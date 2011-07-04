@@ -5,7 +5,9 @@
 		
 		while(1==1)
 		{
-			echo 'ja he'; 
+			if($i = 1){
+				echo 'ja he';
+			} 
 		}
 	}
 ?>
