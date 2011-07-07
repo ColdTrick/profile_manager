@@ -291,6 +291,8 @@
 	 * Function just now returns only ordered (name is prepped for future release which should support categories)
 	 */
 	function profile_manager_get_categorized_group_fields($group = null){
+		global $CONFIG;
+		
 		$result = array();
 		$result["fields"] = array();
 		
