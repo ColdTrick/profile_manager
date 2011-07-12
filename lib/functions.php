@@ -163,14 +163,14 @@
 			$edit = true;
 		}
 		
-		if(!empty($user) && $user instanceof ElggUser){
+		if(!empty($user) && ($user instanceof ElggUser)){
 			$profile_type_guid = $user->custom_profile_type;
 			
 			if(!empty($profile_type_guid)){
 				$profile_type = get_entity($profile_type_guid);
 				
 				// check if profile type is a REAL profile type
-				if(!empty($profile_type) && $profile_type instanceof ProfileManagerCustomProfileType){
+				if(!empty($profile_type) && ($profile_type instanceof ProfileManagerCustomProfileType)){
 					if($profile_type->getSubtype() != CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE){
 						$profile_type = null;
 					}
@@ -280,9 +280,16 @@
 			} 
 		}
 		
-		if(!$edit && !$register){
-			$result = trigger_plugin_hook("categorized_profile_fields", "profile_manager", array("user" => $user), $result);
-		}
+		//  fire hook to see if other plugins have extra fields
+		$hook_params = array(
+			"user" => $user,
+			"edit" => $edit,
+			"register" => $register,
+			"profile_type_limit" => $profile_type_limit,
+			"profile_type_guid" => $profile_type_guid
+		);
+		
+		$result = trigger_plugin_hook("categorized_profile_fields", "profile_manager", $hook_params, $result);
 		
 		return $result;
 	}
@@ -316,7 +323,12 @@
 			ksort($result["fields"]);
 		}
 		
-		$result = trigger_plugin_hook("categorized_group_fields", "profile_manager", null, $result);
+		//  fire hook to see if other plugins have extra fields
+		$hook_params = array(
+			"group" => $group
+		);
+			
+		$result = trigger_plugin_hook("categorized_group_fields", "profile_manager", $hook_params, $result);
 		
 		return $result;
 	}
@@ -334,7 +346,7 @@
 			$user = get_loggedin_user();
 		}
 		
-		if(!empty($user) && $user instanceof ElggUser){
+		if(!empty($user) && ($user instanceof ElggUser)){
 			
 			$required_fields = array();
 			$missing_fields = array();
