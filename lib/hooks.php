@@ -101,37 +101,42 @@
 	}
 	
 	
-	function profile_manager_categorized_profile_fields_hook($hook_name, $entity_type, $return_value, $parameters){
+	function profile_manager_categorized_profile_fields_hook($hook_name, $entity_type, $return_value, $params){
 		$result = $return_value;
 		
 		// optionally add the system fields for admins
 		if(isadminloggedin() && (get_plugin_setting("display_system_category", "profile_manager") == "yes")){
-			$result["categories"][-1] = "";
-			$result["fields"][-1] = array();
+			$edit = $params["edit"];
+			$register = $params["register"];
 			
-			$system_fields = array(
-					"guid" => "text",
-					"owner_guid" => "text",
-					"container_guid" => "text",
-					
-					"time_created" => "pm_datepicker",
-					"time_updated" => "pm_datepicker",
-					"last_action" => "pm_datepicker",
-					"prev_last_login" => "pm_datepicker",
-			 		"last_login" => "pm_datepicker",
-					
-					"username" => "text",
-					"email" => "text",
-					"language" => "text"
-				);
-			
-			foreach($system_fields as $metadata_name => $metadata_type){
-				$system_field = new ProfileManagerCustomProfileField();
+			if(!$edit && !$register){
+				$result["categories"][-1] = "";
+				$result["fields"][-1] = array();
 				
-				$system_field->metadata_name = $metadata_name;
-				$system_field->metadata_type = $metadata_type;
+				$system_fields = array(
+						"guid" => "text",
+						"owner_guid" => "text",
+						"container_guid" => "text",
+						
+						"time_created" => "pm_datepicker",
+						"time_updated" => "pm_datepicker",
+						"last_action" => "pm_datepicker",
+						"prev_last_login" => "pm_datepicker",
+				 		"last_login" => "pm_datepicker",
+						
+						"username" => "text",
+						"email" => "text",
+						"language" => "text"
+					);
 				
-				$result["fields"][-1][] = $system_field;
+				foreach($system_fields as $metadata_name => $metadata_type){
+					$system_field = new ProfileManagerCustomProfileField();
+					
+					$system_field->metadata_name = $metadata_name;
+					$system_field->metadata_type = $metadata_type;
+					
+					$result["fields"][-1][] = $system_field;
+				}
 			}
 		}
 		
