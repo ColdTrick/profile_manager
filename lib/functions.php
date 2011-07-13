@@ -186,16 +186,15 @@
 		$ordered_cats = array();
 		
 		$options = array(
-				"type" => "object",
-				"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
-				"limit" => 0,
-				"owner_guid" => $CONFIG->site_guid
-			); 
+			"type" => "object",
+			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
+			"limit" => false,
+			"owner_guid" => $CONFIG->site_guid,
+			"site_guid" => $CONFIG->site_guid
+		); 
 			
-		$cats = elgg_get_entities($options);
-		
 		// get ordered categories
-		if($cats){
+		if($cats = elgg_get_entities($options)){
 			foreach($cats as $cat){
 				$ordered_cats[$cat->order] = $cat;
 			}
@@ -215,9 +214,10 @@
 							"type" => "object",
 							"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 							"count" => true,
-							"owner_guid" => $CONFIG->site_guid,
+							"owner_guid" => $cat->getOwner(),
+							"site_guid" => $cat->site_guid,
 							"relationship" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
-							"relationship_guid" => $cat->guid,
+							"relationship_guid" => $cat->getGUID(),
 							"inverse_relationship" => true
 						); 
 					
@@ -240,14 +240,13 @@
 		$options = array(
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
-				"limit" => 0,
-				"owner_guid" => $CONFIG->site_guid
+				"limit" => false,
+				"owner_guid" => $CONFIG->site_guid,
+				"site_guid" => $CONFIG->site_guid
 			); 
 			
-		$fields = elgg_get_entities($options);
-		
 		// adding fields to categories
-		if($fields){
+		if($fields = elgg_get_entities($options)){
 			foreach($fields as $field){
 				if(!($cat_guid = $field->category_guid)){
 					$cat_guid = 0; // 0 is default
@@ -307,8 +306,9 @@
 		$options = array(
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
-				"limit" => 0,
-				"owner_guid" => $CONFIG->site_guid
+				"limit" => false,
+				"owner_guid" => $CONFIG->site_guid,
+				"site_guid" => $CONFIG->site_guid
 			);
 			
 		$fields = elgg_get_entities($options);
