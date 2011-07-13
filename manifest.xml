@@ -82,6 +82,7 @@ x.x:
 	- changed: profile_manager_get_categorized_fields() always fire hook ('categorized_profile_fields', 'profile_manager') to get extra fields
 	- changed: profile_manager_get_categorized_group_fields() always fire hook ('categorized_group_fields', 'profile_manager') to get extra fields
 	- fixed: some small coding errors
+	- fixed: edit profile form to be more site aware
 
 6.1.1:
 	- fixed: several depricated notices for elgg_extend_view in start.php
