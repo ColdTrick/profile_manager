@@ -44,29 +44,24 @@
 			$options = array(
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
-				"count" => true,
+				"limit" => false,
 				"owner_guid" => $CONFIG->site_guid
 			); 
 			
-			$types_count = elgg_get_entities($options);
-			
-			if($types_count > 0){
-				$options["limit"] = $types_count;
-				$options["count"] = false;
-				
-				$types = elgg_get_entities($options);
+			if($types = elgg_get_entities($options)){
 				
 				$pulldown_options = array();
 				$pulldown_options[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
+				
 				foreach($types as $type){
 					
-					$pulldown_options[$type->guid] = $type->getTitle();
+					$pulldown_options[$type->getGUID()] = $type->getTitle();
 					
 					// preparing descriptions of profile types
 					$description = $type->getDescription();
 					
 					if(!empty($description)){
-						$types_description .= "<div id='custom_profile_type_description_" . $type->guid . "' class='custom_profile_type_description'>";
+						$types_description .= "<div id='custom_profile_type_description_" . $type->getGUID() . "' class='custom_profile_type_description'>";
 						$types_description .= "<h3 class='settings'>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:description") . "</h3>";
 						$types_description .= $description;
 						$types_description .= "</div>";
@@ -131,34 +126,33 @@
 		
 		foreach($cats as $cat_guid => $cat){
 			// make nice title for category		
-			if($cat_guid == 0){
+			if(empty($cat_guid) || !($cat instanceof ProfileManagerCustomFieldCategory)) {
 				$title = elgg_echo("profile_manager:categories:list:default");
 			} else {
 				$title = $cat->getTitle();
 			}
 			
 			$class = "";
-			if($cat_guid != 0){
+			if(!empty($cat_guid) && ($cat instanceof ProfileManagerCustomFieldCategory)){
 				
 				$profile_type_options = array(
 						"type" => "object",
 						"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
-						"count" => true,
-						"owner_guid" => $CONFIG->site_guid,
+						"limit" => false,
+						"owner_guid" => $cat->getOwner(),
+						"site_guid" => $cat->site_guid,
 						"relationship" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
 						"relationship_guid" => $cat_guid,
 						"inverse_relationship" => true
 					);
 				
-				$profile_type_count = elgg_get_entities_from_relationship($profile_type_options);
-				if($profile_type_count > 0){
+				if($profile_types = elgg_get_entities_from_relationship($profile_type_options)){
 					
 					$class = "custom_fields_edit_profile_category";
 					
-					$types = $cat->getEntitiesFromRelationship(CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP, true, $profile_type_count);
 					// add extra class so it can be toggle in the display
-					foreach($types as $type){
-						$class .= " custom_profile_type_" . $type->guid; 
+					foreach($profile_types as $type){
+						$class .= " custom_profile_type_" . $type->getGUID(); 
 					}
 				}
 			}
@@ -203,7 +197,7 @@
 					$access_id = get_default_access($vars["entity"]);
 				}
 	
-				if(get_plugin_setting("hide_non_editables", "profile_manager") == "yes" && $valtype == "non_editable"){
+				if(get_plugin_setting("hide_non_editables", "profile_manager") == "yes" && ($valtype == "non_editable")){
 					$field_result = "<p class='hidden_non_editable'>\n";
 				} else {
 					$field_result = "<p>\n";
@@ -233,7 +227,7 @@
 			$list_content .= "</div>\n";
 		}
 		
-		if(get_plugin_setting("edit_profile_mode", "profile_manager") == "tabbed" && count($cats) > 1){
+		if((get_plugin_setting("edit_profile_mode", "profile_manager") == "tabbed") && (count($cats) > 1)){
 			?>
 			<script type="text/javascript">
 				function toggle_tabbed_nav(div_id, element){
