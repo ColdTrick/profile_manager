@@ -81,6 +81,7 @@ Version history
 x.x:
 	- changed: profile_manager_get_categorized_fields() always fire hook ('categorized_profile_fields', 'profile_manager') to get extra fields
 	- changed: profile_manager_get_categorized_group_fields() always fire hook ('categorized_group_fields', 'profile_manager') to get extra fields
+	- changed: action/new compares existing based on CONFIG->profile instead of dbfields (saves a query)
 	- fixed: some small coding errors
 	- fixed: edit profile form to be more site aware
 

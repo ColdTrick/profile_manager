@@ -76,17 +76,12 @@
 		register_error(elgg_echo("profile_manager:actions:new:error:metadata_name_invalid"));
 	} elseif(($metadata_type == "pulldown" || $metadata_type == "radio" || $metadata_type == "multiselect") && empty($metadata_options)){
 		register_error(elgg_echo("profile_manager:actions:new:error:metadata_options"));
-	} else {		 
-		$options = array(
-				"type" => "object",
-				"subtype" => "custom_" . $type . "_field",
-				"count" => true,
-				"owner_guid" => $CONFIG->site_guid,
-				"metadata_name_value_pairs" => array("name" => "metadata_name", "value" => $metadata_name)
+	} else {	
+		if(array_key_exists($metadata_name, $CONFIG->profile)){
+			$existing = true;
+		}
 		
-			);
-		$existing = elgg_get_entities_from_metadata($options);
-		if(empty($current_field) && $existing > 0){
+		if(empty($current_field) && $existing){
 			register_error(elgg_echo("profile_manager:actions:new:error:metadata_name_invalid"));
 		} else {
 			$new_options = array();
