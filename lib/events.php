@@ -131,24 +131,22 @@
 		$custom_profile_fields = array();
 		
 		// retrieve all field that were on the register page
-		foreach($_POST as $key=>$value){
+		foreach($_POST as $key => $value){
 	    	if(strpos($key, "custom_profile_fields_") === 0){
-	    		$key = substr($key,22);
-	    		$custom_profile_fields[$key] = $value;
+	    		$key = substr($key, 22);
+	    		$custom_profile_fields[$key] = get_input("custom_profile_fields_" . $key);
 	    	}
 	    }
 	    
 		if(count($custom_profile_fields) > 0 ){
+			$categorized_fields = profile_manager_get_categorized_fields(null, true, true);
+			$configured_fields = $categorized_fields['fields'];
+			
+			// set ignore access
+			$ia = elgg_get_ignore_access();
+			elgg_set_ignore_access(true);
+			
 			foreach($custom_profile_fields as $shortname => $value){
-				$options = array(
-						"type" => "object",
-						"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
-						"limit" => 0,
-						"owner_guid" => $CONFIG->site_guid,
-						"metadata_name_value_pairs" => array("name" => "show_on_register", "value" =>  "yes")
-					);
-				
-				$configured_fields = elgg_get_entities_from_metadata($options);
 				
 				// determine if $value should be an array
 				if(!is_array($value) && !empty($configured_fields)){
@@ -176,6 +174,9 @@
 					create_metadata($object->guid, $shortname, $value, 'text', $object->guid, get_default_access($object));
 				}
 			}
+			
+			// restore ignore access
+			elgg_set_ignore_access($ia);
 		}
 		
 		if($profile_icon = $_FILES["profile_icon"]){
