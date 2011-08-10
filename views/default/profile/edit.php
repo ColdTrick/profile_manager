@@ -28,6 +28,8 @@
 	$cats = $categorized_fields['categories'];
 	$fields = $categorized_fields['fields'];
 	
+	$user_metadata = profile_manager_get_user_profile_data($vars['entity']);
+	
 	if(!empty($cats)){
 		
 		// Profile type selector
@@ -98,7 +100,7 @@
 				echo elgg_view("input/pulldown", array("internalname" => "custom_profile_type",
 														"options_values" => $pulldown_options,
 														"js" => "onchange='changeProfileType();'",
-														"value" => $vars["entity"]->custom_profile_type));
+														"value" => profile_manager_get_user_profile_data_value($user_metadata, "custom_profile_type")));
 				echo "</label>\n";
 				echo elgg_view('input/hidden', array('internalname' => 'accesslevel[custom_profile_type]', 'value' => ACCESS_PUBLIC)); 
 				
@@ -106,7 +108,7 @@
 				echo $types_description;
 			}
 		} else {
-			$profile_type = $vars["entity"]->custom_profile_type;
+			$profile_type = profile_manager_get_user_profile_data_value($user_metadata, "custom_profile_type");
 			
 			if(!empty($profile_type)){
 				echo elgg_view("input/hidden", array("internalname" => custom_profile_type, "value" => $profile_type));
@@ -180,18 +182,9 @@
 				$title = $field->getTitle();
 								
 				// get value
-				if($metadata = get_metadata_byname($vars['entity']->guid, $metadata_name)) {
-					if (is_array($metadata)) {
-						$value = '';
-						foreach($metadata as $md) {
-							if (!empty($value)) $value .= ', ';
-							$value .= $md->value;
-							$access_id = $md->access_id;
-						}
-					} else {
-						$value = $metadata->value;
-						$access_id = $metadata->access_id;
-					}
+				if(array_key_exists($metadata_name, $user_metadata)){
+					$value = $user_metadata[$metadata_name]->value;
+					$access_id = $user_metadata[$metadata_name]->access_id;
 				} else {
 					$value = '';
 					$access_id = get_default_access($vars["entity"]);

@@ -164,7 +164,9 @@
 		}
 		
 		if(!empty($user) && ($user instanceof ElggUser)){
-			$profile_type_guid = $user->custom_profile_type;
+			$user_metadata = profile_manager_get_user_profile_data($user);
+			
+			$profile_type_guid = profile_manager_get_user_profile_data_value($user_metadata, "custom_profile_type");
 			
 			if(!empty($profile_type_guid)){
 				$profile_type = get_entity($profile_type_guid);
@@ -261,7 +263,9 @@
 						// only add if value exists
 						$metadata_name = $field->metadata_name;
 
-						if(!empty($user->$metadata_name) || $user->$metadata_name === 0){
+						$user_value = profile_manager_get_user_profile_data_value($user_metadata, $metadata_name);
+						
+						if(!empty($user_value) || $user_value === 0){
 							$filtered_ordered_cats[$cat_guid][$field->order] = $field;
 						}
 					}
@@ -384,6 +388,48 @@
 				);
 		}
 		
+		return $result;
+	}
+	
+	function profile_manager_get_user_profile_data(ElggUser $user){
+		global $CONFIG;
+		
+		$result = false;
+		if(!empty($user) && !empty($CONFIG->profile)){
+			
+			$fields = "'" . implode("','", array_keys($CONFIG->profile)) . "'";
+			$query = "SELECT m.*, n.string as name, v.string as value from {$CONFIG->dbprefix}metadata m JOIN {$CONFIG->dbprefix}metastrings v on m.value_id = v.id JOIN {$CONFIG->dbprefix}metastrings n on m.name_id = n.id where";
+			$query .= " n.string in ('custom_profile_type'," . $fields . ") AND"; 	
+			$query .= " m.entity_guid = " . $user->getGUID() . " AND"; 	
+			$query .= " " . get_access_sql_suffix("m"); // Add access controls
+			
+			$rows = get_data($query, "row_to_elggmetadata");
+			if($rows){
+				$result = array();
+				foreach($rows as $row){
+					
+					if(!array_key_exists($row->name, $result)){
+						// create object						
+						$object = new stdClass();
+						$object->name = $row->name;
+						$object->value = $row->value;
+						$object->access_id = $row->access_id;
+						$result[$row->name] = $object;
+					} else {
+						$result[$row->name]->value = $row->value . ", " . $result[$row->name]->value;
+					}					 
+				}
+			}	
+		} 
+		
+		return $result;
+	}
+	
+	function profile_manager_get_user_profile_data_value($data, $name){
+		$result = NULL;
+		if(!empty($data) && is_array($data) && array_key_exists($name, $data)){
+			$result = $data[$name]->value;
+		}
 		return $result;
 	}
 	

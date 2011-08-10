@@ -9,7 +9,8 @@
  			"output_as_tags" => "no", 
  			"simple_search" => "no", 
  			"advanced_search" => "no",
- 			"metadata_label" => NULL
+ 			"metadata_label" => NULL,
+ 			"category_guid" => NULL
  			);
 		
 		protected function initialise_attributes() {
