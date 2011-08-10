@@ -1,7 +1,17 @@
 <?php 
 	
 	abstract class ProfileManagerCustomField extends ElggObject {
- 		
+ 		protected $meta_cache;
+ 		protected $meta_defaults = array(
+ 			"admin_only" => "no",
+ 			"mandatory" => "no", 
+ 			"show_on_register" => "no", 
+ 			"output_as_tags" => "no", 
+ 			"simple_search" => "no", 
+ 			"advanced_search" => "no",
+ 			"metadata_label" => NULL
+ 			);
+		
 		protected function initialise_attributes() {
 			global $CONFIG;
 			
@@ -14,6 +24,52 @@
 	 
 		public function __construct($guid = null) {
 			parent::__construct($guid);
+		}
+		
+		protected function load($guid) {
+			if (!parent::load($guid)) {
+				return false;
+			}
+			
+			if($metadata = get_metadata_for_entity($guid)){
+				if (!is_array($this->meta_cache)) {
+					$this->meta_cache = array();
+				}
+				foreach($metadata as $md){
+					$this->meta_cache[$md->name] = $md->value;
+				}
+			}
+			return true;
+		}
+		
+		public function get($name) {
+			
+			if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
+				return $this->meta_cache[$name];
+			} elseif (array_key_exists($name, $this->meta_defaults)){
+				return $this->meta_defaults[$name];
+			} 
+			
+			return parent::get($name);				
+		}		
+		
+		public function setMetaData($name, $value){
+			if(parent::setMetaData($name, $value)){
+				if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
+					$this->meta_cache[$name] = $value;
+				}
+				return true;
+			}
+		}
+		
+		public function clearMetaData($name){
+			if(parent::clearMetaData($name)){
+				if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
+					unset($this->meta_cache[$name]);
+				}
+				return true;
+			}
+			return false;
 		}
 		
 		public function getOptions($add_blank_option = false){
@@ -48,6 +104,7 @@
 			parent::initialise_attributes();
 			
 			$this->attributes['subtype'] = self::SUBTYPE;
+
 		}
 		
 		public function getTitle(){
@@ -62,7 +119,6 @@
 					$title = $this->metadata_name;
 				}
 			}
-			
 			return $title;
 		}	
 	}
@@ -93,7 +149,12 @@
 	}
 	
 	class ProfileManagerCustomProfileType extends ElggObject {
- 		
+ 		protected $meta_cache;
+ 		protected $meta_defaults = array(
+ 			"metadata_label" => NULL,
+ 			"metadata_description" => NULL
+ 			);
+ 			
 		const SUBTYPE = "custom_profile_type";
 		
 		protected function initialise_attributes() {
@@ -105,6 +166,52 @@
 			$this->attributes['access_id'] = ACCESS_PUBLIC;
 			$this->attributes['owner_guid'] = $CONFIG->site_guid;
 			$this->attributes['container_guid'] = $CONFIG->site_guid;
+		}
+	 
+		protected function load($guid) {
+			if (!parent::load($guid)) {
+				return false;
+			}
+			
+			if($metadata = get_metadata_for_entity($guid)){
+				if (!is_array($this->meta_cache)) {
+					$this->meta_cache = array();
+				}
+				foreach($metadata as $md){
+					$this->meta_cache[$md->name] = $md->value;
+				}
+			}
+			return true;
+		}
+		
+		public function get($name) {
+			
+			if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
+				return $this->meta_cache[$name];
+			} elseif (array_key_exists($name, $this->meta_defaults)){
+				return $this->meta_defaults[$name];
+			} 
+			
+			return parent::get($name);				
+		}		
+		
+		public function setMetaData($name, $value){
+			if(parent::setMetaData($name, $value)){
+				if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
+					$this->meta_cache[$name] = $value;
+				}
+				return true;
+			}
+		}
+		
+		public function clearMetaData($name){
+			if(parent::clearMetaData($name)){
+				if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
+					unset($this->meta_cache[$name]);
+				}
+				return true;
+			}
+			return false;
 		}
 	 
 		public function getTitle(){
@@ -137,7 +244,11 @@
 	}
 	
 	class ProfileManagerCustomFieldCategory extends ElggObject {
- 		
+ 		protected $meta_cache;
+ 		protected $meta_defaults = array(
+ 			"metadata_label" => NULL
+ 			);
+ 			
 		const SUBTYPE = "custom_profile_field_category";
 		
 		protected function initialise_attributes() {
@@ -148,6 +259,52 @@
 			$this->attributes['access_id'] = ACCESS_PUBLIC;
 			$this->attributes['owner_guid'] = $CONFIG->site_guid;
 			$this->attributes['container_guid'] = $CONFIG->site_guid;
+		}
+		
+		protected function load($guid) {
+			if (!parent::load($guid)) {
+				return false;
+			}
+			
+			if($metadata = get_metadata_for_entity($guid)){
+				if (!is_array($this->meta_cache)) {
+					$this->meta_cache = array();
+				}
+				foreach($metadata as $md){
+					$this->meta_cache[$md->name] = $md->value;
+				}
+			}
+			return true;
+		}
+		
+		public function get($name) {
+			
+			if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
+				return $this->meta_cache[$name];
+			} elseif (array_key_exists($name, $this->meta_defaults)){
+				return $this->meta_defaults[$name];
+			} 
+			
+			return parent::get($name);				
+		}		
+		
+		public function setMetaData($name, $value){
+			if(parent::setMetaData($name, $value)){
+				if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
+					$this->meta_cache[$name] = $value;
+				}
+				return true;
+			}
+		}
+		
+		public function clearMetaData($name){
+			if(parent::clearMetaData($name)){
+				if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
+					unset($this->meta_cache[$name]);
+				}
+				return true;
+			}
+			return false;
 		}
 	 
 		public function getTitle(){

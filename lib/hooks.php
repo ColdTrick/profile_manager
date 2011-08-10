@@ -22,7 +22,7 @@
 		if($entities = elgg_get_entities($options)){
 			$result = array();
 			$translations = array();
-			
+			$context = get_context();
 		    // Make new result
 		    foreach($entities as $entity){
 		    	if($entity->admin_only != "yes" || isadminloggedin()){
@@ -30,7 +30,7 @@
 		    		$result[$entity->metadata_name] = $entity->metadata_type;
 		    		
 		    		// should it be handled as tags? TODO: is this still needed? Yes it is, it handles presentation of these fields in listing mode
-		    		if(get_context() == "search" && ($entity->output_as_tags == "yes" || $entity->metadata_type == "multiselect")){
+		    		if($context == "search" && ($entity->output_as_tags == "yes" || $entity->metadata_type == "multiselect")){
 		    			$result[$entity->metadata_name] = "tags";
 		    		}	    		
 		    	}
