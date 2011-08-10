@@ -30,6 +30,8 @@
 	
 	$user_metadata = profile_manager_get_user_profile_data($vars['entity']);
 	
+	$edit_profile_mode = get_plugin_setting("edit_profile_mode", "profile_manager");
+	$simple_access_control = get_plugin_setting("simple_access_control","profile_manager");
 	if(!empty($cats)){
 		
 		// Profile type selector
@@ -87,7 +89,7 @@
 							$('#custom_profile_type_description_'+ selVal).show();
 						}
 
-						<?php if(get_plugin_setting("edit_profile_mode", "profile_manager") == "tabbed" && count($cats) > 1){ ?>
+						<?php if($edit_profile_mode == "tabbed" && count($cats) > 1){ ?>
 						$('#elgg_horizontal_tabbed_nav li:visible:first>a').click();
 						<?php } ?>
 					}
@@ -166,6 +168,7 @@
 			$list_content .= "<h3 class='settings'>" . $title . "</h3>\n";
 			
 			// display each field for currect category
+			$hide_non_editables = get_plugin_setting("hide_non_editables", "profile_manager");
 			foreach($fields[$cat_guid] as $field){
 				$metadata_name = $field->metadata_name;
 				
@@ -190,7 +193,7 @@
 					$access_id = get_default_access($vars["entity"]);
 				}
 	
-				if(get_plugin_setting("hide_non_editables", "profile_manager") == "yes" && ($valtype == "non_editable")){
+				if($hide_non_editables == "yes" && ($valtype == "non_editable")){
 					$field_result = "<p class='hidden_non_editable'>\n";
 				} else {
 					$field_result = "<p>\n";
@@ -220,7 +223,7 @@
 			$list_content .= "</div>\n";
 		}
 		
-		if((get_plugin_setting("edit_profile_mode", "profile_manager") == "tabbed") && (count($cats) > 1)){
+		if(($edit_profile_mode == "tabbed") && (count($cats) > 1)){
 			?>
 			<script type="text/javascript">
 				function toggle_tabbed_nav(div_id, element){
@@ -285,7 +288,7 @@
 		}
 	}
 
-	if(get_plugin_setting("simple_access_control","profile_manager") == "yes"){ 
+	if($simple_access_control == "yes"){ 
 		?>
 		<p>
 			<label>
@@ -304,7 +307,7 @@
 
 </form>
 <?php 
-	if(get_plugin_setting("simple_access_control","profile_manager") == "yes"){ 
+	if($simple_access_control == "yes"){ 
 	?>
 	<script type="text/javascript">
 		$(document).ready(function(){

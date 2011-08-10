@@ -10,7 +10,9 @@
  			"simple_search" => "no", 
  			"advanced_search" => "no",
  			"metadata_label" => NULL,
- 			"category_guid" => NULL
+ 			"category_guid" => NULL,
+ 			"metadata_hint" => NULL,
+ 			"metadata_options" => NULL
  			);
 		
 		protected function initialise_attributes() {
