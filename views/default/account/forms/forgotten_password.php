@@ -1,5 +1,5 @@
 <?php
-	/**
+	/***
 	 * Elgg forgotten password.
 	 *
 	 * @package Elgg
