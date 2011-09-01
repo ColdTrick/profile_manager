@@ -241,4 +241,11 @@
 		    }
 		}
 	}
+	
+	
+	
+	function profile_noindex_view_hook($hook, $type, $returnvalue, $params){
+		global $autofeed;
+		$autofeed = false;
+	}
 ?>

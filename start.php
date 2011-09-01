@@ -28,7 +28,14 @@
 	 */
 	function profile_manager_init(){
 		global $CONFIG;
-
+		
+		/* Profile NoIndex*/
+			elgg_extend_view("profile/edit", "profile_noindex/edit_profile", 400);		
+			// extend CSS
+			elgg_extend_view("css", "profile_noindex/css");
+		
+		
+		
 		// Extend CSS
 		elgg_extend_view("css", "profile_manager/css");
 		elgg_extend_view("css", "members/css");
@@ -165,7 +172,28 @@
 	function profile_manager_pagesetup(){
 		global $CONFIG;
 		
-		if(get_context() == "admin" && isadminloggedin()){
+		
+		$page_owner = page_owner_entity();
+		$context = get_context();
+		
+		
+		/*Profile NoIndex*/
+		if(in_array($context, array("profile", "friends", "friendsof")) && ($page_owner instanceof ElggUser)){
+			if(get_plugin_usersetting("hide_from_search_engine", $page_owner->getGUID(), "profile_noindex") == "yes"){
+				// protect against search engines
+				elgg_extend_view("metatags", "profile_noindex/metatags");
+				
+				// remove FoaF link
+				elgg_unextend_view("metatags", "profile/metatags");
+				
+				// remove RSS/Atom/ links
+				register_plugin_hook("display", "view", "profile_noindex_view_hook");
+			}
+		}
+		
+		
+		
+		if($context == "admin" && isadminloggedin()){
 			if(is_plugin_enabled("profile")){
 				// Remake admin submenu
 				$subA = &$CONFIG->submenu["a"];
