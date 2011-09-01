@@ -373,6 +373,8 @@
 		
 		'profile_noindex:usersettings:hide_from_search_engine' => "Hide your profile from search engines",
 		'profile_noindex:usersettings:hide_from_search_engine:explain' => "It may take several days before your profile is removed from the search indexes.",
+		'profile_manager:admin:allow_profile_noindex' => "Allow users to hide their profile from search engines.",
+		
 	
 	);
 	

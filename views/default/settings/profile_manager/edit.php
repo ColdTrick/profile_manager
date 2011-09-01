@@ -47,6 +47,16 @@
 			$profile_types[$type->guid] = $type->getTitle();
 		}
 	}
+	
+	if(!$vars['entity']->allow_profile_noindex)
+	{
+		$allow_profile_noindex_value = 'yes';
+	}
+	else
+	{
+		$allow_profile_noindex_value = $vars['entity']->allow_profile_noindex; 
+	}
+	
 ?>
 
 <table>
@@ -219,6 +229,14 @@
 		</td>
 		<td>
 			<?php echo elgg_view("input/pulldown", array("internalname" => "params[show_admin_stats]", "options_values" => array_reverse($yesno_options), "value" => $vars['entity']->show_admin_stats)); ?>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:admin:allow_profile_noindex'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/pulldown", array("internalname" => "params[allow_profile_noindex]", "options_values" => array_reverse($yesno_options), "value" => $allow_profile_noindex_value)); ?>
 		</td>
 	</tr>
 </table>
