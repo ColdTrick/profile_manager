@@ -320,6 +320,15 @@
 		'profile_manager:admin:adduser:notify' => "Mail account informatie naar gebruiker",
 		'profile_manager:admin:adduser:use_default_access' => "Extra profiel informatie luistert naar standaard toegangsniveau",
 		'profile_manager:admin:adduser:extra_metadata' => "Extra profiel informatie toevoegen",
+	
+	
+	
+		//Profile NoIndex
+		'profile_manager:profile:noindex' => "Verberg je profiel voor zoekmachines",
+		
+		'profile_manager:usersettings:hide_from_search_engine' => "Verberg je profiel voor zoekmaschienes",
+		'profile_manager:usersettings:hide_from_search_engine:explain' => "Het kan een aantal dagen duren voor je profiel uit de zoekmachines zijn verwijdert.",
+		'profile_manager:admin:allow_profile_noindex' => "Gebruikers toestaan om profiel te verbergen",
 	);
 	
 	add_translation("nl", $dutch);

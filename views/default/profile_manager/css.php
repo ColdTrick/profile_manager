@@ -376,3 +376,9 @@ li.custom_fields_edit_profile_category {
 	background: #00FF00;
 	height: 20px;
 }
+
+
+.profile_noindex_explain {
+	font-size: 90%;
+	color: #cccccc;
+}

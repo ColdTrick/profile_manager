@@ -33,9 +33,9 @@
 		/* Profile NoIndex*/
 		if(get_plugin_setting("allow_profile_noindex") == 'yes')
 		{
-			elgg_extend_view("profile/edit", "profile_noindex/edit_profile", 400);		
+			elgg_extend_view("profile/edit", "profile_manager/profile/edit_profile", 400);		
 			// extend CSS
-			elgg_extend_view("css", "profile_noindex/css");
+			elgg_extend_view("css", "profile_manager/css");
 		}
 		
 		// Extend CSS
@@ -182,9 +182,9 @@
 			
 			/*Profile NoIndex*/
 			if(in_array($context, array("profile", "friends", "friendsof")) && ($page_owner instanceof ElggUser)){
-				if(get_plugin_usersetting("hide_from_search_engine", $page_owner->getGUID(), "profile_noindex") == "yes"){
+				if(get_plugin_usersetting("hide_from_search_engine", $page_owner->getGUID(), "profile_manager") == "yes"){
 					// protect against search engines
-					elgg_extend_view("metatags", "profile_noindex/metatags");
+					elgg_extend_view("metatags", "profile_manager/metatags");
 					
 					// remove FoaF link
 					elgg_unextend_view("metatags", "profile/metatags");
