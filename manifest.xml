@@ -1,306 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin_manifest>
-	<field key="author" value="ColdTrick IT Solutions" />
-	<field key="version" value="6.2" />
-	<field key="description" value="Manage user and group profile fields" />
-	<field key="website" value="http://www.coldtrick.com/" />
-	<field key="copyright" value="(C) ColdTrick IT Solutions 2009" />
-	<field key="licence" value="GNU Public License version 2" />
-	<field key="elgg_version" value="2010071002" />
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>Profile Manager</name>
+	<author>ColdTrick IT Solutions</author>
+	<version>6.2</version>
+	<blurb>Manage user and group profile fields</blurb>
+	<description>Provides better use of profile fields, replaces (replace profile fields) and configurable group fields.</description>
+	<website>http://www.coldtrick.com/</website>
+	<copyright>(C) ColdTrick IT Solutions 2009 - 2011</copyright>
+	<license>GNU Public License version 2</license>
+ 
+	<!-- All plugins must require either elgg_version or elgg_release. -->
+	<requires>
+		<type>plugin</type>
+		<name>profile</name>
+	</requires>
+	 
+	
+	<requires>
+		<type>priority</type>
+		<plugin>profile</plugin>
+		<priority>after</priority>
+	</requires>
+	
+	<suggests>
+		<type>plugin</type>
+		<name>groups</name>
+	</suggests>
+	
+	<suggests>
+		<type>priority</type>
+		<plugin>groups</plugin>
+		<priority>after</priority>
+	</suggests>
+ 
+	<!-- The path is relative to the plugin's root. 
+	<screenshot>
+		<description>Elgg profile.</description>
+		<path>screenshots/profile.png</path>
+	</screenshot>
+ 	-->
+	<category>coldtrick</category>
+	<admin_interface>advanced</admin_interface>
 </plugin_manifest>
-<!--
-Profile Manager
-
-Provides better use of profile fields, replaces (replace profile fields) and configurable group fields
-
-=====================
-Features:
-=====================
-- search based on profile fields
-- importing default or custom fields
-- ordering of custom fields (drag and drop)
-- add profile types
-- add categories (draggable reordering, drop fields on categories to add)
-- adds pulldown, radio, multiselect, calendar and datepicker field types
-- show on register form (profile fields only)
-- show output as tags
-- mandatory fields (for register form, profile fields only)
-- mandatory profile icon on register form
-- disallow editing of a specific field (applies to edit profile only)
-- replace profile fields access control with just one profile access option
-- backup / restore profile fields configuration
-- export user profile (meta)data to csv
-- a customized registration form
-
-Needs to be positioned after the profile plugin!!!
-
-=====================
-TO DO:
-=====================
-	- if only 'about me' is filled, the default category is visible, but can't do anything
-	- profile completeness
-	- categories and types for groups
-	- multilingual options (in pulldown, radio, multiselect)
-	- add multilingual support for hint field
-	- Default values for fields (user specified)
-	- Force empty fields on profile
-	- dependend fields
-	- show profile type on user details
-	- check existence of input/output views (in get_categorized function)
-	- check if fieldtype is enabled (in get_categorized function)
-	- handle disabled fieldtype options (in get_categorized function)
-	- handle empty fields on group details (in get_categorized function)
-	- replace profile type description with longtext instead of plaintext
-	- toggle fields on registerform based on profile type selection
-	- add "modify once" option to fields. So user can only modify the first time. Only admin then will be able to change it.
-	- add "default access lvl"
-	- add "can change access lvl"
-	- tabbed profile details
-	- client side registration form validation
-	- extend group and user search listing with info from profile manager
-	- listen to get/post for profile types on members search form
-	
-=====================
-Known issues:
-=====================
-	- on register error backward maintaining selected profile icon is impossible due to security reasons 
-	- longtext with tinymce too small when on first hidden
-	- reset on members search forms won't reset multiselects
-	
-	
-NEED FIXING:
-When i choose to "select profile type by Admin", on the profile page of the user it will indeed only show the fields specfic to that profile type but the user can see all the categories of all the profile types in their edit profile page.
-
-They can fill in the information but it wont show as their profile type wont match but I dont think they should be able to see the categories as they wont show. Is this just the way it is on is it a bug?
-
-=====================
-Version history
-=====================
-6.2 (2011-08-11):
-	- changed: major performance gains
-	
-6.1.2 (2011-07-15):
-	- changed: profile_manager_get_categorized_fields() always fire hook ('categorized_profile_fields', 'profile_manager') to get extra fields
-	- changed: profile_manager_get_categorized_group_fields() always fire hook ('categorized_group_fields', 'profile_manager') to get extra fields
-	- changed: action/new compares existing based on CONFIG->profile instead of dbfields (saves a query)
-	- changed: handling of register event
-	- fixed: some small coding errors
-	- fixed: edit profile form to be more site aware
-
-6.1.1:
-	- fixed: several depricated notices for elgg_extend_view in start.php
-
-6.1 (2011-05-20):
-	- added: admin option to select the default profile type for register page
-	- added: admin option to show profile type on a users profile page (default on) 
-	- changed: more efficient loading of profile field labels in translation
-	- changed: styling of profile type selection on registration page
-	- fixed: no spacing between left and right column on register form
-	- fixed: only show tabcontainer on register form if tabs are configured
-	- removed: compatibility with accordion on profile for Elgg version < 1.7
-	
-6.0 (2011-05-06):
-	- added: js validation of mandatory registration fields (account + custom profile fields)
-	- added: option to login (and register) with email address, fallback to username
-	- added: request password by email address (if login by email is set)
-	- added: support for index_login widget of Widget Manager
-	- added: river cleanup on profile icon update (only one river item)
-	- added: river cleanup on profile update (only one river item per 12 hours)
-	- added: terms url (if configured a terms agree checkbox appears on the registration form)
-	- added: free text to be displayed on the registration form
-	- added: support for tabbed categories on register form (determined by edit profile display type == tabbed)
-	- changed: layout of registration page 
-	- changed: moved functions, events, hooks and run_once code to lib files
-	- changed: improved stickyness of registration form
-	- fixed: register form fields now depend on selected profile type
-	
-5.9.3 (2011-05-03):
-	- changed: update datepicker js to 4.0.5
-	- changed: pm_datepicker no longer stores as timestamp but in UTC/GMT/Zulu time to circumvent timezone issue's
-	- changed: member search limited to current site only (when using multisite setups)
-	- fixed: php warning invalid arguments foreach in input/multiselect
-	- fixed: multiselect can now also handle options_values
-	
-5.9.2 (2011-04-14):
-	- changed: layout of admin settings
-	- fixed: major bug in registration form fields not being created with default access (database fix included)
-	- fixed: prevent sql injection by sanitising inputs in member search
-	- fixed: invisible group access on group profile edit is not showing the correct values
-	
-5.9.1 (2011-03-01):
-	- changed: moved admin profile fields to categorized_profile_fields hook
-	- fixed: categorized_profile_fields hook only triggered when viewing profile
-	- fixed: getTitle() error on categories in profile details
-	
-5.9 (2011-02-15):
-	- added: hooks to extend categorized user/group profile items
-	- fixed: group "show as tags" fields and multiselect are now searchable
-	- fixed (in Elgg Core): Elgg 1.7.7 now enables correct use of multiselect fields for groups (Elgg Trac Ticket #2609)
-	- removed: output/url view (no longer needed) (Elgg Trac Ticket #2840) 
-	
-5.8.1 (2010-12-22):
-	- fixed: error when editing admin profile and the system category is enabled
-	
-5.8 (2010-12-10):
-	- added: optional system category (admin only) on userdetails and full profile
-	- added: files field type
-	- added: hover over pm_datepickerfield shows timestamp
-	
-5.7 (2010-11-17):
-	- added: admin created users are now default validated, if not validated they will be disabled
-	- added: german language file (thanks to http://community.elgg.org/pg/profile/Tombone)
-	- fixed: inconsistent translation keys for profile types
-	- fixed: every page refresh profile plugin settings are updated
-	- fixed: admin created users are not shown in the unvalidated users list (Elgg 1.7.4)
-	
-5.6 (2010-10-25):
-	- added: option on profile field configuration to add a blank option to pulldowns or radio field types
-	- added: runonce to reset owner ship of Profile Manager configuration to prevent loss of configuration when removing admins
-	- changed: moved some root plugin files to pages folder
-	- changed: most of the code rewritten to use elgg_get / elgg_list functions
-	- changed: renamed label for type of profile field to "Field Type"
-	- changed: import from custom now makes fields default editable
-	- changed: output of export csv in UTF-8
-	- changed: removed all action_gatekeeper functions from actions (handled by action handler since 1.7)
-	- changed: admin only member search query is by default hidden (css) to prevent confusion
-	- changed: no EMPTY option on radio and pulldown field types
-	- changed: positioning of registration fields now runs by register/extend view
-	- removed: action profile/edit; no need for to replace this one now as it can handle array's now
-	- fixed: newly created profile fields have the site as owner instead of the current user or 0; this prevents loosing configuration when admin is deleted
-	- fixed: hidden groups option in elgg 1.7 not available when profile manager is active 
-	- fixed: add user as admin wraps users under left side bar
-	- fixed: <? instead of <?php generating token errors on profile and group edit form
-	- fixed: about me not displaying in Elgg 1.7
-	- fixed: sorting options not in translation file
-	- fixed: creation of tags fields (or show as tags) on register are not recognized as such
-	- fixed: issues when importing custom and default fields
-	- fixed: text of profile field disappearing when dragging in configuration
-	- fixed: non available field type options are not disabled when editing a field
-	- fixed: can not clear label or hint field
-	- fixed: strange characters allowed in profile type and category name field
-	- fixed: can't edit profile types and categories with single quotes in name or label
-	- fixed: data on registration form not always retained when error in other parts of registration form
-	- fixed: issue with date -1 day
-	- fixed: conflict with other datepickers
-	- fixed: upload of profile icon now works
-
-5.5:
-	- added: ability to preload members search form with (POST or GET) input variables (not available for date fields)
-	- added: own url output view, because elgg default doesn't auto add http://
-	- added: target _blank to all url output views on profile details and full_profile
-	- added: ajax/loader to members search
-	- changed: on the search page multiselect fields and all fields marked with show as tags are searchable (Elgg 1.7)
-	- changed: initialise_attributes of ProfileManagerCustomField & ProfileManagerCustomProfileField to make it more efficient
-	- changed: profile type now saved with correct access level (Elgg 1.7 default was PRIVATE)
-	- changed: search is not an action anymore
-	- fixed: profile page not displaying after edit (caused by datepicker)
-	- fixed: reset not working in Elgg 1.7 (due to use of delete_entities function)
-	- fixed: restore not working in Elgg 1.7 (due to use of delete_entities function)
-	- fixed: accordion not working in Elgg 1.7 (include of accordion js only when version < 1.7)  
-	- fixed: multi select not saving in Elgg 1.7 (related to trac #2016)
-	- fixed: multi select not created correctly on register and admin user form
-	
-5.4:
-	- added: hooks to extend membersearch sql string
-	- fixed: custom_profile_type visible on profile details for admins when nothing else has values
-	- fixed: unable to remove categorie -> profile type relations  
-	- fixed: tabs not working correctly when changing profile type on profile edit
-	
-5.3:
-	- added: extra classes and a * to register form mandatory fields
-	- fixed: updating of profile type and category not possible
-	- fixed: applied nasty fix to hide configuration from search results
-	- fixed: members search result profile icons not showing pulldown
-	- fixed: members search not filtering on profile type in Elgg > 1.6.x
-	- fixed: members search fields not listening to admin_only 
-	
-5.2:
-	- added: hint text on profile fields to show on edit/register forms
-	- added: empty value to pulldown and radio options to empty a field (or keep blank)
-	- added: new admin add user form with the option to notify user and directly add extra profile information
-	- changed: plugin now works with classes
-	- fixed: multiselect not working in safari/chrome
-	- fixed: switching profile field (with edit) doesn't empty form. Problem when last field doesn't contain a label	
-	- fixed: description not keeping data on edit group form
-	- fixed: layout bug in css on search form
-	- fixed: having no custom profile fields except admin only makes the admin only visible on the profile ($CONFIG->profile need to not contain these fields)
-	- fixed: profile fields used filled on the register form (and admin form) now listens to default access level
-	- (maybe) fixed: on some browsers group fields configuration not showing (not reproducable)
-	
-5.1:
-	- added: members search form based on profile fields (admin configurable)
-	- added: simple/advanced search toggle options on user profile field configuration
-	- fixed: token mismatch on group edit when using 1.6.x or higher (not tested)
-	- fixed: after bounce on register it showed bounced values
-	- fixed: datepicker fields sometimes a day off, fix provided by westor (http://community.elgg.org/pg/profile/westor)
-	- fixed: groupprofile view replaced to show correct field labels
-5.0.1 (2009-12-28):
-	- fixed: profile type description change on selection change not working on register
-	- fixed: bouncing on register form not working for profile type and multiselect
-5.0 (2009-12-23):
-	- added: backup / restore of custom profile fields configuration (no categories and profile types)
-	- added: basic export of profile metadata to a csv
-	- added: admin option to show a tabbed edit profile view
-	- added: option to add profile type to members tabbed view
-	- added: pulldown, radio and multiselect field types for groups
-	- added: admin only option to custom group profile fields
-	- added: simple admin stats to show different profile type count
-	- added: profile fields now editable
-	- added: profile type selection on register
-	- changed: renamed plugin to Profile Manager
-	- changed: secured all actions with tokens and action gatekeepers (for Elgg 1.7)
-	- fixed: forgotten translation of unavailable options
-	- fixed: admin only not saved when adding new fields
-4.1 BETA:
-	- added: experimental support to extend field types
-	- added: description field on profile type
-	- removed: pulldown, radio and multiselect field types for groups (because they don't work at the moment)
-	- fixed: some missing translations
-	- fixed: bug with longtext showing twice on userdetails
-	- fixed: bug when profile types where deleted but still attached to a profile (getSubtype on non-object)
-	- fixed: css issue with sortable categories
-4.0 BETA:
-	- added: profile types 
-	- added: categories
-	- added: admin only profile fields (makes Admin Profile Fields plugin obsolete http://community.elgg.org/pg/plugins/FxNion/read/304257/admin-profile-fields)
-	- added: full profile view (link can be disabled in admin settings)
-	- added: admin tooltip to clarify functionality
-	- changed: display of profile fields (plain categorized or with accordion)
-	- changed: a lot of code
-	- fixed: display of customfields icon in IE on admin pages 
-3.0:
-	- added: custom group fields
-	- added: separate admin menu box for replacing profile/group fields
-	- added: admin option to completely hide the non-editable profile fields from the edit profile form
-	- added: warning in admin settings if plugin is ordered incorrectly
-	- added: more reserved custom field names
-	- changed: split admin profile fields page into views
-	- changed: edit profile details => added security tokens
-	- changed: adding custom field with 'description' name now is possible
-	- changed: display of custom fields
-	- changed: a lot of code
-	- fixed: noneditable fields fix for 1.6
-2.3:
-	- added: admin option for simplified access control
-	- added: admin option for enforcing a profile icon on register form
-	- added: regexp check on name field of a new profile field (a-zA-Z0-9_)
-	- fixed: added maximum height to the multiple-select pulldown (control in css)
-2.2:
-	- added: datepicker can be internationalised
-	- added: multiselect pulldown field based on http://code.google.com/p/dropdown-check-list/
-	- added: dutch translation
-	- changed: datepicker uses strftime instead of date php function in output so it listen to the server locale	
-2.1:
-	- added: input/securitytoken view on profile edit form to comply to 1.6.x standards
-	- fixed: show as tags also on edit profile and register
-	- fixed: datepicker handling existing (non unix timestamp) data
-	- fixed: loading of css of datepicker not working in IE
-	- fixed: reference to coldtrick.com in datepicker 
-2.0:
-	- added: option to output field (on profile) always as tags
-	- added: datepicker (saves selected date as unix timestamp), can replace default elgg calendar view
-	- added: option for disallowing editing of profile field (eg only ask on register or data maintained in external system)
-1.0:
-	- initial release
-
--->

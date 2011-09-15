@@ -14,7 +14,7 @@
 
 	admin_gatekeeper();
 	
-	$ordering = get_input("custom_profile_field");
+	$ordering = get_input("elgg-object");
 	
 	if(!empty($ordering) && is_array($ordering)){
 		foreach($ordering as $order => $guid){

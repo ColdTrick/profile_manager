@@ -36,8 +36,20 @@
 	}
 	
 	$list = elgg_view_entity_list($ordered, $count, 0, $count, false, false, false);
-	
+	if(empty($list)){
+		$list = elgg_echo("profile_manager:profile_fields:no_fields");
+	}
 ?>
-<div id="custom_fields_ordering" class="custom_fields_ordering_group">
-	<?php echo $list; ?>
+
+<div class="elgg-module elgg-module-inline">
+	<div class="elgg-head">
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "#custom_fields_form", "class" => "elgg-button-action profile-manager-popup"));?>
+		<h3>
+			<?php echo elgg_echo('profile_manager:group_fields:list:title'); ?>
+		</h3>
+	</div>
+	<div class="elgg-body" id="custom_fields_ordering">
+		<?php echo $list; ?>
+	</div>
 </div>
+<?php echo elgg_view("profile_manager/group_fields/add");?>

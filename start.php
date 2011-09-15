@@ -27,63 +27,56 @@
 	 * @return unknown_type
 	 */
 	function profile_manager_init(){
-		global $CONFIG;
-		
-		
 		/* Profile NoIndex*/
-		if(get_plugin_setting("allow_profile_noindex") == 'yes')
-		{
+		if(elgg_get_plugin_setting("allow_profile_noindex") == 'yes'){
 			elgg_extend_view("profile/edit", "profile_manager/profile/edit_profile", 400);		
-			// extend CSS
-			elgg_extend_view("css", "profile_manager/css");
 		}
 		
 		// Extend CSS
-		elgg_extend_view("css", "profile_manager/css");
-		elgg_extend_view("css", "members/css");
-		elgg_extend_view("js/initialise_elgg", "profile_manager/global_js");
+		elgg_extend_view("css/admin", "profile_manager/css/global");
+		elgg_extend_view("css/admin", "profile_manager/css/admin");
+		elgg_extend_view("css/elgg", "profile_manager/css/global");
+		elgg_extend_view("css/elgg", "profile_manager/css/site");
+		
+		elgg_extend_view("js/elgg", "profile_manager/js/site");
+		elgg_extend_view("js/admin", "profile_manager/js/admin");
 		
 		// extend the user profile view
 		elgg_extend_view("profile/userdetails", "profile_manager/profile/userdetails");
 		
 		// link to full profile
-		if(get_plugin_setting("show_full_profile_link") == "yes"){
+		if(elgg_get_plugin_setting("show_full_profile_link") == "yes"){
 			elgg_extend_view("profile/menu/actions", "profile_manager/profile/userlinks");
 		}
 		
-		// Extend the admin statistics
-		if(get_plugin_setting("show_admin_stats") == "yes"){
-			elgg_extend_view("admin/statistics", "profile_manager/admin_stats");
-		}
-		
-		// Register a page handler, so we can have nice URLs
-		register_page_handler('defaultprofile', 'profile_manager_edit_defaults_page_handler');
-		
 		// Register Page handler for Custom Profile Fields
-		register_page_handler("profile_manager", "profile_manager_page_handler");
+		elgg_register_page_handler("profile_manager", "profile_manager_page_handler");
 		
+		/*
+		 * TODO: get it working for 1.8
 		// Register Page handler for Members listing
-		if(get_plugin_setting("show_members_search") == "yes"){
-			register_page_handler("members", "profile_manager_members_page_handler");
+		if(elgg_get_plugin_setting("show_members_search") == "yes"){
+			elgg_register_page_handler("members", "profile_manager_members_page_handler");
 			add_menu(elgg_echo("profile_manager:members:menu"), $CONFIG->wwwroot . "pg/members");
 		}
+		*/
 		
 		// admin user add, registered here to overrule default action
-		register_action("useradd", false, dirname(__FILE__) . "/actions/admin/useradd.php", true);
+		elgg_register_action("useradd", dirname(__FILE__) . "/actions/admin/useradd.php", "admin");
 		
 		// Register all custom field types
 		register_custom_field_types();
 		
 		// add profile_completeness widget 
-		if(get_plugin_setting("enable_profile_completeness_widget") == "yes"){
-			add_widget_type("profile_completeness", elgg_echo("profile_manager:widget:profile_completeness:title"), elgg_echo("profile_manager:widget:profile_completeness:description"), "profile,dashboard");
+		if(elgg_get_plugin_setting("enable_profile_completeness_widget") == "yes"){
+			elgg_add_widget_type("profile_completeness", elgg_echo("profile_manager:widget:profile_completeness:title"), elgg_echo("profile_manager:widget:profile_completeness:description"), "profile,dashboard");
 		}
 		
 		// free_text on register form
 		elgg_extend_view("register/extend_side", "profile_manager/register/free_text");
 		
 		// where to put extra profile fields
-		if(get_plugin_setting("registration_extra_fields", "profile_manager") == "beside"){
+		if(elgg_get_plugin_setting("registration_extra_fields", "profile_manager") == "beside"){
 			// besides the default registration page
 			elgg_extend_view("register/extend_side", "profile_manager/register/fields");
 		} else {
@@ -92,12 +85,12 @@
 		}
 		
 		// allow login by mail
-		if(get_plugin_setting("login_by_email", "profile_manager") == "yes"){
+		if(elgg_get_plugin_setting("login_by_email", "profile_manager") == "yes"){
 			// overrule action to allow login by mail
-			register_action("login", true, dirname(__FILE__) . "/actions/core/login.php");
+			elgg_register_action("login", dirname(__FILE__) . "/actions/core/login.php", "public");
 			
 			// request password by email
-			register_action("user/requestnewpassword_by_email", true, dirname(__FILE__) . "/actions/user/requestnewpassword_by_email.php");
+			elgg_register_action("user/requestnewpassword_by_email", dirname(__FILE__) . "/actions/user/requestnewpassword_by_email.php", "public");
 			
 			// register pam handler to authenticate based on email
 			register_pam_handler("profile_manager_email_pam_handler");
@@ -109,43 +102,16 @@
 	}
 	
 	/**
-	 * function to handle the 'old' replace profile fields url
-	 * 
-	 * @param $page
-	 * @return unknown_type
-	 */
-	function profile_manager_edit_defaults_page_handler($page){
-		global $CONFIG;
-		
-		// Forward to new form url
-		if($page[0] == "edit"){
-			forward($CONFIG->wwwroot . "pg/profile_manager/profile_fields");
-		} 
-	}
-	
-	/**
 	 * function to handle the nice urls for Custom Profile Fields
 	 * 
 	 * @param $page
 	 * @return unknown_type
 	 */
 	function profile_manager_page_handler($page){
-		global $CONFIG;
-		
 		switch($page[0]){
-			case "group_fields":
-				include(dirname(__FILE__) . "/pages/group_fields.php");
-				break;
-			case "profile_fields":
-				include(dirname(__FILE__) . "/pages/profile_fields.php");
-				break;
 			case "full_profile":
 				set_input("profile_guid", $page[1]);
 				include(dirname(__FILE__) . "/pages/full_profile.php");
-				break;
-			case "export":
-				set_input("fieldtype", $page[1]);
-				include(dirname(__FILE__) . "/pages/export.php");
 				break;
 			case "file_download":
 				set_input("file_guid", $page[1]);
@@ -154,6 +120,8 @@
 		}
 	}
 	
+	/*
+	 * TODO: get it working for 1.8
 	function profile_manager_members_page_handler($page){
 		
 		switch($page[0]){
@@ -165,6 +133,7 @@
 				break;
 		}
 	}
+	*/
 	
 	/**
 	 * Function to add menu items to the pages
@@ -172,91 +141,85 @@
 	 * @return unknown_type
 	 */
 	function profile_manager_pagesetup(){
-		global $CONFIG;
-		
-		if(get_plugin_setting("allow_profile_noindex") == 'yes')
-		{
-			$page_owner = page_owner_entity();
-			$context = get_context();
+		if(elgg_get_plugin_setting("allow_profile_noindex") == 'yes'){
+			$page_owner = elgg_get_page_owner_entity();
+			$context = elgg_get_context();
 			
 			
 			/*Profile NoIndex*/
 			if(in_array($context, array("profile", "friends", "friendsof")) && ($page_owner instanceof ElggUser)){
-				if(get_plugin_usersetting("hide_from_search_engine", $page_owner->getGUID(), "profile_manager") == "yes"){
+				if(elgg_get_plugin_usersetting("hide_from_search_engine", $page_owner->getGUID(), "profile_manager") == "yes"){
 					// protect against search engines
-					elgg_extend_view("metatags", "profile_manager/metatags");
+					elgg_extend_view("metatags", "profile_manager/profile/noindex");
 					
 					// remove FoaF link
+					// TODO: check if still existing in 1.8
 					elgg_unextend_view("metatags", "profile/metatags");
 					
 					// remove RSS/Atom/ links
-					register_plugin_hook("display", "view", "profile_noindex_view_hook");
+					// TODO: check if still existing in 1.8
+					elgg_register_plugin_hook_handler("display", "view", "profile_noindex_view_hook");
 				}
 			}
 		}
 		
-		if($context == "admin" && isadminloggedin()){
-			if(is_plugin_enabled("profile")){
-				// Remake admin submenu
-				$subA = &$CONFIG->submenu["a"];
-				
-				foreach($subA as $index => $item){
-					if($item->name == elgg_echo("profile:edit:default")){
-						unset($subA[$index]);
-					}
-				}
+		if($context == "admin" && elgg_is_admin_logged_in()){
+			elgg_load_js('lightbox');
+			elgg_load_css('lightbox');
 			
-				add_submenu_item(elgg_echo("profile:edit:default"), $CONFIG->wwwroot . "pg/profile_manager/profile_fields", "b");
-			}
-			
-			if(is_plugin_enabled("groups")){
-				add_submenu_item(elgg_echo("profile_manager:group_fields"), $CONFIG->wwwroot . "pg/profile_manager/group_fields", "b");
+			if(elgg_is_active_plugin("groups")){
+				elgg_register_admin_menu_item('configure', 'group_fields', 'appearance');
 			}
 		}
-		if(get_plugin_setting("show_members_search") == "yes" && (get_input("handler") == "search" || strpos($_SERVER["REQUEST_URI"], "/search/") === 0)){
-			add_submenu_item(elgg_echo('profile_manager:members:submenu'), $CONFIG->wwwroot . "pg/members", "b");
+		/*
+		TODO: get it working for 1.8 
+		if(elgg_get_plugin_setting("show_members_search") == "yes" && (get_input("handler") == "search" || strpos($_SERVER["REQUEST_URI"], "/search/") === 0)){
+			// Site navigation
+			$item = new ElggMenuItem("members", elgg_echo('profile_manager:members:submenu'), "members");
+			elgg_register_menu_item('site', $item);
+			
 		}
+		*/
 	}
 	
 	// Initialization functions
-	register_elgg_event_handler('init', 'system', 'profile_manager_init');
-	register_elgg_event_handler('pagesetup', 'system', 'profile_manager_pagesetup');
+	elgg_register_event_handler('init', 'system', 'profile_manager_init');
+	elgg_register_event_handler('pagesetup', 'system', 'profile_manager_pagesetup');
 	
-	register_elgg_event_handler('create', 'user', 'profile_manager_create_user_event');
-	register_elgg_event_handler('all', 'object', 'profile_manager_all_object_event');
-	register_elgg_event_handler('profileupdate','user', 'profile_manager_profileupdate_user_event');
-	register_elgg_event_handler('profileiconupdate','user', 'profile_manager_profileiconupdate_user_event');
+	elgg_register_event_handler('create', 'user', 'profile_manager_create_user_event');
+	elgg_register_event_handler('all', 'object', 'profile_manager_all_object_event');
+	elgg_register_event_handler('profileupdate','user', 'profile_manager_profileupdate_user_event');
+	elgg_register_event_handler('profileiconupdate','user', 'profile_manager_profileiconupdate_user_event');
 	
-	register_plugin_hook('profile:fields', 'profile', 'profile_manager_profile_override');
-	register_plugin_hook('profile:fields', 'group', 'profile_manager_group_override');
+	elgg_register_plugin_hook_handler('profile:fields', 'profile', 'profile_manager_profile_override');
+	elgg_register_plugin_hook_handler('profile:fields', 'group', 'profile_manager_group_override');
 	
-	register_plugin_hook('action', 'register', 'profile_manager_action_register_hook');
+	elgg_register_plugin_hook_handler('action', 'register', 'profile_manager_action_register_hook');
 	
-	register_plugin_hook('categorized_profile_fields', 'profile_manager', 'profile_manager_categorized_profile_fields_hook', 1000);
+	elgg_register_plugin_hook_handler('categorized_profile_fields', 'profile_manager', 'profile_manager_categorized_profile_fields_hook', 1000);
 	
 	// actions
-	register_action("profile_manager/new", false, $CONFIG->pluginspath . "profile_manager/actions/new.php", true);
-	register_action("profile_manager/get_field_data", false, $CONFIG->pluginspath . "profile_manager/actions/get_field_data.php", true);
-	register_action("profile_manager/reset", false, $CONFIG->pluginspath . "profile_manager/actions/reset.php", true);
-	register_action("profile_manager/reorder", false, $CONFIG->pluginspath . "profile_manager/actions/reorder.php", true);
-	register_action("profile_manager/delete", false, $CONFIG->pluginspath . "profile_manager/actions/delete.php", true);
-	register_action("profile_manager/toggleOption", false, $CONFIG->pluginspath . "profile_manager/actions/toggleOption.php", true);
-	register_action("profile_manager/changeCategory", false, $CONFIG->pluginspath . "profile_manager/actions/changeCategory.php", true);
-	register_action("profile_manager/importFromCustom", false, $CONFIG->pluginspath . "profile_manager/actions/importFromCustom.php", true);
-	register_action("profile_manager/importFromDefault", false, $CONFIG->pluginspath . "profile_manager/actions/importFromDefault.php", true);
-	register_action("profile_manager/export", false, $CONFIG->pluginspath . "profile_manager/actions/export.php", true);
-	register_action("profile_manager/configuration/backup", false, $CONFIG->pluginspath . "profile_manager/actions/configuration/backup.php", true);
-	register_action("profile_manager/configuration/restore", false, $CONFIG->pluginspath . "profile_manager/actions/configuration/restore.php", true);
+	elgg_register_action("profile_manager/new", dirname(__FILE__) . "/actions/new.php", "admin");
+	elgg_register_action("profile_manager/get_field_data", dirname(__FILE__) . "/actions/get_field_data.php", "admin");
+	elgg_register_action("profile_manager/reset", dirname(__FILE__) . "/actions/reset.php", "admin");
+	elgg_register_action("profile_manager/reorder", dirname(__FILE__) . "/actions/reorder.php", "admin");
+	elgg_register_action("profile_manager/delete", dirname(__FILE__) . "/actions/delete.php", "admin");
+	elgg_register_action("profile_manager/toggleOption", dirname(__FILE__) . "/actions/toggleOption.php", "admin");
+	elgg_register_action("profile_manager/changeCategory", dirname(__FILE__) . "/actions/changeCategory.php", "admin");
+	elgg_register_action("profile_manager/importFromCustom", dirname(__FILE__) . "/actions/importFromCustom.php", "admin");
+	elgg_register_action("profile_manager/importFromDefault", dirname(__FILE__) . "/actions/importFromDefault.php", "admin");
+	elgg_register_action("profile_manager/export", dirname(__FILE__) . "/actions/export.php", "admin");
+	elgg_register_action("profile_manager/configuration/backup", dirname(__FILE__) . "/actions/configuration/backup.php", "admin");
+	elgg_register_action("profile_manager/configuration/restore", dirname(__FILE__) . "/actions/configuration/restore.php", "admin");
 	
-	register_action("profile_manager/categories/add", false, $CONFIG->pluginspath . "profile_manager/actions/categories/add.php", true);
-	register_action("profile_manager/categories/reorder", false, $CONFIG->pluginspath . "profile_manager/actions/categories/reorder.php", true);
-	register_action("profile_manager/categories/delete", false, $CONFIG->pluginspath . "profile_manager/actions/categories/delete.php", true);
+	elgg_register_action("profile_manager/categories/add", dirname(__FILE__) . "/actions/categories/add.php", "admin");
+	elgg_register_action("profile_manager/categories/reorder", dirname(__FILE__) . "/actions/categories/reorder.php", "admin");
+	elgg_register_action("profile_manager/categories/delete", dirname(__FILE__) . "/actions/categories/delete.php", "admin");
 	
-	register_action("profile_manager/profile_types/add", false, $CONFIG->pluginspath . "profile_manager/actions/profile_types/add.php", true);
-	register_action("profile_manager/profile_types/delete", false, $CONFIG->pluginspath . "profile_manager/actions/profile_types/delete.php", true);
-	register_action("profile_manager/profile_types/get_description", false, $CONFIG->pluginspath . "profile_manager/actions/profile_types/get_description.php", true);
+	elgg_register_action("profile_manager/profile_types/add", dirname(__FILE__) . "/actions/profile_types/add.php", "admin");
+	elgg_register_action("profile_manager/profile_types/delete", dirname(__FILE__) . "/actions/profile_types/delete.php", "admin");
+	elgg_register_action("profile_manager/profile_types/get_description", dirname(__FILE__) . "/actions/profile_types/get_description.php", "admin");
 	
 	// members
-	register_action("profile_manager/members/search", true, $CONFIG->pluginspath . "profile_manager/actions/members/search.php"); // can be executed publically
-		
-?>
+	elgg_register_action("profile_manager/members/search", dirname(__FILE__) . "/actions/members/search.php", "public");
+	

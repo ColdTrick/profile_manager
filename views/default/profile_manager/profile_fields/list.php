@@ -15,7 +15,7 @@
 	$options = array(
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
-			"limit" => 0,
+			"limit" => false,
 			"owner_guid" => $CONFIG->site_guid
 		);
 
@@ -30,22 +30,23 @@
 		ksort($ordered);
 	}
 		
-	$fieldslist = elgg_view_entity_list($ordered, $count, 0, $count, false, false, false);
-	if(empty($fieldslist)){
-		$fieldslist = elgg_view("page_elements/contentwrapper", array("body" => elgg_echo("profile_manager:profile_fields:no_fields")));
+	$list = elgg_view_entity_list($ordered, $count, 0, $count, false, false, false);
+	if(empty($list)){
+		$list = elgg_echo("profile_manager:profile_fields:no_fields");
 	}
-	$categorylist = elgg_view("profile_manager/categories/list");
-	$profiletypelist = elgg_view("profile_manager/profile_types/list");
+	
 ?>
-<div id="custom_fields_ordering">
-	<?php echo $fieldslist; ?>
-</div>
-<div id="custom_fields_lists">
-	<div id="custom_fields_profile_type_list">
-		<?php echo $profiletypelist; ?>	
+<div class="elgg-module elgg-module-inline">
+	<div class="elgg-head">
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "#custom_fields_form", "class" => "elgg-button-action profile-manager-popup"));?>
+		<h3>
+			<?php echo elgg_echo('profile_manager:profile_fields:list:title'); ?>
+		</h3>
 	</div>
-	<div id="custom_fields_category_list">
-		<?php echo $categorylist; ?>	
+	<div class="elgg-body" id="custom_fields_ordering">
+		<?php echo $list; ?>
 	</div>
 </div>
-<div class="clearfloat"></div>
+<?php echo elgg_view("profile_manager/profile_fields/add");?>
+<div class="custom_fields_more_info_text" id="text_more_info_profile_field"><?php echo elgg_echo("profile_manager:tooltips:profile_field");?></div>
+<div class="custom_fields_more_info_text" id="text_more_info_profile_field_additional"><?php echo elgg_echo("profile_manager:tooltips:profile_field_additional");?></div>

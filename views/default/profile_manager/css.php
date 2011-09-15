@@ -10,138 +10,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 ?>
-#custom_fields_ordering {
-	width: 518px;
-	float: left;
-}
-
-.custom_fields_ordering_group {
-	width: inherit !important;
-	float: none !important;
-}
-
-#custom_fields_lists{
-	width: 200px;
-	float: right;
-}
-
-.custom_fields_lists_green {
-	border-color: green !important; 
-}
-
-#custom_fields_category_list .ui-sortable{
-	min-height: 0px;
-}
-
-#custom_fields_category_list .droppable-hover{
-	background: #BBDAF7;
-}
-
-.custom_fields_category,
-.custom_profile_type  {
-	width: 100%;
-	border: 1px solid #CCCCCC;
-	border-left: 5px solid #CCCCCC;
-	margin-bottom: 2px;
-	padding: 1px;
-	word-wrap: break-word;
-	background-color: white; /* fix so pickup of draggable will work in IE (7) */
-}
-
-.custom_profile_type {
-	border-left: 1px solid #CCCCCC;
-}
-
-.custom_profile_type_description {
-	display: none;
-	margin-bottom: 5px;
-	padding-bottom: 5px;
-	border-bottom: 1px dotted #CCCCCC;
-}
-
-.custom_fields_category_selected {
-	border-color: #4690D6;
-}
-
-.custom_fields_category_edit,
-.custom_profile_type_edit {
-	cursor: pointer;
-	width: 16px;
-	height: 16px;
-	background: url(<?php echo $vars['url']; ?>mod/profile_manager/_graphics/edit.png);
-	margin-top: 1px;
-	float: right;
-}
-
-.custom_fields_category_delete_button,
-.custom_fields_profile_type_delete_button {
-	display: none;
-}
-
-#custom_fields_category_list_custom .custom_fields_category { 
-	cursor: move;
-}
-
-#custom_fields_ordering .search_listing {
-	border: 1px solid #CCCCCC;
-	cursor: move;
-}
-
-#custom_fields_ordering .search_listing_icon img {
-	width: 16px;
-	cursor: pointer;
-}
-
-#custom_fields_ordering .search_listing_info {
-	min-height: 0px;
-	margin-left: 25px;
-	color: #333333;
-}
-
-#custom_fields_form, 
-#custom_fields_category_form,
-#custom_fields_profile_type_form {
-	display: none;
-}
-
-#custom_fields_ordering.ui-sortable {
-	min-height: 0px;
-}
-#custom_fields_category_list_custom .ui-sortable-helper,
-#custom_fields_ordering .ui-sortable-helper {
-	width: 100%;
-}
-
-.metadata_config_right{
-	float: right;
-}
-
-.metadata_config_left{
-	float: left;
-}
-
-.metadata_config_left_extra{
-	display:none;
-}
-
-.metadata_config_right_status {
-	width: 16px;
-	height: 13px;
-	display: inline-block;
-	cursor: default;
-	background: url(<?php echo $vars['url']; ?>mod/profile_manager/_graphics/field_metadata_status.png);
-}
-
-.metadata_config_right_status_enabled{
-	background-position: 0 -16px;
-	cursor: pointer;
-}
-
-.metadata_config_right_status_disabled{
-	background-position: 0 -32px;
-	cursor: pointer;
-}
-
 .datepicker_hidden{
 	display: none;
 }
@@ -170,35 +38,10 @@
 	font-size:90%;
 }
 
-#restoreForm {
-	display: none;
-}
 
 /* end actions */
 
-.custom_fields_more_info {
-	width: 14px;
-	height: 14px;
-	float: right;
-	background: url(<?php echo $vars['url']; ?>_graphics/icon_customise_info.gif);
-	cursor: pointer;
-}
 
-.custom_fields_more_info_text {
-	display:none;
-}
-
-#custom_fields_more_info_tooltip {
-	position:absolute;
-	border:1px solid #333333;
-	background:#e4ecf5;
-	color:#333333;
-	padding:5px;
-	display:none;
-	width: 250px;
-	line-height: 1.2em;
-	font-size: 90%;
-}
 
 /* fix for max-height multi-select drop down*/
 .ui-dropdownchecklist-dropcontainer {

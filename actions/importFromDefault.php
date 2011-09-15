@@ -34,13 +34,15 @@
 			$defaults = array (
 					'description' => 'longtext',
 					'briefdescription' => 'text',
-					'location' => 'tags',
+					'location' => 'location',
 					'interests' => 'tags',
 					'skills' => 'tags',
 					'contactemail' => 'email',
 					'phone' => 'text',
 					'mobile' => 'text',
 					'website' => 'url',
+					'twitter' => 'text'
+			
 				);
 		} elseif($type == "group"){
 			// Group defaults

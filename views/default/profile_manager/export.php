@@ -22,13 +22,16 @@
 		);
 	$entities = elgg_get_entities($options);
 	
-	$ts = time();
-	$token = generate_action_token($ts);
+	echo elgg_echo('profile_manager:export:description:' . $fieldtype);
 ?>
-<div class='contentWrapper'>
-<?php echo elgg_echo('profile_manager:export:description:' . $fieldtype);?>
-<h3 class='settings'><?php echo elgg_echo('profile_manager:export:list:title');?></h3>
+	<div class="elgg-module elgg-module-inline">
+		<div class="elgg-head">
+			<h3><?php echo elgg_echo('profile_manager:export:list:title'); ?></h3>
+		</div>
+		<div class="elgg-body">
+	
 <?php 
+	
 	if($entities){
 		
 		echo "<form action='" . $vars['url'] . "action/profile_manager/export' method='POST'>";
@@ -114,4 +117,5 @@
 		echo elgg_echo("profile_manager:export:nofields");
 	}
 ?>
+	</div>
 </div>

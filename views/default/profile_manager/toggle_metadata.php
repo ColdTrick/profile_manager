@@ -16,6 +16,8 @@
 	
 	$types = array();
 	$type_options = array();
+	
+	// TODO: get substitute for get_register
 	if($entity->getSubType() == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE){
 		$types = get_register("custom_profile_field_types");
 	} elseif($entity->getSubType() == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE) {
@@ -41,4 +43,3 @@
 		$title = elgg_echo('profile_manager:admin:option_unavailable');
 	}
 	echo "<span title='" . $title . "' class='metadata_config_right_status" . $class . "' id='" . $id . "' " . $onclick . "></span>";
-?>

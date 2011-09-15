@@ -38,6 +38,7 @@
 		add_custom_field_type("custom_profile_field_types", 'text', elgg_echo('text'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'longtext', elgg_echo('longtext'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'tags', elgg_echo('tags'), $profile_options);
+		add_custom_field_type("custom_profile_field_types", 'location', elgg_echo('location'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'url', elgg_echo('url'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'email', elgg_echo('email'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'calendar', elgg_echo('calendar'), $calendar_options);

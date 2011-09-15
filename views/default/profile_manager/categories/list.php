@@ -16,7 +16,7 @@
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 			"count" => true,
-			"owner_guid" => $CONFIG->site_guid
+			"owner_guid" => $CONFIG->site_guid 
 		);
 
 	$categories_count = elgg_get_entities($options);
@@ -40,11 +40,23 @@
 	}
 	
 ?>
-<div class="contentWrapper">
-	<h3 class="settings"><span class='custom_fields_more_info' id='more_info_category_list'></span><?php echo elgg_echo("profile_manager:categories:list:title"); ?></h3>
-	<div id="custom_profile_field_category_0" class="custom_fields_category"><a href="javascript:void(0);" onclick="filterCustomFields(0);"><?php echo elgg_echo("profile_manager:categories:list:default"); ?></a></div>
-	<div id="custom_fields_category_list_custom">	
-		<?php echo $list; ?>
+
+<div class="elgg-module elgg-module-inline">
+	<div class="elgg-head">
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "#custom_fields_category_form", "class" => "elgg-button-action profile-manager-popup")); ?>
+		<h3>
+			<?php echo elgg_echo('profile_manager:categories:list:title'); ?>
+			<span class='custom_fields_more_info' id='more_info_category_list'></span>
+		</h3>
 	</div>
-	<center><a href="javascript:void(0);" onclick="filterCustomFields();"><?php echo elgg_echo("profile_manager:categories:list:view_all"); ?></a></center>
+	<div class="elgg-body" id="custom_fields_category_list_custom">
+		<div id="custom_profile_field_category_0" class="custom_fields_category"><a href="javascript:void(0);" onclick="filterCustomFields(0);"><?php echo elgg_echo("profile_manager:categories:list:default"); ?></a></div>
+		<?php echo $list; ?>
+		<a href="javascript:void(0);" onclick="filterCustomFields();"><?php echo elgg_echo("profile_manager:categories:list:view_all"); ?></a>
+	</div>
 </div>
+
+<?php echo elgg_view("profile_manager/categories/add");?>
+
+<div class="custom_fields_more_info_text" id="text_more_info_category"><?php echo elgg_echo("profile_manager:tooltips:category");?></div>
+<div class="custom_fields_more_info_text" id="text_more_info_category_list"><?php echo elgg_echo("profile_manager:tooltips:category_list");?></div>

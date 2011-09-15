@@ -66,23 +66,32 @@
 	
 	$formbody .= elgg_view("input/hidden", array("internalname" => "guid"));
 	$formbody .= elgg_view('input/submit', array('internalname' => elgg_echo('save'), 'value' => elgg_echo('save')));
-	$formbody .= "&nbsp;";
 	$formbody .= elgg_view('input/reset', array('internalname' => elgg_echo('cancel'), 
 												'value' => elgg_echo('cancel'),
-												'js' => "onClick='resetProfileTypeForm();'"));
-	$formbody .= "&nbsp;";
+												'js' => "onClick='resetProfileTypeForm();'",
+												'class' => "elgg-button-cancel"));
 	$formbody .= elgg_view('input/button', array('internalname' => elgg_echo('delete'),
 												'class' => "submit_button custom_fields_profile_type_delete_button", 
 												'value' => elgg_echo('delete'),
 												'type' => "button",
-												'js' => "onClick='deleteProfileType();'"));
+												'js' => "onClick='deleteProfileType();'",
+												'class' => "elgg-button-action"));
 	
 	$form = elgg_view('input/form', array('body' => $formbody, 
 										'action' => $vars['url'] . 'action/profile_manager/profile_types/add')
 									);
-	
+
 ?>
-<div class="contentWrapper" id="custom_fields_profile_type_form">
-	<h3 class="settings"><span class='custom_fields_more_info' id='more_info_profile_type'></span><?php echo elgg_echo("profile_manager:profile_types:add:link"); ?></h3>
-	<?php echo $form; ?>
+<div class="custom_fields_forms">
+	<div class="elgg-module elgg-module-inline" id="custom_fields_profile_type_form">
+		<div class="elgg-head">
+			<h3>
+				<?php echo elgg_echo('profile_manager:profile_types:add:link'); ?>
+				<span class='custom_fields_more_info' id='more_info_profile_type'></span>
+			</h3>
+		</div>
+		<div class="elgg-body">
+			<?php echo $form; ?>
+		</div>
+	</div>
 </div>

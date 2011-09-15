@@ -24,44 +24,49 @@
 				"owner_guid" => $CONFIG->site_guid
 			);
 	
-	$max_fields = elgg_get_entities($options) + 1;
-			
-	while ($translation = get_plugin_setting("admin_defined_profile_$n", 'profile')){
-		$metadata_name = "admin_defined_profile_$n";
-		$metadata_label = $translation;
+	$new_order = elgg_get_entities($options) + 1;
 		
-		$type = get_plugin_setting("admin_defined_profile_type_$n", 'profile');
-		if (empty($type)){
-			$type = 'text';
-		}
-		$metadata_type = $type;
-		
-		$options["metadata_name_value_pairs"] = array("name" => "metadata_name", "value" => $metadata_name);
-			
-		$count = elgg_get_entities_from_metadata($options);
-		
-		if($count == 0){
-			$field = new ProfileManagerCustomProfileField();
+	if ($fieldlist = elgg_get_config('profile_custom_fields')) {
+		$fieldlistarray = explode(',', $fieldlist);
+		foreach ($fieldlistarray as $listitem) {
+			if ($translation = elgg_get_config("admin_defined_profile_{$listitem}")) {
+				$metadata_name = "admin_defined_profile_$listitem";
+				$metadata_label = $translation;
+				
+				$type = elgg_get_config("admin_defined_profile_type_$listitem");
+				if (empty($type)){
+					$type = 'text';
+				}
+				$metadata_type = $type;
+				
+				$options["metadata_name_value_pairs"] = array("name" => "metadata_name", "value" => $metadata_name);
 					
-			$field->save();
-			
-			$field->metadata_name = $metadata_name;
-			$field->metadata_label = $metadata_label;
-			$field->metadata_type = $metadata_type;
-			
-			$field->show_on_register = "no";
-			$field->mandatory = "no";
-			$field->user_editable = "yes";
-			
-			$field->order = $max_fields;
-			
-			$field->save();
-			
-			$max_fields++;
-		} else {
-			$skipped++;
-		}	
-		$n++;
+				$count = elgg_get_entities_from_metadata($options);
+				
+				if($count == 0){
+					$field = new ProfileManagerCustomProfileField();
+							
+					$field->save();
+					
+					$field->metadata_name = $metadata_name;
+					$field->metadata_label = $metadata_label;
+					$field->metadata_type = $metadata_type;
+					
+					$field->show_on_register = "no";
+					$field->mandatory = "no";
+					$field->user_editable = "yes";
+					
+					$field->order = $new_order;
+					
+					$field->save();
+					
+					$new_order++;
+				} else {
+					$skipped++;
+				}	
+				$n++;
+			}
+		}
 	}
 	
 	if(($n - $skipped) == 0){
@@ -70,5 +75,4 @@
 		system_message(sprintf(elgg_echo("profile_manager:actions:import:from_custom:new_fields"), $n - $skipped));
 	}
 	
-	forward($_SERVER['HTTP_REFERER']);
-?>
+	forward(REFERER);
