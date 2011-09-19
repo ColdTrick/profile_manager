@@ -2,7 +2,7 @@
 
 	$owner = $vars["entity"]->getOwnerEntity();
 	
-	if($owner->getGUID() === get_loggedin_userid()){
+	if($owner->getGUID() === elgg_get_logged_in_user_guid()){
 		$completeness = profile_manager_profile_completeness($owner);
 		$percentage_complete = $completeness["percentage_completeness"];
 
@@ -15,9 +15,9 @@
 			$rand_key = array_rand($missing_fields);
 			$field = $missing_fields[$rand_key];
 			
-			$tips = sprintf(elgg_echo("profile_manager:widget:profile_completeness:view:tips"), "<b>" . $field->getTitle() . "</b>");
+			$tips = sprintf(elgg_echo("widgets:profile_completeness:view:tips"), "<b>" . $field->getTitle() . "</b>");
 		} else {
-			$tips = elgg_echo("profile_manager:widget:profile_completeness:view:complete");
+			$tips = elgg_echo("widgets:profile_completeness:view:complete");
 		}
 	} else {
 		if($owner->profile_completeness_percentage){

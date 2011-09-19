@@ -59,12 +59,6 @@
 												'value' => elgg_echo('cancel'),
 												'js' => "onClick='resetCategoryForm();'",
 												'class' => "elgg-button-cancel"));
-	$formbody .= elgg_view('input/button', array('internalname' => elgg_echo('delete'),
-												'class' => "submit_button custom_fields_category_delete_button", 
-												'value' => elgg_echo('delete'),
-												'type' => "button",
-												'js' => "onClick='deleteCategory();'",
-												'class' => "elgg-button-action"));
 	
 	$form = elgg_view('input/form', array('body' => $formbody, 
 										'action' => $vars['url'] . 'action/profile_manager/categories/add')

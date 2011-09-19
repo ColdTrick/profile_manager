@@ -50,9 +50,9 @@
 		</h3>
 	</div>
 	<div class="elgg-body" id="custom_fields_category_list_custom">
+		<div id="custom_profile_field_category_all" class="custom_fields_category"><a href="javascript:void(0);" onclick="filterCustomFields();"><?php echo elgg_echo("all"); ?></a></div>
 		<div id="custom_profile_field_category_0" class="custom_fields_category"><a href="javascript:void(0);" onclick="filterCustomFields(0);"><?php echo elgg_echo("profile_manager:categories:list:default"); ?></a></div>
 		<?php echo $list; ?>
-		<a href="javascript:void(0);" onclick="filterCustomFields();"><?php echo elgg_echo("profile_manager:categories:list:view_all"); ?></a>
 	</div>
 </div>
 

@@ -9,8 +9,6 @@
 	* @copyright Coldtrick IT Solutions 2009
 	* @link http://www.coldtrick.com/
 	*/
-
- 	global $CONFIG;
  	
 	admin_gatekeeper();
 
@@ -32,4 +30,3 @@
 	}
 
 	exit();
-?>

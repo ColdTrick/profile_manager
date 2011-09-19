@@ -23,17 +23,18 @@ $(document).ready(function(){
    		items: 'li'
 	});
 
-	$('#custom_fields_category_list_custom').sortable({
+	$('#custom_fields_category_list_custom .elgg-list').sortable({
 		update: function(event, ui) { 
    			reorderCategories();			   		
    		},
 		opacity: 0.6,
-		containment: 'parent',
-		tolerance: 'pointer'
+		tolerance: 'pointer',
+		items: 'li',
+		handle: '.elgg-icon-drag-arrow'
 	});
 
-	$('#custom_fields_category_list .custom_fields_category').droppable({
-		accept: ".search_listing",
+	$('#custom_profile_field_category_0, #custom_fields_category_list_custom .elgg-item').droppable({
+		accept: "#custom_fields_ordering .elgg-item",
 		hoverClass: 'droppable-hover',
 		tolerance: 'pointer',
 		drop: function(event, ui) {
@@ -44,21 +45,81 @@ $(document).ready(function(){
 	});
 
 	// enable/disable correct field type options 
-	changeFieldType();
+	//changeFieldType();
 
 	// add buttons
 	$(".profile-manager-popup").fancybox();
 });
 
-// General Functions
+function toggleOption(field, guid){
+	$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/toggleOption?&guid=' + guid + '&field=' + field), function(data){
+		if(data == 'true'){
+			$("#" + field + "_" + guid).toggleClass("metadata_config_right_status_disabled metadata_config_right_status_enabled");
+		} else {
+			alert(elgg.echo("profile_manager:actions:toggle_option:error:unknown"));
+		}
+	});
+}
 
-function toggleForm(form_id){
-	if($('#' + form_id + ' input[name="guid"]').val() > 0){
-		$('#' + form_id + ' input[type="reset"]').click();
-	} else {	
-		$('#' + form_id).toggle();
+function reorderCustomFields(){
+	var strArray = $('#custom_fields_ordering').sortable('serialize');
+	$.post(elgg.security.addToken('<?php echo $vars['url'];?>action/profile_manager/reorder?'), strArray);
+}
+
+function reorderCategories(){
+	var strArray = $('#custom_fields_category_list_custom .elgg-list').sortable('serialize');
+	$.post(elgg.security.addToken('<?php echo $vars['url'];?>action/profile_manager/categories/reorder?'), strArray);
+}
+
+function removeField(guid){
+	if(confirm(elgg.echo("profile_manager:actions:delete:confirm"))){
+		$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/delete?guid=' + guid), function(data){
+			if(data == 'true'){
+				$('#custom_profile_field_' + guid).hide('slow').parent().remove();
+				reorderCustomFields();
+			} else {
+				alert(elgg.echo("profile_manager:actions:delete:error:unknown"));
+			}
+		});
+	}	
+}
+
+function deleteCategory(guid){
+	if(guid && confirm(elgg.echo("profile_manager:categories:delete:confirm"))){
+		document.location.href = elgg.security.addToken("<?php echo $vars['url']; ?>action/profile_manager/categories/delete?guid=" + guid);
+	}
+}
+
+function filterCustomFields(category_guid){
+	$("#custom_fields_ordering .elgg-item").hide();
+	$("#custom_fields_category_list_custom .custom_fields_category_selected").removeClass("custom_fields_category_selected");
+	if(category_guid === 0){
+		// show default
+		$("#custom_fields_ordering .custom_field[rel='']").parent().show();
+		$("#custom_profile_field_category_0").addClass("custom_fields_category_selected");
+	} else {
+		if(category_guid === undefined){
+			// show all
+			$("#custom_fields_ordering .custom_field").parent().show();
+			$("#custom_profile_field_category_all").addClass("custom_fields_category_selected");
+		} else {
+			//show selected category
+			$("#custom_fields_ordering .custom_field[rel='" + category_guid + "']").parent().show();
+			$("#custom_profile_field_category_" + category_guid).parent().addClass("custom_fields_category_selected");
+		}
 	}		
 }
+
+
+// General Functions
+
+//function toggleForm(form_id){
+//	if($('#' + form_id + ' input[name="guid"]').val() > 0){
+//		$('#' + form_id + ' input[type="reset"]').click();
+//	} else {	
+//		$('#' + form_id).toggle();
+//	}		
+//}
 
 // profile fields
 function resetProfileFieldsForm(){
@@ -85,35 +146,11 @@ function editField(guid){
 	});
 }
 
-function removeField(guid){
-	if(confirm(elgg.echo("profile_manager:actions:delete:confirm"))){
-		$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/delete?guid=' + guid), function(data){
-			if(data == 'true'){
-				$('#custom_profile_field_' + guid).hide('slow');
-				$('#custom_profile_field_' + guid).remove();
-				reorderCustomFields();
-			} else {
-				alert(elgg.echo("profile_manager:actions:delete:error:unknown"));
-			}
-		});
-	}	
-}
 
-function toggleOption(field, guid){
-	$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/toggleOption?&guid=' + guid + '&field=' + field), function(data){
-		if(data == 'true'){
-			$("#" + field + "_" + guid).toggleClass("metadata_config_right_status_disabled");
-			$("#" + field + "_" + guid).toggleClass("metadata_config_right_status_enabled");
-		} else {
-			alert(elgg.echo("profile_manager:actions:toggle_option:error:unknown"));
-		}
-	});
-}
 
-function reorderCustomFields(){
-	var strArray = $('#custom_fields_ordering').sortable('serialize');
-	$.post(elgg.security.addToken('<?php echo $vars['url'];?>action/profile_manager/reorder?'), strArray);
-}
+
+
+
 
 function changeFieldType(){
 	var selectedType = $("#custom_fields_form select[name='metadata_type']").val();
@@ -123,15 +160,15 @@ function changeFieldType(){
 
 // categories	
 function changeFieldCategory(field, category_guid){
-	var field_guid = $(field).attr("id").replace("custom_profile_field_","");
-	category_guid = category_guid.replace("custom_profile_field_category_","");
+	var field_guid = $(field).attr("id").replace("elgg-object-","");
+	category_guid = category_guid.replace("elgg-object-","");
 
 	$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/changeCategory?guid=' + field_guid + '&category_guid=' + category_guid), function(data){
 		if(data == 'true'){		
 			if(category_guid == 0){
 				category_guid = "";
 			}				 
-			$(field).attr("rel", category_guid);
+			$(field).find(".custom_field").attr("rel", category_guid);
 			$(".custom_fields_category_selected a").click();
 				
 		} else {
@@ -140,24 +177,7 @@ function changeFieldCategory(field, category_guid){
 	});
 }
 
-function filterCustomFields(category_guid){
-	$("#custom_fields_ordering .search_listing").hide();
-	$(".custom_fields_category").removeClass("custom_fields_category_selected");
-	if(category_guid === 0){
-		// show default
-		$("#custom_fields_ordering .search_listing[rel='']").show();
-		$("#custom_profile_field_category_0").addClass("custom_fields_category_selected");
-	} else {
-		if(category_guid === undefined){
-			// show all
-			$("#custom_fields_ordering .search_listing").show();
-		} else {
-			//show selected category
-			$("#custom_fields_ordering .search_listing[rel='" + category_guid + "']").show();
-			$("#custom_profile_field_category_" + category_guid).addClass("custom_fields_category_selected");
-		}
-	}		
-}
+
 
 function editCategory(guid, name, label, rels){
 	$('#custom_fields_category_form input[name="guid"]').val(guid);
@@ -167,33 +187,21 @@ function editCategory(guid, name, label, rels){
 	var cats = rels.split(",");
 	$('#custom_fields_category_form input[type="checkbox"]').val(cats);
 	
-	$('#custom_fields_category_form .custom_fields_category_delete_button').show();
 	$.fancybox({ href: "#custom_fields_category_form"});
 }
 
-function reorderCategories(){
-	var strArray = $('#custom_fields_category_list_custom').sortable('serialize');
-	$.post(elgg.security.addToken('<?php echo $vars['url'];?>action/profile_manager/categories/reorder?'), strArray);
-}
 
 function resetCategoryForm(){
 	$('#custom_fields_category_form input[name="guid"]').val('');
-	$('#custom_fields_category_form .custom_fields_category_delete_button').hide();
 	
 	return true;
 }
 
-function deleteCategory(){
-	if(confirm(elgg.echo("profile_manager:categories:delete:confirm"))){
-		var guid = $('#custom_fields_category_form input[name="guid"]').val();
-		document.location.href = elgg.security.addToken("<?php echo $vars['url']; ?>action/profile_manager/categories/delete?guid=" + guid);
-	}
-}
+
 
 // Profile Types
 function resetProfileTypeForm(){
 	$('#custom_fields_profile_type_form input[name="guid"]').val('');
-	$('#custom_fields_profile_type_form .custom_fields_profile_type_delete_button').hide();
 	
 	return true;
 }
@@ -211,13 +219,11 @@ function editProfileType(guid, name, label, show_on_members, rels){
 	var cats = rels.split(",");
 	$('#custom_fields_profile_type_form input[type="checkbox"]').val(cats);
 	
-	$('#custom_fields_profile_type_form .custom_fields_profile_type_delete_button').show();
 	$.fancybox({ href: "#custom_fields_profile_type_form"});
 }
 
-function deleteProfileType(){
-	if(confirm(elgg.echo("profile_manager:profile_types:delete:confirm"))){
-		var guid = $('#custom_fields_profile_type_form input[name="guid"]').val();
+function deleteProfileType(guid){
+	if(guid && confirm(elgg.echo("profile_manager:profile_types:delete:confirm"))){
 		document.location.href = elgg.security.addToken("<?php echo $vars['url']; ?>action/profile_manager/profile_types/delete?guid=" + guid);
 	}
 }

@@ -297,6 +297,13 @@
 			Various actions related to these profile fields.
 		",
 	
+		// widgets
+		'widgets:profile_completeness:title' => 'Profile Completeness',
+		'widgets:profile_completeness:description' => 'Show the profile completeness',
+		'widgets:profile_completeness:view:tips' => 'Tip! Update your %s to improve the Profile Completeness.',
+		'widgets:profile_completeness:view:complete' => 'Congratulations! Your profile is 100% complete!.',
+	
+	
 /*	
 		'profile_manager' => "Profile Manager",
 		'custom_profile_fields' => "Custom Profile Fields",
@@ -337,12 +344,7 @@
 		'profile_manager:register_pre_check:profile_icon:error' => 'Error uploading your profile icon (probably related to the file size)',
 		'profile_manager:register_pre_check:profile_icon:nosupportedimage' => 'Uploaded profile icon is not the right type (jpg, gif, png)',
 	
-		// widget
-		'profile_manager:widget:profile_completeness:title' => 'Profile Completeness',
-		'profile_manager:widget:profile_completeness:description' => 'Show the profile completeness',
-		'profile_manager:widget:profile_completeness:view:tips' => 'Tip! Update your %s to improve the Profile Completeness.',
-		'profile_manager:widget:profile_completeness:view:complete' => 'Congratulations! Your profile is 100% complete!.',
-	
+		
 		// Custom Group Fields
 		'profile_manager:group_fields' => "Replace group fields",
 		//'profile_manager:group_fields:title' => "Replace group profile fields",

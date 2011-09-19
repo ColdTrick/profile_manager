@@ -14,25 +14,41 @@
 	margin: 0;
 }
 
-.custom_fields_lists_green {
-	border-color: green !important; 
+#custom_fields_category_list_custom .droppable-hover{
+	background: #000000;
 }
 
-#custom_fields_category_list .droppable-hover{
-	background: #BBDAF7;
+#custom_fields_category_list_custom .droppable-hover a{
+	color: #FFFFFF;
 }
 
-.custom_fields_category,
-.custom_profile_type  {
+#custom_profile_field_category_all,
+#custom_profile_field_category_all,
+#custom_profile_field_category_0,
+#custom_fields_category_list_custom .elgg-item,
+#custom_fields_profile_types_list_custom .elgg-item {
 	border: 1px solid #CCCCCC;
-	margin-bottom: 2px;
-	padding: 1px;
+	margin: 0 2px 0 0;
+	padding: 5px;
 	word-wrap: break-word;
 	float: left;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
-.custom_profile_type {
-	border-left: 1px solid #CCCCCC;
+#custom_fields_category_list_custom .custom_fields_category_selected {
+	background: #BBBBBB;
+}
+.custom_profile_type .elgg-icon,
+.custom_fields_category .elgg-icon {
+	float: right;
+	cursor: pointer;
+}
+
+.custom_fields_category .elgg-icon-drag-arrow {
+	cursor: move;
+	float: left;
 }
 
 .custom_profile_type_description {
@@ -42,38 +58,17 @@
 	border-bottom: 1px dotted #CCCCCC;
 }
 
-.custom_fields_category_selected {
-	border-color: #4690D6;
-}
-
-.custom_fields_category_edit,
-.custom_profile_type_edit {
-	cursor: pointer;
-	width: 16px;
-	height: 16px;
-	background: url(<?php echo $plugin_graphics_folder; ?>edit.png);
-	margin-top: 1px;
-	float: right;
-}
-
-.custom_fields_category_delete_button,
-.custom_fields_profile_type_delete_button {
-	display: none;
-}
-
-#custom_fields_category_list_custom .elgg-item {
-	margin: 0px;
-}
-
-#custom_fields_category_list_custom .custom_fields_category { 
-	cursor: move;
-	margin: 3px;
+#custom_fields_ordering .elgg-item {
+	background: #FFFFFF;
 }
 
 #custom_fields_ordering .custom_field{
 	border: 1px solid #CCCCCC;
 	cursor: move;
 	padding: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .custom_fields_forms {
@@ -84,15 +79,6 @@
 #custom_fields_category_form,
 #custom_fields_profile_type_form {
 	width: 700px;
-}
-
-#custom_fields_ordering.ui-sortable {
-	min-height: 0px;
-}
-
-#custom_fields_category_list_custom .ui-sortable-helper,
-#custom_fields_ordering .ui-sortable-helper {
-	width: 100%;
 }
 
 .custom_field_handle {
@@ -133,7 +119,6 @@
 	background-position: 0 -32px;
 	cursor: pointer;
 }
-
 
 #restoreForm {
 	display: none;

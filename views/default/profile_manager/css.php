@@ -31,18 +31,6 @@
 	vertical-align: middle;
 }
 
-/* actions */
-.custom_profile_fields_actions_list td{
-	vertical-align: middle;
-	padding-left: 5px;
-	font-size:90%;
-}
-
-
-/* end actions */
-
-
-
 /* fix for max-height multi-select drop down*/
 .ui-dropdownchecklist-dropcontainer {
 	max-height: 150px;
@@ -201,24 +189,6 @@ li.custom_fields_edit_profile_category {
 
 /* end registration form */
 
-/* widgets */
-#widget_profile_completeness_container {
-	border: 1px solid #AAAAAA;
-	position: relative;
-}
-
-#widget_profile_completeness_progress {
-	position: absolute;
-	line-height: 20px;
-	font-weight: bold;
-	width: 100%;
-	text-align: center;
-}
-
-#widget_profile_completeness_progress_bar {
-	background: #00FF00;
-	height: 20px;
-}
 
 
 .profile_noindex_explain {

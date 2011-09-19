@@ -28,7 +28,7 @@
 	 */
 	function profile_manager_init(){
 		/* Profile NoIndex*/
-		if(elgg_get_plugin_setting("allow_profile_noindex") == 'yes'){
+		if(elgg_get_plugin_setting("allow_profile_noindex", "profile_manager") == 'yes'){
 			elgg_extend_view("profile/edit", "profile_manager/profile/edit_profile", 400);		
 		}
 		
@@ -41,11 +41,8 @@
 		elgg_extend_view("js/elgg", "profile_manager/js/site");
 		elgg_extend_view("js/admin", "profile_manager/js/admin");
 		
-		// extend the user profile view
-		elgg_extend_view("profile/userdetails", "profile_manager/profile/userdetails");
-		
 		// link to full profile
-		if(elgg_get_plugin_setting("show_full_profile_link") == "yes"){
+		if(elgg_get_plugin_setting("show_full_profile_link", "profile_manager") == "yes"){
 			elgg_extend_view("profile/menu/actions", "profile_manager/profile/userlinks");
 		}
 		
@@ -68,8 +65,8 @@
 		register_custom_field_types();
 		
 		// add profile_completeness widget 
-		if(elgg_get_plugin_setting("enable_profile_completeness_widget") == "yes"){
-			elgg_add_widget_type("profile_completeness", elgg_echo("profile_manager:widget:profile_completeness:title"), elgg_echo("profile_manager:widget:profile_completeness:description"), "profile,dashboard");
+		if(elgg_get_plugin_setting("enable_profile_completeness_widget", "profile_manager") == "yes"){
+			elgg_register_widget_type("profile_completeness", elgg_echo("widgets:profile_completeness:title"), elgg_echo("widgets:profile_completeness:description"), "profile,dashboard");
 		}
 		
 		// free_text on register form
@@ -141,14 +138,13 @@
 	 * @return unknown_type
 	 */
 	function profile_manager_pagesetup(){
-		if(elgg_get_plugin_setting("allow_profile_noindex") == 'yes'){
+		if(elgg_get_plugin_setting("allow_profile_noindex", "profile_manager") == 'yes'){
 			$page_owner = elgg_get_page_owner_entity();
 			$context = elgg_get_context();
 			
-			
 			/*Profile NoIndex*/
 			if(in_array($context, array("profile", "friends", "friendsof")) && ($page_owner instanceof ElggUser)){
-				if(elgg_get_plugin_usersetting("hide_from_search_engine", $page_owner->getGUID(), "profile_manager") == "yes"){
+				if(elgg_get_plugin_user_setting("hide_from_search_engine", $page_owner->getGUID(), "profile_manager") == "yes"){
 					// protect against search engines
 					elgg_extend_view("metatags", "profile_manager/profile/noindex");
 					

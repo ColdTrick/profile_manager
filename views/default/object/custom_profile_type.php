@@ -45,7 +45,8 @@
 		}
 	?>
 	<div class="custom_profile_type" id="custom_profile_type_<?php echo $object->guid;?>" onmouseover="highlightCategories(this, '<?php echo $rels;?>');" onmouseout="highlightCategories(this, '<?php echo $rels;?>');">
-		<div class="custom_profile_type_edit" onclick="editProfileType('<?php echo $object->guid;?>','<?php echo addslashes($object->metadata_name);?>','<?php echo addslashes($object->metadata_label);?>','<?php echo $object->show_on_members;?>', '<?php echo $rels; ?>');"></div>
+		<span class="elgg-icon elgg-icon-delete" title="<?php echo elgg_echo("delete");?>" onclick="deleteProfileType('<?php echo $object->guid;?>');"></span>
+		<span class="elgg-icon elgg-icon-settings-alt" title="<?php echo elgg_echo("edit");?>" onclick="editProfileType('<?php echo $object->guid;?>','<?php echo addslashes($object->metadata_name);?>','<?php echo addslashes($object->metadata_label);?>','<?php echo $object->show_on_members;?>', '<?php echo $rels; ?>');"></span>
 		<?php echo $title; ?>
 	</div>
 	<?php

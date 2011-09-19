@@ -15,8 +15,6 @@
 				"count_for_completeness" => true
 			);		
 			
-			global $CONFIG;
-			
 		$calendar_options = $profile_options;
 		unset($calendar_options["simple_search"]);
 		unset($calendar_options["advanced_search"]);
@@ -250,12 +248,15 @@
 			
 		// adding fields to categories
 		if($fields = elgg_get_entities($options)){
+			
 			foreach($fields as $field){
+				
 				if(!($cat_guid = $field->category_guid)){
 					$cat_guid = 0; // 0 is default
 				}
+				
 				$admin_only = $field->admin_only;
-				if($admin_only != "yes" || isadminloggedin()){
+				if($admin_only != "yes" || elgg_is_admin_logged_in()){
 					if($edit){
 						if(!$register || $field->show_on_register == "yes"){
 							$filtered_ordered_cats[$cat_guid][$field->order] = $field;
@@ -263,7 +264,6 @@
 					} else {
 						// only add if value exists
 						$metadata_name = $field->metadata_name;
-
 						$user_value = profile_manager_get_user_profile_data_value($user_metadata, $metadata_name);
 						
 						if(!empty($user_value) || $user_value === 0){
@@ -293,7 +293,7 @@
 			"profile_type_guid" => $profile_type_guid
 		);
 		
-		$result = trigger_plugin_hook("categorized_profile_fields", "profile_manager", $hook_params, $result);
+		$result = elgg_trigger_plugin_hook("categorized_profile_fields", "profile_manager", $hook_params, $result);
 		
 		return $result;
 	}
@@ -321,7 +321,7 @@
 		if($fields){
 			foreach($fields as $field){
 				$admin_only = $field->admin_only;
-				if($admin_only != "yes" || isadminloggedin()){
+				if($admin_only != "yes" || elgg_is_admin_logged_in()){
 					$result["fields"][$field->order] = $field;
 				}
 			}
@@ -333,7 +333,35 @@
 			"group" => $group
 		);
 			
-		$result = trigger_plugin_hook("categorized_group_fields", "profile_manager", $hook_params, $result);
+		$result = elgg_trigger_plugin_hook("categorized_group_fields", "profile_manager", $hook_params, $result);
+		
+		return $result;
+	}
+	/*
+	 * returns the max order from a specific profile field type
+	 */
+	function profile_manager_get_max_order($field_type){
+		global $CONFIG;
+		$max = 0;
+		$result = false;
+		
+		if($field_type == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE || $field_type == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE){
+			$options = array(
+				"type" => "object",
+				"subtype" => $field_type,
+				"limit" => 1,
+				"order_by_metadata" => array(array('name' => 'order', 'direction' => "desc", 'as' => "integer")),
+				"owner_guid" => $CONFIG->site_guid,
+				"site_guid" => $CONFIG->site_guid
+			); 
+			
+			if($entities = elgg_get_entities_from_metadata($options)){
+				$entity = $entities[0];
+				$max = (int) $entity->order;
+			}
+			
+			$result = $max;
+		} 
 		
 		return $result;
 	}
@@ -348,7 +376,7 @@
 		$result = false;
 		
 		if(empty($user)){
-			$user = get_loggedin_user();
+			$user = elgg_get_logged_in_user_entity();
 		}
 		
 		if(!empty($user) && ($user instanceof ElggUser)){
@@ -395,10 +423,11 @@
 	function profile_manager_get_user_profile_data(ElggUser $user){
 		global $CONFIG;
 		
+		$profile_fields = elgg_get_config('profile_fields');
 		$result = false;
-		if(!empty($user) && !empty($CONFIG->profile)){
+		if(!empty($user) && !empty($profile_fields)){
 			
-			$fields = "'" . implode("','", array_keys($CONFIG->profile)) . "'";
+			$fields = "'" . implode("','", array_keys($profile_fields)) . "'";
 			$query = "SELECT m.*, n.string as name, v.string as value from {$CONFIG->dbprefix}metadata m JOIN {$CONFIG->dbprefix}metastrings v on m.value_id = v.id JOIN {$CONFIG->dbprefix}metastrings n on m.name_id = n.id where";
 			$query .= " n.string in ('custom_profile_type'," . $fields . ") AND"; 	
 			$query .= " m.entity_guid = " . $user->getGUID() . " AND"; 	
@@ -506,4 +535,4 @@
 		
 		return $result;
 	}
-?>
+	

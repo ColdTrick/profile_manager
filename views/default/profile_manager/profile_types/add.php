@@ -70,12 +70,6 @@
 												'value' => elgg_echo('cancel'),
 												'js' => "onClick='resetProfileTypeForm();'",
 												'class' => "elgg-button-cancel"));
-	$formbody .= elgg_view('input/button', array('internalname' => elgg_echo('delete'),
-												'class' => "submit_button custom_fields_profile_type_delete_button", 
-												'value' => elgg_echo('delete'),
-												'type' => "button",
-												'js' => "onClick='deleteProfileType();'",
-												'class' => "elgg-button-action"));
 	
 	$form = elgg_view('input/form', array('body' => $formbody, 
 										'action' => $vars['url'] . 'action/profile_manager/profile_types/add')

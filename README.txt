@@ -30,7 +30,6 @@ Needs to be positioned after the profile plugin!!!
 
 == 2. TO DO ==
 - if only 'about me' is filled, the default category is visible, but can't do anything
-- profile completeness
 - categories and types for groups
 - multilingual options (in pulldown, radio, multiselect)
 - add multilingual support for hint field

@@ -248,4 +248,3 @@
 		global $autofeed;
 		$autofeed = false;
 	}
-?>
