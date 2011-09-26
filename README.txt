@@ -62,7 +62,7 @@ When i choose to "select profile type by Admin", on the profile page of the user
 They can fill in the information but it wont show as their profile type wont match but I dont think they should be able to see the categories as they wont show. Is this just the way it is on is it a bug?
 
 == 4. Version history ==
-7.0 beta:
+7.0 beta (2011-09-26):
 
 - added: support for 1.8 (multiple changes)
 - added: multilingual support for field hints ("profile:hint:<fieldname>")
