@@ -28,9 +28,9 @@
 	 */
 	function profile_manager_init(){
 		/* Profile NoIndex*/
-		if(elgg_get_plugin_setting("allow_profile_noindex", "profile_manager") == 'yes'){
-			elgg_extend_view("profile/edit", "profile_manager/profile/edit_profile", 400);		
-		}
+		//if(elgg_get_plugin_setting("allow_profile_noindex", "profile_manager") == 'yes'){
+		//	elgg_extend_view("profile/edit", "profile_manager/profile/edit_profile", 400);		
+		//}
 		
 		// Extend CSS
 		elgg_extend_view("css/admin", "profile_manager/css/global");
@@ -41,12 +41,7 @@
 		elgg_extend_view("js/elgg", "profile_manager/js/site");
 		elgg_extend_view("js/admin", "profile_manager/js/admin");
 		
-		// link to full profile
-		if(elgg_get_plugin_setting("show_full_profile_link", "profile_manager") == "yes"){
-			elgg_extend_view("profile/menu/actions", "profile_manager/profile/userlinks");
-		}
-		
-		// Register Page handler for Custom Profile Fields
+		// Register Page handler
 		elgg_register_page_handler("profile_manager", "profile_manager_page_handler");
 		
 		/*
@@ -59,7 +54,7 @@
 		*/
 		
 		// admin user add, registered here to overrule default action
-		elgg_register_action("useradd", dirname(__FILE__) . "/actions/admin/useradd.php", "admin");
+		elgg_register_action("useradd", dirname(__FILE__) . "/actions/useradd.php", "admin");
 		
 		// Register all custom field types
 		register_custom_field_types();
@@ -81,18 +76,6 @@
 			elgg_extend_view("register/extend", "profile_manager/register/fields");
 		}
 		
-		// allow login by mail
-		if(elgg_get_plugin_setting("login_by_email", "profile_manager") == "yes"){
-			// overrule action to allow login by mail
-			elgg_register_action("login", dirname(__FILE__) . "/actions/core/login.php", "public");
-			
-			// request password by email
-			elgg_register_action("user/requestnewpassword_by_email", dirname(__FILE__) . "/actions/user/requestnewpassword_by_email.php", "public");
-			
-			// register pam handler to authenticate based on email
-			register_pam_handler("profile_manager_email_pam_handler");
-		}
-		
 		// Run once function to configure this plugin
 		run_function_once('profile_manager_run_once', 1287964800); // 2010-10-25
 		run_function_once('pm_fix_access_default'); 		
@@ -106,13 +89,12 @@
 	 */
 	function profile_manager_page_handler($page){
 		switch($page[0]){
-			case "full_profile":
-				set_input("profile_guid", $page[1]);
-				include(dirname(__FILE__) . "/pages/full_profile.php");
-				break;
-			case "file_download":
-				set_input("file_guid", $page[1]);
-				include(dirname(__FILE__) . "/pages/file_download.php");
+			case "forms":
+				$form = $page[1];
+				if(!empty($form)){
+					set_input("guid", $page[2]);	
+					include(dirname(__FILE__) . "/pages/forms/" . $form . ".php");	
+				}
 				break;
 		}
 	}
@@ -138,11 +120,12 @@
 	 * @return unknown_type
 	 */
 	function profile_manager_pagesetup(){
-		if(elgg_get_plugin_setting("allow_profile_noindex", "profile_manager") == 'yes'){
+		$context = elgg_get_context();
+		
+		/*if(elgg_get_plugin_setting("allow_profile_noindex", "profile_manager") == 'yes'){
 			$page_owner = elgg_get_page_owner_entity();
-			$context = elgg_get_context();
 			
-			/*Profile NoIndex*/
+			//Profile NoIndex
 			if(in_array($context, array("profile", "friends", "friendsof")) && ($page_owner instanceof ElggUser)){
 				if(elgg_get_plugin_user_setting("hide_from_search_engine", $page_owner->getGUID(), "profile_manager") == "yes"){
 					// protect against search engines
@@ -154,10 +137,10 @@
 					
 					// remove RSS/Atom/ links
 					// TODO: check if still existing in 1.8
-					elgg_register_plugin_hook_handler("display", "view", "profile_noindex_view_hook");
+					elgg_register_plugin_hook_handler("display", "view", "profile_manager_profile_noindex_view_hook");
 				}
 			}
-		}
+		}*/
 		
 		if($context == "admin" && elgg_is_admin_logged_in()){
 			elgg_load_js('lightbox');
@@ -173,7 +156,6 @@
 			// Site navigation
 			$item = new ElggMenuItem("members", elgg_echo('profile_manager:members:submenu'), "members");
 			elgg_register_menu_item('site', $item);
-			
 		}
 		*/
 	}
@@ -183,9 +165,7 @@
 	elgg_register_event_handler('pagesetup', 'system', 'profile_manager_pagesetup');
 	
 	elgg_register_event_handler('create', 'user', 'profile_manager_create_user_event');
-	elgg_register_event_handler('all', 'object', 'profile_manager_all_object_event');
 	elgg_register_event_handler('profileupdate','user', 'profile_manager_profileupdate_user_event');
-	elgg_register_event_handler('profileiconupdate','user', 'profile_manager_profileiconupdate_user_event');
 	
 	elgg_register_plugin_hook_handler('profile:fields', 'profile', 'profile_manager_profile_override');
 	elgg_register_plugin_hook_handler('profile:fields', 'group', 'profile_manager_group_override');
@@ -196,7 +176,6 @@
 	
 	// actions
 	elgg_register_action("profile_manager/new", dirname(__FILE__) . "/actions/new.php", "admin");
-	elgg_register_action("profile_manager/get_field_data", dirname(__FILE__) . "/actions/get_field_data.php", "admin");
 	elgg_register_action("profile_manager/reset", dirname(__FILE__) . "/actions/reset.php", "admin");
 	elgg_register_action("profile_manager/reorder", dirname(__FILE__) . "/actions/reorder.php", "admin");
 	elgg_register_action("profile_manager/delete", dirname(__FILE__) . "/actions/delete.php", "admin");
@@ -214,8 +193,7 @@
 	
 	elgg_register_action("profile_manager/profile_types/add", dirname(__FILE__) . "/actions/profile_types/add.php", "admin");
 	elgg_register_action("profile_manager/profile_types/delete", dirname(__FILE__) . "/actions/profile_types/delete.php", "admin");
-	elgg_register_action("profile_manager/profile_types/get_description", dirname(__FILE__) . "/actions/profile_types/get_description.php", "admin");
 	
 	// members
-	elgg_register_action("profile_manager/members/search", dirname(__FILE__) . "/actions/members/search.php", "public");
+	//elgg_register_action("profile_manager/members/search", dirname(__FILE__) . "/actions/members/search.php", "public");
 	

@@ -97,6 +97,19 @@
 			
 			return $options;
 		}
+		
+		public function getHint(){
+			// make title
+			$hint = $this->metadata_hint;
+			
+			if(empty($hint)){
+				$trans_key = "profile:hint:" . $this->metadata_name;
+				if($trans_key != elgg_echo($trans_key)){
+					$hint = elgg_echo($trans_key);
+				}
+			}
+			return $hint;
+		}
 	}
 	
 	class ProfileManagerCustomProfileField extends ProfileManagerCustomField {
@@ -188,7 +201,6 @@
 		}
 		
 		public function get($name) {
-			
 			if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
 				return $this->meta_cache[$name];
 			} elseif (array_key_exists($name, $this->meta_defaults)){

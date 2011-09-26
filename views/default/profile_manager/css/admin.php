@@ -40,10 +40,11 @@
 #custom_fields_category_list_custom .custom_fields_category_selected {
 	background: #BBBBBB;
 }
+.custom_field .elgg-icon,
 .custom_profile_type .elgg-icon,
 .custom_fields_category .elgg-icon {
-	float: right;
 	cursor: pointer;
+	vertical-align: text-bottom;
 }
 
 .custom_fields_category .elgg-icon-drag-arrow {
@@ -71,10 +72,6 @@
 	border-radius: 5px;
 }
 
-.custom_fields_forms {
-	display: none;
-}
-
 #custom_fields_form, 
 #custom_fields_category_form,
 #custom_fields_profile_type_form {
@@ -90,19 +87,18 @@
 	margin-right: 5px;
 }
 
-.metadata_config_right{
-	float: right;
+.field_config_title{
 }
 
-.metadata_config_left{
-	float: left;
-}
-
-.metadata_config_left_extra{
+.field_config_extra{
 	display:none;
 }
 
-.metadata_config_right_status {
+.field_config_metadata {
+	float: right;
+}
+
+.field_config_metadata_option {
 	width: 16px;
 	height: 13px;
 	display: inline-block;
@@ -110,16 +106,33 @@
 	background: url(<?php echo $plugin_graphics_folder; ?>field_metadata_status.png);
 }
 
-.metadata_config_right_status_enabled{
+.field_config_metadata_option_enabled{
 	background-position: 0 -16px;
 	cursor: pointer;
 }
 
-.metadata_config_right_status_disabled{
+.field_config_metadata_option_disabled{
 	background-position: 0 -32px;
 	cursor: pointer;
 }
 
 #restoreForm {
 	display: none;
+}
+
+.custom_fields_add_form_table,
+.custom_fields_add_form_table_left {
+	width: 100%;
+}
+
+.custom_fields_add_form_table_right {
+	white-space: nowrap;
+}
+
+.custom_fields_add_form_table_right label{
+	font-size:inherit;
+	font-weight:inherit;
+}
+.custom_fields_add_form_table_right .elgg-input-checkbox{
+	vertical-align: middle;
 }

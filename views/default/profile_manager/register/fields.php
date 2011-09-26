@@ -10,14 +10,16 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	$profile_icon = get_plugin_setting("profile_icon_on_register", "profile_manager");
-	$profile_type_selection = get_plugin_setting("profile_type_selection", "profile_manager");
+	$profile_icon = elgg_get_plugin_setting("profile_icon_on_register", "profile_manager");
+	$profile_type_selection = elgg_get_plugin_setting("profile_type_selection", "profile_manager");
 	
 	$tabbed = false;
-	if(get_plugin_setting("edit_profile_mode", "profile_manager") == "tabbed"){
+	if(elgg_get_plugin_setting("edit_profile_mode", "profile_manager") == "tabbed"){
 		$tabbed = true;
 	}
-		
+	
+	echo "<fieldset>";
+	
 	// mandatory profile icon
 	if($profile_icon == "yes"){
 		echo elgg_view("input/profile_icon");
@@ -27,8 +29,11 @@
 	$fields = $categorized_fields['fields'];
 	$cats = $categorized_fields['categories'];
 	
-	$bounced_values = $_SESSION["register_post_backup"];
-	
+	if (elgg_is_sticky_form('profile_manager_register')) {
+		extract(elgg_get_sticky_values('profile_manager_register'));
+		elgg_clear_sticky_form('profile_manager_register');
+	}
+		
 	if($profile_type_selection != "admin"){
 		$types_options = array(
 				"type" => "object",
@@ -55,9 +60,8 @@
 				}
 			}
 			
-			$selected_profile_type = $bounced_values['custom_profile_fields_custom_profile_type'];
-			if(empty($selected_profile_type)){
-				$selected_profile_type = get_plugin_setting("default_profile_type", "profile_manager");
+			if(empty($custom_profile_fields_custom_profile_type)){
+				$custom_profile_fields_custom_profile_type = elgg_get_plugin_setting("default_profile_type", "profile_manager");
 			}
 			
 			$types_result = "<div>";
@@ -67,7 +71,7 @@
 											"internalid" => "custom_profile_fields_custom_profile_type",
 											"options_values" => $types_options_values,
 											"js" => "onchange='changeProfileType();'",
-											"value" => $selected_profile_type)
+											"value" => $custom_profile_fields_custom_profile_type)
 										);
 			
 			$types_result .= $types_description;
@@ -94,7 +98,9 @@
 					$metadata_type = "plaintext";
 				}
 				
-				$value = $bounced_values["custom_profile_fields_" . $field->metadata_name];
+				$sticky_name = "custom_profile_fields_". $field->metadata_name;
+				
+				$value = $$sticky_name;
 				
 				if(is_array($value)){
 					$value = implode(", ", $value);
@@ -105,15 +111,15 @@
 				} 
 				
 				$fields_result .= "<div" . $class . ">";
+				$fields_result .= "<label>" . $field->getTitle() . "</label>";
 				
-				if(!empty($field->metadata_hint)){ 
-				
-					
+				if($hint = $field->getHint()){ 
 					$fields_result .= "<span class='custom_fields_more_info' id='more_info_" . $field->metadata_name . "'></span>"; 		
-					$fields_result .= "<span class='custom_fields_more_info_text' id='text_more_info_" . $field->metadata_name . "'>" . $field->metadata_hint . "</span>";
+					$fields_result .= "<span class='custom_fields_more_info_text' id='text_more_info_" . $field->metadata_name . "'>" . $hint . "</span>";
 				} 
 				
-				$fields_result .= "<label>" . $field->getTitle() . "</label><br />";
+				$fields_result .= "<br />";
+				
 				$fields_result .= elgg_view("input/{$metadata_type}", array(
 														"internalname" => "custom_profile_fields_" . $field->metadata_name,
 														"value" => $value,
@@ -142,7 +148,7 @@
 				} 
 			}
 			
-			$cat_result .= $fields_result;
+			$cat_result .= "<fieldset>" . $fields_result . "</fieldset>";
 			$cat_result .= "</div>";
 			
 			if($tabbed){
@@ -166,4 +172,4 @@
 			}
 		}
 	} 	
-?>
+	echo "</fieldset>";

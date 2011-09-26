@@ -31,7 +31,7 @@
 ?>
 <div class="elgg-module elgg-module-inline">
 	<div class="elgg-head">
-		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "#custom_fields_profile_type_form", "class" => "elgg-button-action profile-manager-popup")); ?>
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => $vars["url"] . "profile_manager/forms/type", "class" => "elgg-button-action profile-manager-popup")); ?>
 		<h3>
 			<?php echo elgg_echo('profile_manager:profile_types:list:title'); ?>
 			<span class='custom_fields_more_info' id='more_info_profile_type_list'></span>
@@ -41,8 +41,6 @@
 		<?php echo $list; ?>
 	</div>
 </div>
-
-<?php echo elgg_view("profile_manager/profile_types/add");?>
 
 <div class="custom_fields_more_info_text" id="text_more_info_profile_type"><?php echo elgg_echo("profile_manager:tooltips:profile_type");?></div>
 <div class="custom_fields_more_info_text" id="text_more_info_profile_type_list"><?php echo elgg_echo("profile_manager:tooltips:profile_type_list");?></div>

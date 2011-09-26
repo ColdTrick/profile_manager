@@ -24,19 +24,12 @@
 				
 				$options = array(
 						"type" => "user",
-						"count" => true,
+						"limit" => false,
 						"metadata_name_value_pairs" => array("name" => $meta_name, "value" => $guid)
 					);
 				
-				$entities_count = elgg_get_entities_from_metadata($options);
-				if($entities_count > 0){
-					
-					$options["count"] = false; 
-					$options["limit"] = $entities_count;  
-					
-	  				$entities = elgg_get_entities_from_metadata($options);
-					
-	  				foreach($entities as $entity){
+				if($entities = elgg_get_entities_from_metadata($options)){
+					foreach($entities as $entity){
 	  					// unset currently deleted profile type for user
 	  					unset($entity->$meta_name);
 	  				}
@@ -54,4 +47,3 @@
 	}
 	
 	forward($_SERVER["HTTP_REFERER"]);
-?>

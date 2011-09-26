@@ -9,6 +9,9 @@
 	* @copyright Coldtrick IT Solutions 2009
 	* @link http://www.coldtrick.com/
 	*/
- 
-	echo elgg_view("output/tags", array("value" => $vars['value']));
-?>
+	
+	if(is_string($vars["value"])){
+		$vars["value"] = string_to_tag_array($vars["value"]); 
+	}
+	
+	echo elgg_view("output/tags", $vars);

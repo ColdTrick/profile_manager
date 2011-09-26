@@ -21,32 +21,32 @@
 	
 	if(!empty($name) && preg_match("/^[a-zA-Z0-9_]{1,}$/", $name)){
 		if(!empty($guid)){
-			$object = get_entity($guid);
-			if(!empty($object) && !($object instanceof ProfileManagerCustomFieldCategory)){
-				$object = null;
+			$entity = get_entity($guid);
+			if(!empty($entity) && !($entity instanceof ProfileManagerCustomFieldCategory)){
+				$entity = null;
 			}
 		}
 		
-		if(empty($object)){
-			$object = new ProfileManagerCustomFieldCategory();
-			$object->save();
+		if(empty($entity)){
+			$entity = new ProfileManagerCustomFieldCategory();
+			$entity->save();
 			$add = true;
 		}
 		
-		if(!empty($object)){
-			$object->metadata_name = $name;
+		if(!empty($entity)){
+			$entity->metadata_name = $name;
 			
 			if(!empty($label)){
-				$object->metadata_label = $label;
+				$entity->metadata_label = $label;
 			} else {
-				unset($object->metadata_label);
+				unset($entity->metadata_label);
 			}
 			
 			// add relationship
-			remove_entity_relationships($object->guid, CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP, true);
+			remove_entity_relationships($entity->guid, CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP, true);
 			if(!empty($profile_types) && is_array($profile_types)){
 				foreach($profile_types as $type){
-					add_entity_relationship($type, CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP, $object->guid);
+					add_entity_relationship($type, CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP, $entity->guid);
 				}
 			}
 			
@@ -61,10 +61,10 @@
 			$count = elgg_get_entities($options);
 			
 			if($add){
-				$object->order = $count;
+				$entity->order = $count;
 			}
 			
-			if($object->save()){
+			if($entity->save()){
 				system_message(elgg_echo("profile_manager:action:category:add:succes"));
 			} else {
 				register_error(elgg_echo("profile_manager:action:category:add:error:save"));
@@ -77,4 +77,3 @@
 	}
 	
 	forward($_SERVER["HTTP_REFERER"]);
-?>

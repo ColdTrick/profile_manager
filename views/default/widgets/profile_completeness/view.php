@@ -28,12 +28,11 @@
 		}
 	}
 ?>
-<div class="contentWrapper">
-	<div id="widget_profile_completeness_container">
-		<div id="widget_profile_completeness_progress">
-			<?php echo $percentage_complete; ?>%
-		</div>
-		<div id="widget_profile_completeness_progress_bar" style="width: <?php echo $percentage_complete; ?>%;"></div>
+<div id="widget_profile_completeness_container">
+	<div id="widget_profile_completeness_progress">
+		<?php echo $percentage_complete; ?>%
 	</div>
-	<?php echo $tips; ?>
+	<div id="widget_profile_completeness_progress_bar" style="width: <?php echo $percentage_complete; ?>%;"></div>
 </div>
+<?php 
+echo $tips;

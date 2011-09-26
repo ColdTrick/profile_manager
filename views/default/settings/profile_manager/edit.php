@@ -70,14 +70,6 @@
 	</tr>
 	<tr>
 		<td>
-			<?php echo elgg_echo('profile_manager:settings:registration:login_by_email'); ?>
-		</td>
-		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[login_by_email]", "options_values" => $noyes_options, "value" => $vars['entity']->login_by_email)); ?>
-		</td>
-	</tr>
-	<tr>
-		<td>
 			<?php echo elgg_echo('profile_manager:settings:registration:extra_fields'); ?>
 		</td>
 		<td>
@@ -160,14 +152,6 @@
 		<td colspan="2">
 			<br />
 			<h4><?php echo elgg_echo("profile_manager:settings:view_profile"); ?></h4>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<?php echo elgg_echo('profile_manager:settings:show_full_profile_link'); ?>
-		</td>
-		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[show_full_profile_link]", "options_values" => $noyes_options, "value" => $vars['entity']->show_full_profile_link)); ?>
 		</td>
 	</tr>
 	<tr>

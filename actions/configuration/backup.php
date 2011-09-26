@@ -25,23 +25,13 @@
 	$options = array(
 			"type" => "object",
 			"subtype" => $fieldtype,
-			"count" => true,
+			"limit" => false,
 			"owner_guid" => $CONFIG->site_guid
 		);
 	
-	$entities_count = elgg_get_entities($options);
-	
-	$options["count"] = false;
-	$options["limit"] = $entities_count;
-	
 	$entities = elgg_get_entities($options);
 
-	$manifest = load_plugin_manifest("profile_manager");
-	
-	$info = array(
-			"plugin_version" => $manifest["version"],	
-			"fieldtype" => $fieldtype
-		);
+	$info = array("fieldtype" => $fieldtype);
 	
 	$fields = array();
 	foreach($entities as $entity){
@@ -69,6 +59,4 @@
 					));
 	
 	echo $json;
-	
 	exit();
-?>

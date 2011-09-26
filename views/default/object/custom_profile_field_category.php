@@ -10,38 +10,15 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	$object = $vars["entity"];
+	$entity = $vars["entity"];
 
 	// get title
-	$title = $object->getTitle();
-	
-	$rels = "";
-	
-	$options = array(
-		"type" => "object",
-		"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
-		"limit" => 0,
-		"owner_guid" => $CONFIG->site_guid,
-		"relationship" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
-		"relationship_guid" => $object->guid,
-		"inverse_relationship" => true
-	);
-	
-	$cats = elgg_get_entities_from_relationship($options);
-	
-	if($cats){
-		$guids = array();
-		foreach($cats as $cat){
-			$guids[] = $cat->guid;
-		}
-		
-		$rels = implode(",", $guids);
-	}
+	$title = $entity->getTitle();
 	
 ?>
-<div class="custom_fields_category" id="custom_profile_field_category_<?php echo $object->guid;?>">
+<div class="custom_fields_category" id="custom_profile_field_category_<?php echo $entity->guid;?>">
 	<span class="elgg-icon elgg-icon-drag-arrow"></span>
-	<span class="elgg-icon elgg-icon-delete" title="<?php echo elgg_echo("delete");?>" onclick="deleteCategory('<?php echo $object->guid;?>');"></span>
-	<span class="elgg-icon elgg-icon-settings-alt" title="<?php echo elgg_echo("edit");?>" onclick="editCategory('<?php echo $object->guid;?>','<?php echo addslashes($object->metadata_name);?>','<?php echo addslashes($object->metadata_label);?>', '<?php echo $rels; ?>');"></span>
-	<a href="javascript:void(0);" onclick="filterCustomFields(<?php echo $object->guid; ?>)"><?php echo $title; ?></a>
+	<a href="javascript:void(0);" onclick="filterCustomFields(<?php echo $entity->guid; ?>)"><?php echo $title; ?></a>
+	<a href="<?php echo $vars["url"];?>profile_manager/forms/category/<?php echo $entity->guid;?>" class="profile-manager-popup"><span class="elgg-icon elgg-icon-settings-alt" title="<?php echo elgg_echo("edit");?>"></span></a>
+	<span class="elgg-icon elgg-icon-delete" title="<?php echo elgg_echo("delete");?>" onclick="deleteCategory('<?php echo $entity->guid;?>');"></span>
 </div>

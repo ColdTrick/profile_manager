@@ -16,26 +16,14 @@
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
 			"count" => true,
-			"owner_guid" => $CONFIG->site_guid
+			"order_by_metadata" => array(array('name' => 'order', 'direction' => "asc", 'as' => "integer")),
+			"owner_guid" => $CONFIG->site_guid,
+			"pagination" => false,
+			"full_view" => false
 		);
-		
-	$count = elgg_get_entities($options);
-    
-	$ordered = array();
-	if($count > 0){	
-		$options["count"] = false;
-		$options["limit"] = $count;
-			
-		$fields = elgg_get_entities($options);
-		
-		foreach($fields as $field){
-			$ordered[$field->order] = $field;
-		}
-		
-		ksort($ordered);
-	}
 	
-	$list = elgg_view_entity_list($ordered, $count, 0, $count, false, false, false);
+	$list = elgg_list_entities_from_metadata($options);	
+	
 	if(empty($list)){
 		$list = elgg_echo("profile_manager:profile_fields:no_fields");
 	}
@@ -43,7 +31,7 @@
 
 <div class="elgg-module elgg-module-inline">
 	<div class="elgg-head">
-		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "#custom_fields_form", "class" => "elgg-button-action profile-manager-popup"));?>
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => $vars["url"] . "profile_manager/forms/group_field", "class" => "elgg-button-action profile-manager-popup"));?>
 		<h3>
 			<?php echo elgg_echo('profile_manager:group_fields:list:title'); ?>
 		</h3>
@@ -52,4 +40,3 @@
 		<?php echo $list; ?>
 	</div>
 </div>
-<?php echo elgg_view("profile_manager/group_fields/add");?>

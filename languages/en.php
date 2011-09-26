@@ -44,7 +44,6 @@
 		'profile_manager:settings:edit_profile_mode:list' => "List",
 		'profile_manager:settings:edit_profile_mode:tabbed' => "Tabbed",
 	
-		'profile_manager:settings:show_full_profile_link' => 'Show a link to the full profile page',
 		'profile_manager:settings:show_profile_type_on_profile' => "Show the users profile type on the profile",
 	
 		'profile_manager:settings:display_categories' => 'Select how the different categories are displayed on the profile',
@@ -113,17 +112,21 @@
 		'profile_manager:profile_fields:list:title' => "Profile Fields",	
 	
 		'profile_manager:profile_fields:no_fields' => "Currently no fields are configured using the Profile Manager plugin. Add your own or import with one of the actions below.",
+		
+		'profile_manager:profile_fields:add' => "Add a new profile field",
+		'profile_manager:profile_fields:edit' => "Edit a profile field",
 		'profile_manager:profile_fields:add:description' => "Here you can edit the fields a user can edit on his/her profile",
-		'profile_manager:profile_fields:add:link' => "Add a new profile field",
 	
 		// group fields
 		'profile_manager:group_fields:list:title' => "Group Profile Fields",	
 	
 		'profile_manager:group_fields:add:description' => "Here you can edit the fields that show on a group profile page",
-		'profile_manager:group_fields:add:link' => "Add a new group profile field",
+		'profile_manager:group_fields:add' => "Add a new group profile field",
+		'profile_manager:group_fields:edit' => "Edit a group profile field",
 	
 		// Custom fields categories
-		'profile_manager:categories:add:link' => "Add a new category",
+		'profile_manager:categories:add' => "Add a new category",
+		'profile_manager:categories:edit' => "Edit a category",
 		'profile_manager:categories:list:title' => "Categories",
 		'profile_manager:categories:list:default' => "Default",
 		'profile_manager:categories:list:system' => "System (admin only)",	
@@ -132,7 +135,8 @@
 		'profile_manager:categories:delete:confirm' => "Are you sure you wish to delete this category?",
 		
 		// Custom Profile Types
-		'profile_manager:profile_types:add:link' => "Add a new profile type",
+		'profile_manager:profile_types:add' => "Add a new profile type",
+		'profile_manager:profile_types:edit' => "Edit a profile type",
 		'profile_manager:profile_types:list:title' => "Profile Types",
 		'profile_manager:profile_types:list:no_types' => "No profile types defined",
 		'profile_manager:profile_types:delete:confirm' => "Are you sure you wish to delete this profile type?",
@@ -147,7 +151,7 @@
 		'profile_manager:actions:reset:confirm' => 'Are you sure you wish to reset all profile fields?',
 		'profile_manager:actions:reset:error:unknown' => 'Unknown error occurred while resetting all profile fields',
 		'profile_manager:actions:reset:error:wrong_type' => 'Wrong profile field type (group or profile)',
-		'profile_manager:actions:reset:success' => 'Reset succesfull',
+		'profile_manager:actions:reset:success' => 'Reset succesful',
 	
 		// import from custom
 		'profile_manager:actions:import:from_custom' => 'Import custom fields',
@@ -181,7 +185,7 @@
 		
 		'profile_manager:actions:configuration:restore:upload' => "Restore",
 	
-		'profile_manager:actions:restore:success' => "Restore successfull",
+		'profile_manager:actions:restore:success' => "Restore successful",
 		'profile_manager:actions:restore:error:deleting' => "Error while restoring: couldn't delete current fields",	
 		'profile_manager:actions:restore:error:fieldtype' => "Error while restoring: fieldtypes do not match",
 		'profile_manager:actions:restore:error:corrupt' => "Error while restoring: backup file seems to be corrupt or information is missing",
@@ -238,7 +242,8 @@
 			<b>Profile Field</b><br />
 			Here you can add a new profile field.<br /><br />
 			If you leave the label empty, you can internationalize the profile field label (<i>profile:[name]</i>).<br /><br />
-			Use the hint field to supply on input forms (register and profile/group edit) a hoverable icon with a field description.<br /><br />
+			Use the hint field to supply on input forms (register and profile/group edit) a hoverable icon with a field description.
+			If you leave the hint empty, you can internationalize the hint (<i>profile:hint:[name]</i>).<br /><br />
 			Options are only mandatory for fieldtypes <i>Pulldown, Radio and MultiSelect</i>.
 		",
 		'profile_manager:tooltips:profile_field_additional' => "
@@ -303,23 +308,20 @@
 		'widgets:profile_completeness:view:tips' => 'Tip! Update your %s to improve the Profile Completeness.',
 		'widgets:profile_completeness:view:complete' => 'Congratulations! Your profile is 100% complete!.',
 	
-	
-/*	
-		'profile_manager' => "Profile Manager",
-		'custom_profile_fields' => "Custom Profile Fields",
-		
-		// non_editable
-		'profile_manager:non_editable:info' => 'This field can not be edited',
-	
-		// profile user links
-		'profile_manager:show_full_profile' => 'Full Profile',
-	
 		// datepicker		
 		'profile_manager:datepicker:trigger' => 'Select a date',
 		'profile_manager:datepicker:output:dateformat' => '%a %d %b %Y', // For available notations see http://nl.php.net/manual/en/function.strftime.php
 		'profile_manager:datepicker:input:localisation' => '', // change it to the available localized js files in custom_profile_fields/vendors/jquery.datepick.package-3.5.2 (e.g. jquery.datepick-nl.js), leave blank for default 
 		'profile_manager:datepicker:input:dateformat' => '%m/%d/%Y', // Notation is based on strftime, but must result in output like http://keith-wood.name/datepick.html#format
 		'profile_manager:datepicker:input:dateformat_js' => 'mm/dd/yyyy', // Notation is based on strftime, but must result in output like http://keith-wood.name/datepick.html#format
+	
+		// Edit profile => profile type selector
+		'profile_manager:profile:edit:custom_profile_type:label' => "Select your profile type",
+		'profile_manager:profile:edit:custom_profile_type:description' => "Description of selected profile type",
+		'profile_manager:profile:edit:custom_profile_type:default' => "Default",
+	
+		// non_editable
+		'profile_manager:non_editable:info' => 'This field can not be edited',
 		
 		// register form mandatory notice
 		'profile_manager:register:mandatory' => "Items marked with a * are mandatory",
@@ -330,12 +332,6 @@
 		// register accept terms
 		'profile_manager:registration:accept_terms' => "I have read and accept the %sTerms of Service%s",
 	
-		// login by email
-		
-	
-		// request password by email
-		'profile_manager:user:password_email:text' => "To generate a new password, enter your e-mail address below. We will send the address of a unique verification page to you via email.  Click on the link in the body of the message and a new password will be sent to you.",
-	
 		// simple access control
 		'profile_manager:simple_access_control' => 'Select who can view your profile information',
 	
@@ -344,20 +340,18 @@
 		'profile_manager:register_pre_check:profile_icon:error' => 'Error uploading your profile icon (probably related to the file size)',
 		'profile_manager:register_pre_check:profile_icon:nosupportedimage' => 'Uploaded profile icon is not the right type (jpg, gif, png)',
 	
+		//Profile NoIndex
+		'profile_manager:profile:noindex' => "Protect your profile against search engines",
 		
-		// Custom Group Fields
-		'profile_manager:group_fields' => "Replace group fields",
-		//'profile_manager:group_fields:title' => "Replace group profile fields",
-			
-		// Edit profile => profile type selector
-		'profile_manager:profile:edit:custom_profile_type:label' => "Select your profile type",
-		'profile_manager:profile:edit:custom_profile_type:description' => "Description of selected profile type",
-		'profile_manager:profile:edit:custom_profile_type:default' => "Default",
+		'profile_manager:usersettings:hide_from_search_engine' => "Hide your profile from search engines",
+		'profile_manager:usersettings:hide_from_search_engine:explain' => "It may take several days before your profile is removed from the search indexes.",
 	
-		// Admin Stats
-		'profile_manager:admin_stats:title'=> "Profile Manager Stats",
-		'profile_manager:admin_stats:total'=> "Total user count",
-		'profile_manager:admin_stats:profile_types'=> "Amount of users with profile type",
+		// Admin add user form
+		'profile_manager:admin:adduser:notify' => "Notify user",
+		'profile_manager:admin:adduser:use_default_access' => "Extra metadata created based on site default access level",
+		'profile_manager:admin:adduser:extra_metadata' => "Add extra profile data",
+	
+/*	
 	
 		// Members
 		'profile_manager:members:menu' => "Members",
@@ -377,22 +371,8 @@
 		'profile_manager:members:searchresults:noresults' => "Your search didn't match any users",
 		'profile_manager:members:searchform:reset' => "Reset",
 	
-		// Admin add user form
-		'profile_manager:admin:adduser:notify' => "Notify user",
-		'profile_manager:admin:adduser:use_default_access' => "Extra metadata created based on site default access level",
-		'profile_manager:admin:adduser:extra_metadata' => "Add extra profile data",
-		'profile_manager:admin:adduser:mark_as_validated' => "Mark this user as validated",
-	
-	
-		//Profile NoIndex
-		'profile_manager:profile:noindex' => "Protect your profile against search engines",
-		
-		'profile_manager:usersettings:hide_from_search_engine' => "Hide your profile from search engines",
-		'profile_manager:usersettings:hide_from_search_engine:explain' => "It may take several days before your profile is removed from the search indexes.",
-		
-		
 	*/
 	);
 	
 	add_translation("en", $english);
-?>
+	

@@ -15,6 +15,9 @@
 				"count_for_completeness" => true
 			);		
 			
+		$location_options = $profile_options;
+		unset($location_options["output_as_tags"]);
+		
 		$calendar_options = $profile_options;
 		unset($calendar_options["simple_search"]);
 		unset($calendar_options["advanced_search"]);
@@ -36,7 +39,7 @@
 		add_custom_field_type("custom_profile_field_types", 'text', elgg_echo('text'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'longtext', elgg_echo('longtext'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'tags', elgg_echo('tags'), $profile_options);
-		add_custom_field_type("custom_profile_field_types", 'location', elgg_echo('location'), $profile_options);
+		add_custom_field_type("custom_profile_field_types", 'location', elgg_echo('location'), $location_options);
 		add_custom_field_type("custom_profile_field_types", 'url', elgg_echo('url'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'email', elgg_echo('email'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'calendar', elgg_echo('calendar'), $calendar_options);
@@ -44,7 +47,7 @@
 		add_custom_field_type("custom_profile_field_types", 'pulldown', elgg_echo('profile_manager:admin:options:pulldown'), $pulldown_options);
 		add_custom_field_type("custom_profile_field_types", 'radio', elgg_echo('profile_manager:admin:options:radio'), $radio_options);
 		add_custom_field_type("custom_profile_field_types", 'multiselect', elgg_echo('profile_manager:admin:options:multiselect'), $profile_options);
-		add_custom_field_type("custom_profile_field_types", 'pm_file', elgg_echo('profile_manager:admin:options:file'), $file_options);
+		//add_custom_field_type("custom_profile_field_types", 'pm_file', elgg_echo('profile_manager:admin:options:file'), $file_options);
 		
 		if(elgg_view_exists("output/datepicker") && elgg_view_exists("input/datepicker")){
 			$datepicker_options = $profile_options;
@@ -474,35 +477,6 @@
 			}
 		}
 	
-		return $result;
-	}
-	
-	function profile_manager_email_pam_handler($credentials = null){
-		$result = false;
-		
-		if(is_array($credentials) && !empty($credentials["username"]) && !empty($credentials["password"])){
-			if(($users = get_user_by_email($credentials["username"])) && (count($users) == 1)){
-				$user = $users[0];
-				
-				// Let admins log in without validating their email, but normal users must have validated their email or been admin created
-				if ((!$user->isAdmin()) && (!$user->validated) && (!$user->admin_created)) {
-					return false;
-				}
-	
-				// User has been banned, so prevent from logging in
-				if ($user->isBanned()) {
-					return false;
-				}
-	
-				if ($user->password == generate_user_password($user, $credentials["password"])) {
-					$result = true;
-				} else {
-					// Password failed, log.
-					log_login_failure($user->getGUID());
-				}
-			}
-		}
-		
 		return $result;
 	}
 	

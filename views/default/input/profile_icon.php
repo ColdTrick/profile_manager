@@ -17,6 +17,6 @@
 ?>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#register-box form").attr("enctype", "multipart/form-data").attr("encoding", "multipart/form-data");
+		$(".elgg-form-register").attr("enctype", "multipart/form-data").attr("encoding", "multipart/form-data");
 	});
 </script>

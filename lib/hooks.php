@@ -22,10 +22,10 @@
 		if($entities = elgg_get_entities($options)){
 			$result = array();
 			$translations = array();
-			$context = get_context();
+			$context = elgg_get_context();
 		    // Make new result
 		    foreach($entities as $entity){
-		    	if($entity->admin_only != "yes" || isadminloggedin()){
+		    	if($entity->admin_only != "yes" || elgg_is_admin_logged_in()){
 
 		    		$result[$entity->metadata_name] = $entity->metadata_type;
 		    		
@@ -77,21 +77,19 @@
 			
 			// Order the group fields and filter some types out
 			foreach($group_fields as $group_field){
-				if($group_field->admin_only != "yes" || isadminloggedin()){
+				if($group_field->admin_only != "yes" || elgg_is_admin_logged_in()){
 					$ordered[$group_field->order] = $group_field;
-					
-					
 				}				
 			}
 			ksort($ordered);
-			
+				
 			// build the correct list
 			$result["name"] = "text";
 			foreach($ordered as $group_field){
 				$result[$group_field->metadata_name] = $group_field->metadata_type;
 
 				// should it be handled as tags? TODO: is this still needed? Yes it is, it handles presentation of these fields in listing mode
-	    		if(get_context() == "search" && ($group_field->output_as_tags == "yes" || $group_field->metadata_type == "multiselect")){
+	    		if(elgg_get_context() == "search" && ($group_field->output_as_tags == "yes" || $group_field->metadata_type == "multiselect")){
 	    			$result[$group_field->metadata_name] = "tags";
 	    		}	
 			}
@@ -100,12 +98,11 @@
 		return $result;
 	}
 	
-	
 	function profile_manager_categorized_profile_fields_hook($hook_name, $entity_type, $return_value, $params){
 		$result = $return_value;
 		
 		// optionally add the system fields for admins
-		if(isadminloggedin() && (get_plugin_setting("display_system_category", "profile_manager") == "yes")){
+		if(elgg_is_admin_logged_in() && (elgg_get_plugin_setting("display_system_category", "profile_manager") == "yes")){
 			$edit = $params["edit"];
 			$register = $params["register"];
 			
@@ -117,16 +114,22 @@
 						"guid" => "text",
 						"owner_guid" => "text",
 						"container_guid" => "text",
+						"site_guid" => "text",
 						
 						"time_created" => "pm_datepicker",
 						"time_updated" => "pm_datepicker",
 						"last_action" => "pm_datepicker",
 						"prev_last_login" => "pm_datepicker",
 				 		"last_login" => "pm_datepicker",
+
+						"admin_created" => "text",
+				 		"created_by_guid" => "text",
+						"validated" => "text",
+						"validated_method" => "text",
 						
 						"username" => "text",
 						"email" => "text",
-						"language" => "text"
+						"language" => "text"						
 					);
 				
 				foreach($system_fields as $metadata_name => $metadata_type){
@@ -168,21 +171,14 @@
 	 * @return unknown_type
 	 */
 	function profile_manager_action_register_hook($hook_name, $entity_type, $return_value, $parameters){
-		// check if login by email is enabled, if so generate username
-		if(get_plugin_setting("login_by_email", "profile_manager") == "yes"){
-			if($email = get_input("email")){
-				if($username = profile_manager_generate_username_from_email($email)){
-					set_input("username", $username);
-				}
-			}
-		}
 		
-		// backup POST data
-		$_SESSION["register_post_backup"] = $_POST;
+		elgg_make_sticky_form('register');
+		elgg_make_sticky_form('profile_manager_register');
+		
 		
 		// validate mandatory profile fields
 		
-		$profile_icon = get_plugin_setting("profile_icon_on_register");
+		$profile_icon = elgg_get_plugin_setting("profile_icon_on_register", "profile_manager");
 		// new
 		$profile_type_guid = get_input("custom_profile_fields_custom_profile_type", false);
 		$fields = profile_manager_get_categorized_fields($user, true, true, true, $profile_type_guid);
@@ -242,9 +238,7 @@
 		}
 	}
 	
-	
-	
-	function profile_noindex_view_hook($hook, $type, $returnvalue, $params){
+	function profile_manager_profile_noindex_view_hook($hook, $type, $returnvalue, $params){
 		global $autofeed;
 		$autofeed = false;
 	}

@@ -42,15 +42,13 @@
 					'mobile' => 'text',
 					'website' => 'url',
 					'twitter' => 'text'
-			
 				);
 		} elseif($type == "group"){
 			// Group defaults
 			$defaults = array(
 				'description' => 'longtext',
 				'briefdescription' => 'text',
-				'interests' => 'tags',
-				'website' => 'url',
+				'interests' => 'tags'
 			);
 		}
 		
@@ -95,4 +93,3 @@
 	}
 	
 	forward($_SERVER['HTTP_REFERER']);
-?>

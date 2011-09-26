@@ -64,4 +64,7 @@ END;
 	});
 
 </script>
-<input class="datepicker_hidden" type="text" READONLY name="<?php echo $vars['internalname']; ?>" value="" id="<?php echo $internal_id; ?>_alt" /> <input type="text" READONLY id="<?php echo $internal_id; ?>" value="<?php echo $dateval; ?>" style="width:200px"/>
+<div>
+	<input class="datepicker_hidden" type="text" READONLY name="<?php echo $vars['internalname']; ?>" value="" id="<?php echo $internal_id; ?>_alt" />
+	<input type="text" READONLY id="<?php echo $internal_id; ?>" value="<?php echo $dateval; ?>" style="width:200px"/>
+</div>

@@ -44,9 +44,6 @@ $(document).ready(function(){
 		}
 	});
 
-	// enable/disable correct field type options 
-	//changeFieldType();
-
 	// add buttons
 	$(".profile-manager-popup").fancybox();
 });
@@ -54,7 +51,7 @@ $(document).ready(function(){
 function toggleOption(field, guid){
 	$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/toggleOption?&guid=' + guid + '&field=' + field), function(data){
 		if(data == 'true'){
-			$("#" + field + "_" + guid).toggleClass("metadata_config_right_status_disabled metadata_config_right_status_enabled");
+			$("#" + field + "_" + guid).toggleClass("field_config_metadata_option_disabled field_config_metadata_option_enabled");
 		} else {
 			alert(elgg.echo("profile_manager:actions:toggle_option:error:unknown"));
 		}
@@ -110,52 +107,11 @@ function filterCustomFields(category_guid){
 	}		
 }
 
-
-// General Functions
-
-//function toggleForm(form_id){
-//	if($('#' + form_id + ' input[name="guid"]').val() > 0){
-//		$('#' + form_id + ' input[type="reset"]').click();
-//	} else {	
-//		$('#' + form_id).toggle();
-//	}		
-//}
-
-// profile fields
-function resetProfileFieldsForm(){
-	$('#custom_fields_form input[name="guid"]').val('');
-	
-	return true;
-}
-	
-function editField(guid){
-	$.getJSON(elgg.security.addToken("<?php echo $vars['url']; ?>action/profile_manager/get_field_data?guid=" + guid), function(data){
-		if(data.guid == guid){
-			var form = $("#custom_fields_form");
-			form.find('input[type="reset"]').click();
-			$.each(data, function(name, value){
-				if(value != null){
-					$(form).find("[name='" + name + "']").val(value);
-				}
-			});
-			$.fancybox({ href: "#custom_fields_form"});
-			changeFieldType();
-		} else {
-			alert(elgg.echo("profile_manager:actions:edit:error:unknown"));
-		}
-	});
-}
-
-
-
-
-
-
-
 function changeFieldType(){
 	var selectedType = $("#custom_fields_form select[name='metadata_type']").val();
+	
 	$("#custom_fields_form .custom_fields_form_field_option").attr("disabled", "disabled");
-	$("#custom_fields_form .field_option_enable_" + selectedType).attr("disabled", "");
+	$("#custom_fields_form .field_option_enable_" + selectedType).removeAttr("disabled");
 }
 
 // categories	
@@ -177,61 +133,9 @@ function changeFieldCategory(field, category_guid){
 	});
 }
 
-
-
-function editCategory(guid, name, label, rels){
-	$('#custom_fields_category_form input[name="guid"]').val(guid);
-	$('#custom_fields_category_form input[name="metadata_name"]').val(name);
-	$('#custom_fields_category_form input[name="metadata_label"]').val(label);
-
-	var cats = rels.split(",");
-	$('#custom_fields_category_form input[type="checkbox"]').val(cats);
-	
-	$.fancybox({ href: "#custom_fields_category_form"});
-}
-
-
-function resetCategoryForm(){
-	$('#custom_fields_category_form input[name="guid"]').val('');
-	
-	return true;
-}
-
-
-
 // Profile Types
-function resetProfileTypeForm(){
-	$('#custom_fields_profile_type_form input[name="guid"]').val('');
-	
-	return true;
-}
-
-function editProfileType(guid, name, label, show_on_members, rels){
-	$('#custom_fields_profile_type_form input[name="guid"]').val(guid);
-	$('#custom_fields_profile_type_form input[name="metadata_name"]').val(name);
-	$('#custom_fields_profile_type_form input[name="metadata_label"]').val(label);
-	$('#custom_fields_profile_type_form select[name="show_on_members"]').val(show_on_members);
-
-	$.post(elgg.security.addToken("<?php echo $vars['url']; ?>action/profile_manager/profile_types/get_description?guid=" + guid), function(data){
-		$('#custom_fields_profile_type_form textarea[name="metadata_description"]').val(data);
-	});
-	
-	var cats = rels.split(",");
-	$('#custom_fields_profile_type_form input[type="checkbox"]').val(cats);
-	
-	$.fancybox({ href: "#custom_fields_profile_type_form"});
-}
-
 function deleteProfileType(guid){
 	if(guid && confirm(elgg.echo("profile_manager:profile_types:delete:confirm"))){
 		document.location.href = elgg.security.addToken("<?php echo $vars['url']; ?>action/profile_manager/profile_types/delete?guid=" + guid);
 	}
-}
-
-function highlightCategories(elem, rels){
-	$(elem).toggleClass("custom_fields_lists_green");
-	var cats = rels.split(",");
-	$.each(cats, function(){
-		$("#custom_profile_field_category_" + this).toggleClass("custom_fields_lists_green");
-	});
 }

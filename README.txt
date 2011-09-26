@@ -32,7 +32,6 @@ Needs to be positioned after the profile plugin!!!
 - if only 'about me' is filled, the default category is visible, but can't do anything
 - categories and types for groups
 - multilingual options (in pulldown, radio, multiselect)
-- add multilingual support for hint field
 - Default values for fields (user specified)
 - Force empty fields on profile
 - dependend fields
@@ -49,11 +48,13 @@ Needs to be positioned after the profile plugin!!!
 - extend group and user search listing with info from profile manager
 - listen to get/post for profile types on members search form
 - review complete js
+- review new field action (make better use of class constructors)
 	
 == 3. Known issues ==
 - on register error backward maintaining selected profile icon is impossible due to security reasons 
 - longtext with tinymce too small when on first hidden
 - reset on members search forms won't reset multiselects
+- multiselect mandatory not js enforced on register form
 	
 NEED FIXING:
 When i choose to "select profile type by Admin", on the profile page of the user it will indeed only show the fields specfic to that profile type but the user can see all the categories of all the profile types in their edit profile page.
@@ -61,15 +62,23 @@ When i choose to "select profile type by Admin", on the profile page of the user
 They can fill in the information but it wont show as their profile type wont match but I dont think they should be able to see the categories as they wont show. Is this just the way it is on is it a bug?
 
 == 4. Version history ==
-x.x:
+7.0 beta:
 
 - added: support for 1.8 (multiple changes)
-- added: user option to block profile page (and friends listing) from search bots
+- added: multilingual support for field hints ("profile:hint:<fieldname>")
 - changed: admin profile fields add forms now open in a lightbox
 - changed: layout of admin pages
 - removed: !! IMPORTANT !! temporarily disabled the use of the Profile Manager member search
+- removed: !! IMPORTANT !! temporarily removed the 'file' field type 
 - removed: admin profile type stats page 
 - removed: widget index_login (obsolete) 
+- removed: full profile link and page
+- removed: river cleanup function for avatar crop (obsolete)
+- removed: river cleanup function for profile updates (obsolete)
+- removed: login by email pam handler (and core action) (obsolete)
+- removed: request new password by email (hope to see it end up in core trac #3843)
+- removed: register by email only functionality (probably temporarily)
+- removed: marking a user (at the admin user add form) as validated (obsolete)
 	
 6.2 (2011-08-11):
 

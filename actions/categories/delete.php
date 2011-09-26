@@ -21,19 +21,13 @@
 			$options = array(
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
-				"count" => true,
+				"limit" => false,
 				"owner_guid" => $CONFIG->site_guid,
 				"metadata_name_value_pairs" => array("name" => "category_guid", "value" => $guid)
 			);
 			
-			$fields_count = elgg_get_entities_from_metadata($options);
 			// remove reference to this category on related profile fields 
-			if($fields_count > 0){
-				$options["count"] = false;
-				$options["limit"] = $fields_count;
-				
-				$fields = elgg_get_entities_from_metadata($options);
-				
+			if($fields = elgg_get_entities_from_metadata($options)){
 				foreach($fields as $field){
 					unset($field->category_guid);
 				}
@@ -52,4 +46,3 @@
 	}
 	
 	forward($_SERVER["HTTP_REFERER"]);
-?>

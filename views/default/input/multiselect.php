@@ -35,7 +35,7 @@
     	$("#<?php echo $internal_id;?>").dropdownchecklist({ width: 200});
     });
 </script>
-<p style="display:inline;">
+<div>
 	<select id="<?php echo $internal_id;?>" name="<?php echo $vars['internalname'];?>[]" multiple="multiple" style="display:none">
 	<?php	
 		if(!empty($vars["options_values"])){
@@ -61,4 +61,4 @@
 		}
 	?>
 	</select>
-</p>
+</div>

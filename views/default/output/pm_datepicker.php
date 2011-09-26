@@ -24,5 +24,3 @@
 		echo $vars['value'];
 	}
 	echo "</span>";
-
-?>

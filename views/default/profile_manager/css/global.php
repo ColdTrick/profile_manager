@@ -5,7 +5,7 @@
 	width: 14px;
 	height: 14px;
 	display: inline-block;
-	vertical-align: sub;
+	vertical-align: middle;
 	background: url(<?php echo $plugin_graphics_folder; ?>icon_customise_info.gif);
 	cursor: pointer;
 	margin-left: 5px;

@@ -10,8 +10,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	global $CONFIG;
-
 	admin_gatekeeper();
 	
 	$guid = get_input("guid");
@@ -30,4 +28,3 @@
 	}
 
 	exit();
-?>

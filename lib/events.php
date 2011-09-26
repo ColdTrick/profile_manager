@@ -1,22 +1,4 @@
 <?php 
-	function profile_manager_all_object_event($event, $object_type, $object){
-		
-		if($object instanceof ElggObject && $object->getSubtype() == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE){
-			$count = elgg_get_entities_from_metadata(array(
-					"type" => "object",
-					"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
-					"count" => true,
-					"metadata_name_value_pairs" => array("name" => "metadata_name", "value" => "description", "operand" => "=", "case_sensitive" => TRUE)
-				)); 
-			if(!empty($count)){
-			   	// used for showing description in profile box (profile/userdetails)
-				set_plugin_setting('user_defined_fields', false, 'profile');
-			} else {
-				set_plugin_setting('user_defined_fields', true, 'profile');
-			}
-		}
-	}
-	
 	function profile_manager_profileupdate_user_event($event, $object_type, $user){
 		
 		if(!empty($user) && ($user instanceof ElggUser)){
@@ -101,19 +83,6 @@
 			
 			// update profile completeness
 			profile_manager_profile_completeness($user);
-			
-			// cleaunp river events
-			$update_river_view = "river/user/default/profileupdate";
-			$update_river_action_type = "update";
-			
-			$timeout = (time() - (12 * 60 * 60));
-			if($items = get_river_items($user->getGUID(), $user->getGUID(), "", "", "", $update_river_action_type, 9999, 0, $timeout)){
-				foreach($items as $item){
-					if($item->view == $update_river_view){
-						remove_from_river_by_id($item->id);
-					}
-				}
-			}
 		}
 	}
 	
@@ -126,8 +95,6 @@
 	 * @return unknown_type
 	 */
 	function profile_manager_create_user_event($event, $object_type, $object){
-		global $CONFIG;
-		
 		$custom_profile_fields = array();
 		
 		// retrieve all field that were on the register page
@@ -182,23 +149,4 @@
 		if($profile_icon = $_FILES["profile_icon"]){
 			add_profile_icon($object);
 		}
-		
-		// cleanup session
-		unset($_SESSION["register_post_backup"]);
-	}
-	
-	function profile_manager_profileiconupdate_user_event($event, $object_type, $user){
-		
-		if(!empty($user) && ($user instanceof ElggUser)){
-			$icon_river_view = "river/user/default/profileiconupdate";
-			$icon_river_action_type = "update";
-			
-			if($items = get_river_items($user->getGUID(), $user->getGUID(), "", "", "", $icon_river_action_type, 9999)){
-				foreach($items as $item){
-					if($item->view == $icon_river_view){
-						remove_from_river_by_id($item->id);
-					}
-				}
-			}
-		}
-	}
+	}	

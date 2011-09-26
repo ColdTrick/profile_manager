@@ -33,13 +33,13 @@
 	// if no option is available in the register, this metadata field can't be toggled
 	if(!empty($type_options) && array_key_exists($metadata_name, $type_options) && $type_options[$metadata_name]){
 		if($entity->$metadata_name != "yes"){
-			$class = " metadata_config_right_status_disabled";
+			$class = " field_config_metadata_option_disabled";
 		} else {
-			$class = " metadata_config_right_status_enabled";
+			$class = " field_config_metadata_option_enabled";
 		}
 		$title = elgg_echo('profile_manager:admin:' . $metadata_name);
 		$onclick = "onclick='toggleOption(\"" . $metadata_name . "\", " . $entity->guid . "); return false;'";
 	} else {
 		$title = elgg_echo('profile_manager:admin:option_unavailable');
 	}
-	echo "<span title='" . $title . "' class='metadata_config_right_status" . $class . "' id='" . $id . "' " . $onclick . "></span>";
+	echo "<span title='" . $title . "' class='field_config_metadata_option" . $class . "' id='" . $id . "' " . $onclick . "></span>";

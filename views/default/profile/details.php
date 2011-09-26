@@ -19,7 +19,7 @@
 		
 		if($profile_type_guid = $user->custom_profile_type){
 			if(($profile_type = get_entity($profile_type_guid)) && ($profile_type instanceof ProfileManagerCustomProfileType)){
-				$result .= "<p class='even'><b>" . elgg_echo("profile_manager:user_details:profile_type") . "</b>: " . $profile_type->getTitle() . " </p>";	
+				$result .= "<div class='even'><b>" . elgg_echo("profile_manager:user_details:profile_type") . "</b>: " . $profile_type->getTitle() . " </div>";	
 			}
 		}
 				
@@ -47,7 +47,15 @@
 					$title = $cat;
 				}
 				
-				$result .= "<h3><span class='accordion-icon'></span>" . $title . "</h3>\n";
+				$params = array(
+					'text' => ' ',
+					'href' => "#",
+					'class' => 'elgg-widget-collapse-button',
+					'rel' => 'toggle',
+				);
+				$collapse_link = elgg_view('output/url', $params);
+				
+				$result .= "<h3>" . $title . "</h3>\n";
 			}
 			
 			$result .= "<div>\n";
@@ -75,6 +83,7 @@
 					// adjust output type
 					if($field->output_as_tags == "yes"){
 						$output_type = "tags";
+						$value = string_to_tag_array($value);
 					} else {
 						$output_type = $field->metadata_type;
 					}

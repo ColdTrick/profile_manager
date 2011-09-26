@@ -1,8 +1,8 @@
 <?php ?>
 <script type="text/javascript">		
-	$("#register_form .mandatory>label").append("*");
+	$(".elgg-form-register .mandatory>label").append("*");
 	
-	$("#register_form").submit(function(){
+	$(".elgg-form-register").submit(function(){
 		var error_count = 0;
 		var result = false;
 
@@ -12,7 +12,7 @@
 			selProfileType = 0;
 		}
 		
-		$form.find(".mandatory input, .mandatory select, .mandatory textarea").each(function(index, elem){
+		$form.find(".mandatory").find("input, select, textarea").each(function(index, elem){
 			
 			switch($(elem).attr("type")){
 				case "radio":

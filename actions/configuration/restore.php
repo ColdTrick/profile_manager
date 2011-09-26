@@ -28,7 +28,7 @@
 					$options = array(
 							"type" => "object",
 							"subtype" => $fieldtype,
-							"limit" => 9999,
+							"limit" => false,
 							"owner_guid" => $CONFIG->site_guid
 						);
 						
@@ -81,4 +81,3 @@
 	}
 	
 	forward($_SERVER['HTTP_REFERER']);
-?>

@@ -20,13 +20,11 @@
 		$options = array(
 				"type" => "object",
 				"subtype" => "custom_" . $type . "_field",
-				"limit" => 9999,
+				"limit" => false,
 				"owner_guid" => $CONFIG->site_guid
 			);
-			
-		$entities = elgg_get_entities($options);
 		
-		if(!empty($entities)){
+		if($entities = elgg_get_entities($options)){
 			foreach($entities as $entity){
 				if(!$entity->delete()){
 					$error = true;
@@ -44,4 +42,3 @@
 	}
 	
 	forward($_SERVER['HTTP_REFERER']);
-?>

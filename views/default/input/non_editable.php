@@ -10,8 +10,12 @@
 	* @link http://www.coldtrick.com/
 	*/
 	
-	echo "</label>";
-	echo "<input name='" . $vars['internalname'] . "' type='hidden' value='" . $vars['value'] . "'>";
-	echo $vars['value'] . "<br />" . elgg_echo("profile_manager:non_editable:info") . "<br />";
-
-?>
+	echo elgg_view("input/hidden", $vars);
+	
+	echo "<div>";
+	echo elgg_view("output/text", $vars);
+	echo "</div>";
+	
+	echo "<div>";
+	echo elgg_echo("profile_manager:non_editable:info");
+	echo "</div>";
