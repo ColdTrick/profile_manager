@@ -15,7 +15,7 @@
 	$cats = $categorized_fields['categories'];
 	$fields = $categorized_fields['fields'];
 	if(count($cats) > 0){
-		$result .= "<div id='custom_fields_userdetails'>\n";
+		$result .= "<div id='custom_fields_userdetails'>";
 		
 		if($profile_type_guid = $user->custom_profile_type){
 			if(($profile_type = get_entity($profile_type_guid)) && ($profile_type instanceof ProfileManagerCustomProfileType)){
@@ -31,6 +31,10 @@
 		}
 		
 		foreach($cats as $cat_guid => $cat){
+			$cat_title = "";
+			$field_result = "";
+			$even_odd = "even";
+			
 			if($show_header){
 				// make nice title
 				if($cat_guid == -1){
@@ -55,11 +59,8 @@
 				);
 				$collapse_link = elgg_view('output/url', $params);
 				
-				$result .= "<h3>" . $title . "</h3>\n";
+				$cat_title = "<h3>" . $title . "</h3>\n";
 			}
-			
-			$result .= "<div>\n";
-			$even_odd = "even";
 			
 			foreach($fields[$cat_guid] as $field){
 				
@@ -72,7 +73,6 @@
 					} else {
 						$even_odd = "odd";
 					}
-					$result .= "<div class='" . $even_odd . "'>";
 					
 					// make nice title
 					$title = $field->getTitle();
@@ -95,17 +95,20 @@
 					}
 					
 					// build result
-					$field_result = "<b>" . $title . "</b>:&nbsp;";
+					$field_result .= "<div class='" . $even_odd . "'>";
+					$field_result .= "<b>" . $title . "</b>:&nbsp;";
 					$field_result .= elgg_view("output/" . $output_type, array("value" =>  $value, "target" => $target));
-					
-					$result .=  $field_result;
-					$result .= "</div>\n";
+					$field_result .= "</div>\n";
 				}
 			}
-			$result .= "</div>\n";
+			
+			if(!empty($field_result)){
+				$result .= $cat_title;
+				$result .= "<div>" . $field_result . "</div>";	
+			}
 		}
 		
-		$result .= "</div>\n";
+		$result .= "</div>";
 		
 		echo $result; 
 	
