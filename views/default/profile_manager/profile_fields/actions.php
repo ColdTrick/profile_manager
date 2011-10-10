@@ -18,14 +18,14 @@
 			<span class='custom_fields_more_info' id='more_info_actions'></span>
 		</h3>
 	</div>
-	<div class="elgg-body">
+	<div class="elgg-body profile-manager-actions">
 		<?php 
-			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:reset"), "title" => elgg_echo("profile_manager:actions:reset:description"), "href" => $vars['url'] . "action/profile_manager/reset?type=profile", "confirm" => elgg_echo("profile_manager:actions:reset:confirm"), "class" => "elgg-button-action")); 
-			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:import:from_custom"), "title" => elgg_echo("profile_manager:actions:import:from_custom:description"), "href" => $vars['url'] . "action/profile_manager/importFromCustom", "confirm" => elgg_echo("profile_manager:actions:import:from_custom:confirm"), "class" => "elgg-button-action")); 
-			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:import:from_default"), "title" => elgg_echo("profile_manager:actions:import:from_default:description"), "href" => $vars['url'] . "action/profile_manager/importFromDefault?type=profile", "confirm" => elgg_echo("profile_manager:actions:import:from_default:confirm"), "class" => "elgg-button-action")); 
-			echo elgg_view("output/url", array("title" => elgg_echo("profile_manager:actions:export:description"),"text" => elgg_echo("profile_manager:actions:export"), "href" => $vars['url'] . "admin/appearance/export_fields?fieldtype=" . CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE, "class" => "elgg-button-action")); 
-			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:configuration:backup"), "href" => $vars['url'] . "action/profile_manager/configuration/backup?fieldtype=" . CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE, "confirm" => elgg_echo("profile_manager:actions:configuration:backup:description"), "class" => "elgg-button-action"));
-			echo elgg_view("output/url", array("text" => elgg_echo("profile_manager:actions:configuration:restore"), "js" => "onclick=\"$('#restoreForm').toggle();\"", "class" => "elgg-button-action")); 
+			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:reset"), "title" => elgg_echo("profile_manager:actions:reset:description"), "href" => $vars['url'] . "action/profile_manager/reset?type=profile", "confirm" => elgg_echo("profile_manager:actions:reset:confirm"), "class" => "elgg-button elgg-button-action")); 
+			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:import:from_custom"), "title" => elgg_echo("profile_manager:actions:import:from_custom:description"), "href" => $vars['url'] . "action/profile_manager/importFromCustom", "confirm" => elgg_echo("profile_manager:actions:import:from_custom:confirm"), "class" => "elgg-button elgg-button-action")); 
+			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:import:from_default"), "title" => elgg_echo("profile_manager:actions:import:from_default:description"), "href" => $vars['url'] . "action/profile_manager/importFromDefault?type=profile", "confirm" => elgg_echo("profile_manager:actions:import:from_default:confirm"), "class" => "elgg-button elgg-button-action")); 
+			echo elgg_view("output/url", array("title" => elgg_echo("profile_manager:actions:export:description"),"text" => elgg_echo("profile_manager:actions:export"), "href" => $vars['url'] . "admin/appearance/export_fields?fieldtype=" . CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE, "class" => "elgg-button elgg-button-action")); 
+			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:configuration:backup"), "href" => $vars['url'] . "action/profile_manager/configuration/backup?fieldtype=" . CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE, "confirm" => elgg_echo("profile_manager:actions:configuration:backup:description"), "class" => "elgg-button elgg-button-action"));
+			echo elgg_view("output/url", array("text" => elgg_echo("profile_manager:actions:configuration:restore"), "js" => "onclick=\"$('#restoreForm').toggle();\"", "class" => "elgg-button elgg-button-action")); 
 
 			$form_body = "<div>" . elgg_echo("profile_manager:actions:configuration:restore:description") . "</div>";
 			$form_body .= elgg_view("input/file", array("name" => "restoreFile"));

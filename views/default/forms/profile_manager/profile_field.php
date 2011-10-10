@@ -52,7 +52,7 @@
 	$yes_no_options = array('yes' => elgg_echo('option:yes'),'no' => elgg_echo('option:no'));
 	$no_yes_options = array_reverse($yes_no_options);
 
-	$type_control = elgg_view('input/pulldown', array('name' => 'metadata_type', 'options_values' => $options_values, 'js' => 'onchange="changeFieldType();"', "value" => $metadata_type));
+	$type_control = elgg_view('input/dropdown', array('name' => 'metadata_type', 'options_values' => $options_values, 'js' => 'onchange="changeFieldType();"', "value" => $metadata_type));
 	
 	$formbody .= elgg_echo('profile_manager:admin:metadata_name') . ":" . elgg_view('input/text', array('name' => 'metadata_name', "value" => $metadata_name));
 	$formbody .= elgg_echo('profile_manager:admin:metadata_label') . "*:" . elgg_view('input/text', array('name' => 'metadata_label', "value" => $metadata_label));
@@ -70,7 +70,7 @@
 	}
 	$formbody .= "<tr>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:show_on_register') . ":</td>";
-	$formbody .= "<td>" . elgg_view('input/pulldown', array('name' => 'show_on_register', 'options_values' => $no_yes_options , 'value'=> $show_on_register, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
+	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'show_on_register', 'options_values' => $no_yes_options , 'value'=> $show_on_register, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:show_on_register:description') . "</td>";
 	$formbody .= "</tr>";
 
@@ -81,7 +81,7 @@
 	}
 	$formbody .= "<tr>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:mandatory') . ":</td>";
-	$formbody .= "<td>" . elgg_view('input/pulldown', array('name' => 'mandatory', 'options_values' => $no_yes_options, 'value'=> $mandatory, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
+	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'mandatory', 'options_values' => $no_yes_options, 'value'=> $mandatory, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:mandatory:description') . "</td>";
 	$formbody .= "</tr>";
 	
@@ -92,7 +92,7 @@
 	}
 	$formbody .= "<tr>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:user_editable') . ":</td>";
-	$formbody .= "<td>" . elgg_view('input/pulldown', array('name' => 'user_editable', 'options_values' => $yes_no_options, 'value'=> $user_editable, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
+	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'user_editable', 'options_values' => $yes_no_options, 'value'=> $user_editable, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:user_editable:description') . "</td>";
 	$formbody .= "</tr>";
 	
@@ -103,7 +103,7 @@
 	}
 	$formbody .= "<tr>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:output_as_tags') . ":</td>";
-	$formbody .= "<td>" . elgg_view('input/pulldown', array('name' => 'output_as_tags', 'options_values' => $no_yes_options, 'value'=> $output_as_tags, 'class' => 'custom_fields_form_field_option field_option_enable_text' . $class)) . "</td>";
+	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'output_as_tags', 'options_values' => $no_yes_options, 'value'=> $output_as_tags, 'class' => 'custom_fields_form_field_option field_option_enable_text' . $class)) . "</td>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:output_as_tags:description') . "</td>";
 	$formbody .= "</tr>";
 	
@@ -114,7 +114,7 @@
 	}
 	$formbody .= "<tr>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:blank_available') . ":</td>";
-	$formbody .= "<td>" . elgg_view('input/pulldown', array('name' => 'blank_available', 'options_values' => $no_yes_options, 'value'=> $blank_available, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
+	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'blank_available', 'options_values' => $no_yes_options, 'value'=> $blank_available, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:blank_available:description') . "</td>";
 	$formbody .= "</tr>";
 	
@@ -125,7 +125,7 @@
 	}
 	$formbody .= "<tr>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:admin_only') . ":</td>";
-	$formbody .= "<td>" . elgg_view('input/pulldown', array('name' => 'admin_only', 'options_values' => $no_yes_options, 'value'=> $admin_only, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
+	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'admin_only', 'options_values' => $no_yes_options, 'value'=> $admin_only, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:admin_only:description') . "</td>";
 	$formbody .= "</tr>";
 	
@@ -136,7 +136,7 @@
 	}
 	$formbody .= "<tr>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:simple_search') . ":</td>";
-	$formbody .= "<td>" . elgg_view('input/pulldown', array('name' => 'simple_search', 'options_values' => $no_yes_options, 'value'=> $simple_search, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
+	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'simple_search', 'options_values' => $no_yes_options, 'value'=> $simple_search, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:simple_search:description') . "</td>";
 	$formbody .= "</tr>";
 	
@@ -147,7 +147,7 @@
 	}
 	$formbody .= "<tr>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:advanced_search') . ":</td>";
-	$formbody .= "<td>" . elgg_view('input/pulldown', array('name' => 'advanced_search', 'options_values' => $no_yes_options, 'value' => $advanced_search, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
+	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'advanced_search', 'options_values' => $no_yes_options, 'value' => $advanced_search, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:advanced_search:description') . "</td>";
 	$formbody .= "</tr>";
 	

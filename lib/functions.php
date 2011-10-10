@@ -44,7 +44,7 @@
 		add_custom_field_type("custom_profile_field_types", 'email', elgg_echo('email'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'calendar', elgg_echo('calendar'), $calendar_options);
 		add_custom_field_type("custom_profile_field_types", 'pm_datepicker', elgg_echo('profile_manager:admin:options:pm_datepicker'), $pm_datepicker_options);
-		add_custom_field_type("custom_profile_field_types", 'pulldown', elgg_echo('profile_manager:admin:options:pulldown'), $pulldown_options);
+		add_custom_field_type("custom_profile_field_types", 'dropdown', elgg_echo('profile_manager:admin:options:pulldown'), $pulldown_options);
 		add_custom_field_type("custom_profile_field_types", 'radio', elgg_echo('profile_manager:admin:options:radio'), $radio_options);
 		add_custom_field_type("custom_profile_field_types", 'multiselect', elgg_echo('profile_manager:admin:options:multiselect'), $profile_options);
 		//add_custom_field_type("custom_profile_field_types", 'pm_file', elgg_echo('profile_manager:admin:options:file'), $file_options);
@@ -57,7 +57,7 @@
 			
 			add_custom_field_type("custom_profile_field_types", 'datepicker', elgg_echo('profile_manager:admin:options:datepicker'), $datepicker_options);
 		} else {
-			register_plugin_hook('display', 'view', 'profile_manager_display_view_hook');
+			elgg_register_plugin_hook_handler('display', 'view', 'profile_manager_display_view_hook');
 		}
 		
 		// registering group field types		
@@ -82,7 +82,7 @@
 		add_custom_field_type("custom_group_field_types", 'email', elgg_echo('email'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'calendar', elgg_echo('calendar'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'datepicker', elgg_echo('profile_manager:admin:options:datepicker'), $datepicker_options);
-		add_custom_field_type("custom_group_field_types", 'pulldown', elgg_echo('profile_manager:admin:options:pulldown'), $pulldown_options);
+		add_custom_field_type("custom_group_field_types", 'dropdown', elgg_echo('profile_manager:admin:options:pulldown'), $pulldown_options);
 		add_custom_field_type("custom_group_field_types", 'radio', elgg_echo('profile_manager:admin:options:radio'), $radio_options);
 		add_custom_field_type("custom_group_field_types", 'multiselect', elgg_echo('profile_manager:admin:options:multiselect'), $group_options);
 	}
@@ -218,7 +218,7 @@
 							"type" => "object",
 							"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 							"count" => true,
-							"owner_guid" => $cat->getOwner(),
+							"owner_guid" => $cat->getOwnerGUID(),
 							"site_guid" => $cat->site_guid,
 							"relationship" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
 							"relationship_guid" => $cat->getGUID(),

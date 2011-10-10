@@ -37,7 +37,7 @@
 	
 	$no_yes_options = array('no' => elgg_echo('option:no'), 'yes' => elgg_echo('option:yes'));
 
-	$type_control = elgg_view('input/pulldown', array('name' => 'metadata_type', 'options_values' => $options_values, "value" => $metadata_type));
+	$type_control = elgg_view('input/dropdown', array('name' => 'metadata_type', 'options_values' => $options_values, "value" => $metadata_type));
 	
 	$formbody .= elgg_echo('profile_manager:admin:metadata_name') . ":" . elgg_view('input/text', array('name' => 'metadata_name', "value" => $metadata_name));
 	$formbody .= elgg_echo('profile_manager:admin:metadata_label') . "*:" . elgg_view('input/text', array('name' => 'metadata_label', "value" => $metadata_label));
@@ -47,9 +47,9 @@
 
 	$formbody .= "<h3>" . elgg_echo("profile_manager:admin:additional_options") . "</h3>";
 	$formbody .= "<table>";
-	$formbody .= "<tr><td>" . elgg_echo('profile_manager:admin:output_as_tags') . ":</td><td>" . elgg_view('input/pulldown', array('name' => 'output_as_tags', 'options_values' => $no_yes_options, 'value' => $output_as_tags)) . "</td></tr>";
-	$formbody .= "<tr><td>" . elgg_echo('profile_manager:admin:admin_only') . ":</td><td>" . elgg_view('input/pulldown', array('name' => 'admin_only', 'options_values' => $no_yes_options, 'value' => $admin_only)) . "</td></tr>";
-	$formbody .= "<tr><td>" . elgg_echo('profile_manager:admin:blank_available') . ":</td><td>" . elgg_view('input/pulldown', array('name' => 'blank_available', 'options_values' => $no_yes_options, 'value' => $blank_available)) . "</td></tr>";
+	$formbody .= "<tr><td>" . elgg_echo('profile_manager:admin:output_as_tags') . ":</td><td>" . elgg_view('input/dropdown', array('name' => 'output_as_tags', 'options_values' => $no_yes_options, 'value' => $output_as_tags)) . "</td></tr>";
+	$formbody .= "<tr><td>" . elgg_echo('profile_manager:admin:admin_only') . ":</td><td>" . elgg_view('input/dropdown', array('name' => 'admin_only', 'options_values' => $no_yes_options, 'value' => $admin_only)) . "</td></tr>";
+	$formbody .= "<tr><td>" . elgg_echo('profile_manager:admin:blank_available') . ":</td><td>" . elgg_view('input/dropdown', array('name' => 'blank_available', 'options_values' => $no_yes_options, 'value' => $blank_available)) . "</td></tr>";
 	$formbody .= "</table>";
 	
 	$formbody .= "<br />";

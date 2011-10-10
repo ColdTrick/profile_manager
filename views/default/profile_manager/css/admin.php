@@ -116,6 +116,14 @@
 	cursor: pointer;
 }
 
+.profile-manager-actions {
+	padding: 5px 0px;
+}
+
+.profile-manager-actions a{
+	margin: 0 5px 5px 0;
+}
+
 #restoreForm {
 	display: none;
 }

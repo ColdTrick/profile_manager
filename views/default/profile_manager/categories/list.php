@@ -15,26 +15,15 @@
 	$options = array(
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
-			"count" => true,
-			"owner_guid" => $CONFIG->site_guid 
+			"limit" => false,
+			"owner_guid" => $CONFIG->site_guid,
+			"order_by_metadata" => array("order") 
 		);
 
-	$categories_count = elgg_get_entities($options);
+	$categories = elgg_list_entities_from_metadata($options);	
 	
-	if($categories_count > 0){
-		$options["count"] = false;
-		$options["limit"] = $categories_count;
-		 
-		$categories = elgg_get_entities($options);
-		
-		$ordered = array();
-		foreach($categories as $cat){
-			$ordered[$cat->order] = $cat;
-		}
-		
-		ksort($ordered);
-		
-		$list = elgg_view_entity_list($ordered, $categories_count, 0, $categories_count, false, false, false);
+	if(!empty($categories)){
+		$list = $categories;
 	} else {
 		$list = elgg_echo("profile_manager:categories:list:no_categories");
 	}
@@ -43,7 +32,7 @@
 
 <div class="elgg-module elgg-module-inline">
 	<div class="elgg-head">
-		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => $vars["url"] . "profile_manager/forms/category", "class" => "elgg-button-action profile-manager-popup")); ?>
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => $vars["url"] . "profile_manager/forms/category", "class" => "elgg-button elgg-button-action profile-manager-popup")); ?>
 		<h3>
 			<?php echo elgg_echo('profile_manager:categories:list:title'); ?>
 			<span class='custom_fields_more_info' id='more_info_category_list'></span>

@@ -29,7 +29,6 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 Needs to be positioned after the profile plugin!!!
 
 == 2. TO DO ==
-- if only 'about me' is filled, the default category is visible, but can't do anything
 - categories and types for groups
 - multilingual options (in pulldown, radio, multiselect)
 - Default values for fields (user specified)

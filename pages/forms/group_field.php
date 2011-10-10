@@ -1,4 +1,5 @@
 <?php
+	$vars = array();
 	
 	if($guid = get_input("guid")){
 		if($entity = get_entity($guid)){

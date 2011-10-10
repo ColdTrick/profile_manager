@@ -8,7 +8,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 	
-	require_once(dirname(__FILE__) . "/lib/classes.php");
 	require_once(dirname(__FILE__) . "/lib/functions.php");
 	require_once(dirname(__FILE__) . "/lib/run_once.php");
 	require_once(dirname(__FILE__) . "/lib/hooks.php");

@@ -57,7 +57,7 @@
 	$formbody .= elgg_view('input/plaintext', array("name" => "metadata_description", "value" => $metadata_description));
 	
 	$formbody .= elgg_echo('profile_manager:admin:show_on_members') . "*:";
-	$formbody .= elgg_view('input/pulldown', array(	"name" => "show_on_members",
+	$formbody .= elgg_view('input/dropdown', array(	"name" => "show_on_members",
 												   	"options_values" => array("no" => elgg_echo("option:no"),
 																				"yes" => elgg_echo("option:yes")),
 													"value" => $show_on_members));

@@ -55,7 +55,7 @@
 			<?php echo elgg_echo('profile_manager:settings:profile_icon_on_register'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[profile_icon_on_register]", "options_values" => $noyes_options, "value" => $vars['entity']->profile_icon_on_register)); ?>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[profile_icon_on_register]", "options_values" => $noyes_options, "value" => $vars['entity']->profile_icon_on_register)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -65,7 +65,7 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<?php echo elgg_view("input/text", array("internalname" => "params[registration_terms]", "value" => $vars['entity']->registration_terms)); ?>
+			<?php echo elgg_view("input/text", array("name" => "params[registration_terms]", "value" => $vars['entity']->registration_terms)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -73,7 +73,7 @@
 			<?php echo elgg_echo('profile_manager:settings:registration:extra_fields'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[registration_extra_fields]", "options_values" => $extra_fields_options, "value" => $vars['entity']->registration_extra_fields)); ?>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[registration_extra_fields]", "options_values" => $extra_fields_options, "value" => $vars['entity']->registration_extra_fields)); ?>
 		</td>
 	</tr>
 	<?php if(!empty($profile_types)){?>
@@ -82,7 +82,7 @@
 			<?php echo elgg_echo('profile_manager:settings:default_profile_type'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[default_profile_type]", "options_values" => $profile_types, "value" => $vars['entity']->default_profile_type)); ?>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[default_profile_type]", "options_values" => $profile_types, "value" => $vars['entity']->default_profile_type)); ?>
 		</td>
 	</tr>
 	<?php } ?>
@@ -93,7 +93,7 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<?php echo elgg_view("input/longtext", array("internalname" => "params[registration_free_text]", "value" => $vars['entity']->registration_free_text)); ?>
+			<?php echo elgg_view("input/longtext", array("name" => "params[registration_free_text]", "value" => $vars['entity']->registration_free_text)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -107,7 +107,7 @@
 			<?php echo elgg_echo('profile_manager:settings:simple_access_control'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[simple_access_control]", "options_values" => $noyes_options, "value" => $vars['entity']->simple_access_control)); ?>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[simple_access_control]", "options_values" => $noyes_options, "value" => $vars['entity']->simple_access_control)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -115,7 +115,7 @@
 			<?php echo elgg_echo('profile_manager:settings:hide_non_editables'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[hide_non_editables]", "options_values" => $noyes_options, "value" => $vars['entity']->hide_non_editables)); ?>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[hide_non_editables]", "options_values" => $noyes_options, "value" => $vars['entity']->hide_non_editables)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -125,7 +125,7 @@
 		<td>
 			<?php
 				$edit_profile_mode_options = array("list" => elgg_echo('profile_manager:settings:edit_profile_mode:list'), "tabbed" => elgg_echo('profile_manager:settings:edit_profile_mode:tabbed')); 
-				echo elgg_view("input/pulldown", array("internalname" => "params[edit_profile_mode]", "options_values" => $edit_profile_mode_options, "value" => $vars['entity']->edit_profile_mode)); 
+				echo elgg_view("input/dropdown", array("name" => "params[edit_profile_mode]", "options_values" => $edit_profile_mode_options, "value" => $vars['entity']->edit_profile_mode)); 
 			?>		
 		</td>
 	</tr>
@@ -136,7 +136,7 @@
 		<td>
 			<?php 
 				$profile_type_selection_options = array("user" => elgg_echo('profile_manager:settings:profile_type_selection:option:user'), "admin" => elgg_echo('profile_manager:settings:profile_type_selection:option:admin')); 
-				echo elgg_view("input/pulldown", array("internalname" => "params[profile_type_selection]", "options_values" => $profile_type_selection_options, "value" => $vars['entity']->profile_type_selection));
+				echo elgg_view("input/dropdown", array("name" => "params[profile_type_selection]", "options_values" => $profile_type_selection_options, "value" => $vars['entity']->profile_type_selection));
 			?>
 		</td>
 	</tr>
@@ -145,7 +145,7 @@
 			<?php echo elgg_echo('profile_manager:settings:allow_profile_noindex'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[allow_profile_noindex]", "options_values" => $yesno_options, "value" => $vars['entity']->allow_profile_noindex)); ?>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[allow_profile_noindex]", "options_values" => $yesno_options, "value" => $vars['entity']->allow_profile_noindex)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -159,7 +159,7 @@
 			<?php echo elgg_echo('profile_manager:settings:show_profile_type_on_profile'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[show_profile_type_on_profile]", "options_values" => $yesno_options, "value" => $vars['entity']->show_profile_type_on_profile)); ?>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[show_profile_type_on_profile]", "options_values" => $yesno_options, "value" => $vars['entity']->show_profile_type_on_profile)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -169,7 +169,7 @@
 		<td>
 			<?php
 				$display_categories_options = array("plain" => elgg_echo('profile_manager:settings:display_categories:option:plain'), "accordion" => elgg_echo('profile_manager:settings:display_categories:option:accordion')); 
-				echo elgg_view("input/pulldown", array("internalname" => "params[display_categories]", "options_values" => $display_categories_options, "value" => $vars['entity']->display_categories)); 
+				echo elgg_view("input/dropdown", array("name" => "params[display_categories]", "options_values" => $display_categories_options, "value" => $vars['entity']->display_categories)); 
 			?>
 		</td>
 	</tr>
@@ -178,7 +178,7 @@
 			<?php echo elgg_echo('profile_manager:settings:display_system_category'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[display_system_category]", "options_values" => $noyes_options, "value" => $vars['entity']->display_system_category)); ?>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[display_system_category]", "options_values" => $noyes_options, "value" => $vars['entity']->display_system_category)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -193,7 +193,7 @@
 		</td>
 		<td>
 			<span style='color: gray;'>Currently Unavailable</span>
-			<?php //echo elgg_view("input/pulldown", array("internalname" => "params[show_members_search]", "options_values" => $noyes_options, "value" => $vars['entity']->show_members_search)); ?>
+			<?php //echo elgg_view("input/dropdown", array("name" => "params[show_members_search]", "options_values" => $noyes_options, "value" => $vars['entity']->show_members_search)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -201,7 +201,7 @@
 			<?php echo elgg_echo('profile_manager:settings:enable_profile_completeness_widget'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/pulldown", array("internalname" => "params[enable_profile_completeness_widget]", "options_values" => $noyes_options, "value" => $vars['entity']->enable_profile_completeness_widget)); ?>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[enable_profile_completeness_widget]", "options_values" => $noyes_options, "value" => $vars['entity']->enable_profile_completeness_widget)); ?>
 		</td>
 	</tr>
 </table>

@@ -84,7 +84,7 @@
 				 
 				echo "<div>";
 				echo "<label>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:label") . "</label>";
-				echo elgg_view("input/pulldown", array("name" => "custom_profile_type",
+				echo elgg_view("input/dropdown", array("name" => "custom_profile_type",
 														"id" => "custom_profile_type",
 														"options_values" => $pulldown_options,
 														"onchange" => "changeProfileType();",

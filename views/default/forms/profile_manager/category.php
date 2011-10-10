@@ -44,7 +44,7 @@
 	$formbody .= "<tr>\n";
 	$formbody .= "<td class='custom_fields_add_form_table_left'>\n"; 
 	$formbody .= elgg_echo('profile_manager:admin:metadata_name') . ":";
-	$formbody .= elgg_view('input/text', array('internalname' => 'metadata_name', "value" => $metadata_name));
+	$formbody .= elgg_view('input/text', array('name' => 'metadata_name', "value" => $metadata_name));
 	$formbody .= "</td>\n";
 	$formbody .= "<td rowspan='2' class='custom_fields_add_form_table_right'>\n"; 
 	
@@ -66,7 +66,7 @@
 			$checkbox_options[$title] = $type->guid;
 		}
 		
-		$formbody .= elgg_view("input/checkboxes", array("internalname" => "profile_types", "options" => $checkbox_options, "value" => $related_types));
+		$formbody .= elgg_view("input/checkboxes", array("name" => "profile_types", "options" => $checkbox_options, "value" => $related_types));
 	} else {
 		$formbody .= "&nbsp;";
 	}
@@ -76,13 +76,13 @@
 	$formbody .= "<tr>\n";
 	$formbody .= "<td>\n"; 
 	$formbody .= elgg_echo('profile_manager:admin:metadata_label') . "*:";
-	$formbody .= elgg_view('input/text', array('internalname' => 'metadata_label', "value" => $metadata_label));
+	$formbody .= elgg_view('input/text', array('name' => 'metadata_label', "value" => $metadata_label));
 	$formbody .= "</td>\n";
 	$formbody .= "</tr>\n";
 	$formbody .= "</table>\n";
 	
-	$formbody .= elgg_view("input/hidden", array("internalname" => "guid", "value" => $guid));
-	$formbody .= elgg_view('input/submit', array('internalname' => elgg_echo('save'), 'value' => elgg_echo('save')));
+	$formbody .= elgg_view("input/hidden", array("name" => "guid", "value" => $guid));
+	$formbody .= elgg_view('input/submit', array('name' => elgg_echo('save'), 'value' => elgg_echo('save')));
 	
 	$form = elgg_view('input/form', array('body' => $formbody, 'action' => $vars['url'] . 'action/profile_manager/categories/add'));
 	
