@@ -91,7 +91,33 @@
 	 * Function to add a custom field type to a register
 	 */
 	function add_custom_field_type($register_name, $field_type, $field_display_name, $options){
-		add_to_register($register_name, $field_type, $field_display_name, $options);
+		global $PROFILE_MANAGER_FIELD_TYPES;
+		
+		if(!isset($PROFILE_MANAGER_FIELD_TYPES)){
+			$PROFILE_MANAGER_FIELD_TYPES = array();
+		}
+		if(!isset($PROFILE_MANAGER_FIELD_TYPES[$register_name])){
+			$PROFILE_MANAGER_FIELD_TYPES[$register_name] = array();
+		}
+		
+		$field_config = new stdClass();
+		$field_config->name = $field_display_name;
+		$field_config->type = $field_type;
+		$field_config->options = $options;
+		
+		$PROFILE_MANAGER_FIELD_TYPES[$register_name][$field_type] = $field_config;
+	}
+	
+	function get_custom_field_types($register_name){
+		global $PROFILE_MANAGER_FIELD_TYPES;
+		
+		$result = false;
+		
+		if(isset($PROFILE_MANAGER_FIELD_TYPES) && isset($PROFILE_MANAGER_FIELD_TYPES[$register_name])){
+			$result = $PROFILE_MANAGER_FIELD_TYPES[$register_name];
+		}
+		
+		return $result;
 	}
 	
 	/**

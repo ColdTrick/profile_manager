@@ -17,15 +17,15 @@
 	$types = array();
 	$type_options = array();
 	
-	// TODO: get substitute for get_register
 	if($entity->getSubType() == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE){
-		$types = get_register("custom_profile_field_types");
+		$types = get_custom_field_types("custom_profile_field_types");
 	} elseif($entity->getSubType() == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE) {
-		$types = get_register("custom_group_field_types");
+		$types = get_custom_field_types("custom_group_field_types");
+		
 	}
 		
 	if(!empty($metadata_type) && !empty($types) && array_key_exists($metadata_type, $types)){
-		$type_options = $types[$metadata_type]->children;
+		$type_options = $types[$metadata_type]->options;
 	}
 	
 	$id = $metadata_name . "_" . $entity->guid; 

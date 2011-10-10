@@ -29,9 +29,10 @@
 	}	
 
 	$options_values = array();
-	if($types = get_register("custom_group_field_types")){
+	
+	if($types = get_custom_field_types("custom_group_field_types")){
 		foreach($types as $type){
-			$options_values[$type->name] = $type->value; 
+			$options_values[$type->type] = $type->name; 
 		}
 	}
 	

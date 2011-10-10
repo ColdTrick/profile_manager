@@ -36,14 +36,12 @@
 	$options_values = array();
 	$option_classes = array();
 	
-	// TODO: make a new system for these options as the register functions are deprecated
-	
-	if($types = get_register("custom_profile_field_types")){
+	if($types = get_custom_field_types("custom_profile_field_types")){
 		foreach($types as $type){
-			$options_values[$type->name] = $type->value;
-			foreach($type->children as $option_name => $option_value){
+			$options_values[$type->type] = $type->name;
+			foreach($type->options as $option_name => $option_value){
 				if($option_value){
-					$option_classes[$option_name] .= " field_option_enable_". $type->name;
+					$option_classes[$option_name] .= " field_option_enable_". $type->type;
 				} 
 			}
 		}
