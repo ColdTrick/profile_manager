@@ -11,7 +11,7 @@
  	
  	<requires>
 		<type>elgg_version</type>
-		<version>2011092500</version>
+		<version>2011061200</version>
 	</requires>
 	<requires>
 		<type>plugin</type>
