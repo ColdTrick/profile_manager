@@ -35,12 +35,21 @@
 		<priority>after</priority>
 	</suggests>
  
-	<!-- The path is relative to the plugin's root. 
 	<screenshot>
-		<description>Elgg profile.</description>
-		<path>screenshots/profile.png</path>
+		<description>Edit Profile Fields</description>
+		<path>screenshots/edit_profile_fields.png</path>
 	</screenshot>
- 	-->
-	<category>coldtrick</category>
+
+	<screenshot>
+		<description>New Profile Field</description>
+		<path>screenshots/new_profile_field.png</path>
+	</screenshot>
+
+	<screenshot>
+		<description>Accordion Profile View</description>
+		<path>screenshots/accordion_profile_view.png</path>
+	</screenshot>
+ 	
+ 	<category>ColdTrick</category>
 	<admin_interface>advanced</admin_interface>
 </plugin_manifest>

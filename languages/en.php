@@ -21,9 +21,6 @@
 		'item:object:custom_profile_type' => 'Custom Profile Type',
 		'item:object:custom_group_field' => 'Custom Group Field',
 	
-		// admin plugin listing
-		'admin:plugins:category:coldtrick' => "ColdTrick",
-	
 		// admin menu 
 		'admin:appearance:group_fields' => "Edit Group Fields",
 		'admin:appearance:export_fields' => "Export Profile Data",
@@ -58,7 +55,6 @@
 	
 		'profile_manager:settings:allow_profile_noindex' => "Allow users to hide their profile from search engines",
 	
-		'profile_manager:settings:show_admin_stats' => "Show admin statistics",
 		'profile_manager:settings:show_members_search' => "Show the profile manager 'Members' search page",
 		'profile_manager:settings:enable_profile_completeness_widget' => "Enable the profile completeness widget",
 		
@@ -67,8 +63,7 @@
 		'profile_manager:settings:registration:extra_fields:extend' => "Below default registration form",
 		'profile_manager:settings:registration:extra_fields:beside' => "Beside registration form",
 		'profile_manager:settings:registration:free_text' => "Enter extra text to show on the registration page",
-		'profile_manager:settings:registration:login_by_email' => "Allow login by email (will remove username from registration form)",
-	
+		
 		// Field Configuration
 		'profile_manager:admin:metadata_name' => 'Name',	
 		'profile_manager:admin:metadata_label' => 'Label',
@@ -306,7 +301,7 @@
 		'widgets:profile_completeness:title' => 'Profile Completeness',
 		'widgets:profile_completeness:description' => 'Show the profile completeness',
 		'widgets:profile_completeness:view:tips' => 'Tip! Update your %s to improve the Profile Completeness.',
-		'widgets:profile_completeness:view:complete' => 'Congratulations! Your profile is 100% complete!.',
+		'widgets:profile_completeness:view:complete' => 'Congratulations! Your profile is 100% complete!',
 	
 		// datepicker		
 		'profile_manager:datepicker:trigger' => 'Select a date',
