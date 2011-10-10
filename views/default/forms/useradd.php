@@ -94,8 +94,8 @@ if ($admin_option) {
 	));
 	echo "</div>";
 	
-	echo "<div>" . elgg_view('input/checkboxes', array('internalname' => "notify", 'options' => array(elgg_echo('profile_manager:admin:adduser:notify')))) . "</div>";
-	echo "<div>" . elgg_view('input/checkboxes', array('internalname' => "use_default_access", 'value' => elgg_echo('profile_manager:admin:adduser:use_default_access'), 'options' => array(elgg_echo('profile_manager:admin:adduser:use_default_access')))) . "</div>";
+	echo "<div>" . elgg_view('input/checkboxes', array('name' => "notify", 'options' => array(elgg_echo('profile_manager:admin:adduser:notify') => 1))) . "</div>";
+	echo "<div>" . elgg_view('input/checkboxes', array('name' => "use_default_access", 'value' => elgg_echo('profile_manager:admin:adduser:use_default_access'), 'options' => array(elgg_echo('profile_manager:admin:adduser:use_default_access') => 1))) . "</div>";
 	
 	// get profile types
 	$profile_type_options = array(
@@ -127,7 +127,7 @@ if ($admin_option) {
 		
 		echo "<div>";
 		echo "<label>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:label") . "</label><br />";
-		echo elgg_view("input/pulldown", array("internalname" => "custom_profile_fields[custom_profile_type]",
+		echo elgg_view("input/dropdown", array("name" => "custom_profile_fields[custom_profile_type]",
 												"options_values" => $options));
 		echo "</div>";	
 	}
@@ -145,7 +145,7 @@ if ($admin_option) {
 				
 				echo "<div><label>" . $title . "</label><br />";
 				echo elgg_view("input/" . $field->metadata_type, array(
-																'internalname' => "custom_profile_fields[" . $metadata_name . "]",
+																'name' => "custom_profile_fields[" . $metadata_name . "]",
 																'options' => $options
 																));
 				echo "</div>";
