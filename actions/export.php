@@ -10,7 +10,12 @@
 	* @link http://www.coldtrick.com/
 	*/
  
+	global $DB_QUERY_CACHE;
+	global $CONFIG;
+
 	admin_gatekeeper();
+
+	set_time_limit(0);
 
 	$fielddelimiter = "|";
 	
@@ -34,37 +39,43 @@
 			}
 			echo $headers . PHP_EOL;
 			
+			$options = array(
+				"limit" => false
+			);
+			
 			if($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE){
 				$type = "user";
+				$options["relationship"] = "member_of_site"; 
+				$options["relationship_guid"] = $CONFIG>site_guid; 
+				$options["inverse_relationship"] = true; 
+				$options["site_guids"] = false;
 			} else {
 				$type = "group";
 			}
 			
-			$options = array(
-				"type" => $type,
-				"count" => true
-			);
+			$options["type"] = $type;
 			
-			$entities_count = elgg_get_entities($options);
+			$entities = elgg_get_entities_from_relationship($options);
+			if(!empty($entities)){
 			
-			$options["count"] = false;
-			$options["limit"] = $entities_count;
-			
-			$entities = elgg_get_entities($options);
-			
-			foreach($entities as $entity){
-				$row = "";
-				foreach($fields as $field){
-					if(!empty($row)){
-						$row .= $fielddelimiter . " ";
+				foreach($entities as $entity){
+					$row = "";
+					foreach($fields as $field){
+						if(!empty($row)){
+							$row .= $fielddelimiter . " ";
+						}
+						$field_data = $entity->$field;
+						if(is_array($field_data)){
+							$field_data = implode(",", $field_data);
+						}
+						$row .= $field_data; 
 					}
-					$field_data = $entity->$field;
-					if(is_array($field_data)){
-						$field_data = implode(",", $field_data);
+					echo $row . PHP_EOL;
+					
+					if($DB_QUERY_CACHE){
+						$DB_QUERY_CACHE->clear();
 					}
-					$row .= $field_data; 
 				}
-				echo $row . PHP_EOL;
 			}
 		}
 	}
