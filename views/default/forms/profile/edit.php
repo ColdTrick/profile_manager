@@ -44,7 +44,7 @@
 		} 
 		
 		// can user edit? or just admins
-		if($setting == "user" || is_admin_logged_in()){
+		if($setting == "user" || elgg_is_admin_logged_in()){
 			// get profile types
 			
 			$options = array(
