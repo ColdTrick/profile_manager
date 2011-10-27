@@ -93,7 +93,7 @@ li.custom_fields_edit_profile_category {
 
 #profile_manager_register_right {
 	float: right;
-	min-width: 400px;
+	max-width: 400px;
 }
 
 #profile_manager_register_right > fieldset {
