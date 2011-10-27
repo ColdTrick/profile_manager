@@ -89,6 +89,7 @@ li.custom_fields_edit_profile_category {
 #profile_manager_register_left {
 	float: left;
 	min-width: 400px;
+	margin-right: 10px;
 }
 
 #profile_manager_register_right {
