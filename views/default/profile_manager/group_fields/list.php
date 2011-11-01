@@ -15,7 +15,7 @@
 	$options = array(
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
-			"count" => true,
+			"limit" => false,
 			"order_by_metadata" => array(array('name' => 'order', 'direction' => "asc", 'as' => "integer")),
 			"owner_guid" => $CONFIG->site_guid,
 			"pagination" => false,
