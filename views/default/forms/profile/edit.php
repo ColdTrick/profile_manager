@@ -128,7 +128,7 @@
 						"type" => "object",
 						"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 						"limit" => false,
-						"owner_guid" => $cat->getOwner(),
+						"owner_guid" => $cat->getOwnerGUID(),
 						"site_guid" => $cat->site_guid,
 						"relationship" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
 						"relationship_guid" => $cat_guid,
