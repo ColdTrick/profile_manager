@@ -46,7 +46,7 @@
 			if($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE){
 				$type = "user";
 				$options["relationship"] = "member_of_site"; 
-				$options["relationship_guid"] = $CONFIG>site_guid; 
+				$options["relationship_guid"] = $CONFIG->site_guid; 
 				$options["inverse_relationship"] = true; 
 				$options["site_guids"] = false;
 			} else {
