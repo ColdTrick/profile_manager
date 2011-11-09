@@ -19,6 +19,7 @@
 		'item:object:custom_group_field' => 'Custom Group Field',
 		
 		// settings
+		'profile_manager:settings:registration:show_access' => 'Show access options on register form',
 		'profile_manager:settings:registration' => 'Registration',
 		'profile_manager:settings:edit_profile' => 'Edit Profile',
 		'profile_manager:settings:view_profile' => 'View Profile',

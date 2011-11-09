@@ -120,6 +120,14 @@
 														"options" => $field->getOptions()
 														)); 
 				$fields_result .= "</div>";
+				if(get_plugin_setting("registration_show_access", "profile_manager") == "yes"){
+					$access_value = $bounced_values["custom_profile_fields_profile_manager_access"][$field->metadata_name];
+					$fields_result .= var_export($access_value, true);
+					$fields_result .= "<div>";
+					$fields_result .= "<label>" . elgg_echo("access") . "</label> ";
+					$fields_result .= elgg_view("input/access", array("internalname" => "custom_profile_fields_profile_manager_access[" . $field->metadata_name . "]", "value" => $access_value)); 
+					$fields_result .= "</div>";
+				}
 			}
 			
 			$class = "category_" . $cat_guid;

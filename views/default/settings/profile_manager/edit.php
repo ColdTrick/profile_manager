@@ -64,6 +64,14 @@
 		</td>
 	</tr>
 	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:settings:registration:show_access'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/pulldown", array("internalname" => "params[registration_show_access]", "options_values" => array_reverse($yesno_options), "value" => $vars['entity']->registration_show_access)); ?>
+		</td>
+	</tr>
+	<tr>
 		<td colspan="2">
 			<?php echo elgg_echo('profile_manager:admin:registration:terms'); ?>
 		</td>

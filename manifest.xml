@@ -37,8 +37,6 @@ Needs to be positioned after the profile plugin!!!
 =====================
 TO DO:
 =====================
-	- if only 'about me' is filled, the default category is visible, but can't do anything
-	- profile completeness
 	- categories and types for groups
 	- multilingual options (in pulldown, radio, multiselect)
 	- add multilingual support for hint field
@@ -51,12 +49,10 @@ TO DO:
 	- handle disabled fieldtype options (in get_categorized function)
 	- handle empty fields on group details (in get_categorized function)
 	- replace profile type description with longtext instead of plaintext
-	- toggle fields on registerform based on profile type selection
 	- add "modify once" option to fields. So user can only modify the first time. Only admin then will be able to change it.
 	- add "default access lvl"
 	- add "can change access lvl"
 	- tabbed profile details
-	- client side registration form validation
 	- extend group and user search listing with info from profile manager
 	- listen to get/post for profile types on members search form
 	
@@ -76,6 +72,10 @@ They can fill in the information but it wont show as their profile type wont mat
 =====================
 Version history
 =====================
+6.3 (2011-11-09)
+	- added: option to set access level for profile fields directly on registration forms (plugin setting; default off)
+	- fixed: minor issues when exporting user profile data 
+
 6.2 (2011-08-11):
 	- changed: major performance gains
 	

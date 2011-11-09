@@ -146,6 +146,13 @@
 			$ia = elgg_get_ignore_access();
 			elgg_set_ignore_access(true);
 			
+			$default_access = get_default_access($object);
+			
+			
+			if(get_plugin_setting("registration_show_access","profile_manager") == "yes"){
+				$field_access = get_input("custom_profile_fields_profile_manager_access");
+			}
+			
 			foreach($custom_profile_fields as $shortname => $value){
 				
 				// determine if $value should be an array
@@ -162,16 +169,21 @@
 					}
 				}
 				
+				$access = $default_access;
+				if(!empty($field_access) && is_array($field_access) && array_key_exists($shortname, $field_access)){
+					$access = $field_access[$shortname];
+				}
+				
 				// use create_metadata to listen to default access
 				if (is_array($value)) {
 					$i = 0;
 					foreach($value as $interval) {
 						$i++;
 						if ($i == 1) { $multiple = false; } else { $multiple = true; }
-						create_metadata($object->guid, $shortname, $interval, 'text', $object->guid, get_default_access($object), $multiple);
+						create_metadata($object->guid, $shortname, $interval, 'text', $object->guid, $access, $multiple);
 					}
 				} else {
-					create_metadata($object->guid, $shortname, $value, 'text', $object->guid, get_default_access($object));
+					create_metadata($object->guid, $shortname, $value, 'text', $object->guid, $access);
 				}
 			}
 			
