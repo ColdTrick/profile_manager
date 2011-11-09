@@ -74,7 +74,7 @@
 				!preg_match("/^[a-zA-Z0-9_]{1,}$/", $metadata_name)){
 		// invalid name
 		register_error(elgg_echo("profile_manager:actions:new:error:metadata_name_invalid"));
-	} elseif(($metadata_type == "pulldown" || $metadata_type == "radio" || $metadata_type == "multiselect") && empty($metadata_options)){
+	} elseif(($metadata_type == "dropdown" || $metadata_type == "radio" || $metadata_type == "multiselect") && empty($metadata_options)){
 		register_error(elgg_echo("profile_manager:actions:new:error:metadata_options"));
 	} else {	
 		if(array_key_exists($metadata_name, $CONFIG->profile)){
@@ -86,7 +86,7 @@
 		} else {
 			$new_options = array();
 			$options_error = false;
-			if($metadata_type == "pulldown" || $metadata_type == "radio" || $metadata_type == "multiselect"){
+			if($metadata_type == "dropdown" || $metadata_type == "radio" || $metadata_type == "multiselect"){
 				$temp_options = explode(",", $metadata_options);
 				foreach($temp_options as $key => $option) {
 					$trimmed_option = trim($option);
@@ -137,7 +137,7 @@
 				}
 				
 				$field->metadata_type = $metadata_type;
-				if($metadata_type == "pulldown" || $metadata_type == "radio" || $metadata_type == "multiselect"){
+				if($metadata_type == "dropdown" || $metadata_type == "radio" || $metadata_type == "multiselect"){
 					$field->metadata_options = $new_options;
 				} elseif($current_field) {
 					$field->clearMetaData("metadata_options");
