@@ -92,7 +92,8 @@
 				$form = $page[1];
 				if(!empty($form)){
 					set_input("guid", $page[2]);	
-					include(dirname(__FILE__) . "/pages/forms/" . $form . ".php");	
+					include(dirname(__FILE__) . "/pages/forms/" . $form . ".php");
+					return true;	
 				}
 				break;
 		}

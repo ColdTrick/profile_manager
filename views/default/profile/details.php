@@ -6,11 +6,30 @@
 
 	$user = elgg_get_page_owner_entity();
 	
+	if ($user->isBanned()) {
+		$about .= "<p class='profile-banned-user'>";
+		$about .= elgg_echo('banned');
+		$about .= "</p>";
+	} else {
+		if ($user->description) {
+			$about .= "<p class='profile-aboutme-title'><b>" . elgg_echo("profile:aboutme") . "</b></p>";
+			$about .= "<div class='profile-aboutme-contents'>";
+			$about .= elgg_view('output/longtext', array('value' => $user->description, 'class' => 'mtn'));
+			$about .= "</div>";
+		}
+	}
+	
 	echo '<div id="profile-details" class="elgg-body pll">';
 	echo "<h2>{$user->name}</h2>";
 	
 	echo elgg_view("profile/status", array("entity" => $user));
 
+	$description_position = elgg_get_plugin_setting("description_position", "profile_manager");
+	
+	if($description_position == "top"){
+		echo $about;
+	}
+	
 	$categorized_fields = profile_manager_get_categorized_fields($user);
 	$cats = $categorized_fields['categories'];
 	$fields = $categorized_fields['fields'];
@@ -124,17 +143,8 @@
 		}
 	}
 	
-	if ($user->isBanned()) {
-		echo "<p class='profile-banned-user'>";
-		echo elgg_echo('banned');
-		echo "</p>";
-	} else {
-		if ($user->description) {
-			echo "<p class='profile-aboutme-title'><b>" . elgg_echo("profile:aboutme") . "</b></p>";
-			echo "<div class='profile-aboutme-contents'>";
-			echo elgg_view('output/longtext', array('value' => $user->description, 'class' => 'mtn'));
-			echo "</div>";
-		}
+	if($description_position != "top"){
+		echo $about;
 	}
 
 	echo '</div>';

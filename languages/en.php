@@ -52,6 +52,10 @@
 		'profile_manager:settings:profile_type_selection' => 'Who can change the profile type?',
 		'profile_manager:settings:profile_type_selection:option:user' => 'User',
 		'profile_manager:settings:profile_type_selection:option:admin' => 'Admin only',
+
+		'profile_manager:settings:description_position' => 'Where to position the description ("About me") field',
+		'profile_manager:settings:description_position:top' => 'Top',
+		'profile_manager:settings:description_position:bottom' => 'Bottom',
 	
 		'profile_manager:settings:allow_profile_noindex' => "Allow users to hide their profile from search engines",
 	

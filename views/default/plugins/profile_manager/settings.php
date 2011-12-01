@@ -23,6 +23,11 @@
 		"extend" => elgg_echo("profile_manager:settings:registration:extra_fields:extend"),
 		"beside" => elgg_echo("profile_manager:settings:registration:extra_fields:beside")
 	);
+
+	$description_position_options = array(
+		"bottom" => elgg_echo("profile_manager:settings:description_position:bottom"),
+		"top" => elgg_echo("profile_manager:settings:description_position:top")
+	);
 	
 	$profile_types = array();
 	
@@ -46,8 +51,11 @@
 <table>
 	<tr>
 		<td colspan="2">
-			<br />
-			<h4><?php echo elgg_echo("profile_manager:settings:registration"); ?></h4>
+			<div class='elgg-module-inline'>
+				<div class='elgg-head'>
+				<h3><?php echo elgg_echo("profile_manager:settings:registration"); ?></h3>
+				</div>
+			</div>
 		</td>
 	</tr>
 	<tr>
@@ -98,8 +106,11 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<br />
-			<h4><?php echo elgg_echo("profile_manager:settings:edit_profile"); ?></h4>
+			<div class='elgg-module-inline'>
+				<div class='elgg-head'>
+				<h3><?php echo elgg_echo("profile_manager:settings:edit_profile"); ?></h3>
+				</div>
+			</div>
 		</td>
 	</tr>
 	<tr>
@@ -150,8 +161,11 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<br />
-			<h4><?php echo elgg_echo("profile_manager:settings:view_profile"); ?></h4>
+			<div class='elgg-module-inline'>
+				<div class='elgg-head'>
+				<h3><?php echo elgg_echo("profile_manager:settings:view_profile"); ?></h3>
+				</div>
+			</div>
 		</td>
 	</tr>
 	<tr>
@@ -182,9 +196,20 @@
 		</td>
 	</tr>
 	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:settings:description_position'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[description_position]", "options_values" => $description_position_options, "value" => $vars['entity']->description_position)); ?>
+		</td>
+	</tr>
+	<tr>
 		<td colspan="2">
-			<br />
-			<h4><?php echo elgg_echo("profile_manager:settings:other"); ?></h4>
+			<div class='elgg-module-inline'>
+				<div class='elgg-head'>
+				<h3><?php echo elgg_echo("profile_manager:settings:other"); ?></h3>
+				</div>
+			</div>
 		</td>
 	</tr>
 	<tr>
@@ -205,3 +230,4 @@
 		</td>
 	</tr>
 </table>
+<br />

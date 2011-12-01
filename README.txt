@@ -46,8 +46,14 @@ Needs to be positioned after the profile plugin!!!
 - tabbed profile details
 - extend group and user search listing with info from profile manager
 - listen to get/post for profile types on members search form
+- add hint to default register form fields (username, email, password etc)
 - review complete js
 - review new field action (make better use of class constructors)
+- export profile fields
+	- time created (ts/date)
+	- time last login (ts/date)
+	- time last action (ts/date)
+	- validate (yes/no)
 	
 == 3. Known issues ==
 - on register error backward maintaining selected profile icon is impossible due to security reasons 
@@ -61,6 +67,10 @@ When i choose to "select profile type by Admin", on the profile page of the user
 They can fill in the information but it wont show as their profile type wont match but I dont think they should be able to see the categories as they wont show. Is this just the way it is on is it a bug?
 
 == 4. Version history ==
+x.x:
+- added: plugin setting for positioning of "About me" (above or below profile fields; default below)
+- fixed: support for new page_handler requirements Elgg 1.8.1 
+
 7.0 beta (2011-09-26):
 
 - added: support for 1.8 (multiple changes)
