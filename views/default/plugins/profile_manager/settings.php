@@ -25,8 +25,8 @@
 	);
 
 	$description_position_options = array(
-		"bottom" => elgg_echo("profile_manager:settings:description_position:bottom"),
-		"top" => elgg_echo("profile_manager:settings:description_position:top")
+		"bottom" => elgg_echo("top"),
+		"top" => elgg_echo("bottom")
 	);
 	
 	$profile_types = array();

@@ -1,5 +1,28 @@
 <?php
 $language = array (
+  'profile_manager:settings:simple_access_control' => 'Toon slechts één toegangsrecht keuze op het profiel bewerken formulier',
+  'profile_manager:settings:description_position' => 'Waar moet het "Over mij" veld gepositioneerd worden',
+  'profile_manager:actions:import:from_custom:new_fields' => 'Succesvol <b>%s</b> nieuwe velden geïmporteerd',
+  'profile_manager:actions:import:from_default:new_fields' => 'Succesvol <b>%s</b> nieuwe velden geïmporteerd',
+  'profile_manager:tooltips:category_list' => '<b>Categorieën</b><br>
+			Toont een lijst van alle geconfigureerde categorieën.<br><br>
+			
+			<i>Standaard</i> is de categorie die van toepassing is op alle profielen.<br><br>
+			
+			Voeg velden toe aan de categorieën door ze er op te slepen.<br><br>
+			
+			Klik op de categorie label om de weergegeven profiel velden te filteren. Klik op \'Alle velden weergeven\' om alle velden weer te geven.<br><br>
+			
+			Je kunt ook de volgorde van de categorieën aanpassen door ze onderling te verslepen (<i>Standaard kan niet worden verplaatst</i>. <br><br>
+			
+			Klik op het bewerk icoon om de categorie te bewerken.',
+  'profile_manager:tooltips:profile_type' => '<b>Profiel Type</b><br>
+			Hier kun je een nieuwe profiel type aanmaken.<br><br>
+			Indien je het label leeg laat, kun je het label internationaliseren in een taal bestand(<i>profile:types:[naam]</i>).<br><br>
+			Voeg een omschrijving toe die gebruikers kunnen zien wanneer ze het profieltype selecteren of laat het leeg om het te internationaliseren (<i>profile:types:[name]:description</i>).<br><br>
+			Je kunt dit profiel type toevoegen als filter op de Leden Zoek pagina<br><br>
+			
+			Indien er categorieën zijn gedefinieerd kan we worden aangegeven welke categorieën van toepassing zijn op dit profiel.',
   'admin:appearance:group_fields' => 'Bewerk groep velden',
   'admin:appearance:export_fields' => 'Exporteer profiel informatie',
   'profile_manager:settings:registration' => 'Registratie',
@@ -7,7 +30,6 @@ $language = array (
   'profile_manager:settings:view_profile' => 'Bekijk Profiel',
   'profile_manager:settings:other' => 'Overige',
   'profile_manager:settings:profile_icon_on_register' => 'Verplicht de upload van een avatar op het registratie formulier',
-  'profile_manager:settings:simple_access_control' => 'Toon slechts één toegangsrecht keuze op het profiel bewerken formulier',
   'profile_manager:settings:default_profile_type' => 'Standaard profiel type bij registratie',
   'profile_manager:settings:hide_non_editables' => 'Verberg de niet bewerkbare velden van het bewerk profiel formulier',
   'profile_manager:settings:edit_profile_mode' => 'Hoe moeten de velden op het bewerk profiel formulier worden getoond',
@@ -51,11 +73,9 @@ $language = array (
   'profile_manager:profile_types:edit' => 'Bewerk een profiel type',
   'profile_manager:user_details:profile_type' => 'Profiel Type',
   'profile_manager:actions:reset:success' => 'Reset gelukt',
-  'profile_manager:actions:import:from_custom:new_fields' => 'Succesvol <b>%s</b> nieuwe velden geïmporteerd',
   'profile_manager:actions:import:from_default' => 'Importeer standaard velden',
   'profile_manager:actions:import:from_default:confirm' => 'Weet je zeker dat je de standaard velden wilt importeren?',
   'profile_manager:actions:import:from_default:no_fields' => 'Geen standaard velden beschikbaar voor import',
-  'profile_manager:actions:import:from_default:new_fields' => 'Succesvol <b>%s</b> nieuwe velden geïmporteerd',
   'profile_manager:actions:export' => 'Exporteer',
   'profile_manager:actions:configuration:backup' => 'Backup',
   'profile_manager:actions:configuration:restore' => 'Herstel',
@@ -87,25 +107,6 @@ $language = array (
 			Indien je het label leeg laat, kun je het label internationaliseren in een taal bestand(<i>profile:categories:[naam]</i>).<br><br>
 			
 			Indien profiel types zijn gedefinieerd, kun je selecteren bij welk type deze categorie van toepassing is. Indien geen profiel type is geselecteerd is deze categorie op alle profielen van toepassing.',
-  'profile_manager:tooltips:category_list' => '<b>Categorieën</b><br>
-			Toont een lijst van alle geconfigureerde categorieën.<br><br>
-			
-			<i>Standaard</i> is de categorie die van toepassing is op alle profielen.<br><br>
-			
-			Voeg velden toe aan de categorieën door ze er op te slepen.<br><br>
-			
-			Klik op de categorie label om de weergegeven profiel velden te filteren. Klik op \'Alle velden weergeven\' om alle velden weer te geven.<br><br>
-			
-			Je kunt ook de volgorde van de categorieën aanpassen door ze onderling te verslepen (<i>Standaard kan niet worden verplaatst</i>. <br><br>
-			
-			Klik op het bewerk icoon om de categorie te bewerken.',
-  'profile_manager:tooltips:profile_type' => '<b>Profiel Type</b><br>
-			Hier kun je een nieuwe profiel type aanmaken.<br><br>
-			Indien je het label leeg laat, kun je het label internationaliseren in een taal bestand(<i>profile:types:[naam]</i>).<br><br>
-			Voeg een omschrijving toe die gebruikers kunnen zien wanneer ze het profieltype selecteren of laat het leeg om het te internationaliseren (<i>profile:types:[name]:description</i>).<br><br>
-			Je kunt dit profiel type toevoegen als filter op de Leden Zoek pagina<br><br>
-			
-			Indien er categorieën zijn gedefinieerd kan we worden aangegeven welke categorieën van toepassing zijn op dit profiel.',
   'profile_manager:tooltips:profile_type_list' => '<b>Profiel Types</b><br>
 			Toont een lijst van alle geconfigureerde profiel types<br><br>
 			Klik op het bewerk icoon om het profiel type te bewerken.',
