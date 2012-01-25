@@ -3,10 +3,9 @@
 	<name>Profile Manager</name>
 	<author>ColdTrick IT Solutions</author>
 	<version>7.0</version>
-	<blurb>Manage user and group profile fields</blurb>
 	<description>Provides better use of profile fields, replaces (replace profile fields) and configurable group fields.</description>
 	<website>http://www.coldtrick.com/</website>
-	<copyright>(C) ColdTrick IT Solutions 2009 - 2011</copyright>
+	<copyright>(C) ColdTrick IT Solutions 2009 - 2012</copyright>
 	<license>GNU Public License version 2</license>
  	
  	<requires>
@@ -51,5 +50,4 @@
 	</screenshot>
  	
  	<category>ColdTrick</category>
-	<admin_interface>advanced</admin_interface>
 </plugin_manifest>
