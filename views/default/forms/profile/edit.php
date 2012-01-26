@@ -120,7 +120,7 @@
 			} else {
 				$title = $cat->getTitle();
 			}
-			
+		
 			$class = "";
 			if(!empty($cat_guid) && ($cat instanceof ProfileManagerCustomFieldCategory)){
 				
@@ -145,7 +145,7 @@
 					}
 				}
 			}
-			
+		
 			$tabs[] = array(
 				'title' => $title,
 				'url' => "#" . $cat_guid,
@@ -153,9 +153,11 @@
 			);
 			
 			$tab_content .= "<div id='profile_manager_profile_edit_tab_content_" . $cat_guid . "' class='profile_manager_profile_edit_tab_content'>\n";
-			
+				
 			$list_content .= "<div class='" . $class . "'>";
-			$list_content .= "<h3 class='settings'>" . $title . "</h3>";
+			if(count($cats) > 1){
+				$list_content .= "<h3 class='settings'>" . $title . "</h3>";
+			}
 			$list_content .= "<fieldset>";
 			
 			// display each field for currect category
