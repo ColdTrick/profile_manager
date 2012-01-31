@@ -27,7 +27,7 @@
     	$multiselect++;
     }
     
-    $internal_id = str_replace("]", "_", str_replace("[" , "_" ,$vars['internalname'])) . $multiselect;
+    $internal_id = str_replace("]", "_", str_replace("[" , "_" ,$vars['name'])) . $multiselect;
 	
 ?>
 <script type="text/javascript">
@@ -36,7 +36,7 @@
     });
 </script>
 <div>
-	<select id="<?php echo $internal_id;?>" name="<?php echo $vars['internalname'];?>[]" multiple="multiple" style="display:none">
+	<select id="<?php echo $internal_id;?>" name="<?php echo $vars['name'];?>[]" multiple="multiple" style="display:none">
 	<?php	
 		if(!empty($vars["options_values"])){
 			foreach($vars['options_values'] as $value => $option) {

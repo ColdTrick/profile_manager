@@ -10,8 +10,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	global $CONFIG;
-	
 	$form_title = elgg_echo('profile_manager:categories:add');
 	
 	if($vars["entity"]){
@@ -26,7 +24,7 @@
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 			"limit" => false,
-			"owner_guid" => $CONFIG->site_guid,
+			"owner_guid" => elgg_get_site_entity()->getGUID(),
 			"relationship" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
 			"relationship_guid" => $vars["entity"]->guid,
 			"inverse_relationship" => true
@@ -52,7 +50,7 @@
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 			"limit" => false,
-			"owner_guid" => $CONFIG->site_guid
+			"owner_guid" => elgg_get_site_entity()->getGUID()
 		);
 	
 	$types = elgg_get_entities($options);

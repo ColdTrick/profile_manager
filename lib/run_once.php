@@ -53,7 +53,7 @@
 						ProfileManagerCustomProfileType::SUBTYPE,
 						ProfileManagerCustomFieldCategory::SUBTYPE
 					),
-				"limit" => 0
+				"limit" => false
 			);
 		$entities = elgg_get_entities($options);
 		foreach($entities as $entity){

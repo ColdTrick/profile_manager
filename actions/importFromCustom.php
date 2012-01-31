@@ -10,10 +10,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 	
-	global $CONFIG;
-
-	admin_gatekeeper();
-		
 	$n = 0;	
 	$skipped = 0;
 	
@@ -21,7 +17,7 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 				"count" => true,
-				"owner_guid" => $CONFIG->site_guid
+				"owner_guid" => elgg_get_site_entity()->getGUID()
 			);
 	
 	$new_order = elgg_get_entities($options) + 1;
@@ -72,7 +68,7 @@
 	if(($n - $skipped) == 0){
 		register_error(elgg_echo("profile_manager:actions:import:from_custom:no_fields"));
 	} else {
-		system_message(sprintf(elgg_echo("profile_manager:actions:import:from_custom:new_fields"), $n - $skipped));
+		system_message(elgg_echo("profile_manager:actions:import:from_custom:new_fields", array($n - $skipped)));
 	}
 	
 	forward(REFERER);

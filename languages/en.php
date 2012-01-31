@@ -55,9 +55,6 @@
 
 		'profile_manager:settings:description_position' => 'Where to position the description ("About me") field',
 		
-		'profile_manager:settings:allow_profile_noindex' => "Allow users to hide their profile from search engines",
-	
-		'profile_manager:settings:show_members_search' => "Show the profile manager 'Members' search page",
 		'profile_manager:settings:enable_profile_completeness_widget' => "Enable the profile completeness widget",
 		
 		'profile_manager:settings:registration:terms' => "To show an 'Accept terms' field on the registration page, please fill in the URL to the terms below",
@@ -81,7 +78,6 @@
 		'profile_manager:admin:options:radio' => 'Radio',
 		'profile_manager:admin:options:multiselect' => 'MultiSelect',
 		'profile_manager:admin:options:file' => 'File',
-		'profile_manager:admin:show_on_members' => "Show as filter on 'Members' page",
 		
 		'profile_manager:admin:additional_options' => 'Additional options',
 		'profile_manager:admin:show_on_register' => 'Show on register form',	
@@ -89,8 +85,6 @@
 		'profile_manager:admin:user_editable' => 'User can edit this field',
 		'profile_manager:admin:output_as_tags' => 'Show on profile as tags',
 		'profile_manager:admin:admin_only' => 'Admin only field',
-		'profile_manager:admin:simple_search' => 'Show on simple search form',	
-		'profile_manager:admin:advanced_search' => 'Show on advanced search form',
 		'profile_manager:admin:count_for_completeness' => 'Count this field in profile completeness widget',
 		'profile_manager:admin:blank_available' => 'Field has a blank option',		
 		'profile_manager:admin:option_unavailable' => 'Option unavailable',
@@ -101,8 +95,6 @@
 		'profile_manager:admin:user_editable:description' => "If set to 'No' users can't edit this field (handy when data is managed in an external system).",
 		'profile_manager:admin:output_as_tags:description' => "Data output will be handle as tags (only applies on user profile).",
 		'profile_manager:admin:admin_only:description' => "Select 'Yes' if field is only available for admins.",
-		'profile_manager:admin:simple_search:description' => "Select 'Yes' if field is searchable on the simple profile search form.",	
-		'profile_manager:admin:advanced_search:description' => "Select 'Yes' if field is searchable on the advanced profile search form.",
 		'profile_manager:admin:blank_available:description' => "Select 'Yes' if a blank option should be added to the field options",	
 	
 		// profile fields
@@ -285,7 +277,6 @@
 			Here you can add a new profile type.<br /><br />
 			If you leave the label empty, you can internationalize the profile type label (<i>profile:types:[name]</i>).<br /><br />
 			Enter a description which users can see when selecting this profile type or leave it empty to internationalize (<i>profile:types:[name]:description</i>).<br /><br />
-			You can add this profile type as filterable to the members search page<br /><br />
 			
 			If Categories are defined you can choose which categories apply to this profile type.
 		",
@@ -337,38 +328,11 @@
 		'profile_manager:register_pre_check:profile_icon:error' => 'Error uploading your profile icon (probably related to the file size)',
 		'profile_manager:register_pre_check:profile_icon:nosupportedimage' => 'Uploaded profile icon is not the right type (jpg, gif, png)',
 	
-		//Profile NoIndex
-		'profile_manager:profile:noindex' => "Protect your profile against search engines",
-		
-		'profile_manager:usersettings:hide_from_search_engine' => "Hide your profile from search engines",
-		'profile_manager:usersettings:hide_from_search_engine:explain' => "It may take several days before your profile is removed from the search indexes.",
-	
 		// Admin add user form
 		'profile_manager:admin:adduser:notify' => "Notify user",
 		'profile_manager:admin:adduser:use_default_access' => "Extra metadata created based on site default access level",
 		'profile_manager:admin:adduser:extra_metadata' => "Add extra profile data",
-	
-/*	
-	
-		// Members
-		'profile_manager:members:menu' => "Members",
-		'profile_manager:members:submenu' => "Members Search",
-		'profile_manager:members:searchform:title' => "Search for Members",
-		'profile_manager:members:searchform:simple:title' => "Simple Search",
-		'profile_manager:members:searchform:advanced:title' => "Advanced Search",
-		'profile_manager:members:searchform:sorting' => "Sorting",
-		'profile_manager:members:searchform:sorting:alphabetic' => "Alphabetic",
-		'profile_manager:members:searchform:sorting:newest' => "Newest",
-		'profile_manager:members:searchform:sorting:popular' => "Popular",
-		'profile_manager:members:searchform:sorting:online' => "Online",
-		'profile_manager:members:searchform:date:from' => "from",
-		'profile_manager:members:searchform:date:to' => "to",
-		'profile_manager:members:searchresults:title' => "Search Results",
-		'profile_manager:members:searchresults:query' => "QUERY",
-		'profile_manager:members:searchresults:noresults' => "Your search didn't match any users",
-		'profile_manager:members:searchform:reset' => "Reset",
-	
-	*/
+
 	);
 	
 	add_translation("en", $english);

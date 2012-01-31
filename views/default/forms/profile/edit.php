@@ -10,11 +10,9 @@
 	* @link http://www.coldtrick.com/
 	* 
 	* @uses $vars['entity'] The user entity
-	* @uses $vars['profile'] Profile items from $CONFIG->profile, defined in profile/start.php for now 
+	* @uses $vars['profile'] Profile items from get_config('profile_fields'), defined in profile/start.php for now 
 	*/
 	
-	global $CONFIG;
-
 	// id profile_edit_form
 	?>	
 	<div>
@@ -51,7 +49,7 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => $CONFIG->site_guid
+				"owner_guid" => elgg_get_site_entity()->getGUID()
 			); 
 			
 			if($types = elgg_get_entities($options)){

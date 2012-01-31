@@ -58,12 +58,6 @@
 	
 	// admin_only
 	$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "admin_only"));
-	$metadata .= "|";
-	// simple_search
-	$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "simple_search"));
-
-	// advanced_search
-	$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "advanced_search"));
 	
 	// profile completeness
 	if(elgg_get_plugin_setting("enable_profile_completeness_widget", "profile_manager") == "yes"){

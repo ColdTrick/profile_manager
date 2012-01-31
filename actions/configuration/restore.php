@@ -9,10 +9,8 @@
 	* @copyright Coldtrick IT Solutions 2009
 	* @link http://www.coldtrick.com/
 	*/
- 
-	admin_gatekeeper();
 	
-	global $CONFIG;
+	$site_guid = elgg_get_site_entity()->getGUID();
 	
 	if($json = get_uploaded_file("restoreFile")){
 		if($data = json_decode($json, true)){
@@ -29,7 +27,7 @@
 							"type" => "object",
 							"subtype" => $fieldtype,
 							"limit" => false,
-							"owner_guid" => $CONFIG->site_guid
+							"owner_guid" => $site_guid
 						);
 						
 					$entities = elgg_get_entities($options);
@@ -48,8 +46,8 @@
 						foreach($fields as $index => $field){
 							// create new field
 							$object = new ElggObject();
-							$object->owner_guid = $CONFIG->site_guid;
-							$object->container_guid = $CONFIG->site_guid;
+							$object->owner_guid = $site_guid;
+							$object->container_guid = $site_guid;
 							$object->access_id = ACCESS_PUBLIC;
 							$object->subtype = $fieldtype;
 							$object->save();
@@ -80,4 +78,4 @@
 		register_error(elgg_echo("profile_manager:actions:restore:error:nofile"));
 	}
 	
-	forward($_SERVER['HTTP_REFERER']);
+	forward(REFERER);

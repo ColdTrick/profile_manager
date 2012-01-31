@@ -21,7 +21,6 @@
 		$types = get_custom_field_types("custom_profile_field_types");
 	} elseif($entity->getSubType() == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE) {
 		$types = get_custom_field_types("custom_group_field_types");
-		
 	}
 		
 	if(!empty($metadata_type) && !empty($types) && array_key_exists($metadata_type, $types)){

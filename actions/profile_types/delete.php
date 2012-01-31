@@ -10,8 +10,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	admin_gatekeeper();
-	
 	$guid = get_input("guid");
 	
 	if(!empty($guid)){
@@ -46,4 +44,4 @@
 		register_error(elgg_echo("profile_manager:action:profile_types:delete:error:guid"));
 	}
 	
-	forward($_SERVER["HTTP_REFERER"]);
+	forward(REFERER);

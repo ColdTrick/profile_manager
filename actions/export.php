@@ -12,8 +12,6 @@
  
 	global $DB_QUERY_CACHE;
 
-	admin_gatekeeper();
-
 	set_time_limit(0);
 	
 	$fielddelimiter = "|";

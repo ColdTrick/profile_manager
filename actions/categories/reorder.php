@@ -12,8 +12,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	admin_gatekeeper();
-	
 	$ordering = get_input("elgg-object");
 	
 	if(!empty($ordering) && is_array($ordering)){

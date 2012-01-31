@@ -7,8 +7,6 @@
  			"mandatory" => "no", 
  			"show_on_register" => "no", 
  			"output_as_tags" => "no", 
- 			"simple_search" => "no", 
- 			"advanced_search" => "no",
  			"metadata_label" => NULL,
  			"category_guid" => NULL,
  			"metadata_hint" => NULL,
@@ -16,13 +14,11 @@
  			);
 		
 		protected function initializeAttributes() {
-			global $CONFIG;
-			
 			parent::initializeAttributes();
 			
 			$this->attributes['access_id'] = ACCESS_PUBLIC;
-			$this->attributes['owner_guid'] = $CONFIG->site_guid;
-			$this->attributes['container_guid'] = $CONFIG->site_guid;
+			$this->attributes['owner_guid'] = elgg_get_site_entity()->getGUID();
+			$this->attributes['container_guid'] = elgg_get_site_entity()->getGUID();
 		}
 	 
 		public function __construct($guid = null) {

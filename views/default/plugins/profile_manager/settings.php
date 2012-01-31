@@ -10,8 +10,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	global $CONFIG;
-
 	$yesno_options = array(
 		"yes" => elgg_echo("option:yes"),
 		"no" => elgg_echo("option:no")
@@ -34,7 +32,7 @@
 	$profile_types_options = array(
 		"type" => "object",
 		"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
-		"owner_guid" => $CONFIG->site_guid,
+		"owner_guid" => elgg_get_site_entity()->getGUID(),
 		"limit" => false
 	); 
 
@@ -152,14 +150,6 @@
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<?php echo elgg_echo('profile_manager:settings:allow_profile_noindex'); ?>
-		</td>
-		<td>
-			<?php echo elgg_view("input/dropdown", array("name" => "params[allow_profile_noindex]", "options_values" => $yesno_options, "value" => $vars['entity']->allow_profile_noindex)); ?>
-		</td>
-	</tr>
-	<tr>
 		<td colspan="2">
 			<div class='elgg-module-inline'>
 				<div class='elgg-head'>
@@ -210,15 +200,6 @@
 				<h3><?php echo elgg_echo("profile_manager:settings:other"); ?></h3>
 				</div>
 			</div>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<?php echo elgg_echo('profile_manager:settings:show_members_search'); ?>
-		</td>
-		<td>
-			<span style='color: gray;'>Currently Unavailable</span>
-			<?php //echo elgg_view("input/dropdown", array("name" => "params[show_members_search]", "options_values" => $noyes_options, "value" => $vars['entity']->show_members_search)); ?>
 		</td>
 	</tr>
 	<tr>

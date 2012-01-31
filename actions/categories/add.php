@@ -10,10 +10,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 	
-	admin_gatekeeper();
-	
-	global $CONFIG;
-	
 	$name = get_input("metadata_name");
 	$label = get_input("metadata_label");
 	$guid = get_input("guid");
@@ -55,7 +51,7 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 				"count" => true,
-				"owner_guid" => $CONFIG->site_guid
+				"owner_guid" => elgg_get_site_entity()->getGUID()
 			);
 			
 			$count = elgg_get_entities($options);
@@ -76,4 +72,4 @@
 		register_error(elgg_echo("profile_manager:action:category:add:error:name"));
 	}
 	
-	forward($_SERVER["HTTP_REFERER"]);
+	forward(REFERER);

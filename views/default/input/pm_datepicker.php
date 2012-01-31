@@ -5,7 +5,7 @@
 	* Datepicker
 	* 
 	* @uses $vars['value'] The current value, if any
-	* @uses $vars['internalname'] The name of the input field
+	* @uses $vars['name'] The name of the input field
 	* 
 	* @package profile_manager
 	* @author ColdTrick IT Solutions
@@ -34,7 +34,7 @@ END;
     	$datepicker++;
     }
     
-    $internal_id = sanitise_string(str_replace("]", "_", str_replace("[" , "_" ,$vars['internalname']))) . $datepicker;
+    $internal_id = sanitise_string(str_replace("]", "_", str_replace("[" , "_" ,$vars['name']))) . $datepicker;
 	
     $val = $vars['value'];
     if($val){
@@ -65,6 +65,6 @@ END;
 
 </script>
 <div>
-	<input class="datepicker_hidden" type="text" READONLY name="<?php echo $vars['internalname']; ?>" value="" id="<?php echo $internal_id; ?>_alt" />
+	<input class="datepicker_hidden" type="text" READONLY name="<?php echo $vars['name']; ?>" value="" id="<?php echo $internal_id; ?>_alt" />
 	<input type="text" READONLY id="<?php echo $internal_id; ?>" value="<?php echo $dateval; ?>" style="width:200px"/>
 </div>

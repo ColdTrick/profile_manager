@@ -10,8 +10,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	admin_gatekeeper();
-	
 	$guid = get_input("guid");
 	
 	if(!empty($guid)){
@@ -22,7 +20,7 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => $CONFIG->site_guid,
+				"owner_guid" => elgg_get_site_entity()->getGUID(),
 				"metadata_name_value_pairs" => array("name" => "category_guid", "value" => $guid)
 			);
 			
@@ -45,4 +43,4 @@
 		register_error(elgg_echo("profile_manager:action:category:delete:error:guid"));
 	}
 	
-	forward($_SERVER["HTTP_REFERER"]);
+	forward(REFERER);

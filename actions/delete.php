@@ -13,8 +13,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	admin_gatekeeper();
-	
 	$guid = get_input("guid");
 	
 	if(!empty($guid)){

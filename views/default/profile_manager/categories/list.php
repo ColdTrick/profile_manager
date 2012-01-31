@@ -10,13 +10,11 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	global $CONFIG;
-
 	$options = array(
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 			"limit" => false,
-			"owner_guid" => $CONFIG->site_guid,
+			"owner_guid" => elgg_get_site_entity()->getGUID(),
 			"order_by_metadata" => array("order") 
 		);
 

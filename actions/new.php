@@ -10,9 +10,7 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	global $CONFIG;
-
-	admin_gatekeeper();
+	$site_guid = elgg_get_site_entity()->getGUID();
 
 	$metadata_name = trim(get_input("metadata_name"));
 	$metadata_label = trim(get_input("metadata_label"));
@@ -25,8 +23,6 @@
 	$user_editable = get_input("user_editable");
 	$output_as_tags = get_input("output_as_tags");
 	$admin_only = get_input("admin_only");
-	$simple_search = get_input("simple_search");
-	$advanced_search = get_input("advanced_search");
 	$blank_available = get_input("blank_available");
 	
 	$type = get_input("type", "profile");
@@ -77,7 +73,7 @@
 	} elseif(($metadata_type == "dropdown" || $metadata_type == "radio" || $metadata_type == "multiselect") && empty($metadata_options)){
 		register_error(elgg_echo("profile_manager:actions:new:error:metadata_options"));
 	} else {	
-		if(array_key_exists($metadata_name, $CONFIG->profile)){
+		if(array_key_exists($metadata_name, elgg_get_config('profile_fields'))){
 			$existing = true;
 		}
 		
@@ -106,7 +102,7 @@
 						"type" => "object",
 						"subtype" => "custom_" . $type . "_field",
 						"count" => true,
-						"owner_guid" => $CONFIG->site_guid					
+						"owner_guid" => $site_guid					
 					);
 				$max_fields = elgg_get_entities($options) + 1;
 
@@ -115,8 +111,8 @@
 				} else {
 					$field = new ElggObject();
 						
-					$field->owner_guid = $CONFIG->site_guid;
-					$field->container_guid = $CONFIG->site_guid;
+					$field->owner_guid = $site_guid;
+					$field->container_guid = $site_guid;
 					$field->access_id = ACCESS_PUBLIC;
 					$field->subtype = "custom_" . $type . "_field";
 					$field->save();
@@ -147,8 +143,6 @@
 					$field->show_on_register = $show_on_register;
 					$field->mandatory = $mandatory;
 					$field->user_editable = $user_editable;
-					$field->simple_search = $simple_search;
-					$field->advanced_search = $advanced_search;					
 				}
 				
 				$field->admin_only = $admin_only;
@@ -170,4 +164,4 @@
 		}
 	}
 	
-	forward($_SERVER['HTTP_REFERER']);
+	forward(REFERER);

@@ -9,11 +9,6 @@
 	 * @copyright Curverider Ltd 2008-2009
 	 * @link http://elgg.org/
 	 */
-
-	global $CONFIG;
-
-	
-
 	
 /**
  * Elgg add user form.
@@ -102,7 +97,7 @@ if ($admin_option) {
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => $CONFIG->site_guid
+				"owner_guid" => elgg_get_site_entity()->getGUID()
 			);
 	
 	$types = elgg_get_entities($profile_type_options);

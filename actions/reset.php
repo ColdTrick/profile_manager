@@ -9,9 +9,6 @@
 	* @copyright Coldtrick IT Solutions 2009
 	* @link http://www.coldtrick.com/
 	*/
-	global $CONFIG; 
-
-	admin_gatekeeper();
 	
 	$type = get_input("type", "profile");
 
@@ -21,7 +18,7 @@
 				"type" => "object",
 				"subtype" => "custom_" . $type . "_field",
 				"limit" => false,
-				"owner_guid" => $CONFIG->site_guid
+				"owner_guid" => elgg_get_site_entity()->getGUID()
 			);
 		
 		if($entities = elgg_get_entities($options)){
@@ -41,4 +38,4 @@
 		register_error(elgg_echo("profile_manager:actions:reset:error:wrong_type"));
 	}
 	
-	forward($_SERVER['HTTP_REFERER']);
+	forward(REFERER);

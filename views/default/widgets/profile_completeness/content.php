@@ -15,7 +15,7 @@
 			$rand_key = array_rand($missing_fields);
 			$field = $missing_fields[$rand_key];
 			
-			$tips = sprintf(elgg_echo("widgets:profile_completeness:view:tips"), "<b>" . $field->getTitle() . "</b>");
+			$tips = elgg_echo("widgets:profile_completeness:view:tips", array("<b>" . $field->getTitle() . "</b>"));
 		} else {
 			$tips = elgg_echo("widgets:profile_completeness:view:complete");
 		}

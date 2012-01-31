@@ -10,13 +10,10 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	admin_gatekeeper();
-	
 	$guid = get_input("guid");
 	$name = get_input("metadata_name");
 	$label = get_input("metadata_label");
 	$description = get_input("metadata_description");
-	$show_on_members = get_input("show_on_members", "no");
 	$categories = get_input("categories");
 	
 	if(!empty($name) && preg_match("/^[a-zA-Z0-9_]{1,}$/", $name)){
@@ -47,8 +44,6 @@
 				unset($object->metadata_description);
 			}
 			
-			$object->show_on_members = $show_on_members;
-			
 			// add category relations
 			remove_entity_relationships($object->guid, CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP);
 			if(!empty($categories) && is_array($categories)){
@@ -69,4 +64,4 @@
 		register_error(elgg_echo("profile_manager:action:profile_types:add:error:name"));
 	}
 	
-	forward($_SERVER["HTTP_REFERER"]);
+	forward(REFERER);

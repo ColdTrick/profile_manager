@@ -10,17 +10,11 @@
 				"user_editable" => true,
 				"output_as_tags" => true,
 				"admin_only" => true,
-				"simple_search" => true,
-				"advanced_search" => true,
 				"count_for_completeness" => true
 			);		
 			
 		$location_options = $profile_options;
 		unset($location_options["output_as_tags"]);
-		
-		$calendar_options = $profile_options;
-		unset($calendar_options["simple_search"]);
-		unset($calendar_options["advanced_search"]);
 		
 		$pm_datepicker_options = $profile_options;
 		unset($pm_datepicker_options["output_as_tags"]);
@@ -42,7 +36,7 @@
 		add_custom_field_type("custom_profile_field_types", 'location', elgg_echo('location'), $location_options);
 		add_custom_field_type("custom_profile_field_types", 'url', elgg_echo('url'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'email', elgg_echo('email'), $profile_options);
-		add_custom_field_type("custom_profile_field_types", 'calendar', elgg_echo('calendar'), $calendar_options);
+		add_custom_field_type("custom_profile_field_types", 'calendar', elgg_echo('calendar'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'pm_datepicker', elgg_echo('profile_manager:admin:options:pm_datepicker'), $pm_datepicker_options);
 		add_custom_field_type("custom_profile_field_types", 'dropdown', elgg_echo('profile_manager:admin:options:pulldown'), $pulldown_options);
 		add_custom_field_type("custom_profile_field_types", 'radio', elgg_echo('profile_manager:admin:options:radio'), $radio_options);
@@ -52,8 +46,6 @@
 		if(elgg_view_exists("output/datepicker") && elgg_view_exists("input/datepicker")){
 			$datepicker_options = $profile_options;
 			unset($datepicker_options["output_as_tags"]);
-			unset($datepicker_options["simple_search"]);
-			unset($datepicker_options["advanced_search"]);
 			
 			add_custom_field_type("custom_profile_field_types", 'datepicker', elgg_echo('profile_manager:admin:options:datepicker'), $datepicker_options);
 		} else {
@@ -181,7 +173,6 @@
 	 * returns an array containing the categories and the fields ordered by category and field order
 	 */ 
 	function profile_manager_get_categorized_fields($user = null, $edit = false, $register = false, $profile_type_limit = false, $profile_type_guid = false){
-		global $CONFIG;
 		
 		$result = array();
 		$profile_type = null;
@@ -219,8 +210,8 @@
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 			"limit" => false,
-			"owner_guid" => $CONFIG->site_guid,
-			"site_guid" => $CONFIG->site_guid
+			"owner_guid" => elgg_get_site_entity()->getGUID(),
+			"site_guid" => elgg_get_site_entity()->getGUID()
 		); 
 			
 		// get ordered categories
@@ -271,8 +262,8 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => $CONFIG->site_guid,
-				"site_guid" => $CONFIG->site_guid
+				"owner_guid" => elgg_get_site_entity()->getGUID(),
+				"site_guid" => elgg_get_site_entity()->getGUID()
 			); 
 			
 		// adding fields to categories
@@ -331,7 +322,6 @@
 	 * Function just now returns only ordered (name is prepped for future release which should support categories)
 	 */
 	function profile_manager_get_categorized_group_fields($group = null){
-		global $CONFIG;
 		
 		$result = array();
 		$result["fields"] = array();
@@ -341,8 +331,8 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => $CONFIG->site_guid,
-				"site_guid" => $CONFIG->site_guid
+				"owner_guid" => elgg_get_site_entity()->getGUID(),
+				"site_guid" => elgg_get_site_entity()->getGUID()
 			);
 			
 		$fields = elgg_get_entities($options);
@@ -370,7 +360,6 @@
 	 * returns the max order from a specific profile field type
 	 */
 	function profile_manager_get_max_order($field_type){
-		global $CONFIG;
 		$max = 0;
 		$result = false;
 		
@@ -380,8 +369,8 @@
 				"subtype" => $field_type,
 				"limit" => 1,
 				"order_by_metadata" => array(array('name' => 'order', 'direction' => "desc", 'as' => "integer")),
-				"owner_guid" => $CONFIG->site_guid,
-				"site_guid" => $CONFIG->site_guid
+				"owner_guid" => elgg_get_site_entity()->getGUID(),
+				"site_guid" => elgg_get_site_entity()->getGUID()
 			); 
 			
 			if($entities = elgg_get_entities_from_metadata($options)){

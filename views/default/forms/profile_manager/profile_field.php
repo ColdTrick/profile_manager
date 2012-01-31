@@ -29,8 +29,6 @@
 		$output_as_tags = $vars["entity"]->output_as_tags;
 		$blank_available = $vars["entity"]->blank_available;
 		$admin_only = $vars["entity"]->admin_only;
-		$simple_search = $vars["entity"]->simple_search;
-		$advanced_search = $vars["entity"]->advanced_search;
 	}
 
 	$options_values = array();
@@ -125,28 +123,6 @@
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:admin_only') . ":</td>";
 	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'admin_only', 'options_values' => $no_yes_options, 'value'=> $admin_only, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
 	$formbody .= "<td>" . elgg_echo('profile_manager:admin:admin_only:description') . "</td>";
-	$formbody .= "</tr>";
-	
-	if(array_key_exists("simple_search", $option_classes)){
-		$class = $option_classes['simple_search'];	
-	} else {
-		$class = "";
-	}
-	$formbody .= "<tr>";
-	$formbody .= "<td>" . elgg_echo('profile_manager:admin:simple_search') . ":</td>";
-	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'simple_search', 'options_values' => $no_yes_options, 'value'=> $simple_search, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
-	$formbody .= "<td>" . elgg_echo('profile_manager:admin:simple_search:description') . "</td>";
-	$formbody .= "</tr>";
-	
-	if(array_key_exists("advanced_search", $option_classes)){
-		$class = $option_classes['advanced_search'];	
-	} else {
-		$class = "";
-	}
-	$formbody .= "<tr>";
-	$formbody .= "<td>" . elgg_echo('profile_manager:admin:advanced_search') . ":</td>";
-	$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'advanced_search', 'options_values' => $no_yes_options, 'value' => $advanced_search, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
-	$formbody .= "<td>" . elgg_echo('profile_manager:admin:advanced_search:description') . "</td>";
 	$formbody .= "</tr>";
 	
 	$formbody .= "</table>";

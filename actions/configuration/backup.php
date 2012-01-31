@@ -10,10 +10,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	global $CONFIG;
-
-	admin_gatekeeper();
-
 	// We'll be outputting a txt
 	header("Content-Type: text/plain");
 		
@@ -26,7 +22,7 @@
 			"type" => "object",
 			"subtype" => $fieldtype,
 			"limit" => false,
-			"owner_guid" => $CONFIG->site_guid
+			"owner_guid" => elgg_get_site_entity()->getGUID()
 		);
 	
 	$entities = elgg_get_entities($options);
@@ -46,6 +42,7 @@
 			"user_editable" => $entity->user_editable,
 			"output_as_tags" => $entity->output_as_tags,
 			"admin_only" => $entity->admin_only,
+			"blank_available" => $entity->blank_available,
 			"order" => $entity->order
 		);
 	}

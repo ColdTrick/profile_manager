@@ -66,9 +66,9 @@
 			
 			$types_result = "<div>";
 			$types_result .= "<label>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:label") . "</label><br />";
-			$types_result .= elgg_view("input/pulldown", array(
-											"internalname" => "custom_profile_fields_custom_profile_type",
-											"internalid" => "custom_profile_fields_custom_profile_type",
+			$types_result .= elgg_view("input/dropdown", array(
+											"name" => "custom_profile_fields_custom_profile_type",
+											"id" => "custom_profile_fields_custom_profile_type",
 											"options_values" => $types_options_values,
 											"js" => "onchange='changeProfileType();'",
 											"value" => $custom_profile_fields_custom_profile_type)
@@ -121,7 +121,7 @@
 				$fields_result .= "<br />";
 				
 				$fields_result .= elgg_view("input/{$metadata_type}", array(
-														"internalname" => "custom_profile_fields_" . $field->metadata_name,
+														"name" => "custom_profile_fields_" . $field->metadata_name,
 														"value" => $value,
 														"options" => $field->getOptions()
 														)); 

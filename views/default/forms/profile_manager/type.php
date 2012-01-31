@@ -10,8 +10,6 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	global $CONFIG;
-	
 	$form_title = elgg_echo('profile_manager:profile_types:add');
 	
 	if($vars["entity"]){
@@ -22,13 +20,12 @@
 		$metadata_name = $vars["entity"]->metadata_name;
 		$metadata_label = $vars["entity"]->metadata_label;
 		$metadata_description = $vars["entity"]->metadata_description;
-		$show_on_members = $vars["entity"]->show_on_members;
 		
 		$options = array(
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 			"limit" => false,
-			"owner_guid" => $CONFIG->site_guid,
+			"owner_guid" => elgg_get_site_entity()->getGUID(),
 			"relationship" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
 			"relationship_guid" => $vars["entity"]->guid,
 			"inverse_relationship" => false
@@ -55,13 +52,7 @@
 	
 	$formbody .= elgg_echo('profile_manager:admin:metadata_description') . "*:";
 	$formbody .= elgg_view('input/plaintext', array("name" => "metadata_description", "value" => $metadata_description));
-	
-	$formbody .= elgg_echo('profile_manager:admin:show_on_members') . "*:";
-	$formbody .= elgg_view('input/dropdown', array(	"name" => "show_on_members",
-												   	"options_values" => array("no" => elgg_echo("option:no"),
-																				"yes" => elgg_echo("option:yes")),
-													"value" => $show_on_members));
-			
+		
 	$formbody .= "</td>\n";
 	$formbody .= "<td class='custom_fields_add_form_table_right'>\n"; 
 	
@@ -69,7 +60,7 @@
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 			"limit" => false,
-			"owner_guid" => $CONFIG->site_guid
+			"owner_guid" => elgg_get_site_entity()->getGUID()
 		);
 	
 	$categories = elgg_get_entities($options);

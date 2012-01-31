@@ -10,17 +10,13 @@
 	* @link http://www.coldtrick.com/
 	*/
 
-	global $CONFIG;
-
 	$fieldtype = $vars['fieldtype'];
-	
-	$options = array(
-			"type" => "object",
-			"subtype" => $fieldtype,
-			"limit" => 0,
-			"owner_guid" => $CONFIG->site_guid
-		);
-	$entities = elgg_get_entities($options);
+
+	if($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE){
+		$fields = elgg_get_config('profile_fields');
+	} elseif($fieldtype == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE){
+		$fields = elgg_get_config('group');
+	}
 	
 	echo elgg_echo('profile_manager:export:description:' . $fieldtype);
 ?>
@@ -32,7 +28,7 @@
 	
 <?php 
 	
-	if($entities){
+	if($fields){
 		
 		echo "<form action='" . $vars['url'] . "action/profile_manager/export' method='POST'>";
 		echo "<input type='hidden' name='fieldtype' value='" . $fieldtype . "'></hidden>";
@@ -97,14 +93,14 @@
 			<?php 	
 		}
 		
-		foreach($entities as $entity){
+		foreach($fields as $metadata_name => $type){
 			?>
 			<tr>
 				<td>
-					<?php echo $entity->metadata_name;?>
+					<?php echo $metadata_name;?>
 				</td>
 				<td>
-					<input type='checkbox' name='export[<?php echo $entity->metadata_name;?>]' value='<?php echo $entity->metadata_name;?>'></input>
+					<input type='checkbox' name='export[<?php echo $metadata_name;?>]' value='<?php echo $metadata_name;?>'></input>
 				</td>
 			</tr>
 			<?php 

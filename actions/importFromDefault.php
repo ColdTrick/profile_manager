@@ -10,9 +10,7 @@
 	* @link http://www.coldtrick.com/
 	*/
 	
-	global $CONFIG;
-	 
-	admin_gatekeeper();
+	$site_guid = elgg_get_site_entity()->getGUID();
 	
 	$type = get_input("type", "profile");
 	
@@ -24,7 +22,7 @@
 				"type" => "object",
 				"subtype" => "custom_" . $type . "_field",
 				"count" => true,
-				"owner_guid" => $CONFIG->site_guid
+				"owner_guid" => $site_guid
 			);
 		
 		$max_fields = elgg_get_entities($options) + 1;
@@ -60,8 +58,8 @@
 			if($count == 0){
 				$field = new ElggObject(); // not using classes so we can handle both profile and group in one function
 						
-				$field->owner_guid = $CONFIG->site_guid;
-				$field->container_guid = $CONFIG->site_guid;
+				$field->owner_guid = $site_guid;
+				$field->container_guid = $site_guid;
 				$field->access_id = ACCESS_PUBLIC;
 				$field->subtype = "custom_" . $type . "_field";
 				$field->save();
@@ -86,10 +84,10 @@
 		if($added == 0){
 			register_error(elgg_echo("profile_manager:actions:import:from_default:no_fields"));
 		} else {
-			system_message(sprintf(elgg_echo("profile_manager:actions:import:from_default:new_fields"), $added));
+			system_message(elgg_echo("profile_manager:actions:import:from_default:new_fields", array($added)));
 		}
 	} else {
 		register_error(elgg_echo("profile_manager:actions:import:from_default:error:wrong_type"));
 	}
 	
-	forward($_SERVER['HTTP_REFERER']);
+	forward(REFERER);

@@ -9,14 +9,13 @@
 	 * @return unknown_type
 	 */
 	function profile_manager_profile_override($hook_name, $entity_type, $return_value, $parameters){
-		global $CONFIG;
-
+		
 		// Get all the custom profile fields
 		$options = array(
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => $CONFIG->site_guid
+				"owner_guid" => elgg_get_site_entity()->getGUID()
 			);
 
 		if($entities = elgg_get_entities($options)){
@@ -58,7 +57,6 @@
 	 * @return unknown_type
 	 */
 	function profile_manager_group_override($hook_name, $entity_type, $return_value, $parameters){
-		global $CONFIG;
 		$result = $return_value;
 		
 		// Get all custom group fields
@@ -66,7 +64,7 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => $CONFIG->site_guid
+				"owner_guid" => elgg_get_site_entity()->getGUID()
 			);
 		
 		$group_fields = elgg_get_entities($options);
@@ -211,7 +209,7 @@
 		    	$passed_value = $custom_profile_fields[$entity->metadata_name];
 		    	
 				if(empty($passed_value)){
-					register_error(sprintf(elgg_echo("profile_manager:register_pre_check:missing"), $entity->getTitle()));
+					register_error(elgg_echo("profile_manager:register_pre_check:missing", array($entity->getTitle())));
 					forward(REFERER);					
 				}
 		    }
@@ -221,7 +219,7 @@
 		    	
 		    	$error = false;
 		    	if(empty($profile_icon["name"])){
-			    	register_error(sprintf(elgg_echo("profile_manager:register_pre_check:missing"), "profile_icon"));
+			    	register_error(elgg_echo("profile_manager:register_pre_check:missing", array("profile_icon")));
 			    	$error = true;
 		    	} elseif($profile_icon["error"] != 0){
 		    		register_error(elgg_echo("profile_manager:register_pre_check:profile_icon:error"));
@@ -236,9 +234,4 @@
 		    	}
 		    }
 		}
-	}
-	
-	function profile_manager_profile_noindex_view_hook($hook, $type, $returnvalue, $params){
-		global $autofeed;
-		$autofeed = false;
 	}
