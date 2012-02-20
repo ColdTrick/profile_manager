@@ -1,6 +1,6 @@
 = Version history =
 
-7.1 (2012-02-12):
+7.1 (2012-02-20):
 - changed: cleanup deprecated Profile Manager code (Members Search and NoIndex)
 - changed: more code is now using the latest Elgg 1.8 functions
 - changed: moved version history to CHANGES.txt
