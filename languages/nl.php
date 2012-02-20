@@ -1,19 +1,18 @@
 <?php
 $language = array (
-  'profile_manager:settings:simple_access_control' => 'Toon slechts één toegangsrecht keuze op het profiel bewerken formulier',
-  'profile_manager:settings:description_position' => 'Waar moet het "Over mij" veld gepositioneerd worden',
-  'profile_manager:actions:import:from_custom:new_fields' => 'Succesvol <b>%s</b> nieuwe velden geïmporteerd',
-  'profile_manager:actions:import:from_default:new_fields' => 'Succesvol <b>%s</b> nieuwe velden geïmporteerd',
-  'profile_manager:tooltips:category_list' => '<b>Categorieën</b><br>
-			Toont een lijst van alle geconfigureerde categorieën.<br><br>
+  'profile_manager:settings:simple_access_control' => 'Toon slechts ï¿½ï¿½n toegangsrecht keuze op het profiel bewerken formulier',
+  'profile_manager:actions:import:from_custom:new_fields' => 'Succesvol <b>%s</b> nieuwe velden geï¿½mporteerd',
+  'profile_manager:actions:import:from_default:new_fields' => 'Succesvol <b>%s</b> nieuwe velden geï¿½mporteerd',
+  'profile_manager:tooltips:category_list' => '<b>Categorieï¿½n</b><br>
+			Toont een lijst van alle geconfigureerde categorieï¿½n.<br><br>
 			
 			<i>Standaard</i> is de categorie die van toepassing is op alle profielen.<br><br>
 			
-			Voeg velden toe aan de categorieën door ze er op te slepen.<br><br>
+			Voeg velden toe aan de categorieï¿½n door ze er op te slepen.<br><br>
 			
 			Klik op de categorie label om de weergegeven profiel velden te filteren. Klik op \'Alle velden weergeven\' om alle velden weer te geven.<br><br>
 			
-			Je kunt ook de volgorde van de categorieën aanpassen door ze onderling te verslepen (<i>Standaard kan niet worden verplaatst</i>. <br><br>
+			Je kunt ook de volgorde van de categorieï¿½n aanpassen door ze onderling te verslepen (<i>Standaard kan niet worden verplaatst</i>. <br><br>
 			
 			Klik op het bewerk icoon om de categorie te bewerken.',
   'profile_manager:tooltips:profile_type' => '<b>Profiel Type</b><br>
@@ -22,7 +21,9 @@ $language = array (
 			Voeg een omschrijving toe die gebruikers kunnen zien wanneer ze het profieltype selecteren of laat het leeg om het te internationaliseren (<i>profile:types:[name]:description</i>).<br><br>
 			Je kunt dit profiel type toevoegen als filter op de Leden Zoek pagina<br><br>
 			
-			Indien er categorieën zijn gedefinieerd kan we worden aangegeven welke categorieën van toepassing zijn op dit profiel.',
+			Indien er categorieï¿½n zijn gedefinieerd kan we worden aangegeven welke categorieï¿½n van toepassing zijn op dit profiel.',
+  'profile_manager:input:multi_select:empty_text' => 'Maak uw keuze ...',
+  'profile_manager:settings:description_position' => 'Waar moet het "Over mij" veld gepositioneerd worden',
   'admin:appearance:group_fields' => 'Bewerk groep velden',
   'admin:appearance:export_fields' => 'Exporteer profiel informatie',
   'profile_manager:settings:registration' => 'Registratie',
@@ -43,8 +44,6 @@ $language = array (
   'profile_manager:settings:profile_type_selection' => 'Wie kan het profiel type wijzigen?',
   'profile_manager:settings:profile_type_selection:option:user' => 'Gebruiker',
   'profile_manager:settings:profile_type_selection:option:admin' => 'Alleen de beheerder',
-  'profile_manager:settings:allow_profile_noindex' => 'Mogen gebruikers hun profiel afschermen van zoekmachines?',
-  'profile_manager:settings:show_members_search' => 'Toon de profile manager "Leden" zoek pagina',
   'profile_manager:settings:enable_profile_completeness_widget' => 'Activeer de profiel compleetheid widget',
   'profile_manager:settings:registration:terms' => 'Om een "Ik ga akkoord met de algemene voorwaarden" veld op het registratie pagina te tonen, voer hieronder een link naar de voorwaarden in',
   'profile_manager:settings:registration:extra_fields' => 'Waar moeten de additionele profiel velden worden getoond',
@@ -121,7 +120,6 @@ $language = array (
   'profile_manager:non_editable:info' => 'Dit veld kan niet worden bewerkt',
   'profile_manager:registration:accept_terms' => 'Ik heb het gelezen en accepteer de %sAlgemene Voorwaarden%s',
   'profile_manager:register_pre_check:profile_icon:error' => 'Fout bij het uploaden van het profiel icoon (waarschijnlijk gerelateerd aan de grootte)',
-  'profile_manager:usersettings:hide_from_search_engine' => 'Verberg je profiel voor zoekmachines',
   'add' => 'Voeg toe',
   'item:object:custom_profile_field' => 'Custom Profile Field',
   'item:object:custom_profile_field_category' => 'Custom Profile Field Category',
@@ -140,19 +138,14 @@ $language = array (
   'profile_manager:admin:options:radio' => 'Radio',
   'profile_manager:admin:options:multiselect' => 'MultiSelect',
   'profile_manager:admin:blank_available' => 'Lege optie',
-  'profile_manager:admin:show_on_members' => 'Toon als filter op \'Leden\' pagina',
   'profile_manager:admin:additional_options' => 'Extra opties',
   'profile_manager:admin:mandatory' => 'Verplicht',
   'profile_manager:admin:user_editable' => 'Bewerkbaar door gebruiker',
   'profile_manager:admin:output_as_tags' => 'Toon als tags op profiel',
-  'profile_manager:admin:simple_search' => 'Toon op eenvoudig zoek formulier',
-  'profile_manager:admin:advanced_search' => 'Toon op geavanceerd zoek formulier',
   'profile_manager:admin:option_unavailable' => 'Deze optie is niet beschikbaar',
   'profile_manager:admin:show_on_register:description' => 'Indien het veld ook op het registratie formulier ingevuld kan worden.',
   'profile_manager:admin:mandatory:description' => 'Indien het veld verplicht moet worden ingevuld (dit geldt alleen op het registratie formulier).',
   'profile_manager:admin:admin_only:description' => 'Kies \'Ja\' indien het veld alleen zichtbaar is voor beheerders.',
-  'profile_manager:admin:simple_search:description' => 'Kies \'Ja\' indien het veld zoekbaar is op het eenvoudige zoekformulier.',
-  'profile_manager:admin:advanced_search:description' => 'Kies \'Ja\' indien het veld zoekbaar is op het geavanceerde zoekformulier.',
   'profile_manager:admin:blank_available:description' => 'Kies \'Ja\' indien een lege optie aan de opties moet worden toegevoegd.',
   'profile_manager:datepicker:output:dateformat' => '%a %d %b %Y',
   'profile_manager:datepicker:input:localisation' => 'jquery.datepick-nl.js',
@@ -227,7 +220,5 @@ $language = array (
   'profile_manager:admin:adduser:notify' => 'Mail account informatie naar gebruiker',
   'profile_manager:admin:adduser:use_default_access' => 'Extra profiel informatie luistert naar standaard toegangsniveau',
   'profile_manager:admin:adduser:extra_metadata' => 'Extra profiel informatie toevoegen',
-  'profile_manager:profile:noindex' => 'Verberg je profiel voor zoekmachines',
-  'profile_manager:usersettings:hide_from_search_engine:explain' => 'Het kan een aantal dagen duren voor je profiel uit de zoekmachines zijn verwijdert.',
 );
 add_translation("nl", $language);

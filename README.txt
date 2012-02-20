@@ -9,7 +9,6 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 3. Known issues
 
 == 1. Features ==
-- search based on profile fields
 - importing default or custom fields
 - ordering of custom fields (drag and drop)
 - add profile types
@@ -25,15 +24,12 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 - export user profile (meta)data to csv
 - a customized registration form
 
-Needs to be positioned after the profile plugin!!!
-
 == 2. TO DO ==
 - categories and types for groups
 - multilingual options (in pulldown, radio, multiselect)
 - Default values for fields (user specified)
 - Force empty fields on profile
 - dependend fields
-- show profile type on user details
 - check existence of input/output views (in get_categorized function)
 - check if fieldtype is enabled (in get_categorized function)
 - handle disabled fieldtype options (in get_categorized function)
@@ -44,7 +40,6 @@ Needs to be positioned after the profile plugin!!!
 - add "can change access lvl"
 - tabbed profile details
 - extend group and user search listing with info from profile manager
-- listen to get/post for profile types on members search form
 - add hint to default register form fields (username, email, password etc)
 - review complete js
 - review new field action (make better use of class constructors)
@@ -54,17 +49,14 @@ Needs to be positioned after the profile plugin!!!
 	- time last action (ts/date)
 	- validate (yes/no)
 	
-- function to retrieve a readable profile type for a give user
+- check trimmed required profile fields (space should not be accepted, js + hook)
 	
 == 3. Known issues ==
 - on register error backward maintaining selected profile icon is impossible due to security reasons 
 - longtext with tinymce too small when on first hidden
-- reset on members search forms won't reset multiselects
 - multiselect mandatory not js enforced on register form
-
-- export/import with empty field setting
 	
-NEED FIXING:
+NEED CHECKING:
 When i choose to "select profile type by Admin", on the profile page of the user it will indeed only show the fields specfic to that profile type but the user can see all the categories of all the profile types in their edit profile page.
 
 They can fill in the information but it wont show as their profile type wont match but I dont think they should be able to see the categories as they wont show. Is this just the way it is on is it a bug?

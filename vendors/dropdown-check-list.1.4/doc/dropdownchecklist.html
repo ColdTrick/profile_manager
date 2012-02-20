@@ -1,0 +1,859 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>jQuery Dropdown CheckList</title>
+    <!-- Use a JQuery ThemeRoller theme, in this case 'smoothness' -->
+    <link rel="stylesheet" type="text/css" href="smoothness-1.8.13/jquery-ui-1.8.13.custom.css">
+    <link rel="stylesheet" type="text/css" href="../src/ui.dropdownchecklist.themeroller.css">
+    <!--  <link rel="stylesheet" type="text/css" href="../src/ui.dropdownchecklist.standalone.css">  -->
+    <style>
+table td { vertical-align: top }
+dd { padding-bottom: 15px }
+    </style>
+    
+    <!-- Include the basic JQuery support (core and ui) -->
+    <script type="text/javascript" src="jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.8.13.custom.min.js"></script>
+    
+    <!-- Include the DropDownCheckList supoprt -->
+    <!-- <script type="text/javascript" src="ui.dropdownchecklist.js"></script> -->
+    <script type="text/javascript" src="ui.dropdownchecklist-1.4-min.js"></script>
+    
+    <!-- Apply dropdown check list to the selected items  -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#s1").dropdownchecklist();
+            $("#s2").dropdownchecklist( {icon: {}, width: 150 } );
+            $("#s3").dropdownchecklist( { width: 150 } );
+            $("#s4").dropdownchecklist( { maxDropHeight: 150 } );
+            $("#s5").dropdownchecklist( { firstItemChecksAll: true, explicitClose: '...close' } );
+            $("#s6").dropdownchecklist();
+            $("#s7").dropdownchecklist();
+            $("#s8").dropdownchecklist( { emptyText: "Please Select...", width: 150 } );
+            $("#s9").dropdownchecklist( { textFormatFunction: function(options) {
+                var selectedOptions = options.filter(":selected");
+                var countOfSelected = selectedOptions.size();
+                switch(countOfSelected) {
+                    case 0: return "<i>Nobody<i>";
+                    case 1: return selectedOptions.text();
+                    case options.size(): return "<b>Everybody</b>";
+                    default: return countOfSelected + " People";
+                }
+            } });
+            $("#s10").dropdownchecklist( { forceMultiple: true
+, onComplete: function(selector) {
+	var values = "";
+  	for( i=0; i < selector.options.length; i++ ) {
+    	if (selector.options[i].selected && (selector.options[i].value != "")) {
+      		if ( values != "" ) values += ";";
+      		values += selector.options[i].value;
+    	}
+  	}
+  	alert( values );
+} 
+, onItemClick: function(checkbox, selector){
+	var justChecked = checkbox.prop("checked");
+	var checkCount = (justChecked) ? 1 : -1;
+	for( i = 0; i < selector.options.length; i++ ){
+		if ( selector.options[i].selected ) checkCount += 1;
+	}
+    if ( checkCount > 3 ) {
+		alert( "Limit is 3" );
+		throw "too many";
+	}
+}
+            });
+        });
+    </script>
+    <meta name="description" 
+        content="The Dropdown Check List jQuery widget transforms a regular select html element into a dropdown checkbox list">
+    <meta name="keywords" 
+        content="dropdown, checkbox list, jquery, widget, themeroller, plugin, html multiple select">
+</head>
+<body>
+<div id="content">
+    <h1>jQuery <em>Dropdown Check List</em></h1>
+    <p>
+        The <i>Dropdown CheckList</i> jQuery widget transforms a regular &lt;SELECT&gt; html element into a 
+        combo box with a text display of the selected elements and a dropdown of options. The plugin is hosted on 
+        <a href="http://code.google.com/p/dropdown-check-list/">google code</a>.
+    <br>
+        <img src="demo.png" alt="Dropdown Check List" title="The widget transforms a regular select 
+        html element into a dropdown checkbox list" />
+    <br>
+    	The widget uses standard jQuery processing to select the target &lt;SELECT&gt; elements (matching on 
+    	class or id or whatever) and replacing them with a single line text display that supports a dropdown
+    	list of options. The dropdown list is composed of <i>checkboxes</i> for multi-select elements, and
+    	<i>radio buttons</i> for single-select elements. Option groups are supported as well.
+    </p>
+    <p>
+        Copyright &copy; Adrian Tosca &lt;adrian.tosca@gmail.com&gt;, Ittrium, LLC &lt;womohundro@ittrium.com&gt;
+    </p>
+    <p>
+        Licensed like jQuery, see <a href="http://docs.jquery.com/Licensing">http://docs.jquery.com/Licensing</a>.
+    </p>
+    <h2>Download</h2>
+    <p>
+        The current version <b>v1.4</b> of <i>Dropdown CheckList</i> can be downloaded from 
+        <a href="http://code.google.com/p/dropdown-check-list/downloads/list">google code Downloads</a>. 
+        This page, including all required files to run the examples, can be downloaded as zip package 
+        from the same location.
+    </p>
+    <h2>Requirements/Environments</h2>
+    <p>
+        <i>Dropdown CheckList 1.4</i> requires <a href="http://code.jquery.com/jquery-latest.js">jquery.js</a> 
+        and <a href="http://dev.jquery.com/view/tags/ui/latest/ui/ui.core.js">ui.core.js</a>(both core and 
+        widget) and requires <i>jquery</i> core version 1.6.1 and <i>ui</i> version 1.8.13.  For CSS styling, 
+        it can run as a standalone with custom CSS that you provide, or the preferred method is to leverage the 
+        jQuery ThemeRoller support. <i>Dropdown CheckList</i> uses element tags that match those definded
+        by ThemeRoller. This page is styled with the ThemeRoller "smoothness" theme.
+    </p>
+    <p>
+        The widget has been tested with brosers
+        <ul>
+	        <li>IE 6 / 7 / 8</li>
+	        <li>Firefox 3</li>
+	        <li>Safari 5</li>
+	        <li>Chrome 6</li>
+        </ul>
+        <input type='button' value='version' onclick='$("#s1").dropdownchecklist("version");'>
+    </p>
+	<h2>How does it work?</h2>
+	<p>
+	 	<i>Dropdown CheckList</i> uses the existing structure of the html select elements on which it is 
+	 	applied to dynamically build a container with checkboxes and labels, then hides the original 
+	 	select element. The plugin does not change in any way the existing select element, it only synchronizes 
+	 	the checked values from the new container to the original select. This approach has the added 
+	 	benefit to allow the use of the plugin with any server technology.
+	</p>
+    <p>
+        The widget will hide the existing select element by modifying its <code>display</code> 
+        attribute to <code>none</code>.
+        The new widget will keep the replaced select options synchronized with the checkbox list so 
+        the postback is not affected.
+        The text of the control is composed on the concatenated text of selected options in the list.
+        Because the width of the control will not allways accomodate all selected options, the control 
+        will show the full text on hover by setting its title attribute.
+    </p>
+    <h2>Examples</h2>
+    <table>
+      <tr>
+      	<td colspan='2'>
+    		<h3>Simple Multi-selector</h3>
+    		<div>Nothing originally selected</div>
+		    <blockquote>
+		    	<code>
+		            $("#s1").dropdownchecklist();
+		        </code>
+	        </blockquote>
+    	</td>
+      </tr>
+      <tr>
+      	<td>
+	        <select multiple="multiple">
+	            <option>Low</option>
+	            <option>Medium</option>
+	            <option>High</option>
+	        </select>
+    	</td>
+      	<td>
+	        <select id="s1" multiple="multiple">
+	            <option>Low</option>
+	            <option>Medium</option>
+	            <option>High</option>
+	        </select>
+    	</td>
+      </tr>
+      <tr>
+      	<td colspan='2'>
+		    <h3>Multi-selector with initially selected options and icons</h3>
+		    <div>
+		        The existing select element already has some options selected.
+		        In this case the widget will take over the selection automatically on initialization.
+		    <br>
+		    	In addition, the ThemeRoller icon support is leveraged to include graphical markers on
+		    	the widget.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $("#s2").dropdownchecklist( {icon: {}, width: 150 } );
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td>
+	        <select multiple="multiple">
+	            <option>Low</option>
+	            <option selected="selected">Medium</option>
+	            <option selected="selected">High</option>
+	        </select>
+	  	</td>
+	  	<td>
+	        <select id="s2" multiple="multiple">
+	            <option>Low</option>
+	            <option selected="selected">Medium</option>
+	            <option selected="selected">High</option>
+	        </select>
+	  	</td>
+	  </tr>
+	  <tr>
+	  	<td colspan='2'>
+		    <h3>Long text, shorter control</h3>
+		    <div>
+		        The 'width' option allows you to set a fixed width on the control even if the 
+		        dropdown list is wider. The dropdown will keep its size so the items in the list 
+		        are correctly visible.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $("#s3").dropdownchecklist({ width: 150 });
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td>
+	        <select multiple="multiple">
+	            <option>Pneumonoultramicroscopicsilicovolcanoconiosis</option>
+	            <option>Pseudopseudohypoparathyroidism</option>
+	            <option>Floccinaucinihilipilification</option>
+	            <option>Antidisestablishmentarianism</option>
+	            <option>Honorificabilitudinitatibus</option>
+	        </select>
+	  	</td>
+	  	<td>
+	        <select id="s3" multiple="multiple">
+	            <option>Pneumonoultramicroscopicsilicovolcanoconiosis</option>
+	            <option>Pseudopseudohypoparathyroidism</option>
+	            <option>Floccinaucinihilipilification</option>
+	            <option>Antidisestablishmentarianism</option>
+	            <option>Honorificabilitudinitatibus</option>
+	        </select>
+	  	</td>
+	  </tr>
+	  <tr>
+	  	<td colspan='2'>
+		    <h3>Long list of options, with scroll and disabled items</h3>
+    		<div>
+        		The 'maxDropHeight' option allows you to set a height for the dropdown list.
+        		This is usefull when there is a big number of items. The dropdown list is scrollable 
+        		to allow selection of all the items. Some select options have been disabled.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $("#s4").dropdownchecklist({ maxDropHeight: 150 });
+		        </code>
+   			</blockquote>
+   		</td>
+   	  </tr>
+   	  <tr>
+   	  	<td>
+	        <select multiple="multiple">
+	            <option>Aries</option>
+	            <option>Taurus</option>
+	            <option disabled="disabled">Gemini</option>
+	            <option disabled="disabled">Cancer</option>
+	            <option>Leo</option>
+	            <option>Virgo</option>
+	            <option>Libra</option>
+	            <option>Scorpius</option>
+	            <option>Ophiuchus</option>
+	            <option>Sagittarius</option>
+	            <option>Capricornus</option>
+	            <option>Aquarius</option>
+	            <option>Pisces</option>
+	        </select>
+   		</td>
+   	  	<td>
+	        <select id="s4" multiple="multiple">
+	            <option>Aries</option>
+	            <option>Taurus</option>
+	            <option disabled="disabled">Gemini</option>
+	            <option disabled="disabled">Cancer</option>
+	            <option>Leo</option>
+	            <option>Virgo</option>
+	            <option>Libra</option>
+	            <option>Scorpius</option>
+	            <option>Ophiuchus</option>
+	            <option>Sagittarius</option>
+	            <option>Capricornus</option>
+	            <option>Aquarius</option>
+	            <option>Pisces</option>
+	        </select>
+   		</td>
+   	  </tr>
+   	  <tr>
+   	  	<td colspan='2'>
+		    <h3>Option to let the first item in list check all items</h3>
+		    <div>
+		        The 'firstItemChecksAll' option allows you to attach a special behavior to the first item 
+		        in the list. If the item is checked, all items in the list are checked. 
+		    <br>
+		    	The 'explicitClose' option allows you to include a special close action as the last
+		    	item in the list.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $("#s5").dropdownchecklist({ firstItemChecksAll: true, explicitClose: '...close' });
+		        </code>
+		    </blockquote>
+    	</td>
+      </tr>
+      <tr>
+      	<td>
+	        <select multiple="multiple">
+	            <option>(all)</option>
+	            <option>Banana Nut</option>
+	            <option disabled="disabled">Black Walnut</option>
+	            <option disabled="disabled">Burgundy Cherry</option>
+	            <option>Butter Pecan</option>
+	            <option>Chocolate Chip</option>
+	            <option>Chocolate Fudge Truffle</option>
+	            <option>Chocolate Mint Chip</option>
+	            <option>Chocolate Peanut Butter</option>
+	            <option>Coconut-Pineapple</option>
+	            <option>Coffee</option>
+	            <option>Coffee Caramel</option>
+	            <option>Coffee Chip</option>
+	            <option>Cookie Dough</option>
+	            <option>Cookies 'n Cream</option>
+	            <option>Dutch Chocolate</option>
+	            <option>English Toffee</option>
+	            <option>Fudgee Peanut Butter Cup</option>
+	            <option>Macadamia Nut</option>
+	            <option>Mocha Almond Fudge</option>
+	            <option>Nutty Coconut</option>
+	            <option>Pistachio Nut</option>
+	            <option>Pralines and Cream</option>
+	            <option>Rocky Road</option>
+	            <option>Root Beer Float</option>
+	            <option>Strawberry</option>
+	            <option>Strawberry Cheesecake</option>
+	            <option>Turkish Coffee</option>
+	            <option>Vanilla</option>
+	        </select>
+	    </td>
+      	<td>
+	        <select id="s5" multiple="multiple">
+	            <option>(all)</option>
+	            <option>Banana Nut</option>
+	            <option disabled="disabled">Black Walnut</option>
+	            <option disabled="disabled">Burgundy Cherry</option>
+	            <option>Butter Pecan</option>
+	            <option>Chocolate Chip</option>
+	            <option>Chocolate Fudge Truffle</option>
+	            <option>Chocolate Mint Chip</option>
+	            <option>Chocolate Peanut Butter</option>
+	            <option>Coconut-Pineapple</option>
+	            <option>Coffee</option>
+	            <option>Coffee Caramel</option>
+	            <option>Coffee Chip</option>
+	            <option>Cookie Dough</option>
+	            <option>Cookies 'n Cream</option>
+	            <option>Dutch Chocolate</option>
+	            <option>English Toffee</option>
+	            <option>Fudgee Peanut Butter Cup</option>
+	            <option>Macadamia Nut</option>
+	            <option>Mocha Almond Fudge</option>
+	            <option>Nutty Coconut</option>
+	            <option>Pistachio Nut</option>
+	            <option>Pralines and Cream</option>
+	            <option>Rocky Road</option>
+	            <option>Root Beer Float</option>
+	            <option>Strawberry</option>
+	            <option>Strawberry Cheesecake</option>
+	            <option>Turkish Coffee</option>
+	            <option>Vanilla</option>
+	        </select>
+	    </td>
+	  </tr>
+      <tr>
+      	<td colspan='2'>
+		    <h3>Select with groups</h3>
+		    <div>
+		        The existing select element has groups (optgroup elements). The options are listed 
+		        in groups as with original select element.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $("#s6").dropdownchecklist();
+		        </code>
+		    </blockquote>
+    	</td>
+      </tr>
+      <tr>
+      	<td>
+	        <select multiple="multiple">
+				<optgroup label="Letters">
+					<option>A</option>
+					<option>B & C</option>
+					<option selected="selected">D&F</option>
+				</optgroup>
+	            <optgroup label="Numbers">
+					<option>1</option>
+					<option>2</option>
+					<option selected="selected">3</option>
+				</optgroup>
+	        </select>
+	    </td>
+      	<td>
+	        <select id="s6" multiple="multiple">
+				<optgroup label="Letters">
+					<option>A</option>
+					<option>B & C</option>
+					<option selected="selected">D&F</option>
+				</optgroup>
+	            <optgroup label="Numbers">
+					<option>1</option>
+					<option>2</option>
+					<option selected="selected">3</option>
+				</optgroup>
+	        </select>
+	    </td>
+	  </tr>
+      <tr>
+      	<td colspan='2'>
+		    <h3>Single select with radio buttons instead of checkboxes</h3>
+		    <div>
+		        If the select element does not have an multiple attribute then the plugin will 
+		        display radiobuttons in the list.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $("#s7").dropdownchecklist();
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+      <tr>
+      	<td>
+	        <select>
+	            <option>Aries</option>
+	            <option>Taurus</option>
+	            <option>Gemini</option>
+	            <option>Cancer</option>
+	            <option>Leo	Leo</option>
+	            <option>Virgo</option>
+	            <option>Libra</option>
+	            <option>Scorpius</option>
+	            <option>Ophiuchus</option>
+	            <option>Sagittarius</option>
+	            <option>Capricornus</option>
+	            <option>Aquarius</option>
+	            <option>Pisces</option>
+	        </select>
+	    </td>
+      	<td>
+	        <select id="s7">
+	            <option>Aries</option>
+	            <option>Taurus</option>
+	            <option>Gemini</option>
+	            <option>Cancer</option>
+	            <option>Leo	Leo</option>
+	            <option>Virgo</option>
+	            <option>Libra</option>
+	            <option>Scorpius</option>
+	            <option>Ophiuchus</option>
+	            <option>Sagittarius</option>
+	            <option>Capricornus</option>
+	            <option>Aquarius</option>
+	            <option>Pisces</option>
+	        </select>
+	    </td>
+	  </tr>
+	  <tr>
+	  	<td colspan='2'>
+		    <h3>Empty default text</h3>
+		    <div>
+		        The 'emptyText' options allows you to set the text can be displayed when no items 
+		        are selected.<br>
+		        Note also that styling attributes applied to the OPTIONs are copied into the
+		        generated label components.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $("#s8").dropdownchecklist({ emptyText: "Please select ...", width: 150 });
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+	  <tr>
+    	<td>
+	        <select multiple="multiple">
+	            <option style='color:green'>Low</option>
+	            <option style='color:orange'>Medium</option>
+	            <option style='color:red'>High</option>
+	        </select>
+	    </td>
+    	<td>
+	        <select id="s8" multiple="multiple">
+	            <option style='color:green'>Low</option>
+	            <option style='color:orange'>Medium</option>
+	            <option style='color:red'>High</option>
+	        </select>
+	    </td>
+	  </tr>
+      <tr>
+      	<td colspan='2'>
+		    <h3>Function for formatting the displayed text</h3>
+		    <div>
+		        The 'textFormatFunction' option allows you to supply a formatting function used to 
+		        display the control text. You can then customize the text display in any way you
+		        wish. The callback function is run with a single argument that is the list of 
+		        selector options.
+		    </div>
+		    <blockquote>
+		    	<code>
+<pre>
+    $("#s9").dropdownchecklist({ textFormatFunction: function(options) {
+        var selectedOptions = options.filter(":selected");
+        var countOfSelected = selectedOptions.size();
+        var size = options.size();
+        switch(countOfSelected) {
+           case 0: return "&lt;i&gt;Nobody&lt;i&gt;";
+           case 1: return selectedOptions.text();
+           case options.size(): return "&lt;b&gt;Everybody&lt;/b&gt;";
+           default: return countOfSelected + " People";
+        }
+    } });
+</pre>
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+      <tr>
+      	<td>
+	        <select multiple="multiple">
+	            <option>Alice</option>
+	            <option>Bob</option>
+	            <option>Christian</option>
+	            <option>Daniel</option>
+	        </select>
+	     </td>
+      	<td>
+	        <select id="s9" multiple="multiple">
+	            <option>Alice</option>
+	            <option>Bob</option>
+	            <option>Christian</option>
+	            <option>Daniel</option>
+	        </select>
+	     </td>
+	   </tr>
+      <tr>
+      	<td colspan='2'>
+		    <h3>Callback handling for both single item click and when the user completes their selection</h3>
+		    <div>
+		        The 'onComplete' option allows you to supply a callback function that is invoked
+		        when the user completes their selection and closes the dropdown. It is passed
+		        a single argument which is the original selector element.
+		    </div>
+		    <div>The 'onItemClick' callback function can be defined to respond every
+		    	 time a user clicks on an item.
+		    </div>
+		    <div>
+		    	Also, you can force the target selector into <i>multiple</i> selection mode
+		    	by using the 'forceMultiple' option, even if the underlying &lt;SELECT&gt; is
+		    	not marked as multiple.
+		    	-- <i>The forceMultiple option does NOT work with IE 6</i> --
+		    <blockquote>
+		    	<code>
+<pre>
+    $("#s10").dropdownchecklist( { forceMultiple: true
+    , onComplete: function(selector) {
+        var values = "";
+        for( i=0; i < selector.options.length; i++ ) {
+            if (selector.options[i].selected && (selector.options[i].value != "")) {
+                if ( values != "" ) values += ";";
+                values += selector.options[i].value;
+            }
+        }
+	  	alert( values );
+    } 
+	, onItemClick: function(checkbox, selector){
+		var justChecked = checkbox.prop("checked");
+		var checkCount = (justChecked) ? 1 : -1;
+		for( i = 0; i < selector.options.length; i++ ){
+			if ( selector.options[i].selected ) checkCount += 1;
+		}
+	    if ( checkCount > 3 ) {
+			alert( "Limit is 3" );
+			throw "too many";
+		}
+	}
+        });
+</pre>
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+      <tr>
+      	<td>
+	        <select>
+	            <option value='a'>Alice</option>
+	            <option value='b'>Bob</option>
+	            <option value='c'>Christian</option>
+	            <option value='d'>Daniel</option>
+	            <option value='e'>Elizabeth</option>
+	        </select>
+	     </td>
+      	<td>
+	        <select id="s10">
+	            <option value='a'>Alice</option>
+	            <option value='b'>Bob</option>
+	            <option value='c'>Christian</option>
+	            <option value='d'>Daniel</option>
+	            <option value='e'>Elizabeth</option>
+	        </select>
+	     </td>
+	   </tr>
+    </table>
+    
+	<h2>Changing the original select element content or selection</h2>
+	<p>
+	 	The plugin does not automatically syncronize any changes made to the original select back into the 
+	 	DDCL checkboxes after initial creation. If the original select needs to change, for example by 
+	 	adding some options, changing the text, or reordering, then the plugin must be destroyed 
+	 	and recreated to reflect the changes:
+	</p>
+	<blockquote>
+  	 	<code>
+		 	$("#s1").dropdownchecklist("destroy");<br />
+			$("#s1").val(...) // do something to the original select, for example select some options or change the options<br />
+			$("#s1").dropdownchecklist();<br />
+		</code>
+	</blockquote>
+	<p>
+	 	If the changes you wish to make to the original selector are simple adjustments to the 
+	 	<i>selected</i> state or the <i>disabled</i> state (no changing the text, adding items, moving items,
+	 	or deleting items), then you have a simplier (and faster) option to refresh the DDCL control
+	 	without destroying it:
+	</p>
+	<blockquote>
+  	 	<code>
+			$("#s1").val(...) // do something to the original select, for example, changing which items are selected<br />
+			$("#s1").dropdownchecklist("refresh");<br />
+		</code>
+	</blockquote>
+    <h2>Style</h2>
+    <p>
+    	All components constructed by <i>Dropdown CheckList</i> are 'well named' in terms of classes
+    	for CSS styling. You can choose to develop your own CSS, but the recommended method of applying
+    	style is to leverage the settings provided by JQuery ThemeRoller. By including the CSS for
+    	a given ThemeRoller theme, the <i>Dropdown CheckList</i> widget will match that theme's look.
+    </p>
+    <p>
+    	This page is styled using the ThemeRoller 'smoothness' theme.
+    </p>
+    <h2>Configuration Options</h2>
+    <dl>
+    	<dt>bgiframe: true/false</dt>
+    	<dd>
+    		This option should be set to `true` if the user wants to use the bgiframe plugin 
+    		(http://docs.jquery.com/Plugins/bgiframe)
+    		<br><i>FYI - I have no real knowledge of this feature and it is not included in any test</i>
+    	</dd>
+    	
+    	<dt>closeRadioOnClick: true/false</dt>
+    	<dd>
+    		When true, a single selector with radio button display will close the dropdown when
+    		any radio button is clicked.
+    		<br>
+    		For backwards compatibility, the default is 'false' so you must explicitly include this
+    		option in your configuration as 'true' if you want the control to auto-close.
+    	</dd>
+    	
+    	<dt>emptyText: 'string'</dt>
+    	<dd>
+    		The <b>emptyText</b> option supplies the string to display if no options are currently
+    		selected. This string can include html formatting.
+    	</dd>
+    	
+    	<dt>explicitClose: 'string'</dt>
+    	<dd>
+    		The <b>explicitClose</b> option creates a special item at the end of the list that
+    		the user can click on to close the control. This string can include html formatting.
+    	</dd>
+    	
+    	<dt>firstItemChecksAll: true/false/'exclusive'</dt>
+    	<dd>
+    		The <b>firstItemChecksAll</b> option indicates if the first item in 
+    		the list acts as the all/nothing option.  If set to 'exclusive', then when the
+    		first item is checked, than all others are automatically unchecked.
+    	</dd>
+    	
+    	<dt>forceMultiple: true/false</dt>
+    	<dd>
+    		The <b>forceMultiple</b> option, when true, will treat the selector as having 
+    		multiple selections even if the underlying html is not so marked.
+    		<br><i>This option does NOT work with IE 6</i>
+    	</dd>
+    	
+    	<dt>icon: { keyed-list }</dt>
+    	<dd>
+    		The <b>icon</b> option allows you to include a ThemeRoller icon in the text display area.
+    		An empty list activates the icon with all default values, which are left placement, and
+    		the east/south triangles as the icons. The allowed options in the keyed-list are:
+    		<ul>
+    			<li>placement: 'left' or 'right'</li>
+    			<li>toOpen: 'string name of ThemeRoller icon' (default is 'ui-icon-triangle-1-e')
+    			<li>toClose: 'string name of ThemeRoller icon' (default is 'ui-icon-triangle-1-s')
+    		</ul>
+    	</dd>
+    	
+    	<dt>maxDropHeight: integerValue</dt>
+    	<dd>
+    		The <b>maxDropHeight</b> option specifies the maximum height in pixels that the dropdown
+    		display is allowed to reach. Dropdowns taller than this maximum will have scrolling 
+    		activated.
+    		<br>
+    		NOTE that it is best to include a 'width' when using maxDropHeight to leave space for
+    	    vertical scroll bars.
+    	</dd>
+    	
+    	<dt>minWidth: integerVaue</dt>
+    	<dd>
+    		The <b>minWidth</b> option specifies the minimum width in pixels of the text display area.
+    		The width is only applied if there is no explicit 'width' value and if the calculated
+    		width of the option items is less than the minimum.
+    	</dd>
+    	
+    	<dt>onComplete: function(selector) {}</dt>
+    	<dd>
+    		The <b>onComplete</b> option defines a callback function invoked when the user is 
+    		finished making their selections and then closes the dropdown.  It is called with a 
+    		single argument which is the underlying html &lt;SELECT&gt; element.
+    		<br>
+    		It would be desirable to use the standard 'blur' processing on the selector, but I
+    		have not been able to get blur to fire. If anyone has insight into this issue, please
+    		post an issue to help me out.
+    	</dd>
+    	
+    	<dt>onItemClick: function(checkbox,selector) {}</dt>
+    	<dd>
+    		The <b>onItemClick</b> option defines a callback function invoked when the user clicks
+    		on any item.  It is called with a single argument which is the dynamically generated
+    		checkbox element.
+    		<br>
+    		The callback can 'reject' the click by throwing any error.
+    	</dd>
+    	
+    	<dt>positionHow: 'absolute' or 'relative'</dt>
+    	<dd>
+    		The <b>positionHow</b> option controls how the pop-up is positioned on the page.  If
+    		'absolute' (the default), then the pop-up is positioned absolutely to ride over the
+    		normal page contents.  If 'relative', then the pop-up is included within the page 
+    		contents, relative to its parent container.  It consumes space on the page rather
+    		than flying over it, but it will scroll if the parent element is scrolled (<i>Except
+    		for IE6 and IE7</i>).
+    	</dd>
+    	
+    	<dt>textFormatFunction: function(options) { return 'string'; }</dt>
+    	<dd>
+    		The <b>textFormatFunction</b> option defines a callback function used to format the display
+    		text. It is called with a single argument that is the list selector options. The return
+    		string can include html formatting.
+    	</dd>
+    	
+    	<dt>width: integerValue</dt>
+    	<dd>
+    		The <b>width</b> option specifies the desired width in pixels of the text display area.
+    		If not given, the width is calculated from the width of the option items. The width may
+    		be wider than the items, to provide extra room for icons or the display of multiple items.
+    		The width may be narrower than the items to account for dropdowns with very long names.
+    	</dd>
+    	    	
+    	<dt>zIndex: integerValue</dt>
+    	<dd>
+    		The <b>zIndex</b> option specifies the explict z-index value to apply to the pop-up
+    		container, to help it display properly with other components on the page. This is of
+    		particular value if you have other active jQuery widgets.
+    	</dd>
+    </dl>
+    <h2>Use of IDs</h2>
+    <p>
+    	<i>Dropdown CheckList</i> generates two basic components that are inserted into the document.
+    	There is a <i>control wrapper</i> which is positioned in place of the original selector and
+    	acts like the &lt;select&gt; item on the page. And there is the <i>drop-down wrapper</i> 
+    	which is only visible when the control wrapper is 'open' and is positioned under the control.
+    </p>
+    <p>
+    	Both of these items are assigned an id, which you can use in other jQuery processing to 
+    	locate and alter the items.
+    	<dl>
+    		<dt>Control Wrapper</dt>
+    		<dd>
+    			The control wrapper has a generated id of the form "ddcl-XXX", where the XXX is
+    			either 1) the assigned id of underlying &lt;select&gt;, or 2) an incrementing 
+    			counter when the &lt;select&gt; has no id assigned.
+    		</dd>
+    		<dt>Drop-down Wrapper</dt>
+    		<dd>
+    			The drop-down wrapper has a generated id of the form "ddcl-XXX-ddw", where the
+    			XXX matches the XXX of the control wrapper.
+    		</dd>
+    	</dl>
+    	These ids must be unique and <i>Dropdown CheckList</i> assumes no other elements on the 
+    	page have an id that conflicts.
+    </p>
+    <h2>Limitations</h2>
+    <ul>
+    	<li>Keyboard / Tab processing is iffy at best. I have found no reliable way of detecting 
+    	loss of focus to another component in order to force an auto-close of the dropdown.</li>
+    	<li>&lt;LABEL&gt; tags associated with the underlying &lt;SELECT&gt; just do not work, 
+    	since the &lt;LABEL&gt; is wired to the original &lt;SELECT&gt;, not the DDCL component. 
+    	In particular, do not include the original &lt;SELECT&gt; within the span of the 
+    	&lt;LABEL&gt; tag itself.</li>
+		<li>IFrame support is questionable</li>
+		<li>DDCL calculates size and position on widget initialization.  This only operates 
+		properly if the wrapper elements containing the &lt;SELECT&gt; are <b>not</b> hidden.
+		Therefore, the use of DDCL within dynamic components that hide/show the wrapper element
+		is problematic.</li>
+	</ul>
+	<h2>History</h2>
+	<p>
+	 	The full change history (including references to issue numbers) is avaiable 
+	 	<a href="http://dropdown-check-list.googlecode.com/svn/trunk/src/changes.txt" target='_blank'>here</a>.
+	 	Some highlights are listed below:
+	</p>
+	<dl>
+		<dt>Version 1.4</dt>
+		<dd><ul>
+			<li>Compatibility with jQuery 1.6</li>
+			<li>Expancded onItemClick support</li>
+			<li>'exclusive' first item checks all</li>
+		</ul></dd>
+		<dt>Version 1.3</dt>
+		<dd><ul>
+			<li>Recognize 'styled' options and other explicit text</li>
+			<li>onItemClick support</li>
+		</ul></dd>
+		<dt>Version 1.2 (never made it out of QA)</dt>
+		<dd><ul>
+			<li>Correct positioning problems with relative parent</li>
+			<li>explicitClose option</li>
+			<li>zIndex option</li>
+		</ul></dd>
+		<dt>Version 1.1</dt>
+		<dd><ul>
+			<li>jQuery 1.4.2, jQuery ui 1.8.4</li>
+			<li>"refresh" function to synch DDCL control with simple selected/disabled changes made
+				to underlying &lt;select&gt;</li>
+		</ul></dd>
+		<dt>Version 1.0</dt>
+		<dd><ul>
+			<li>jQuery 1.3.2, jQuery ui 1.7.2</li>
+			<li>ThemeRoller based styling</li>
+			<li>better support for multiple controls on single page</li>
+		</ul></dd>
+	</dl>
+	<h2>Have problems using the plugin?</h2>
+	<p>
+	 	Have a look at the <a href="http://code.google.com/p/dropdown-check-list/issues/list" 
+	 	target='_blank'>issue list</a>. You may want to search through 'closed' as well as 'open' issues
+	 	in case an issue has been identified as something we choose not to fix.
+	</p>
+</div>
+</body>
+</html>
+

@@ -302,6 +302,8 @@
 		'profile_manager:datepicker:input:localisation' => '', // change it to the available localized js files in custom_profile_fields/vendors/jquery.datepick.package-3.5.2 (e.g. jquery.datepick-nl.js), leave blank for default 
 		'profile_manager:datepicker:input:dateformat' => '%m/%d/%Y', // Notation is based on strftime, but must result in output like http://keith-wood.name/datepick.html#format
 		'profile_manager:datepicker:input:dateformat_js' => 'mm/dd/yyyy', // Notation is based on strftime, but must result in output like http://keith-wood.name/datepick.html#format
+
+		'profile_manager:input:multi_select:empty_text' => 'Please select ...',
 	
 		// Edit profile => profile type selector
 		'profile_manager:profile:edit:custom_profile_type:label' => "Select your profile type",

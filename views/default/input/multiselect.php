@@ -17,10 +17,9 @@
     // only include js once
     if (empty($multiselect)) {
 		?>
-			<link rel="stylesheet" type="text/css" href="<?php echo $vars['url'];?>mod/profile_manager/vendors/dropdown-check-list.0.5/ui.dropdownchecklist.css" />
+			<link rel="stylesheet" type="text/css" href="<?php echo $vars['url'];?>mod/profile_manager/vendors/dropdown-check-list.1.4/css/ui.dropdownchecklist.standalone.css" />
 			
-			<script type="text/javascript" src="<?php echo $vars['url'];?>mod/profile_manager/vendors/dropdown-check-list.0.5/ui.core.js"></script>
-			<script type="text/javascript" src="<?php echo $vars['url'];?>mod/profile_manager/vendors/dropdown-check-list.0.5/ui.dropdownchecklist.js"></script>
+			<script type="text/javascript" src="<?php echo $vars['url'];?>mod/profile_manager/vendors/dropdown-check-list.1.4/js/ui.dropdownchecklist-1.4-min.js"></script>
 		<?php 
 		$multiselect = 1;
     } else {
@@ -32,7 +31,7 @@
 ?>
 <script type="text/javascript">
 	$(document).ready(function() {
-    	$("#<?php echo $internal_id;?>").dropdownchecklist({ width: 200});
+    	$("#<?php echo $internal_id;?>").dropdownchecklist({emptyText: "<?php echo elgg_echo("profile_manager:input:multi_select:empty_text");?>", width: 200});
     });
 </script>
 <div>

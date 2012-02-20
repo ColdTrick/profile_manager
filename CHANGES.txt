@@ -1,12 +1,13 @@
 = Version history =
 
-x.x:
+7.1 (2012-02-12):
 - changed: cleanup deprecated Profile Manager code (Members Search and NoIndex)
 - changed: more code is now using the latest Elgg 1.8 functions
 - changed: moved version history to CHANGES.txt
 - fixed: default category should not be shown if there is only the default category on edit profile
 - fixed: incorrect check for unique metadatanames
 - fixed: configuration backup did not export blank_available option
+- fixed: multiselect not working correctly (updated to latest version)
 
 7.0 (2011-12-1):
 

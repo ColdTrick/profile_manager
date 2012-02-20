@@ -1,0 +1,1960 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>jQuery Dropdown CheckList - TESTING</title>
+    <!-- Use a JQuery ThemeRoller theme, in this case 'smoothness' -->
+    <link rel="stylesheet" type="text/css" href="smoothness-1.8.13/jquery-ui-1.8.13.custom.css">
+    <link rel="stylesheet" type="text/css" href="../src/ui.dropdownchecklist.themeroller.css">
+    <!--  <link rel="stylesheet" type="text/css" href="../src/ui.dropdownchecklist.standalone.css">  -->
+    
+    <style>
+table td { vertical-align: top }
+dd { padding-bottom: 15px }
+    </style>
+    
+    <!-- Include the basic JQuery support (core and ui) -->
+    <script type="text/javascript" src="jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.8.13.custom.min.js"></script>
+    
+    <!-- Include the DropDownCheckList supoprt -->
+    <script type="text/javascript" src="../src/ui.dropdownchecklist.js"></script>
+    
+    <!-- Apply dropdown check list to the selected items  -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".s1").dropdownchecklist();
+            $(".s3").dropdownchecklist( { icon: {}, width: 150 } );
+            $(".s4").dropdownchecklist( { icon: {}, maxDropHeight: 150, width: 150 } );
+            $(".s4a").dropdownchecklist( { icon: { placement: 'right', toOpen: 'ui-icon-arrowthick-1-s'
+                                            , toClose: 'ui-icon-arrowthick-1-n' }
+            								, maxDropHeight: 150, width: 150 } );
+            $("#s5").dropdownchecklist( { firstItemChecksAll: true } );
+            $("#s5a").dropdownchecklist( { firstItemChecksAll: true, explicitClose: '<i>...close</i>' } );
+            $("#s5b").dropdownchecklist( { firstItemChecksAll: 'exclusive' } );
+            $("#s5c").dropdownchecklist( { firstItemChecksAll: 'exclusive', explicitClose: '<i>...close</i>' } );
+            $(".s6").dropdownchecklist();
+            $("#s7").dropdownchecklist();
+            $("#s7a").dropdownchecklist( { closeRadioOnClick: true } );
+            $("#s8").dropdownchecklist( { emptyText: "Please Select...", width: 150 } );
+            $("#s8a").dropdownchecklist( { emptyText: "<i>please select...</i>", width: 150 } );
+            $("#s9").dropdownchecklist( { textFormatFunction: function(options) {
+                var selectedOptions = options.filter(":selected");
+                var countOfSelected = selectedOptions.size();
+                switch(countOfSelected) {
+                    case 0: return "Nobody";
+                    case 1: return selectedOptions.text();
+                    case options.size(): return "Everybody";
+                    default: return countOfSelected + " People";
+                }
+            } });
+            $("#s9a").dropdownchecklist( { textFormatFunction: function(options) {
+                var selectedOptions = options.filter(":selected");
+                var countOfSelected = selectedOptions.size();
+                switch(countOfSelected) {
+                    case 0: return "<i>Nobody</i>";
+                    case 1: return selectedOptions.text();
+                    case options.size(): return "<span style='color:red;font-weight:bold'>Everybody</span>";
+                    default: return countOfSelected + " People";
+                }
+            } });
+            $(".s10").dropdownchecklist( { forceMultiple: true, onComplete: function(selector) {
+			  	var values = "";
+			  	for( i=0; i < selector.options.length; i++ ) {
+			    	if (selector.options[i].selected && (selector.options[i].value != "")) {
+			      		if ( values != "" ) values += ";";
+			      		values += selector.options[i].value;
+			    	}
+			  	}
+			  	alert( values );
+            } });
+            $("#s10b").dropdownchecklist( { onItemClick: function(checkbox,selector) {
+			  	alert("value " + checkbox.val() + ", is checked: " + checkbox.prop("checked"));
+            } });
+            $("#s10c").dropdownchecklist( {
+onItemClick: function(checkbox, selector){
+	var justChecked = checkbox.prop("checked");
+	var checkCount = (justChecked) ? 1 : -1;
+	for( i = 0; i < selector.options.length; i++ ){
+		if ( selector.options[i].selected ) checkCount += 1;
+	}
+    if ( checkCount > 3 ) {
+		alert( "Limit is 3" );
+		throw "too many";
+	}
+}
+            });
+            
+            $(".s11").dropdownchecklist( { firstItemChecksAll: true } );
+            $(".s12").dropdownchecklist( { width: 250 } );
+            $(".s13").dropdownchecklist( { width: 150, onComplete: function(selector) {
+			  	var values = "";
+			  	for( i=0; i < selector.options.length; i++ ) {
+			    	if (selector.options[i].selected && (selector.options[i].value != "")) {
+			      		if ( values != "" ) values += ";";
+			      		values += selector.options[i].value;
+			    	}
+			  	}
+			  	alert( values );
+            } });
+            $("#s14").dropdownchecklist( );
+            $("#s14a").dropdownchecklist( { positionHow: 'relative' } );
+            $("#s15").dropdownchecklist( );
+            $("#s15a").dropdownchecklist( { positionHow: 'relative' } );
+            
+            $("#s16").dropdownchecklist( { } );
+            $("#s16a").dropdownchecklist( { } );
+			$("#show16a").click(function() { 
+				$("#div16a").show(); 
+			} );
+			$("#hide16a").click(function() { 
+				$("#div16a").hide(); 
+			} );
+			$("#show16b").click(function() { 
+				$("#div16b").show(); 
+				$("#s16b").dropdownchecklist( { } ); 
+			} );
+			$("#hide16b").click(function() { 
+      			$("#s16b").dropdownchecklist("destroy");
+				$("#div16b").hide(); 
+			} );
+			
+            $("#s17").dropdownchecklist( { width: 200 } );
+            $("#s17a").dropdownchecklist( { width: 200, zIndex: 999 } );
+            $("#theAccordian").accordion({ fillSpace: true });
+            $(".rangeSlider").slider({
+                range: true,
+                min: 0,
+                max: 1000,
+                values: [0, 1000]
+            });
+            $("#s17b").dropdownchecklist( { width: 200, zIndex: 999 } );
+            $("#theDialog").dialog( { autoOpen: false } );
+			$("#show17b").click(function() { 
+				$("#theDialog").dialog( "open" ); 
+			} );
+            
+            
+            $("#s20a").dropdownchecklist( { width: 150 } );
+            $("#s20b").dropdownchecklist( { width: 150, maxDropHeight: 200, firstItemChecksAll: 'exclusive' } );			
+        });
+    </script>
+    <meta name="description" 
+    content="The Dropdown Check List jQuery widget TESTCASE page">
+</head>
+<body>
+<div id="content">
+    <h1>jQuery <em>Dropdown Check List TESTCASES</em></h1>
+    <p>
+        The <i>Dropdown CheckList</i> jQuery widget transforms a regular &lt;SELECT&gt; html element into a 
+        combo box with a text display of the selected elements and a dropdown of options. The plugin is hosted on 
+        <a href="http://code.google.com/p/dropdown-check-list/">google code</a>.
+    </p>
+    <p>
+        Copyright &copy; Adrian Tosca &lt;adrian.tosca@gmail.com&gt;, Ittrium, LLC &lt;womohundro@ittrium.com&gt;
+    </p>
+    <p>
+        Licensed like jQuery, see <a href="http://docs.jquery.com/Licensing">http://docs.jquery.com/Licensing</a>.
+    </p>
+    <h2>TestCases</h2>
+    <p>
+    	This page contains various test cases used to exercise DDCL.
+    	<br>
+    	<b>Please Note</b> that this page directly references the latest version checked into SVN, not
+    	the current release point contained in the download .zip. It is used to test pending changes 
+    	and the samples here may not work on the stable release. Click on the <b>version</b> button 
+    	below to see the active version.
+    	<br>
+    	<b>Please Note</b> that this page is using jQuery 1.6.1, ui 1.8.13.
+    	<br>
+    	<b>Please Note</b> as of Version 1.2, all testing will be done with html pages defined for
+    	<i>strict</i> mode (DOCTYPE http://www.w3.org/TR/html4/strict.dtd). This is to better reflect
+    	modern standards and browsers.
+    </p>
+    <p>
+        The widget has been tested with browsers
+        <ul>
+	        <li>IE 6 / 7 / 8</li>
+	        <li>Firefox 3</li>
+	        <li>Safari 5</li>
+	        <li>Chrome 6</li>
+        </ul>
+        <input type='button' value='version' onclick='$("#s1").dropdownchecklist("version");'>
+    </p>
+    <table>
+      <tr>
+      	<td colspan='3'>
+    		<h3>Simple Multi-selector</h3>
+    		<div>Items may be preslected, or not</div>
+		    <blockquote>
+		    	<code>
+		            $(".s1").dropdownchecklist();
+		        </code>
+	        </blockquote>
+    	</td>
+      </tr>
+      <tr>
+      	<td>
+	  		<span>Naked Selector</span><br>
+	        <select multiple="multiple">
+	            <option>Low</option>
+	            <option>Medium</option>
+	            <option>High</option>
+	        </select>
+    	</td>
+      	<td>
+	  		<span>Nothing preselected</span><br>
+	  		<span>(but with explicit tabindex)</span><br>
+	        <select id="s1" class="s1" multiple="multiple" tabindex='8'>
+	            <option>Low</option>
+	            <option>Medium</option>
+	            <option>High</option>
+	        </select>
+    	</td>
+	  	<td>
+	  		<span>Medium and High are preselected</span><br>
+	        <select id="s1a" class="s1" multiple="multiple">
+	            <option>Low</option>
+	            <option selected="selected">Medium</option>
+	            <option selected="selected">High</option>
+	        </select>
+	  	</td>
+	  </tr>
+	  <tr>
+	  	<td colspan='3'>
+		    <h3>Long text, shorter control</h3>
+		    <div>
+		        The 'width' option allows you to set a fixed width on the control even if the 
+		        dropdown list is wider. The dropdown will keep its size so the items in the list 
+		        are correctly visible.
+		    <br>
+		    	Include icon support via ThemeRoller
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $(".s3").dropdownchecklist({ icon: {}, width: 150 });
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td>
+	  		<span>Naked Selector(styled)</span><br>
+	        <select multiple="multiple">
+	            <option style='color:green'>Pneumonoultramicroscopicsilicovolcanoconiosis</option>
+	            <option style='color:blue'>Pseudopseudohypoparathyroidism</option>
+	            <option disabled>Floccinaucinihilipilification</option>
+	            <option style='color:cyan'>Antidisestablishmentarianism</option>
+	            <option style='color:orange'>Honorificabilitudinitatibus</option>
+	        </select>
+	  	</td>
+	  	<td>
+	  		<span>Narrow text, Wide items</span><br>
+	        <select id="s3" class="s3" multiple="multiple">
+	            <option>Pneumonoultramicroscopicsilicovolcanoconiosis</option>
+	            <option>Pseudopseudohypoparathyroidism</option>
+	            <option disabled>Floccinaucinihilipilification</option>
+	            <option>Antidisestablishmentarianism</option>
+	            <option>Honorificabilitudinitatibus</option>
+	        </select>
+	  	</td>
+	  	<td>
+	  		<span>Narrow text, Wide items(styled)</span><br>
+	        <select id="s3a" class="s3" multiple="multiple">
+	            <option style='color:green'>Pneumonoultramicroscopicsilicovolcanoconiosis</option>
+	            <option style='color:blue'>Pseudopseudohypoparathyroidism</option>
+	            <option disabled>Floccinaucinihilipilification</option>
+	            <option style='color:cyan'>Antidisestablishmentarianism</option>
+	            <option style='color:orange'>Honorificabilitudinitatibus</option>
+	        </select>
+	  	</td>
+	  </tr>
+	  <tr>
+	  	<td colspan='3'>
+		    <h3>Long list of options, with scroll and disabled items</h3>
+    		<div>
+        		The 'maxDropHeight' option allows you to set a fixed height of the dropdown list.
+        		This is usefull when there is a big number of items. The dropdown list is scrollable 
+        		to allow selection of all the items. Some select options have been disabled.
+        	<br>
+        		The height acts as a maximum, not a fixed value.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $(".s4").dropdownchecklist({ maxDropHeight: 150 });
+		        </code>
+   			</blockquote>
+   		</td>
+   	  </tr>
+   	  <tr>
+   	  	<td>
+	  		<span>Naked Selector</span><br>
+	        <select multiple="multiple">
+	            <option>Aries</option>
+	            <option>Taurus</option>
+	            <option disabled="disabled">Gemini</option>
+	            <option disabled="disabled">Cancer</option>
+	            <option>Leo</option>
+	            <option>Virgo</option>
+	            <option>Libra</option>
+	            <option>Scorpius</option>
+	            <option>Ophiuchus</option>
+	            <option>Sagittarius</option>
+	            <option>Capricornus</option>
+	            <option>Aquarius</option>
+	            <option>Pisces</option>
+	        </select>
+   		</td>
+   	  	<td>
+	  		<span>Drop down list taller than the maximum, default icon</span><br>
+	        <select id="s4" class="s4" multiple="multiple">
+	            <option>Aries</option>
+	            <option>Taurus</option>
+	            <option disabled="disabled">Gemini</option>
+	            <option disabled="disabled">Cancer</option>
+	            <option>Leo</option>
+	            <option>Virgo</option>
+	            <option>Libra</option>
+	            <option>Scorpius</option>
+	            <option>Ophiuchus</option>
+	            <option>Sagittarius</option>
+	            <option>Capricornus</option>
+	            <option>Aquarius</option>
+	            <option>Pisces</option>
+	        </select>
+   		</td>
+   	  	<td>
+	  		<span>Drop down list shorter that the maximum, custom icon</span><br>
+	        <select id="s4a" class="s4a" multiple="multiple">
+	            <option>Aries</option>
+	            <option>Taurus</option>
+	        </select>
+   		</td>
+   	  </tr>
+   	  <tr>
+   	  	<td colspan='3'>
+		    <h3>Option to let the first item in list check all items</h3>
+		    <div>
+		        The 'firstItemChecksAll' option allows you to attach a special behavior to the first item 
+		        in the list. If the item is checked, all items in the list are checked. 
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $(".s5").dropdownchecklist({ firstItemChecksAll: true });
+		        </code>
+		    </blockquote>
+    	</td>
+      </tr>
+      <tr>
+      	<td>
+	  		<span>Naked Selector</span><br>
+	        <select multiple="multiple">
+	            <option>(all)</option>
+	            <option>Banana Nut</option>
+	            <option disabled>Black Walnut</option>
+	            <option disabled>Burgundy Cherry</option>
+	            <option>Butter Pecan</option>
+	            <option>Chocolate Chip</option>
+	            <option>Chocolate Fudge Truffle</option>
+	            <option>Chocolate Mint Chip</option>
+	            <option>Chocolate Peanut Butter</option>
+	            <option>Coconut-Pineapple</option>
+	            <option>Coffee</option>
+	            <option>Coffee Caramel</option>
+	            <option>Coffee Chip</option>
+	            <option>Cookie Dough</option>
+	            <option>Cookies 'n Cream</option>
+	            <option>Dutch Chocolate</option>
+	            <option>English Toffee</option>
+	            <option>Fudgee Peanut Butter Cup</option>
+	            <option>Macadamia Nut</option>
+	            <option>Mocha Almond Fudge</option>
+	            <option>Nutty Coconut</option>
+	            <option>Pistachio Nut</option>
+	            <option>Pralines and Cream</option>
+	            <option>Rocky Road</option>
+	            <option>Root Beer Float</option>
+	            <option>Strawberry</option>
+	            <option>Strawberry Cheesecake</option>
+	            <option>Turkish Coffee</option>
+	            <option>Vanilla</option>
+	        </select>
+	    </td>
+      	<td>
+	  		<span>All as first option, NOT prechecked</span><br>
+	        <select id="s5" class="s5" multiple="multiple">
+	            <option>(all)</option>
+	            <option>Banana Nut</option>
+	            <option disabled>Black Walnut</option>
+	            <option disabled>Burgundy Cherry</option>
+	            <option>Butter Pecan</option>
+	            <option>Chocolate Chip</option>
+	            <option>Chocolate Fudge Truffle</option>
+	            <option>Chocolate Mint Chip</option>
+	            <option>Chocolate Peanut Butter</option>
+	            <option>Coconut-Pineapple</option>
+	            <option>Coffee</option>
+	            <option>Coffee Caramel</option>
+	            <option>Coffee Chip</option>
+	            <option>Cookie Dough</option>
+	            <option>Cookies 'n Cream</option>
+	            <option>Dutch Chocolate</option>
+	            <option>English Toffee</option>
+	            <option>Fudgee Peanut Butter Cup</option>
+	            <option>Macadamia Nut</option>
+	            <option>Mocha Almond Fudge</option>
+	            <option>Nutty Coconut</option>
+	            <option>Pistachio Nut</option>
+	            <option>Pralines and Cream</option>
+	            <option>Rocky Road</option>
+	            <option>Root Beer Float</option>
+	            <option>Strawberry</option>
+	            <option>Strawberry Cheesecake</option>
+	            <option>Turkish Coffee</option>
+	            <option>Vanilla</option>
+	        </select>
+	        <br>
+	         <span>All as first option, EXCLUSIVE </span><br>
+	        <select id="s5b" class="s5" multiple="multiple">
+	            <option>(all)</option>
+	            <option>Banana Nut</option>
+	            <option disabled>Black Walnut</option>
+	            <option disabled>Burgundy Cherry</option>
+	            <option>Butter Pecan</option>
+	            <option>Chocolate Chip</option>
+	            <option>Chocolate Fudge Truffle</option>
+	            <option>Chocolate Mint Chip</option>
+	            <option>Chocolate Peanut Butter</option>
+	        </select>
+	        
+	    </td>
+      	<td>
+	  		<span>All as first option, prechecked (with explicit close)</span><br>
+	        <select id="s5a" class="s5a" multiple="multiple">
+	            <option selected='selected'>(all)</option>
+	            <option>Banana Nut</option>
+	            <option disabled>Black Walnut</option>
+	            <option disabled>Burgundy Cherry</option>
+	            <option>Butter Pecan</option>
+	            <option>Chocolate Chip</option>
+	            <option>Chocolate Fudge Truffle</option>
+	            <option>Chocolate Mint Chip</option>
+	            <option>Chocolate Peanut Butter</option>
+	            <option>Coconut-Pineapple</option>
+	            <option>Coffee</option>
+	            <option>Coffee Caramel</option>
+	            <option>Coffee Chip</option>
+	            <option>Cookie Dough</option>
+	            <option>Cookies 'n Cream</option>
+	            <option>Dutch Chocolate</option>
+	            <option>English Toffee</option>
+	            <option>Fudgee Peanut Butter Cup</option>
+	            <option>Macadamia Nut</option>
+	            <option>Mocha Almond Fudge</option>
+	            <option>Nutty Coconut</option>
+	            <option>Pistachio Nut</option>
+	            <option>Pralines and Cream</option>
+	            <option>Rocky Road</option>
+	            <option>Root Beer Float</option>
+	            <option>Strawberry</option>
+	            <option>Strawberry Cheesecake</option>
+	            <option>Turkish Coffee</option>
+	            <option>Vanilla</option>
+	        </select>
+	        <br>
+	  		<span>All as first option EXCLUSIVE, prechecked (with explicit close)</span><br>
+	        <select id="s5c" class="s5a" multiple="multiple">
+	            <option selected='selected'>(all)</option>
+	            <option>Banana Nut</option>
+	            <option disabled>Black Walnut</option>
+	            <option disabled>Burgundy Cherry</option>
+	            <option>Butter Pecan</option>
+	            <option>Chocolate Chip</option>
+	            <option>Chocolate Fudge Truffle</option>
+	            <option>Chocolate Mint Chip</option>
+	            <option>Chocolate Peanut Butter</option>
+	        </select>
+	    </td>
+	  </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>Select with groups</h3>
+		    <div>
+		        The existing select element has groups (optgroup elements). The options are listed 
+		        in groups as with original select element.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $(".s6").dropdownchecklist();
+		        </code>
+		    </blockquote>
+    	</td>
+      </tr>
+      <tr>
+      	<td>
+	  		<span>Naked Selector</span><br>
+	        <select multiple="multiple">
+				<optgroup label="Letters">
+					<option>A</option>
+					<option>B & C</option>
+					<option selected="selected">D&F</option>
+					<option>Test1&Test2</option>
+				</optgroup>
+	            <optgroup label="Numbers">
+					<option>1</option>
+					<option>2</option>
+					<option selected="selected">3</option>
+				</optgroup>
+	            <optgroup disabled label="Disabled">
+					<option>x</option>
+					<option>y</option>
+					<option>z</option>
+				</optgroup>
+	            <optgroup>
+					<option>no label group - #1</option>
+					<option>no lable group - #2</option>
+				</optgroup>
+	        </select>
+	    </td>
+      	<td>
+	  		<span>With option groups</span><br>
+	        <select id="s6" class="s6" multiple="multiple">
+				<optgroup label="Letters">
+					<option>A</option>
+					<option>B & C</option>
+					<option selected="selected">D&F</option>
+					<option>Test1&Test2</option>
+				</optgroup>
+	            <optgroup label="Numbers">
+					<option>1</option>
+					<option>2</option>
+					<option selected="selected">3</option>
+				</optgroup>
+	        </select>
+	    </td>
+      	<td>
+	  		<span>With option groups (disabled)</span><br>
+	        <select id="s6a" class="s6" multiple="multiple">
+				<optgroup label="Letters">
+					<option>A</option>
+					<option>B & C</option>
+					<option selected="selected">D&F</option>
+					<option>Test1&Test2</option>
+				</optgroup>
+	            <optgroup label="Numbers">
+					<option>1</option>
+					<option>2</option>
+					<option selected="selected">3</option>
+				</optgroup>
+	            <optgroup disabled label="Disabled">
+					<option>x</option>
+					<option>y</option>
+					<option>z</option>
+				</optgroup>
+	            <optgroup>
+					<option>no label group - #1</option>
+					<option>no lable group - #2</option>
+				</optgroup>
+	        </select>
+	    </td>
+	  </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>Single select with radio buttons instead of checkboxes</h3>
+		    <div>
+		        If the select element does not have an multiple attribute then the plugin will 
+		        display radiobuttons in the list.
+		        <br>
+		        Note that you can include an empty placeholder as the first item to
+		        suppress the browser auto-select.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $("#s7").dropdownchecklist();
+		            $("#s7a").dropdownchecklist({closeRadioOnClick: true });
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+      <tr>
+      	<td>
+	  		<span>Naked Selector</span><br>
+	        <select>
+	            <option></option>
+	            <option>Aries</option>
+	            <option>Taurus</option>
+	            <option>Gemini</option>
+	            <option>Cancer</option>
+	            <option>Leo	Leo</option>
+	            <option>Virgo</option>
+	            <option>Libra</option>
+	            <option>Scorpius</option>
+	            <option>Ophiuchus</option>
+	            <option>Sagittarius</option>
+	            <option>Capricornus</option>
+	            <option>Aquarius</option>
+	            <option>Pisces</option>
+	        </select>
+	    </td>
+      	<td>
+	  		<span>As radio buttons</span><br>
+	        <select id="s7" class="s7">
+	            <option></option>
+	            <option>Aries</option>
+	            <option>Taurus</option>
+	            <option>Gemini</option>
+	            <option>Cancer</option>
+	            <option>Leo	Leo</option>
+	            <option>Virgo</option>
+	            <option>Libra</option>
+	            <option>Scorpius</option>
+	            <option>Ophiuchus</option>
+	            <option>Sagittarius</option>
+	            <option>Capricornus</option>
+	            <option>Aquarius</option>
+	            <option>Pisces</option>
+	        </select>
+	    </td>
+      	<td>
+	  		<span>Close on Click</span><br>
+	        <select id="s7a" class="s7">
+	            <option></option>
+	            <option>Aries</option>
+	            <option>Taurus</option>
+	            <option>Gemini</option>
+	            <option>Cancer</option>
+	            <option>Leo	Leo</option>
+	            <option>Virgo</option>
+	            <option>Libra</option>
+	            <option>Scorpius</option>
+	            <option>Ophiuchus</option>
+	            <option>Sagittarius</option>
+	            <option>Capricornus</option>
+	            <option>Aquarius</option>
+	            <option>Pisces</option>
+	        </select>
+	    </td>
+	  </tr>
+	  <tr>
+	  	<td colspan='3'>
+		    <h3>Empty default text</h3>
+		    <div>
+		        The 'emptyText' option allows you to set the text that is displayed when no 
+		        items are selected. You can include html markup in the string, which allows
+		        you full control over any special styling you may want
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $("#s8").dropdownchecklist({ emptyText: "Please select ...", width: 150 });
+<br>	            $("#s8").dropdownchecklist({ emptyText: "&lt;i&gt;please select ...&lt;/i&gt;", width: 150 });
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+	  <tr>
+    	<td>
+	  		<span>Naked Selector</span><br>
+	        <select multiple="multiple">
+	            <option>Low</option>
+	            <option>Medium</option>
+	            <option>High</option>
+	        </select>
+	    </td>
+    	<td>
+	  		<span>Explicit empty text</span><br>
+	        <select id="s8" class="s8" multiple="multiple">
+	            <option>Low</option>
+	            <option>Medium</option>
+	            <option>High</option>
+	        </select>
+	    </td>
+    	<td>
+	  		<span>Explicit empty text (styled)</span><br>
+	        <select id="s8a" class="s8" multiple="multiple">
+	            <option>Low</option>
+	            <option>Medium</option>
+	            <option>High</option>
+	        </select>
+	    </td>
+	  </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>Function for formatting the displayed text</h3>
+		    <div>
+		        The 'textFormatFunction' option allows you to supply a formatting function used to 
+		        display the control text. You can then customize the text display in any way you
+		        wish. The callback function is run with a single argument that is the list of 
+		        selector options.
+		    </div>
+		    <blockquote>
+		    	<code>
+<pre>
+    $(".s9").dropdownchecklist({ textFormatFunction: function(options) {
+        var selectedOptions = options.filter(":selected");
+        var countOfSelected = selectedOptions.size();
+        var size = options.size();
+        switch(countOfSelected) {
+            case 0: return "Nobody";
+            case 1: return selectedOptions.text();
+            case size: return "Everybody";
+            default: return countOfSelected + " People";
+        }
+    } });
+</pre>
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+      <tr>
+      	<td>
+	  		<span>Naked Selector</span><br>
+	        <select multiple="multiple">
+	            <option>Alice</option>
+	            <option>Bob</option>
+	            <option>Christian</option>
+	            <option>Daniel</option>
+	        </select>
+	     </td>
+      	<td>
+	  		<span>Custom display text handling</span><br>
+	        <select id="s9" class="s9" multiple="multiple">
+	            <option>Alice</option>
+	            <option>Bob</option>
+	            <option>Christian</option>
+	            <option>Daniel</option>
+	        </select>
+	     </td>
+      	<td>
+	  		<span>Custom display text (styled)</span><br>
+	        <select id="s9a" class="s9" multiple="multiple">
+	            <option>Alice</option>
+	            <option>Bob</option>
+	            <option>Christian</option>
+	            <option>Daniel</option>
+	        </select>
+	     </td>
+	   </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>Callback handling when user completes their selection</h3>
+		    <div>
+		        The 'onComplete' option allows you to supply a callback function that is invoked
+		        when the user completes their selection and closes the dropdown. It is passed
+		        a single argument which is the original selector element.
+		    </div>
+		    <div></div>
+		    <div>
+		    	Also, you can force the target selector into <i>multiple</i> selection mode
+		    	by using the 'forceMultiple' option, even if the underlying &lt;SELECT&gt; is
+		    	not marked as multiple.
+		    	-- <i>The forceMultiple option does NOT work with IE 6</i> --
+		    <blockquote>
+		    	<code>
+<pre>
+    $(".s10").dropdownchecklist( { forceMultiple: true, onComplete: function(selector) {
+        var values = "";
+        for( i=0; i < selector.options.length; i++ ) {
+            if (selector.options[i].selected && (selector.options[i].value != "")) {
+                if ( values != "" ) values += ";";
+                values += selector.options[i].value;
+            }
+        }
+	  	alert( values );
+    } });
+</pre>
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+      <tr>
+      	<td>
+	  		<span>Naked Selector</span><br>
+	        <select>
+	            <option value='a'>Alice</option>
+	            <option value='b'>Bob</option>
+	            <option value='c'>Christian</option>
+	            <option value='d'>Daniel</option>
+	        </select>
+	     </td>
+      	<td>
+	  		<span>With values and an alert on complete</span><br>
+	        <select id="s10" class="s10" multiple>
+	            <option value='a'>Alice</option>
+	            <option value='b'>Bob</option>
+	            <option value='c'>Christian</option>
+	            <option value='d'>Daniel</option>
+	        </select>
+	     </td>
+      	<td>
+	  		<span>Forced Multiple (not on IE6)</span><br>
+	        <select id="s10a" class="s10">
+	            <option></option><!-- empty placeholder -->
+	            <option value='a'>Alice</option>
+	            <option value='b'>Bob</option>
+	            <option value='c'>Christian</option>
+	            <option value='d'>Daniel</option>
+	        </select>
+	     </td>
+	   </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>Callback handling when user clicks any item</h3>
+		    <div>
+		        The 'onItemClick' option allows you to supply a callback function that is invoked
+		        when the user clicks on an item. It is passed two arguments, the generated checkbox 
+		        element and the underlying html selector.
+		        <blockquote>NOTE that the checkbox "checked" property reflects the user action 
+		        already taken, BUT the underlying selector option state has not yet been updated.
+		        </blockquote>
+		    </div>
+		    <div>
+		    	You can reject the click by throwing any error from within your callback function.
+		    	You can also modify the underlying selector option(s) state.
+		    </div>
+		    <blockquote>
+		    	<code>
+<pre>
+    $(".s10b").dropdownchecklist( { onItemClick: function(checkbox,selector) {
+	    alert("value " + checkbox.val() + ", is checked: " + checkbox.prop("checked"));
+    } });
+</pre>
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+      <tr>
+      	<td>
+	  		<span>Naked Selector</span><br>
+	        <select multiple>
+	            <option value='a'>Alice</option>
+	            <option value='b'>Bob</option>
+	            <option value='c'>Christian</option>
+	            <option value='d'>Daniel</option>
+	        </select>
+	     </td>
+      	<td>
+	  		<span>Callback on change</span><br>
+	        <select id="s10b" class="s10b" multiple>
+	            <option value='a'>Alice</option>
+	            <option value='b'>Bob</option>
+	            <option value='c'>Christian</option>
+	            <option value='d'>Daniel</option>
+	        </select>
+	     </td>
+      	<td>
+	  		<span>Callback on change(limit)</span><br>
+	        <select id="s10c" class="s10c" multiple>
+	            <option value='a'>Alice</option>
+	            <option value='b'>Bob</option>
+	            <option value='c'>Christian</option>
+	            <option value='d'>Daniel</option>
+	            <option value='e'>Elizabeth</option>
+	        </select>
+	     </td>
+	   </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>First Item Checks All (not selected), all others preselected</h3>
+		    <div>
+		        The existing select element already has all options EXCEPT the first selected.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $(".s11").dropdownchecklist( firstItemChecksAll: true } );
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td>
+	  		<span>Naked Selector</span><br>
+	        <select multiple="multiple">
+	        	<option>All</option>
+	            <option selected="selected">Low</option>
+	            <option selected="selected">Medium</option>
+	            <option selected="selected">High</option>
+	        </select>
+	  	</td>
+	  	<td>
+	  		<span>All items selected EXCEPT the first</span><br>
+	        <select id="s11" class="s11" multiple="multiple">
+	        	<option>All</option>
+	            <option selected="selected">Low</option>
+	            <option selected="selected">Medium</option>
+	            <option selected="selected">High</option>
+	        </select>
+	  	</td>
+	  	<td>
+	  		<span>All items selected INCLUDING the first</span><br>
+	        <select id="s11a" class="s11" multiple="multiple">
+	        	<option selected="selected">All</option>
+	            <option selected="selected">Low</option>
+	            <option selected="selected">Medium</option>
+	            <option selected="selected">High</option>
+	        </select>
+	  	</td>
+	  </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>Simple Form Handling</h3>
+		    <div>
+		        Post a form so you can see how the values are returned to the server.
+		    <br>
+		        Enter the url of a form to post to in the "Post to:" field.  The items
+		        returned with the form are named "selector1", "selector2", and "selector3"
+		    <br>
+		        We are also testing multiple selectors that do NOT have uniquely assigned ids.
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $(".s12").dropdownchecklist(  { width: 250 } } );
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td colspan='3'>
+			<script type="text/javascript">
+		      function handleSubmit( theForm ) {
+		         theForm.action=theForm.elements['postwhere'].value;
+		         return true;
+		      }
+			</script>
+
+      		<form onsubmit="return handleSubmit(this);" method="POST">
+	  			<span>Post to: </span>
+	  			<input id='postwhere' type='text' style='width: 250px'>
+	  		<br>
+	  			<span>Naked Select: </span>
+		        <select name='selector1' multiple="multiple" style='width: 250px'>
+		            <option selected="selected">Low</option>
+		            <option selected="selected">Medium</option>
+		            <option selected="selected">High</option>
+		        </select>
+	  		<br>
+	  			<span>DDCL: </span>
+		        <select name='selector2' multiple="multiple" class='s12'>
+		            <option selected="selected">Low</option>
+		            <option selected="selected">Medium</option>
+		            <option selected="selected">High</option>
+		        </select>
+	  		<br>
+	  			<span>DDCL (with values): </span>
+		        <select name='selector3' multiple="multiple" class='s12'>
+		            <option value='l' selected="selected">Low</option>
+		            <option value='m' selected="selected">Medium</option>
+		            <option value='h' selected="selected">High</option>
+		        </select>
+		    <br>
+		    	<input type='submit' value='post'>
+		    </form>
+	  	</td>
+	  </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>LABELS just do not work</h3>
+		    <div>
+		        DDCL has not been designed to operate with &lt;LABEL&gt; tags.
+		</td>
+	  </tr>
+	  <tr>
+	  	<td>
+	  			<label for='s12a'>A Label (independent)</label>
+		        <select multiple="multiple" id='s12a'>
+		            <option value='l'>Low</option>
+		            <option value='m' selected="selected">Medium</option>
+		            <option value='h' selected="selected">High</option>
+		        </select>
+		    <br>
+	  			<label>A Label (wrapper)
+			        <select multiple="multiple" id='s12b'>
+			            <option value='l' selected="selected">Low</option>
+			            <option value='m'>Medium</option>
+			            <option value='h'>High</option>
+			        </select>
+			    </label>
+		</td>
+		<td>
+	  			<label for='s12c'>A Label (independent)</label>
+		        <select multiple="multiple" class='s12' id='s12c'>
+		            <option value='l'>Low</option>
+		            <option value='m' selected="selected">Medium</option>
+		            <option value='h' selected="selected">High</option>
+		        </select>
+		    <br>
+	  			<label>A Label (wrapper)
+			        <select multiple="multiple" class='s12' id='s12d'>
+			            <option value='l' selected="selected">Low</option>
+			            <option value='m'>Medium</option>
+			            <option value='h'>High</option>
+			        </select>
+			    </label>
+	  	</td>
+	  </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>Rebuild of the control</h3>
+		    <div>
+		        Press the appropriate button to destroy the control and rebuild it, or alter the 
+		        underlying select and refresh it, or enable/disable it
+		    </div>
+		    <blockquote>
+		    	<code>
+		            $(".s13").dropdownchecklist( width: 150 } );
+		        </code>
+		    </blockquote>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td>
+	  		<span>Naked Selector</span><br>
+	        <select multiple="multiple">
+	            <option selected>Low</option>
+	            <option disabled>Medium</option>
+	            <option selected>High</option>
+				<optgroup label="A Group">
+					<option>1</option>
+					<option disabled>2</option>
+					<option>3</option>
+				</optgroup>
+				<optgroup label="B Group">
+					<option>X</option>
+					<option disabled>Y</option>
+					<option>Z</option>
+				</optgroup>
+	        </select>
+	  	</td>
+	  	<td>
+			<script type="text/javascript">
+			  function rebuildItem( anItem, index ) {
+   					if ( anItem.attr("selected") ) {
+   						anItem.html( 'Selection ' + index );
+   					} else {
+   						anItem.html( 'NonSelection ' + index );
+					}			  	
+			  }
+		      function doRebuild() {
+      			$("#s13").dropdownchecklist("destroy");
+    			alert('Changing the underlying SELECT here');
+    			var aSelector = $("#s13").get(0);
+    			$(aSelector).children().each(function(index) {
+    				var anItem = $(this);
+    				if ( anItem.is("option") ) {
+    					rebuildItem( anItem, index );
+    				} else if ( anItem.is("optgroup") ) {
+						anItem.children().each(function(subindex) {
+							rebuildItem( $(this), index + subindex );
+						});
+					}
+    			});
+    			$("#s13").dropdownchecklist();
+		      }
+			</script>
+	  		<input type='button' value='rebuild' onClick='doRebuild();'><br>
+	  		
+			<script type="text/javascript">
+			  function refreshItem( anItem, index ) {
+				if ( anItem.attr("disabled") ) {
+					anItem.removeAttr("disabled");
+				} else if ( anItem.attr("selected") ) {
+					anItem.removeAttr("selected");
+				} else {
+					anItem.attr("selected",true);
+				}			  	
+			  }
+		      function doRefresh() {
+    			alert('Changing the underlying SELECT here');
+    			var aSelector = $("#s13").get(0);
+    			$(aSelector).children().each(function(index) {
+    				var anItem = $(this);
+    				if ( anItem.is("option") ) {
+    					refreshItem( anItem, index );
+    				} else if ( anItem.is("optgroup") ) {
+						anItem.children().each(function(subindex) {
+							refreshItem( $(this), index + subindex );
+						});
+					}
+    			});
+      			$("#s13").dropdownchecklist("refresh");
+    		  }
+		      function doRefresh2() {
+    			alert('Changing the underlying SELECT(group) here');
+    			var aSelector = $("#s13").get(0);
+    			$(aSelector).children().each(function(index) {
+    				var anItem = $(this);
+    				if ( anItem.is("optgroup") ) {
+						if ( anItem.attr("disabled") ) {
+							anItem.removeAttr("disabled");
+						} else {
+							anItem.attr("disabled",true);
+						}
+					}
+    			});
+      			$("#s13").dropdownchecklist("refresh");
+		      }
+			</script>
+	  		<input type='button' value='refresh' onClick='doRefresh();'>
+	  		<input type='button' value='refresh(group)' onClick='doRefresh2();'>
+	  		<br>
+	        <select id="s13" class="s13" multiple="multiple">
+	            <option selected value='L'>Low</option>
+	            <option disabled value='M'>Medium</option>
+	            <option selected value='H'>High</option>
+				<optgroup label="A Group">
+					<option value='1'>1</option>
+					<option value='2' disabled>2</option>
+					<option value='3'>3</option>
+				</optgroup>
+				<optgroup label="B Group">
+					<option>X</option>
+					<option disabled>Y</option>
+					<option>Z</option>
+				</optgroup>
+	        </select>
+	  	</td>
+	  	<td>
+			<script type="text/javascript">
+		      function doEnable( enable ) {
+		        if ( enable ) {
+	      			$("#s13a").dropdownchecklist("enable");		        
+		        } else {
+	      			$("#s13a").dropdownchecklist("disable");		        
+		        }
+		      }
+		      function doClose() { $("#s13a").dropdownchecklist("close"); }
+			</script>
+	  		<input type='button' value='Enable' onClick='doEnable(true);'><br>
+	  		<input type='button' value='Disable' onClick='doEnable(false);'><br>
+	  		<input type='button' value='Close' onClick='doClose();'><br>
+	        <select id="s13a" class="s13" multiple="multiple">
+	            <option selected value='L'>Low</option>
+	            <option disabled value='M'>Medium</option>
+	            <option selected value='H'>High</option>
+				<optgroup label="A Group">
+					<option value='1'>1</option>
+					<option value='2' disabled>2</option>
+					<option value='3'>3</option>
+				</optgroup>
+				<optgroup label="B Group">
+					<option>X</option>
+					<option disabled>Y</option>
+					<option>Z</option>
+				</optgroup>
+	        </select>
+	  	</td>
+	  </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>Relative Positioned Parent Item</h3>
+		    <div>
+		        The parent item of the SELECT is relatively positioned, which causes
+		        positioniong problems for the dropdown in version 1.1 and before
+		    </div>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td>
+	  		<div>Outside the relative parent</div>
+	  		<div style='position:relative'>
+	  			<span>In the relative parent</span><br>
+		        <select multiple="multiple">
+		            <option selected="selected">Low</option>
+		            <option selected="selected">Medium</option>
+		            <option selected="selected">High</option>
+		        </select>
+		    </div>
+	  	</td>
+	  	<td>
+	  		<div>Outside the relative parent (absolute dropdown)</div>
+	  		<div style='position:relative'>
+	  			<span>In the relative parent</span><br>
+		        <select id="s14" class="s14" multiple="multiple">
+		            <option selected="selected">Low</option>
+		            <option selected="selected">Medium</option>
+		            <option selected="selected">High</option>
+		        </select>
+		    </div>
+	  	</td>
+	  	<td>
+	  		<div>Outside the relative parent (relative dropdown)</div>
+	  		<div style='position:relative'>
+	  			<span>In the relative parent</span><br>
+		        <select id="s14a" class="s14" multiple="multiple">
+		            <option selected="selected">Low</option>
+		            <option selected="selected">Medium</option>
+		            <option selected="selected">High</option>
+		        </select>
+		    </div>
+	  	</td>
+	  </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>Parent Item that Scrolls</h3>
+		    <div>
+		        The parent item of the SELECT inherently scrolls, which causes
+		        positioniong problems for the dropdown in version 1.1 and before.
+		    </div>
+		    <div>
+		    	NOTE that the positioning fix applied with V1.2 causes the dropdown
+		    		 popup to position properly in all cases.  However, if you use
+		    		 absolute positioning (the default), then the parent scrolls 
+		    		 without dragging the popup along. You can set the popup to
+		    		 position relative to the parent, which will then scroll along
+		    		 with the parent (<i>EXCEPT IE6 and IE7</i>).<br>
+		    	HOWEVER when the popup is relative, it consumes 'space' in the document
+		    		 and does not fly above subsequent content, but rather pushes the
+		    		 subsequent content further down the page.
+		</td>
+	  </tr>
+	  <tr>
+	  	<td>
+            <div style="height: 100px; border: solid 1px black; overflow: scroll; padding: 5px;">
+	  			<span>In the scrolling parent</span><br>
+		        <select multiple="multiple">
+		            <option selected="selected">Low</option>
+		            <option selected="selected">Medium</option>
+		            <option selected="selected">High</option>
+		        </select>
+		        <p>Content to force scrolling.</p>
+		        <p>More content to force scrolling.</p>
+		        <p>Even more content to force scroling.</p>
+		    </div>
+	  	</td>
+	  	<td>
+            <div style="height: 100px; border: solid 1px black; overflow: scroll; padding: 5px;">
+	  			<span>In the scrolling parent (absolute dropdown)</span><br>
+		        <select id="s15" class="s15" multiple="multiple">
+		            <option selected="selected">Low</option>
+		            <option selected="selected">Medium</option>
+		            <option selected="selected">High</option>
+		        </select>
+		        <p>Content to force scrolling.</p>
+		        <p>More content to force scrolling.</p>
+		        <p>Even more content to force scroling.</p>
+		    </div>
+	  	</td>
+	  	<td>
+            <div style="height: 100px; border: solid 1px black; overflow: scroll; padding: 5px;">
+	  			<span>In the scrolling parent (relative dropdown)</span><br>
+		        <select id="s15a" class="s15" multiple="multiple">
+		            <option selected="selected">Low</option>
+		            <option selected="selected">Medium</option>
+		            <option selected="selected">High</option>
+		        </select>
+		        <p>Content to force scrolling.</p>
+		        <p>More content to force scrolling.</p>
+		        <p>Even more content to force scroling.</p>
+		    </div>
+	  	</td>
+	  </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h3>DDCL within a hidden parent</h3>
+		    <div>
+		        Initializing a ddcl within a Hidden parent causes the width/height calculation of
+		        the dynamic controls to fail.
+		    </div>
+		    <div>
+		    	DDCL should be made smarter in a future version to handle this.
+		    	<br>For now, you can try moving the ddcl initialization into the 'show' processing,
+		    	but watch out for multiple initialization calls.
+		    </div>
+		</td>
+	  </tr>
+	  <tr>
+		<td>Standard Example
+			<div id="div16">
+				<select id='s16' class="s16" multiple="multiple">
+					<option>Item One</option>
+					<option selected="selected">Item Two</option>
+					<option>Item Three</option>
+					<option>Item Four</option>
+					<option selected="selected">Item Five</option>
+					<option>Item Six</option>
+				</select>
+			</div>
+		</td>
+		<td>Hidden Example (early ddcl init)
+		 	<input type="button" id="show16a" value="Show" />
+		 	<input type="button" id="hide16a" value="Hide" />
+			<div style="display:none;" id="div16a">
+				<select id='s16a' class="s16a" multiple="multiple">
+					<option>Item One</option>
+					<option selected="selected">Item Two</option>
+					<option>Item Three</option>
+					<option>Item Four</option>
+					<option selected="selected">Item Five</option>
+					<option>Item Six</option>
+				</select>
+			</div>
+		</td>
+		<td>Hidden Example (late ddcl init)
+		 	<input type="button" id="show16b" value="Show" />
+		 	<input type="button" id="hide16b" value="Hide" />
+			<div style="display:none;" id="div16b">
+				<select id='s16b' class="s16b" multiple="multiple">
+					<option>Item One</option>
+					<option selected="selected">Item Two</option>
+					<option>Item Three</option>
+					<option>Item Four</option>
+					<option selected="selected">Item Five</option>
+					<option>Item Six</option>
+				</select>
+			</div>
+		</td>
+	  </tr>
+	  
+      <tr>
+      	<td colspan='3'>
+		    <h3>DDCL interaction with other jQuery Widgets</h3>
+		    <div>
+		    	DDCL has shown some <i>interesting</i> interactions with other jQuery widgets.
+		    	<br>
+		        In particular, DDCL's internal calculation of an appropriate z-index does not 
+		        always work well with other widgets on the page. It tries to determine an 
+		        approprite z-index based on parent elements, but does take into account 
+		        siblings with a high z-index value with which it may overlap.
+		        <br>
+		        zIndex is now a configuration option that you can set to an explicit value as needed.
+		    </div>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td colspan='3'>
+    <div id="theAccordian">
+        <h3><a href="#">Accordian Entry 1 - DDCL dropdown <i>beneath</i> the slider</a> </h3>
+        <div>
+            <select id="s17" multiple="multiple">
+                 <option>A</option>
+                 <option>B</option>
+                 <option selected="selected">C</option>
+                 <option>1</option>
+                 <option>2</option>
+                 <option selected="selected">3</option>
+            </select>
+            <div>Sample Range Slider</div>
+            <div id="rangeSlider" class='rangeSlider'></div>
+        </div>
+        <h3><a href="#">Accordian Entry 2 - DDCL dropdown with explicit z-index</a> </h3>
+        <div>
+            <select id="s17a" multiple="multiple">
+                 <option>A</option>
+                 <option>B</option>
+                 <option selected="selected">C</option>
+                 <option>1</option>
+                 <option>2</option>
+                 <option selected="selected">3</option>
+            </select>
+            <div>Sample Range Slider 2</div>
+            <div id="rangeSlider2" class='rangeSlider'></div>
+        </div>
+        <h3><a href="#">Accordian Entry 3</a></h3>
+        <div>
+            Just some contents on item 3
+        </div>
+    </div>
+	  	</td>
+	  </tr>
+      <tr>
+      	<td colspan='3'>
+		    <h4>jQuery Dialog support</h4>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td>
+		 	<input type="button" id="show17b" value="Show Dialog" />
+			<div id="theDialog" title="Basic dialog">	
+				<select id="s17b" multiple="multiple">
+					<option>Aaaa</option>
+					<option>Bbbb</option>
+					<option>Cccc</option>
+					<option>Ddddd</option>
+					<option>Eeeeee</option>
+					<option>Ffffff</option>
+				</select>	
+			</div>
+		</td>
+	  </tr>
+	  
+      <tr>
+      	<td colspan='3'>
+		    <h3>Massive count of options</h3>
+		    <div>
+		    	DDCL can reportly drive the browsers wonky if you have a large number of options.
+		    </div>
+		</td>
+	  </tr>
+	  <tr>
+      	<td>
+	  		<span>Large number of options</span><br>
+	        <select id="s20" class="s20" multiple="multiple">
+				<optgroup label="Group 00">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 10">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 20">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 30">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 40">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 50">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 60">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 70">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 80">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 90">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+	        </select>
+	    </td>
+      	<td>
+	  		<span>Large number of options (no max)</span><br>
+	        <select id="s20a" class="s20a" multiple="multiple">
+				<optgroup label="Group 00">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 10">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 20">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 30">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 40">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 50">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 60">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 70">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 80">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 90">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 100">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 110">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 120">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 130">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 140">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 150">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+	        </select>
+	    </td>
+      	<td>
+	  		<span>Large number of options (with maxHeight/firstSelectsAll exclusive)</span><br>
+	        <select id="s20b" class="s20b" multiple="multiple">
+	            <option>All</option>
+				<optgroup label="Group 00">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 10">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 20">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 30">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 40">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 50">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 60">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 70">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 80">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 90">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 100">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 110">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 120">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 130">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 140">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 150">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 160">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 170">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 180">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+				<optgroup label="Group 190">
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+				</optgroup>
+	        </select>
+	    </td>
+	  </tr>
+    </table>
+</div>
+</body>
+</html>
+

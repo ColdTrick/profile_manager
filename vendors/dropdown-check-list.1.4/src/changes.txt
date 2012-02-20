@@ -1,0 +1,103 @@
+1.4 
+- compatible with/requires jQuery 1.6, ui 1.8.13 (#180, #188)
+- suppress checkbox generation for options with no text display (#169)
+- support firstItemChecksAll: 'exclusive' (#135)
+- enhanced onItemClick callback support (#185, #184)
+
+1.3
+- change of licensing to explicitly state "MIT or GPL", rather than "MIT and GPL"
+- copy styling from OPTION into generated checkbox and display text
+- option for onItemClick (#162)
+- handle firstItemChecksAll in refresh (#163)
+- fix title attribute display to use raw text, not html, which allows html styling to
+  apply to the empty text (#170, #171)
+
+1.2 (qa)  NOTE that I never did release a non-qa variant of 1.2, and enough other
+               changes went in that I decided to call it 1.3
+- fix 'refrsh' when multiple option groups used (#161)
+- changed positioning calculations (#147, #142, #138, #137, #127, #126, #119?? )
+- added 'positionHow' option (#138, #137)
+- added external 'close' function that can be called to close the pop-up (#137)
+- added 'explicitClose' option (#129)
+- fixed 'firstItemChecksAll' if only the first item is initially checked (#133)
+- fixed ampersands within option text (#130)
+- added 'zIndex' option (#92)
+
+1.1
+- updated jquery to 1.4.2, ui to 1.8.4 (which fixes the 'destroy' problem: #94, #114, #115, #121)
+- if firstItemChecksAll is true and all items EXCEPT the first are checked, then autocheck the first (#62)
+- treat maxDropHeight as a 'max', not as 'fixed' (#77)
+- include simple vertical alignment css to try to address field positioning (#110)
+- various key issues (#84)
+  NOTE my approach for handling tabout via blur processing fails in IE7+ and Chrome due to loss of
+  	   focus when user clicks in scrollbar.  blur processing has been disabled for now.
+- assign ids to the generated elements for access by other jQuery processing, and keep the various ids
+  unique (#97, #107, #111)
+- copy the tabindex of the underlying select if provided (#100)
+- provide option to auto-close dropdown when a singleton radio button is clicked (#57, #120)
+- if optgroup is disabled, all child items are disabled (#72)
+- optgroup without a label (#59)
+- 'refresh' function to resynch with selected and disabled state of underlying <select> items (#99,#116,#121)
+- 'version' function to identify DDCL version number
+
+1.0
+- rework CSS tagging to utilize jQuery ThemeRoller settings
+- added onComplete callback option (blur does not fire)
+- added forceMultiple option (known restriction for IE6)
+- added icon option (ThemeRoller based)
+- explicit open/close rather than toggle to keep dropdown state correct
+- limited use of inline-block (known cross-browser issues)
+- try/catch to protect against callback failures
+- various cleanup to suppress cross-talk between multiple dropdowns on same page
+- made generated item ids more unique to keep from colliding with parent ids
+- fixed many keyboard handling issues -- but tab out of the dropdown is still incomplete
+  (radiobuttons, checkboxes must be disabled to keep them out of tab order)
+- created 'doc' as independent directory under version control
+  (easier to keep doc page reflecting current release rather than pending work-in-progress)
+- callout to explicit versions of jquery core and ui to better track testing environment
+
+0.9
+- fixed some warnings for unused variabled with yui processor (#52)
+- added patch from munkyboy to aoutomatically syncronize with the source select value changes (#48)
+- fixed a problem with positioning and z-index (#47, #53, #54, #56)
+- disabled options are not transformed in disabled checkboxes; the disabled checkboxes are displayed but ignored (#42)
+- !known issue: keyboard handling is broken
+
+0.8
+- changed zip structure to provide minified version and modified to ant build (#40)
+- fixed a problem where dropdown is not visible if displayed in modal dialog with z-index above some value (#41)
+- merged a patch from Kulikov.Dm to fix a problem with a trailing comma in IE (#43)
+- added keyboard handling with Alt+Key Down for showing hiding the dropdown, Tab, Shift+Tab for navigating the checkboxes and Space to check the items (#29)
+- updated jquery to 1.3.2 and ui.core to 1.7.2
+
+0.7
+- merged patch from bishiboosh for bgiframe integration (#34)
+- merged patch from neil.anthony.owen to display radio buttons instead of checkboxes when the select does not have a multiple attribute (#25)
+
+0.6
+- fixed a problem when the text is not shown when using groups (#17)
+- change event is now rises when the checkbox is clicked, the previous version only rised the event on label click (#18)
+- blur and focus events are rised when the ddl is shown/hidden (#19)
+- fixed a small issue with "float" keyword not correctly used from js (#20)
+- fixed the firstItemChecksAll incorect behavior when using groups (#23)
+
+0.5
+- fixed destroy function to allow dynamic updates scenarios (#7)
+- moved text height to css to fix the problem of zero text height when the control is initially hidden (#8)
+- fixed hover over items in firefox (#11)
+- fire onchange event on the source select when the chackboxes are checked (#12)
+- fixed control text when using select groups (#14)
+- other minor fixes
+
+0.4
+- added support for groups. The optgroup tags are visible in the drop down and have their own style. The options are indented if they are in a group (#5)
+- fixed a css issue with text remaining gray on hover
+
+0.3
+- fixed a problem where checkboxes are not checked when options are initially selected in IE6 (#3)
+
+0.2
+- works in Chrome and Opera
+
+0.1
+- initial version
