@@ -50,11 +50,13 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 	- validate (yes/no)
 	
 - check trimmed required profile fields (space should not be accepted, js + hook)
+- use elgg_get_config("icon_sizes") for mandatory profile icon upload
 	
 == 3. Known issues ==
 - on register error backward maintaining selected profile icon is impossible due to security reasons 
 - longtext with tinymce too small when on first hidden
 - multiselect mandatory not js enforced on register form
+- profile type not showing on details if no custom fields visible
 	
 NEED CHECKING:
 When i choose to "select profile type by Admin", on the profile page of the user it will indeed only show the fields specfic to that profile type but the user can see all the categories of all the profile types in their edit profile page.

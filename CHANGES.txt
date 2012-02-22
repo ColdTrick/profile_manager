@@ -1,6 +1,12 @@
 = Version history =
 
+x.x:
+
+- fixed: multiselect drop down not showing on non visible tab content on edit profile
+- fixed: group edit form not showing previously saved tag field values
+
 7.1 (2012-02-20):
+
 - changed: cleanup deprecated Profile Manager code (Members Search and NoIndex)
 - changed: more code is now using the latest Elgg 1.8 functions
 - changed: moved version history to CHANGES.txt
