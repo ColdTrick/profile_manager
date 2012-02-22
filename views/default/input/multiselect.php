@@ -31,7 +31,19 @@
 ?>
 <script type="text/javascript">
 	$(document).ready(function() {
-    	$("#<?php echo $internal_id;?>").dropdownchecklist({emptyText: "<?php echo elgg_echo("profile_manager:input:multi_select:empty_text");?>", width: 200});
+    	$("#<?php echo $internal_id;?>").dropdownchecklist({
+        		emptyText: "<?php echo elgg_echo("profile_manager:input:multi_select:empty_text");?>", 
+        		minWidth: 200
+        	});
+    	$("#ddcl-<?php echo $internal_id;?> .ui-dropdownchecklist-selector").click(function(event){
+        	$("#<?php echo $internal_id;?>").dropdownchecklist("destroy");
+    		$("#<?php echo $internal_id;?>").dropdownchecklist({
+        		emptyText: "<?php echo elgg_echo("profile_manager:input:multi_select:empty_text");?>", 
+        		minWidth: 200
+        	});
+    		$("#ddcl-<?php echo $internal_id;?>").click();
+    		event.stopPropagation();
+    	});
     });
 </script>
 <div>
