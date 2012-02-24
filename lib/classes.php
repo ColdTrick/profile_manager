@@ -34,6 +34,10 @@
 				return false;
 			}
 			
+			if($guid instanceof stdClass){
+				$guid = $guid->guid;
+			}
+			
 			if($metadata = get_metadata_for_entity($guid)){
 				if (!is_array($this->meta_cache)) {
 					$this->meta_cache = array();
@@ -176,6 +180,10 @@
 				return false;
 			}
 			
+			if($guid instanceof stdClass){
+				$guid = $guid->guid;
+			}
+			
 			if($metadata = get_metadata_for_entity($guid)){
 				if (!is_array($this->meta_cache)) {
 					$this->meta_cache = array();
@@ -267,6 +275,10 @@
 		protected function load($guid) {
 			if (!parent::load($guid)) {
 				return false;
+			}
+			
+			if($guid instanceof stdClass){
+				$guid = $guid->guid;
 			}
 			
 			if($metadata = get_metadata_for_entity($guid)){
