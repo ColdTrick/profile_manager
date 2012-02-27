@@ -23,8 +23,8 @@
 	);
 
 	$description_position_options = array(
-		"bottom" => elgg_echo("top"),
-		"top" => elgg_echo("bottom")
+		"bottom" => elgg_echo("bottom"),
+		"top" => elgg_echo("top")
 	);
 	
 	$profile_types = array();
