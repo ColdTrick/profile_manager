@@ -94,6 +94,8 @@
 					// optionally add a blank option to the field options
 					array_unshift($options, "");
 				}
+				
+				$options = array_combine($options, $options); // add values as labels for deprecated notices
 			}
 			
 			return $options;
