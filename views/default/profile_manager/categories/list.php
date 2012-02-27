@@ -15,7 +15,7 @@
 			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 			"limit" => false,
 			"owner_guid" => elgg_get_site_entity()->getGUID(),
-			"order_by_metadata" => array("order") 
+			"order_by_metadata" => array("name" => "order") 
 		);
 
 	$categories = elgg_list_entities_from_metadata($options);	
