@@ -23,6 +23,10 @@
 				return false;
 			}
 			
+			if($guid instanceof stdClass){
+				$guid = $guid->guid;
+			}
+			
 			$metadata_options = array('guid' => $guid, 'limit' => false);
 			
 			if($metadata = elgg_get_metadata($metadata_options)){
