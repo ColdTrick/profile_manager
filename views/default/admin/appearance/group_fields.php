@@ -15,4 +15,5 @@
 	
 	$page_data = $fields . $actions;
 	
+	echo elgg_view("profile_manager/admin/tabs", array("group_fields_selected" => true));
 	echo $page_data;	

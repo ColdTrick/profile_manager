@@ -45,6 +45,7 @@
 		}
 	}
 	
+	echo elgg_view("profile_manager/admin/tabs", array("settings_selected" => true));
 ?>
 <table>
 	<tr>
