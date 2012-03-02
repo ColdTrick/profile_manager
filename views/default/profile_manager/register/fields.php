@@ -159,11 +159,11 @@
 		}
 		if($tabbed){
 			if($tabbed_cat_titles){
-				echo "<div id='elgg_horizontal_tabbed_nav'>";
-				echo "<ul id='profile_manager_register_tabbed'>";
+				
+				echo "<ul class='elgg-tabs elgg-htabs' id='profile_manager_register_tabbed'>";
 				echo $tabbed_cat_titles;
 				echo "</ul>";
-				echo "</div>";
+				
 				echo "<div>";
 				echo $tabbed_cat_content;
 				echo "</div>";

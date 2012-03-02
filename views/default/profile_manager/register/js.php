@@ -90,12 +90,12 @@
 	}
 
 	function toggle_tabbed_nav(div_id, element){
-		$content_container = $('#elgg_horizontal_tabbed_nav').next(); 
+		$content_container = $('#profile_manager_register_tabbed').next(); 
 		$content_container.find('>div').hide();
 		$content_container.find('>div.category_' + div_id).show();
 
-		$('#profile_manager_register_tabbed li.selected').removeClass('selected');
-		$(element).parent('li').addClass("selected");
+		$('#profile_manager_register_tabbed li.elgg-state-selected').removeClass('elgg-state-selected');
+		$(element).parent('li').addClass("elgg-state-selected");
 	}
 
 	$(document).ready(function(){
