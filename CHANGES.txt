@@ -1,10 +1,15 @@
 = Version history =
 
-x.x:
+7.2 (2012-03-02):
 
+- added: hash detection on edit profile page to select correct tab
+- added: tabs on admin pages for easier navigation
 - fixed: multiselect drop down not showing on non visible tab content on edit profile
 - fixed: group edit form not showing previously saved tag field values
-- changed: classes are compatible with a performance gain available in Elgg 1.8
+- fixed: some styling on the registration form
+- fixed: profile type visibility not listening to plugin setting
+- changed: classes are compatible with a possible future performance gain available in Elgg 1.8 (not yet part of core at the moment)
+- changed: some styling on the add field forms
 
 7.1 (2012-02-20):
 

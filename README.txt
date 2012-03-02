@@ -56,9 +56,3 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 - on register error backward maintaining selected profile icon is impossible due to security reasons 
 - longtext with tinymce too small when on first hidden
 - multiselect mandatory not js enforced on register form
-- profile type not showing on details if no custom fields visible
-	
-NEED CHECKING:
-When i choose to "select profile type by Admin", on the profile page of the user it will indeed only show the fields specfic to that profile type but the user can see all the categories of all the profile types in their edit profile page.
-
-They can fill in the information but it wont show as their profile type wont match but I dont think they should be able to see the categories as they wont show. Is this just the way it is on is it a bug?
