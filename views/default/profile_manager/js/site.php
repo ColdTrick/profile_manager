@@ -32,7 +32,13 @@ $(document).ready(function(){
 		$('#profile_manager_profile_edit_tab_content_' + id).show();
 	});
 	
-	$("#profile_manager_profile_edit_tabs a:first").click();
+	hash = window.location.hash;
+	if(hash && $("#profile_manager_profile_edit_tabs " + hash).length > 0){
+	
+		$("#profile_manager_profile_edit_tabs " + hash + " a").click();
+	} else {
+		$("#profile_manager_profile_edit_tabs a:first").click();
+	}
 });
 
 function changeProfileType(){

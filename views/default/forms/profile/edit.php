@@ -147,12 +147,13 @@
 			$tabs[] = array(
 				'title' => $title,
 				'url' => "#" . $cat_guid,
+				'id' => $cat_guid,
 				'class' => $class
 			);
 			
 			$tab_content .= "<div id='profile_manager_profile_edit_tab_content_" . $cat_guid . "' class='profile_manager_profile_edit_tab_content'>\n";
 				
-			$list_content .= "<div class='" . $class . "'>";
+			$list_content .= "<div id='" . $cat_guid . "' class='" . $class . "'>";
 			if(count($cats) > 1){
 				$list_content .= "<h3 class='settings'>" . $title . "</h3>";
 			}
