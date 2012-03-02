@@ -25,6 +25,7 @@
 	echo elgg_view("profile/status", array("entity" => $user));
 
 	$description_position = elgg_get_plugin_setting("description_position", "profile_manager");
+	$show_profile_type_on_profile = elgg_get_plugin_setting("show_profile_type_on_profile", "profile_manager");
 	
 	if($description_position == "top"){
 		echo $about;
@@ -33,14 +34,16 @@
 	$categorized_fields = profile_manager_get_categorized_fields($user);
 	$cats = $categorized_fields['categories'];
 	$fields = $categorized_fields['fields'];
-	if(count($cats) > 0){
-		$result .= "<div id='custom_fields_userdetails'>";
-		
+	
+	if($show_profile_type_on_profile != "no"){
 		if($profile_type_guid = $user->custom_profile_type){
 			if(($profile_type = get_entity($profile_type_guid)) && ($profile_type instanceof ProfileManagerCustomProfileType)){
-				$result .= "<div class='even'><b>" . elgg_echo("profile_manager:user_details:profile_type") . "</b>: " . $profile_type->getTitle() . " </div>";	
+				$details_result .= "<div class='even'><b>" . elgg_echo("profile_manager:user_details:profile_type") . "</b>: " . $profile_type->getTitle() . " </div>";
 			}
 		}
+	}
+	
+	if(count($cats) > 0){
 				
 		// only show category headers if more than 1 category available
 		if(count($cats) > 1){
@@ -122,16 +125,15 @@
 			}
 			
 			if(!empty($field_result)){
-				$result .= $cat_title;
-				$result .= "<div>" . $field_result . "</div>";	
+				$details_result .= $cat_title;
+				$details_result .= "<div>" . $field_result . "</div>";	
 			}
 		}
-		
-		$result .= "</div>";
-		
-		echo $result; 
+	}
 	
-		if(elgg_get_plugin_setting("display_categories", "profile_manager") == "accordion"){ 
+	if(!empty($details_result)){
+		echo "<div id='custom_fields_userdetails'>" . $details_result . "</div>";
+		if(elgg_get_plugin_setting("display_categories", "profile_manager") == "accordion"){
 			?>
 			<script type="text/javascript">
 				$('#custom_fields_userdetails').accordion({
