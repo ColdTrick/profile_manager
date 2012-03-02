@@ -88,13 +88,12 @@ li.custom_fields_edit_profile_category {
 /* registration field */
 #profile_manager_register_left {
 	float: left;
-	min-width: 400px;
-	margin-right: 10px;
+	width: 450px;
 }
 
 #profile_manager_register_right {
 	float: right;
-	max-width: 400px;
+	width: 450px;
 }
 
 #profile_manager_register_right > fieldset {

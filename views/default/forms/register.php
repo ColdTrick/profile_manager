@@ -108,3 +108,8 @@ echo elgg_view("profile_manager/register/js");
 		$('input[name=name]').focus();
 	});
 </script>
+<style type="text/css">
+	.elgg-form-account {
+		max-width: 100%;
+	}
+</style>
