@@ -2,13 +2,16 @@
 	$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/"; 
 ?>
 .custom_fields_more_info {
-	width: 14px;
-	height: 14px;
+	width: 16px;
+	height: 16px;
+	margin: 0 2px 0 5px;
 	display: inline-block;
-	vertical-align: middle;
-	background: url(<?php echo $plugin_graphics_folder; ?>icon_customise_info.gif);
+	vertical-align: top;
+	background: transparent url(<?php echo elgg_get_site_url(); ?>_graphics/elgg_sprites.png) 0 -486px;
 	cursor: pointer;
-	margin-left: 5px;
+}
+.custom_fields_more_info:hover {
+	background-position: 0 -468px;
 }
 
 .custom_fields_more_info_text {

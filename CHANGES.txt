@@ -1,5 +1,11 @@
 = Version history =
 
+x.x:
+
+- added: option to allow users to change their username
+- changed: info icons replaced with elgg default info icon
+- changed: version requirement to 1.8.1 to support info icon
+
 7.2 (2012-03-02):
 
 - added: hash detection on edit profile page to select correct tab
