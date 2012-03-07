@@ -56,6 +56,8 @@
 		'profile_manager:settings:description_position' => 'Where to position the description ("About me") field',
 		
 		'profile_manager:settings:enable_profile_completeness_widget' => "Enable the profile completeness widget",
+		'profile_manager:settings:enable_username_change' => "Allow users to change their username in settings",
+		'profile_manager:settings:enable_username_change:option:admin' => "Admin only",
 		
 		'profile_manager:settings:registration:terms' => "To show an 'Accept terms' field on the registration page, please fill in the URL to the terms below",
 		'profile_manager:settings:registration:extra_fields' => "Where to show extra profile fields",
@@ -225,6 +227,9 @@
 		'profile_manager:action:profile_types:delete:error:type' => "The provided GUID is not an Custom Profile Type",
 		'profile_manager:action:profile_types:delete:error:delete' => "An unknown error occured while deleting the Custom Profile Type",
 		'profile_manager:action:profile_types:delete:succes' => "The Custom Profile Type was deleted succesfully",
+		
+		// change username action
+		'profile_manager:action:username:change:succes' => "Successfully changed your username",
 	
 		// Tooltips
 		'profile_manager:tooltips:profile_field' => "
@@ -334,6 +339,10 @@
 		'profile_manager:admin:adduser:notify' => "Notify user",
 		'profile_manager:admin:adduser:use_default_access' => "Extra metadata created based on site default access level",
 		'profile_manager:admin:adduser:extra_metadata' => "Add extra profile data",
+		
+		// change username form
+		'profile_manager:account:username:button' => "Click to change your username",
+		'profile_manager:account:username:info' => "Change your username. An icon will tell you if the username entered is valid and available.",
 
 	);
 	

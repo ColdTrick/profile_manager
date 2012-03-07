@@ -27,6 +27,12 @@
 		"top" => elgg_echo("top")
 	);
 	
+	$enable_username_change_options = array(
+		"no" => elgg_echo("option:no"),
+		"admin" => elgg_echo("profile_manager:settings:enable_username_change:option:admin"),
+		"yes" => elgg_echo("option:yes")
+	);
+	
 	$profile_types = array();
 	
 	$profile_types_options = array(
@@ -209,6 +215,14 @@
 		</td>
 		<td>
 			<?php echo elgg_view("input/dropdown", array("name" => "params[enable_profile_completeness_widget]", "options_values" => $noyes_options, "value" => $vars['entity']->enable_profile_completeness_widget)); ?>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:settings:enable_username_change'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[enable_username_change]", "options_values" => $enable_username_change_options, "value" => $vars['entity']->enable_username_change)); ?>
 		</td>
 	</tr>
 </table>

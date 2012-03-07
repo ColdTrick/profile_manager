@@ -105,3 +105,36 @@ li.custom_fields_edit_profile_category {
 .profile_manager_register_missing {
 	border: 1px solid red !important;
 }
+
+/* Account Username Change */
+.profile-manager-account-change-username.elgg-state-active {
+	display: none;
+}
+
+#profile_manager_username {
+	position: relative;
+}
+
+.elgg-icon-profile-manager-loading,
+.elgg-icon-profile-manager-valid,
+.elgg-icon-profile-manager-invalid {
+	position: absolute;
+	right: 5px;
+	top: 8px;
+	display: none;
+}
+
+.elgg-icon-profile-manager-loading {
+	background-image: url(<?php echo $plugin_graphics_folder; ?>loading.gif);
+}
+
+.elgg-icon-profile-manager-valid {
+	background-position: 0 -126px;
+}
+
+.elgg-icon-profile-manager-invalid {
+
+	background-position: 0 -252px;
+}
+
+/* End Account Username Change */

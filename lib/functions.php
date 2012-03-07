@@ -525,3 +525,27 @@
 		return $result;
 	}
 	
+	function profile_manager_validate_username($username){
+		$result = false;
+		if(!empty($username)){
+			// make sure we can check every user (even unvalidated)
+			$access_status = access_get_show_hidden_status();
+			access_show_hidden_entities(true);
+			
+			// check if username exists
+			try {
+				if(validate_username($username)){
+					
+					if(!get_user_by_username($username))	{
+						$result = true;
+					} 
+				}
+			} catch (Exception $e){
+			}
+			
+			// restore access settings
+			access_show_hidden_entities($access_status);
+		}
+		
+		return $result;
+	}

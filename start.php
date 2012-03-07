@@ -62,6 +62,15 @@
 			elgg_extend_view("register/extend", "profile_manager/register/fields");
 		}
 		
+		// enable username change
+		$enable_username_change = elgg_get_plugin_setting("enable_username_change", "profile_manager");
+		if($enable_username_change == "yes" || ($enable_username_change == "admin" && elgg_is_admin_logged_in())){
+			elgg_extend_view("forms/account/settings", "profile_manager/account/username", 50); // positioned at the beginning of the options
+			
+			// register hook for saving the new username
+			elgg_register_plugin_hook_handler('usersettings:save', 'user', 'profile_manager_username_change_hook');
+		}
+		
 		// Run once function to configure this plugin
 		run_function_once('profile_manager_run_once', 1287964800); // 2010-10-25
 		run_function_once('pm_fix_access_default'); 		
@@ -81,6 +90,19 @@
 					set_input("guid", $page[2]);	
 					include(dirname(__FILE__) . "/pages/forms/" . $form . ".php");
 					return true;	
+				}
+				break;
+			case "validate_username":
+				if(elgg_is_logged_in()){
+					$new_username = get_input("username");
+					$valid = false;
+					if(!empty($new_username)){
+						$valid = profile_manager_validate_username($new_username);
+					}
+					$result = array("valid" => $valid);
+					echo json_encode($result);
+					
+					return true;
 				}
 				break;
 		}

@@ -86,7 +86,7 @@
 			foreach($ordered as $group_field){
 				$result[$group_field->metadata_name] = $group_field->metadata_type;
 
-				// should it be handled as tags? TODO: is this still needed? Yes it is, it handles presentation of these fields in listing mode
+				// should it be handled as tags? Q: is this still needed? A: Yes it is, it handles presentation of these fields in listing mode
 	    		if(elgg_get_context() == "search" && ($group_field->output_as_tags == "yes" || $group_field->metadata_type == "multiselect")){
 	    			$result[$group_field->metadata_name] = "tags";
 	    		}	
@@ -173,10 +173,9 @@
 		elgg_make_sticky_form('register');
 		elgg_make_sticky_form('profile_manager_register');
 		
-		
 		// validate mandatory profile fields
-		
 		$profile_icon = elgg_get_plugin_setting("profile_icon_on_register", "profile_manager");
+		
 		// new
 		$profile_type_guid = get_input("custom_profile_fields_custom_profile_type", false);
 		$fields = profile_manager_get_categorized_fields($user, true, true, true, $profile_type_guid);
@@ -233,5 +232,51 @@
 		    		forward(REFERER);
 		    	}
 		    }
+		}
+	}
+
+	/**
+	 * 
+	 * If possible change the username of a user
+	 * @param unknown_type $hook_name
+	 * @param unknown_type $entity_type
+	 * @param unknown_type $return_value
+	 * @param unknown_type $parameters
+	 */
+	function profile_manager_username_change_hook($hook_name, $entity_type, $return_value, $parameters){
+		$user_guid = (int) get_input('guid');
+		$new_username = get_input('username');
+		
+		if(!empty($user_guid) && !empty($new_username)){
+			if(profile_manager_validate_username($new_username)){
+				if($user = get_user($user_guid)){
+					if($user->canEdit()){
+						if($user->username !== $new_username){
+							$user->username = $new_username;
+							if($user->save()){
+								elgg_register_plugin_hook_handler("forward", "system", "profile_manager_username_change_forward_hook");
+								
+								system_message(elgg_echo('profile_manager:action:username:change:succes'));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * Directs user to correct settings links after changing a username
+	 * @param unknown_type $hook_name
+	 * @param unknown_type $entity_type
+	 * @param unknown_type $return_value
+	 * @param unknown_type $parameters
+	 * @return string
+	 */
+	function profile_manager_username_change_forward_hook($hook_name, $entity_type, $return_value, $parameters){
+		$username = get_input("username");
+		if(!empty($username)){
+			return elgg_get_site_url() . "settings/user/" . $username;
 		}
 	}

@@ -1,5 +1,10 @@
 <?php
 $language = array (
+  'profile_manager:settings:enable_username_change' => 'Sta gebruikers toe om hun gebruikersnaam te wijzigen',
+  'profile_manager:settings:enable_username_change:option:admin' => 'Alleen beheerders',
+  'profile_manager:action:username:change:succes' => 'Gebruikersnaam succesvol gewijzigd',
+  'profile_manager:account:username:button' => 'Klik om je gebruikersnaam te wijzigen',
+  'profile_manager:account:username:info' => 'Wijzig je gebruikersnaam. Een icoon zal aangeven of de ingevoerde gebruikersnaam beschikbaar en geldig is.',
   'profile_manager:settings:simple_access_control' => 'Toon slechts ��n toegangsrecht keuze op het profiel bewerken formulier',
   'profile_manager:actions:import:from_custom:new_fields' => 'Succesvol <b>%s</b> nieuwe velden ge�mporteerd',
   'profile_manager:actions:import:from_default:new_fields' => 'Succesvol <b>%s</b> nieuwe velden ge�mporteerd',
