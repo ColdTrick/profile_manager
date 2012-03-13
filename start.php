@@ -86,7 +86,7 @@
 		switch($page[0]){
 			case "forms":
 				$form = $page[1];
-				if(!empty($form)){
+				if(!empty($form) && elgg_is_admin_logged_in()){
 					set_input("guid", $page[2]);	
 					include(dirname(__FILE__) . "/pages/forms/" . $form . ".php");
 					return true;	

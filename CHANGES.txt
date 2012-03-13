@@ -2,6 +2,7 @@
 
 x.x:
 
+- added: rating field type
 - added: option to allow users to change their username
 - changed: info icons replaced with elgg default info icon
 - changed: version requirement to 1.8.1 to support info icon

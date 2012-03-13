@@ -44,7 +44,7 @@
 		add_custom_field_type("custom_profile_field_types", 'dropdown', elgg_echo('profile_manager:admin:options:pulldown'), $pulldown_options);
 		add_custom_field_type("custom_profile_field_types", 'radio', elgg_echo('profile_manager:admin:options:radio'), $radio_options);
 		add_custom_field_type("custom_profile_field_types", 'multiselect', elgg_echo('profile_manager:admin:options:multiselect'), $profile_options);
-		add_custom_field_type("custom_profile_field_types", 'pm_rating', elgg_echo('profile_manager:admin:options:pm_rating'), $profile_options);
+		add_custom_field_type("custom_profile_field_types", 'pm_rating', elgg_echo('profile_manager:admin:options:pm_rating'), $pm_rating_options);
 		//add_custom_field_type("custom_profile_field_types", 'pm_file', elgg_echo('profile_manager:admin:options:file'), $file_options);
 		
 		if(elgg_view_exists("output/datepicker") && elgg_view_exists("input/datepicker")){

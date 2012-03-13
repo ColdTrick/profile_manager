@@ -80,6 +80,7 @@
 		'profile_manager:admin:options:radio' => 'Radio',
 		'profile_manager:admin:options:multiselect' => 'MultiSelect',
 		'profile_manager:admin:options:file' => 'File',
+		'profile_manager:admin:options:pm_rating' => 'Rating',
 		
 		'profile_manager:admin:additional_options' => 'Additional options',
 		'profile_manager:admin:show_on_register' => 'Show on register form',	
