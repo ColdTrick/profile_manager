@@ -42,6 +42,7 @@ echo "</div>";
 
 		$("#<?php echo $rating_id; ?> a").live("click", function(event){
 			$("#<?php echo $rating_id; ?> .elgg-icon").removeClass("pm-rating-selected elgg-icon-star-alt").addClass("elgg-icon-star-empty");
+			$("#<?php echo $rating_id; ?> input").val("");
 			event.preventDefault();
 		});
 	});
