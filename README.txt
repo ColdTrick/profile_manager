@@ -23,6 +23,7 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 - backup / restore profile fields configuration
 - export user profile (meta)data to csv
 - a customized registration form
+- control the fields shown on a user summary / listing view
 
 == 2. TO DO ==
 - categories and types for groups

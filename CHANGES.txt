@@ -1,7 +1,8 @@
 = Version history =
 
-x.x:
+7.3 (2012-03-15):
 
+- added: user summary control
 - added: rating field type
 - added: option to allow users to change their username
 - changed: info icons replaced with elgg default info icon

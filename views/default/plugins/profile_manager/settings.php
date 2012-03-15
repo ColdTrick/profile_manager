@@ -201,6 +201,14 @@
 		</td>
 	</tr>
 	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:settings:user_summary_control'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[user_summary_control]", "options_values" => $noyes_options, "value" => $vars['entity']->user_summary_control)); ?>
+		</td>
+	</tr>
+	<tr>
 		<td colspan="2">
 			<div class='elgg-module-inline'>
 				<div class='elgg-head'>

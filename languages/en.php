@@ -21,9 +21,12 @@
 		'item:object:custom_profile_type' => 'Custom Profile Type',
 		'item:object:custom_group_field' => 'Custom Group Field',
 	
+		'profile:custom_profile_type' => 'Custom Profile Type',
+		
 		// admin menu 
 		'admin:appearance:group_fields' => "Edit Group Fields",
 		'admin:appearance:export_fields' => "Export Profile Data",
+		'admin:appearance:user_summary_control' => "User Summary Control",
 	
 		// plugin settings
 		'profile_manager:settings:registration' => 'Registration',
@@ -54,6 +57,7 @@
 		'profile_manager:settings:profile_type_selection:option:admin' => 'Admin only',
 
 		'profile_manager:settings:description_position' => 'Where to position the description ("About me") field',
+		'profile_manager:settings:user_summary_control' => 'Let Profile Manager control the user summary / listing view',
 		
 		'profile_manager:settings:enable_profile_completeness_widget' => "Enable the profile completeness widget",
 		'profile_manager:settings:enable_username_change' => "Allow users to change their username in settings",
@@ -133,6 +137,20 @@
 		'profile_manager:profile_types:list:no_types' => "No profile types defined",
 		'profile_manager:profile_types:delete:confirm' => "Are you sure you wish to delete this profile type?",
 		'profile_manager:user_details:profile_type' => "Profile Type",
+		
+		// User Summary Control
+		'profile_manager:user_summary_control:config' => "Configuration",
+		'profile_manager:user_summary_control:info' => "Add fields to the different containers and see in the preview the result of the configuration. If you are satisfied you can 'Save' the configuration.",
+		
+		'profile_manager:user_summary_control:container:title' => "Title",
+		'profile_manager:user_summary_control:container:entity_menu' => "Entity Menu",
+		'profile_manager:user_summary_control:container:subtitle' => "Subtitle",
+		'profile_manager:user_summary_control:container:content' => "Content",
+		
+		'profile_manager:user_summary_control:options:spacers' => "Spacers",
+		'profile_manager:user_summary_control:options:spacers:new_line' => "New line",
+		'profile_manager:user_summary_control:options:spacers:space' => "Space",
+		'profile_manager:user_summary_control:options:spacers:dash' => "-",
 	
 		// admin actions
 		'profile_manager:actions:title' => 'Actions',

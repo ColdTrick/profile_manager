@@ -280,3 +280,86 @@
 			return elgg_get_site_url() . "settings/user/" . $username;
 		}
 	}
+	
+	/**
+	 * 
+	 * Used to extend the entity menu when user_summary_control is enabled 
+	 * @param unknown_type $hook_name
+	 * @param unknown_type $entity_type
+	 * @param unknown_type $return_value
+	 * @param unknown_type $parameters
+	 */
+	function profile_manager_register_entity_menu($hook_name, $entity_type, $return_value, $params){
+		
+		if(!elgg_in_context("widgets") && elgg_instanceof($params['entity'], 'user')){
+			if(elgg_get_plugin_setting("user_summary_control", "profile_manager") == "yes"){
+				// cleanup existing menu items (location is added in core/lib/users.php)
+				if(!empty($return_value)){
+					foreach($return_value as $key => $menu_item){
+						if($menu_item->getName() == "location"){
+							unset($return_value[$key]);
+						}
+					}
+				}
+				
+				// add optional custom profile field data
+				$current_config = elgg_get_plugin_setting("user_summary_config", "profile_manager");
+				if(!empty($current_config)){
+					$current_config = json_decode($current_config, true);
+					
+					$profile_fields = elgg_get_config("profile_fields");
+					
+					if(!empty($current_config) && is_array($current_config) && !empty($profile_fields)){
+						if(array_key_exists("entity_menu", $current_config)){
+							$fields = $current_config["entity_menu"];
+							$spacer_allowed = true;
+							$spacer_result = "";
+							$menu_content = "";
+							
+							foreach($fields as $field){
+								$field_result = "";
+									
+								switch($field){
+									case "spacer_dash":
+										if($spacer_allowed){
+											$spacer_result = " - ";
+										}
+										$spacer_allowed = false;
+										break;
+									case "spacer_space":
+										if($spacer_allowed){
+											$spacer_result = " ";
+										}
+										$spacer_allowed = false;
+										break;
+									case "spacer_new_line":
+										$spacer_allowed = true;
+										$field_result = "<br />";
+										break;
+									default:
+										$spacer_allowed = true;
+									$field_result = elgg_view("output/" . $profile_fields[$field], array("value" => $params["entity"]->$field));
+									break;
+								}
+									
+								if(!empty($field_result)){
+									$menu_content .= $spacer_result . $field_result;
+								}
+							}
+							if(!empty($menu_content)){
+								$options = array(
+												'name' => 'profile_manager_user_summary_control_entity_menu',
+												'text' => "<span>$menu_content</span>",
+												'href' => false,
+												'priority' => 150,
+								);
+								$return_value[] = ElggMenuItem::factory($options);
+							}
+						}
+					}
+				}
+				
+				return $return_value;
+			}
+		}
+	}

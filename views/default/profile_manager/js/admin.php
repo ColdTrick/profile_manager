@@ -44,6 +44,14 @@ $(document).ready(function(){
 		}
 	});
 
+	$(".elgg-icon-profile-manager-user-summary-config-add").live("click", function(){
+		$("#profile-manager-user-summary-config-options").clone().insertBefore($(this)).removeAttr("id").attr("name", $(this).parent().attr("rel") + "[]");
+	});
+
+	$(".profile-manager-user-summary-config-options-delete").live("click", function(){
+		$(this).parent().remove();
+	});
+
 	// add buttons
 	$(".profile-manager-popup").fancybox();
 });
