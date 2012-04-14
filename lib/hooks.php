@@ -15,7 +15,7 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => elgg_get_site_entity()->getGUID()
+				"owner_guid" => elgg_get_config("site_guid")
 			);
 
 		if($entities = elgg_get_entities($options)){
@@ -64,7 +64,7 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => elgg_get_site_entity()->getGUID()
+				"owner_guid" => elgg_get_config("site_guid")
 			);
 		
 		$group_fields = elgg_get_entities($options);

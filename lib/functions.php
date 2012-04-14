@@ -214,8 +214,8 @@
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 			"limit" => false,
-			"owner_guid" => elgg_get_site_entity()->getGUID(),
-			"site_guid" => elgg_get_site_entity()->getGUID()
+			"owner_guid" => elgg_get_config("site_guid"),
+			"site_guid" => elgg_get_config("site_guid")
 		); 
 			
 		// get ordered categories
@@ -266,8 +266,8 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => elgg_get_site_entity()->getGUID(),
-				"site_guid" => elgg_get_site_entity()->getGUID()
+				"owner_guid" => elgg_get_config("site_guid"),
+				"site_guid" => elgg_get_config("site_guid")
 			); 
 			
 		// adding fields to categories
@@ -335,8 +335,8 @@
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
 				"limit" => false,
-				"owner_guid" => elgg_get_site_entity()->getGUID(),
-				"site_guid" => elgg_get_site_entity()->getGUID()
+				"owner_guid" => elgg_get_config("site_guid"),
+				"site_guid" => elgg_get_config("site_guid")
 			);
 			
 		$fields = elgg_get_entities($options);
@@ -373,8 +373,8 @@
 				"subtype" => $field_type,
 				"limit" => 1,
 				"order_by_metadata" => array(array('name' => 'order', 'direction' => "desc", 'as' => "integer")),
-				"owner_guid" => elgg_get_site_entity()->getGUID(),
-				"site_guid" => elgg_get_site_entity()->getGUID()
+				"owner_guid" => elgg_get_config("site_guid"),
+				"site_guid" => elgg_get_config("site_guid")
 			); 
 			
 			if($entities = elgg_get_entities_from_metadata($options)){
@@ -443,14 +443,12 @@
 	}
 	
 	function profile_manager_get_user_profile_data(ElggUser $user){
-		global $CONFIG;
-		
 		$profile_fields = elgg_get_config('profile_fields');
 		$result = false;
 		if(!empty($user) && !empty($profile_fields)){
 			
 			$fields = "'" . implode("','", array_keys($profile_fields)) . "'";
-			$query = "SELECT m.*, n.string as name, v.string as value from {$CONFIG->dbprefix}metadata m JOIN {$CONFIG->dbprefix}metastrings v on m.value_id = v.id JOIN {$CONFIG->dbprefix}metastrings n on m.name_id = n.id where";
+			$query = "SELECT m.*, n.string as name, v.string as value from " . elgg_get_config("dbprefix") . "metadata m JOIN " . elgg_get_config("dbprefix") . "metastrings v on m.value_id = v.id JOIN " . elgg_get_config("dbprefix") . "metastrings n on m.name_id = n.id where";
 			$query .= " n.string in ('custom_profile_type'," . $fields . ") AND"; 	
 			$query .= " m.entity_guid = " . $user->getGUID() . " AND"; 	
 			$query .= " " . get_access_sql_suffix("m"); // Add access controls

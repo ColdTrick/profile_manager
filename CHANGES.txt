@@ -1,5 +1,9 @@
 = Version history =
 
+x.x:
+
+- fixed: some incompatibility issues with Subsite Manager
+
 7.3 (2012-03-15):
 
 - added: user summary control
