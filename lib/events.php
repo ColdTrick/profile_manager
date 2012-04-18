@@ -150,3 +150,39 @@
 			add_profile_icon($object);
 		}
 	}	
+	
+	/**
+	 * Adds a river event when a user joins the site
+	 * 
+	 * @param unknown_type $event
+	 * @param unknown_type $object_type
+	 * @param unknown_type $object
+	 */
+	function profile_manager_create_member_of_site($event, $object_type, $object){
+		
+		$user_guid = $object->guid_one;
+		$site_guid = $object->guid_two;
+		
+		// clear current river events
+		elgg_delete_river(array("view" => 'river/relationship/member_of_site/create', "subject_guid" => $user_guid, "object_guid" => $site_guid));
+		
+		// add new join river event
+		add_to_river('river/relationship/member_of_site/create', 'join', $user_guid, $site_guid);
+	}
+
+	/**
+	 * Remove river join event on site leave
+	 * 
+	 * @param unknown_type $event
+	 * @param unknown_type $object_type
+	 * @param unknown_type $object
+	 */
+	function profile_manager_delete_member_of_site($event, $object_type, $object){
+		// remove previous join events
+		$user_guid = $object->guid_one;
+		$site_guid = $object->guid_two;
+		
+		// clear current river events
+		elgg_delete_river(array("view" => 'river/relationship/member_of_site/create', "subject_guid" => $user_guid, "object_guid" => $site_guid));
+	}
+	

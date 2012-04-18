@@ -233,5 +233,13 @@
 			<?php echo elgg_view("input/dropdown", array("name" => "params[enable_username_change]", "options_values" => $enable_username_change_options, "value" => $vars['entity']->enable_username_change)); ?>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:settings:enable_site_join_river_event'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[enable_site_join_river_event]", "options_values" => $yesno_options, "value" => $vars['entity']->enable_site_join_river_event)); ?>
+		</td>
+	</tr>
 </table>
 <br />

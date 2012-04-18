@@ -2,6 +2,7 @@
 
 x.x:
 
+- added: optional river event on site join (default enabled)
 - fixed: some incompatibility issues with Subsite Manager
 
 7.3 (2012-03-15):

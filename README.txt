@@ -24,6 +24,7 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 - export user profile (meta)data to csv
 - a customized registration form
 - control the fields shown on a user summary / listing view
+- a river event when user joins the site
 
 == 2. TO DO ==
 - categories and types for groups

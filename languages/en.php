@@ -62,6 +62,7 @@
 		'profile_manager:settings:enable_profile_completeness_widget' => "Enable the profile completeness widget",
 		'profile_manager:settings:enable_username_change' => "Allow users to change their username in settings",
 		'profile_manager:settings:enable_username_change:option:admin' => "Admin only",
+		'profile_manager:settings:enable_site_join_river_event' => "Add a river event when people join this site",
 		
 		'profile_manager:settings:registration:terms' => "To show an 'Accept terms' field on the registration page, please fill in the URL to the terms below",
 		'profile_manager:settings:registration:extra_fields' => "Where to show extra profile fields",
@@ -362,6 +363,10 @@
 		// change username form
 		'profile_manager:account:username:button' => "Click to change your username",
 		'profile_manager:account:username:info' => "Change your username. An icon will tell you if the username entered is valid and available.",
+		
+		// river events
+		'river:join:site:default' => '%s joined the site',
+	
 
 	);
 	

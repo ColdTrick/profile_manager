@@ -1,5 +1,7 @@
 <?php
 $language = array (
+  'profile_manager:settings:enable_site_join_river_event' => 'Voeg een gebeurtenis toe aan de activiteiten stroom',
+  'river:join:site:default' => '%s is lid geworden van de site',
   'item:object:custom_profile_type' => 'Custom Profiel Type',
   'profile:custom_profile_type' => 'Custom Profiel Type',
   'admin:appearance:user_summary_control' => 'Gebruikers Lijstweergave Controle',
