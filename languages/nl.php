@@ -54,6 +54,7 @@ $language = array (
   'profile_manager:settings:other' => 'Overige',
   'profile_manager:settings:profile_icon_on_register' => 'Verplicht de upload van een avatar op het registratie formulier',
   'profile_manager:settings:default_profile_type' => 'Standaard profiel type bij registratie',
+'profile_manager:settings:hide_profile_type_default' => "Verberg het 'Standaard' profiel type bij registratie",
   'profile_manager:settings:hide_non_editables' => 'Verberg de niet bewerkbare velden van het bewerk profiel formulier',
   'profile_manager:settings:edit_profile_mode' => 'Hoe moeten de velden op het bewerk profiel formulier worden getoond',
   'profile_manager:settings:edit_profile_mode:list' => 'Lijst',

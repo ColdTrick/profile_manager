@@ -37,6 +37,7 @@
 		'profile_manager:settings:profile_icon_on_register' => 'Add mandatory profile icon input field on register form',
 		'profile_manager:settings:simple_access_control' => 'Show just one access control pulldown on edit profile form',
 		'profile_manager:settings:default_profile_type' => "Default profile type on registration form",
+		'profile_manager:settings:hide_profile_type_default' => "Hide the 'Default' profile type on registration form",
 	
 		'profile_manager:settings:hide_non_editables' => 'Hide the non editable fields from the Edit Profile form',
 	

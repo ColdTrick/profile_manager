@@ -2,6 +2,7 @@
 
 x.x:
 
+- added: option to hide the 'default' profile type option on registration (default visible)
 - added: optional river event on site join (default enabled)
 - fixed: some incompatibility issues with Subsite Manager
 

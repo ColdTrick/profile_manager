@@ -98,6 +98,14 @@
 			<?php echo elgg_view("input/dropdown", array("name" => "params[default_profile_type]", "options_values" => $profile_types, "value" => $vars['entity']->default_profile_type)); ?>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:settings:hide_profile_type_default'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[hide_profile_type_default]", "options_values" => $noyes_options, "value" => $vars['entity']->hide_profile_type_default)); ?>
+		</td>
+	</tr>
 	<?php } ?>
 	<tr>
 		<td colspan="2">

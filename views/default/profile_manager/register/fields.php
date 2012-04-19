@@ -45,7 +45,9 @@
 		if($types = elgg_get_entities($types_options)){
 			
 			$types_options_values = array();
-			$types_options_values[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
+			if(elgg_get_plugin_setting("hide_profile_type_default", "profile_manager") !== "yes"){
+				$types_options_values[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
+			}
 			
 			foreach($types as $type){
 				$types_options_values[$type->guid] = $type->getTitle();
