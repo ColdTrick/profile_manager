@@ -53,8 +53,11 @@ if((elgg_get_plugin_setting("user_summary_control", "profile_manager") == "yes")
 							$field_result = "<br />";
 							break;
 						default:
-							$spacer_allowed = true;
-							$field_result = elgg_view("output/" . $profile_fields[$field], array("value" => $vars["entity"]->$field));
+							$value = $vars["entity"]->$field;
+							if(!empty($value)){
+								$spacer_allowed = true;
+								$field_result = elgg_view("output/" . $profile_fields[$field], array("value" => $value));
+							}
 							break;
 					}
 					
