@@ -2,6 +2,8 @@
 
 x.x:
 
+- added: listing of inactive users (with last login before date x)
+- added: download list of inactive user to csv
 - added: option to hide the 'default' profile type option on registration (default visible)
 - added: optional river event on site join (default enabled)
 - fixed: some incompatibility issues with Subsite Manager

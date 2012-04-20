@@ -27,6 +27,9 @@
 		'admin:appearance:group_fields' => "Edit Group Fields",
 		'admin:appearance:export_fields' => "Export Profile Data",
 		'admin:appearance:user_summary_control' => "User Summary Control",
+
+		'admin:users:export' => "Export users",
+		'admin:users:inactive' => "List inactive users",
 	
 		// plugin settings
 		'profile_manager:settings:registration' => 'Registration',
@@ -153,6 +156,12 @@
 		'profile_manager:user_summary_control:options:spacers:new_line' => "New line",
 		'profile_manager:user_summary_control:options:spacers:space' => "Space",
 		'profile_manager:user_summary_control:options:spacers:dash' => "-",
+		
+		// profile manager inactive users
+		'profile_manager:admin:users:inactive:last_login' => "Last login before",
+		'profile_manager:admin:users:inactive:list' => "Inactive users",
+		'profile_manager:admin:users:inactive:never' => "Never",
+		'profile_manager:admin:users:inactive:download' => "Download",
 	
 		// admin actions
 		'profile_manager:actions:title' => 'Actions',

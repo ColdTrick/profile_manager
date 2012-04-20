@@ -128,6 +128,9 @@
 			elgg_load_js('lightbox');
 			elgg_load_css('lightbox');
 			
+			elgg_register_admin_menu_item('administer', 'export', 'users');
+			elgg_register_admin_menu_item('administer', 'inactive', 'users');
+			
 			if(elgg_is_active_plugin("groups")){
 				elgg_register_admin_menu_item('configure', 'group_fields', 'appearance');
 			}
@@ -173,4 +176,6 @@
 	elgg_register_action("profile_manager/profile_types/delete", dirname(__FILE__) . "/actions/profile_types/delete.php", "admin");
 
 	elgg_register_action("profile_manager/user_summary_control/save", dirname(__FILE__) . "/actions/user_summary_control/save.php", "admin");
+
+	elgg_register_action("profile_manager/users/export_inactive", dirname(__FILE__) . "/actions/users/export_inactive.php", "admin");
 	

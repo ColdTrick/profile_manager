@@ -1,5 +1,11 @@
 <?php
 $language = array (
+  'admin:users:export' => 'Exporteer gebruikers',
+  'admin:users:inactive' => 'Inactive gebruikers',
+  'profile_manager:admin:users:inactive:last_login' => 'Laatst aangemeld voor',
+  'profile_manager:admin:users:inactive:list' => 'Inactive gebruikers',
+  'profile_manager:admin:users:inactive:never' => 'Nooit',
+  'profile_manager:admin:users:inactive:download' => 'Download',
   'profile_manager:settings:enable_site_join_river_event' => 'Voeg een gebeurtenis toe aan de activiteiten stroom',
   'river:join:site:default' => '%s is lid geworden van de site',
   'item:object:custom_profile_type' => 'Custom Profiel Type',
@@ -54,7 +60,7 @@ $language = array (
   'profile_manager:settings:other' => 'Overige',
   'profile_manager:settings:profile_icon_on_register' => 'Verplicht de upload van een avatar op het registratie formulier',
   'profile_manager:settings:default_profile_type' => 'Standaard profiel type bij registratie',
-'profile_manager:settings:hide_profile_type_default' => "Verberg het 'Standaard' profiel type bij registratie",
+  'profile_manager:settings:hide_profile_type_default' => 'Verberg het \'Standaard\' profiel type bij registratie',
   'profile_manager:settings:hide_non_editables' => 'Verberg de niet bewerkbare velden van het bewerk profiel formulier',
   'profile_manager:settings:edit_profile_mode' => 'Hoe moeten de velden op het bewerk profiel formulier worden getoond',
   'profile_manager:settings:edit_profile_mode:list' => 'Lijst',
