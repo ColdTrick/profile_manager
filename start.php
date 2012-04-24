@@ -63,13 +63,10 @@
 		}
 		
 		// enable username change
-		$enable_username_change = elgg_get_plugin_setting("enable_username_change", "profile_manager");
-		if($enable_username_change == "yes" || ($enable_username_change == "admin" && elgg_is_admin_logged_in())){
-			elgg_extend_view("forms/account/settings", "profile_manager/account/username", 50); // positioned at the beginning of the options
-			
-			// register hook for saving the new username
-			elgg_register_plugin_hook_handler('usersettings:save', 'user', 'profile_manager_username_change_hook');
-		}
+		elgg_extend_view("forms/account/settings", "profile_manager/account/username", 50); // positioned at the beginning of the options
+
+		// register hook for saving the new username
+		elgg_register_plugin_hook_handler('usersettings:save', 'user', 'profile_manager_username_change_hook');
 		
 		$enable_river_event = elgg_get_plugin_setting("enable_site_join_river_event", "profile_manager");
 		if($enable_river_event !== "no"){

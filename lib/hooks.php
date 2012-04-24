@@ -247,16 +247,20 @@
 		$user_guid = (int) get_input('guid');
 		$new_username = get_input('username');
 		
-		if(!empty($user_guid) && !empty($new_username)){
-			if(profile_manager_validate_username($new_username)){
-				if($user = get_user($user_guid)){
-					if($user->canEdit()){
-						if($user->username !== $new_username){
-							$user->username = $new_username;
-							if($user->save()){
-								elgg_register_plugin_hook_handler("forward", "system", "profile_manager_username_change_forward_hook");
-								
-								system_message(elgg_echo('profile_manager:action:username:change:succes'));
+		$enable_username_change = elgg_get_plugin_setting("enable_username_change", "profile_manager");
+		if($enable_username_change == "yes" || ($enable_username_change == "admin" && elgg_is_admin_logged_in())){
+		
+			if(!empty($user_guid) && !empty($new_username)){
+				if(profile_manager_validate_username($new_username)){
+					if($user = get_user($user_guid)){
+						if($user->canEdit()){
+							if($user->username !== $new_username){
+								$user->username = $new_username;
+								if($user->save()){
+									elgg_register_plugin_hook_handler("forward", "system", "profile_manager_username_change_forward_hook");
+									
+									system_message(elgg_echo('profile_manager:action:username:change:succes'));
+								}
 							}
 						}
 					}
