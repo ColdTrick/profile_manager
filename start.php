@@ -68,10 +68,9 @@
 		// register hook for saving the new username
 		elgg_register_plugin_hook_handler('usersettings:save', 'user', 'profile_manager_username_change_hook');
 		
-		$enable_river_event = elgg_get_plugin_setting("enable_site_join_river_event", "profile_manager");
-		if($enable_river_event !== "no"){
-			elgg_register_event_handler("create", "member_of_site", "profile_manager_create_member_of_site");
-		}
+		// site join event handler
+		elgg_register_event_handler("create", "member_of_site", "profile_manager_create_member_of_site");
+		
 		// always cleanup
 		elgg_register_event_handler("delete", "member_of_site", "profile_manager_delete_member_of_site");
 		

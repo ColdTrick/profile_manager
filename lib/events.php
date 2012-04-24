@@ -159,15 +159,18 @@
 	 * @param unknown_type $object
 	 */
 	function profile_manager_create_member_of_site($event, $object_type, $object){
-		
-		$user_guid = $object->guid_one;
-		$site_guid = $object->guid_two;
-		
-		// clear current river events
-		elgg_delete_river(array("view" => 'river/relationship/member_of_site/create', "subject_guid" => $user_guid, "object_guid" => $site_guid));
-		
-		// add new join river event
-		add_to_river('river/relationship/member_of_site/create', 'join', $user_guid, $site_guid);
+		$enable_river_event = elgg_get_plugin_setting("enable_site_join_river_event", "profile_manager");
+		if($enable_river_event !== "no"){
+			
+			$user_guid = $object->guid_one;
+			$site_guid = $object->guid_two;
+			
+			// clear current river events
+			elgg_delete_river(array("view" => 'river/relationship/member_of_site/create', "subject_guid" => $user_guid, "object_guid" => $site_guid));
+			
+			// add new join river event
+			add_to_river('river/relationship/member_of_site/create', 'join', $user_guid, $site_guid);
+		}
 	}
 
 	/**
