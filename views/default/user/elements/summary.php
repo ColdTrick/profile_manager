@@ -10,7 +10,7 @@
  * @uses $vars['content']   HTML for the entity content (optional)
  */
 
-if((elgg_get_plugin_setting("user_summary_control", "profile_manager") == "yes") && !$vars["entity"]->isBanned()){
+if((elgg_get_plugin_setting("user_summary_control", "profile_manager") == "yes") && !$vars["entity"]->isBanned() && !elgg_in_context("admin")){
 	
 	$current_config = elgg_get_plugin_setting("user_summary_config", "profile_manager");
 	if(!empty($current_config)){

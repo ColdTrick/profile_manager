@@ -291,7 +291,7 @@
 	 */
 	function profile_manager_register_entity_menu($hook_name, $entity_type, $return_value, $params){
 		
-		if(!elgg_in_context("widgets") && elgg_instanceof($params['entity'], 'user')){
+		if(!elgg_in_context("widgets") && elgg_instanceof($params['entity'], 'user') && !elgg_in_context("admin")){
 			if(elgg_get_plugin_setting("user_summary_control", "profile_manager") == "yes"){
 				// cleanup existing menu items (location is added in core/lib/users.php)
 				if(!empty($return_value)){
