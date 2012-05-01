@@ -62,6 +62,9 @@
 			elgg_extend_view("register/extend", "profile_manager/register/fields");
 		}
 		
+		// hook for extending the entity menu
+		elgg_register_plugin_hook_handler('register', 'menu:entity', 'profile_manager_register_entity_menu', 600);
+		
 		// enable username change
 		elgg_extend_view("forms/account/settings", "profile_manager/account/username", 50); // positioned at the beginning of the options
 

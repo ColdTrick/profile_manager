@@ -295,17 +295,30 @@
 	 */
 	function profile_manager_register_entity_menu($hook_name, $entity_type, $return_value, $params){
 		
-		if(!elgg_in_context("widgets") && elgg_instanceof($params['entity'], 'user') && !elgg_in_context("admin")){
-			if(elgg_get_plugin_setting("user_summary_control", "profile_manager") == "yes"){
-				// cleanup existing menu items (location is added in core/lib/users.php)
-				if(!empty($return_value)){
-					foreach($return_value as $key => $menu_item){
-						if($menu_item->getName() == "location"){
-							unset($return_value[$key]);
+		// cleanup existing menu items (location is added in core/lib/users.php)
+		if(!empty($return_value)){
+			foreach($return_value as $key => $menu_item){
+				if($menu_item->getName() == "location"){
+					// add the new and improved version that supports 'old' location as tags field
+					if ($location = $params["entity"]->location) {
+						if(is_array($location)){
+							$location = implode(",", $location);
 						}
+						$options = array(
+									'name' => 'location',
+									'text' => "<span>$location</span>",
+									'href' => false,
+									'priority' => 150,
+						);
+						$location_menu = ElggMenuItem::factory($options);
+						$return_value[$key] = $location_menu;
 					}
 				}
-				
+			}
+		}
+		
+		if(!elgg_in_context("widgets") && elgg_instanceof($params['entity'], 'user')){
+			if(elgg_get_plugin_setting("user_summary_control", "profile_manager") == "yes"){
 				// add optional custom profile field data
 				$current_config = elgg_get_plugin_setting("user_summary_config", "profile_manager");
 				if(!empty($current_config)){
@@ -362,8 +375,8 @@
 						}
 					}
 				}
-				
-				return $return_value;
 			}
 		}
+		
+		return $return_value;
 	}
