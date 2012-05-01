@@ -447,13 +447,17 @@
 		$result = false;
 		if(!empty($user) && !empty($profile_fields)){
 			
-			$fields = "'" . implode("','", array_keys($profile_fields)) . "'";
-			$query = "SELECT m.*, n.string as name, v.string as value from " . elgg_get_config("dbprefix") . "metadata m JOIN " . elgg_get_config("dbprefix") . "metastrings v on m.value_id = v.id JOIN " . elgg_get_config("dbprefix") . "metastrings n on m.name_id = n.id where";
-			$query .= " n.string in ('custom_profile_type'," . $fields . ") AND"; 	
-			$query .= " m.entity_guid = " . $user->getGUID() . " AND"; 	
-			$query .= " " . get_access_sql_suffix("m"); // Add access controls
+			$fields = array_keys($profile_fields);
+			$fields[] = "custom_profile_type";
 			
-			$rows = get_data($query, "row_to_elggmetadata");
+			$options = array(
+				"metadata_names" => $fields,
+				"guid" => $user->getGUID(),
+				"limit" => false
+			);
+			
+			$rows = elgg_get_metadata($options);
+			
 			if($rows){
 				$result = array();
 				foreach($rows as $row){
