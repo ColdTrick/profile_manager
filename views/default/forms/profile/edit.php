@@ -177,7 +177,7 @@
 				$title = $field->getTitle();
 								
 				// get value
-				if(array_key_exists($metadata_name, $user_metadata)){
+				if(!empty($user_metadata) && array_key_exists($metadata_name, $user_metadata)){
 					$value = $user_metadata[$metadata_name]->value;
 					$access_id = $user_metadata[$metadata_name]->access_id;
 				} else {
