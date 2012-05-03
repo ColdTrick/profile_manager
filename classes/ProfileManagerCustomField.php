@@ -57,8 +57,8 @@
 			return parent::get($name);				
 		}		
 		
-		public function setMetaData($name, $value){
-			if(parent::setMetaData($name, $value)){
+		public function setMetaData($name, $value, $value_type = "", $multiple = false){
+			if(parent::setMetaData($name, $value, $value_type, $multiple)){
 				if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
 					$this->meta_cache[$name] = $value;
 				}
@@ -66,7 +66,7 @@
 			}
 		}
 		
-		public function clearMetaData($name){
+		public function clearMetaData($name = ''){
 			if(parent::clearMetaData($name)){
 				if(is_array($this->meta_cache) && array_key_exists($name, $this->meta_cache)){
 					unset($this->meta_cache[$name]);
