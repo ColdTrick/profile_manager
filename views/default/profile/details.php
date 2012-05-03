@@ -105,7 +105,9 @@
 					// adjust output type
 					if($field->output_as_tags == "yes"){
 						$output_type = "tags";
-						$value = string_to_tag_array($value);
+						if(!is_array($value)){
+							$value = string_to_tag_array($value);
+						}
 					} else {
 						$output_type = $field->metadata_type;
 					}
