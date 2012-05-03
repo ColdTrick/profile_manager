@@ -11,13 +11,13 @@
 	*/
 	$handle = "<div onclick='$(\"#" . $vars['entity']->guid . "\").toggle();' class='custom_field_handle'></div>";
 	
-	$title .= "<div class='field_config_title'>";
+	$title = "<div class='field_config_title'>";
 	$title .= "<b>" . $vars['entity']->metadata_name . "</b> [" . $vars['entity']->metadata_type . "]";
 	$title .= "<a href='" . $vars["url"] . "profile_manager/forms/profile_field/" . $vars['entity']->guid  . "' class='profile-manager-popup'><span class='elgg-icon elgg-icon-settings-alt' title='" . elgg_echo("edit") . "'></span></a>";
 	$title .= "<span class='elgg-icon elgg-icon-delete' title='" . elgg_echo("delete") . "' onclick='removeField(" . $vars['entity']->guid . ");'></span>";
 	$title .= "</div>";
 	
-	$extra_info .= "<div id='" . $vars['entity']->guid . "' class='field_config_extra'>";
+	$extra_info = "<div id='" . $vars['entity']->guid . "' class='field_config_extra'>";
 	
 	// label information
 	if(!empty($vars['entity']->metadata_label)){
@@ -42,7 +42,7 @@
 	
 	$extra_info .= "</div>";
 	
-	$metadata .= "<div class='field_config_metadata'>";
+	$metadata = "<div class='field_config_metadata'>";
 	
 	// show_on_register
 	$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "show_on_register"));	

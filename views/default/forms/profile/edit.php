@@ -65,7 +65,7 @@
 					$description = $type->getDescription();
 					
 					if(!empty($description)){
-						$types_description .= "<div id='custom_profile_type_description_" . $type->getGUID() . "' class='custom_profile_type_description'>";
+						$types_description = "<div id='custom_profile_type_description_" . $type->getGUID() . "' class='custom_profile_type_description'>";
 						$types_description .= "<h3 class='settings'>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:description") . "</h3>";
 						$types_description .= $description;
 						$types_description .= "</div>";

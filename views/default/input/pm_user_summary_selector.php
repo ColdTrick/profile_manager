@@ -1,6 +1,6 @@
 <?php
 
-$value = $vars["value"];
+$value = elgg_extract("value", $vars);
 unset($vars["value"]);
 
 $spacers = array("new_line", "space", "dash");

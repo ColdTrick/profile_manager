@@ -29,6 +29,9 @@
 	
 	$id = $metadata_name . "_" . $entity->guid; 
 	
+	$class = "";
+	$onclick = "";
+	
 	// if no option is available in the register, this metadata field can't be toggled
 	if(!empty($type_options) && array_key_exists($metadata_name, $type_options) && $type_options[$metadata_name]){
 		if($entity->$metadata_name != "yes"){
