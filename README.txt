@@ -13,7 +13,7 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 - ordering of custom fields (drag and drop)
 - add profile types
 - add categories (draggable reordering, drop fields on categories to add)
-- adds pulldown, radio, multiselect, calendar and datepicker field types
+- adds pulldown, radio, multiselect and date field types
 - show on register form (profile fields only)
 - show output as tags
 - mandatory fields (for register form, profile fields only)
@@ -41,7 +41,6 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 - add "default access lvl"
 - add "can change access lvl"
 - tabbed profile details
-- extend group and user search listing with info from profile manager
 - add hint to default register form fields (username, email, password etc)
 - review complete js
 - review new field action (make better use of class constructors)
@@ -56,5 +55,4 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 	
 == 3. Known issues ==
 - on register error backward maintaining selected profile icon is impossible due to security reasons 
-- longtext with tinymce too small when on first hidden
 - multiselect mandatory not js enforced on register form

@@ -127,7 +127,9 @@
 						
 						"username" => "text",
 						"email" => "text",
-						"language" => "text"						
+						"language" => "text",						
+						"icontime" => "text"
+												
 					);
 				
 				foreach($system_fields as $metadata_name => $metadata_type){

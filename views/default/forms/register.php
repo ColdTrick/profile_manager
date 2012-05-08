@@ -21,7 +21,7 @@ if($accept_terms = elgg_get_plugin_setting("registration_terms", "profile_manage
 	$link_begin = "<a target='_blank' href='" . $accept_terms . "'>";
 	$link_end = "</a>";
 	
-	$terms .= "<div class='mandatory'>";
+	$terms = "<div class='mandatory'>";
 	$terms .= "<input type='checkbox' name='accept_terms' value='yes' /> ";
 	$terms .= "<label>" . elgg_echo("profile_manager:registration:accept_terms", array($link_begin, $link_end)) . "</label>";
 	$terms .= "</div>";

@@ -56,7 +56,7 @@
 				$description = $type->getDescription();
 				
 				if(!empty($description)){
-					$types_description .= "<div id='" . $type->guid . "' class='custom_profile_type_description'>";
+					$types_description = "<div id='" . $type->guid . "' class='custom_profile_type_description'>";
 					$types_description .= $description;
 					$types_description .= "</div>";
 				}
@@ -84,6 +84,8 @@
 	}
 	
 	if(count($fields) > 0){
+		$tabbed_cat_titles = "";
+		$tabbed_cat_content = "";
 		
 		foreach($cats as $cat_guid => $cat){
 			
@@ -102,7 +104,10 @@
 				
 				$sticky_name = "custom_profile_fields_". $field->metadata_name;
 				
-				$value = $$sticky_name;
+				$value = "";
+				if(isset($$sticky_name)){
+					$value = $$sticky_name;
+				}
 				
 				if(is_array($value)){
 					$value = implode(", ", $value);
