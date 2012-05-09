@@ -377,7 +377,10 @@
 		// river events
 		'river:join:site:default' => '%s joined the site',
 	
-
+		// login history
+		'profile_manager:account:login_history' => "Login History",
+		'profile_manager:account:login_history:date' => "Date",
+		'profile_manager:account:login_history:ip' => "IP Address",
 	);
 	
 	add_translation("en", $english);

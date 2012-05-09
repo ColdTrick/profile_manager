@@ -66,6 +66,9 @@
 			elgg_extend_view("register/extend", "profile_manager/register/fields");
 		}
 		
+		// login history
+		elgg_extend_view('core/settings/statistics', 'profile_manager/account/login_history');
+		
 		// hook for extending the entity menu
 		elgg_register_plugin_hook_handler('register', 'menu:entity', 'profile_manager_register_entity_menu', 600);
 		
