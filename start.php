@@ -54,6 +54,8 @@
 			elgg_register_widget_type("profile_completeness", elgg_echo("widgets:profile_completeness:title"), elgg_echo("widgets:profile_completeness:description"), "profile,dashboard");
 		}
 		
+		elgg_register_widget_type("register", elgg_echo("widgets:register:title"), elgg_echo("widgets:register:description"), "index");
+		
 		// free_text on register form
 		elgg_extend_view("register/extend_side", "profile_manager/register/free_text");
 		

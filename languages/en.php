@@ -14,7 +14,7 @@
 	
 		// Generic action words 
 		'add' => "Add",
-		
+				
 		// entity names
 		'item:object:custom_profile_field' => 'Custom Profile Field',
 		'item:object:custom_profile_field_category' => 'Custom Profile Field Category',
@@ -330,6 +330,10 @@
 		'widgets:profile_completeness:description' => 'Show the profile completeness',
 		'widgets:profile_completeness:view:tips' => 'Tip! Update your %s to improve the Profile Completeness.',
 		'widgets:profile_completeness:view:complete' => 'Congratulations! Your profile is 100% complete!',
+		
+		'widgets:register:title' => "Register",
+		'widgets:register:description' => "Show a register box",
+		'widgets:register:loggedout' => "You need to be logged out to use this widget",
 	
 		// datepicker		
 		'profile_manager:datepicker:trigger' => 'Select a date',
@@ -381,6 +385,8 @@
 		'profile_manager:account:login_history' => "Login History",
 		'profile_manager:account:login_history:date' => "Date",
 		'profile_manager:account:login_history:ip' => "IP Address",
+		
+	
 	);
 	
 	add_translation("en", $english);
