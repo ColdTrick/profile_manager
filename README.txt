@@ -51,6 +51,7 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 	- time last action (ts/date)
 	- validate (yes/no)
 - new field should lowercase check for non allowed metadatanames !important
+- add profile icon on admin user create profile form (adduser)
 	
 - check trimmed required profile fields (space should not be accepted, js + hook)
 - use elgg_get_config("icon_sizes") for mandatory profile icon upload
