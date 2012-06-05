@@ -23,6 +23,8 @@
 			} else {
 				$entity->$field = "yes";
 			}
+			// need to save to trigger a memcache update
+			$entity->save();
 			echo "true";		
 		}
 	}
