@@ -29,6 +29,11 @@
 	
 	$guid = get_input("guid");
 	
+	$reserved_metadata_names = array(
+		"guid", "title", "access_id", "owner_guid", "container_guid", "type", "subtype", "name", "username", "email", "membership", "group_acl", "icon", "site_guid", 
+		"time_created", "time_updated", "enabled", "tables_split", "tables_loaded", "password", "salt", "language", "code", "banned", "admin", "custom_profile_type"
+	);
+	
 	if($guid){
 		$current_field = get_entity($guid);
 	}
@@ -41,33 +46,7 @@
 	} elseif(empty($metadata_name)){
 		// no name
 		register_error(elgg_echo("profile_manager:actions:new:error:metadata_name_missing"));
-	} elseif($metadata_name == "guid" || 
-				$metadata_name == "title" || 
-				$metadata_name == "access_id" || 
-				$metadata_name == "owner_guid" || 
-				$metadata_name == "container_guid" || 
-				$metadata_name == "type" || 
-				$metadata_name == "subtype" || 
-				$metadata_name == "name" || 
-				$metadata_name == "username" || 
-				$metadata_name == "email" || 
-				$metadata_name == "membership" || 
-				$metadata_name == "group_acl" || 
-				$metadata_name == "icon" || 
-				$metadata_name == "site_guid" || 
-				$metadata_name == "time_created" || 
-				$metadata_name == "time_updated" || 
-				$metadata_name == "enabled" || 
-				$metadata_name == "tables_split" || 
-				$metadata_name == "tables_loaded" || 
-				$metadata_name == "password" || 
-				$metadata_name == "salt" || 
-				$metadata_name == "language" || 
-				$metadata_name == "code" || 
-				$metadata_name == "banned" ||
-				$metadata_name == "admin" || 
-				$metadata_name == "custom_profile_type" || 
-				!preg_match("/^[a-zA-Z0-9_]{1,}$/", $metadata_name)){
+	} elseif(in_array(strtolower($metadata_name), $reserved_metadata_names) || !preg_match("/^[a-zA-Z0-9_]{1,}$/", $metadata_name)){
 		// invalid name
 		register_error(elgg_echo("profile_manager:actions:new:error:metadata_name_invalid"));
 	} elseif(($metadata_type == "dropdown" || $metadata_type == "radio" || $metadata_type == "multiselect") && empty($metadata_options)){
