@@ -16,8 +16,10 @@
     } else {
     	$multiselect++;
     }
-    
-	$selected_items = explode(", ", strtolower($vars['value']));
+    $selected_items = $vars["value"];
+    if(!is_array($selected_items)){
+		$selected_items = string_to_tag_array($selected_items);
+    }
 
     $internal_id = str_replace("]", "_", str_replace("[" , "_" ,$vars['name'])) . $multiselect;
 	
