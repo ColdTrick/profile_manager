@@ -71,8 +71,10 @@
 		// login history
 		elgg_extend_view('core/settings/statistics', 'profile_manager/account/login_history');
 		
-		// hook for extending the entity menu
+		// hook for extending menus
 		elgg_register_plugin_hook_handler('register', 'menu:entity', 'profile_manager_register_entity_menu', 600);
+		
+		elgg_register_plugin_hook_handler('permissions_check:annotate', 'site', 'profile_manager_permissions_check_annotate');
 		
 		// enable username change
 		elgg_extend_view("forms/account/settings", "profile_manager/account/username", 50); // positioned at the beginning of the options

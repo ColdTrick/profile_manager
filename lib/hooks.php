@@ -382,3 +382,19 @@
 		
 		return $return_value;
 	}
+	
+	/**
+	*
+	* Used to prevent likes on site objects
+	* @param unknown_type $hook_name
+	* @param unknown_type $entity_type
+	* @param unknown_type $return_value
+	* @param unknown_type $parameters
+	*/
+	function profile_manager_permissions_check_annotate($hook_name, $entity_type, $return_value, $params){
+		$return = $return_value;
+		if(is_array($params) && (elgg_extract("annotation_name", $params) == "likes")){
+			$return = false;
+		}
+		return $return;
+	}
