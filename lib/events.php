@@ -146,7 +146,7 @@
 			elgg_set_ignore_access($ia);
 		}
 		
-		if($profile_icon = $_FILES["profile_icon"]){
+		if(isset($_FILES["profile_icon"])){
 			add_profile_icon($object);
 		}
 	}	
