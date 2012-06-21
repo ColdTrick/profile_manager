@@ -128,8 +128,8 @@
 						"username" => "text",
 						"email" => "text",
 						"language" => "text",						
-						"icontime" => "text"
-												
+						"icontime" => "text",
+						"code" => "text"			
 					);
 				
 				foreach($system_fields as $metadata_name => $metadata_type){
