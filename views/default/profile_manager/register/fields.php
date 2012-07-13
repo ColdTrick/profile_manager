@@ -130,7 +130,7 @@
 				$fields_result .= elgg_view("input/{$metadata_type}", array(
 														"name" => "custom_profile_fields_" . $field->metadata_name,
 														"value" => $value,
-														"options" => $field->getOptions()
+														$metadata_type == 'radio' ? 'options' : 'options_values' => $field->getOptions()
 														)); 
 				$fields_result .= "</div>";
 			}
