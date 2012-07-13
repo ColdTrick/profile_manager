@@ -119,7 +119,15 @@
 					} else {
 						$target = null;
 					}
-					
+
+					if ( $field->metadata_type == "radio" || $field->metadata_type == "dropdown" || $field->metadata_type == "multiselect" ) {
+						$options = $field->getOptions();
+						if ( $field->metadata_type == "radio" ) {
+							$options = array_flip($options);
+						}
+						$value = $options[$value];
+					}
+
 					// build result
 					$field_result .= "<div class='" . $even_odd . "'>";
 					$field_result .= "<b>" . $title . "</b>:&nbsp;";
