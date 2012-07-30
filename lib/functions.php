@@ -33,12 +33,12 @@
 		$pm_rating_options = $profile_options;
 		unset($pm_rating_options["output_as_tags"]);
 		
-		add_custom_field_type("custom_profile_field_types", 'text', elgg_echo('text'), $profile_options);
-		add_custom_field_type("custom_profile_field_types", 'longtext', elgg_echo('longtext'), $profile_options);
-		add_custom_field_type("custom_profile_field_types", 'tags', elgg_echo('tags'), $profile_options);
-		add_custom_field_type("custom_profile_field_types", 'location', elgg_echo('location'), $location_options);
-		add_custom_field_type("custom_profile_field_types", 'url', elgg_echo('url'), $profile_options);
-		add_custom_field_type("custom_profile_field_types", 'email', elgg_echo('email'), $profile_options);
+		add_custom_field_type("custom_profile_field_types", 'text', elgg_echo('profile:field:text'), $profile_options);
+		add_custom_field_type("custom_profile_field_types", 'longtext', elgg_echo('profile:field:longtext'), $profile_options);
+		add_custom_field_type("custom_profile_field_types", 'tags', elgg_echo('profile:field:tags'), $profile_options);
+		add_custom_field_type("custom_profile_field_types", 'location', elgg_echo('profile:field:location'), $location_options);
+		add_custom_field_type("custom_profile_field_types", 'url', elgg_echo('profile:field:url'), $profile_options);
+		add_custom_field_type("custom_profile_field_types", 'email', elgg_echo('profile:field:email'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'date', elgg_echo('profile:field:date'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'calendar', elgg_echo('calendar'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'pm_datepicker', elgg_echo('profile_manager:admin:options:pm_datepicker'), $pm_datepicker_options);
@@ -72,11 +72,11 @@
 		$radio_options = $group_options;
 		$radio_options["blank_available"] = true;
 		
-		add_custom_field_type("custom_group_field_types", 'text', elgg_echo('text'), $group_options);
-		add_custom_field_type("custom_group_field_types", 'longtext', elgg_echo('longtext'), $group_options);
-		add_custom_field_type("custom_group_field_types", 'tags', elgg_echo('tags'), $group_options);
-		add_custom_field_type("custom_group_field_types", 'url', elgg_echo('url'), $group_options);
-		add_custom_field_type("custom_group_field_types", 'email', elgg_echo('email'), $group_options);
+		add_custom_field_type("custom_group_field_types", 'text', elgg_echo('profile:field:text'), $group_options);
+		add_custom_field_type("custom_group_field_types", 'longtext', elgg_echo('profile:field:longtext'), $group_options);
+		add_custom_field_type("custom_group_field_types", 'tags', elgg_echo('profile:field:tags'), $group_options);
+		add_custom_field_type("custom_group_field_types", 'url', elgg_echo('profile:field:url'), $group_options);
+		add_custom_field_type("custom_group_field_types", 'email', elgg_echo('profile:field:email'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'date', elgg_echo('profile:field:date'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'calendar', elgg_echo('calendar'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'datepicker', elgg_echo('profile_manager:admin:options:datepicker'), $datepicker_options);

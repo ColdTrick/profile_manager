@@ -7,6 +7,7 @@ x.x:
 - added: download list of inactive user to csv
 - added: option to hide the 'default' profile type option on registration (default visible)
 - added: optional river event on site join (default enabled)
+- fixed: field type names now use core language keys
 - fixed: some incompatibility issues with Subsite Manager
 
 7.3 (2012-03-15):
