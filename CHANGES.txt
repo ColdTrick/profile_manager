@@ -1,14 +1,24 @@
 = Version history =
 
-x.x:
+7.4 (2012-07-30):
 
 - added: support for date fields (with core date input/output views)
 - added: listing of inactive users (with last login before date x)
 - added: download list of inactive user to csv
 - added: option to hide the 'default' profile type option on registration (default visible)
 - added: optional river event on site join (default enabled)
+- added: remember me code part of user system category
+- added: registration form widget (experimental)
+- changed: multiselect now uses different/better js library
+- changed: moved some code around so plugin settings are only check when needed (reduces query amount)
 - fixed: field type names now use core language keys
+- fixed: output as tags now only converts to array if needed
 - fixed: some incompatibility issues with Subsite Manager
+- fixed: some php notices
+- fixed: correct check on lowercase metadataname existence
+- fixed: memcache not updated on toggleOption action
+- fixed: multiselect can not handle array passed in value
+- fixed: some small issues related to user summary control
 
 7.3 (2012-03-15):
 
