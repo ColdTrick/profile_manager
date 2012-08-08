@@ -1,4 +1,70 @@
-<?php 
+<?php
+
+	/**
+	 * Restores a JSON data structure saved with the back-up command
+	 */
+	function pm_restore_from_json($data) {
+		$site_guid = elgg_get_site_entity()->getGUID();
+	
+		$requestedfieldtype = get_input("fieldtype");
+		$fieldtype = $data['info']['fieldtype'];
+		$md5 = $data['info']['md5'];
+		$fields = $data['fields'];
+
+		// check if field data is corrupted 
+		if($fieldtype && $md5 && $fields && md5(print_r($fields,true)) == $md5){
+			// check if selected file is same type as requested
+			if($requestedfieldtype == $fieldtype){
+				$options = array(
+						"type" => "object",
+						"subtype" => $fieldtype,
+						"limit" => false,
+						"owner_guid" => $site_guid
+					);
+
+				$entities = elgg_get_entities($options);
+				if(!empty($entities)){
+					foreach($entities as $entity){
+						if(!$entity->delete()){
+							$error = true;
+						}
+					}
+				}
+
+				// remove existing fields
+				if(!$error){
+
+					// add new fields with configured metadata
+					foreach($fields as $index => $field){
+						// create new field
+						$object = new ElggObject();
+						$object->owner_guid = $site_guid;
+						$object->container_guid = $site_guid;
+						$object->access_id = ACCESS_PUBLIC;
+						$object->subtype = $fieldtype;
+						$object->save();
+
+						foreach($field as $metadata_key => $metadata_value){
+							// add field metadata
+							if(!empty($metadata_value)){
+								$object->$metadata_key = $metadata_value; 
+							}	
+						}
+						$object->save();
+					}
+					// report success to user
+					return 1;
+				} else {
+					return -1;
+				}
+			} else {
+				return -2;
+			}
+		} else {
+			return -3;
+		}
+	}
+
 	/**
 	 * Registes all custom field types
 	 */
