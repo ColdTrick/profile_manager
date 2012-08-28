@@ -10,9 +10,9 @@
 	* @link http://www.coldtrick.com/
 	*/
 	
-	if($json = get_uploaded_file("restoreFile")){
-		if($data = json_decode($json, true)){
-			switch ( pm_restore_from_json($data) ) {
+	if ( ($json = get_uploaded_file("restoreFile")) ) {
+		if ( ($data = json_decode($json, true)) ) {
+			switch ( pm_restore_from_json($data, get_input("fieldtype")) ) {
 				case 1:
 					system_message(elgg_echo("profile_manager:actions:restore:success"));
 					break;
