@@ -19,6 +19,9 @@
 			if($entity = get_entity($guid)){
 				if($entity instanceof ProfileManagerCustomFieldCategory){			
 					$entity->order = $order + 1;
+					
+					// trigger memcache update
+					$entity->save();
 				}
 			}
 		}	
