@@ -55,6 +55,7 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 	
 - check trimmed required profile fields (space should not be accepted, js + hook)
 - use elgg_get_config("icon_sizes") for mandatory profile icon upload
+- be able to add new profile fields directly into a category
 	
 == 3. Known issues ==
 - on register error backward maintaining selected profile icon is impossible due to security reasons 
