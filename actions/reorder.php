@@ -19,6 +19,9 @@
 			$entity = get_entity($guid);
 			if($entity instanceof ProfileManagerCustomField){
 				$entity->order = $order + 1;
+				
+				// trigger memcache update
+				$entity->save();
 			}
 		}	
 	}

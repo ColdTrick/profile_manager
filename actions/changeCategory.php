@@ -21,7 +21,10 @@
 			} else {
 				unset($entity->category_guid);
 			}
-			echo "true";		
+			echo "true";	
+			
+			// trigger memcache update
+			$entity->save();	
 		}
 	}
 
