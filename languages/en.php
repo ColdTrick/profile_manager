@@ -197,6 +197,9 @@
 		'profile_manager:export:description:custom_group_field' => "This function will export all <b>group</b> metadata based on selected fields.",
 		'profile_manager:export:list:title' => "Select the fields which you want to be exported",
 		'profile_manager:export:nofields' => "No custom profile fields available for export",
+		'profile_manager:export:select:all' => 'all fields',
+		'profile_manager:export:select:default' => 'default fields',
+		'profile_manager:export:select:custom' => 'custom fields',
 	
 		// Configuration Backup and Restore
 		'profile_manager:actions:configuration:backup' => "Backup",

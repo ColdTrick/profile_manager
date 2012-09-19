@@ -141,8 +141,8 @@ if ($admin_option) {
 				echo "<div><label>" . $title . "</label><br />";
 				echo elgg_view("input/" . $field->metadata_type, array(
 																'name' => "custom_profile_fields[" . $metadata_name . "]",
-																'options' => $options
-																));
+																$field->metadata_type == 'radio' ? 'options' : 'options_values' => $options
+															));
 				echo "</div>";
 			}
 		}

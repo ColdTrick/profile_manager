@@ -201,7 +201,7 @@
 				$field_result .= elgg_view("input/" . $valtype, array(
 																'name' => $metadata_name,
 																'value' => $value,
-																'options' => $options
+																$valtype == 'radio' ? 'options' : 'options_values' => $options
 																));
 				
 				$field_result .= elgg_view('input/access', array('name' => 'accesslevel[' . $metadata_name . ']', 'value' => $access_id)); 

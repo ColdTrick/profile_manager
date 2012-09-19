@@ -81,23 +81,45 @@
 			
 			// get options
 			if(!empty($this->metadata_options))	{
-				
-				$options = explode(",", $this->metadata_options);
-				
+				$enhanced = strpos($this->metadata_options, ';;') !== false;
+
+				$options = explode($enhanced ? ';;' : ',', $this->metadata_options);
+
 				if(!$add_blank_option){
 					if($this->blank_available == "yes"){	
 						$add_blank_option = true;
 					} 
 				}
 				
-				if($this->metadata_type != "multiselect" && $add_blank_option){
+				if ( $this->metadata_type != "multiselect" && $this->metadata_type != "radio" && $add_blank_option ) {
 					// optionally add a blank option to the field options
 					array_unshift($options, "");
 				}
-				
-				$options = array_combine($options, $options); // add values as labels for deprecated notices
+
+				if ( $enhanced ) {
+					$combinedOptions = array();
+					foreach ( $options as $optKey => $optValue ) {
+						list($tempKey, $tempValue) = explode('::', $optValue, 2);
+						$tempKey = trim($tempKey);
+						$tempValue = trim($tempValue);
+						if ( empty($tempValue) ) {
+							// add values as labels for deprecated notices
+							$combinedOptions["$optValue"] = $optValue;
+						} else {
+							// use values and labels provided in value::label format
+							if ( $this->metadata_type == "radio" ) {
+								$combinedOptions["$tempValue"] = $tempKey;
+							} else {
+								$combinedOptions["$tempKey"] = $tempValue;
+							}
+						}
+					}
+					$options = $combinedOptions;
+				} else {
+					$options = array_combine($options, $options);
+				}
 			}
-			
+
 			return $options;
 		}
 		
@@ -106,7 +128,7 @@
 			$hint = $this->metadata_hint;
 			
 			if(empty($hint)){
-				$trans_key = "profile:hint:" . $this->metadata_name;
+				$trans_key = "profile:hint:$this->metadata_name";
 				if($trans_key != elgg_echo($trans_key)){
 					$hint = elgg_echo($trans_key);
 				}

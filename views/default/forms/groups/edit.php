@@ -90,7 +90,7 @@ if(count($group_fields["fields"]) > 0){
 		echo elgg_view("input/{$valtype}", array(
 			'name' => $metadata_name,
 			'value' => $value,
-			'options' => $options
+			$valtype == 'radio' ? 'options' : 'options_values' => $options
 		));
 		echo '</div>';
 	}

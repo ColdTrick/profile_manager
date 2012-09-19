@@ -205,3 +205,8 @@
 #profile-manager-user-summary-preview:hover {
 	overflow: auto;
 }
+
+.datepicker_hidden{
+	display: none;
+}
+
