@@ -50,7 +50,7 @@
 			}
 			
 			// Generate type descriptions for all profile types
-			$type_description = "";
+			$types_description = "";
 			foreach($types as $type){
 				$types_options_values[$type->guid] = $type->getTitle();
 				
