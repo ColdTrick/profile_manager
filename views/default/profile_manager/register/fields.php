@@ -49,6 +49,8 @@
 				$types_options_values[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
 			}
 			
+			// Generate type descriptions for all profile types
+			$types_description = "";
 			foreach($types as $type){
 				$types_options_values[$type->guid] = $type->getTitle();
 				
@@ -56,7 +58,7 @@
 				$description = $type->getDescription();
 				
 				if(!empty($description)){
-					$types_description = "<div id='" . $type->guid . "' class='custom_profile_type_description'>";
+					$types_description .= "<div id='" . $type->guid . "' class='custom_profile_type_description'>";
 					$types_description .= $description;
 					$types_description .= "</div>";
 				}
