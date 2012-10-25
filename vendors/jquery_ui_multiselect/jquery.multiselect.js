@@ -340,7 +340,7 @@ $.widget("ech.multiselect", {
 			})
 			.delegate('input[type="checkbox"], input[type="radio"]', 'click.multiselect', function( e ){
 				var $this = $(this),
-					val = this.value,
+					val = this.title, // can't use value in IE7
 					checked = this.checked,
 					tags = self.element.find('option');
 				
@@ -359,10 +359,16 @@ $.widget("ech.multiselect", {
 				
 				// change state on the original option tags
 				tags.each(function(){
-					if( this.value === val ){
-						this.selected = checked;
+					$option = $(this);
+					
+					if( $option.val() === val ){
+						if(checked){
+							$option.attr("selected", "selected");
+						} else {
+							$option.removeAttr("selected");
+						}
 					} else if( !self.options.multiple ){
-						this.selected = false;
+						$option.removeAttr("selected");
 					}
 				});
 				
