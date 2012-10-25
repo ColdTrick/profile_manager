@@ -1,4 +1,8 @@
 = Version history =
+x.x:
+
+- fixed: selected value issue with multiselect
+
 
 7.4 (2012-07-30):
 
