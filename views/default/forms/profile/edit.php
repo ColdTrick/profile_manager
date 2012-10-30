@@ -198,11 +198,20 @@
 					$field_result .= "<span class='custom_fields_more_info_text' id='text_more_info_" . $metadata_name . "'>" . $hint . "</span>";
 				}
 				
+				if($valtype == "dropdown"){
+					// add div around dropdown to let it act as a block level element
+					$field_result .= "<div>";
+				}
+				
 				$field_result .= elgg_view("input/" . $valtype, array(
 																'name' => $metadata_name,
 																'value' => $value,
 																'options' => $options
 																));
+				
+				if($valtype == "dropdown"){
+					$field_result .= "</div>";
+				}
 				
 				$field_result .= elgg_view('input/access', array('name' => 'accesslevel[' . $metadata_name . ']', 'value' => $access_id)); 
 				$field_result .= "</div>";
