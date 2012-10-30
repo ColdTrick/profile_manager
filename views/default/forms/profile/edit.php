@@ -54,12 +54,12 @@
 			
 			if($types = elgg_get_entities($options)){
 				
-				$pulldown_options = array();
-				$pulldown_options[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
+				$dropdown_options = array();
+				$dropdown_options[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
 				
 				foreach($types as $type){
 					
-					$pulldown_options[$type->getGUID()] = $type->getTitle();
+					$dropdown_options[$type->getGUID()] = $type->getTitle();
 					
 					// preparing descriptions of profile types
 					$description = $type->getDescription();
@@ -84,7 +84,7 @@
 				echo "<label>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:label") . "</label>";
 				echo elgg_view("input/dropdown", array("name" => "custom_profile_type",
 														"id" => "custom_profile_type",
-														"options_values" => $pulldown_options,
+														"options_values" => $dropdown_options,
 														"onchange" => "changeProfileType();",
 														"value" => profile_manager_get_user_profile_data_value($user_metadata, "custom_profile_type")));
 				echo elgg_view('input/hidden', array('name' => 'accesslevel[custom_profile_type]', 'value' => ACCESS_PUBLIC)); 

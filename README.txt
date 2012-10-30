@@ -13,7 +13,7 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 - ordering of custom fields (drag and drop)
 - add profile types
 - add categories (draggable reordering, drop fields on categories to add)
-- adds pulldown, radio, multiselect and date field types
+- adds dropdown, radio, multiselect and date field types
 - show on register form (profile fields only)
 - show output as tags
 - mandatory fields (for register form, profile fields only)
@@ -29,7 +29,7 @@ Provides better use of profile fields, replaces (replace profile fields) and con
 
 == 2. TO DO ==
 - categories and types for groups
-- multilingual options (in pulldown, radio, multiselect)
+- multilingual options (in dropdown, radio, multiselect)
 - Default values for fields (user specified)
 - Force empty fields on profile
 - dependend fields

@@ -19,8 +19,8 @@
 		$pm_datepicker_options = $profile_options;
 		unset($pm_datepicker_options["output_as_tags"]);
 		
-		$pulldown_options = $profile_options;
-		$pulldown_options["blank_available"] = true;
+		$dropdown_options = $profile_options;
+		$dropdown_options["blank_available"] = true;
 		
 		$radio_options = $profile_options;
 		$radio_options["blank_available"] = true;
@@ -42,7 +42,7 @@
 		add_custom_field_type("custom_profile_field_types", 'date', elgg_echo('profile:field:date'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'calendar', elgg_echo('calendar'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'pm_datepicker', elgg_echo('profile_manager:admin:options:pm_datepicker'), $pm_datepicker_options);
-		add_custom_field_type("custom_profile_field_types", 'dropdown', elgg_echo('profile_manager:admin:options:pulldown'), $pulldown_options);
+		add_custom_field_type("custom_profile_field_types", 'dropdown', elgg_echo('profile_manager:admin:options:dropdown'), $dropdown_options);
 		add_custom_field_type("custom_profile_field_types", 'radio', elgg_echo('profile_manager:admin:options:radio'), $radio_options);
 		add_custom_field_type("custom_profile_field_types", 'multiselect', elgg_echo('profile_manager:admin:options:multiselect'), $profile_options);
 		add_custom_field_type("custom_profile_field_types", 'pm_rating', elgg_echo('profile_manager:admin:options:pm_rating'), $pm_rating_options);
@@ -66,8 +66,8 @@
 		$datepicker_options = $group_options;
 		unset($datepicker_options["output_as_tags"]);
 		
-		$pulldown_options = $group_options;
-		$pulldown_options["blank_available"] = true;
+		$dropdown_options = $group_options;
+		$dropdown_options["blank_available"] = true;
 		
 		$radio_options = $group_options;
 		$radio_options["blank_available"] = true;
@@ -80,7 +80,7 @@
 		add_custom_field_type("custom_group_field_types", 'date', elgg_echo('profile:field:date'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'calendar', elgg_echo('calendar'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'datepicker', elgg_echo('profile_manager:admin:options:datepicker'), $datepicker_options);
-		add_custom_field_type("custom_group_field_types", 'dropdown', elgg_echo('profile_manager:admin:options:pulldown'), $pulldown_options);
+		add_custom_field_type("custom_group_field_types", 'dropdown', elgg_echo('profile_manager:admin:options:dropdown'), $dropdown_options);
 		add_custom_field_type("custom_group_field_types", 'radio', elgg_echo('profile_manager:admin:options:radio'), $radio_options);
 		add_custom_field_type("custom_group_field_types", 'multiselect', elgg_echo('profile_manager:admin:options:multiselect'), $group_options);
 	}

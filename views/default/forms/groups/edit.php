@@ -2,7 +2,7 @@
 /**
 * Profile Manager
 * 
-* Overrules group edit form to support options (radio, pulldown, multiselect)
+* Overrules group edit form to support options (radio, dropdown, multiselect)
 * 
 * @package profile_manager
 * @author ColdTrick IT Solutions

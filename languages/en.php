@@ -38,7 +38,7 @@
 		'profile_manager:settings:other' => 'Other',
 	
 		'profile_manager:settings:profile_icon_on_register' => 'Add mandatory profile icon input field on register form',
-		'profile_manager:settings:simple_access_control' => 'Show just one access control pulldown on edit profile form',
+		'profile_manager:settings:simple_access_control' => 'Show just one access control dropdown on edit profile form',
 		'profile_manager:settings:default_profile_type' => "Default profile type on registration form",
 		'profile_manager:settings:hide_profile_type_default' => "Hide the 'Default' profile type on registration form",
 	
@@ -85,7 +85,7 @@
 		'profile_manager:admin:field_type' => "Field Type",
 		'profile_manager:admin:options:datepicker' => 'Datepicker',
 		'profile_manager:admin:options:pm_datepicker' => 'Datepicker (Profile Manager Style)',
-		'profile_manager:admin:options:pulldown' => 'Pulldown',
+		'profile_manager:admin:options:dropdown' => 'Dropdown',
 		'profile_manager:admin:options:radio' => 'Radio',
 		'profile_manager:admin:options:multiselect' => 'MultiSelect',
 		'profile_manager:admin:options:file' => 'File',
@@ -268,7 +268,7 @@
 			If you leave the label empty, you can internationalize the profile field label (<i>profile:[name]</i>).<br /><br />
 			Use the hint field to supply on input forms (register and profile/group edit) a hoverable icon with a field description.
 			If you leave the hint empty, you can internationalize the hint (<i>profile:hint:[name]</i>).<br /><br />
-			Options are only mandatory for fieldtypes <i>Pulldown, Radio and MultiSelect</i>.
+			Options are only mandatory for fieldtypes <i>Dropdown, Radio and MultiSelect</i>.
 		",
 		'profile_manager:tooltips:profile_field_additional' => "
 			<b>Show on register</b><br />
