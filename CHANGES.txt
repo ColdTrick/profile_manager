@@ -1,8 +1,11 @@
 = Version history =
-x.x:
 
+7.4.1 (2012-10-30):
+
+- fixed: trigger some object saves to prevent memcache issues
 - fixed: selected value issue with multiselect
-
+- fixed: multiselect values not saved correctly when using IE7
+- fixed: issue with profile types description on registration form (thanks limdauto)
 
 7.4 (2012-07-30):
 
