@@ -106,5 +106,3 @@ echo elgg_view('input/hidden', array('name' => 'invitecode', 'value' => $vars['i
 echo elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('register')));
 echo "<div class='elgg-subtext mtm'>" . elgg_echo("profile_manager:register:mandatory") . "</div>";
 echo "</div>";
-
-echo elgg_view("profile_manager/register/js");

@@ -74,7 +74,7 @@
 											"name" => "custom_profile_fields_custom_profile_type",
 											"id" => "custom_profile_fields_custom_profile_type",
 											"options_values" => $types_options_values,
-											"js" => "onchange='changeProfileType();'",
+											"js" => "onchange='elgg.profile_manager.change_profile_type_register();'",
 											"value" => $custom_profile_fields_custom_profile_type)
 										);
 			
@@ -151,7 +151,7 @@
 					$title = $cat->getTitle();
 				}
 				if($tabbed){
-					$tabbed_cat_titles .= "<li class='" . $class . "'><a href='javascript:void(0);' onclick='toggle_tabbed_nav(\"" . $cat_guid . "\", this);'>" . $title . "</a></li>";
+					$tabbed_cat_titles .= "<li class='" . $class . "'><a href='javascript:void(0);' onclick='elgg.profile_manager.toggle_tabbed_nav(\"" . $cat_guid . "\", this);'>" . $title . "</a></li>";
 				} else {
 					$cat_result .= "<h3 class='settings'>" . $title . "</h3>";
 				} 

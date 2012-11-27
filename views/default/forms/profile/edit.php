@@ -75,7 +75,7 @@
 				?>
 				<script type="text/javascript">
 					$(document).ready(function(){
-						changeProfileType();
+						elgg.profile_manager.change_profile_type();
 					});
 				</script>
 				<?php
@@ -85,7 +85,7 @@
 				echo elgg_view("input/dropdown", array("name" => "custom_profile_type",
 														"id" => "custom_profile_type",
 														"options_values" => $dropdown_options,
-														"onchange" => "changeProfileType();",
+														"onchange" => "elgg.profile_manager.change_profile_type();",
 														"value" => profile_manager_get_user_profile_data_value($user_metadata, "custom_profile_type")));
 				echo elgg_view('input/hidden', array('name' => 'accesslevel[custom_profile_type]', 'value' => ACCESS_PUBLIC)); 
 				echo "</div>";
