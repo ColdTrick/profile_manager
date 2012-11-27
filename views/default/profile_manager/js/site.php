@@ -99,12 +99,24 @@ elgg.profile_manager.init = function(){
 			});
 		
 			if(error_count > 0){
-				alert("<?php echo elgg_echo("profile_manager:register:mandatory"); ?>");
+				alert(elgg.echo("profile_manager:register:mandatory"));
 			} else {
 				result = true;
 			}
 		
 			return result;
+		});
+
+		$(".elgg-form-register input[name='email']").blur(function(){
+			email_value = $(this).val();
+			if(email_value.indexOf("@") !== -1){
+				pre = email_value.split("@");
+				if(pre[0]){
+					if($(".elgg-form-register input[name='username']").val() == ""){
+						$(".elgg-form-register input[name='username']").val(pre[0]);
+					}
+				}
+			}
 		});
 
 		elgg.profile_manager.change_profile_type_register();
