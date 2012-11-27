@@ -11,8 +11,8 @@
 	*/
 
 	echo "<div class='mandatory'>";
-	echo "<label>" . elgg_echo("profile_manager:register:profile_icon") . "</label><br />";
-	echo elgg_view("input/file", array("name"=>"profile_icon"));
+	echo "<label for='register-profile_icon'>" . elgg_echo("profile_manager:register:profile_icon") . "</label><br />";
+	echo elgg_view("input/file", array("name"=>"profile_icon", "id" => "register-profile_icon"));
 	echo "</div>";
 ?>
 <script type="text/javascript">
