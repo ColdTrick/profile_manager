@@ -85,6 +85,11 @@ li.custom_fields_edit_profile_category {
 	display: none;
 }
 
+/* registration form */
+.elgg-form-register {
+	max-width: 100%;
+}
+
 /* registration field */
 #profile_manager_register_left {
 	float: left;

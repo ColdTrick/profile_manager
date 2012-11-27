@@ -108,10 +108,3 @@ echo "<div class='elgg-subtext mtm'>" . elgg_echo("profile_manager:register:mand
 echo "</div>";
 
 echo elgg_view("profile_manager/register/js");
-?>
-
-<style type="text/css">
-	.elgg-form-account {
-		max-width: 100%;
-	}
-</style>
