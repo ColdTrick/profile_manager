@@ -143,13 +143,13 @@ elgg.profile_manager.init = function(){
 				var password2 = form.find("input[name='password2']").val();
 				$field = form.find("input[name='password2']");
 				$field_icon = $field.next(".profile_manager_validate_icon");
-				$field_icon.attr("class", "elgg-icon profile_manager_validate_icon"); 
+				$field_icon.attr("class", "elgg-icon profile_manager_validate_icon").attr("title", ""); 
 				if((password1 !== "") && (password2 !== "")){
 					if(password1 == password2){
 						$field_icon.addClass("profile_manager_validate_icon_valid");
 						$field.removeClass("profile_manager_register_missing");
 					} else {
-						$field_icon.addClass("profile_manager_validate_icon_invalid");
+						$field_icon.addClass("profile_manager_validate_icon_invalid").attr("title", elgg.echo("RegistrationException:PasswordMismatch"));
 					}
 				}
 
@@ -174,7 +174,7 @@ elgg.profile_manager.register_form_validate = function(form, field){
 		data.name=fieldname;
 		data[fieldname] = fieldvalue;
 	
-		form.find("input[name='" + fieldname + "']").next(".profile_manager_validate_icon").attr("class", "elgg-icon profile_manager_validate_icon profile_manager_validate_icon_loading");
+		form.find("input[name='" + fieldname + "']").next(".profile_manager_validate_icon").attr("class", "elgg-icon profile_manager_validate_icon profile_manager_validate_icon_loading").attr("title", "");
 		
 		profile_manager_register_form_validate_xhr[fieldname] = elgg.action("profile_manager/register/validate", {
 				data: data,
@@ -194,12 +194,15 @@ elgg.profile_manager.register_form_validate = function(form, field){
 							$field_icon.addClass("profile_manager_validate_icon_valid");
 							$field.removeClass("profile_manager_register_missing");
 						}
+						if(data.output.text){
+							$field_icon.attr("title", data.output.text);
+						}
 					}
 					
 				}
 			});
 	} else {
-		form.find("input[name='" + fieldname + "']").next(".profile_manager_validate_icon").attr("class", "elgg-icon profile_manager_validate_icon");
+		form.find("input[name='" + fieldname + "']").next(".profile_manager_validate_icon").attr("class", "elgg-icon profile_manager_validate_icon").attr("title", "");
 	}	
 }
 
