@@ -3,9 +3,11 @@
 //<script>
 elgg.provide("elgg.profile_manager");
 
+var profile_manager_register_form_timers = new Array();
+var profile_manager_register_form_validate_xhr = new Array();
 
-// Profile Manager More Info tooltips
 elgg.profile_manager.init = function(){
+	// more info tooltips
 	$("span.custom_fields_more_info").live('mouseover', function(e) {
 			var tooltip = $("#text_" + $(this).attr('id'));
 			$("body").append("<p id='custom_fields_more_info_tooltip'>"+ $(tooltip).html() + "</p>");
@@ -26,7 +28,8 @@ elgg.profile_manager.init = function(){
 			$("#custom_fields_more_info_tooltip").remove();
 		}
 	);	
-	
+
+	// tab switcher on edit form
 	$("#profile_manager_profile_edit_tabs a").click(function(){
 		var id = $(this).attr("href").replace("#", ""); 
 		$("#profile_manager_profile_edit_tabs li").removeClass("elgg-state-selected");
@@ -46,8 +49,10 @@ elgg.profile_manager.init = function(){
 
 	// registration form adjustments
 	if($(".elgg-form-register").length > 0){
+		// append mandatory *
 		$(".elgg-form-register .mandatory>label").append("*");
-		
+
+		// validate on submit
 		$(".elgg-form-register").submit(function(){
 			var error_count = 0;
 			var result = false;
@@ -107,22 +112,98 @@ elgg.profile_manager.init = function(){
 			return result;
 		});
 
-		$(".elgg-form-register input[name='email']").blur(function(){
-			email_value = $(this).val();
-			if(email_value.indexOf("@") !== -1){
-				pre = email_value.split("@");
-				if(pre[0]){
-					if($(".elgg-form-register input[name='username']").val() == ""){
-						$(".elgg-form-register input[name='username']").val(pre[0]);
+		$(".elgg-form-register").each(function(){
+			var form = $(this);
+
+			// add username generation when a email adress has been entered
+			form.find("input[name='email']").live("blur", function(){
+				var email_value = $(this).val();
+				if(email_value.indexOf("@") !== -1){
+					var pre = email_value.split("@");
+					if(pre[0]){
+						if($(".elgg-form-register input[name='username']").val() == ""){
+							// change value and trigger change
+							$(".elgg-form-register input[name='username']").val(pre[0]).keyup();
+						}
 					}
 				}
-			}
+			});
+
+			// add live validation of username and emailaddress
+			form.find("input[name='username'], input[name='email'], input[name='password']").live("keyup", function(event){
+				var fieldname = $(event.currentTarget).attr("name");
+				
+				clearTimeout(profile_manager_register_form_timers[fieldname]);
+				profile_manager_register_form_timers[fieldname] = setTimeout(function(){ elgg.profile_manager.register_form_validate(form, $(event.currentTarget)); }, 500);
+			});
+
+			// password compare check
+			form.find("input[name='password'], input[name='password2']").live("keyup", function(event){
+				var password1 = form.find("input[name='password']").val();
+				var password2 = form.find("input[name='password2']").val();
+				$field = form.find("input[name='password2']");
+				$field_icon = $field.next(".profile_manager_validate_icon");
+				$field_icon.attr("class", "elgg-icon profile_manager_validate_icon"); 
+				if((password1 !== "") && (password2 !== "")){
+					if(password1 == password2){
+						$field_icon.addClass("profile_manager_validate_icon_valid");
+						$field.removeClass("profile_manager_register_missing");
+					} else {
+						$field_icon.addClass("profile_manager_validate_icon_invalid");
+					}
+				}
+
+			});
 		});
 
+		// init selected profile type
 		elgg.profile_manager.change_profile_type_register();
 	}
 }
 
+// live input validation
+elgg.profile_manager.register_form_validate = function(form, field){
+	var fieldname = $(field).attr("name"); 
+	var fieldvalue = $(field).val(); 
+	if(profile_manager_register_form_validate_xhr[fieldname]){
+		// cancel running ajax calls
+		profile_manager_register_form_validate_xhr[fieldname].abort();
+	}
+	if(fieldvalue){
+		var data = new Object();
+		data.name=fieldname;
+		data[fieldname] = fieldvalue;
+	
+		form.find("input[name='" + fieldname + "']").next(".profile_manager_validate_icon").attr("class", "elgg-icon profile_manager_validate_icon profile_manager_validate_icon_loading");
+		
+		profile_manager_register_form_validate_xhr[fieldname] = elgg.action("profile_manager/register/validate", {
+				data: data,
+				success: function(data){
+					// process results
+					if(data.output){
+						$field = form.find("input[name='" + data.output.name + "']");
+						$field_icon = $field.next(".profile_manager_validate_icon");
+						$field_icon.removeClass("profile_manager_validate_icon_loading");
+						if(data.output.status == false){
+							// something went wrong; show error icon and add title
+							$field_icon.addClass("profile_manager_validate_icon_invalid");
+						}
+	
+						if(data.output.status == true){
+							// something went right; show success icon
+							$field_icon.addClass("profile_manager_validate_icon_valid");
+							$field.removeClass("profile_manager_register_missing");
+						}
+					}
+					
+				}
+			});
+	} else {
+		form.find("input[name='" + fieldname + "']").next(".profile_manager_validate_icon").attr("class", "elgg-icon profile_manager_validate_icon");
+	}	
+}
+
+// show description and fields based on selected profile type (profile edit)
 elgg.profile_manager.change_profile_type = function(){
 	var selVal = $('#custom_profile_type').val();
 	
@@ -139,6 +220,7 @@ elgg.profile_manager.change_profile_type = function(){
 	}
 }
 
+//show description and fields based on selected profile type (register form)
 elgg.profile_manager.change_profile_type_register = function(){
 	
 	var selVal = $('#custom_profile_fields_custom_profile_type').val();
@@ -167,6 +249,7 @@ elgg.profile_manager.change_profile_type_register = function(){
 	}
 }
 
+// tab switcher on register form
 elgg.profile_manager.toggle_tabbed_nav = function(div_id, element){
 	$content_container = $('#profile_manager_register_tabbed').next(); 
 	$content_container.find('>div').hide();

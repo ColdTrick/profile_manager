@@ -90,6 +90,37 @@ li.custom_fields_edit_profile_category {
 	max-width: 100%;
 }
 
+.profile_manager_register_input_container {
+	white-space:nowrap; /* required for outlining in IE7 */
+}
+
+.profile_manager_register_input_container > input {
+	padding-right: 25px;
+}
+
+/* extra explicit for IE7 */
+.elgg-icon.profile_manager_validate_icon {
+	margin-left: -22px;
+    margin-top: 8px;
+    position: absolute;
+    display: none;
+}
+
+.elgg-icon.profile_manager_validate_icon_loading {
+	background-image: url(<?php echo $plugin_graphics_folder; ?>loading.gif);
+	display: inline-block;
+	
+}
+.elgg-icon.profile_manager_validate_icon_valid {
+	background-position: 0 -126px;
+	display: inline-block;
+}
+
+.elgg-icon.profile_manager_validate_icon_invalid {
+	background-position: 0 -252px;
+	display: inline-block;
+}
+
 /* registration field */
 #profile_manager_register_left {
 	float: left;

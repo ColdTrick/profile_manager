@@ -44,43 +44,55 @@ echo "<div id='profile_manager_register_left'>";
 	</div>
 	<div class="mandatory">
 		<label for='register-email'><?php echo elgg_echo('email'); ?></label><br />
-		<?php
-		echo elgg_view('input/text', array(
-			'id' => 'register-email',
-			'name' => 'email',
-			'value' => $email,
-		));
-		?>
+		<div class='profile_manager_register_input_container'>
+			<?php
+			echo elgg_view('input/text', array(
+				'id' => 'register-email',
+				'name' => 'email',
+				'value' => $email,
+			));
+			?>
+			<span class='elgg-icon profile_manager_validate_icon'></span>
+		</div>
 	</div>
 	<div class="mandatory">
 		<label for='register-username'><?php echo elgg_echo('username'); ?></label><br />
-		<?php
-		echo elgg_view('input/text', array(
-			'id' => 'register-username',
-			'name' => 'username',
-			'value' => $username,
-		));
-		?>
+		<div class='profile_manager_register_input_container'>
+			<?php
+			echo elgg_view('input/text', array(
+				'id' => 'register-username',
+				'name' => 'username',
+				'value' => $username,
+			));
+			?>
+			<div class='elgg-icon profile_manager_validate_icon'></div>
+		</div>
 	</div>
 	<div class="mandatory">
 		<label for='register-password'><?php echo elgg_echo('password'); ?></label><br />
-		<?php
-		echo elgg_view('input/password', array(
-			'id' => 'register-password',
-			'name' => 'password',
-			'value' => $password,
-		));
-		?>
+		<div class='profile_manager_register_input_container'>
+			<?php
+			echo elgg_view('input/password', array(
+				'id' => 'register-password',
+				'name' => 'password',
+				'value' => $password,
+			));
+			?>
+			<span class='elgg-icon profile_manager_validate_icon'></span>
+		</div>
 	</div>
 	<div class="mandatory">
 		<label for='register-password2'><?php echo elgg_echo('passwordagain'); ?></label><br />
-		<?php
-		echo elgg_view('input/password', array(
-			'id' => 'register-password2',
-			'name' => 'password2',
-			'value' => $password2,
-		));
-		?>
+		<div class='profile_manager_register_input_container'>
+			<?php
+			echo elgg_view('input/password', array(
+				'id' => 'register-password2',
+				'name' => 'password2',
+				'value' => $password2,
+			));
+			?>
+			<span class='elgg-icon profile_manager_validate_icon'></span>
+		</div>
 	</div>
 	<?php 
 		echo $terms;
