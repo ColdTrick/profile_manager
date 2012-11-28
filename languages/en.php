@@ -366,6 +366,7 @@
 	
 		// register pre check
 		'profile_manager:register_pre_check:missing' => 'The next field must be filled: %s',
+		'profile_manager:register_pre_check:terms' => 'You need to accept the terms to complete the registration',
 		'profile_manager:register_pre_check:profile_icon:error' => 'Error uploading your profile icon (probably related to the file size)',
 		'profile_manager:register_pre_check:profile_icon:nosupportedimage' => 'Uploaded profile icon is not the right type (jpg, gif, png)',
 	

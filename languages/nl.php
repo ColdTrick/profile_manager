@@ -148,6 +148,7 @@ $language = array (
   'profile_manager:profile:edit:custom_profile_type:description' => 'Omschrijving van het geselecteerde profiel type',
   'profile_manager:non_editable:info' => 'Dit veld kan niet worden bewerkt',
   'profile_manager:registration:accept_terms' => 'Ik heb het gelezen en accepteer de %sAlgemene Voorwaarden%s',
+  'profile_manager:register_pre_check:terms' => 'Je moet de Algemene Voorwaarden selecteren om je te kunnen registreren',
   'profile_manager:register_pre_check:profile_icon:error' => 'Fout bij het uploaden van het profiel icoon (waarschijnlijk gerelateerd aan de grootte)',
   'add' => 'Voeg toe',
   'item:object:custom_profile_field' => 'Custom Profile Field',

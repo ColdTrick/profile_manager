@@ -178,6 +178,9 @@
 		// validate mandatory profile fields
 		$profile_icon = elgg_get_plugin_setting("profile_icon_on_register", "profile_manager");
 		
+		// general terms
+		$terms = elgg_get_plugin_setting("registration_terms", "profile_manager");
+		
 		// new
 		$profile_type_guid = get_input("custom_profile_fields_custom_profile_type", false);
 		$fields = profile_manager_get_categorized_fields($user, true, true, true, $profile_type_guid);
@@ -194,7 +197,7 @@
 			}
 		}
 		
-		if($required_fields || $profile_icon == "yes"){
+		if($terms || $required_fields || $profile_icon == "yes"){
 		    
 		    $custom_profile_fields = array();
 		    
@@ -231,6 +234,14 @@
 		    	}	
 		    		   
 		    	if($error){
+		    		forward(REFERER);
+		    	}
+		    }
+		    
+		    if($terms){
+		    	$terms_accepted = get_input("accept_terms");
+		    	if($terms_accepted !== "yes"){
+		    		register_error(elgg_echo("profile_manager:register_pre_check:terms"));
 		    		forward(REFERER);
 		    	}
 		    }
