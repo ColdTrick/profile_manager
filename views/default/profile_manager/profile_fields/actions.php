@@ -20,7 +20,7 @@
 	</div>
 	<div class="elgg-body profile-manager-actions">
 		<?php 
-			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:reset"), "title" => elgg_echo("profile_manager:actions:reset:description"), "href" => "/action/profile_manager/reset?type=profile", "confirm" => elgg_echo("profile_manager:actions:reset:confirm"), "class" => "elgg-button elgg-button-action")); 
+			echo elgg_view("output/confirmlink", array("text" => elgg_echo("reset"), "title" => elgg_echo("profile_manager:actions:reset:description"), "href" => "/action/profile_manager/reset?type=profile", "confirm" => elgg_echo("profile_manager:actions:reset:confirm"), "class" => "elgg-button elgg-button-action")); 
 			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:import:from_custom"), "title" => elgg_echo("profile_manager:actions:import:from_custom:description"), "href" => "/action/profile_manager/importFromCustom", "confirm" => elgg_echo("profile_manager:actions:import:from_custom:confirm"), "class" => "elgg-button elgg-button-action")); 
 			echo elgg_view("output/confirmlink", array("text" => elgg_echo("profile_manager:actions:import:from_default"), "title" => elgg_echo("profile_manager:actions:import:from_default:description"), "href" => "/action/profile_manager/importFromDefault?type=profile", "confirm" => elgg_echo("profile_manager:actions:import:from_default:confirm"), "class" => "elgg-button elgg-button-action")); 
 			echo elgg_view("output/url", array("title" => elgg_echo("profile_manager:actions:export:description"),"text" => elgg_echo("profile_manager:actions:export"), "href" => "/admin/users/export", "class" => "elgg-button elgg-button-action")); 

@@ -191,7 +191,6 @@ $language = array (
   'profile_manager:actions:new:error:unknown' => 'Onbekend probleem opgetreden tijdens het opslaan van het veld',
   'profile_manager:action:new:error:type' => 'Verkeerd profiel type (groep of profiel)',
   'profile_manager:actions:edit:error:unknown' => 'Probleem opgetreden tijdens het ophalen van profiel veld informatie',
-  'profile_manager:actions:reset' => 'Reset',
   'profile_manager:actions:reset:description' => 'Verwijderd alle custom profiel velden.',
   'profile_manager:actions:reset:confirm' => 'Weet je zeker dat je alle velden wilt verwijderen?',
   'profile_manager:actions:reset:error:unknown' => 'Onbekend probleem opgetreden tijdens het resetten van de velden',
