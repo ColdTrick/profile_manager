@@ -36,61 +36,15 @@
 				
 		echo "<table>";
 		if($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE){
-			?>
-			<tr>
-				<td>
-					<?php echo elgg_echo("guid");?>
-				</td>
-				<td>
-					<input type='checkbox' name='export[guid]' value='guid'></input>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<?php echo elgg_echo("username");?>
-				</td>
-				<td>
-					<input type='checkbox' name='export[username]' value='username'></input>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<?php echo elgg_echo("name");?>
-				</td>
-				<td>
-					<input type='checkbox' name='export[name]' value='name'></input>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<?php echo elgg_echo("email");?>
-				</td>
-				<td>
-					<input type='checkbox' name='export[email]' value='email'></input>
-				</td>
-			</tr>
-			<?php 			
+			
+			$default_fields = array("guid" => 0, "username" => 0, "name" => 0, "email" => 0, "time_created" => 0, "time_updated" => 0, "last_login" => 0, "validated" => 0, "validated_method" => 0);
+			$fields = $default_fields + $fields; 			
 		}
 		
 		if($fieldtype == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE){
-			?>
-			<tr>
-				<td>
-					<?php echo elgg_echo("guid");?>
-				</td>
-				<td>
-					<input type='checkbox' name='export[guid]' value='guid'></input>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<?php echo elgg_echo("name");?>
-				</td>
-				<td>
-					<input type='checkbox' name='export[name]' value='name'></input>
-				</td>
-			</tr>
-			<?php 	
+
+			$default_fields = array("guid" => 0, "name" => 0);
+			$fields = $default_fields + $fields;
 		}
 		
 		foreach($fields as $metadata_name => $type){
