@@ -25,6 +25,9 @@
 		'admin:appearance:export_fields' => "Export Profile Data",
 		'admin:appearance:user_summary_control' => "User Summary Control",
 
+		'admin:groups' => "Groups",
+		'admin:groups:export' => "Export groups",
+		
 		'admin:users:export' => "Export users",
 		'admin:users:inactive' => "List inactive users",
 	
