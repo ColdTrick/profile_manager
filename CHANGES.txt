@@ -1,5 +1,15 @@
 = Version history =
 
+7.5 (2013-01-30):
+
+- added: live form validation (username, emaila, password) on registration form
+- added: a few new exportable profile fields
+- changed: now using config('iconsizes') for thumbnail generation
+- fixed: some inline css en js (moved to global)
+- fixed: group profile fields export not working
+- fixed: some WCAG related issues 
+- fixed: general terms acceptance is not enforced in registration action 
+
 7.4.1 (2012-10-30):
 
 - fixed: trigger some object saves to prevent memcache issues
@@ -16,6 +26,7 @@
 - added: optional river event on site join (default enabled)
 - added: remember me code part of user system category
 - added: registration form widget (experimental)
+- added: user login history page 
 - changed: multiselect now uses different/better js library
 - changed: moved some code around so plugin settings are only check when needed (reduces query amount)
 - fixed: field type names now use core language keys
