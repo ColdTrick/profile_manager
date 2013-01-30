@@ -125,54 +125,35 @@
 	 * @return unknown_type
 	 */
 	function add_profile_icon($user){
-		$topbar = get_resized_image_from_uploaded_file('profile_icon',16,16, true);
-		$tiny = get_resized_image_from_uploaded_file('profile_icon',25,25, true);
-		$small = get_resized_image_from_uploaded_file('profile_icon',40,40, true);
-		$medium = get_resized_image_from_uploaded_file('profile_icon',100,100, true);
-		$large = get_resized_image_from_uploaded_file('profile_icon',200,200);
-		$master = get_resized_image_from_uploaded_file('profile_icon',550,550);
 		
+		$icon_sizes = elgg_get_config('icon_sizes');
 		
-		$prefix = $user->guid;
-		$cur_version = get_version();
-		if($cur_version < 2010071002){
-			$prefix = $user->name;
+		// get the images and save their file handlers into an array
+		// so we can do clean up if one fails.
+		$files = array();
+		foreach ($icon_sizes as $name => $size_info) {
+			$resized = get_resized_image_from_uploaded_file('profile_icon', $size_info['w'], $size_info['h'], $size_info['square'], $size_info['upscale']);
+		
+			if ($resized) {
+				$file = new ElggFile();
+				$file->owner_guid = $user->guid;
+				$file->setFilename("profile/{$user->guid}{$name}.jpg");
+				$file->open('write');
+				$file->write($resized);
+				$file->close();
+				$files[] = $file;
+			} else {
+				// cleanup on fail
+				foreach ($files as $file) {
+					$file->delete();
+				}
+		
+				register_error(elgg_echo('avatar:resize:fail'));
+				forward(REFERER);
+			}
 		}
 		
-		if ($small !== false
-			&& $medium !== false
-			&& $large !== false
-			&& $tiny !== false) {
-		
-			$filehandler = new ElggFile();
-			$filehandler->owner_guid = $user->getGUID();
-			$filehandler->setFilename("profile/" . $prefix . "large.jpg");
-			$filehandler->open("write");
-			$filehandler->write($large);
-			$filehandler->close();
-			$filehandler->setFilename("profile/" . $prefix . "medium.jpg");
-			$filehandler->open("write");
-			$filehandler->write($medium);
-			$filehandler->close();
-			$filehandler->setFilename("profile/" . $prefix . "small.jpg");
-			$filehandler->open("write");
-			$filehandler->write($small);
-			$filehandler->close();
-			$filehandler->setFilename("profile/" . $prefix . "tiny.jpg");
-			$filehandler->open("write");
-			$filehandler->write($tiny);
-			$filehandler->close();
-			$filehandler->setFilename("profile/" . $prefix . "topbar.jpg");
-			$filehandler->open("write");
-			$filehandler->write($topbar);
-			$filehandler->close();
-			$filehandler->setFilename("profile/" . $prefix . "master.jpg");
-			$filehandler->open("write");
-            $filehandler->write($master);
-			$filehandler->close();
-			
-			$user->icontime = time();
-		}
+		$user->icontime = time();
 	}
 	
 	/**
