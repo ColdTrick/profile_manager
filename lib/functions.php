@@ -263,7 +263,7 @@
 				}
 				
 				$admin_only = $field->admin_only;
-				if($admin_only != "yes" || elgg_is_admin_logged_in()){
+				if($register || $admin_only != "yes" || elgg_is_admin_logged_in()){
 					if($edit){
 						if(!$register || $field->show_on_register == "yes"){
 							$filtered_ordered_cats[$cat_guid][$field->order] = $field;

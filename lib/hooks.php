@@ -190,7 +190,7 @@
 			foreach($fields["categories"] as $cat_guid => $cat){
 				$cat_fields = $fields["fields"][$cat_guid]; 
 				foreach($cat_fields as $field){
-					if($field->show_on_register == "yes" && $field->admin_only != "yes" && $field->mandatory == "yes"){
+					if($field->show_on_register == "yes" && $field->mandatory == "yes"){
 						$required_fields[] = $field;
 					}
 				}
