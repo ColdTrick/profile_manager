@@ -43,7 +43,8 @@
 			"output_as_tags" => $entity->output_as_tags,
 			"admin_only" => $entity->admin_only,
 			"blank_available" => $entity->blank_available,
-			"order" => $entity->order
+			"order" => $entity->order,
+			"count_for_completeness" => $entity->count_for_completeness
 		);
 	}
 		

@@ -1,4 +1,8 @@
 = Version history =
+x.x
+
+- added: backup of completeness count setting
+- changed: removed metadata caching in favor of elgg metadata caching
 
 7.5 (2013-01-30):
 
