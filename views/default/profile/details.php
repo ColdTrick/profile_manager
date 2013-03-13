@@ -116,6 +116,10 @@
 					
 					if($field->metadata_type == "url"){
 						$target = "_blank";
+						// validate urls
+						if (!preg_match('~^https?\://~i', $value)) {
+							$value = "http://$value";
+						}
 					} else {
 						$target = null;
 					}
