@@ -41,10 +41,14 @@ elgg.profile_manager.init = function(){
 	
 	hash = window.location.hash;
 	if(hash && $("#profile_manager_profile_edit_tabs " + hash).length > 0){
-	
-		$("#profile_manager_profile_edit_tabs " + hash + " a").click();
+		$tab = $("#profile_manager_profile_edit_tabs " + hash + " a:visible");
+		if($tab.length > 0){ 
+			$tab.click();
+		} else {
+			$("#profile_manager_profile_edit_tabs a:first:visible").click();
+		}
 	} else {
-		$("#profile_manager_profile_edit_tabs a:first").click();
+		$("#profile_manager_profile_edit_tabs a:first:visible").click();
 	}
 
 	// registration form adjustments
@@ -219,7 +223,8 @@ elgg.profile_manager.change_profile_type = function(){
 	}
 	
 	if($("#profile_manager_profile_edit_tabs li.elgg-state-selected:visible").length == 0){
-		$("#profile_manager_profile_edit_tabs a:first").click();
+		$('#profile_manager_profile_edit_tab_content_wrapper>div').hide();
+		$("#profile_manager_profile_edit_tabs a:first:visible").click();
 	}
 }
 
