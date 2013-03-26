@@ -59,9 +59,12 @@ Contents
 - add profile icon on admin user create profile form (adduser)
 - check trimmed required profile fields (space should not be accepted, 0 should be accepted, js + hook)
 - be able to add new profile fields directly into a category
+- social inputs (facebook, twitter, linkedin) with action buttons
 	
 3. Known issues
 ---------------
 
 - on register error backward maintaining selected profile icon is impossible due to security reasons 
 - multiselect mandatory not js enforced on register form
+- multiselect not working in walledgarden register form
+- live validation not working in walledgarden register form
