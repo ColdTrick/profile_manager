@@ -138,6 +138,9 @@
 				} else {
 					register_error(elgg_echo("profile_manager:actions:new:error:unknown"));
 				}
+				
+				// update system cache
+				elgg_get_system_cache()->delete("profile_manager_" . $type . "_fields_" . $site_guid);
 			} else {
 				register_error(elgg_echo("profile_manager:actions:new:error:metadata_options"));
 			}

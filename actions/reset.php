@@ -13,12 +13,13 @@
 	$type = get_input("type", "profile");
 
 	if($type == "profile" || $type == "group"){
+		$site_guid = elgg_get_site_entity()->getGUID();
 		
 		$options = array(
 				"type" => "object",
 				"subtype" => "custom_" . $type . "_field",
 				"limit" => false,
-				"owner_guid" => elgg_get_site_entity()->getGUID()
+				"owner_guid" => $site_guid
 			);
 		
 		if($entities = elgg_get_entities($options)){
@@ -28,6 +29,8 @@
 				}
 			}
 		}
+		
+		elgg_get_system_cache()->delete("profile_manager_" . $type . "_fields_" . $site_guid);
 		
 		if(!$error){
 			system_message(elgg_echo("profile_manager:actions:reset:success"));

@@ -17,10 +17,15 @@
 	
 	if(!empty($guid)){
 		$entity = get_entity($guid);
+		$site_guid = $entity->site_guid;
 		
 		if(!empty($entity) && ($entity->getSubtype() == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE || $entity->getSubtype() == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE)){
 			if($entity->delete()){
 				echo "true";
+				
+				// clear cache
+				elgg_get_system_cache()->delete("profile_manager_profile_fields_" . $site_guid);
+				elgg_get_system_cache()->delete("profile_manager_group_fields_" . $site_guid);
 			} 
 		}
 	}

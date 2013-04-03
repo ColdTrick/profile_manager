@@ -23,6 +23,12 @@
 			if($fieldtype && $md5 && $fields && md5(print_r($fields,true)) == $md5){
 				// check if selected file is same type as requested
 				if($requestedfieldtype == $fieldtype){
+					// clear cache
+					elgg_get_system_cache()->delete("profile_manager_profile_fields_" . $site_guid);
+					elgg_get_system_cache()->delete("profile_manager_group_fields_" . $site_guid);
+					
+					// remove existing fields
+					
 					$options = array(
 							"type" => "object",
 							"subtype" => $fieldtype,
@@ -39,7 +45,7 @@
 						}
 					}
 					
-					// remove existing fields
+					
 					if(!$error){
 						
 						// add new fields with configured metadata

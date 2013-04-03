@@ -63,6 +63,10 @@
 				$n++;
 			}
 		}
+		
+		// clear cache
+		$site_guid = elgg_get_site_entity()->getGUID();
+		elgg_get_system_cache()->delete("profile_manager_profile_fields_" . $site_guid);
 	}
 	
 	if(($n - $skipped) == 0){

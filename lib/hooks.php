@@ -11,14 +11,34 @@
 	function profile_manager_profile_override($hook_name, $entity_type, $return_value, $parameters){
 		
 		// Get all the custom profile fields
-		$options = array(
-				"type" => "object",
-				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
-				"limit" => false,
-				"owner_guid" => elgg_get_config("site_guid")
-			);
+		
+		// get from cache
+		$site_guid = elgg_get_config("site_guid");
+		
+		$entities = elgg_load_system_cache("profile_manager_profile_fields_" . $site_guid);
+		if($entities === null){
+			$options = array(
+					"type" => "object",
+					"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
+					"limit" => false,
+					"owner_guid" => elgg_get_config("site_guid")
+				);
+			$entities = elgg_get_entities($options);
+			elgg_save_system_cache("profile_manager_profile_fields_" . $site_guid, serialize($entities));
+		} else {
+			$entities = unserialize($entities);
+		}
 
-		if($entities = elgg_get_entities($options)){
+		if($entities){
+			
+			$guids = array();
+			
+			foreach($entities as $entity){
+				$guids[] = $entity->getGUID();
+			}
+			
+			elgg_get_metadata_cache()->populateFromEntities($guids);
+			
 			$result = array();
 			$translations = array();
 			$context = elgg_get_context();
@@ -59,22 +79,37 @@
 	function profile_manager_group_override($hook_name, $entity_type, $return_value, $parameters){
 		$result = $return_value;
 		
-		// Get all custom group fields
-		$options = array(
-				"type" => "object",
-				"subtype" => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
-				"limit" => false,
-				"owner_guid" => elgg_get_config("site_guid")
+		// get from cache
+		$site_guid = elgg_get_config("site_guid");
+		$entities = elgg_load_system_cache("profile_manager_group_fields_" . $site_guid);
+		if($entities === null){
+			$options = array(
+					"type" => "object",
+					"subtype" => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
+					"limit" => false,
+					"owner_guid" => elgg_get_config("site_guid")
 			);
+			$entities = elgg_get_entities($options);
+			elgg_save_system_cache("profile_manager_group_fields_" . $site_guid, serialize($entities));
+		} else {
+			$entities = unserialize($entities);
+		}
 		
-		$group_fields = elgg_get_entities($options);
-		
-		if($group_fields){
+		if($entities){
+			
+			$guids = array();
+				
+			foreach($entities as $entity){
+				$guids[] = $entity->getGUID();
+			}
+				
+			elgg_get_metadata_cache()->populateFromEntities($guids);
+			
 			$result = array();
 			$ordered = array();
 			
 			// Order the group fields and filter some types out
-			foreach($group_fields as $group_field){
+			foreach($entities as $group_field){
 				if($group_field->admin_only != "yes" || elgg_is_admin_logged_in()){
 					$ordered[$group_field->order] = $group_field;
 				}				
