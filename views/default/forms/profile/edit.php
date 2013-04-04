@@ -27,8 +27,6 @@
 	$cats = $categorized_fields['categories'];
 	$fields = $categorized_fields['fields'];
 	
-	$user_metadata = profile_manager_get_user_profile_data($vars['entity']);
-	
 	$edit_profile_mode = elgg_get_plugin_setting("edit_profile_mode", "profile_manager");
 	$simple_access_control = elgg_get_plugin_setting("simple_access_control","profile_manager");
 	
@@ -86,17 +84,17 @@
 														"id" => "custom_profile_type",
 														"options_values" => $dropdown_options,
 														"onchange" => "elgg.profile_manager.change_profile_type();",
-														"value" => profile_manager_get_user_profile_data_value($user_metadata, "custom_profile_type")));
+														"value" => $vars['entity']->custom_profile_type));
 				echo elgg_view('input/hidden', array('name' => 'accesslevel[custom_profile_type]', 'value' => ACCESS_PUBLIC)); 
 				echo "</div>";
 				
 				echo $types_description;
 			}
 		} else {
-			$profile_type = profile_manager_get_user_profile_data_value($user_metadata, "custom_profile_type");
+			$profile_type = $vars['entity']->custom_profile_type;
 			
 			if(!empty($profile_type)){
-				echo elgg_view("input/hidden", array("name" => custom_profile_type, "value" => $profile_type));
+				echo elgg_view("input/hidden", array("name" => "custom_profile_type", "value" => $profile_type));
 				?>
 				<script type="text/javascript">
 					$(document).ready(function(){
@@ -177,9 +175,15 @@
 				$title = $field->getTitle();
 								
 				// get value
-				if(!empty($user_metadata) && array_key_exists($metadata_name, $user_metadata)){
-					$value = $user_metadata[$metadata_name]->value;
-					$access_id = $user_metadata[$metadata_name]->access_id;
+				$metadata = elgg_get_metadata(array(
+					'guid' => $vars['entity']->guid,
+					'metadata_name' => $metadata_name,
+					'limit' => false
+				));
+				
+				if($metadata){
+					$value = $vars['entity']->$metadata_name;
+					$access_id = $metadata->access_id;
 				} else {
 					$value = '';
 					$access_id = get_default_access($vars["entity"]);
