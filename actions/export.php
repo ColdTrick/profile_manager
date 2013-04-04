@@ -11,7 +11,8 @@
 	*/
  
 	global $DB_QUERY_CACHE;
-
+	$DB_QUERY_CACHE = false; // no need for cache. Will only cause OOM issues
+	
 	set_time_limit(0);
 	
 	$fielddelimiter = "|";
@@ -67,10 +68,6 @@
 						$row .= $field_data; 
 					}
 					echo $row . PHP_EOL;
-					
-					if($DB_QUERY_CACHE){
-						$DB_QUERY_CACHE->clear();
-					}
 				}
 			}
 		}
