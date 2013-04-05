@@ -1,5 +1,14 @@
 = Version history =
 
+7.5.2 (2013-04-05):
+
+- changed: better use of system cache for profile entities
+- changed: use core metadata caching instead of own version
+- changed: autoprepend http on url profile fields if missing
+- changed: query cache is disabled during profile export to prevent OOM issues
+- fixed: sticky register form values not cleared after registration
+- fixed: show correct tabs when switching profile types
+
 7.5.1 (2013-03-11):
 
 - added: backup of completeness count setting
