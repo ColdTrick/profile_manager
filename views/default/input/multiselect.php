@@ -16,10 +16,12 @@
     } else {
     	$multiselect++;
     }
-    $selected_items = $vars["value"];
+    $selected_items = elgg_extract("value", $vars, "");
+    
     if(!is_array($selected_items)){
 		$selected_items = string_to_tag_array($selected_items);
     }
+    
     $selected_items = array_map("strtolower", $selected_items);
 
     $internal_id = str_replace("]", "_", str_replace("[" , "_" ,$vars['name'])) . $multiselect;
