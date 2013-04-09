@@ -182,6 +182,8 @@
 				));
 				
 				if($metadata){
+					$metadata = $metadata[0];
+					
 					$value = $vars['entity']->$metadata_name;
 					$access_id = $metadata->access_id;
 				} else {
