@@ -444,3 +444,19 @@
 		}
 		return $return;
 	}
+
+	/**
+	*
+	* Extend public pages
+	* @param unknown_type $hook_name
+	* @param unknown_type $entity_type
+	* @param unknown_type $return_value
+	* @param unknown_type $parameters
+	*/
+	function profile_manager_public_pages($hook_name, $entity_type, $return_value, $params){
+		$return = $return_value;
+		if(is_array($return)){
+			$return[] = "action/profile_manager/register/validate.*";
+		}
+		return $return;
+	}

@@ -74,6 +74,9 @@
 		// hook for extending menus
 		elgg_register_plugin_hook_handler('register', 'menu:entity', 'profile_manager_register_entity_menu', 600);
 		
+		// extend public pages
+		elgg_register_plugin_hook_handler('public_pages', 'walled_garden', 'profile_manager_public_pages');
+		
 		elgg_register_plugin_hook_handler('permissions_check:annotate', 'site', 'profile_manager_permissions_check_annotate');
 		
 		// enable username change
