@@ -72,6 +72,14 @@
 		</td>
 	</tr>
 	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:settings:show_account_hints'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[show_account_hints]", "options_values" => $noyes_options, "value" => $vars['entity']->show_account_hints)); ?>
+		</td>
+	</tr>
+	<tr>
 		<td colspan="2">
 			<?php echo elgg_echo('profile_manager:settings:registration:terms'); ?>
 		</td>

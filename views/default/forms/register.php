@@ -28,11 +28,25 @@ if($accept_terms = elgg_get_plugin_setting("registration_terms", "profile_manage
 }
 
 echo "<div id='profile_manager_register_left'>";
+
+$show_hints = false;
+if(elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes"){
+	$show_hints = true;
+}
 ?>
 
 <fieldset>
 	<div class="mtm mandatory">
-		<label for='register-name'><?php echo elgg_echo('name'); ?></label><br />
+		
+		<label for='register-name'><?php echo elgg_echo('name'); ?></label>
+		
+		<?php if($show_hints){ ?>
+		<span class='custom_fields_more_info' id='more_info_name'></span> 		
+		<span class='custom_fields_more_info_text' id='text_more_info_name'><?php echo elgg_echo("profile_manager:register:hints:name")?></span>
+		<?php } ?>
+		
+		<br />
+		
 		<?php
 		echo elgg_view('input/text', array(
 			'id' => 'register-name',
@@ -41,9 +55,17 @@ echo "<div id='profile_manager_register_left'>";
 			'class' => 'elgg-autofocus'
 		));
 		?>
+		
 	</div>
 	<div class="mandatory">
-		<label for='register-email'><?php echo elgg_echo('email'); ?></label><br />
+		<label for='register-email'><?php echo elgg_echo('email'); ?></label>
+		
+		<?php if($show_hints){ ?>
+		<span class='custom_fields_more_info' id='more_info_name'></span> 		
+		<span class='custom_fields_more_info_text' id='text_more_info_name'><?php echo elgg_echo("profile_manager:register:hints:email")?></span>
+		<?php } ?>
+		
+		<br />
 		<div class='profile_manager_register_input_container'>
 			<?php
 			echo elgg_view('input/text', array(
@@ -56,7 +78,14 @@ echo "<div id='profile_manager_register_left'>";
 		</div>
 	</div>
 	<div class="mandatory">
-		<label for='register-username'><?php echo elgg_echo('username'); ?></label><br />
+		<label for='register-username'><?php echo elgg_echo('username'); ?></label>
+		
+		<?php if($show_hints){ ?>
+		<span class='custom_fields_more_info' id='more_info_name'></span> 		
+		<span class='custom_fields_more_info_text' id='text_more_info_name'><?php echo elgg_echo("profile_manager:register:hints:username")?></span>
+		<?php } ?>
+		
+		<br />
 		<div class='profile_manager_register_input_container'>
 			<?php
 			echo elgg_view('input/text', array(
@@ -69,7 +98,14 @@ echo "<div id='profile_manager_register_left'>";
 		</div>
 	</div>
 	<div class="mandatory">
-		<label for='register-password'><?php echo elgg_echo('password'); ?></label><br />
+		<label for='register-password'><?php echo elgg_echo('password'); ?></label>
+		
+		<?php if($show_hints){ ?>
+		<span class='custom_fields_more_info' id='more_info_name'></span> 		
+		<span class='custom_fields_more_info_text' id='text_more_info_name'><?php echo elgg_echo("profile_manager:register:hints:password")?></span>
+		<?php } ?>
+		
+		<br />
 		<div class='profile_manager_register_input_container'>
 			<?php
 			echo elgg_view('input/password', array(
@@ -82,7 +118,14 @@ echo "<div id='profile_manager_register_left'>";
 		</div>
 	</div>
 	<div class="mandatory">
-		<label for='register-password2'><?php echo elgg_echo('passwordagain'); ?></label><br />
+		<label for='register-password2'><?php echo elgg_echo('passwordagain'); ?></label>
+		
+		<?php if($show_hints){ ?>
+		<span class='custom_fields_more_info' id='more_info_name'></span> 		
+		<span class='custom_fields_more_info_text' id='text_more_info_name'><?php echo elgg_echo("profile_manager:register:hints:passwordagain")?></span>
+		<?php } ?>
+		
+		<br />
 		<div class='profile_manager_register_input_container'>
 			<?php
 			echo elgg_view('input/password', array(
