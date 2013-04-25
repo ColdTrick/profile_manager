@@ -141,9 +141,7 @@
 					}
 				}
 			}
-		
-			
-			
+					
 			$tab_content .= "<div id='profile_manager_profile_edit_tab_content_" . $cat_guid . "' class='profile_manager_profile_edit_tab_content'>\n";
 				
 			$list_content .= "<div id='" . $cat_guid . "' class='" . $class . "'>";
