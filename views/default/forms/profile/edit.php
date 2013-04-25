@@ -112,9 +112,9 @@
 		foreach($cats as $cat_guid => $cat){
 			// make nice title for category		
 			if(empty($cat_guid) || !($cat instanceof ProfileManagerCustomFieldCategory)) {
-				$title = elgg_echo("profile_manager:categories:list:default");
+				$cat_title = elgg_echo("profile_manager:categories:list:default");
 			} else {
-				$title = $cat->getTitle();
+				$cat_title = $cat->getTitle();
 			}
 		
 			$class = "";
@@ -142,23 +142,21 @@
 				}
 			}
 		
-			$tabs[] = array(
-				'title' => $title,
-				'url' => "#" . $cat_guid,
-				'id' => $cat_guid,
-				'class' => $class
-			);
+			
 			
 			$tab_content .= "<div id='profile_manager_profile_edit_tab_content_" . $cat_guid . "' class='profile_manager_profile_edit_tab_content'>\n";
 				
 			$list_content .= "<div id='" . $cat_guid . "' class='" . $class . "'>";
 			if(count($cats) > 1){
-				$list_content .= "<h3 class='settings'>" . $title . "</h3>";
+				$list_content .= "<h3 class='settings'>" . $cat_title . "</h3>";
 			}
 			$list_content .= "<fieldset>";
 			
 			// display each field for currect category
 			$hide_non_editables = elgg_get_plugin_setting("hide_non_editables", "profile_manager");
+			
+			$visible_fields = 0;
+			
 			foreach($fields[$cat_guid] as $field){
 				$metadata_name = $field->metadata_name;
 				
@@ -194,6 +192,7 @@
 				if($hide_non_editables == "yes" && ($valtype == "non_editable")){
 					$field_result = "<div class='hidden_non_editable'>";
 				} else {
+					$visible_fields++;
 					$field_result = "<div>";
 				}	
 				
@@ -224,6 +223,16 @@
 				
 				$tab_content .= $field_result;
 				$list_content .= $field_result;
+			}
+			
+			if($visible_fields){
+				// only add tab if there are visible fields
+				$tabs[] = array(
+						'title' => $cat_title,
+						'url' => "#" . $cat_guid,
+						'id' => $cat_guid,
+						'class' => $class
+				);
 			}
 			
 			$tab_content .= "</div>\n";
