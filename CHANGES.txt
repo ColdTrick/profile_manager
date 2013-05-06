@@ -1,5 +1,13 @@
 = Version history =
 
+7.6 (2013-05-06):
+
+- added: admin option to show hints on default account fields on register form
+- fixed: live validation of account details not working in walled garden mode
+- fixed: categorized profile fields can not be reset to general category
+- fixed: only show categorie titles/tabs if there are visible fields on profile edit form
+- fixed: some php notices
+
 7.5.2 (2013-04-05):
 
 - changed: better use of system cache for profile entities
