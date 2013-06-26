@@ -58,7 +58,9 @@
 				if(in_array(strtolower($option), $selected_items)){
 					$selected = " selected='selected'";
 				}
-				echo "<option" . $selected . ">" . $option . "</option>";
+				$encoded_option = htmlentities($option, ENT_QUOTES, 'UTF-8');
+				
+				echo "<option value=\"$encoded_option\"" . $selected . ">" . $encoded_option . "</option>";
 			}
 		}
 	?>

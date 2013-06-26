@@ -340,7 +340,7 @@ $.widget("ech.multiselect", {
 			})
 			.delegate('input[type="checkbox"], input[type="radio"]', 'click.multiselect', function( e ){
 				var $this = $(this),
-					val = this.title, // can't use value in IE7
+					val = this.value,
 					checked = this.checked,
 					tags = self.element.find('option');
 				
