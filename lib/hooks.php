@@ -403,7 +403,9 @@
 										break;
 									default:
 										$spacer_allowed = true;
-									$field_result = elgg_view("output/" . $profile_fields[$field], array("value" => $params["entity"]->$field));
+										if (array_key_exists($field, $profile_fields)) {
+											$field_result = elgg_view("output/" . $profile_fields[$field], array("value" => $params["entity"]->$field));
+										}
 									break;
 								}
 									
