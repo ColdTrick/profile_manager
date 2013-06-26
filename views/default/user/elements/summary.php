@@ -54,9 +54,11 @@ if((elgg_get_plugin_setting("user_summary_control", "profile_manager") == "yes")
 							break;
 						default:
 							$value = $vars["entity"]->$field;
-							if(!empty($value)){
-								$spacer_allowed = true;
-								$field_result = elgg_view("output/" . $profile_fields[$field], array("value" => $value));
+							if (!empty($value)) {
+								if (array_key_exists($field, $profile_fields)) {
+									$spacer_allowed = true;
+									$field_result = elgg_view("output/" . $profile_fields[$field], array("value" => $value));
+								}									
 							}
 							break;
 					}
