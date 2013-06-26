@@ -51,6 +51,7 @@
 			); 
 			
 			if($types = elgg_get_entities($options)){
+				$types_description = "";
 				
 				$dropdown_options = array();
 				$dropdown_options[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
