@@ -12,7 +12,24 @@
 		$about .= "</p>";
 	} else {
 		if ($user->description) {
-			$about .= "<p class='profile-aboutme-title'><b>" . elgg_echo("profile:aboutme") . "</b></p>";
+			// see if we have a custom title
+            $description_field = elgg_get_entities_from_metadata(array(
+                'type' => 'object',
+                'subtype' => 'custom_profile_field',
+                'metadata_name_value_pairs' => array(
+                    'name' => 'metadata_name',
+                    'value' => 'description'
+                ),
+                'limit' => 1
+            ));
+            
+            if ($description_field) {
+                $title = $description_field[0]->getTitle();
+            }
+            else {
+                $title = elgg_echo('profile:aboutme');
+            }
+			$about .= "<p class='profile-aboutme-title'><b>{$title}</b></p>";
 			$about .= "<div class='profile-aboutme-contents'>";
 			$about .= elgg_view('output/longtext', array('value' => $user->description, 'class' => 'mtn'));
 			$about .= "</div>";
