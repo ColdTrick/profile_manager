@@ -1,9 +1,9 @@
 <?php
 	/**
 	* Profile Manager
-	* 
+	*
 	* Category list view
-	* 
+	*
 	* @package profile_manager
 	* @author ColdTrick IT Solutions
 	* @copyright Coldtrick IT Solutions 2009
@@ -14,11 +14,12 @@
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 			"limit" => false,
+			"pagination" => false,
 			"owner_guid" => elgg_get_site_entity()->getGUID(),
-			"order_by_metadata" => array("name" => "order") 
+			"order_by_metadata" => array("name" => "order")
 		);
 
-	$categories = elgg_list_entities_from_metadata($options);	
+	$categories = elgg_list_entities_from_metadata($options);
 	
 	if(!empty($categories)){
 		$list = $categories;
