@@ -1,5 +1,12 @@
 = Version history =
 
+7.6.1 (2013-08-28):
+
+- fixed: about me field uses custom field name as label
+- fixed: auto suggested usernames no longer contains invalid characters
+- fixed: input multiselect correctly encodes options
+- fixed: incorrect listing of categories on admin configuration page if more than 10 are created
+
 7.6 (2013-05-06):
 
 - added: admin option to show hints on default account fields on register form

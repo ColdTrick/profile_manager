@@ -53,7 +53,6 @@ Contents
 - add "default access lvl"
 - add "can change access lvl"
 - tabbed profile details
-- add hint to default register form fields (username, email, password etc)
 - review complete js
 - review new field action (make better use of class constructors)
 - add profile icon on admin user create profile form (adduser)
@@ -67,4 +66,3 @@ Contents
 - on register error backward maintaining selected profile icon is impossible due to security reasons 
 - multiselect mandatory not js enforced on register form
 - multiselect not working in walledgarden register form
-- live validation not working in walledgarden register form
