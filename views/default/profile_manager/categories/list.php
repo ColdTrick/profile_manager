@@ -16,7 +16,7 @@
 			"limit" => false,
 			"pagination" => false,
 			"owner_guid" => elgg_get_site_entity()->getGUID(),
-			"order_by_metadata" => array("name" => "order")
+			"order_by_metadata" => array("name" => "order", "as" => "integer"),
 		);
 
 	$categories = elgg_list_entities_from_metadata($options);
