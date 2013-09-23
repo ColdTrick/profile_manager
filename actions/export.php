@@ -8,8 +8,6 @@
 	* @author ColdTrick IT Solutions
 	* @copyright Coldtrick IT Solutions 2009
 	* @link http://www.coldtrick.com/
-	 * 
-	 * modified to use elggbatch for large numbers of users in order to mitigate OOM errors
 	*/
  
 	global $DB_QUERY_CACHE;
