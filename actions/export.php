@@ -12,30 +12,34 @@
  
 	global $DB_QUERY_CACHE;
 	$DB_QUERY_CACHE = false; // no need for cache. Will only cause OOM issues
-	
+
 	set_time_limit(0);
 	
-	$fielddelimiter = "|";
+	$filename = 'export.csv';
 	
 	$fieldtype = get_input("fieldtype");
 	$fields = get_input("export");
 	
-	// We'll be outputting a CSV
-	header("Content-Type: text/plain; charset: UTF-8");
-		
-	// It will be called export.csv
-	header('Content-Disposition: attachment; filename="export.csv"');
+	header("Pragma: public");
+    header("Expires: 0");
+    header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+    header("Content-Type: application/force-download");
+    header("Content-Type: application/octet-stream");
+    header("Content-Type: application/download");
+    header("Content-Disposition: attachment;filename={$filename}");
+    header("Content-Transfer-Encoding: binary");
+
+    ob_start();
+
+    $df = fopen("php://output", 'w');
 	
 	if(!empty($fieldtype) && !empty($fields)){
 		if($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE || $fieldtype == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE){
-			$headers = "";
+			$headers = array();
 			foreach($fields as $field){
-				if(!empty($headers)){
-					$headers .= $fielddelimiter . " ";
-				}
-				$headers .= $field;
+				$headers[] = $field;
 			}
-			echo $headers . PHP_EOL;
+			fputcsv($df, $headers);
 			
 			$options = array(
 				"limit" => false
@@ -53,24 +57,26 @@
 			
 			$options["type"] = $type;
 			
-			$entities = elgg_get_entities_from_relationship($options);
+			$entities = new ElggBatch('elgg_get_entities_from_relationship', $options);
 			if(!empty($entities)){
 				foreach($entities as $entity){
-					$row = "";
+					$row = array();
 					foreach($fields as $field){
-						if(!empty($row)){
-							$row .= $fielddelimiter . " ";
-						}
 						$field_data = $entity->$field;
 						if(is_array($field_data)){
 							$field_data = implode(",", $field_data);
 						}
-						$row .= $field_data; 
+						$row[] = $field_data;
 					}
-					echo $row . PHP_EOL;
+					fputcsv($df, $row);
 				}
 			}
 		}
+		
+		fclose($df);
+
+		echo ob_get_clean();
+		exit;
 	}
 	
 	exit();
