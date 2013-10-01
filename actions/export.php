@@ -1,9 +1,9 @@
 <?php
 	/**
 	* Profile Manager
-	* 
+	*
 	* export profile data action
-	* 
+	*
 	* @package profile_manager
 	* @author ColdTrick IT Solutions
 	* @copyright Coldtrick IT Solutions 2009
@@ -39,7 +39,7 @@
 			foreach($fields as $field){
 				$headers[] = $field;
 			}
-			fputcsv($df, $headers);
+			fputcsv($df, $headers, ";");
 			
 			$options = array(
 				"limit" => false
@@ -47,9 +47,9 @@
 			
 			if($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE){
 				$type = "user";
-				$options["relationship"] = "member_of_site"; 
-				$options["relationship_guid"] = elgg_get_site_entity()->getGUID(); 
-				$options["inverse_relationship"] = true; 
+				$options["relationship"] = "member_of_site";
+				$options["relationship_guid"] = elgg_get_site_entity()->getGUID();
+				$options["inverse_relationship"] = true;
 				$options["site_guids"] = false;
 			} else {
 				$type = "group";
@@ -68,7 +68,7 @@
 						}
 						$row[] = $field_data;
 					}
-					fputcsv($df, $row);
+					fputcsv($df, $row, ";");
 				}
 			}
 		}
