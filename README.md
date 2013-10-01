@@ -3,14 +3,7 @@ Profile Manager
 
 Improved management of user and group profile fields
 
-Contents
---------
-
-1. Features
-2. ToDo
-3. Known issues
-
-1. Features
+Features
 -----------
 
 - importing default or custom fields
@@ -36,33 +29,7 @@ Contents
 - profile completeness widget
 - register form widget
 
-2. ToDo
--------
-
-- categories and types for groups
-- multilingual options (in dropdown, radio, multiselect)
-- Default values for fields (user specified)
-- Force empty fields on profile
-- dependend fields
-- check existence of input/output views (in get_categorized function)
-- check if fieldtype is enabled (in get_categorized function)
-- handle disabled fieldtype options (in get_categorized function)
-- handle empty fields on group details (in get_categorized function)
-- replace profile type description with longtext instead of plaintext
-- add "modify once" option to fields. So user can only modify the first time. Only admin then will be able to change it.
-- add "default access lvl"
-- add "can change access lvl"
-- tabbed profile details
-- review complete js
-- review new field action (make better use of class constructors)
-- add profile icon on admin user create profile form (adduser)
-- check trimmed required profile fields (space should not be accepted, 0 should be accepted, js + hook)
-- be able to add new profile fields directly into a category
-- social inputs (facebook, twitter, linkedin) with action buttons
-	
-3. Known issues
+Known issues
 ---------------
 
 - on register error backward maintaining selected profile icon is impossible due to security reasons 
-- multiselect mandatory not js enforced on register form
-- multiselect not working in walledgarden register form
