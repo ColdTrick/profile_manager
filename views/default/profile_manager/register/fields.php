@@ -127,6 +127,19 @@
 					$fields_result .= "<span class='custom_fields_more_info_text' id='text_more_info_" . $field->metadata_name . "'>" . $hint . "</span>";
 				} 
 				
+				/**
+				 * add in access controls
+				 */
+				if (elgg_get_plugin_setting('register_field_access', 'profile_manager') == 'yes') {
+					$fields_result .= '<span class="profile-manager-register-access">';
+					// note: requires different name prefix so it's not pickedup in the event as a field value
+					$fields_result .= elgg_view('input/access', array(
+						'name' => "custom_profile_access_" . $field->metadata_name,
+						'value' => get_default_access()
+					));
+					$fields_result .= '</span>';
+				}
+				
 				$fields_result .= "<br />";
 				
 				$fields_result .= elgg_view("input/{$metadata_type}", array(

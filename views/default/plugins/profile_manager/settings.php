@@ -73,6 +73,14 @@
 	</tr>
 	<tr>
 		<td>
+			<?php echo elgg_echo('profile_manager:settings:register_field_access'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[register_field_access]", "options_values" => $noyes_options, "value" => $vars['entity']->register_field_access)); ?>
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<?php echo elgg_echo('profile_manager:settings:show_account_hints'); ?>
 		</td>
 		<td>

@@ -98,6 +98,10 @@ li.custom_fields_edit_profile_category {
 	padding-right: 25px;
 }
 
+.profile-manager-register-access {
+    padding-left: 10px;
+}
+
 /* extra explicit for IE7 */
 .elgg-icon.profile_manager_validate_icon {
 	margin-left: -22px;

@@ -128,6 +128,15 @@
 						}
 					}
 				}
+
+				// determine the access of the field
+				$access = get_default_access($object);
+				if (elgg_get_plugin_setting('register_field_access', 'profile_manager') == 'yes') {
+					$user_defined_access = get_input('custom_profile_access_' . $shortname, false);
+					if ($user_defined_access !== false) {
+						$access = $user_defined_access;
+					}
+				}
 				
 				// use create_metadata to listen to default access
 				if (is_array($value)) {
@@ -135,10 +144,10 @@
 					foreach($value as $interval) {
 						$i++;
 						if ($i == 1) { $multiple = false; } else { $multiple = true; }
-						create_metadata($object->guid, $shortname, $interval, 'text', $object->guid, get_default_access($object), $multiple);
+						create_metadata($object->guid, $shortname, $interval, 'text', $object->guid, $access, $multiple);
 					}
 				} else {
-					create_metadata($object->guid, $shortname, $value, 'text', $object->guid, get_default_access($object));
+					create_metadata($object->guid, $shortname, $value, 'text', $object->guid, $access);
 				}
 			}
 			
