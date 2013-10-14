@@ -116,54 +116,55 @@ elgg.profile_manager.init = function(){
 			return result;
 		});
 
-		$(".elgg-form-register").each(function(){
-			var form = $(this);
-
-			// add username generation when a email adress has been entered
-			form.find("input[name='email']").live("blur", function(){
-				var email_value = $(this).val();
-				if(email_value.indexOf("@") !== -1){
-					var pre = email_value.split("@");
-					if(pre[0]){
-						if($(".elgg-form-register input[name='username']").val() == ""){
-							// change value and trigger change
-							var new_val = pre[0].replace(/[^a-zA-Z0-9]/g, "");
-							$(".elgg-form-register input[name='username']").val(new_val).keyup();
-						}
-					}
-				}
-			});
-
-			// add live validation of username and emailaddress
-			form.find("input[name='username'], input[name='email'], input[name='password']").live("keyup", function(event){
-				var fieldname = $(event.currentTarget).attr("name");
-				
-				clearTimeout(profile_manager_register_form_timers[fieldname]);
-				profile_manager_register_form_timers[fieldname] = setTimeout(function(){ elgg.profile_manager.register_form_validate(form, $(event.currentTarget)); }, 500);
-			});
-
-			// password compare check
-			form.find("input[name='password'], input[name='password2']").live("keyup", function(event){
-				var password1 = form.find("input[name='password']").val();
-				var password2 = form.find("input[name='password2']").val();
-				$field = form.find("input[name='password2']");
-				$field_icon = $field.next(".profile_manager_validate_icon");
-				$field_icon.attr("class", "elgg-icon profile_manager_validate_icon").attr("title", "");
-				if((password1 !== "") && (password2 !== "")){
-					if(password1 == password2){
-						$field_icon.addClass("profile_manager_validate_icon_valid");
-						$field.removeClass("profile_manager_register_missing");
-					} else {
-						$field_icon.addClass("profile_manager_validate_icon_invalid").attr("title", elgg.echo("RegistrationException:PasswordMismatch"));
-					}
-				}
-
-			});
-		});
-
 		// init selected profile type
 		elgg.profile_manager.change_profile_type_register();
 	}
+
+	// add username generation when a email adress has been entered
+	$(".elgg-form-register input[name='email']").live("blur", function(){
+		var email_value = $(this).val();
+		if(email_value.indexOf("@") !== -1){
+			var pre = email_value.split("@");
+			if(pre[0]){
+				if($(".elgg-form-register input[name='username']").val() == ""){
+					// change value and trigger change
+					var new_val = pre[0].replace(/[^a-zA-Z0-9]/g, "");
+					$(".elgg-form-register input[name='username']").val(new_val).keyup();
+				}
+			}
+		}
+	});
+
+	// add live validation of username and emailaddress
+	$(".elgg-form-register input[name='username'], .elgg-form-register input[name='email'], .elgg-form-register input[name='password']").live("keyup", function(event){
+		var fieldname = $(event.currentTarget).attr("name");
+		var form = $(this).parents(".elgg-form-register");
+		clearTimeout(profile_manager_register_form_timers[fieldname]);
+		profile_manager_register_form_timers[fieldname] = setTimeout(function(){
+			elgg.profile_manager.register_form_validate(form, $(event.currentTarget));
+		}, 500);
+	});
+
+	// password compare check
+	$(".elgg-form-register input[name='password'], .elgg-form-register input[name='password2']").live("keyup", function(event){
+		var form = $(this).parents(".elgg-form-register");
+		
+		var password1 = form.find("input[name='password']").val();
+		var password2 = form.find("input[name='password2']").val();
+		
+		$field = form.find("input[name='password2']");
+		$field_icon = $field.next(".profile_manager_validate_icon");
+		$field_icon.attr("class", "elgg-icon profile_manager_validate_icon").attr("title", "");
+		if((password1 !== "") && (password2 !== "")){
+			if(password1 == password2){
+				$field_icon.addClass("profile_manager_validate_icon_valid");
+				$field.removeClass("profile_manager_register_missing");
+			} else {
+				$field_icon.addClass("profile_manager_validate_icon_invalid").attr("title", elgg.echo("RegistrationException:PasswordMismatch"));
+			}
+		}
+	});
+
 }
 
 // live input validation
