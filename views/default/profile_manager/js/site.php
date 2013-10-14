@@ -117,10 +117,6 @@ elgg.profile_manager.init = function(){
 		});
 	}
 
-	$(".elgg-form-register").live("ready", function() {
-		 alert("form loaded");
-	});
-
 	// add username generation when a email adress has been entered
 	$(".elgg-form-register input[name='email']").live("blur", function(){
 		var email_value = $(this).val();
