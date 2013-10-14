@@ -52,11 +52,7 @@ elgg.profile_manager.init = function(){
 	}
 
 	// registration form adjustments
-	if($(".elgg-form-register").length > 0){
-		// append mandatory *
-		$(".elgg-form-register .mandatory>label").append("*");
-	}
-
+	
 	// validate on submit
 	$(".elgg-form-register").live("submit", function(){
 		var error_count = 0;

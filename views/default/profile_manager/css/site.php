@@ -1,5 +1,5 @@
 <?php
-	$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/"; 
+	$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 ?>
 /* widgets */
 #widget_profile_completeness_container {
@@ -119,6 +119,11 @@ li.custom_fields_edit_profile_category {
 .elgg-icon.profile_manager_validate_icon_invalid {
 	background-position: 0 -252px;
 	display: inline-block;
+}
+
+/* register form */
+.elgg-form-register .mandatory > label:after {
+	content: "*";
 }
 
 /* registration field */
