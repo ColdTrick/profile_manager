@@ -83,14 +83,19 @@ elgg.profile_manager.init = function(){
 					break;
 				default:
 					$(elem).removeClass("profile_manager_register_missing");
+					// also remove class from multiselect element
+					$(elem).next(".ui-multiselect").removeClass("profile_manager_register_missing");
 
 					// check parents
 					var $parents = $(elem).parents(".profile_manager_register_category");
 					if(($parents.length == 0) || ($parents.hasClass("profile_type_" + selProfileType) || $parents.hasClass("profile_type_0"))){
 					
 						if($(elem).is("select")){
-							if($form.find("select[name='" + $(elem).attr("name") + "'] option:selected").val() == ""){
+							if(($(elem).val() == null) || ($(elem).val() == "")){
 								$(elem).addClass("profile_manager_register_missing");
+								// also add class to multiselect element
+								$(elem).next(".ui-multiselect").addClass("profile_manager_register_missing");
+								
 								error_count++;
 							}
 						} else {
@@ -157,7 +162,6 @@ elgg.profile_manager.init = function(){
 			}
 		}
 	});
-
 }
 
 // live input validation
