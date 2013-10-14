@@ -115,10 +115,11 @@ elgg.profile_manager.init = function(){
 		
 			return result;
 		});
-
-		// init selected profile type
-		elgg.profile_manager.change_profile_type_register();
 	}
+
+	$(".elgg-form-register").live("ready", function() {
+		 alert("form loaded");
+	});
 
 	// add username generation when a email adress has been entered
 	$(".elgg-form-register input[name='email']").live("blur", function(){
@@ -232,7 +233,6 @@ elgg.profile_manager.change_profile_type = function(){
 
 //show description and fields based on selected profile type (register form)
 elgg.profile_manager.change_profile_type_register = function(){
-	
 	var selVal = $('#custom_profile_fields_custom_profile_type').val();
 	if(selVal == "" || selVal == "undefined"){
 		selVal = 0;
