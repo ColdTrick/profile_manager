@@ -1,7 +1,7 @@
-<?php 
+<?php
 	/**
 	* Profile Manager
-	* 
+	*
 	* @package profile_manager
 	* @author ColdTrick IT Solutions
 	* @copyright Coldtrick IT Solutions 2009
@@ -22,12 +22,12 @@
 
 	/**
 	 * initialization of plugin
-	 * 
+	 *
 	 * @return unknown_type
 	 */
 	function profile_manager_init(){
 		// register libraries
-		elgg_register_js("jquery.ui.multiselect", elgg_get_site_url() . "mod/profile_manager/vendors/jquery_ui_multiselect/jquery.multiselect.js");
+		elgg_register_js("jquery.ui.multiselect", "mod/profile_manager/vendors/jquery_ui_multiselect/jquery.multiselect.js");
 		
 		// Extend CSS
 		elgg_extend_view("css/admin", "profile_manager/css/global");
@@ -49,7 +49,7 @@
 		// Register all custom field types
 		register_custom_field_types();
 		
-		// add profile_completeness widget 
+		// add profile_completeness widget
 		if(elgg_get_plugin_setting("enable_profile_completeness_widget", "profile_manager") == "yes"){
 			elgg_register_widget_type("profile_completeness", elgg_echo("widgets:profile_completeness:title"), elgg_echo("widgets:profile_completeness:description"), "profile,dashboard");
 		}
@@ -93,12 +93,12 @@
 		
 		// Run once function to configure this plugin
 		run_function_once('profile_manager_run_once', 1287964800); // 2010-10-25
-		run_function_once('pm_fix_access_default'); 		
+		run_function_once('pm_fix_access_default');
 	}
 	
 	/**
 	 * function to handle the nice urls for Custom Profile Fields
-	 * 
+	 *
 	 * @param $page
 	 * @return unknown_type
 	 */
@@ -107,9 +107,9 @@
 			case "forms":
 				$form = $page[1];
 				if(!empty($form) && elgg_is_admin_logged_in()){
-					set_input("guid", $page[2]);	
+					set_input("guid", $page[2]);
 					include(dirname(__FILE__) . "/pages/forms/" . $form . ".php");
-					return true;	
+					return true;
 				}
 				break;
 			case "validate_username":
@@ -133,7 +133,7 @@
 	
 	/**
 	 * Function to add menu items to the pages
-	 * 
+	 *
 	 * @return unknown_type
 	 */
 	function profile_manager_pagesetup(){
