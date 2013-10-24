@@ -5,8 +5,10 @@
 	<version>7.6.1</version>
 	<description>Improved management of user and group profile fields</description>
 	<website>http://www.coldtrick.com/</website>
+	<repository>https://github.com/ColdTrick/profile_manager</repository>
+	<bugtracker>https://github.com/ColdTrick/profile_manager/issues</bugtracker>
 	<copyright>(C) ColdTrick IT Solutions 2009 - 2013</copyright>
-	<license>GNU Public License version 2</license>
+	<license>GNU General Public License version 2</license>
  	
  	<requires>
 		<type>elgg_release</type>
