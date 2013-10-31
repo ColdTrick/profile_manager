@@ -1,9 +1,9 @@
-<?php 
+<?php
 	/**
 	* Profile Manager
-	* 
+	*
 	* English language
-	* 
+	*
 	* @package profile_manager
 	* @author ColdTrick IT Solutions
 	* @copyright Coldtrick IT Solutions 2009
@@ -20,7 +20,7 @@
 	
 		'profile:custom_profile_type' => 'Custom Profile Type',
 		
-		// admin menu 
+		// admin menu
 		'admin:appearance:group_fields' => "Edit Group Fields",
 		'admin:appearance:export_fields' => "Export Profile Data",
 		'admin:appearance:user_summary_control' => "User Summary Control",
@@ -35,6 +35,7 @@
 		'profile_manager:settings:registration' => 'Registration',
 		'profile_manager:settings:edit_profile' => 'Edit Profile',
 		'profile_manager:settings:view_profile' => 'View Profile',
+		'profile_manager:settings:group' => "Edit Group Profile",
 		'profile_manager:settings:other' => 'Other',
 	
 		'profile_manager:settings:profile_icon_on_register' => 'Add mandatory profile icon input field on register form',
@@ -75,8 +76,15 @@
 		'profile_manager:settings:registration:extra_fields:beside' => "Beside registration form",
 		'profile_manager:settings:registration:free_text' => "Enter extra text to show on the registration page",
 		
+		
+		'profile_manager:settings:group:group_limit_name' => "Maximum number of times a group name can be edited",
+		'profile_manager:settings:group:group_limit_description' => "Maximum number of times a group description can be edited",
+		'profile_manager:settings:group:limit:unlimited' => "Unlimited",
+		'profile_manager:settings:group:limit:never' => "Never",
+		'profile_manager:settings:group:limit:info' => "These limits do not apply to site administrators",
+		
 		// Field Configuration
-		'profile_manager:admin:metadata_name' => 'Name',	
+		'profile_manager:admin:metadata_name' => 'Name',
 		'profile_manager:admin:metadata_label' => 'Label',
 		'profile_manager:admin:metadata_hint' => 'Hint',
 		'profile_manager:admin:metadata_description' => 'Description',
@@ -93,25 +101,25 @@
 		'profile_manager:admin:options:pm_rating' => 'Rating',
 		
 		'profile_manager:admin:additional_options' => 'Additional options',
-		'profile_manager:admin:show_on_register' => 'Show on register form',	
+		'profile_manager:admin:show_on_register' => 'Show on register form',
 		'profile_manager:admin:mandatory' => 'Mandatory',
 		'profile_manager:admin:user_editable' => 'User can edit this field',
 		'profile_manager:admin:output_as_tags' => 'Show on profile as tags',
 		'profile_manager:admin:admin_only' => 'Admin only field',
 		'profile_manager:admin:count_for_completeness' => 'Count this field in profile completeness widget',
-		'profile_manager:admin:blank_available' => 'Field has a blank option',		
+		'profile_manager:admin:blank_available' => 'Field has a blank option',
 		'profile_manager:admin:option_unavailable' => 'Option unavailable',
 	
 		// field options additionals description
-		'profile_manager:admin:show_on_register:description' => "If you want this field to be on the register form.",	
+		'profile_manager:admin:show_on_register:description' => "If you want this field to be on the register form.",
 		'profile_manager:admin:mandatory:description' => "If you want this field to be mandatory (only applies to the register form).",
 		'profile_manager:admin:user_editable:description' => "If set to 'No' users can't edit this field (handy when data is managed in an external system).",
 		'profile_manager:admin:output_as_tags:description' => "Data output will be handle as tags (only applies on user profile).",
 		'profile_manager:admin:admin_only:description' => "Select 'Yes' if field is only available for admins.",
-		'profile_manager:admin:blank_available:description' => "Select 'Yes' if a blank option should be added to the field options",	
+		'profile_manager:admin:blank_available:description' => "Select 'Yes' if a blank option should be added to the field options",
 	
 		// profile fields
-		'profile_manager:profile_fields:list:title' => "Profile Fields",	
+		'profile_manager:profile_fields:list:title' => "Profile Fields",
 	
 		'profile_manager:profile_fields:no_fields' => "Currently no fields are configured using the Profile Manager plugin. Add your own or import with one of the actions below.",
 		
@@ -120,7 +128,7 @@
 		'profile_manager:profile_fields:add:description' => "Here you can edit the fields a user can edit on his/her profile",
 	
 		// group fields
-		'profile_manager:group_fields:list:title' => "Group Profile Fields",	
+		'profile_manager:group_fields:list:title' => "Group Profile Fields",
 	
 		'profile_manager:group_fields:add:description' => "Here you can edit the fields that show on a group profile page",
 		'profile_manager:group_fields:add' => "Add a new group profile field",
@@ -131,7 +139,7 @@
 		'profile_manager:categories:edit' => "Edit a category",
 		'profile_manager:categories:list:title' => "Categories",
 		'profile_manager:categories:list:default' => "Default",
-		'profile_manager:categories:list:system' => "System (admin only)",	
+		'profile_manager:categories:list:system' => "System (admin only)",
 		'profile_manager:categories:list:view_all' => "View all fields",
 		'profile_manager:categories:list:no_categories' => "No categories defined",
 		'profile_manager:categories:delete:confirm' => "Are you sure you wish to delete this category?",
@@ -207,17 +215,17 @@
 		'profile_manager:actions:configuration:restore:upload' => "Restore",
 	
 		'profile_manager:actions:restore:success' => "Restore successful",
-		'profile_manager:actions:restore:error:deleting' => "Error while restoring: couldn't delete current fields",	
+		'profile_manager:actions:restore:error:deleting' => "Error while restoring: couldn't delete current fields",
 		'profile_manager:actions:restore:error:fieldtype' => "Error while restoring: fieldtypes do not match",
 		'profile_manager:actions:restore:error:corrupt' => "Error while restoring: backup file seems to be corrupt or information is missing",
 		'profile_manager:actions:restore:error:json' => "Error while restoring: invalid json file",
 		'profile_manager:actions:restore:error:nofile' => "Error while restoring: no file uploaded",
 	
 		// new
-		'profile_manager:actions:new:success' => 'Succesfully added new custom profile field',	
-		'profile_manager:actions:new:error:metadata_name_missing' => 'No metadata name provided',	
-		'profile_manager:actions:new:error:metadata_name_invalid' => 'Metadata name is an invalid name',	
-		'profile_manager:actions:new:error:metadata_options' => 'You need to enter options when using this type',	
+		'profile_manager:actions:new:success' => 'Succesfully added new custom profile field',
+		'profile_manager:actions:new:error:metadata_name_missing' => 'No metadata name provided',
+		'profile_manager:actions:new:error:metadata_name_invalid' => 'Metadata name is an invalid name',
+		'profile_manager:actions:new:error:metadata_options' => 'You need to enter options when using this type',
 		'profile_manager:actions:new:error:unknown' => 'Unknown error occurred when saving a new custom profile field',
 		'profile_manager:action:new:error:type' => 'Wrong profile field type (group or profile)',
 		
@@ -335,10 +343,10 @@
 		'widgets:register:description' => "Show a register box",
 		'widgets:register:loggedout' => "You need to be logged out to use this widget",
 	
-		// datepicker		
+		// datepicker
 		'profile_manager:datepicker:trigger' => 'Select a date',
 		'profile_manager:datepicker:output:dateformat' => '%a %d %b %Y', // For available notations see http://nl.php.net/manual/en/function.strftime.php
-		'profile_manager:datepicker:input:localisation' => '', // change it to the available localized js files in custom_profile_fields/vendors/jquery.datepick.package-3.5.2 (e.g. jquery.datepick-nl.js), leave blank for default 
+		'profile_manager:datepicker:input:localisation' => '', // change it to the available localized js files in custom_profile_fields/vendors/jquery.datepick.package-3.5.2 (e.g. jquery.datepick-nl.js), leave blank for default
 		'profile_manager:datepicker:input:dateformat' => '%m/%d/%Y', // Notation is based on strftime, but must result in output like http://keith-wood.name/datepick.html#format
 		'profile_manager:datepicker:input:dateformat_js' => 'mm/dd/yyyy', // Notation is based on strftime, but must result in output like http://keith-wood.name/datepick.html#format
 
