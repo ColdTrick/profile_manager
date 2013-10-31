@@ -472,3 +472,64 @@
 		}
 		return $return;
 	}
+
+	/**
+	* Enforcing group edit limits
+	*
+	* @param unknown_type $hook_name
+	* @param unknown_type $entity_type
+	* @param unknown_type $return_value
+	* @param unknown_type $parameters
+	*/
+	function profile_manager_action_groups_edit_hook($hook_name, $entity_type, $return_value, $params){
+		$guid = get_input("group_guid");
+		if (!empty($guid)
+			//	 || !elgg_is_admin_logged_in()
+			) {
+
+			$group = get_entity($guid);
+			
+			if (elgg_instanceof($group, "group")) {
+				$name_input = get_input("name", false);
+				$description_input = get_input("description", false);
+				
+				if (($name_input !== false) && ($name_input !== $group->name)) {
+					$limit = elgg_get_plugin_setting("group_limit_name", "profile_manager");
+					
+					if (!empty($limit) || ($limit == "0")) {
+						$limit = (int) $limit;
+						$count = (int) $group->getPrivateSetting("profile_manager_name_edit_count");
+						
+						if ($count < $limit) {
+							// register function to increment count on succesful edit
+							elgg_register_event_handler("update", "group", "profile_manager_name_edit_increment");
+						} else {
+							// group name needs special treatment
+							$name = htmlspecialchars_decode($group->name, ENT_QUOTES);
+							
+							// cannot be changed, so reset to current value
+							set_input("name", $name);
+						}
+					}
+				}
+				
+				if (($description_input !== false) && ($description_input !== $group->description)) {
+					$limit = elgg_get_plugin_setting("group_limit_description", "profile_manager");
+					
+					if (!empty($limit) || ($limit == "0")) {
+						$limit = (int) $limit;
+						$count = (int) $group->getPrivateSetting("profile_manager_description_edit_count");
+						
+						if ($count < $limit) {
+							// register function to increment count on succesful edit
+							elgg_register_event_handler("update", "group", "profile_manager_description_edit_increment");
+						} else {
+							// cannot be changed, so reset to current value
+							set_input("description", $group->description);
+						}
+					}
+				}
+			}
+		}
+	}
+	

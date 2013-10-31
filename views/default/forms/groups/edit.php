@@ -1,9 +1,9 @@
 <?php
 /**
 * Profile Manager
-* 
+*
 * Overrules group edit form to support options (radio, dropdown, multiselect)
-* 
+*
 * @package profile_manager
 * @author ColdTrick IT Solutions
 * @copyright Coldtrick IT Solutions 2009
@@ -22,6 +22,11 @@ if (isset($vars['entity'])) {
 	$membership = ACCESS_PUBLIC;
 	$access = ACCESS_PUBLIC;
 }
+
+$group = elgg_extract("entity", $vars);
+
+$name_limit = elgg_get_plugin_setting("group_limit_name", "profile_manager");
+$description_limit = elgg_get_plugin_setting("group_limit_description", "profile_manager");
 	
 ?>
 
@@ -31,10 +36,45 @@ if (isset($vars['entity'])) {
 </div>
 <div>
 	<label><?php echo elgg_echo("groups:name"); ?></label><br />
-	<?php echo elgg_view("input/text", array(
-		'name' => 'name',
-		'value' => $vars['entity']->name,
-	));
+	<?php
+		$show_input = false;
+		if (empty($group) || ($name_limit === "")
+			//	|| elgg_is_admin_logged_in()
+		){
+			$show_input = true;
+		}
+		
+		if (!empty($group) && (!empty($name_limit) || ($name_limit == "0"))) {
+			$name_limit = (int) $name_limit;
+			$name_edit_count = (int) $group->getPrivateSetting("profile_manager_name_edit_count");
+
+			if ($name_edit_count < $name_limit) {
+				$show_input = true;
+			}
+			
+			$name_edit_num_left = $name_limit - $name_edit_count;
+		}
+		
+		if ($show_input) {
+			echo elgg_view("input/text", array(
+					'name' => 'name',
+					'value' => $vars['entity']->name,
+			));
+			if (!empty($name_edit_num_left)) {
+				echo "<div class='elgg-subtext'>" . elgg_echo("profile_manager:group:edit:limit", array("<strong>" . $name_edit_num_left . "</strong>")) . "</div>";
+			}
+		} else {
+			// show value
+			echo elgg_view("output/text", array(
+					'value' => $vars['entity']->name,
+			));
+			
+			// add hidden so it gets saved and form checks still are valid
+			echo elgg_view("input/hidden", array(
+					'name' => 'name',
+					'value' => $vars['entity']->name,
+			));
+		}
 	?>
 </div>
 		
@@ -69,7 +109,7 @@ if(count($group_fields["fields"]) > 0){
 			} else {
 				$value = $metadata;
 			}
-		}		
+		}
 		
 		$line_break = '<br />';
 		if ($valtype == 'longtext') {
@@ -79,28 +119,73 @@ if(count($group_fields["fields"]) > 0){
 		echo $title;
 		echo "</label>";
 		
-		if($hint = $field->getHint()){ 
+		if($hint = $field->getHint()){
 			?>
-			<span class='custom_fields_more_info' id='more_info_<?php echo $metadata_name; ?>'></span>		
+			<span class='custom_fields_more_info' id='more_info_<?php echo $metadata_name; ?>'></span>
 			<span class="custom_fields_more_info_text" id="text_more_info_<?php echo $metadata_name; ?>"><?php echo $hint;?></span>
-			<?php 
+			<?php
 		}
 		
 		echo $line_break;
 		
-		if($valtype == "dropdown"){
-			// add div around dropdown to let it act as a block level element
-			echo "<div>";
-		}
+		if ($metadata_name == "description") {
 		
-		echo elgg_view("input/{$valtype}", array(
-			'name' => $metadata_name,
-			'value' => $value,
-			'options' => $options
-		));
-		
-		if($valtype == "dropdown"){
-			echo "</div>";
+			$show_input = false;
+			if (empty($group) || ($description_limit === "")
+					//	|| elgg_is_admin_logged_in()
+			){
+				$show_input = true;
+			}
+			
+			$edit_num_left = 0;
+			
+			if (!$show_input && !empty($group) && (!empty($description_limit) || ($description_limit == "0"))) {
+				$description_limit = (int) $description_limit;
+				$field_edit_count = (int) $group->getPrivateSetting("profile_manager_description_edit_count");
+			
+				if ($field_edit_count < $description_limit) {
+					$show_input = true;
+				}
+					
+				$edit_num_left = $description_limit - $field_edit_count;
+			}
+			
+			if ($show_input) {
+				echo elgg_view("input/{$valtype}", array(
+						'name' => $metadata_name,
+						'value' => $value,
+				));
+				
+				if (!empty($edit_num_left)) {
+					echo "<div class='elgg-subtext'>" . elgg_echo("profile_manager:group:edit:limit", array("<strong>" . $edit_num_left . "</strong>")) . "</div>";
+				}
+			} else {
+				// show value
+				echo elgg_view("output/{$valtype}", array(
+						'value' => $value
+				));
+					
+				// add hidden so it gets saved and form checks still are valid
+				echo elgg_view("input/hidden", array(
+						'name' => $metadata_name,
+						'value' => $value
+				));
+			}
+		} else {
+			if($valtype == "dropdown"){
+				// add div around dropdown to let it act as a block level element
+				echo "<div>";
+			}
+			
+			echo elgg_view("input/{$valtype}", array(
+				'name' => $metadata_name,
+				'value' => $value,
+				'options' => $options
+			));
+			
+			if($valtype == "dropdown"){
+				echo "</div>";
+			}
 		}
 		
 		echo '</div>';
@@ -150,7 +235,7 @@ if(count($group_fields["fields"]) > 0){
 		</label>
 	</div>
 	
-	<?php 	
+	<?php
 }
 	
 $tools = elgg_get_config('group_tool_options');
@@ -164,12 +249,12 @@ if ($tools) {
 			$group_option_default_value = 'no';
 		}
 		$value = $vars['entity']->$group_option_toggle_name ? $vars['entity']->$group_option_toggle_name : $group_option_default_value;
-		?>	
+		?>
 		<div>
 			<label>
 				<?php echo $group_option->label; ?><br />
 			</label>
-			<?php 
+			<?php
 			echo elgg_view("input/radio", array(
 				"name" => $group_option_toggle_name,
 				"value" => $value,
@@ -180,7 +265,7 @@ if ($tools) {
 			));
 			?>
 		</div>
-		<?php 
+		<?php
 	}
 }
 ?>

@@ -206,6 +206,9 @@
 		'profile_manager:export:list:title' => "Select the fields which you want to be exported",
 		'profile_manager:export:nofields' => "No custom profile fields available for export",
 	
+		// Group Edit
+		'profile_manager:group:edit:limit' => "You can edit this field %s more time(s)",
+		
 		// Configuration Backup and Restore
 		'profile_manager:actions:configuration:backup' => "Backup",
 		'profile_manager:actions:configuration:backup:description' => "Backup the configuration of these fields (categories and types are not backed up)",

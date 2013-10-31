@@ -165,6 +165,7 @@
 	elgg_register_plugin_hook_handler('profile:fields', 'group', 'profile_manager_group_override');
 	
 	elgg_register_plugin_hook_handler('action', 'register', 'profile_manager_action_register_hook');
+	elgg_register_plugin_hook_handler('action', 'groups/edit', 'profile_manager_action_groups_edit_hook');
 	
 	elgg_register_plugin_hook_handler('categorized_profile_fields', 'profile_manager', 'profile_manager_categorized_profile_fields_hook', 1000);
 	

@@ -57,7 +57,7 @@
 			"" => elgg_echo("profile_manager:settings:group:limit:unlimited"),
 			0 => elgg_echo("profile_manager:settings:group:limit:never"),
 			1 => 1,
-			2 => 3,
+			2 => 2,
 			3 => 3,
 			4 => 4,
 			5 => 5,

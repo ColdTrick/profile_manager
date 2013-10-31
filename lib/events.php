@@ -1,4 +1,4 @@
-<?php 
+<?php
 	function profile_manager_profileupdate_user_event($event, $object_type, $user){
 		
 		if(!empty($user) && ($user instanceof ElggUser)){
@@ -74,7 +74,7 @@
 							if($file = get_entity($current_file_guid)){
 								// maybe we need to update the access id
 								$file->access_id = $access_id;
-								$file->save();								
+								$file->save();
 							}
 						}
 					}
@@ -88,7 +88,7 @@
 	
 	/**
 	 * function to add custom profile fields to user on register
-	 * 
+	 *
 	 * @param $event
 	 * @param $object_type
 	 * @param $object
@@ -155,11 +155,11 @@
 		}
 		
 		elgg_clear_sticky_form('profile_manager_register');
-	}	
+	}
 	
 	/**
 	 * Adds a river event when a user joins the site
-	 * 
+	 *
 	 * @param unknown_type $event
 	 * @param unknown_type $object_type
 	 * @param unknown_type $object
@@ -181,7 +181,7 @@
 
 	/**
 	 * Remove river join event on site leave
-	 * 
+	 *
 	 * @param unknown_type $event
 	 * @param unknown_type $object_type
 	 * @param unknown_type $object
@@ -193,5 +193,41 @@
 		
 		// clear current river events
 		elgg_delete_river(array("view" => 'river/relationship/member_of_site/create', "subject_guid" => $user_guid, "object_guid" => $site_guid));
+	}
+	
+	/**
+	 * Increments edit counter for name editing
+	 *
+	 * @param unknown_type $hook_name
+	 * @param unknown_type $entity_type
+	 * @param unknown_type $return_value
+	 * @param unknown_type $parameters
+	 */
+	function profile_manager_name_edit_increment($event, $object_type, $object){
+		if (elgg_instanceof($object, "group")) {
+			$count = (int) $object->getPrivateSetting("profile_manager_name_edit_count");
+			$object->setPrivateSetting("profile_manager_name_edit_count", $count + 1);
+		}
+		
+		// only do this once
+		elgg_unregister_event_handler("update", "group", "profile_manager_name_edit_increment");
+	}
+	
+	/**
+	 * Increments edit counter for description editing
+	 *
+	 * @param unknown_type $hook_name
+	 * @param unknown_type $entity_type
+	 * @param unknown_type $return_value
+	 * @param unknown_type $parameters
+	 */
+	function profile_manager_description_edit_increment($event, $object_type, $object){
+		if (elgg_instanceof($object, "group")) {
+			$count = (int) $object->getPrivateSetting("profile_manager_description_edit_count");
+			$object->setPrivateSetting("profile_manager_description_edit_count", $count + 1);
+		}
+		
+		// only do this once
+		elgg_unregister_event_handler("update", "group", "profile_manager_description_edit_increment");
 	}
 	
