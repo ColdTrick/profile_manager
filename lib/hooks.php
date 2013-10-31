@@ -483,9 +483,7 @@
 	*/
 	function profile_manager_action_groups_edit_hook($hook_name, $entity_type, $return_value, $params){
 		$guid = get_input("group_guid");
-		if (!empty($guid)
-			//	 || !elgg_is_admin_logged_in()
-			) {
+		if (!empty($guid) || !elgg_is_admin_logged_in()) {
 
 			$group = get_entity($guid);
 			
