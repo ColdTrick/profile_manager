@@ -1,4 +1,4 @@
-<?php 
+<?php
 	/**
 	 * Registes all custom field types
 	 */
@@ -11,7 +11,7 @@
 				"output_as_tags" => true,
 				"admin_only" => true,
 				"count_for_completeness" => true
-			);		
+			);
 			
 		$location_options = $profile_options;
 		unset($location_options["output_as_tags"]);
@@ -57,11 +57,11 @@
 			elgg_register_plugin_hook_handler('display', 'view', 'profile_manager_display_view_hook');
 		}
 		
-		// registering group field types		
+		// registering group field types
 		$group_options = array(
 				"output_as_tags" => true,
 				"admin_only" => true
-			);	
+			);
 		
 		$datepicker_options = $group_options;
 		unset($datepicker_options["output_as_tags"]);
@@ -120,7 +120,7 @@
 	
 	/**
 	 * function to upload a profile icon on register of a user
-	 * 
+	 *
 	 * @param $user
 	 * @return unknown_type
 	 */
@@ -158,7 +158,7 @@
 	
 	/**
 	 * returns an array containing the categories and the fields ordered by category and field order
-	 */ 
+	 */
 	function profile_manager_get_categorized_fields($user = null, $edit = false, $register = false, $profile_type_limit = false, $profile_type_guid = false){
 		
 		$result = array();
@@ -197,7 +197,7 @@
 			"limit" => false,
 			"owner_guid" => elgg_get_config("site_guid"),
 			"site_guid" => elgg_get_config("site_guid")
-		); 
+		);
 			
 		// get ordered categories
 		if($cats = elgg_get_entities($options)){
@@ -207,7 +207,7 @@
 			ksort($ordered_cats);
 		}
 		
-		// get filtered categories			
+		// get filtered categories
 		$filtered_ordered_cats = array();
 		// default category at index 0
 		$filtered_ordered_cats[0] = array();
@@ -225,7 +225,7 @@
 							"relationship" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
 							"relationship_guid" => $cat->getGUID(),
 							"inverse_relationship" => true
-						); 
+						);
 					
 					$rel_count = elgg_get_entities_from_relationship($options);
 					
@@ -249,7 +249,7 @@
 				"limit" => false,
 				"owner_guid" => elgg_get_config("site_guid"),
 				"site_guid" => elgg_get_config("site_guid")
-			); 
+			);
 			
 		// adding fields to categories
 		if($fields = elgg_get_entities($options)){
@@ -286,7 +286,7 @@
 				$result["fields"][$cat_guid] = $fields;
 			} else {
 				unset($result["categories"][$cat_guid]);
-			} 
+			}
 		}
 		
 		//  fire hook to see if other plugins have extra fields
@@ -356,7 +356,7 @@
 				"order_by_metadata" => array(array('name' => 'order', 'direction' => "desc", 'as' => "integer")),
 				"owner_guid" => elgg_get_config("site_guid"),
 				"site_guid" => elgg_get_config("site_guid")
-			); 
+			);
 			
 			if($entities = elgg_get_entities_from_metadata($options)){
 				$entity = $entities[0];
@@ -364,14 +364,14 @@
 			}
 			
 			$result = $max;
-		} 
+		}
 		
 		return $result;
 	}
 	
 	/**
-	 * returns an array with percentage completeness and required / missing fields 
-	 * 
+	 * returns an array with percentage completeness and required / missing fields
+	 *
 	 * @param optional ElggUser $user
 	 */
 	function profile_manager_profile_completeness($user = null){
@@ -393,7 +393,7 @@
 			if(!empty($fields["categories"])){
 				
 				foreach($fields["categories"] as $cat_guid => $cat){
-					$cat_fields = $fields["fields"][$cat_guid]; 
+					$cat_fields = $fields["fields"][$cat_guid];
 					
 					foreach($cat_fields as $field){
 						
@@ -420,20 +420,6 @@
 				);
 		}
 		
-		return $result;
-	}
-		
-	function profile_manager_authenticate($username, $password){
-		$result = false;
-		
-		if (pam_authenticate(array("username" => $username, "password" => $password))) {
-			if(($users = get_user_by_email($username)) && (count($users) == 1)){
-				$result = $users[0];
-			} elseif($user = get_user_by_username($username)){
-				$result = $user;
-			}
-		}
-	
 		return $result;
 	}
 	
@@ -480,7 +466,7 @@
 					
 					if(!get_user_by_username($username))	{
 						$result = true;
-					} 
+					}
 				}
 			} catch (Exception $e){
 			}
