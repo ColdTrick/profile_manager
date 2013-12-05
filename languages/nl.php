@@ -134,6 +134,7 @@ $language = array (
   'profile_manager:export:description:custom_profile_field' => 'Deze functie zal alle <b>gebruikers</b> metadata gebaseerd op de geselecteerde velden exporteren.',
   'profile_manager:export:description:custom_group_field' => 'Deze functie zal alle <b>groeps</b> metadata gebaseerd op de geselecteerde velden exporteren.',
   'profile_manager:export:list:title' => 'Selecteer de velden die je wilt exporteren',
+  'profile_manager:export:list:include_group_membership' => "Inclusief groepslidmaatschappen",
   'profile_manager:export:nofields' => 'Geen profielvelden beschikbaar voor export',
   'profile_manager:actions:configuration:backup' => 'Backup',
   'profile_manager:actions:configuration:backup:description' => 'Backup de configuratie van deze velden (categorieën en types worden niet gebackupped)',

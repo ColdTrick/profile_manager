@@ -204,6 +204,7 @@
 		'profile_manager:export:description:custom_profile_field' => "This function will export all <b>user</b> metadata based on selected fields.",
 		'profile_manager:export:description:custom_group_field' => "This function will export all <b>group</b> metadata based on selected fields.",
 		'profile_manager:export:list:title' => "Select the fields which you want to be exported",
+		'profile_manager:export:list:include_group_membership' => "Include group membership",
 		'profile_manager:export:nofields' => "No custom profile fields available for export",
 	
 		// Group Edit
