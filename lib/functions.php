@@ -477,3 +477,11 @@
 		
 		return $result;
 	}
+	
+	function profile_manager_export_group_name($row) {
+		$name = htmlspecialchars_decode($row->name);
+		$name = str_replace("\"", "", $name);
+		$name = str_replace(",", " ", $name);
+	
+		return $name;
+	}
