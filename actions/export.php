@@ -35,12 +35,6 @@
 	
 	if(!empty($fieldtype) && !empty($fields)){
 		if($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE || $fieldtype == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE){
-			$headers = array();
-			foreach($fields as $field){
-				$headers[] = $field;
-			}
-			fputcsv($df, $headers, ";");
-			
 			$options = array(
 				"limit" => false
 			);
@@ -51,11 +45,33 @@
 				$options["relationship_guid"] = elgg_get_site_entity()->getGUID();
 				$options["inverse_relationship"] = true;
 				$options["site_guids"] = false;
+				
+				if (get_input("include_group_membership")) {
+					$include_groups = true;
+				}
 			} else {
 				$type = "group";
 			}
 			
 			$options["type"] = $type;
+			
+			$headers = array();
+			foreach($fields as $field){
+				$headers[] = $field;
+			}
+			if ($include_groups) {
+				$headers[] = "group membership";
+			}
+			fputcsv($df, $headers, ";");
+			
+			$group_options = array (
+					"selects" => array("ge.name"),
+					"type" => "group",
+					"relationship" => "member",
+					"joins" => array("JOIN " . elgg_get_config("dbprefix") . "groups_entity ge ON e.guid = ge.guid"),
+					"inverse_relationship" => false,
+					"callback" => "profile_manager_export_group_name"
+				);
 			
 			$entities = new ElggBatch('elgg_get_entities_from_relationship', $options);
 			if(!empty($entities)){
@@ -67,6 +83,14 @@
 							$field_data = implode(",", $field_data);
 						}
 						$row[] = $field_data;
+					}
+					if ($include_groups) {
+						$group_options["relationship_guid"] = $entity->guid;
+						$groups = elgg_get_entities_from_relationship($group_options);
+						
+						$groups_text = implode(",", $groups);
+						
+						$row[] = "$groups_text";
 					}
 					fputcsv($df, $row, ";");
 				}
