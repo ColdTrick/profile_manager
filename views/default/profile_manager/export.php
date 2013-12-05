@@ -36,7 +36,7 @@ if ($fields) {
 	echo "<input type='hidden' name='fieldtype' value='" . $fieldtype . "'></hidden>";
 	echo elgg_view("input/securitytoken");
 
-	echo "<table>";
+	echo "<table class='mbm'>";
 	if ($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE) {
 
 		$default_fields = array(
@@ -66,11 +66,19 @@ if ($fields) {
 		?>
 		<tr>
 			<td><?php echo $metadata_name; ?></td>
-			<td><input type='checkbox' name='export[<?php echo $metadata_name; ?>]'	value='<?php echo $metadata_name; ?>'></input></td>
+			<td class='plm'><input type='checkbox' name='export[<?php echo $metadata_name; ?>]'	value='<?php echo $metadata_name; ?>'></input></td>
 		</tr>
 		<?php
 	}
 	echo "</table>";
+	
+	if (elgg_is_active_plugin("groups") && ($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE)) {
+		echo "<div class='mbm'>";
+		echo elgg_view("input/checkbox", array("name" => "include_group_membership"));
+		echo " ". elgg_echo("profile_manager:export:list:include_group_membership");
+		echo "</div>";
+	}
+	
 	// buttons
 	echo elgg_view("input/submit", array("value" => elgg_echo("export")));
 	echo "</form>";
