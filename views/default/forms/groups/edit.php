@@ -38,7 +38,7 @@ $description_limit = elgg_get_plugin_setting("group_limit_description", "profile
 	<label><?php echo elgg_echo("groups:name"); ?></label><br />
 	<?php
 		$show_input = false;
-		if (empty($group) || ($name_limit === "") || elgg_is_admin_logged_in()){
+		if (empty($group) || ($name_limit === NULL) || elgg_is_admin_logged_in()){
 			$show_input = true;
 		}
 		
@@ -129,7 +129,7 @@ if(count($group_fields["fields"]) > 0){
 		if ($metadata_name == "description") {
 		
 			$show_input = false;
-			if (empty($group) || ($description_limit === "") || elgg_is_admin_logged_in()
+			if (empty($group) || ($description_limit === NULL) || elgg_is_admin_logged_in()
 			){
 				$show_input = true;
 			}
