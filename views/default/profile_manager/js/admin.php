@@ -57,7 +57,7 @@ $(document).ready(function(){
 });
 
 function toggleOption(field, guid){
-	$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/toggleOption?&guid=' + guid + '&field=' + field), function(data){
+	$.post(elgg.security.addToken('<?php echo elgg_get_site_url(); ?>action/profile_manager/toggleOption?&guid=' + guid + '&field=' + field), function(data){
 		if(data == 'true'){
 			$("#" + field + "_" + guid).toggleClass("field_config_metadata_option_disabled field_config_metadata_option_enabled");
 		} else {
@@ -68,17 +68,17 @@ function toggleOption(field, guid){
 
 function reorderCustomFields(){
 	var strArray = $('#custom_fields_ordering').sortable('serialize');
-	$.post(elgg.security.addToken('<?php echo $vars['url'];?>action/profile_manager/reorder?'), strArray);
+	$.post(elgg.security.addToken('<?php echo elgg_get_site_url();?>action/profile_manager/reorder?'), strArray);
 }
 
 function reorderCategories(){
 	var strArray = $('#custom_fields_category_list_custom .elgg-list').sortable('serialize');
-	$.post(elgg.security.addToken('<?php echo $vars['url'];?>action/profile_manager/categories/reorder?'), strArray);
+	$.post(elgg.security.addToken('<?php echo elgg_get_site_url();?>action/profile_manager/categories/reorder?'), strArray);
 }
 
 function removeField(guid){
 	if(confirm(elgg.echo("profile_manager:actions:delete:confirm"))){
-		$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/delete?guid=' + guid), function(data){
+		$.post(elgg.security.addToken('<?php echo elgg_get_site_url(); ?>action/profile_manager/delete?guid=' + guid), function(data){
 			if(data == 'true'){
 				$('#custom_profile_field_' + guid).hide('slow').parent().remove();
 				reorderCustomFields();
@@ -91,7 +91,7 @@ function removeField(guid){
 
 function deleteCategory(guid){
 	if(guid && confirm(elgg.echo("profile_manager:categories:delete:confirm"))){
-		document.location.href = elgg.security.addToken("<?php echo $vars['url']; ?>action/profile_manager/categories/delete?guid=" + guid);
+		document.location.href = elgg.security.addToken("<?php echo elgg_get_site_url(); ?>action/profile_manager/categories/delete?guid=" + guid);
 	}
 }
 
@@ -127,7 +127,7 @@ function changeFieldCategory(field, category_guid){
 	var field_guid = $(field).attr("id").replace("elgg-object-","");
 	category_guid = category_guid.replace("elgg-object-","").replace("custom_profile_field_category_", "");
 
-	$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/changeCategory?guid=' + field_guid + '&category_guid=' + category_guid), function(data){
+	$.post(elgg.security.addToken('<?php echo elgg_get_site_url(); ?>action/profile_manager/changeCategory?guid=' + field_guid + '&category_guid=' + category_guid), function(data){
 		if(data == 'true'){		
 			if(category_guid == 0){
 				category_guid = "";
@@ -144,6 +144,6 @@ function changeFieldCategory(field, category_guid){
 // Profile Types
 function deleteProfileType(guid){
 	if(guid && confirm(elgg.echo("profile_manager:profile_types:delete:confirm"))){
-		document.location.href = elgg.security.addToken("<?php echo $vars['url']; ?>action/profile_manager/profile_types/delete?guid=" + guid);
+		document.location.href = elgg.security.addToken("<?php echo elgg_get_site_url(); ?>action/profile_manager/profile_types/delete?guid=" + guid);
 	}
 }

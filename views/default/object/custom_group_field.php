@@ -14,7 +14,7 @@
 
 	$title = "<div class='field_config_title'>";
 	$title .= "<b>" . $vars['entity']->metadata_name . "</b> [" . $vars['entity']->metadata_type . "]";
-	$title .= "<a href='" . $vars["url"] . "profile_manager/forms/group_field/" . $vars['entity']->guid  . "' class='profile-manager-popup'><span class='elgg-icon elgg-icon-settings-alt' title='" . elgg_echo("edit") . "'></span></a>";
+	$title .= "<a href='" . elgg_get_site_url() . "profile_manager/forms/group_field/" . $vars['entity']->guid  . "' class='profile-manager-popup'><span class='elgg-icon elgg-icon-settings-alt' title='" . elgg_echo("edit") . "'></span></a>";
 	$title .= "<span class='elgg-icon elgg-icon-delete' title='" . elgg_echo("delete") . "' onclick='removeField(" . $vars['entity']->guid . ");'></span>";
 	$title .= "</div>";
 	
