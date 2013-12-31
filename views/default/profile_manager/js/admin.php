@@ -52,8 +52,6 @@ $(document).ready(function(){
 		$(this).parent().remove();
 	});
 
-	// add buttons
-	$(".profile-manager-popup").fancybox();
 });
 
 function toggleOption(field, guid){
