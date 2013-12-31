@@ -16,7 +16,7 @@
 			"limit" => 0,
 			"owner_guid" => elgg_get_site_entity()->getGUID(),
 			"full_view" => false,
-			"view_type_toggle" => false,
+			"list_type_toggle" => false,
 			"pagination" => false
 		);
 
