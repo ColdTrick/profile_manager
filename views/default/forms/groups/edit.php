@@ -38,11 +38,11 @@ $description_limit = elgg_get_plugin_setting("group_limit_description", "profile
 	<label><?php echo elgg_echo("groups:name"); ?></label><br />
 	<?php
 		$show_input = false;
-		if (empty($group) || ($name_limit === NULL) || elgg_is_admin_logged_in()){
+		if (empty($group) || ($name_limit === NULL) || ($name_limit === "") || elgg_is_admin_logged_in()){
 			$show_input = true;
 		}
 		
-		if (!empty($group) && (!empty($name_limit) || ($name_limit == "0"))) {
+		if (!$show_input && !empty($group) && (!empty($name_limit) || ($name_limit == "0"))) {
 			$name_limit = (int) $name_limit;
 			$name_edit_count = (int) $group->getPrivateSetting("profile_manager_name_edit_count");
 
@@ -129,8 +129,7 @@ if(count($group_fields["fields"]) > 0){
 		if ($metadata_name == "description") {
 		
 			$show_input = false;
-			if (empty($group) || ($description_limit === NULL) || elgg_is_admin_logged_in()
-			){
+			if (empty($group) || ($description_limit === NULL) || ($description_limit === "") || elgg_is_admin_logged_in()){
 				$show_input = true;
 			}
 			
