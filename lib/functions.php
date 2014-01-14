@@ -72,12 +72,16 @@
 		$radio_options = $group_options;
 		$radio_options["blank_available"] = true;
 		
+		$location_options = $group_options;
+		unset($location_options["output_as_tags"]);
+		
 		add_custom_field_type("custom_group_field_types", 'text', elgg_echo('profile:field:text'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'longtext', elgg_echo('profile:field:longtext'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'tags', elgg_echo('profile:field:tags'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'url', elgg_echo('profile:field:url'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'email', elgg_echo('profile:field:email'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'date', elgg_echo('profile:field:date'), $group_options);
+		add_custom_field_type("custom_group_field_types", 'location', elgg_echo('profile:field:location'), $location_options);
 		add_custom_field_type("custom_group_field_types", 'calendar', elgg_echo('calendar'), $group_options);
 		add_custom_field_type("custom_group_field_types", 'datepicker', elgg_echo('profile_manager:admin:options:datepicker'), $datepicker_options);
 		add_custom_field_type("custom_group_field_types", 'dropdown', elgg_echo('profile_manager:admin:options:dropdown'), $dropdown_options);
@@ -91,10 +95,10 @@
 	function add_custom_field_type($register_name, $field_type, $field_display_name, $options){
 		global $PROFILE_MANAGER_FIELD_TYPES;
 		
-		if(!isset($PROFILE_MANAGER_FIELD_TYPES)){
+		if (!isset($PROFILE_MANAGER_FIELD_TYPES)) {
 			$PROFILE_MANAGER_FIELD_TYPES = array();
 		}
-		if(!isset($PROFILE_MANAGER_FIELD_TYPES[$register_name])){
+		if (!isset($PROFILE_MANAGER_FIELD_TYPES[$register_name])) {
 			$PROFILE_MANAGER_FIELD_TYPES[$register_name] = array();
 		}
 		
@@ -106,12 +110,12 @@
 		$PROFILE_MANAGER_FIELD_TYPES[$register_name][$field_type] = $field_config;
 	}
 	
-	function get_custom_field_types($register_name){
+	function get_custom_field_types($register_name) {
 		global $PROFILE_MANAGER_FIELD_TYPES;
 		
 		$result = false;
 		
-		if(isset($PROFILE_MANAGER_FIELD_TYPES) && isset($PROFILE_MANAGER_FIELD_TYPES[$register_name])){
+		if (isset($PROFILE_MANAGER_FIELD_TYPES) && isset($PROFILE_MANAGER_FIELD_TYPES[$register_name])) {
 			$result = $PROFILE_MANAGER_FIELD_TYPES[$register_name];
 		}
 		

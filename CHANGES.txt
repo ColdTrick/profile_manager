@@ -1,5 +1,9 @@
 = Version history =
 
+x.x:
+
+- added: location field added to the group profile field types
+
 7.6.1 (2013-08-28):
 
 - fixed: about me field uses custom field name as label
