@@ -1,5 +1,12 @@
 <?php
 $language = array (
+  'profile_manager:settings:group' => 'Bewerk Groep Profiel',
+  'profile_manager:settings:group:group_limit_name' => 'Maximum aantal keer dat een groepsnaam kan worden bewerkt',
+  'profile_manager:settings:group:group_limit_description' => 'Maximum aantal keer dat een groepsomschrijving kan worden bewerkt',
+  'profile_manager:settings:group:limit:unlimited' => 'Onbeperkt',
+  'profile_manager:settings:group:limit:never' => 'Nooit',
+  'profile_manager:settings:group:limit:info' => 'Deze beperking zijn niet van toepassing voor site beheerders',
+  'profile_manager:group:edit:limit' => 'U kunt dit veld nog %s keer wijzigen',
   'item:object:custom_profile_field' => 'Custom Profile Field',
   'item:object:custom_profile_field_category' => 'Custom Profile Field Category',
   'item:object:custom_profile_type' => 'Custom Profiel Type',
@@ -134,7 +141,7 @@ $language = array (
   'profile_manager:export:description:custom_profile_field' => 'Deze functie zal alle <b>gebruikers</b> metadata gebaseerd op de geselecteerde velden exporteren.',
   'profile_manager:export:description:custom_group_field' => 'Deze functie zal alle <b>groeps</b> metadata gebaseerd op de geselecteerde velden exporteren.',
   'profile_manager:export:list:title' => 'Selecteer de velden die je wilt exporteren',
-  'profile_manager:export:list:include_group_membership' => "Inclusief groepslidmaatschappen",
+  'profile_manager:export:list:include_group_membership' => 'Inclusief groepslidmaatschappen',
   'profile_manager:export:nofields' => 'Geen profielvelden beschikbaar voor export',
   'profile_manager:actions:configuration:backup' => 'Backup',
   'profile_manager:actions:configuration:backup:description' => 'Backup de configuratie van deze velden (categorieën en types worden niet gebackupped)',
