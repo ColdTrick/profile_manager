@@ -39,6 +39,7 @@
 		'profile_manager:settings:other' => 'Other',
 	
 		'profile_manager:settings:profile_icon_on_register' => 'Add mandatory profile icon input field on register form',
+		'profile_manager:settings:register_field_access' => 'Show field level access settings on registration form',
 		'profile_manager:settings:show_account_hints' => 'Show hints for default account registration questions',
 		'profile_manager:settings:simple_access_control' => 'Show just one access control dropdown on edit profile form',
 		'profile_manager:settings:default_profile_type' => "Default profile type on registration form",
