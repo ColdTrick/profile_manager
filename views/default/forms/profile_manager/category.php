@@ -82,7 +82,7 @@
 	$formbody .= elgg_view("input/hidden", array("name" => "guid", "value" => $guid));
 	$formbody .= elgg_view('input/submit', array('name' => elgg_echo('save'), 'value' => elgg_echo('save')));
 	
-	$form = elgg_view('input/form', array('body' => $formbody, 'action' => $vars['url'] . 'action/profile_manager/categories/add'));
+	$form = elgg_view('input/form', array('body' => $formbody, 'action' => elgg_get_site_url() . 'action/profile_manager/categories/add'));
 	
 ?>
 <div class="elgg-module elgg-module-inline" id="custom_fields_category_form">

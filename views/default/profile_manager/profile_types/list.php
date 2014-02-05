@@ -16,7 +16,7 @@
 			"limit" => 0,
 			"owner_guid" => elgg_get_site_entity()->getGUID(),
 			"full_view" => false,
-			"view_type_toggle" => false,
+			"list_type_toggle" => false,
 			"pagination" => false
 		);
 
@@ -29,7 +29,7 @@
 ?>
 <div class="elgg-module elgg-module-inline">
 	<div class="elgg-head">
-		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => $vars["url"] . "profile_manager/forms/type", "class" => "elgg-button elgg-button-action profile-manager-popup")); ?>
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => elgg_get_site_url() . "profile_manager/forms/type", "class" => "elgg-button elgg-button-action profile-manager-popup")); ?>
 		<h3>
 			<?php echo elgg_echo('profile_manager:profile_types:list:title'); ?>
 			<span class='custom_fields_more_info' id='more_info_profile_type_list'></span>

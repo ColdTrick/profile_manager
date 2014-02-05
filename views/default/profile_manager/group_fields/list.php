@@ -29,7 +29,7 @@
 
 <div class="elgg-module elgg-module-inline">
 	<div class="elgg-head">
-		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => $vars["url"] . "profile_manager/forms/group_field", "class" => "elgg-button elgg-button-action profile-manager-popup"));?>
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => elgg_get_site_url() . "profile_manager/forms/group_field", "class" => "elgg-button elgg-button-action profile-manager-popup"));?>
 		<h3>
 			<?php echo elgg_echo('profile_manager:group_fields:list:title'); ?>
 		</h3>

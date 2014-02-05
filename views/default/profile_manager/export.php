@@ -32,7 +32,7 @@ echo elgg_echo('profile_manager:export:description:' . $fieldtype);
 
 if ($fields) {
 
-	echo "<form action='" . $vars['url'] . "action/profile_manager/export' method='POST'>";
+	echo "<form action='" . elgg_get_site_url() . "action/profile_manager/export' method='POST'>";
 	echo "<input type='hidden' name='fieldtype' value='" . $fieldtype . "'></hidden>";
 	echo elgg_view("input/securitytoken");
 

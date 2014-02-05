@@ -18,6 +18,6 @@
 ?>
 <div class="custom_profile_type" id="custom_profile_type_<?php echo $entity->guid;?>">
 	<?php echo $title; ?>
-	<a href="<?php echo $vars["url"];?>profile_manager/forms/type/<?php echo $entity->guid;?>" class="profile-manager-popup"><span class="elgg-icon elgg-icon-settings-alt" title="<?php echo elgg_echo("edit");?>"></span></a>
+	<a href="<?php echo elgg_get_site_url();?>profile_manager/forms/type/<?php echo $entity->guid;?>" class="profile-manager-popup"><span class="elgg-icon elgg-icon-settings-alt" title="<?php echo elgg_echo("edit");?>"></span></a>
 	<span class="elgg-icon elgg-icon-delete" title="<?php echo elgg_echo("delete");?>" onclick="deleteProfileType('<?php echo $entity->guid;?>');"></span>
 </div>

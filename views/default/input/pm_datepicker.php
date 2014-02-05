@@ -18,16 +18,16 @@
 	$dateformat = elgg_echo("profile_manager:datepicker:input:dateformat");
 	$dateformat_js = elgg_echo("profile_manager:datepicker:input:dateformat_js");
 	$locale_js = elgg_echo("profile_manager:datepicker:input:localisation");
-	
+	$url = elgg_get_site_url();
     // only include js once
     if (empty($datepicker)) {
         echo <<< END
         
-<script type="text/javascript" src="{$vars['url']}mod/profile_manager/vendors/jquery.datepick.package-4.0.5/jquery.datepick.pack.js"></script>
-<link rel="stylesheet" type="text/css" href="{$vars['url']}mod/profile_manager/vendors/jquery.datepick.package-4.0.5/redmond.datepick.css">        
+<script type="text/javascript" src="{$url}mod/profile_manager/vendors/jquery.datepick.package-4.0.5/jquery.datepick.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="{$url}mod/profile_manager/vendors/jquery.datepick.package-4.0.5/redmond.datepick.css">        
 END;
 		if(!empty($locale_js)){
-			echo "<script type='text/javascript' src='" . $vars['url'] . "mod/profile_manager/vendors/jquery.datepick.package-4.0.5/" . $locale_js . "'></script>";
+			echo "<script type='text/javascript' src='" . $url . "mod/profile_manager/vendors/jquery.datepick.package-4.0.5/" . $locale_js . "'></script>";
 		}
         $datepicker = 1;
     } else {
@@ -55,7 +55,7 @@ END;
 			yearRange: '-90:+10',
 			dateFormat: '<?php echo $dateformat_js;?>', 
 		    altField: '#<?php echo $internal_id; ?>_alt', 
-		    showTrigger: '<img src="<?php echo $vars['url']; ?>mod/profile_manager/vendors/jquery.datepick.package-4.0.5/calendar.gif" alt="Popup" class="trigger">',
+		    showTrigger: '<img src="<?php echo $url; ?>mod/profile_manager/vendors/jquery.datepick.package-4.0.5/calendar.gif" alt="Popup" class="trigger">',
 		    onSelect: function(dates) {
 			    var date = dates[0];
 			    $('#<?php echo $internal_id; ?>_alt').val(date);
