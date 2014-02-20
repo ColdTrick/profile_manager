@@ -31,23 +31,24 @@ abstract class ProfileManagerCustomField extends ElggObject {
 		$options = "";
 		
 		// get options
-		if (!empty($this->metadata_options)) {
-			
-			$options = explode(",", $this->metadata_options);
-			
-			if (!$add_blank_option) {
-				if ($this->blank_available == "yes") {
-					$add_blank_option = true;
-				}
-			}
-			
-			if ($this->metadata_type != "multiselect" && $add_blank_option) {
-				// optionally add a blank option to the field options
-				array_unshift($options, "");
-			}
-			
-			$options = array_combine($options, $options); // add values as labels for deprecated notices
+		if (empty($this->metadata_options)) {
+			return $options;
 		}
+			
+		$options = explode(",", $this->metadata_options);
+		
+		if (!$add_blank_option) {
+			if ($this->blank_available == "yes") {
+				$add_blank_option = true;
+			}
+		}
+		
+		if ($this->metadata_type != "multiselect" && $add_blank_option) {
+			// optionally add a blank option to the field options
+			array_unshift($options, "");
+		}
+		
+		$options = array_combine($options, $options); // add values as labels for deprecated notices
 		
 		return $options;
 	}
