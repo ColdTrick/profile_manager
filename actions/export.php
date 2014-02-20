@@ -9,7 +9,7 @@
 * @copyright Coldtrick IT Solutions 2009
 * @link http://www.coldtrick.com/
 */
- 
+
 global $DB_QUERY_CACHE;
 $DB_QUERY_CACHE = false; // no need for cache. Will only cause OOM issues
 

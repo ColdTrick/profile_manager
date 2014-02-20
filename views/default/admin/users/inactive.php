@@ -15,7 +15,7 @@ echo elgg_view("input/form", array("disable_security" => true, "action" => "/adm
 
 $dbprefix = elgg_get_config("dbprefix");
 
-$limit =  max((int) get_input("limit", 50), 0);
+$limit = max((int) get_input("limit", 50), 0);
 $offset = sanitise_int(get_input("offset", 0), false);
 
 $options = array(

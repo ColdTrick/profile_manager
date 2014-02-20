@@ -97,10 +97,11 @@ function profile_manager_init() {
 }
 
 /**
- * function to handle the nice urls for Custom Profile Fields
+ * Function to handle the nice urls for Custom Profile Fields
  *
- * @param $page
- * @return unknown_type
+ * @param array $page
+ *
+ * @return void|boolean
  */
 function profile_manager_page_handler($page) {
 	switch ($page[0]) {

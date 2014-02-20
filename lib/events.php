@@ -1,4 +1,15 @@
 <?php
+/**
+ * Events for Profile Manager
+ */
+
+/**
+ * Adds uploaded files to your profile
+ *
+ * @param string $event
+ * @param string $object_type
+ * @param ElggUser $user
+ */
 function profile_manager_profileupdate_user_event($event, $object_type, $user) {
 	
 	if (!empty($user) && ($user instanceof ElggUser)) {
@@ -12,7 +23,7 @@ function profile_manager_profileupdate_user_event($event, $object_type, $user) {
 				"type" => "object",
 				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 				"limit" => false,
-				"metadata_name_value_pairs" => array("name" => "metadata_type", "value" =>  "pm_file")
+				"metadata_name_value_pairs" => array("name" => "metadata_type", "value" => "pm_file")
 			);
 		
 		$configured_fields = elgg_get_entities_from_metadata($options);
@@ -63,7 +74,7 @@ function profile_manager_profileupdate_user_event($event, $object_type, $user) {
 							"subtype" => "file",
 							"owner_guid" => $user->getGUID(),
 							"limit" => 1,
-							"metadata_name_value_pairs" => array("name" => "profile_manager_metadata_name", "value" =>  $metadata_name)
+							"metadata_name_value_pairs" => array("name" => "profile_manager_metadata_name", "value" => $metadata_name)
 						);
 						
 						$files = elgg_get_entities_from_metadata($options);
@@ -88,25 +99,26 @@ function profile_manager_profileupdate_user_event($event, $object_type, $user) {
 }
 
 /**
- * function to add custom profile fields to user on register
+ * Function to add custom profile fields to user on register
  *
- * @param $event
- * @param $object_type
- * @param $object
- * @return unknown_type
+ * @param string $event
+ * @param string $object_type
+ * @param ElggUser $object
+ *
+ * @return array
  */
 function profile_manager_create_user_event($event, $object_type, $object) {
 	$custom_profile_fields = array();
 	
 	// retrieve all field that were on the register page
 	foreach ($_POST as $key => $value) {
-    	if (strpos($key, "custom_profile_fields_") === 0) {
-    		$key = substr($key, 22);
-    		$custom_profile_fields[$key] = get_input("custom_profile_fields_" . $key);
-    	}
-    }
+		if (strpos($key, "custom_profile_fields_") === 0) {
+			$key = substr($key, 22);
+			$custom_profile_fields[$key] = get_input("custom_profile_fields_" . $key);
+		}
+	}
     
-	if (count($custom_profile_fields) > 0 ) {
+	if (count($custom_profile_fields) > 0) {
 		$categorized_fields = profile_manager_get_categorized_fields(null, true, true);
 		$configured_fields = $categorized_fields['fields'];
 		
@@ -166,9 +178,11 @@ function profile_manager_create_user_event($event, $object_type, $object) {
 /**
  * Adds a river event when a user joins the site
  *
- * @param unknown_type $event
- * @param unknown_type $object_type
- * @param unknown_type $object
+ * @param string $event
+ * @param string $object_type
+ * @param ElggRelationship $object
+ *
+ * @return void
  */
 function profile_manager_create_member_of_site($event, $object_type, $object) {
 	$enable_river_event = elgg_get_plugin_setting("enable_site_join_river_event", "profile_manager");
@@ -188,9 +202,11 @@ function profile_manager_create_member_of_site($event, $object_type, $object) {
 /**
  * Remove river join event on site leave
  *
- * @param unknown_type $event
- * @param unknown_type $object_type
- * @param unknown_type $object
+ * @param string $event
+ * @param string $object_type
+ * @param ElggRelationship $object
+ *
+ * @return void
  */
 function profile_manager_delete_member_of_site($event, $object_type, $object) {
 	// remove previous join events
@@ -204,10 +220,11 @@ function profile_manager_delete_member_of_site($event, $object_type, $object) {
 /**
  * Increments edit counter for name editing
  *
- * @param unknown_type $hook_name
- * @param unknown_type $entity_type
- * @param unknown_type $return_value
- * @param unknown_type $parameters
+ * @param string $event
+ * @param string $object_type
+ * @param ElggObject $object
+ *
+ * @return void
  */
 function profile_manager_name_edit_increment($event, $object_type, $object) {
 	if (elgg_instanceof($object, "group")) {
@@ -222,10 +239,11 @@ function profile_manager_name_edit_increment($event, $object_type, $object) {
 /**
  * Increments edit counter for description editing
  *
- * @param unknown_type $hook_name
- * @param unknown_type $entity_type
- * @param unknown_type $return_value
- * @param unknown_type $parameters
+ * @param string $event
+ * @param string $object_type
+ * @param ElggObject $object
+ *
+ * @return void
  */
 function profile_manager_description_edit_increment($event, $object_type, $object) {
 	if (elgg_instanceof($object, "group")) {

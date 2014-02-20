@@ -1,15 +1,22 @@
 <?php
 /**
+ * Run Once functions for Profile Manager
+ */
+
+/**
  * fixes a bug in previous profile manager versions that made all fields on register have access_id -1 instead of default access
  */
 function pm_fix_access_default() {
-	global $CONFIG;
+	$dbprefix = elgg_get_config("dbprefix");
 	
-	update_data("UPDATE {$CONFIG->dbprefix}metadata set access_id='" . ACCESS_LOGGED_IN . "' WHERE access_id=" . ACCESS_DEFAULT);
+	update_data("UPDATE {$dbprefix}metadata set access_id='" . ACCESS_LOGGED_IN . "' WHERE access_id=" . ACCESS_DEFAULT);
 }
 
+/**
+ * Run once function
+ */
 function profile_manager_run_once() {
-	global $CONFIG;
+	$dbprefix = elgg_get_config("dbprefix");
 	
 	// upgrade class names for subtypes
 	$profile_field_class_name = "ProfileManagerCustomProfileField";
@@ -18,25 +25,25 @@ function profile_manager_run_once() {
 	$field_category_class_name = "ProfileManagerCustomFieldCategory";
 	
 	if ($id = get_subtype_id('object', ProfileManagerCustomProfileField::SUBTYPE)) {
-		update_data("UPDATE {$CONFIG->dbprefix}entity_subtypes set class='$profile_field_class_name' WHERE id=$id");
+		update_data("UPDATE {$dbprefix}entity_subtypes set class='$profile_field_class_name' WHERE id=$id");
 	} else {
 		add_subtype('object', ProfileManagerCustomProfileField::SUBTYPE, $profile_field_class_name);
 	}
 	
 	if ($id = get_subtype_id('object', ProfileManagerCustomGroupField::SUBTYPE)) {
-		update_data("UPDATE {$CONFIG->dbprefix}entity_subtypes set class='$group_field_class_name' WHERE id=$id");
+		update_data("UPDATE {$dbprefix}entity_subtypes set class='$group_field_class_name' WHERE id=$id");
 	} else {
 		add_subtype('object', ProfileManagerCustomGroupField::SUBTYPE, $group_field_class_name);
 	}
 	
 	if ($id = get_subtype_id('object', ProfileManagerCustomProfileType::SUBTYPE)) {
-		update_data("UPDATE {$CONFIG->dbprefix}entity_subtypes set class='$field_type_class_name' WHERE id=$id");
+		update_data("UPDATE {$dbprefix}entity_subtypes set class='$field_type_class_name' WHERE id=$id");
 	} else {
 		add_subtype('object', ProfileManagerCustomProfileType::SUBTYPE, $field_type_class_name);
 	}
 	
 	if ($id = get_subtype_id('object', ProfileManagerCustomFieldCategory::SUBTYPE)) {
-		update_data("UPDATE {$CONFIG->dbprefix}entity_subtypes set class='$field_category_class_name' WHERE id=$id");
+		update_data("UPDATE {$dbprefix}entity_subtypes set class='$field_category_class_name' WHERE id=$id");
 	} else {
 		add_subtype('object', ProfileManagerCustomFieldCategory::SUBTYPE, $field_category_class_name);
 	}

@@ -9,7 +9,7 @@
 * @copyright Coldtrick IT Solutions 2009
 * @link http://www.coldtrick.com/
 */
- 
+
 $options = array(
 		"type" => "object",
 		"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,

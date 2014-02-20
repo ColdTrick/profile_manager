@@ -12,9 +12,9 @@
 * @copyright Coldtrick IT Solutions 2009
 * @link http://www.coldtrick.com/
 */
- 	
+
 global $datepicker;
- 	
+
 $dateformat = elgg_echo("profile_manager:datepicker:input:dateformat");
 $dateformat_js = elgg_echo("profile_manager:datepicker:input:dateformat_js");
 $locale_js = elgg_echo("profile_manager:datepicker:input:localisation");
@@ -33,20 +33,20 @@ END;
 } else {
 	$datepicker++;
 }
-    
+
 $internal_id = sanitise_string(str_replace("]", "_", str_replace("[" , "_" ,$vars['name']))) . $datepicker;
 	
 $val = $vars['value'];
 if ($val) {
-    if ((date($dateformat, $val) !== false) && (date($dateformat, $val) != date($dateformat, 0))) {
+	if ((date($dateformat, $val) !== false) && (date($dateformat, $val) != date($dateformat, 0))) {
 		// probably a timestamp, we can format it
-		$dateval =  strftime($dateformat, $val);
+		$dateval = strftime($dateformat, $val);
 	} elseif (($new = strtotime($val)) !== false) {
 		// time in date format
 		$dateval = strftime($dateformat, $new);
 	}
 }
-    
+
 ?>
 <script type="text/javascript">
 	$(document).ready(function(){

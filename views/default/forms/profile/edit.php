@@ -78,7 +78,7 @@ if (!empty($cats)) {
 				});
 			</script>
 			<?php
-			 
+
 			echo "<div>";
 			echo "<label>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:label") . "</label>";
 			echo elgg_view("input/dropdown", array("name" => "custom_profile_type",
@@ -198,7 +198,7 @@ if (!empty($cats)) {
 			$field_result .= "<label>" . $title . "</label>";
 			
 			if ($hint = $field->getHint()) {
-				$field_result .= "<span class='custom_fields_more_info' id='more_info_". $metadata_name . "'></span>";
+				$field_result .= "<span class='custom_fields_more_info' id='more_info_" . $metadata_name . "'></span>";
 				$field_result .= "<span class='custom_fields_more_info_text' id='text_more_info_" . $metadata_name . "'>" . $hint . "</span>";
 			}
 			
@@ -272,8 +272,8 @@ if ($simple_access_control == "yes") {
 </div>
 
 <?php
-	if ($simple_access_control == "yes") {
-		?>
+if ($simple_access_control == "yes") {
+	?>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$(".simple_access_control").val($(".elgg-input-access:first").val()).trigger("change");

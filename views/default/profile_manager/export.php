@@ -75,7 +75,7 @@ if ($fields) {
 	if (elgg_is_active_plugin("groups") && ($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE)) {
 		echo "<div class='mbm'>";
 		echo elgg_view("input/checkbox", array("name" => "include_group_membership"));
-		echo " ". elgg_echo("profile_manager:export:list:include_group_membership");
+		echo " " . elgg_echo("profile_manager:export:list:include_group_membership");
 		echo "</div>";
 	}
 	

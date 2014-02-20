@@ -1,9 +1,9 @@
 <?php
 	/**
 	* Profile Manager
-	* 
+	*
 	* JS (admin pages only, so no extend)
-	* 
+	*
 	* @package profile_manager
 	* @author ColdTrick IT Solutions
 	* @copyright Coldtrick IT Solutions 2009
@@ -15,8 +15,8 @@
 $(document).ready(function(){
 	filterCustomFields(0);
 	$('#custom_fields_ordering').sortable({
-  		update: function(event, ui) { 
-   			reorderCustomFields();			   		
+  		update: function(event, ui) {
+   			reorderCustomFields();
    		},
    		opacity: 0.6,
    		tolerance: 'pointer',
@@ -24,8 +24,8 @@ $(document).ready(function(){
 	});
 
 	$('#custom_fields_category_list_custom .elgg-list').sortable({
-		update: function(event, ui) { 
-   			reorderCategories();			   		
+		update: function(event, ui) {
+   			reorderCategories();
    		},
 		opacity: 0.6,
 		tolerance: 'pointer',
@@ -38,9 +38,9 @@ $(document).ready(function(){
 		hoverClass: 'droppable-hover',
 		tolerance: 'pointer',
 		drop: function(event, ui) {
-			var dropped_on = $(this).attr("id");  
+			var dropped_on = $(this).attr("id");
 			var dragged_field = $(ui.draggable);
-			changeFieldCategory(dragged_field, dropped_on); 
+			changeFieldCategory(dragged_field, dropped_on);
 		}
 	});
 
@@ -86,7 +86,7 @@ function removeField(guid){
 				alert(elgg.echo("profile_manager:actions:delete:error:unknown"));
 			}
 		});
-	}	
+	}
 }
 
 function deleteCategory(guid){
@@ -112,7 +112,7 @@ function filterCustomFields(category_guid){
 			$("#custom_fields_ordering .custom_field[rel='" + category_guid + "']").parent().show();
 			$("#custom_profile_field_category_" + category_guid).parent().addClass("custom_fields_category_selected");
 		}
-	}		
+	}
 }
 
 function changeFieldType(){
@@ -122,16 +122,16 @@ function changeFieldType(){
 	$("#custom_fields_form .field_option_enable_" + selectedType).removeAttr("disabled");
 }
 
-// categories	
+// categories
 function changeFieldCategory(field, category_guid){
 	var field_guid = $(field).attr("id").replace("elgg-object-","");
 	category_guid = category_guid.replace("elgg-object-","").replace("custom_profile_field_category_", "");
 
 	$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/changeCategory?guid=' + field_guid + '&category_guid=' + category_guid), function(data){
-		if(data == 'true'){		
+		if(data == 'true'){
 			if(category_guid == 0){
 				category_guid = "";
-			}				 
+			}
 			$(field).find(".custom_field").attr("rel", category_guid);
 			$(".custom_fields_category_selected a").click();
 				

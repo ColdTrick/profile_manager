@@ -1,7 +1,16 @@
 <?php
 
+/**
+ * ProfileManagerCustomField
+ *
+ * @author coldtrick
+ *
+ */
 abstract class ProfileManagerCustomField extends ElggObject {
 	
+	/**
+	 * initializes the default class attributes
+	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
 		
@@ -10,11 +19,17 @@ abstract class ProfileManagerCustomField extends ElggObject {
 		$this->attributes['container_guid'] = elgg_get_site_entity()->getGUID();
 	}
 	
+	/**
+	 * Returns an array of options to be used in input views
+	 *
+	 * @param boolean $add_blank_option
+	 * @return string
+	 */
 	public function getOptions($add_blank_option = false) {
 		$options = "";
 		
 		// get options
-		if (!empty($this->metadata_options))	{
+		if (!empty($this->metadata_options)) {
 			
 			$options = explode(",", $this->metadata_options);
 			
@@ -35,6 +50,11 @@ abstract class ProfileManagerCustomField extends ElggObject {
 		return $options;
 	}
 	
+	/**
+	 * Returns the hint text
+	 *
+	 * @return string
+	 */
 	public function getHint() {
 		// make title
 		$hint = $this->metadata_hint;

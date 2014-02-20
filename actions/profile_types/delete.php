@@ -28,9 +28,9 @@ if (!empty($guid)) {
 			
 			if ($entities = elgg_get_entities_from_metadata($options)) {
 				foreach ($entities as $entity) {
-  					// unset currently deleted profile type for user
-  					unset($entity->$meta_name);
-  				}
+					// unset currently deleted profile type for user
+					unset($entity->$meta_name);
+				}
 			}
 			
 			system_message(elgg_echo("profile_manager:action:profile_types:delete:succes"));

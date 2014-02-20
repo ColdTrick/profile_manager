@@ -105,7 +105,7 @@ if (count($fields) > 0) {
 				$metadata_type = "plaintext";
 			}
 			
-			$sticky_name = "custom_profile_fields_". $field->metadata_name;
+			$sticky_name = "custom_profile_fields_" . $field->metadata_name;
 			
 			$value = "";
 			if (isset($$sticky_name)) {

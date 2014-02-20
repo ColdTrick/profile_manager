@@ -42,5 +42,5 @@ if ($enable_username_change == "yes" || ($enable_username_change == "admin" && e
 		});
 	});
 	</script>
-<?php
+	<?php
 }

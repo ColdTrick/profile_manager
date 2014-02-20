@@ -44,7 +44,7 @@ if (!empty($last_login)) {
 				if (!empty($row)) {
 					$row .= $fielddelimiter;
 				}
-				$row .=  $user->$field;
+				$row .= $user->$field;
 			}
 			echo $row . PHP_EOL;
 		}

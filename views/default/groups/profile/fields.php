@@ -16,8 +16,8 @@ if (count($group_fields["fields"]) > 0) {
 		$value = $group->$metadata_name;
 		
 		if ($value) {
-		    // make title
-		    $title = $field->getTitle();
+			// make title
+			$title = $field->getTitle();
 			
 			// adjust output type
 			if ($field->output_as_tags == "yes") {

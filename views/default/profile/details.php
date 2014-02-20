@@ -14,14 +14,14 @@ if ($user->isBanned()) {
 	if ($user->description) {
 		// see if we have a custom title
 		$description_field = elgg_get_entities_from_metadata(array(
-                'type' => 'object',
-                'subtype' => 'custom_profile_field',
-                'metadata_name_value_pairs' => array(
-                    'name' => 'metadata_name',
-                    'value' => 'description'
-                ),
-                'limit' => 1
-            ));
+			'type' => 'object',
+			'subtype' => 'custom_profile_field',
+			'metadata_name_value_pairs' => array(
+			'name' => 'metadata_name',
+				'value' => 'description'
+			),
+			'limit' => 1
+		));
             
 		if ($description_field) {
 			$title = $description_field[0]->getTitle();
@@ -143,7 +143,7 @@ if (count($cats) > 0) {
 				// build result
 				$field_result .= "<div class='" . $even_odd . "'>";
 				$field_result .= "<b>" . $title . "</b>:&nbsp;";
-				$field_result .= elgg_view("output/" . $output_type, array("value" =>  $value, "target" => $target));
+				$field_result .= elgg_view("output/" . $output_type, array("value" => $value, "target" => $target));
 				$field_result .= "</div>\n";
 			}
 		}

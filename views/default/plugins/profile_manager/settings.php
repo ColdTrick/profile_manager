@@ -112,7 +112,7 @@ $group_limit_options = array(
 			<?php echo elgg_view("input/dropdown", array("name" => "params[registration_extra_fields]", "options_values" => $extra_fields_options, "value" => $vars['entity']->registration_extra_fields)); ?>
 		</td>
 	</tr>
-	<?php if(!empty($profile_types)){?>
+	<?php if (!empty($profile_types)) {?>
 	<tr>
 		<td>
 			<?php echo elgg_echo('profile_manager:settings:default_profile_type'); ?>

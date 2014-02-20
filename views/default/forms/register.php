@@ -40,7 +40,7 @@ if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 		
 		<label for='register-name'><?php echo elgg_echo('name'); ?></label>
 		
-		<?php if($show_hints){ ?>
+		<?php if ($show_hints) { ?>
 		<span class='custom_fields_more_info' id='more_info_name'></span>
 		<span class='custom_fields_more_info_text' id='text_more_info_name'><?php echo elgg_echo("profile_manager:register:hints:name")?></span>
 		<?php } ?>

@@ -70,7 +70,7 @@ if ($current_field && ($current_field->getSubtype() != CUSTOM_PROFILE_FIELDS_PRO
 					$new_options[$key] = $trimmed_option;
 				}
 			}
-			if (count($new_options) > 0 ) {
+			if (count($new_options) > 0) {
 				$new_options = implode(",", $new_options);
 			} else {
 				$options_error = true;

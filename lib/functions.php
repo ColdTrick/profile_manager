@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * Events for Profile Manager
+ */
+
 /**
  * Registes all custom field types
  */
@@ -91,6 +96,13 @@ function register_custom_field_types() {
 
 /**
  * Function to add a custom field type to a register
+ *
+ * @param string $register_name
+ * @param string $field_type
+ * @param string $field_display_name
+ * @param string $options
+ *
+ * @return void
  */
 function add_custom_field_type($register_name, $field_type, $field_display_name, $options) {
 	global $PROFILE_MANAGER_FIELD_TYPES;
@@ -110,6 +122,13 @@ function add_custom_field_type($register_name, $field_type, $field_display_name,
 	$PROFILE_MANAGER_FIELD_TYPES[$register_name][$field_type] = $field_config;
 }
 
+/**
+ * Returns the profile manager field types
+ *
+ * @param string $register_name
+ *
+ * @return boolean|array
+ */
 function get_custom_field_types($register_name) {
 	global $PROFILE_MANAGER_FIELD_TYPES;
 	
@@ -123,10 +142,11 @@ function get_custom_field_types($register_name) {
 }
 
 /**
- * function to upload a profile icon on register of a user
+ * Function to upload a profile icon on register of a user
  *
- * @param $user
- * @return unknown_type
+ * @param ElggUser $user
+ *
+ * @return void
  */
 function add_profile_icon($user) {
 	
@@ -161,7 +181,15 @@ function add_profile_icon($user) {
 }
 
 /**
- * returns an array containing the categories and the fields ordered by category and field order
+ * Returns an array containing the categories and the fields ordered by category and field order
+ *
+ * @param string $user
+ * @param string $edit
+ * @param string $register
+ * @param string $profile_type_limit
+ * @param string $profile_type_guid
+ *
+ * @return unknown
  */
 function profile_manager_get_categorized_fields($user = null, $edit = false, $register = false, $profile_type_limit = false, $profile_type_guid = false){
 	
@@ -309,6 +337,10 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 
 /**
  * Function just now returns only ordered (name is prepped for future release which should support categories)
+ *
+ * @param ElggGroup $group
+ *
+ * @return array
  */
 function profile_manager_get_categorized_group_fields($group = null) {
 	
@@ -345,8 +377,13 @@ function profile_manager_get_categorized_group_fields($group = null) {
 	
 	return $result;
 }
-/*
- * returns the max order from a specific profile field type
+
+/**
+ * Returns the max order from a specific profile field type
+ *
+ * @param unknown $field_type
+ *
+ * @return boolean|int
  */
 function profile_manager_get_max_order($field_type) {
 	$max = 0;
@@ -375,9 +412,11 @@ function profile_manager_get_max_order($field_type) {
 }
 
 /**
- * returns an array with percentage completeness and required / missing fields
+ * Returns an array with percentage completeness and required / missing fields
  *
  * @param optional ElggUser $user
+ *
+ * @return boolean|array
  */
 function profile_manager_profile_completeness($user = null) {
 	
@@ -427,6 +466,13 @@ function profile_manager_profile_completeness($user = null) {
 	return $result;
 }
 
+/**
+ * Generates username based on emailaddress
+ *
+ * @param string $email
+ *
+ * @return boolean|string
+ */
 function profile_manager_generate_username_from_email($email) {
 	$result = false;
 	
@@ -457,6 +503,13 @@ function profile_manager_generate_username_from_email($email) {
 	return $result;
 }
 
+/**
+ * Validates a username
+ *
+ * @param string $username
+ *
+ * @return boolean
+ */
 function profile_manager_validate_username($username) {
 	$result = false;
 	if (!empty($username)) {
@@ -482,6 +535,13 @@ function profile_manager_validate_username($username) {
 	return $result;
 }
 
+/**
+ * Returns group name
+ *
+ * @param stdClass $row
+ *
+ * @return string
+ */
 function profile_manager_export_group_name($row) {
 	$name = htmlspecialchars_decode($row->name);
 	$name = str_replace("\"", "", $name);

@@ -30,7 +30,7 @@
 			$form_body .= elgg_view("input/file", array("name" => "restoreFile"));
 			$form_body .= elgg_view("input/submit", array("value" => elgg_echo("profile_manager:actions:configuration:restore:upload")));
 
-			$form = elgg_view("input/form", array("action" => "action/profile_manager/configuration/restore?fieldtype=" .CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE, "id" => "restoreForm", "body" => $form_body, "enctype" => "multipart/form-data"));
+			$form = elgg_view("input/form", array("action" => "action/profile_manager/configuration/restore?fieldtype=" . CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE, "id" => "restoreForm", "body" => $form_body, "enctype" => "multipart/form-data"));
 
 			echo $form;
 		?>

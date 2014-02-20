@@ -1,5 +1,9 @@
 <?php
 /**
+ * Hooks for Profile Manager
+ */
+
+/**
  * Hook to replace the profile fields
  *
  * @param $hook_name

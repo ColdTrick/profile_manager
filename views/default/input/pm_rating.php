@@ -4,7 +4,7 @@ $selected_value = sanitise_int($vars['value'], false);
 
 $rating_id = $vars["name"] . "_container";
 
-echo "<div id='". $rating_id . "'>";
+echo "<div id='" . $rating_id . "'>";
 echo elgg_view("input/hidden", $vars);
 for ($i = 1; $i <= 5; $i++) {
 	if ($i <= $selected_value) {
