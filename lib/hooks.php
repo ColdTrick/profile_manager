@@ -6,16 +6,14 @@
 /**
  * Hook to replace the profile fields
  *
- * @param $hook_name
- * @param $entity_type
- * @param $return_value
- * @param $parameters
- * @return unknown_type
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $parameters   hook parameters
+ *
+ * @return array
  */
 function profile_manager_profile_override($hook_name, $entity_type, $return_value, $parameters) {
-
-	// Get all the custom profile fields
-
 	// get from cache
 	$site_guid = elgg_get_config("site_guid");
 
@@ -46,24 +44,25 @@ function profile_manager_profile_override($hook_name, $entity_type, $return_valu
 		$result = array();
 		$translations = array();
 		$context = elgg_get_context();
-	    // Make new result
-	    foreach ($entities as $entity) {
-	    	if ($entity->admin_only != "yes" || elgg_is_admin_logged_in()) {
+		
+		// Make new result
+		foreach ($entities as $entity) {
+			if ($entity->admin_only != "yes" || elgg_is_admin_logged_in()) {
 
-	    		$result[$entity->metadata_name] = $entity->metadata_type;
+				$result[$entity->metadata_name] = $entity->metadata_type;
 
-	    		// should it be handled as tags? TODO: is this still needed? Yes it is, it handles presentation of these fields in listing mode
-	    		if ($context == "search" && ($entity->output_as_tags == "yes" || $entity->metadata_type == "multiselect")) {
-	    			$result[$entity->metadata_name] = "tags";
-	    		}
-	    	}
+				// should it be handled as tags? TODO: is this still needed? Yes it is, it handles presentation of these fields in listing mode
+				if ($context == "search" && ($entity->output_as_tags == "yes" || $entity->metadata_type == "multiselect")) {
+					$result[$entity->metadata_name] = "tags";
+				}
+			}
 
-	    	$translations["profile:" . $entity->metadata_name] = $entity->getTitle();
-	    }
+			$translations["profile:" . $entity->metadata_name] = $entity->getTitle();
+		}
 
-	    add_translation(get_current_language(), $translations);
+		add_translation(get_current_language(), $translations);
 
-		if (count($result)>0) {
+		if (count($result) > 0) {
 			$result["custom_profile_type"] = "non_editable";
 		}
 	}
@@ -72,13 +71,14 @@ function profile_manager_profile_override($hook_name, $entity_type, $return_valu
 }
 
 /**
- * function to replace group profile fields
+ * Function to replace group profile fields
  *
- * @param $hook_name
- * @param $entity_type
- * @param $return_value
- * @param $parameters
- * @return unknown_type
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $parameters   hook parameters
+ *
+ * @return array
  */
 function profile_manager_group_override($hook_name, $entity_type, $return_value, $parameters) {
 	$result = $return_value;
@@ -126,15 +126,25 @@ function profile_manager_group_override($hook_name, $entity_type, $return_value,
 			$result[$group_field->metadata_name] = $group_field->metadata_type;
 
 			// should it be handled as tags? Q: is this still needed? A: Yes it is, it handles presentation of these fields in listing mode
-    		if (elgg_get_context() == "search" && ($group_field->output_as_tags == "yes" || $group_field->metadata_type == "multiselect")) {
-    			$result[$group_field->metadata_name] = "tags";
-    		}
+			if (elgg_get_context() == "search" && ($group_field->output_as_tags == "yes" || $group_field->metadata_type == "multiselect")) {
+				$result[$group_field->metadata_name] = "tags";
+			}
 		}
 	}
 
 	return $result;
 }
 
+/**
+ * Hook to add a system category to the profile fields
+ *
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $params       hook parameters
+ *
+ * @return array
+ */
 function profile_manager_categorized_profile_fields_hook($hook_name, $entity_type, $return_value, $params) {
 	$result = $return_value;
 
@@ -148,28 +158,28 @@ function profile_manager_categorized_profile_fields_hook($hook_name, $entity_typ
 			$result["fields"][-1] = array();
 
 			$system_fields = array(
-					"guid" => "text",
-					"owner_guid" => "text",
-					"container_guid" => "text",
-					"site_guid" => "text",
+				"guid" => "text",
+				"owner_guid" => "text",
+				"container_guid" => "text",
+				"site_guid" => "text",
 
-					"time_created" => "pm_datepicker",
-					"time_updated" => "pm_datepicker",
-					"last_action" => "pm_datepicker",
-					"prev_last_login" => "pm_datepicker",
-			 		"last_login" => "pm_datepicker",
+				"time_created" => "pm_datepicker",
+				"time_updated" => "pm_datepicker",
+				"last_action" => "pm_datepicker",
+				"prev_last_login" => "pm_datepicker",
+				"last_login" => "pm_datepicker",
 
-					"admin_created" => "text",
-			 		"created_by_guid" => "text",
-					"validated" => "text",
-					"validated_method" => "text",
+				"admin_created" => "text",
+				"created_by_guid" => "text",
+				"validated" => "text",
+				"validated_method" => "text",
 
-					"username" => "text",
-					"email" => "text",
-					"language" => "text",
-					"icontime" => "text",
-					"code" => "text"
-				);
+				"username" => "text",
+				"email" => "text",
+				"language" => "text",
+				"icontime" => "text",
+				"code" => "text"
+			);
 
 			foreach ($system_fields as $metadata_name => $metadata_type) {
 				$system_field = new ProfileManagerCustomProfileField();
@@ -185,6 +195,16 @@ function profile_manager_categorized_profile_fields_hook($hook_name, $entity_typ
 	return $result;
 }
 
+/**
+ * Replace old datepicker views with pm_datepicker
+ *
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $parameters   hook parameters
+ *
+ * @return string
+ */
 function profile_manager_display_view_hook($hook_name, $entity_type, $return_value, $parameters) {
 	$view = $parameters["view"];
 
@@ -203,11 +223,12 @@ function profile_manager_display_view_hook($hook_name, $entity_type, $return_val
 /**
  * function to check if custom fields on register have been filled (if required)
  *
- * @param $hook_name
- * @param $entity_type
- * @param $return_value
- * @param $parameters
- * @return unknown_type
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $parameters   hook parameters
+ *
+ * @return void
  */
 function profile_manager_action_register_hook($hook_name, $entity_type, $return_value, $parameters) {
 
@@ -222,7 +243,7 @@ function profile_manager_action_register_hook($hook_name, $entity_type, $return_
 
 	// new
 	$profile_type_guid = get_input("custom_profile_fields_custom_profile_type", false);
-	$fields = profile_manager_get_categorized_fields($user, true, true, true, $profile_type_guid);
+	$fields = profile_manager_get_categorized_fields(null, true, true, true, $profile_type_guid);
 	$required_fields = array();
 
 	if (!empty($fields["categories"])) {
@@ -238,62 +259,64 @@ function profile_manager_action_register_hook($hook_name, $entity_type, $return_
 
 	if ($terms || $required_fields || $profile_icon == "yes") {
 
-	    $custom_profile_fields = array();
+		$custom_profile_fields = array();
 
-	    foreach ($_POST as $key => $value) {
-	    	if (strpos($key, "custom_profile_fields_") == 0) {
-	    		$key = substr($key, 22);
-	    		$custom_profile_fields[$key] = $value;
-	    	}
-	    }
+		foreach ($_POST as $key => $value) {
+			if (strpos($key, "custom_profile_fields_") == 0) {
+				$key = substr($key, 22);
+				$custom_profile_fields[$key] = $value;
+			}
+		}
 
-	    foreach ($required_fields as $entity) {
+		foreach ($required_fields as $entity) {
 
-	    	$passed_value = $custom_profile_fields[$entity->metadata_name];
+			$passed_value = $custom_profile_fields[$entity->metadata_name];
 
 			if (empty($passed_value)) {
 				register_error(elgg_echo("profile_manager:register_pre_check:missing", array($entity->getTitle())));
 				forward(REFERER);
 			}
-	    }
+		}
 
-	    if ($profile_icon == "yes") {
-	    	$profile_icon = $_FILES["profile_icon"];
+		if ($profile_icon == "yes") {
+			$profile_icon = $_FILES["profile_icon"];
 
-	    	$error = false;
-	    	if (empty($profile_icon["name"])) {
-		    	register_error(elgg_echo("profile_manager:register_pre_check:missing", array("profile_icon")));
-		    	$error = true;
-	    	} elseif ($profile_icon["error"] != 0) {
-	    		register_error(elgg_echo("profile_manager:register_pre_check:profile_icon:error"));
-	    		$error = true;
-	    	} elseif (!in_array(strtolower(substr($profile_icon["name"], -3)), array("jpg","png","gif"))) {
-	    		register_error(elgg_echo("profile_manager:register_pre_check:profile_icon:nosupportedimage"));
-	    		$error = true;
-	    	}
+			$error = false;
+			if (empty($profile_icon["name"])) {
+				register_error(elgg_echo("profile_manager:register_pre_check:missing", array("profile_icon")));
+				$error = true;
+			} elseif ($profile_icon["error"] != 0) {
+				register_error(elgg_echo("profile_manager:register_pre_check:profile_icon:error"));
+				$error = true;
+			} elseif (!in_array(strtolower(substr($profile_icon["name"], -3)), array("jpg","png","gif"))) {
+				register_error(elgg_echo("profile_manager:register_pre_check:profile_icon:nosupportedimage"));
+				$error = true;
+			}
 
-	    	if ($error) {
-	    		forward(REFERER);
-	    	}
-	    }
+			if ($error) {
+				forward(REFERER);
+			}
+		}
 
-	    if ($terms) {
-	    	$terms_accepted = get_input("accept_terms");
-	    	if ($terms_accepted !== "yes") {
-	    		register_error(elgg_echo("profile_manager:register_pre_check:terms"));
-	    		forward(REFERER);
-	    	}
-	    }
+		if ($terms) {
+			$terms_accepted = get_input("accept_terms");
+			if ($terms_accepted !== "yes") {
+				register_error(elgg_echo("profile_manager:register_pre_check:terms"));
+				forward(REFERER);
+			}
+		}
 	}
 }
 
 /**
- *
  * If possible change the username of a user
- * @param unknown_type $hook_name
- * @param unknown_type $entity_type
- * @param unknown_type $return_value
- * @param unknown_type $parameters
+ *
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $parameters   hook parameters
+ *
+ * @return void
  */
 function profile_manager_username_change_hook($hook_name, $entity_type, $return_value, $parameters) {
 	$user_guid = (int) get_input('guid');
@@ -322,12 +345,13 @@ function profile_manager_username_change_hook($hook_name, $entity_type, $return_
 }
 
 /**
- *
  * Directs user to correct settings links after changing a username
- * @param unknown_type $hook_name
- * @param unknown_type $entity_type
- * @param unknown_type $return_value
- * @param unknown_type $parameters
+ *
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $parameters   hook parameters
+ *
  * @return string
  */
 function profile_manager_username_change_forward_hook($hook_name, $entity_type, $return_value, $parameters) {
@@ -338,12 +362,14 @@ function profile_manager_username_change_forward_hook($hook_name, $entity_type, 
 }
 
 /**
- *
  * Used to extend the entity menu when user_summary_control is enabled
- * @param unknown_type $hook_name
- * @param unknown_type $entity_type
- * @param unknown_type $return_value
- * @param unknown_type $parameters
+ *
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $params       hook parameters
+ *
+ * @return array
  */
 function profile_manager_register_entity_menu($hook_name, $entity_type, $return_value, $params) {
 
@@ -447,13 +473,15 @@ function profile_manager_register_entity_menu($hook_name, $entity_type, $return_
 }
 
 /**
-*
-* Used to prevent likes on site objects
-* @param unknown_type $hook_name
-* @param unknown_type $entity_type
-* @param unknown_type $return_value
-* @param unknown_type $parameters
-*/
+ * Used to prevent likes on site objects
+ *
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $params       hook parameters
+ *
+ * @return boolean
+ */
 function profile_manager_permissions_check_annotate($hook_name, $entity_type, $return_value, $params) {
 	$return = $return_value;
 	if (is_array($params) && (elgg_extract("annotation_name", $params) == "likes")) {
@@ -463,14 +491,16 @@ function profile_manager_permissions_check_annotate($hook_name, $entity_type, $r
 }
 
 /**
-*
-* Extend public pages
-* @param unknown_type $hook_name
-* @param unknown_type $entity_type
-* @param unknown_type $return_value
-* @param unknown_type $parameters
-*/
-function profile_manager_public_pages($hook_name, $entity_type, $return_value, $params){
+ * Extend public pages
+ *
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $params       hook parameters
+ *
+ * @return array
+ */
+function profile_manager_public_pages($hook_name, $entity_type, $return_value, $params) {
 	$return = $return_value;
 	if (is_array($return)) {
 		$return[] = "action/profile_manager/register/validate.*";
@@ -479,14 +509,16 @@ function profile_manager_public_pages($hook_name, $entity_type, $return_value, $
 }
 
 /**
-* Enforcing group edit limits
-*
-* @param unknown_type $hook_name
-* @param unknown_type $entity_type
-* @param unknown_type $return_value
-* @param unknown_type $parameters
-*/
-function profile_manager_action_groups_edit_hook($hook_name, $entity_type, $return_value, $params){
+ * Enforcing group edit limits
+ *
+ * @param string  $hook_name    name of the hook
+ * @param string  $entity_type  type of the hook
+ * @param unknown $return_value return value
+ * @param unknown $params       hook parameters
+ *
+ * @return void
+ */
+function profile_manager_action_groups_edit_hook($hook_name, $entity_type, $return_value, $params) {
 	$guid = get_input("group_guid");
 	if (!empty($guid) || !elgg_is_admin_logged_in()) {
 

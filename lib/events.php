@@ -6,9 +6,11 @@
 /**
  * Adds uploaded files to your profile
  *
- * @param string $event
- * @param string $object_type
- * @param ElggUser $user
+ * @param string   $event       Event name
+ * @param string   $object_type Event type
+ * @param ElggUser $user        User being updated
+ *
+ * @return void
  */
 function profile_manager_profileupdate_user_event($event, $object_type, $user) {
 	
@@ -101,9 +103,9 @@ function profile_manager_profileupdate_user_event($event, $object_type, $user) {
 /**
  * Function to add custom profile fields to user on register
  *
- * @param string $event
- * @param string $object_type
- * @param ElggUser $object
+ * @param string   $event       Event name
+ * @param string   $object_type Event type
+ * @param ElggUser $object      User being created
  *
  * @return array
  */
@@ -117,7 +119,7 @@ function profile_manager_create_user_event($event, $object_type, $object) {
 			$custom_profile_fields[$key] = get_input("custom_profile_fields_" . $key);
 		}
 	}
-    
+
 	if (count($custom_profile_fields) > 0) {
 		$categorized_fields = profile_manager_get_categorized_fields(null, true, true);
 		$configured_fields = $categorized_fields['fields'];
@@ -178,9 +180,9 @@ function profile_manager_create_user_event($event, $object_type, $object) {
 /**
  * Adds a river event when a user joins the site
  *
- * @param string $event
- * @param string $object_type
- * @param ElggRelationship $object
+ * @param string           $event       Event name
+ * @param string           $object_type Event type
+ * @param ElggRelationship $object      Relationship object being created
  *
  * @return void
  */
@@ -202,9 +204,9 @@ function profile_manager_create_member_of_site($event, $object_type, $object) {
 /**
  * Remove river join event on site leave
  *
- * @param string $event
- * @param string $object_type
- * @param ElggRelationship $object
+ * @param string           $event       Event name
+ * @param string           $object_type Event type
+ * @param ElggRelationship $object      Relationship object being removed
  *
  * @return void
  */
@@ -220,9 +222,9 @@ function profile_manager_delete_member_of_site($event, $object_type, $object) {
 /**
  * Increments edit counter for name editing
  *
- * @param string $event
- * @param string $object_type
- * @param ElggObject $object
+ * @param string     $event       Event name
+ * @param string     $object_type Event type
+ * @param ElggObject $object      Group that is being edited
  *
  * @return void
  */
@@ -239,9 +241,9 @@ function profile_manager_name_edit_increment($event, $object_type, $object) {
 /**
  * Increments edit counter for description editing
  *
- * @param string $event
- * @param string $object_type
- * @param ElggObject $object
+ * @param string     $event       Event name
+ * @param string     $object_type Event type
+ * @param ElggObject $object      Group that is being edited
  *
  * @return void
  */

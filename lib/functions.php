@@ -6,6 +6,8 @@
 
 /**
  * Registes all custom field types
+ *
+ * @return void
  */
 function register_custom_field_types() {
 	// registering profile field types
@@ -97,10 +99,10 @@ function register_custom_field_types() {
 /**
  * Function to add a custom field type to a register
  *
- * @param string $register_name
- * @param string $field_type
- * @param string $field_display_name
- * @param string $options
+ * @param string $register_name      Name of the register where the fields are configured
+ * @param string $field_type         Type op the field
+ * @param string $field_display_name Display name of the field type
+ * @param array  $options            Array of options
  *
  * @return void
  */
@@ -125,7 +127,7 @@ function add_custom_field_type($register_name, $field_type, $field_display_name,
 /**
  * Returns the profile manager field types
  *
- * @param string $register_name
+ * @param string $register_name Name of the register to retrieve
  *
  * @return boolean|array
  */
@@ -144,7 +146,7 @@ function get_custom_field_types($register_name) {
 /**
  * Function to upload a profile icon on register of a user
  *
- * @param ElggUser $user
+ * @param ElggUser $user The user to add the profile icons to
  *
  * @return void
  */
@@ -183,15 +185,15 @@ function add_profile_icon($user) {
 /**
  * Returns an array containing the categories and the fields ordered by category and field order
  *
- * @param string $user
- * @param string $edit
- * @param string $register
- * @param string $profile_type_limit
- * @param string $profile_type_guid
+ * @param ElggUser $user               User to check
+ * @param boolean  $edit               Are you editing profile fields
+ * @param boolean  $register           Are you on the register page
+ * @param boolean  $profile_type_limit Should it be limited by the profile type
+ * @param int      $profile_type_guid  The guid of the profile type to limit the results to
  *
  * @return unknown
  */
-function profile_manager_get_categorized_fields($user = null, $edit = false, $register = false, $profile_type_limit = false, $profile_type_guid = false){
+function profile_manager_get_categorized_fields($user = null, $edit = false, $register = false, $profile_type_limit = false, $profile_type_guid = false) {
 	
 	$result = array();
 	$profile_type = null;
@@ -338,7 +340,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 /**
  * Function just now returns only ordered (name is prepped for future release which should support categories)
  *
- * @param ElggGroup $group
+ * @param ElggGroup $group Group to check the values of the fields against
  *
  * @return array
  */
@@ -381,7 +383,7 @@ function profile_manager_get_categorized_group_fields($group = null) {
 /**
  * Returns the max order from a specific profile field type
  *
- * @param unknown $field_type
+ * @param string $field_type Type of fields to fetch
  *
  * @return boolean|int
  */
@@ -414,7 +416,7 @@ function profile_manager_get_max_order($field_type) {
 /**
  * Returns an array with percentage completeness and required / missing fields
  *
- * @param optional ElggUser $user
+ * @param ElggUser $user User to count completeness for
  *
  * @return boolean|array
  */
@@ -469,7 +471,7 @@ function profile_manager_profile_completeness($user = null) {
 /**
  * Generates username based on emailaddress
  *
- * @param string $email
+ * @param string $email Email address
  *
  * @return boolean|string
  */
@@ -506,7 +508,7 @@ function profile_manager_generate_username_from_email($email) {
 /**
  * Validates a username
  *
- * @param string $username
+ * @param string $username Username
  *
  * @return boolean
  */
@@ -538,7 +540,7 @@ function profile_manager_validate_username($username) {
 /**
  * Returns group name
  *
- * @param stdClass $row
+ * @param stdClass $row Row returned from an elgg_get_entities* function
  *
  * @return string
  */
