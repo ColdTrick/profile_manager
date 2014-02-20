@@ -1,19 +1,19 @@
-<?php 
-	/**
-	* Profile Manager
-	* 
-	* Object view of a custom profile field type
-	* 
-	* @package profile_manager
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
-	*/
+<?php
+/**
+* Profile Manager
+*
+* Object view of a custom profile field type
+*
+* @package profile_manager
+* @author ColdTrick IT Solutions
+* @copyright Coldtrick IT Solutions 2009
+* @link http://www.coldtrick.com/
+*/
 
-	$entity = $vars["entity"];
+$entity = $vars["entity"];
 
-	// get title
-	$title = $entity->getTitle();
+// get title
+$title = $entity->getTitle();
 	
 ?>
 <div class="custom_profile_type" id="custom_profile_type_<?php echo $entity->guid;?>">

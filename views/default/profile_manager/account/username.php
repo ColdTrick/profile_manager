@@ -1,7 +1,7 @@
 <?php
 
 $enable_username_change = elgg_get_plugin_setting("enable_username_change", "profile_manager");
-if($enable_username_change == "yes" || ($enable_username_change == "admin" && elgg_is_admin_logged_in())){
+if ($enable_username_change == "yes" || ($enable_username_change == "admin" && elgg_is_admin_logged_in())) {
 	
 	$user = elgg_get_page_owner_entity();
 	
@@ -42,5 +42,5 @@ if($enable_username_change == "yes" || ($enable_username_change == "admin" && el
 		});
 	});
 	</script>
-<?php 
+<?php
 }

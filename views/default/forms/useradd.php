@@ -1,21 +1,13 @@
 <?php
-	/**
-	 * Elgg add user form. 
-	 * 
-	 * @package Elgg
-	 * @subpackage Core
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @author Curverider Ltd
-	 * @copyright Curverider Ltd 2008-2009
-	 * @link http://elgg.org/
-	 */
-	
 /**
  * Elgg add user form.
  *
  * @package Elgg
  * @subpackage Core
- * 
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+ * @author Curverider Ltd
+ * @copyright Curverider Ltd 2008-2009
+ * @link http://elgg.org/
  */
 
 $name = $username = $email = $password = $password2 = $admin = '';
@@ -79,7 +71,7 @@ if ((elgg_get_logged_in_user_entity()->isAdmin()) && ($vars['show_admin'])) {
 	?>
 </div>
 
-<?php 
+<?php
 if ($admin_option) {
 	echo "<div>";
 	echo elgg_view('input/checkboxes', array(
@@ -106,31 +98,30 @@ if ($admin_option) {
 	$cats = $categorized_fields['categories'];
 	$fields = $categorized_fields['fields'];
 	
-	if($types || !empty($fields[0])){
+	if ($types || !empty($fields[0])) {
 		echo "<a href='javascript:void(0);' onclick='$(\"#extra_metadata\").show(); $(this).hide();'>" . elgg_echo("profile_manager:admin:adduser:extra_metadata") . "</a>";
-		echo "<div id='extra_metadata' class='hidden'>";	
+		echo "<div id='extra_metadata' class='hidden'>";
 	}
 	
-	if($types){
+	if ($types) {
 		
 		$options = array();
 		$options[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
 		
-		foreach($types as $type){
+		foreach ($types as $type) {
 			$options[$type->guid] = $type->getTitle();
 		}
 		
 		echo "<div>";
 		echo "<label>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:label") . "</label><br />";
-		echo elgg_view("input/dropdown", array("name" => "custom_profile_fields[custom_profile_type]",
-												"options_values" => $options));
-		echo "</div>";	
+		echo elgg_view("input/dropdown", array("name" => "custom_profile_fields[custom_profile_type]", "options_values" => $options));
+		echo "</div>";
 	}
 	
-	if(!empty($cats)){
-		foreach($cats as $cat_guid => $cat){		
+	if (!empty($cats)) {
+		foreach ($cats as $cat_guid => $cat) {
 			// display each field for currect category
-			foreach($fields[$cat_guid] as $field){
+			foreach ($fields[$cat_guid] as $field) {
 				$metadata_name = $field->metadata_name;
 				// get options
 				$options = $field->getOptions(true);
@@ -148,12 +139,11 @@ if ($admin_option) {
 		}
 	}
 	
-	if($types || !empty($fields[0])){
+	if ($types || !empty($fields[0])) {
 		echo "</div>";
 	}
 }
 ?>
-
 <div class="elgg-foot">
 	<?php echo elgg_view('input/submit', array('value' => elgg_echo('register'))); ?>
 </div>

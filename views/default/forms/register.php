@@ -17,7 +17,7 @@ if (elgg_is_sticky_form('register')) {
 }
 
 // must accept terms
-if($accept_terms = elgg_get_plugin_setting("registration_terms", "profile_manager")){
+if ($accept_terms = elgg_get_plugin_setting("registration_terms", "profile_manager")) {
 	$link_begin = "<a target='_blank' href='" . $accept_terms . "'>";
 	$link_end = "</a>";
 	
@@ -30,7 +30,7 @@ if($accept_terms = elgg_get_plugin_setting("registration_terms", "profile_manage
 echo "<div id='profile_manager_register_left'>";
 
 $show_hints = false;
-if(elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes"){
+if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 	$show_hints = true;
 }
 ?>
@@ -60,7 +60,7 @@ if(elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes"){
 	<div class="mandatory">
 		<label for='register-email'><?php echo elgg_echo('email'); ?></label>
 		
-		<?php if($show_hints){ ?>
+		<?php if ($show_hints) { ?>
 		<span class='custom_fields_more_info' id='more_info_email'></span>
 		<span class='custom_fields_more_info_text' id='text_more_info_email'><?php echo elgg_echo("profile_manager:register:hints:email")?></span>
 		<?php } ?>
@@ -80,7 +80,7 @@ if(elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes"){
 	<div class="mandatory">
 		<label for='register-username'><?php echo elgg_echo('username'); ?></label>
 		
-		<?php if($show_hints){ ?>
+		<?php if ($show_hints) { ?>
 		<span class='custom_fields_more_info' id='more_info_username'></span>
 		<span class='custom_fields_more_info_text' id='text_more_info_username'><?php echo elgg_echo("profile_manager:register:hints:username")?></span>
 		<?php } ?>
@@ -100,7 +100,7 @@ if(elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes"){
 	<div class="mandatory">
 		<label for='register-password'><?php echo elgg_echo('password'); ?></label>
 		
-		<?php if($show_hints){ ?>
+		<?php if ($show_hints) { ?>
 		<span class='custom_fields_more_info' id='more_info_password'></span>
 		<span class='custom_fields_more_info_text' id='text_more_info_password'><?php echo elgg_echo("profile_manager:register:hints:password")?></span>
 		<?php } ?>
@@ -120,7 +120,7 @@ if(elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes"){
 	<div class="mandatory">
 		<label for='register-password2'><?php echo elgg_echo('passwordagain'); ?></label>
 		
-		<?php if($show_hints){ ?>
+		<?php if ($show_hints) { ?>
 		<span class='custom_fields_more_info' id='more_info_passwordagain'></span>
 		<span class='custom_fields_more_info_text' id='text_more_info_passwordagain'><?php echo elgg_echo("profile_manager:register:hints:passwordagain")?></span>
 		<?php } ?>

@@ -1,6 +1,6 @@
 <?php
 	
-	$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/"; 
+$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 
 ?>
 #custom_fields_ordering {
@@ -72,7 +72,7 @@
 	border-radius: 5px;
 }
 
-#custom_fields_form, 
+#custom_fields_form,
 #custom_fields_category_form,
 #custom_fields_profile_type_form {
 	width: 700px;
@@ -193,7 +193,7 @@
 }
 
 .profile-manager-user-summary-config-options-delete {
-	color: red;	
+	color: red;
 }
 
 #profile-manager-user-summary-preview {

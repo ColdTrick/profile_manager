@@ -9,16 +9,17 @@ $field_selector = "<select " . elgg_format_attributes($vars) . " class='elgg-inp
 
 $field_selector .= "<option></option>";
 
-if($profile_fields = elgg_get_config("profile_fields")){
+$profile_fields = elgg_get_config("profile_fields");
+if ($profile_fields) {
 	$field_options = array();
 
-	foreach($profile_fields as $metadata_name => $type){
+	foreach ($profile_fields as $metadata_name => $type) {
 		$label = $metadata_name;
 
 		$translation_key = "profile:" . $metadata_name;
 		$translated_label = elgg_echo($translation_key);
 
-		if($translated_label !== $translation_key){
+		if ($translated_label !== $translation_key) {
 			$label = $translated_label;
 		}
 		$field_options[$metadata_name] = $label;
@@ -27,9 +28,9 @@ if($profile_fields = elgg_get_config("profile_fields")){
 	ksort($field_options);
 
 	$field_selector .= "<optgroup label='" . elgg_echo("profile_manager:profile_fields:list:title") . "'>";
-	foreach($field_options as $name => $label){
+	foreach ($field_options as $name => $label) {
 		$selected = "";
-		if($name == $value){
+		if ($name == $value) {
 			$selected = " selected='selected'";
 		}
 		$field_selector .= "<option value='" . $name . "'" . $selected . ">" . $label . "</option>";
@@ -38,9 +39,9 @@ if($profile_fields = elgg_get_config("profile_fields")){
 }
 
 $field_selector .= "<optgroup label='" . elgg_echo("profile_manager:user_summary_control:options:spacers") . "'>";
-foreach($spacers as $spacer){
+foreach ($spacers as $spacer) {
 	$selected = "";
-	if("spacer_" . $spacer == $value){
+	if ("spacer_" . $spacer == $value) {
 		$selected = " selected='selected'";
 	}
 	$field_selector .= "<option value='spacer_" . $spacer . "'" . $selected . ">" . elgg_echo("profile_manager:user_summary_control:options:spacers:" . $spacer) . "</option>";

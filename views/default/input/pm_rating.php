@@ -6,19 +6,18 @@ $rating_id = $vars["name"] . "_container";
 
 echo "<div id='". $rating_id . "'>";
 echo elgg_view("input/hidden", $vars);
-for($i = 1; $i <= 5; $i++){
-	if($i <= $selected_value){
+for ($i = 1; $i <= 5; $i++) {
+	if ($i <= $selected_value) {
 		echo elgg_view_icon("star-alt", "link");
 	} else {
 		echo elgg_view_icon("star-empty","link");
-	}	
+	}
 }
 
 echo " " . elgg_view("output/url", array("text" => elgg_echo("reset"), "href" => "#"));;
 echo "</div>";
 ?>
 <script type="text/javascript">
-
 	$(document).ready(function(){
 		$("#<?php echo $rating_id; ?> .elgg-icon").live({
 			mouseover: function(){

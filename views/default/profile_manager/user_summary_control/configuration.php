@@ -3,7 +3,7 @@
 $user = elgg_get_logged_in_user_entity();
 
 $current_config = elgg_get_plugin_setting("user_summary_config", "profile_manager");
-if(!empty($current_config)){
+if (!empty($current_config)) {
 	$current_config = json_decode($current_config, true);
 }
 
@@ -19,8 +19,8 @@ $form_body .= "<table class='profile-manager-user-summary-config'>";
 $form_body .= "<tr><td class='profile-manager-user-summary-config-name'>" . $user->name . "</td>";
 $form_body .= "<td class='profile-manager-user-summary-config-container' rel='config_title'>";
 
-if(is_array($current_config) && array_key_exists("title", $current_config)){
-	foreach($current_config["title"] as $field){
+if (is_array($current_config) && array_key_exists("title", $current_config)) {
+	foreach ($current_config["title"] as $field) {
 		$form_body .= elgg_view("input/pm_user_summary_selector", array("value" => $field, "name" => "config_title[]"));
 	}
 }
@@ -30,8 +30,8 @@ $form_body .= $add_icon . " <span class='profile-manager-user-summary-config-con
 $form_body .= "</td>";
 $form_body .= "<td class='profile-manager-user-summary-config-container' rel='config_entity_menu'>";
 
-if(is_array($current_config) && array_key_exists("entity_menu", $current_config)){
-	foreach($current_config["entity_menu"] as $field){
+if (is_array($current_config) && array_key_exists("entity_menu", $current_config)) {
+	foreach ($current_config["entity_menu"] as $field) {
 		$form_body .= elgg_view("input/pm_user_summary_selector", array("value" => $field, "name" => "config_entity_menu[]"));
 	}
 }
@@ -42,8 +42,8 @@ $form_body .= "</tr>";
 
 $form_body .= "<tr><td class='profile-manager-user-summary-config-container' rel='config_subtitle' colspan='3'>";
 
-if(is_array($current_config) && array_key_exists("subtitle", $current_config)){
-	foreach($current_config["subtitle"] as $field){
+if (is_array($current_config) && array_key_exists("subtitle", $current_config)) {
+	foreach ($current_config["subtitle"] as $field) {
 		$form_body .= elgg_view("input/pm_user_summary_selector", array("value" => $field, "name" => "config_subtitle[]"));
 	}
 }
@@ -53,8 +53,8 @@ $form_body .= "</td></tr>";
 
 $form_body .= "<tr><td class='profile-manager-user-summary-config-container' rel='config_content' colspan='3'>";
 
-if(is_array($current_config) && array_key_exists("content", $current_config)){
-	foreach($current_config["content"] as $field){
+if (is_array($current_config) && array_key_exists("content", $current_config)) {
+	foreach ($current_config["content"] as $field) {
 		$form_body .= elgg_view("input/pm_user_summary_selector", array("value" => $field, "name" => "config_content[]"));
 	}
 }

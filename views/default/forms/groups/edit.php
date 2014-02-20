@@ -38,7 +38,7 @@ $description_limit = elgg_get_plugin_setting("group_limit_description", "profile
 	<label><?php echo elgg_echo("groups:name"); ?></label><br />
 	<?php
 		$show_input = false;
-		if (empty($group) || ($name_limit === NULL) || ($name_limit === "") || elgg_is_admin_logged_in()){
+		if (empty($group) || ($name_limit === NULL) || ($name_limit === "") || elgg_is_admin_logged_in()) {
 			$show_input = true;
 		}
 		
@@ -81,10 +81,10 @@ $description_limit = elgg_get_plugin_setting("group_limit_description", "profile
 // retrieve group fields
 $group_fields = profile_manager_get_categorized_group_fields();
 
-if(count($group_fields["fields"]) > 0){
+if (count($group_fields["fields"]) > 0) {
 	$group_fields = $group_fields["fields"];
 	
-	foreach($group_fields as $field) {
+	foreach ($group_fields as $field) {
 		$metadata_name = $field->metadata_name;
 		
 		// get options
@@ -98,10 +98,13 @@ if(count($group_fields["fields"]) > 0){
 		
 		// get value
 		$value = '';
-		if($metadata = $vars['entity']->$metadata_name) {
+		if ($metadata = $vars['entity']->$metadata_name) {
 			if (is_array($metadata)) {
-				foreach($metadata as $md) {
-					if (!empty($value)) $value .= ', ';
+				foreach ($metadata as $md) {
+					if (!empty($value)) {
+						 $value .= ', ';
+					}
+					
 					$value .= $md;
 				}
 			} else {
@@ -117,7 +120,7 @@ if(count($group_fields["fields"]) > 0){
 		echo $title;
 		echo "</label>";
 		
-		if($hint = $field->getHint()){
+		if ($hint = $field->getHint()) {
 			?>
 			<span class='custom_fields_more_info' id='more_info_<?php echo $metadata_name; ?>'></span>
 			<span class="custom_fields_more_info_text" id="text_more_info_<?php echo $metadata_name; ?>"><?php echo $hint;?></span>
@@ -129,7 +132,7 @@ if(count($group_fields["fields"]) > 0){
 		if ($metadata_name == "description") {
 		
 			$show_input = false;
-			if (empty($group) || ($description_limit === NULL) || ($description_limit === "") || elgg_is_admin_logged_in()){
+			if (empty($group) || ($description_limit === NULL) || ($description_limit === "") || elgg_is_admin_logged_in()) {
 				$show_input = true;
 			}
 			
@@ -168,7 +171,7 @@ if(count($group_fields["fields"]) > 0){
 				));
 			}
 		} else {
-			if($valtype == "dropdown"){
+			if ($valtype == "dropdown") {
 				// add div around dropdown to let it act as a block level element
 				echo "<div>";
 			}

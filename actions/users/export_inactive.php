@@ -4,7 +4,7 @@ set_time_limit(0);
 
 $last_login = sanitise_int(get_input("last_login"), false);
 
-if(!empty($last_login)){
+if (!empty($last_login)) {
 	$dbprefix = elgg_get_config("dbprefix");
 	
 	$options = array(
@@ -19,7 +19,8 @@ if(!empty($last_login)){
 		"order_by" => "ue.last_login"
 	);
 	
-	if($users = elgg_get_entities_from_relationship($options)){
+	$users = elgg_get_entities_from_relationship($options);
+	if ($users) {
 		$fields = array("username", "name", "email", "last_login", "banned");
 		$fielddelimiter = ",";
 		// We'll be outputting a CSV
@@ -29,18 +30,18 @@ if(!empty($last_login)){
 		header('Content-Disposition: attachment; filename="export_inactive.csv"');
 		
 		$headers = "";
-		foreach($fields as $field){
-			if(!empty($headers)){
+		foreach ($fields as $field) {
+			if (!empty($headers)) {
 				$headers .= $fielddelimiter;
 			}
 			$headers .= $field;
 		}
 		echo $headers . PHP_EOL;
 		
-		foreach($users as $user){
+		foreach ($users as $user) {
 			$row = "";
-			foreach($fields as $field){
-				if(!empty($row)){
+			foreach ($fields as $field) {
+				if (!empty($row)) {
 					$row .= $fielddelimiter;
 				}
 				$row .=  $user->$field;

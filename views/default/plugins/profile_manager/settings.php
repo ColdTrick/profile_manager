@@ -1,72 +1,72 @@
 <?php
-	/**
-	* Profile Manager
-	*
-	* Admin settings
-	*
-	* @package profile_manager
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
-	*/
+/**
+* Profile Manager
+*
+* Admin settings
+*
+* @package profile_manager
+* @author ColdTrick IT Solutions
+* @copyright Coldtrick IT Solutions 2009
+* @link http://www.coldtrick.com/
+*/
 
-	$yesno_options = array(
-		"yes" => elgg_echo("option:yes"),
-		"no" => elgg_echo("option:no")
-	);
-	
-	$noyes_options = array_reverse($yesno_options);
-	
-	$extra_fields_options = array(
-		"extend" => elgg_echo("profile_manager:settings:registration:extra_fields:extend"),
-		"beside" => elgg_echo("profile_manager:settings:registration:extra_fields:beside")
-	);
+$yesno_options = array(
+	"yes" => elgg_echo("option:yes"),
+	"no" => elgg_echo("option:no")
+);
 
-	$description_position_options = array(
-		"bottom" => elgg_echo("bottom"),
-		"top" => elgg_echo("top")
-	);
-	
-	$enable_username_change_options = array(
-		"no" => elgg_echo("option:no"),
-		"admin" => elgg_echo("profile_manager:settings:enable_username_change:option:admin"),
-		"yes" => elgg_echo("option:yes")
-	);
-	
-	$profile_types = array();
-	
-	$profile_types_options = array(
-		"type" => "object",
-		"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
-		"owner_guid" => elgg_get_site_entity()->getGUID(),
-		"limit" => false
-	);
+$noyes_options = array_reverse($yesno_options);
 
-	$profile_type_entities = elgg_get_entities($profile_types_options);
-	
-	if(!empty($profile_type_entities)){
-		$profile_types[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
-		foreach($profile_type_entities as $type){
-			$profile_types[$type->guid] = $type->getTitle();
-		}
+$extra_fields_options = array(
+	"extend" => elgg_echo("profile_manager:settings:registration:extra_fields:extend"),
+	"beside" => elgg_echo("profile_manager:settings:registration:extra_fields:beside")
+);
+
+$description_position_options = array(
+	"bottom" => elgg_echo("bottom"),
+	"top" => elgg_echo("top")
+);
+
+$enable_username_change_options = array(
+	"no" => elgg_echo("option:no"),
+	"admin" => elgg_echo("profile_manager:settings:enable_username_change:option:admin"),
+	"yes" => elgg_echo("option:yes")
+);
+
+$profile_types = array();
+
+$profile_types_options = array(
+	"type" => "object",
+	"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+	"owner_guid" => elgg_get_site_entity()->getGUID(),
+	"limit" => false
+);
+
+$profile_type_entities = elgg_get_entities($profile_types_options);
+
+if (!empty($profile_type_entities)) {
+	$profile_types[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
+	foreach ($profile_type_entities as $type) {
+		$profile_types[$type->guid] = $type->getTitle();
 	}
-	
-	echo elgg_view("profile_manager/admin/tabs", array("settings_selected" => true));
-	
-	$group_limit_options = array(
-			"" => elgg_echo("profile_manager:settings:group:limit:unlimited"),
-			0 => elgg_echo("profile_manager:settings:group:limit:never"),
-			1 => 1,
-			2 => 2,
-			3 => 3,
-			4 => 4,
-			5 => 5,
-			6 => 6,
-			7 => 7,
-			8 => 8,
-			9 => 9,
-			10 => 10
-		);
+}
+
+echo elgg_view("profile_manager/admin/tabs", array("settings_selected" => true));
+
+$group_limit_options = array(
+		"" => elgg_echo("profile_manager:settings:group:limit:unlimited"),
+		0 => elgg_echo("profile_manager:settings:group:limit:never"),
+		1 => 1,
+		2 => 2,
+		3 => 3,
+		4 => 4,
+		5 => 5,
+		6 => 6,
+		7 => 7,
+		8 => 8,
+		9 => 9,
+		10 => 10
+	);
 ?>
 <table>
 	<tr>

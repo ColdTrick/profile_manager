@@ -1,5 +1,5 @@
 <?php
-	$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
+$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 ?>
 /* widgets */
 #widget_profile_completeness_container {

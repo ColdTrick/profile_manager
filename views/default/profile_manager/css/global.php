@@ -1,5 +1,5 @@
-<?php 
-	$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/"; 
+<?php
+$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 ?>
 .custom_fields_more_info {
 	width: 16px;

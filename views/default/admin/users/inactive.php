@@ -3,7 +3,7 @@
 $last_login = strtotime("-3 months");
 
 $date = sanitise_int(get_input("last_login"));
-if($date > 0){
+if ($date > 0) {
 	$last_login = $date;
 }
 
@@ -33,7 +33,7 @@ $options = array(
 
 $users = elgg_get_entities_from_relationship($options);
 
-if(!empty($users)){
+if (!empty($users)) {
 	$content = "<table class='elgg-table'>";
 	$content .= "<tr>";
 	$content .= "<th>" . elgg_echo("user") . "</th>";
@@ -41,11 +41,11 @@ if(!empty($users)){
 	$content .= "<th>" . elgg_echo("banned") . "</th>";
 	$content .= "</tr>";
 	
-	foreach($users as $user){
+	foreach ($users as $user) {
 		$content .= "<tr>";
 		$content .= "<td>" . elgg_view("output/url", array("text" => $user->name, "href" => $user->getURL())) . "</td>";
 		$last_login = $user->last_login;
-		if(empty($last_login)){
+		if (empty($last_login)) {
 			$content .= "<td>" . elgg_echo("profile_manager:admin:users:inactive:never") . "</td>";
 		} else {
 			$content .= "<td>" . elgg_view_friendly_time($last_login) . "</td>";
