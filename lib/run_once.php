@@ -4,7 +4,9 @@
  */
 
 /**
- * fixes a bug in previous profile manager versions that made all fields on register have access_id -1 instead of default access
+ * Fixes a bug in previous profile manager versions that made all fields on register have access_id -1 instead of default access
+ *
+ * @return void
  */
 function pm_fix_access_default() {
 	$dbprefix = elgg_get_config("dbprefix");
@@ -14,6 +16,8 @@ function pm_fix_access_default() {
 
 /**
  * Run once function
+ *
+ * @return void
  */
 function profile_manager_run_once() {
 	$dbprefix = elgg_get_config("dbprefix");

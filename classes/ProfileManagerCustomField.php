@@ -1,15 +1,16 @@
 <?php
-
 /**
  * ProfileManagerCustomField
  *
- * @author coldtrick
+ * @package ProfileManager
  *
  */
 abstract class ProfileManagerCustomField extends ElggObject {
 	
 	/**
 	 * initializes the default class attributes
+	 *
+	 * @return void
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -22,7 +23,8 @@ abstract class ProfileManagerCustomField extends ElggObject {
 	/**
 	 * Returns an array of options to be used in input views
 	 *
-	 * @param boolean $add_blank_option
+	 * @param boolean $add_blank_option optional boolean if there should be an extra empty option added
+	 *
 	 * @return string
 	 */
 	public function getOptions($add_blank_option = false) {

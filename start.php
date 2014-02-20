@@ -99,7 +99,7 @@ function profile_manager_init() {
 /**
  * Function to handle the nice urls for Custom Profile Fields
  *
- * @param array $page
+ * @param array $page pages
  *
  * @return void|boolean
  */

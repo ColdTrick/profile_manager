@@ -99,7 +99,7 @@ if (count($group_fields["fields"]) > 0) {
 			if (is_array($metadata)) {
 				foreach ($metadata as $md) {
 					if (!empty($value)) {
-						 $value .= ', ';
+						$value .= ', ';
 					}
 					
 					$value .= $md;

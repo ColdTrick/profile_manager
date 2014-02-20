@@ -22,7 +22,7 @@ if ($user->isBanned()) {
 			),
 			'limit' => 1
 		));
-            
+
 		if ($description_field) {
 			$title = $description_field[0]->getTitle();
 		} else {
