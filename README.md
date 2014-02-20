@@ -28,8 +28,3 @@ Features
 
 - profile completeness widget
 - register form widget
-
-Known issues
----------------
-
-- on register error backward maintaining selected profile icon is impossible due to security reasons 
