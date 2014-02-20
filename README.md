@@ -1,4 +1,4 @@
-Profile Manager
+Profile Manager [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/badges/quality-score.png?s=f793cb23030a6d48aee98de8ddaf2a34d5a2ef3c)](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/)
 ===============
 
 Improved management of user and group profile fields
