@@ -37,10 +37,9 @@ abstract class ProfileManagerCustomField extends ElggObject {
 			
 		$options = explode(",", $this->metadata_options);
 		
-		if (!$add_blank_option) {
-			if ($this->blank_available == "yes") {
-				$add_blank_option = true;
-			}
+		if ($this->blank_available == "yes") {
+			// if field has a blank option available, always add the blank option
+			$add_blank_option = true;
 		}
 		
 		if ($this->metadata_type != "multiselect" && $add_blank_option) {
