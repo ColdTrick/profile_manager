@@ -152,7 +152,7 @@ echo elgg_view('input/captcha');
 echo "</div>";
 
 echo "<div id='profile_manager_register_right'>";
-echo elgg_view("register/extend_side");
+echo elgg_view("register/extend_side", array("field_location" => "beside"));
 echo "</div>";
 
 echo "<div class='clearfloat'></div>";

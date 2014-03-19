@@ -10,6 +10,18 @@
 * @link http://www.coldtrick.com/
 */
 
+$field_location = $vars["field_location"];
+$field_location_setting = elgg_get_plugin_setting("registration_extra_fields", "profile_manager");
+if ($field_location == "beside") {
+	if ($field_location_setting !== "beside") {
+		// beside should be beside
+		return true;
+	}
+} elseif ($field_location_setting == "beside") {
+	// below or default
+	return true;
+}
+
 $profile_icon = elgg_get_plugin_setting("profile_icon_on_register", "profile_manager");
 $profile_type_selection = elgg_get_plugin_setting("profile_type_selection", "profile_manager");
 
