@@ -85,7 +85,7 @@ $formbody .= "</table>\n";
 $formbody .= elgg_view("input/hidden", array("name" => "guid", "value" => $guid));
 $formbody .= elgg_view('input/submit', array("value" => elgg_echo('save')));
 
-$form = elgg_view('input/form', array('body' => $formbody, 'action' => $vars['url'] . 'action/profile_manager/profile_types/add'));
+$form = elgg_view('input/form', array('body' => $formbody, 'action' => 'action/profile_manager/profile_types/add'));
 
 ?>
 <div class="elgg-module elgg-module-inline" id="custom_fields_profile_type_form">

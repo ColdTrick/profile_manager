@@ -29,7 +29,7 @@ if (empty($list)) {
 ?>
 <div class="elgg-module elgg-module-inline">
 	<div class="elgg-head">
-		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => $vars["url"] . "profile_manager/forms/profile_field", "class" => "elgg-button elgg-button-action profile-manager-popup"));?>
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "profile_manager/forms/profile_field", "class" => "elgg-button elgg-button-action profile-manager-popup"));?>
 		<h3>
 			<?php echo elgg_echo('profile_manager:profile_fields:list:title'); ?>
 		</h3>
