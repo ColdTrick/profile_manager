@@ -258,7 +258,7 @@ if ($simple_access_control == "yes") {
 	?>
 	<div>
 		<label><?php echo elgg_echo("profile_manager:simple_access_control"); ?></label>
-		<?php echo elgg_view('input/access',array('name' => 'simple_access_control', 'value' => $access_id, 'class' => 'simple_access_control', 'js' => 'onchange="set_access_control(this.value)"')); ?>
+		<?php echo elgg_view('input/access',array('name' => 'simple_access_control', 'value' => $access_id, 'class' => 'simple_access_control', 'onchange' => 'set_access_control(this.value)')); ?>
 	</div>
 	<?php
 }

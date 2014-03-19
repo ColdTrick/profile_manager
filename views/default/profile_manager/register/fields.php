@@ -39,7 +39,7 @@ if ($profile_type_selection != "admin") {
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 			"limit" => 0,
-			"owner_guid" => $vars["config"]->site_guid
+			"owner_guid" => elgg_get_site_entity()->getGUID()
 		);
 	$types = elgg_get_entities($types_options);
 	
@@ -75,7 +75,7 @@ if ($profile_type_selection != "admin") {
 										"name" => "custom_profile_fields_custom_profile_type",
 										"id" => "custom_profile_fields_custom_profile_type",
 										"options_values" => $types_options_values,
-										"js" => "onchange='elgg.profile_manager.change_profile_type_register();'",
+										"onchange" => "elgg.profile_manager.change_profile_type_register();",
 										"value" => $custom_profile_fields_custom_profile_type)
 									);
 		

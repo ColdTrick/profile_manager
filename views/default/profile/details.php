@@ -162,7 +162,7 @@ if (!empty($details_result)) {
 		<script type="text/javascript">
 			$('#custom_fields_userdetails').accordion({
 				header: 'h3',
-				autoHeight: false
+				heightStyle: "content"
 			});
 		</script>
 		<?php
