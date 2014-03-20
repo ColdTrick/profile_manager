@@ -70,10 +70,6 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	display: none;
 }
 
-.datepicker_hidden{
-	display: none;
-}
-
 /* fix for max-height multi-select drop down*/
 .ui-dropdownchecklist-dropcontainer {
 	max-height: 150px;

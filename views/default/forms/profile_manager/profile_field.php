@@ -12,6 +12,21 @@
 
 $form_title = elgg_echo('profile_manager:profile_fields:add');
 
+$options_values = array();
+$option_classes = array();
+
+$types = get_custom_field_types("custom_profile_field_types");
+if ($types) {
+	foreach ($types as $type) {
+		$options_values[$type->type] = $type->name;
+		foreach ($type->options as $option_name => $option_value) {
+			if ($option_value) {
+				$option_classes[$option_name] .= " field_option_enable_" . $type->type;
+			}
+		}
+	}
+}
+
 if ($vars["entity"]) {
 	
 	$form_title = elgg_echo('profile_manager:profile_fields:edit');
@@ -29,20 +44,9 @@ if ($vars["entity"]) {
 	$output_as_tags = $vars["entity"]->output_as_tags;
 	$blank_available = $vars["entity"]->blank_available;
 	$admin_only = $vars["entity"]->admin_only;
-}
-
-$options_values = array();
-$option_classes = array();
-
-$types = get_custom_field_types("custom_profile_field_types");
-if ($types) {
-	foreach ($types as $type) {
-		$options_values[$type->type] = $type->name;
-		foreach ($type->options as $option_name => $option_value) {
-			if ($option_value) {
-				$option_classes[$option_name] .= " field_option_enable_" . $type->type;
-			}
-		}
+	
+	if (!array_key_exists($metadata_type, $options_values)) {
+		$options_values[$metadata_type] = $metadata_type;
 	}
 }
 

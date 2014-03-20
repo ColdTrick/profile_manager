@@ -116,7 +116,7 @@ if ($current_field && ($current_field->getSubtype() != CUSTOM_PROFILE_FIELDS_PRO
 			if ($metadata_type == "dropdown" || $metadata_type == "radio" || $metadata_type == "multiselect") {
 				$field->metadata_options = $new_options;
 			} elseif ($current_field) {
-				$field->clearMetaData("metadata_options");
+				$field->deleteMetadata("metadata_options");
 			}
 			
 			if ($type == "profile") {

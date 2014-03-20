@@ -92,8 +92,6 @@ $english = array(
 	'profile_manager:admin:metadata_label_untranslated' => 'Label (Untranslated)',
 	'profile_manager:admin:metadata_options' => 'Options (comma separated)',
 	'profile_manager:admin:field_type' => "Field Type",
-	'profile_manager:admin:options:datepicker' => 'Datepicker',
-	'profile_manager:admin:options:pm_datepicker' => 'Datepicker (Profile Manager Style)',
 	'profile_manager:admin:options:dropdown' => 'Dropdown',
 	'profile_manager:admin:options:radio' => 'Radio',
 	'profile_manager:admin:options:multiselect' => 'MultiSelect',
@@ -346,13 +344,6 @@ $english = array(
 	'widgets:register:title' => "Register",
 	'widgets:register:description' => "Show a register box",
 	'widgets:register:loggedout' => "You need to be logged out to use this widget",
-
-	// datepicker
-	'profile_manager:datepicker:trigger' => 'Select a date',
-	'profile_manager:datepicker:output:dateformat' => '%a %d %b %Y', // For available notations see http://nl.php.net/manual/en/function.strftime.php
-	'profile_manager:datepicker:input:localisation' => '', // change it to the available localized js files in custom_profile_fields/vendors/jquery.datepick.package-3.5.2 (e.g. jquery.datepick-nl.js), leave blank for default
-	'profile_manager:datepicker:input:dateformat' => '%m/%d/%Y', // Notation is based on strftime, but must result in output like http://keith-wood.name/datepick.html#format
-	'profile_manager:datepicker:input:dateformat_js' => 'mm/dd/yyyy', // Notation is based on strftime, but must result in output like http://keith-wood.name/datepick.html#format
 
 	'profile_manager:input:multi_select:empty_text' => 'Please select ...',
 

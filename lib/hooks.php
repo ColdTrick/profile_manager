@@ -163,11 +163,11 @@ function profile_manager_categorized_profile_fields_hook($hook_name, $entity_typ
 				"container_guid" => "text",
 				"site_guid" => "text",
 
-				"time_created" => "pm_datepicker",
-				"time_updated" => "pm_datepicker",
-				"last_action" => "pm_datepicker",
-				"prev_last_login" => "pm_datepicker",
-				"last_login" => "pm_datepicker",
+				"time_created" => "date",
+				"time_updated" => "date",
+				"last_action" => "date",
+				"prev_last_login" => "date",
+				"last_login" => "date",
 
 				"admin_created" => "text",
 				"created_by_guid" => "text",
@@ -193,31 +193,6 @@ function profile_manager_categorized_profile_fields_hook($hook_name, $entity_typ
 	}
 
 	return $result;
-}
-
-/**
- * Replace old datepicker views with pm_datepicker
- *
- * @param string  $hook_name    name of the hook
- * @param string  $entity_type  type of the hook
- * @param unknown $return_value return value
- * @param unknown $parameters   hook parameters
- *
- * @return string
- */
-function profile_manager_display_view_hook($hook_name, $entity_type, $return_value, $parameters) {
-	$view = $parameters["view"];
-
-	if (($view == "output/datepicker" || $view == "input/datepicker") && !elgg_view_exists($view)) {
-
-		if ($view == "output/datepicker") {
-			$new_view = "output/pm_datepicker";
-		} else {
-			$new_view = "input/pm_datepicker";
-		}
-
-		return elgg_view($new_view, $parameters["vars"]);
-	}
 }
 
 /**
