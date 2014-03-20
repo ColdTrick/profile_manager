@@ -51,7 +51,7 @@ $formbody .= elgg_echo('profile_manager:admin:metadata_label') . "*:";
 $formbody .= elgg_view('input/text', array('name' => 'metadata_label', "value" => $metadata_label));
 
 $formbody .= elgg_echo('description') . "*:";
-$formbody .= elgg_view('input/plaintext', array("name" => "metadata_description", "value" => $metadata_description));
+$formbody .= elgg_view('input/longtext', array("name" => "metadata_description", "value" => $metadata_description));
 	
 $formbody .= "</td>\n";
 $formbody .= "<td class='custom_fields_add_form_table_right'>\n";
@@ -88,7 +88,7 @@ $formbody .= elgg_view('input/submit', array("value" => elgg_echo('save')));
 $form = elgg_view('input/form', array('body' => $formbody, 'action' => 'action/profile_manager/profile_types/add'));
 
 ?>
-<div class="elgg-module elgg-module-inline" id="custom_fields_profile_type_form">
+<div class="elgg-module elgg-module-inline mtn" id="custom_fields_profile_type_form">
 	<div class="elgg-head">
 		<h3>
 			<?php echo $form_title; ?>
