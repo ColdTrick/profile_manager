@@ -36,7 +36,6 @@ $english = array(
 	'profile_manager:settings:edit_profile' => 'Edit Profile',
 	'profile_manager:settings:view_profile' => 'View Profile',
 	'profile_manager:settings:group' => "Edit Group Profile",
-	'profile_manager:settings:other' => 'Other',
 
 	'profile_manager:settings:profile_icon_on_register' => 'Add mandatory profile icon input field on register form',
 	'profile_manager:settings:show_account_hints' => 'Show hints for default account registration questions',
@@ -80,14 +79,12 @@ $english = array(
 	'profile_manager:settings:group:group_limit_name' => "Maximum number of times a group name can be edited",
 	'profile_manager:settings:group:group_limit_description' => "Maximum number of times a group description can be edited",
 	'profile_manager:settings:group:limit:unlimited' => "Unlimited",
-	'profile_manager:settings:group:limit:never' => "Never",
 	'profile_manager:settings:group:limit:info' => "These limits do not apply to site administrators",
 	
 	// Field Configuration
 	'profile_manager:admin:metadata_name' => 'Name',
 	'profile_manager:admin:metadata_label' => 'Label',
 	'profile_manager:admin:metadata_hint' => 'Hint',
-	'profile_manager:admin:metadata_description' => 'Description',
 	'profile_manager:admin:metadata_label_translated' => 'Label (Translated)',
 	'profile_manager:admin:metadata_label_untranslated' => 'Label (Untranslated)',
 	'profile_manager:admin:metadata_options' => 'Options (comma separated)',
@@ -167,8 +164,6 @@ $english = array(
 	// profile manager inactive users
 	'profile_manager:admin:users:inactive:last_login' => "Last login before",
 	'profile_manager:admin:users:inactive:list' => "Inactive users",
-	'profile_manager:admin:users:inactive:never' => "Never",
-	'profile_manager:admin:users:inactive:download' => "Download",
 
 	// admin actions
 	'profile_manager:actions:title' => 'Actions',
@@ -196,7 +191,6 @@ $english = array(
 	'profile_manager:actions:import:from_default:error:wrong_type' => 'Wrong profile field type (group or profile)',
 
 	// Export
-	'profile_manager:actions:export' => "Export",
 	'profile_manager:actions:export:description' => "Export profile data to a csv file",
 	'profile_manager:export:title' => "Export Profile Data",
 	'profile_manager:export:description:custom_profile_field' => "This function will export all <b>user</b> metadata based on selected fields.",

@@ -23,7 +23,7 @@ define("CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP", "custom_profi
 /**
  * initialization of plugin
  *
- * @return unknown_type
+ * @return void
  */
 function profile_manager_init() {
 	// register libraries

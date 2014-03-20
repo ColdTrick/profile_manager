@@ -55,7 +55,7 @@ echo elgg_view("profile_manager/admin/tabs", array("settings_selected" => true))
 
 $group_limit_options = array(
 		"" => elgg_echo("profile_manager:settings:group:limit:unlimited"),
-		0 => elgg_echo("profile_manager:settings:group:limit:never"),
+		0 => elgg_echo("never"),
 		1 => 1,
 		2 => 2,
 		3 => 3,
@@ -273,7 +273,7 @@ $group_limit_options = array(
 		<td colspan="2">
 			<div class='elgg-module-inline'>
 				<div class='elgg-head'>
-				<h3><?php echo elgg_echo("profile_manager:settings:other"); ?></h3>
+				<h3><?php echo elgg_echo("other"); ?></h3>
 				</div>
 			</div>
 		</td>

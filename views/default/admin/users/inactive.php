@@ -46,7 +46,7 @@ if (!empty($users)) {
 		$content .= "<td>" . elgg_view("output/url", array("text" => $user->name, "href" => $user->getURL())) . "</td>";
 		$user_last_login = $user->last_login;
 		if (empty($user_last_login)) {
-			$content .= "<td>" . elgg_echo("profile_manager:admin:users:inactive:never") . "</td>";
+			$content .= "<td>" . elgg_echo("never") . "</td>";
 		} else {
 			$content .= "<td>" . elgg_view_friendly_time($user_last_login) . "</td>";
 		}
@@ -63,7 +63,7 @@ if (!empty($users)) {
 	
 	$download_link = elgg_add_action_tokens_to_url("action/profile_manager/users/export_inactive?last_login=" . $last_login);
 	
-	$content .= "<br />" . elgg_view("input/button", array("value" => elgg_echo("profile_manager:admin:users:inactive:download"), "onclick" => "document.location.href='" . $download_link . "'", "class" => "elgg-button-action"));
+	$content .= "<br />" . elgg_view("input/button", array("value" => elgg_echo("download"), "onclick" => "document.location.href='" . $download_link . "'", "class" => "elgg-button-action"));
 	
 } else {
 	$content = elgg_echo("notfound");

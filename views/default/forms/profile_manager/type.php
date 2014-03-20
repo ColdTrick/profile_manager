@@ -50,7 +50,7 @@ $formbody .= elgg_view('input/text', array('name' => 'metadata_name', "value" =>
 $formbody .= elgg_echo('profile_manager:admin:metadata_label') . "*:";
 $formbody .= elgg_view('input/text', array('name' => 'metadata_label', "value" => $metadata_label));
 
-$formbody .= elgg_echo('profile_manager:admin:metadata_description') . "*:";
+$formbody .= elgg_echo('description') . "*:";
 $formbody .= elgg_view('input/plaintext', array("name" => "metadata_description", "value" => $metadata_description));
 	
 $formbody .= "</td>\n";
