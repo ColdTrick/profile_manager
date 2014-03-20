@@ -88,7 +88,7 @@ $formbody .= elgg_view('input/submit', array("value" => elgg_echo('save')));
 $form = elgg_view('input/form', array('body' => $formbody, 'action' => 'action/profile_manager/profile_types/add'));
 
 ?>
-<div class="elgg-module elgg-module-inline mtn" id="custom_fields_profile_type_form">
+<div class="elgg-module elgg-module-inline mvn" id="custom_fields_profile_type_form">
 	<div class="elgg-head">
 		<h3>
 			<?php echo $form_title; ?>

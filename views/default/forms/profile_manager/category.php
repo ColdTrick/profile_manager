@@ -85,7 +85,7 @@ $formbody .= elgg_view('input/submit', array('name' => elgg_echo('save'), 'value
 $form = elgg_view('input/form', array('body' => $formbody, 'action' => 'action/profile_manager/categories/add'));
 	
 ?>
-<div class="elgg-module elgg-module-inline mtn" id="custom_fields_category_form">
+<div class="elgg-module elgg-module-inline mvn" id="custom_fields_category_form">
 	<div class="elgg-head">
 		<h3>
 			<?php echo $form_title; ?>
