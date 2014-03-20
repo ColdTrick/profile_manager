@@ -207,11 +207,18 @@ if (!empty($cats)) {
 				$field_result .= "<div>";
 			}
 			
-			$field_result .= elgg_view("input/" . $valtype, array(
-															'name' => $metadata_name,
-															'value' => $value,
-															'options' => $options
-															));
+			$field_options = array(
+				'name' => $metadata_name,
+				'value' => $value,
+				'options' => $options
+			);
+
+			$field_placeholder = $field->getPlaceholder();
+			if (!empty($field_placeholder)) {
+				$field_options["placeholder"] = $field_placeholder;
+			}
+
+			$field_result .= elgg_view("input/" . $valtype, $field_options);
 			
 			if ($valtype == "dropdown") {
 				$field_result .= "</div>";

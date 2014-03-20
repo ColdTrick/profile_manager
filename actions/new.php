@@ -15,6 +15,7 @@ $site_guid = elgg_get_site_entity()->getGUID();
 $metadata_name = trim(get_input("metadata_name"));
 $metadata_label = trim(get_input("metadata_label"));
 $metadata_hint = trim(get_input("metadata_hint"));
+$metadata_placeholder = trim(get_input("metadata_placeholder"));
 $metadata_type = get_input("metadata_type");
 $metadata_options = get_input("metadata_options");
 
@@ -110,6 +111,12 @@ if ($current_field && ($current_field->getSubtype() != CUSTOM_PROFILE_FIELDS_PRO
 				$field->metadata_hint = $metadata_hint;
 			} elseif ($current_field) {
 				unset($field->metadata_hint);
+			}
+			
+			if (!empty($metadata_placeholder)) {
+				$field->metadata_placeholder = $metadata_placeholder;
+			} elseif ($current_field) {
+				unset($field->metadata_placeholder);
 			}
 			
 			$field->metadata_type = $metadata_type;

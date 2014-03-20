@@ -35,6 +35,7 @@ if ($vars["entity"]) {
 	$metadata_name = $vars["entity"]->metadata_name;
 	$metadata_label = $vars["entity"]->metadata_label;
 	$metadata_hint = $vars["entity"]->metadata_hint;
+	$metadata_placeholder = $vars["entity"]->metadata_placeholder;
 	$metadata_type = $vars["entity"]->metadata_type;
 	$metadata_options = $vars["entity"]->metadata_options;
 	
@@ -58,6 +59,7 @@ $type_control = elgg_view('input/dropdown', array('name' => 'metadata_type', 'op
 $formbody .= elgg_echo('profile_manager:admin:metadata_name') . ":" . elgg_view('input/text', array('name' => 'metadata_name', "value" => $metadata_name));
 $formbody .= elgg_echo('profile_manager:admin:metadata_label') . "*:" . elgg_view('input/text', array('name' => 'metadata_label', "value" => $metadata_label));
 $formbody .= elgg_echo('profile_manager:admin:metadata_hint') . "*:" . elgg_view('input/text', array('name' => 'metadata_hint', "value" => $metadata_hint));
+$formbody .= elgg_echo('profile_manager:admin:metadata_placeholder') . "*:" . elgg_view('input/text', array('name' => 'metadata_placeholder', "value" => $metadata_placeholder));
 $formbody .= elgg_echo('profile_manager:admin:field_type') . ": " . $type_control;
 $formbody .= "<br />" . elgg_echo('profile_manager:admin:metadata_options') . "*:" . elgg_view('input/text', array('name' => 'metadata_options', "value" => $metadata_options));
 

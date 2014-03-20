@@ -86,6 +86,7 @@ if (count($group_fields["fields"]) > 0) {
 		
 		// get options
 		$options = $field->getOptions();
+		$placeholder = $field->getPlaceholder();
 		
 		// get type of field
 		$valtype = $field->metadata_type;
@@ -126,6 +127,19 @@ if (count($group_fields["fields"]) > 0) {
 		
 		echo $line_break;
 		
+		$field_output_options = array(
+			'name' => $metadata_name,
+			'value' => $value,
+		);
+
+		if ($options) {
+			$field_output_options['options'] = $options;
+		}
+
+		if ($placeholder) {
+			$field_output_options['placeholder'] = $placeholder;
+		}
+
 		if ($metadata_name == "description") {
 		
 			$show_input = false;
@@ -147,10 +161,8 @@ if (count($group_fields["fields"]) > 0) {
 			}
 			
 			if ($show_input) {
-				echo elgg_view("input/{$valtype}", array(
-						'name' => $metadata_name,
-						'value' => $value,
-				));
+
+				echo elgg_view("input/{$valtype}", $field_output_options);
 				
 				if (!empty($edit_num_left)) {
 					echo "<div class='elgg-subtext'>" . elgg_echo("profile_manager:group:edit:limit", array("<strong>" . $edit_num_left . "</strong>")) . "</div>";
@@ -173,11 +185,7 @@ if (count($group_fields["fields"]) > 0) {
 				echo "<div>";
 			}
 			
-			echo elgg_view("input/{$valtype}", array(
-				'name' => $metadata_name,
-				'value' => $value,
-				'options' => $options
-			));
+			echo elgg_view("input/{$valtype}", $field_output_options);
 			
 			if ($valtype == "dropdown") {
 				echo "</div>";

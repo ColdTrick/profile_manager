@@ -145,7 +145,8 @@ if (count($fields) > 0) {
 			$fields_result .= elgg_view("input/{$metadata_type}", array(
 													"name" => "custom_profile_fields_" . $field->metadata_name,
 													"value" => $value,
-													"options" => $field->getOptions()
+													"options" => $field->getOptions(),
+													"placeholder" => $field->getPlaceholder()
 													));
 			$fields_result .= "</div>";
 		}

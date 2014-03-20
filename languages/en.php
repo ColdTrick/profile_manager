@@ -85,6 +85,7 @@ $english = array(
 	'profile_manager:admin:metadata_name' => 'Name',
 	'profile_manager:admin:metadata_label' => 'Label',
 	'profile_manager:admin:metadata_hint' => 'Hint',
+	'profile_manager:admin:metadata_placeholder' => 'Placeholder',
 	'profile_manager:admin:metadata_label_translated' => 'Label (Translated)',
 	'profile_manager:admin:metadata_label_untranslated' => 'Label (Untranslated)',
 	'profile_manager:admin:metadata_options' => 'Options (comma separated)',

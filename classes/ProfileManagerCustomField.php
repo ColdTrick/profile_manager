@@ -58,15 +58,31 @@ abstract class ProfileManagerCustomField extends ElggObject {
 	 * @return string
 	 */
 	public function getHint() {
-		// make title
-		$hint = $this->metadata_hint;
+		$result = $this->metadata_hint;
 		
-		if (empty($hint)) {
+		if (empty($result)) {
 			$trans_key = "profile:hint:" . $this->metadata_name;
 			if ($trans_key != elgg_echo($trans_key)) {
-				$hint = elgg_echo($trans_key);
+				$result = elgg_echo($trans_key);
 			}
 		}
-		return $hint;
+		return $result;
+	}
+
+	/**
+	 * Returns the placeholder text
+	 *
+	 * @return string
+	 */
+	public function getPlaceholder() {
+		$result = $this->metadata_placeholder;
+		
+		if (empty($result)) {
+			$trans_key = "profile:placeholder:" . $this->metadata_name;
+			if ($trans_key != elgg_echo($trans_key)) {
+				$result = elgg_echo($trans_key);
+			}
+		}
+		return $result;
 	}
 }
