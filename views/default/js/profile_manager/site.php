@@ -30,13 +30,16 @@ elgg.profile_manager.init = function(){
 	);
 
 	// tab switcher on edit form
-	$("#profile_manager_profile_edit_tabs a").click(function(){
+	$("#profile_manager_profile_edit_tabs a").click(function(event) {
 		var id = $(this).attr("href").replace("#", "");
 		$("#profile_manager_profile_edit_tabs li").removeClass("elgg-state-selected");
 		$(this).parent().addClass("elgg-state-selected");
 	
 		$('#profile_manager_profile_edit_tab_content_wrapper>div').hide();
 		$('#profile_manager_profile_edit_tab_content_' + id).show();
+
+		// do not jump to the anchor
+		event.preventDefault();
 	});
 	
 	hash = window.location.hash;
