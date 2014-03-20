@@ -51,9 +51,6 @@ $(document).ready(function(){
 	$(".profile-manager-user-summary-config-options-delete").live("click", function(){
 		$(this).parent().remove();
 	});
-
-	// add buttons
-	$(".profile-manager-popup").colorbox();
 });
 
 function toggleOption(field, guid){

@@ -28,7 +28,7 @@ if (empty($list)) {
 ?>
 <div class="elgg-module elgg-module-inline">
 	<div class="elgg-head">
-		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "profile_manager/forms/type", "class" => "elgg-button elgg-button-action profile-manager-popup")); ?>
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "profile_manager/forms/type", "class" => "elgg-button elgg-button-action profile-manager-popup elgg-lightbox")); ?>
 		<h3>
 			<?php echo elgg_echo('profile_manager:profile_types:list:title'); ?>
 			<span class='custom_fields_more_info' id='more_info_profile_type_list'></span>
