@@ -245,9 +245,9 @@ function profile_manager_action_register_hook($hook_name, $entity_type, $return_
 
 		foreach ($required_fields as $entity) {
 
-			$passed_value = $custom_profile_fields[$entity->metadata_name];
+			$passed_value = trim($custom_profile_fields[$entity->metadata_name]);
 
-			if (empty($passed_value)) {
+			if (strlen($passed_value) < 1) {
 				register_error(elgg_echo("profile_manager:register_pre_check:missing", array($entity->getTitle())));
 				forward(REFERER);
 			}

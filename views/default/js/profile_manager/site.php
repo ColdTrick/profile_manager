@@ -57,7 +57,7 @@ elgg.profile_manager.init = function(){
 	// registration form adjustments
 	
 	// validate on submit
-	$(".elgg-form-register").live("submit", function(){
+	$(".elgg-form-register").live("submit", function() {
 		var error_count = 0;
 		var result = false;
 
@@ -67,7 +67,7 @@ elgg.profile_manager.init = function(){
 			selProfileType = 0;
 		}
 		
-		$form.find(".mandatory").find("input, select, textarea").each(function(index, elem){
+		$form.find(".mandatory").find("input, select, textarea").each(function(index, elem) {
 			
 			switch($(elem).attr("type")){
 				case "radio":
@@ -102,7 +102,8 @@ elgg.profile_manager.init = function(){
 								error_count++;
 							}
 						} else {
-							if($(elem).val() == ""){
+							
+							if($(elem).val().trim() == ""){
 								$(elem).addClass("profile_manager_register_missing");
 								error_count++;
 							}
