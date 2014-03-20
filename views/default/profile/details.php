@@ -99,7 +99,7 @@ if (count($cats) > 0) {
 			);
 			$collapse_link = elgg_view('output/url', $params);
 			
-			$cat_title = "<h3>" . $title . "</h3>\n";
+			$cat_title = "<h3>" . $title . "</h3>";
 		}
 			
 		foreach ($fields[$cat_guid] as $field) {
@@ -144,7 +144,7 @@ if (count($cats) > 0) {
 				$field_result .= "<div class='" . $even_odd . "'>";
 				$field_result .= "<b>" . $title . "</b>:&nbsp;";
 				$field_result .= elgg_view("output/" . $output_type, array("value" => $value, "target" => $target));
-				$field_result .= "</div>\n";
+				$field_result .= "</div>";
 			}
 		}
 			

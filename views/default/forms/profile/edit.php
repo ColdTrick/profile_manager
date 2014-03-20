@@ -143,7 +143,7 @@ if (!empty($cats)) {
 			}
 		}
 				
-		$tab_content .= "<div id='profile_manager_profile_edit_tab_content_" . $cat_guid . "' class='profile_manager_profile_edit_tab_content'>\n";
+		$tab_content .= "<div id='profile_manager_profile_edit_tab_content_" . $cat_guid . "' class='profile_manager_profile_edit_tab_content'>";
 			
 		$list_content .= "<div id='" . $cat_guid . "' class='" . $class . "'>";
 		if (count($cats) > 1) {
@@ -241,10 +241,10 @@ if (!empty($cats)) {
 			);
 		}
 		
-		$tab_content .= "</div>\n";
+		$tab_content .= "</div>";
 		
 		$list_content .= "</fieldset>";
-		$list_content .= "</div>\n";
+		$list_content .= "</div>";
 	}
 	
 	if (($edit_profile_mode == "tabbed") && (count($cats) > 1)) {

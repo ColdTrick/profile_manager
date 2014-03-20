@@ -38,13 +38,13 @@ if ($vars["entity"]) {
 	}
 }
 
-$formbody = "<table class='custom_fields_add_form_table'>\n";
-$formbody .= "<tr>\n";
-$formbody .= "<td class='custom_fields_add_form_table_left'>\n";
+$formbody = "<table class='custom_fields_add_form_table'>";
+$formbody .= "<tr>";
+$formbody .= "<td class='custom_fields_add_form_table_left'>";
 $formbody .= elgg_echo('profile_manager:admin:metadata_name') . ":";
 $formbody .= elgg_view('input/text', array('name' => 'metadata_name', "value" => $metadata_name));
-$formbody .= "</td>\n";
-$formbody .= "<td rowspan='2' class='custom_fields_add_form_table_right'>\n";
+$formbody .= "</td>";
+$formbody .= "<td rowspan='2' class='custom_fields_add_form_table_right'>";
 
 $options = array(
 		"type" => "object",
@@ -69,15 +69,15 @@ if (count($types) > 0) {
 	$formbody .= "&nbsp;";
 }
 
-$formbody .= "</td>\n";
-$formbody .= "</tr>\n";
-$formbody .= "<tr>\n";
-$formbody .= "<td>\n";
+$formbody .= "</td>";
+$formbody .= "</tr>";
+$formbody .= "<tr>";
+$formbody .= "<td>";
 $formbody .= elgg_echo('profile_manager:admin:metadata_label') . "*:";
 $formbody .= elgg_view('input/text', array('name' => 'metadata_label', "value" => $metadata_label));
-$formbody .= "</td>\n";
-$formbody .= "</tr>\n";
-$formbody .= "</table>\n";
+$formbody .= "</td>";
+$formbody .= "</tr>";
+$formbody .= "</table>";
 
 $formbody .= elgg_view("input/hidden", array("name" => "guid", "value" => $guid));
 $formbody .= elgg_view('input/submit', array('name' => elgg_echo('save'), 'value' => elgg_echo('save')));
