@@ -30,15 +30,15 @@ function profile_manager_init() {
 	elgg_register_js("jquery.ui.multiselect", "mod/profile_manager/vendors/jquery_ui_multiselect/jquery.multiselect.js");
 	
 	// Extend CSS
-	elgg_extend_view("css/admin", "profile_manager/css/global");
-	elgg_extend_view("css/admin", "profile_manager/css/admin");
-	elgg_extend_view("css/admin", "profile_manager/css/multiselect");
-	elgg_extend_view("css/elgg", "profile_manager/css/multiselect");
-	elgg_extend_view("css/elgg", "profile_manager/css/global");
-	elgg_extend_view("css/elgg", "profile_manager/css/site");
+	elgg_extend_view("css/admin", "css/profile_manager/global");
+	elgg_extend_view("css/admin", "css/profile_manager/admin");
+	elgg_extend_view("css/admin", "css/profile_manager/multiselect");
+	elgg_extend_view("css/elgg", "css/profile_manager/multiselect");
+	elgg_extend_view("css/elgg", "css/profile_manager/global");
+	elgg_extend_view("css/elgg", "css/profile_manager/site");
 	
-	elgg_extend_view("js/elgg", "profile_manager/js/site");
-	elgg_extend_view("js/admin", "profile_manager/js/admin");
+	elgg_extend_view("js/elgg", "js/profile_manager/site");
+	elgg_extend_view("js/admin", "js/profile_manager/admin");
 	
 	// Register Page handler
 	elgg_register_page_handler("profile_manager", "profile_manager_page_handler");
