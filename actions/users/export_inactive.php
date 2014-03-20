@@ -23,31 +23,39 @@ if (!empty($last_login)) {
 	if ($users) {
 		$fields = array("username", "name", "email", "last_login", "banned");
 		$fielddelimiter = ",";
+		
 		// We'll be outputting a CSV
-		header("Content-Type: text/plain; charset: UTF-8");
-		
 		// It will be called export_inactive.csv
-		header('Content-Disposition: attachment; filename="export_inactive.csv"');
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header("Content-Type: application/force-download");
+		header("Content-Type: application/octet-stream");
+		header("Content-Type: application/download");
+		header("Content-Disposition: attachment;filename=export_inactive.csv");
+		header("Content-Transfer-Encoding: binary");
 		
-		$headers = "";
+		ob_start();
+		
+		$df = fopen("php://output", 'w');
+		
+		$headers = array();
 		foreach ($fields as $field) {
-			if (!empty($headers)) {
-				$headers .= $fielddelimiter;
-			}
-			$headers .= $field;
+			$headers[] = $field;
 		}
-		echo $headers . PHP_EOL;
-		
+		fputcsv($df, $headers, ";");
+
 		foreach ($users as $user) {
-			$row = "";
+			$row = array();
 			foreach ($fields as $field) {
-				if (!empty($row)) {
-					$row .= $fielddelimiter;
-				}
-				$row .= $user->$field;
+				$row[] = $user->$field;
 			}
-			echo $row . PHP_EOL;
+			fputcsv($df, $row, ";");
 		}
+		
+		fclose($df);
+		
+		echo ob_get_clean();
 
 		exit();
 	} else {
