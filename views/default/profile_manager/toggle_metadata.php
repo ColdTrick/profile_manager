@@ -40,7 +40,7 @@ if (!empty($type_options) && array_key_exists($metadata_name, $type_options) && 
 		$class = " field_config_metadata_option_enabled";
 	}
 	$title = elgg_echo('profile_manager:admin:' . $metadata_name);
-	$onclick = "onclick='toggleOption(\"" . $metadata_name . "\", " . $entity->guid . "); return false;'";
+	$onclick = "onclick='elgg.profile_manager.toggle_option(\"" . $metadata_name . "\", " . $entity->guid . "); return false;'";
 } else {
 	$title = elgg_echo('profile_manager:admin:option_unavailable');
 }

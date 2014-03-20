@@ -54,7 +54,7 @@ if ($vars["entity"]) {
 $yes_no_options = array('yes' => elgg_echo('option:yes'),'no' => elgg_echo('option:no'));
 $no_yes_options = array_reverse($yes_no_options);
 
-$type_control = elgg_view('input/dropdown', array('name' => 'metadata_type', 'options_values' => $options_values, 'onchange' => 'changeFieldType();', "value" => $metadata_type));
+$type_control = elgg_view('input/dropdown', array('name' => 'metadata_type', 'options_values' => $options_values, 'onchange' => 'elgg.profile_manager.change_field_type();', "value" => $metadata_type));
 
 $formbody .= elgg_echo('profile_manager:admin:metadata_name') . ":" . elgg_view('input/text', array('name' => 'metadata_name', "value" => $metadata_name));
 $formbody .= elgg_echo('profile_manager:admin:metadata_label') . "*:" . elgg_view('input/text', array('name' => 'metadata_label', "value" => $metadata_label));
@@ -152,5 +152,5 @@ $form = elgg_view('input/form', array('body' => $formbody, 'action' => 'action/p
 	</div>
 </div>
 <script type="text/javascript">
-	changeFieldType();
+elgg.profile_manager.change_field_type();
 </script>

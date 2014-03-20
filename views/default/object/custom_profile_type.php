@@ -15,9 +15,23 @@ $entity = $vars["entity"];
 // get title
 $title = $entity->getTitle();
 	
-?>
-<div class="custom_profile_type" id="custom_profile_type_<?php echo $entity->guid;?>">
-	<?php echo $title; ?>
-	<a href="<?php echo elgg_get_site_url();?>profile_manager/forms/type/<?php echo $entity->guid;?>" class="elgg-lightbox"><span class="elgg-icon elgg-icon-settings-alt" title="<?php echo elgg_echo("edit");?>"></span></a>
-	<span class="elgg-icon elgg-icon-delete" title="<?php echo elgg_echo("delete");?>" onclick="deleteProfileType('<?php echo $entity->guid;?>');"></span>
-</div>
+echo "<div class='custom_profile_type' id='custom_profile_type_". $entity->guid . "'>";
+echo $title;
+
+// edit link
+echo elgg_view("output/url", array(
+	"href" => "profile_manager/forms/type/" .  $entity->guid,
+	"class" => "elgg-lightbox",
+	"title" => elgg_echo("edit"),
+	"text" => elgg_view_icon("settings-alt")
+));
+
+// delete link
+echo elgg_view("output/confirmlink", array(
+	"href" => "action/profile_manager/profile_types/delete?guid=" . $entity->guid,
+	"title" => elgg_echo("delete"),
+	"text" => elgg_view_icon("delete"),
+	"confirm" => elgg_echo("profile_manager:profile_types:delete:confirm")
+));
+
+echo "</div>";
