@@ -15,7 +15,7 @@ $entity = $vars["entity"];
 // get title
 $title = $entity->getTitle();
 	
-echo "<div class='custom_profile_type' id='custom_profile_type_". $entity->guid . "'>";
+echo "<div class='custom_profile_type' id='custom_profile_type_" . $entity->guid . "'>";
 echo $title;
 
 // edit link
