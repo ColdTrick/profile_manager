@@ -156,21 +156,16 @@ if (count($cats) > 0) {
 }
 	
 if (!empty($details_result)) {
-	echo "<div id='custom_fields_userdetails'>" . $details_result . "</div>";
 	if (elgg_get_plugin_setting("display_categories", "profile_manager") == "accordion") {
-		?>
-		<script type="text/javascript">
-			$('#custom_fields_userdetails').accordion({
-				header: 'h3',
-				heightStyle: "content"
-			});
-		</script>
-		<?php
+		echo "<div id='custom_fields_userdetails' class='profile-manager-accordion'>";
+	} else {
+		echo "<div id='custom_fields_userdetails'>";
 	}
+	echo $details_result . "</div>";
 }
 
 if ($description_position != "top") {
 	echo $about;
 }
 
-echo '</div>';
+echo "</div>";

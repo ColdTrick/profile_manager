@@ -171,6 +171,12 @@ elgg.profile_manager.init = function(){
 	$("#profile_manager_username .elgg-input-text").live("keyup", function(event) {
 		elgg.profile_manager.profile_manager_username(event, $(this));
 	});
+
+	// profile details accordion
+	$("#custom_fields_userdetails.profile-manager-accordion").accordion({
+		header: "h3",
+		heightStyle: "content"
+	});
 }
 
 elgg.profile_manager.profile_manager_username = function(event, elem) {
