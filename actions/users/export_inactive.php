@@ -22,7 +22,6 @@ if (!empty($last_login)) {
 	$users = elgg_get_entities_from_relationship($options);
 	if ($users) {
 		$fields = array("username", "name", "email", "last_login", "banned");
-		$fielddelimiter = ",";
 		
 		// We'll be outputting a CSV
 		// It will be called export_inactive.csv
