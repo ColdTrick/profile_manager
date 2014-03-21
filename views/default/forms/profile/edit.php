@@ -267,20 +267,6 @@ if ($simple_access_control == "yes") {
 		<label><?php echo elgg_echo("profile_manager:simple_access_control"); ?></label>
 		<?php echo elgg_view('input/access',array('name' => 'simple_access_control', 'value' => $access_id, 'class' => 'simple_access_control', 'onchange' => 'set_access_control(this.value)')); ?>
 	</div>
-	<?php
-}
-?>
-
-<div class="elgg-foot">
-<?php
-	echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars['entity']->guid));
-	echo elgg_view('input/submit', array('value' => elgg_echo('save')));
-?>
-</div>
-
-<?php
-if ($simple_access_control == "yes") {
-	?>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$(".simple_access_control").val($(".elgg-input-access:first").val()).trigger("change");
@@ -300,3 +286,11 @@ if ($simple_access_control == "yes") {
 	</style>
 	<?php
 }
+?>
+
+<div class="elgg-foot">
+<?php
+	echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars['entity']->guid));
+	echo elgg_view('input/submit', array('value' => elgg_echo('save')));
+?>
+</div>

@@ -166,6 +166,35 @@ elgg.profile_manager.init = function(){
 			}
 		}
 	});
+
+	// username change
+	$("#profile_manager_username .elgg-input-text").live("keyup", function(event) {
+		elgg.profile_manager.profile_manager_username(event, $(this));
+	});
+}
+
+elgg.profile_manager.profile_manager_username = function(event, elem) {
+	if(event.which != 13){
+		var username = $(elem).val();
+		$container = $(elem).parent();
+		$container.find(".elgg-icon").hide();
+		
+		if(username !== $(elem).attr("rel")){
+			$container.find(".elgg-icon-profile-manager-loading").show();
+			
+			$.getJSON(elgg.get_site_url() + "profile_manager/validate_username", { "username": username }, function(data){
+				if($("#profile_manager_username .elgg-input-text").val() == username){
+					if(data.valid){
+						$container.find(".elgg-icon-profile-manager-valid").show();
+					} else {
+						$container.find(".elgg-icon-profile-manager-invalid").show();
+					}
+					
+					$("#profile_manager_username .elgg-icon-profile-manager-loading").hide();
+				}
+			});
+		}
+	}
 }
 
 // live input validation
