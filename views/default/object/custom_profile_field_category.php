@@ -26,7 +26,7 @@ echo elgg_view("output/url", array(
 
 // edit link
 echo elgg_view("output/url", array(
-	"href" => "profile_manager/forms/category/" . $entity->guid,
+	"href" => "ajax/view/forms/profile_manager/category?guid=" . $entity->guid,
 	"class" => "elgg-lightbox",
 	"title" => elgg_echo("edit"),
 	"text" => elgg_view_icon("settings-alt")

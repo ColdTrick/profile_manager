@@ -10,6 +10,19 @@
 * @link http://www.coldtrick.com/
 */
 
+if (!elgg_is_admin_logged_in()) {
+	echo elgg_echo('adminrequired');
+	return;
+}
+
+if ($guid = get_input("guid")) {
+	if ($entity = get_entity($guid)) {
+		if ($entity instanceof ProfileManagerCustomProfileType) {
+			$vars["entity"] = $entity;
+		}
+	}
+}
+
 $form_title = elgg_echo('profile_manager:profile_types:add');
 
 if ($vars["entity"]) {

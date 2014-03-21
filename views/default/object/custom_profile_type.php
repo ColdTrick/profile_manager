@@ -20,7 +20,7 @@ echo $title;
 
 // edit link
 echo elgg_view("output/url", array(
-	"href" => "profile_manager/forms/type/" .  $entity->guid,
+	"href" => "ajax/view/forms/profile_manager/type?guid=" .  $entity->guid,
 	"class" => "elgg-lightbox",
 	"title" => elgg_echo("edit"),
 	"text" => elgg_view_icon("settings-alt")

@@ -89,10 +89,16 @@ function profile_manager_init() {
 	// Run once function to configure this plugin
 	run_function_once('profile_manager_run_once', 1287964800); // 2010-10-25
 	run_function_once('pm_fix_access_default');
+	
+	// register ajax views
+	elgg_register_ajax_view("forms/profile_manager/type");
+	elgg_register_ajax_view("forms/profile_manager/category");
+	elgg_register_ajax_view("forms/profile_manager/group_field");
+	elgg_register_ajax_view("forms/profile_manager/profile_field");
 }
 
 /**
- * Function to handle the nice urls for Custom Profile Fields
+ * Function to handle the nice urls for Profile Manager pages
  *
  * @param array $page pages
  *
@@ -100,14 +106,6 @@ function profile_manager_init() {
  */
 function profile_manager_page_handler($page) {
 	switch ($page[0]) {
-		case "forms":
-			$form = $page[1];
-			if (!empty($form) && elgg_is_admin_logged_in()) {
-				set_input("guid", $page[2]);
-				include(dirname(__FILE__) . "/pages/forms/" . $form . ".php");
-				return true;
-			}
-			break;
 		case "validate_username":
 			if (elgg_is_logged_in()) {
 				$new_username = get_input("username");
