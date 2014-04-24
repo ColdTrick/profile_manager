@@ -33,6 +33,14 @@ $enable_username_change_options = array(
 	"yes" => elgg_echo("option:yes")
 );
 
+$enable_profile_completeness_options = array(
+	"no" => elgg_echo("option:no"),
+	"widget" => elgg_echo("profile_manager:settings:enable_profile_completeness:option:widget"),
+	"profile_details" => elgg_echo("profile_manager:settings:enable_profile_completeness:option:profile_details"),
+	"header_profile" => elgg_echo("profile_manager:settings:enable_profile_completeness:option:header_profile"),
+	"header_all" => elgg_echo("profile_manager:settings:enable_profile_completeness:option:header_all"),
+);
+
 $profile_types = array();
 
 $profile_types_options = array(
@@ -280,10 +288,10 @@ $group_limit_options = array(
 	</tr>
 	<tr>
 		<td>
-			<?php echo elgg_echo('profile_manager:settings:enable_profile_completeness_widget'); ?>
+			<?php echo elgg_echo('profile_manager:settings:enable_profile_completeness'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/dropdown", array("name" => "params[enable_profile_completeness_widget]", "options_values" => $noyes_options, "value" => $vars['entity']->enable_profile_completeness_widget)); ?>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[enable_profile_completeness]", "options_values" => $enable_profile_completeness_options, "value" => $vars['entity']->enable_profile_completeness)); ?>
 		</td>
 	</tr>
 	<tr>

@@ -60,7 +60,8 @@ $metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $var
 $metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "admin_only"));
 
 // profile completeness
-if (elgg_get_plugin_setting("enable_profile_completeness_widget", "profile_manager") == "yes") {
+$profile_completeness_setting = elgg_get_plugin_setting("enable_profile_completeness", "profile_manager");
+if ($profile_completeness_setting && ($profile_completeness_setting !== "no")) {
 	$metadata .= "|";
 	$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "count_for_completeness"));
 }

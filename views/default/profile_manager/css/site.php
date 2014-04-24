@@ -1,6 +1,15 @@
 <?php
 $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 ?>
+
+.elgg-page-body .elgg-inner .profile-manager-profile-completeness {
+	margin-top: 10px;
+}
+
+.profile-manager-profile-completeness {
+	text-align: center;
+}
+
 /* widgets */
 #widget_profile_completeness_container {
 	border: 1px solid #AAAAAA;

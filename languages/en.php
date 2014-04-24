@@ -65,7 +65,12 @@ $english = array(
 	'profile_manager:settings:description_position' => 'Where to position the description ("About me") field',
 	'profile_manager:settings:user_summary_control' => 'Let Profile Manager control the user summary / listing view',
 	
-	'profile_manager:settings:enable_profile_completeness_widget' => "Enable the profile completeness widget",
+	'profile_manager:settings:enable_profile_completeness' => "Enable profile completeness information",
+	'profile_manager:settings:enable_profile_completeness:option:widget' => "Show in a widget",
+	'profile_manager:settings:enable_profile_completeness:option:profile_details' => "Show above profile details",
+	'profile_manager:settings:enable_profile_completeness:option:header_profile' => "Show on top of the profile page",
+	'profile_manager:settings:enable_profile_completeness:option:header_all' => "Show on top of every page",
+
 	'profile_manager:settings:enable_username_change' => "Allow users to change their username in settings",
 	'profile_manager:settings:enable_username_change:option:admin' => "Admin only",
 	'profile_manager:settings:enable_site_join_river_event' => "Add a river event when people join this site",

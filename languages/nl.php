@@ -42,7 +42,6 @@ $language = array (
   'profile_manager:settings:profile_type_selection:option:admin' => 'Alleen de beheerder',
   'profile_manager:settings:description_position' => 'Waar moet het "Over mij" veld gepositioneerd worden',
   'profile_manager:settings:user_summary_control' => 'Laat de Profile Manager de lijstweergave van gebruikers beheren',
-  'profile_manager:settings:enable_profile_completeness_widget' => 'Activeer de profiel compleetheid widget',
   'profile_manager:settings:enable_username_change' => 'Sta gebruikers toe om hun gebruikersnaam te wijzigen',
   'profile_manager:settings:enable_username_change:option:admin' => 'Alleen beheerders',
   'profile_manager:settings:enable_site_join_river_event' => 'Voeg een gebeurtenis toe aan de activiteiten stroom als iemand lid wordt van de site',

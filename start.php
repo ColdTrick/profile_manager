@@ -49,11 +49,27 @@ function profile_manager_init() {
 	// Register all custom field types
 	register_custom_field_types();
 	
-	// add profile_completeness widget
-	if (elgg_get_plugin_setting("enable_profile_completeness_widget", "profile_manager") == "yes") {
-		elgg_register_widget_type("profile_completeness", elgg_echo("widgets:profile_completeness:title"), elgg_echo("widgets:profile_completeness:description"), "profile,dashboard");
+	// add profile_completeness widget @todo replace with upgrade script in 1.9
+	$old_profile_completeness_setting = elgg_get_plugin_setting("enable_profile_completeness_widget", "profile_manager");
+	if ($old_profile_completeness_setting == "yes") {
+		elgg_unset_plugin_setting("enable_profile_completeness_widget", "profile_manager");
+		elgg_set_plugin_setting("enable_profile_completeness", "widget", "profile_manager");
 	}
 	
+	$profile_completeness_setting = elgg_get_plugin_setting("enable_profile_completeness", "profile_manager");
+	switch ($profile_completeness_setting) {
+		case "widget":
+			elgg_register_widget_type("profile_completeness", elgg_echo("widgets:profile_completeness:title"), elgg_echo("widgets:profile_completeness:description"), "profile,dashboard");
+			break;
+		case "header_all":
+		case "header_profile":
+			elgg_extend_view("page/elements/body", "profile_manager/profile_completeness/header", 250);
+			break;
+		case "profile_details":
+			elgg_extend_view("profile/status", "profile_manager/profile_completeness/profile_details");
+			break;
+	}
+		
 	elgg_register_widget_type("register", elgg_echo("widgets:register:title"), elgg_echo("widgets:register:description"), "index");
 	
 	// free_text on register form
