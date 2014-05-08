@@ -42,9 +42,9 @@ elgg.profile_manager.init = function(){
 		event.preventDefault();
 	});
 	
-	hash = window.location.hash;
-	if(hash && $("#profile_manager_profile_edit_tabs " + hash).length > 0){
-		$tab = $("#profile_manager_profile_edit_tabs " + hash + " a:visible");
+	var hash = window.location.hash;
+	if(hash && hash !== "#" && $("#profile_manager_profile_edit_tabs " + hash).length > 0){
+		var $tab = $("#profile_manager_profile_edit_tabs " + hash + " a:visible");
 		if($tab.length > 0){
 			$tab.click();
 		} else {
