@@ -195,5 +195,3 @@ if (count($group_fields["fields"]) > 0) {
 		echo '</div>';
 	}
 }
-
-echo "<div>";
