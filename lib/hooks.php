@@ -129,7 +129,11 @@ function profile_manager_group_override($hook_name, $entity_type, $return_value,
 			if (elgg_get_context() == "search" && ($group_field->output_as_tags == "yes" || $group_field->metadata_type == "multiselect")) {
 				$result[$group_field->metadata_name] = "tags";
 			}
+			
+			$translations["groups:" . $group_field->metadata_name] = $group_field->getTitle();
 		}
+		
+		add_translation(get_current_language(), $translations);
 	}
 
 	return $result;
