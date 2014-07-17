@@ -1,5 +1,11 @@
 <?php
+/**
+ * This file was created by Translation Editor v2.0
+ * On 2014-07-17 09:43
+ */
+
 $language = array (
+  'profile_manager:admin:metadata_placeholder' => 'Placeholder',
   'profile_manager:settings:group' => 'Bewerk Groep Profiel',
   'profile_manager:settings:group:group_limit_name' => 'Maximum aantal keer dat een groepsnaam kan worden bewerkt',
   'profile_manager:settings:group:group_limit_description' => 'Maximum aantal keer dat een groepsomschrijving kan worden bewerkt',
