@@ -1,4 +1,9 @@
-= Version history =
+Version history
+===============
+
+8.0:
+
+- changes for Elgg 1.9
 
 7.7 (2014-02-20):
 
