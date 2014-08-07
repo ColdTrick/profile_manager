@@ -13,8 +13,19 @@ $handle = "<div onclick='$(\"#" . $vars['entity']->guid . "\").toggle();' class=
 
 $title = "<div class='field_config_title'>";
 $title .= "<b>" . $vars['entity']->metadata_name . "</b> [" . $vars['entity']->metadata_type . "]";
-$title .= "<a href='" . elgg_get_site_url() . "ajax/view/forms/profile_manager/profile_field?guid=" . $vars['entity']->guid  . "' class='elgg-lightbox'><span class='elgg-icon elgg-icon-settings-alt' title='" . elgg_echo("edit") . "'></span></a>";
-$title .= "<span class='elgg-icon elgg-icon-delete' title='" . elgg_echo("delete") . "' onclick='elgg.profile_manager.remove_field(" . $vars['entity']->guid . ");'></span>";
+$title .= elgg_view("output/url", array(
+		"href" => "ajax/view/forms/profile_manager/profile_field?guid=" . $vars['entity']->guid,
+		"class" => "elgg-lightbox",
+		"title" => elgg_echo("edit"),
+		"text" => elgg_view_icon("settings-alt")
+
+));
+$title .= elgg_view("output/url", array(
+		"href" => false,
+		"onclick" => "elgg.profile_manager.remove_field(" . $vars['entity']->guid . ");",
+		"title" => elgg_echo("delete"),
+		"text" => elgg_view_icon("delete-alt")
+));
 $title .= "</div>";
 
 $extra_info = "<div id='" . $vars['entity']->guid . "' class='field_config_extra'>";
