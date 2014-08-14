@@ -257,7 +257,7 @@ if (!empty($cats)) {
 
 if ($simple_access_control == "yes") {
 	?>
-	<div>
+	<div class="profile-manager-simple-access-control">
 		<label><?php echo elgg_echo("profile_manager:simple_access_control"); ?></label>
 		<?php echo elgg_view('input/access',array('name' => 'simple_access_control', 'value' => $access_id, 'class' => 'simple_access_control', 'onchange' => 'set_access_control(this.value)')); ?>
 	</div>
