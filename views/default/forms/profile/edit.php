@@ -13,13 +13,7 @@
 * @uses $vars['profile'] Profile items from get_config('profile_fields'), defined in profile/start.php for now
 */
 
-// id profile_edit_form
-?>
-<div>
-	<label><?php echo elgg_echo('user:name:label'); ?></label>
-	<?php echo elgg_view('input/text', array('name' => 'name', 'value' => $vars['entity']->name)); ?>
-</div>
-<?php
+echo elgg_view("profile/edit/name", $vars);
 
 // Build fields
 
