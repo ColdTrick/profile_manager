@@ -96,6 +96,7 @@ if (!empty($cats)) {
 		
 		if (!empty($profile_type)) {
 			echo elgg_view("input/hidden", array("name" => "custom_profile_type", "value" => $profile_type));
+			echo elgg_view("input/hidden", array("name" => "accesslevel[custom_profile_type]", "value" => ACCESS_PUBLIC));
 			?>
 			<script type="text/javascript">
 				$(document).ready(function(){
