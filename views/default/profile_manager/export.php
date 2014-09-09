@@ -47,6 +47,7 @@ if ($fields) {
 				"time_created" => 0,
 				"time_updated" => 0,
 				"last_login" => 0,
+				"last_action" => 0,
 				"validated" => 0,
 				"validated_method" => 0
 		);
