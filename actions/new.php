@@ -29,6 +29,7 @@ $blank_available = get_input("blank_available");
 $type = get_input("type", "profile");
 
 $guid = get_input("guid");
+$current_field = false;
 
 $reserved_metadata_names = array(
 	"guid", "title", "access_id", "owner_guid", "container_guid", "type", "subtype", "name", "username", "email", "membership", "group_acl", "icon", "site_guid",
@@ -54,6 +55,7 @@ if ($current_field && ($current_field->getSubtype() != CUSTOM_PROFILE_FIELDS_PRO
 } elseif (($metadata_type == "dropdown" || $metadata_type == "radio" || $metadata_type == "multiselect") && empty($metadata_options)) {
 	register_error(elgg_echo("profile_manager:actions:new:error:metadata_options"));
 } else {
+	$existing = false;
 	if (array_key_exists($metadata_name, elgg_get_config('profile_fields'))) {
 		$existing = true;
 	}

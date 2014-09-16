@@ -29,10 +29,10 @@ function register_custom_field_types() {
 	$radio_options = $profile_options;
 	$radio_options["blank_available"] = true;
 	
-	$file_options = array(
-		"user_editable" => true,
-		"admin_only" => true
-	);
+// 	$file_options = array(
+// 		"user_editable" => true,
+// 		"admin_only" => true
+// 	);
 	
 	$pm_rating_options = $profile_options;
 	unset($pm_rating_options["output_as_tags"]);

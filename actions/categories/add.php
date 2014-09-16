@@ -14,6 +14,7 @@ $name = get_input("metadata_name");
 $label = get_input("metadata_label");
 $guid = get_input("guid");
 $profile_types = get_input("profile_types");
+$add = false;
 
 if (!empty($name) && preg_match("/^[a-zA-Z0-9_]{1,}$/", $name)) {
 	if (!empty($guid)) {

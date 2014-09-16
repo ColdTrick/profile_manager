@@ -14,6 +14,8 @@
  * @return array
  */
 function profile_manager_profile_override($hook_name, $entity_type, $return_value, $parameters) {
+	$result = array();
+	
 	// get from cache
 	$site_guid = elgg_get_config("site_guid");
 
@@ -41,7 +43,6 @@ function profile_manager_profile_override($hook_name, $entity_type, $return_valu
 
 		_elgg_get_metadata_cache()->populateFromEntities($guids);
 
-		$result = array();
 		$translations = array();
 		$context = elgg_get_context();
 		
@@ -102,6 +103,7 @@ function profile_manager_group_override($hook_name, $entity_type, $return_value,
 	if ($entities) {
 
 		$guids = array();
+		$translations = array();
 
 		foreach ($entities as $entity) {
 			$guids[] = $entity->getGUID();

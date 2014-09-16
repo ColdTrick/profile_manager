@@ -35,6 +35,8 @@ $df = fopen("php://output", 'w');
 	
 if (!empty($fieldtype) && !empty($fields)) {
 	if ($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE || $fieldtype == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE) {
+		$include_groups = false;
+		
 		$options = array(
 			"limit" => false
 		);

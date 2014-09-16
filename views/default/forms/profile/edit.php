@@ -24,6 +24,8 @@ $fields = $categorized_fields['fields'];
 $edit_profile_mode = elgg_get_plugin_setting("edit_profile_mode", "profile_manager");
 $simple_access_control = elgg_get_plugin_setting("simple_access_control","profile_manager");
 
+$access_id = get_default_access($vars["entity"]);
+
 if (!empty($cats)) {
 	
 	// Profile type selector

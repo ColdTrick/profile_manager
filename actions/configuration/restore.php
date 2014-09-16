@@ -37,6 +37,8 @@ if ($json = get_uploaded_file("restoreFile")) {
 					);
 					
 				$entities = elgg_get_entities($options);
+				$error = false;
+				
 				if (!empty($entities)) {
 					foreach ($entities as $entity) {
 						if (!$entity->delete()) {

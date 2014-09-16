@@ -11,16 +11,17 @@
 */
 
 $type = get_input("type", "profile");
+$error = false;
 
 if ($type == "profile" || $type == "group") {
 	$site_guid = elgg_get_site_entity()->getGUID();
 	
 	$options = array(
-			"type" => "object",
-			"subtype" => "custom_" . $type . "_field",
-			"limit" => false,
-			"owner_guid" => $site_guid
-		);
+		"type" => "object",
+		"subtype" => "custom_" . $type . "_field",
+		"limit" => false,
+		"owner_guid" => $site_guid
+	);
 	
 	if ($entities = elgg_get_entities($options)) {
 		foreach ($entities as $entity) {
