@@ -51,10 +51,23 @@ foreach ($entities as $entity) {
 $md5 = md5(print_r($fields, true));
 $info["md5"] = $md5;
 
-$json = json_encode(array(
-				"info" => $info,
-				"fields" => $fields
-				));
+if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
+	// JSON_PRETTY_PRINT available
+	$json = json_encode(
+		array(
+			"info" => $info,
+			"fields" => $fields
+		),
+		JSON_PRETTY_PRINT
+	);
+} else {
+	$json = json_encode(
+		array(
+			"info" => $info,
+			"fields" => $fields
+		)
+	);
+}
 
 echo $json;
 exit();
