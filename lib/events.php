@@ -166,7 +166,19 @@ function profile_manager_create_user_event($event, $object_type, $object) {
 	}
 	
 	if (isset($_FILES["profile_icon"])) {
-		add_profile_icon($object);
+		$profile_icon = $_FILES["profile_icon"];
+		$error = false;
+		if (empty($profile_icon["name"])) {
+			$error = true;
+		} elseif ($profile_icon["error"] != 0) {
+			$error = true;
+		} elseif (!in_array(strtolower(substr($profile_icon["name"], -3)), array("jpg","png","gif"))) {
+			$error = true;
+		}
+		
+		if (!$error) {
+			add_profile_icon($object);
+		}		
 	}
 	
 	$terms = elgg_get_plugin_setting("registration_terms", "profile_manager");

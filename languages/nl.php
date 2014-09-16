@@ -28,6 +28,7 @@ $language = array (
   'profile_manager:settings:edit_profile' => 'Bewerk Profiel',
   'profile_manager:settings:view_profile' => 'Bekijk Profiel',
   'profile_manager:settings:profile_icon_on_register' => 'Verplicht de upload van een avatar op het registratie formulier',
+  'profile_manager:settings:profile_icon_on_register:option:optional' => 'Optioneel',
   'profile_manager:settings:show_account_hints' => 'Toon hints bij de standaard account velden op het registratie formulier',
   'profile_manager:settings:simple_access_control' => 'Toon slechts één toegangsrecht keuze op het profiel bewerken formulier',
   'profile_manager:settings:default_profile_type' => 'Standaard profiel type bij registratie',

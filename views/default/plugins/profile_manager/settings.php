@@ -17,6 +17,9 @@ $yesno_options = array(
 
 $noyes_options = array_reverse($yesno_options);
 
+$profile_icon_options = $noyes_options;
+$profile_icon_options["optional"] = elgg_echo("profile_manager:settings:profile_icon_on_register:option:optional");
+
 $extra_fields_options = array(
 	"extend" => elgg_echo("profile_manager:settings:registration:extra_fields:extend"),
 	"beside" => elgg_echo("profile_manager:settings:registration:extra_fields:beside")
@@ -83,7 +86,14 @@ $group_limit_options = array(
 			<?php echo elgg_echo('profile_manager:settings:profile_icon_on_register'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/dropdown", array("name" => "params[profile_icon_on_register]", "options_values" => $noyes_options, "value" => $vars['entity']->profile_icon_on_register)); ?>
+			<?php
+				 
+				echo elgg_view("input/dropdown", array(
+					"name" => "params[profile_icon_on_register]", 
+					"options_values" => $profile_icon_options, 
+					"value" => $vars['entity']->profile_icon_on_register
+				));
+			?>
 		</td>
 	</tr>
 	<tr>

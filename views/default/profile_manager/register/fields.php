@@ -33,7 +33,7 @@ if (elgg_get_plugin_setting("edit_profile_mode", "profile_manager") == "tabbed")
 $result = "";
 
 // mandatory profile icon
-if ($profile_icon == "yes") {
+if ($profile_icon == "yes" || $profile_icon == "optional") {
 	$result .= elgg_view("input/profile_icon");
 }
 
