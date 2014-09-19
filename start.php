@@ -47,7 +47,7 @@ function profile_manager_init() {
 	elgg_register_action("useradd", dirname(__FILE__) . "/actions/useradd.php", "admin");
 	
 	// Register all custom field types
-	register_custom_field_types();
+	profile_manager_register_custom_field_types();
 	
 	// add profile_completeness widget
 	if (elgg_get_plugin_setting("enable_profile_completeness_widget", "profile_manager") == "yes") {
@@ -88,7 +88,7 @@ function profile_manager_init() {
 	
 	// Run once function to configure this plugin
 	run_function_once('profile_manager_run_once', 1287964800); // 2010-10-25
-	run_function_once('pm_fix_access_default');
+	run_function_once('profile_manager_fix_access_default');
 	
 	// register ajax views
 	elgg_register_ajax_view("forms/profile_manager/type");

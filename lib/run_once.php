@@ -8,7 +8,7 @@
  *
  * @return void
  */
-function pm_fix_access_default() {
+function profile_manager_fix_access_default() {
 	$dbprefix = elgg_get_config("dbprefix");
 	
 	update_data("UPDATE {$dbprefix}metadata set access_id='" . ACCESS_LOGGED_IN . "' WHERE access_id=" . ACCESS_DEFAULT);

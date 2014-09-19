@@ -28,7 +28,7 @@ $form_title = elgg_echo('profile_manager:profile_fields:add');
 $options_values = array();
 $option_classes = array();
 
-$types = get_custom_field_types("custom_profile_field_types");
+$types = profile_manager_get_custom_field_types("custom_profile_field_types");
 if ($types) {
 	foreach ($types as $type) {
 		$options_values[$type->type] = $type->name;

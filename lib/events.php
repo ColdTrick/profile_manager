@@ -177,7 +177,7 @@ function profile_manager_create_user_event($event, $object_type, $object) {
 		}
 		
 		if (!$error) {
-			add_profile_icon($object);
+			profile_manager_add_profile_icon($object);
 		}		
 	}
 	
