@@ -39,5 +39,5 @@ if (empty($list)) {
 	</div>
 </div>
 
-<div class="custom_fields_more_info_text" id="text_more_info_profile_field"><?php echo elgg_echo("profile_manager:tooltips:profile_field");?></div>
-<div class="custom_fields_more_info_text" id="text_more_info_profile_field_additional"><?php echo elgg_echo("profile_manager:tooltips:profile_field_additional");?></div>
+<div class="hidden" id="text_more_info_profile_field"><?php echo elgg_echo("profile_manager:tooltips:profile_field");?></div>
+<div class="hidden" id="text_more_info_profile_field_additional"><?php echo elgg_echo("profile_manager:tooltips:profile_field_additional");?></div>

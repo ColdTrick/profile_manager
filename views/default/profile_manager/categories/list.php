@@ -43,5 +43,5 @@ if (!empty($categories)) {
 	</div>
 </div>
 
-<div class="custom_fields_more_info_text" id="text_more_info_category"><?php echo elgg_echo("profile_manager:tooltips:category");?></div>
-<div class="custom_fields_more_info_text" id="text_more_info_category_list"><?php echo elgg_echo("profile_manager:tooltips:category_list");?></div>
+<div class="hidden" id="text_more_info_category"><?php echo elgg_echo("profile_manager:tooltips:category");?></div>
+<div class="hidden" id="text_more_info_category_list"><?php echo elgg_echo("profile_manager:tooltips:category_list");?></div>

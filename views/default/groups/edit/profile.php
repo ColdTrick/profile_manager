@@ -121,7 +121,7 @@ if (count($group_fields["fields"]) > 0) {
 		if ($hint = $field->getHint()) {
 			?>
 			<span class='custom_fields_more_info' id='more_info_<?php echo $metadata_name; ?>'></span>
-			<span class="custom_fields_more_info_text" id="text_more_info_<?php echo $metadata_name; ?>"><?php echo $hint;?></span>
+			<span class="hidden" id="text_more_info_<?php echo $metadata_name; ?>"><?php echo $hint;?></span>
 			<?php
 		}
 		

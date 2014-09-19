@@ -37,4 +37,4 @@
 	</div>
 </div>
 
-<div class="custom_fields_more_info_text" id="text_more_info_actions"><?php echo elgg_echo("profile_manager:tooltips:actions");?></div>
+<div class="hidden" id="text_more_info_actions"><?php echo elgg_echo("profile_manager:tooltips:actions");?></div>

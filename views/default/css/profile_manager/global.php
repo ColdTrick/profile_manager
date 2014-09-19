@@ -14,10 +14,6 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	background-position: 0 -468px;
 }
 
-.custom_fields_more_info_text {
-	display:none;
-}
-
 #custom_fields_more_info_tooltip {
 	position:absolute;
 	border:1px solid #333333;

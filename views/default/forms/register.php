@@ -42,7 +42,7 @@ if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 		
 		<?php if ($show_hints) { ?>
 		<span class='custom_fields_more_info' id='more_info_name'></span>
-		<span class='custom_fields_more_info_text' id='text_more_info_name'><?php echo elgg_echo("profile_manager:register:hints:name")?></span>
+		<span class='hidden' id='text_more_info_name'><?php echo elgg_echo("profile_manager:register:hints:name")?></span>
 		<?php } ?>
 		
 		<br />
@@ -62,7 +62,7 @@ if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 		
 		<?php if ($show_hints) { ?>
 		<span class='custom_fields_more_info' id='more_info_email'></span>
-		<span class='custom_fields_more_info_text' id='text_more_info_email'><?php echo elgg_echo("profile_manager:register:hints:email")?></span>
+		<span class='hidden' id='text_more_info_email'><?php echo elgg_echo("profile_manager:register:hints:email")?></span>
 		<?php } ?>
 		
 		<br />
@@ -82,7 +82,7 @@ if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 		
 		<?php if ($show_hints) { ?>
 		<span class='custom_fields_more_info' id='more_info_username'></span>
-		<span class='custom_fields_more_info_text' id='text_more_info_username'><?php echo elgg_echo("profile_manager:register:hints:username")?></span>
+		<span class='hidden' id='text_more_info_username'><?php echo elgg_echo("profile_manager:register:hints:username")?></span>
 		<?php } ?>
 		
 		<br />
@@ -102,7 +102,7 @@ if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 		
 		<?php if ($show_hints) { ?>
 		<span class='custom_fields_more_info' id='more_info_password'></span>
-		<span class='custom_fields_more_info_text' id='text_more_info_password'><?php echo elgg_echo("profile_manager:register:hints:password")?></span>
+		<span class='hidden' id='text_more_info_password'><?php echo elgg_echo("profile_manager:register:hints:password")?></span>
 		<?php } ?>
 		
 		<br />
@@ -122,7 +122,7 @@ if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 		
 		<?php if ($show_hints) { ?>
 		<span class='custom_fields_more_info' id='more_info_passwordagain'></span>
-		<span class='custom_fields_more_info_text' id='text_more_info_passwordagain'><?php echo elgg_echo("profile_manager:register:hints:passwordagain")?></span>
+		<span class='hidden' id='text_more_info_passwordagain'><?php echo elgg_echo("profile_manager:register:hints:passwordagain")?></span>
 		<?php } ?>
 		
 		<br />
