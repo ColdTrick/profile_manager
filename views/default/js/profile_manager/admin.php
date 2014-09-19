@@ -129,7 +129,7 @@ elgg.profile_manager.change_field_category = function(field, category_guid) {
 	var field_guid = $(field).attr("id").replace("elgg-object-","");
 	category_guid = category_guid.replace("elgg-object-","").replace("custom_profile_field_category_", "");
 
-	$.post(elgg.security.addToken('<?php echo elgg_get_site_url(); ?>action/profile_manager/changeCategory?guid=' + field_guid + '&category_guid=' + category_guid), function(data){
+	$.post(elgg.security.addToken(elgg.get_site_url() + 'action/profile_manager/changeCategory?guid=' + field_guid + '&category_guid=' + category_guid), function(data){
 		if(data == 'true'){
 			if(category_guid == 0){
 				category_guid = "";
