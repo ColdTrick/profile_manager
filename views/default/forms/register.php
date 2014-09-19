@@ -10,21 +10,11 @@ $password = $password2 = '';
 $username = get_input('u');
 $email = get_input('e');
 $name = get_input('n');
+$terms = "";
 
 if (elgg_is_sticky_form('register')) {
 	extract(elgg_get_sticky_values('register'));
 	elgg_clear_sticky_form('register');
-}
-
-// must accept terms
-if ($accept_terms = elgg_get_plugin_setting("registration_terms", "profile_manager")) {
-	$link_begin = "<a target='_blank' href='" . $accept_terms . "'>";
-	$link_end = "</a>";
-	
-	$terms = "<div class='mandatory'>";
-	$terms .= "<input id='register-accept_terms' type='checkbox' name='accept_terms' value='yes' /> ";
-	$terms .= "<label for='register-accept_terms'>" . elgg_echo("profile_manager:registration:accept_terms", array($link_begin, $link_end)) . "</label>";
-	$terms .= "</div>";
 }
 
 echo "<div id='profile_manager_register_left'>";
@@ -137,9 +127,6 @@ if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 			<span class='elgg-icon profile_manager_validate_icon'></span>
 		</div>
 	</div>
-	<?php
-		echo $terms;
-	?>
 </fieldset>
 <?php
 // view to extend to add more fields to the registration form
@@ -155,10 +142,11 @@ echo "<div id='profile_manager_register_right'>";
 echo elgg_view("register/extend_side", array("field_location" => "beside"));
 echo "</div>";
 
-echo "<div class='clearfloat'></div>";
+echo "<div class='clearfloat man'></div>";
 echo "<div class='elgg-foot'>";
 echo elgg_view('input/hidden', array('name' => 'friend_guid', 'value' => $vars['friend_guid']));
 echo elgg_view('input/hidden', array('name' => 'invitecode', 'value' => $vars['invitecode']));
+echo elgg_view("profile_manager/register/terms", $vars);
 echo elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('register')));
 echo "<div class='elgg-subtext mtm'>" . elgg_echo("profile_manager:register:mandatory") . "</div>";
 echo "</div>";
