@@ -60,11 +60,6 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	background-position: 0 0;
 }
 
-/* non_editables */
-.hidden_non_editable {
-	display: none;
-}
-
 /* profile type */
 .custom_profile_type_description {
 	display: none;

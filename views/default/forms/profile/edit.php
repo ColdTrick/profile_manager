@@ -186,7 +186,7 @@ if (!empty($cats)) {
 			}
 
 			if ($hide_non_editables == "yes" && ($valtype == "non_editable")) {
-				$field_result = "<div class='hidden_non_editable'>";
+				$field_result = "<div class='hidden'>";
 			} else {
 				$visible_fields++;
 				$field_result = "<div>";
