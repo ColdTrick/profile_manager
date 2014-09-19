@@ -5,47 +5,13 @@
  */
 
 $user = elgg_get_page_owner_entity();
-$about = "";
-if ($user->isBanned()) {
-	$about .= "<p class='profile-banned-user'>";
-	$about .= elgg_echo('banned');
-	$about .= "</p>";
-} else {
-	if ($user->description) {
-		// see if we have a custom title
-		$description_field = elgg_get_entities_from_metadata(array(
-			'type' => 'object',
-			'subtype' => 'custom_profile_field',
-			'metadata_name_value_pairs' => array(
-			'name' => 'metadata_name',
-				'value' => 'description'
-			),
-			'limit' => 1
-		));
-
-		if ($description_field) {
-			$title = $description_field[0]->getTitle();
-		} else {
-			$title = elgg_echo('profile:aboutme');
-		}
-		$about .= "<p class='profile-aboutme-title'><b>{$title}</b></p>";
-		$about .= "<div class='profile-aboutme-contents'>";
-		$about .= elgg_view('output/longtext', array('value' => $user->description, 'class' => 'mtn'));
-		$about .= "</div>";
-	}
-}
 	
 echo '<div id="profile-details" class="elgg-body pll">';
 echo "<h2>{$user->name}</h2>";
 
 echo elgg_view("profile/status", array("entity" => $user));
 
-$description_position = elgg_get_plugin_setting("description_position", "profile_manager");
 $show_profile_type_on_profile = elgg_get_plugin_setting("show_profile_type_on_profile", "profile_manager");
-
-if ($description_position == "top") {
-	echo $about;
-}
 
 $categorized_fields = profile_manager_get_categorized_fields($user);
 $cats = $categorized_fields['categories'];
@@ -106,46 +72,44 @@ if (count($cats) > 0) {
 			
 			$metadata_name = $field->metadata_name;
 			
-			if ($metadata_name != "description") {
-				// give correct class
-				if ($even_odd != "even") {
-					$even_odd = "even";
-				} else {
-					$even_odd = "odd";
-				}
-				
-				// make nice title
-				$title = $field->getTitle();
-				
-				// get user value
-				$value = $user->$metadata_name;
-				
-				// adjust output type
-				if ($field->output_as_tags == "yes") {
-					$output_type = "tags";
-					if (!is_array($value)) {
-						$value = string_to_tag_array($value);
-					}
-				} else {
-					$output_type = $field->metadata_type;
-				}
-				
-				if ($field->metadata_type == "url") {
-					$target = "_blank";
-					// validate urls
-					if (!preg_match('~^https?\://~i', $value)) {
-						$value = "http://$value";
-					}
-				} else {
-					$target = null;
-				}
-				
-				// build result
-				$field_result .= "<div class='" . $even_odd . "'>";
-				$field_result .= "<b>" . $title . "</b>:&nbsp;";
-				$field_result .= elgg_view("output/" . $output_type, array("value" => $value, "target" => $target));
-				$field_result .= "</div>";
+			// give correct class
+			if ($even_odd != "even") {
+				$even_odd = "even";
+			} else {
+				$even_odd = "odd";
 			}
+			
+			// make nice title
+			$title = $field->getTitle();
+			
+			// get user value
+			$value = $user->$metadata_name;
+			
+			// adjust output type
+			if ($field->output_as_tags == "yes") {
+				$output_type = "tags";
+				if (!is_array($value)) {
+					$value = string_to_tag_array($value);
+				}
+			} else {
+				$output_type = $field->metadata_type;
+			}
+			
+			if ($field->metadata_type == "url") {
+				$target = "_blank";
+				// validate urls
+				if (!preg_match('~^https?\://~i', $value)) {
+					$value = "http://$value";
+				}
+			} else {
+				$target = null;
+			}
+			
+			// build result
+			$field_result .= "<div class='" . $even_odd . "'>";
+			$field_result .= "<b>" . $title . "</b>:&nbsp;";
+			$field_result .= elgg_view("output/" . $output_type, array("value" => $value, "target" => $target));
+			$field_result .= "</div>";
 		}
 			
 		if (!empty($field_result)) {
@@ -164,8 +128,8 @@ if (!empty($details_result)) {
 	echo $details_result . "</div>";
 }
 
-if ($description_position != "top") {
-	echo $about;
+if ($user->isBanned()) {
+	echo "<p class='profile-banned-user'>" . elgg_echo('banned') . "</p>";
 }
 
 echo "</div>";

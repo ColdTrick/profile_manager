@@ -45,7 +45,6 @@ $language = array (
   'profile_manager:settings:profile_type_selection' => 'Wie kan het profiel type wijzigen?',
   'profile_manager:settings:profile_type_selection:option:user' => 'Gebruiker',
   'profile_manager:settings:profile_type_selection:option:admin' => 'Alleen de beheerder',
-  'profile_manager:settings:description_position' => 'Waar moet het "Over mij" veld gepositioneerd worden',
   'profile_manager:settings:user_summary_control' => 'Laat de Profile Manager de lijstweergave van gebruikers beheren',
   'profile_manager:settings:enable_profile_completeness_widget' => 'Activeer de profiel compleetheid widget',
   'profile_manager:settings:enable_username_change' => 'Sta gebruikers toe om hun gebruikersnaam te wijzigen',

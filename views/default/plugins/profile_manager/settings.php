@@ -25,11 +25,6 @@ $extra_fields_options = array(
 	"beside" => elgg_echo("profile_manager:settings:registration:extra_fields:beside")
 );
 
-$description_position_options = array(
-	"bottom" => elgg_echo("bottom"),
-	"top" => elgg_echo("top")
-);
-
 $enable_username_change_options = array(
 	"no" => elgg_echo("option:no"),
 	"admin" => elgg_echo("profile_manager:settings:enable_username_change:option:admin"),
@@ -231,14 +226,6 @@ $group_limit_options = array(
 		</td>
 		<td>
 			<?php echo elgg_view("input/dropdown", array("name" => "params[display_system_category]", "options_values" => $noyes_options, "value" => $vars['entity']->display_system_category)); ?>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<?php echo elgg_echo('profile_manager:settings:description_position'); ?>
-		</td>
-		<td>
-			<?php echo elgg_view("input/dropdown", array("name" => "params[description_position]", "options_values" => $description_position_options, "value" => $vars['entity']->description_position)); ?>
 		</td>
 	</tr>
 	<tr>

@@ -62,7 +62,6 @@ $english = array(
 	'profile_manager:settings:profile_type_selection:option:user' => 'User',
 	'profile_manager:settings:profile_type_selection:option:admin' => 'Admin only',
 
-	'profile_manager:settings:description_position' => 'Where to position the description ("About me") field',
 	'profile_manager:settings:user_summary_control' => 'Let Profile Manager control the user summary / listing view',
 	
 	'profile_manager:settings:enable_profile_completeness_widget' => "Enable the profile completeness widget",
