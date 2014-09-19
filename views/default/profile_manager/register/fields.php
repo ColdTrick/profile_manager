@@ -155,7 +155,7 @@ if (count($fields) > 0) {
 		foreach ($linked_profile_types as $type_guid) {
 			$class .= " profile_type_" . $type_guid;
 		}
-		$cat_result = "<div class='profile_manager_register_category " . $class . "'>";
+		$cat_result = "<div class='profile_manager_register_category elgg-module elgg-module-info " . $class . "'>";
 			
 		if (count($cats) > 1) {
 			// make nice title
@@ -167,11 +167,13 @@ if (count($fields) > 0) {
 			if ($tabbed) {
 				$tabbed_cat_titles .= "<li class='" . $class . "'><a href='javascript:void(0);' onclick='elgg.profile_manager.toggle_tabbed_nav(\"" . $cat_guid . "\", this);'>" . $title . "</a></li>";
 			} else {
-				$cat_result .= "<h3 class='settings'>" . $title . "</h3>";
+				$cat_result .= "<div class='elgg-head'>";
+				$cat_result .= "<h3>" . $title . "</h3>";
+				$cat_result .= "</div>";
 			}
 		}
 		
-		$cat_result .= "<fieldset>" . $fields_result . "</fieldset>";
+		$cat_result .= "<div class='elgg-body'><fieldset>" . $fields_result . "</fieldset></div>";
 		$cat_result .= "</div>";
 		
 		if ($tabbed) {

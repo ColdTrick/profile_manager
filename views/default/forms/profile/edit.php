@@ -61,7 +61,7 @@ if (!empty($cats)) {
 				
 				if (!empty($description)) {
 					$types_description = "<div id='custom_profile_type_description_" . $type->getGUID() . "' class='custom_profile_type_description'>";
-					$types_description .= "<h3 class='settings'>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:description") . "</h3>";
+					$types_description .= "<h3>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:description") . "</h3>";
 					$types_description .= $description;
 					$types_description .= "</div>";
 				}
@@ -115,7 +115,7 @@ if (!empty($cats)) {
 			$cat_title = $cat->getTitle();
 		}
 	
-		$class = "";
+		$class = "elgg-module elgg-module-info";
 		if (!empty($cat_guid) && ($cat instanceof ProfileManagerCustomFieldCategory)) {
 			
 			$profile_type_options = array(
@@ -144,8 +144,11 @@ if (!empty($cats)) {
 			
 		$list_content .= "<div id='" . $cat_guid . "' class='" . $class . "'>";
 		if (count($cats) > 1) {
-			$list_content .= "<h3 class='settings'>" . $cat_title . "</h3>";
+			$list_content .= "<div class='elgg-head'>";
+			$list_content .= "<h3>" . $cat_title . "</h3>";
+			$list_content .= "</div>";
 		}
+		$list_content .= "<div class='elgg-body'>";
 		$list_content .= "<fieldset>";
 		
 		// display each field for currect category
@@ -241,6 +244,7 @@ if (!empty($cats)) {
 		$tab_content .= "</div>";
 		
 		$list_content .= "</fieldset>";
+		$list_content .= "</div>";
 		$list_content .= "</div>";
 	}
 	
