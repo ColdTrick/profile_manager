@@ -1,9 +1,29 @@
 Version history
 ===============
 
-8.0:
+8.0 (2014-11-17):
 
-- changes for Elgg 1.9
+- added: #54 placeholder option on field definition
+- added: extra class added to simple access control for extra css/js control
+- added: last action as exportable value
+- added: config setting to make avatar upload on register available but not mandatory
+- changed: profile description field is no longer special. It now acts as a normal field
+- changed: backup is saved in pretty JSON (if supported)
+- changed: updated multiselect library
+- changed: replaced some language strings with core alternatives
+- changed: moved the "edit name" input forom the edit profile form to a seperate view
+- changed: csv export improvements
+- changed: moved various views to best practice location
+- changed: various changes for Elgg 1.9
+- changed: code is now conform Elgg coding standards
+- changed: improved location of terms checkbox on register form and moved to its own view #46
+- fixed: #51 admin-only and not editable tag fields saved as text
+- fixed: #32 input validation now trims the data before validation
+- fixed: #48 group profile field edit form updated with similar features as user profile field
+- fixed: custom group field titles not added to the translations
+- fixed: correct usage of elgg_view_icon
+- fixed: store access level for custom profile type metadata field
+- removed: no longer support deprecated datepicker fields (use date fields now)
 
 7.7 (2014-02-20):
 
