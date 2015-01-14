@@ -41,7 +41,7 @@ function profile_manager_profile_override($hook_name, $entity_type, $return_valu
 			$guids[] = $entity->getGUID();
 		}
 
-		_elgg_get_metadata_cache()->populateFromEntities($guids);
+		_elgg_services()->metadataCache->populateFromEntities($guids);
 
 		$translations = array();
 		$context = elgg_get_context();
@@ -109,7 +109,7 @@ function profile_manager_group_override($hook_name, $entity_type, $return_value,
 			$guids[] = $entity->getGUID();
 		}
 
-		_elgg_get_metadata_cache()->populateFromEntities($guids);
+		_elgg_services()->metadataCache->populateFromEntities($guids);
 
 		$result = array();
 		$ordered = array();
