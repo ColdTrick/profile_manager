@@ -1,5 +1,7 @@
 <?php
 
+elgg_require_js("profile_manager/rating");
+
 $selected_value = sanitise_int($vars['value'], false);
 
 $rating_id = $vars["name"] . "_container";

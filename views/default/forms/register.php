@@ -6,6 +6,8 @@
  * @subpackage Core
  */
 
+elgg_require_js("profile_manager/register");
+
 $password = $password2 = '';
 $username = get_input('u');
 $email = get_input('e');

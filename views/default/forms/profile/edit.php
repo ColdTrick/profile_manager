@@ -12,6 +12,7 @@
 * @uses $vars['entity'] The user entity
 * @uses $vars['profile'] Profile items from get_config('profile_fields'), defined in profile/start.php for now
 */
+elgg_require_js("profile_manager/profile_edit");
 
 echo elgg_view("profile/edit/name", $vars);
 
