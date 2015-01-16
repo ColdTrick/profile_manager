@@ -166,18 +166,9 @@ function profile_manager_create_user_event($event, $object_type, $object) {
 	}
 	
 	if (isset($_FILES["profile_icon"])) {
-		$profile_icon = $_FILES["profile_icon"];
-		$error = false;
-		if (empty($profile_icon["name"])) {
-			$error = true;
-		} elseif ($profile_icon["error"] != 0) {
-			$error = true;
-		} elseif (!in_array(strtolower(substr($profile_icon["name"], -3)), array("jpg","png","gif"))) {
-			$error = true;
-		}
-		
-		if (!$error) {
-			profile_manager_add_profile_icon($object);
+		if (!profile_manager_add_profile_icon($object)) {
+			// return false to delete the user 
+			return false;
 		}		
 	}
 	

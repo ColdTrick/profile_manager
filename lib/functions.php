@@ -131,7 +131,7 @@ function profile_manager_get_custom_field_types($register_name) {
  *
  * @param ElggUser $user The user to add the profile icons to
  *
- * @return void
+ * @return boolean
  */
 function profile_manager_add_profile_icon($user) {
 	
@@ -158,11 +158,14 @@ function profile_manager_add_profile_icon($user) {
 			}
 	
 			register_error(elgg_echo('avatar:resize:fail'));
-			forward(REFERER);
+			
+			return false;
 		}
 	}
 	
 	$user->icontime = time();
+	
+	return true;
 }
 
 /**

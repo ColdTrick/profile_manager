@@ -269,9 +269,13 @@ function profile_manager_action_register_hook($hook_name, $entity_type, $return_
 			} elseif ($profile_icon["error"] != 0) {
 				register_error(elgg_echo("profile_manager:register_pre_check:profile_icon:error"));
 				$error = true;
-			} elseif (!in_array(strtolower(substr($profile_icon["name"], -3)), array("jpg","png","gif"))) {
-				register_error(elgg_echo("profile_manager:register_pre_check:profile_icon:nosupportedimage"));
-				$error = true;
+			} else {
+				// test if we can handle the image
+				$image = get_resized_image_from_uploaded_file('profile_icon', '10', '10', true, false);
+				if (!$image) {
+					register_error(elgg_echo("profile_manager:register_pre_check:profile_icon:nosupportedimage"));
+					$error = true;
+				}
 			}
 
 			if ($error) {
