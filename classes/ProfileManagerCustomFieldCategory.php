@@ -50,8 +50,13 @@ class ProfileManagerCustomFieldCategory extends ElggObject {
 	 * @return void
 	 */
 	public function getLinkedProfileTypes() {
+		$types = $this->getEntitiesFromRelationship(array(
+			'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
+			'inverse_relationship' => true,
+			'limit' => false
+		));
 		
-		if ($types = $this->getEntitiesFromRelationship(CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP, true, false)) {
+		if ($types) {
 			$result = array();
 			
 			foreach ($types as $type) {
