@@ -27,7 +27,7 @@ echo elgg_view("output/url", array(
 ));
 
 // delete link
-echo elgg_view("output/confirmlink", array(
+echo elgg_view("output/url", array(
 	"href" => "action/profile_manager/profile_types/delete?guid=" . $entity->guid,
 	"title" => elgg_echo("delete"),
 	"text" => elgg_view_icon("delete"),
