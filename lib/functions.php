@@ -112,7 +112,7 @@ function profile_manager_add_custom_field_type($register_name, $field_type, $fie
  *
  * @param string $register_name Name of the register to retrieve
  *
- * @return boolean|array
+ * @return false|array
  */
 function profile_manager_get_custom_field_types($register_name) {
 	global $PROFILE_MANAGER_FIELD_TYPES;

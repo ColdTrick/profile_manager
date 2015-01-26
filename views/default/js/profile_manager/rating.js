@@ -24,7 +24,7 @@ elgg.profile_manager.init_rating = function(){
 		$(this).parent().find("input").val("");
 		event.preventDefault();
 	});
-}
+};
 
 //register init hook
 elgg.register_hook_handler("init", "system", elgg.profile_manager.init_rating);

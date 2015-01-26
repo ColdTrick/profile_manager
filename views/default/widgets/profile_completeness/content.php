@@ -1,6 +1,7 @@
 <?php
 
 $owner = $vars["entity"]->getOwnerEntity();
+$tips = "";
 
 if ($owner->getGUID() === elgg_get_logged_in_user_guid()) {
 	$completeness = profile_manager_profile_completeness($owner);

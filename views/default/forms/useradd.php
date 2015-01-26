@@ -13,7 +13,8 @@
 $name = $username = $email = $password = $password2 = $admin = '';
 
 if (elgg_is_sticky_form('useradd')) {
-	extract(elgg_get_sticky_values('useradd'));
+	$values = elgg_get_sticky_values('useradd');
+	extract($values);
 	elgg_clear_sticky_form('useradd');
 	if (is_array($admin)) {
 		$admin = $admin[0];

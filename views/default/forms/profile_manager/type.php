@@ -25,6 +25,12 @@ if ($guid = get_input("guid")) {
 
 $form_title = elgg_echo('profile_manager:profile_types:add');
 
+$metadata_name = null;
+$metadata_label = null;
+$metadata_description = null;
+
+$related_categories = array();
+
 if ($vars["entity"]) {
 	
 	$form_title = elgg_echo('profile_manager:profile_types:edit');
@@ -46,7 +52,6 @@ if ($vars["entity"]) {
 	
 	$cats = elgg_get_entities_from_relationship($options);
 	if ($cats) {
-		$related_categories = array();
 		foreach ($cats as $cat) {
 			$related_categories[] = $cat->guid;
 		}

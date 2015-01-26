@@ -1,7 +1,7 @@
 elgg.provide("elgg.profile_manager");
 
-var profile_manager_register_form_timers = new Array();
-var profile_manager_register_form_validate_xhr = new Array();
+var profile_manager_register_form_timers = [];
+var profile_manager_register_form_validate_xhr = [];
 
 //live input validation
 elgg.profile_manager.register_form_validate = function(form, field){
@@ -12,7 +12,7 @@ elgg.profile_manager.register_form_validate = function(form, field){
 		profile_manager_register_form_validate_xhr[fieldname].abort();
 	}
 	if(fieldvalue){
-		var data = new Object();
+		var data = {};
 		data.name=fieldname;
 		data[fieldname] = fieldvalue;
 	
@@ -26,12 +26,12 @@ elgg.profile_manager.register_form_validate = function(form, field){
 						$field = form.find("input[name='" + data.output.name + "']");
 						$field_icon = $field.next(".profile_manager_validate_icon");
 						$field_icon.removeClass("profile_manager_validate_icon_loading");
-						if(data.output.status == false){
+						if(data.output.status === false){
 							// something went wrong; show error icon and add title
 							$field_icon.addClass("profile_manager_validate_icon_invalid");
 						}
 	
-						if(data.output.status == true){
+						if(data.output.status === true){
 							// something went right; show success icon
 							$field_icon.addClass("profile_manager_validate_icon_valid");
 							$field.removeClass("profile_manager_register_missing");
@@ -46,12 +46,12 @@ elgg.profile_manager.register_form_validate = function(form, field){
 	} else {
 		form.find("input[name='" + fieldname + "']").next(".profile_manager_validate_icon").attr("class", "elgg-icon profile_manager_validate_icon").attr("title", "");
 	}
-}
+};
 
 //show description and fields based on selected profile type (register form)
 elgg.profile_manager.change_profile_type_register = function(){
 	var selVal = $('#custom_profile_fields_custom_profile_type').val();
-	if(selVal == "" || selVal == "undefined"){
+	if(selVal === "" || selVal === "undefined"){
 		selVal = 0;
 	}
 
@@ -61,10 +61,10 @@ elgg.profile_manager.change_profile_type_register = function(){
 
 	// tabs
 	var $tabs = $('#profile_manager_register_tabbed');
-	if($tabs.length > 0){
+	if ($tabs.length > 0) {
 		$tabs.find('li').hide();
 		$tabs.find(".profile_type_0, .profile_type_" + selVal).show();
-		if($tabs.find('li.selected:visible').length == 0){
+		if ($tabs.find('li.selected:visible').length === 0) {
 			$tabs.find('li:visible:first>a').click();
 		} else {
 			$tabs.find('li.selected:visible').click();
@@ -74,7 +74,7 @@ elgg.profile_manager.change_profile_type_register = function(){
 		$(".profile_manager_register_category").hide();
 		$(".profile_manager_register_category.profile_type_0, .profile_manager_register_category.profile_type_" + selVal).show();
 	}
-}
+};
 
 //tab switcher on register form
 elgg.profile_manager.toggle_tabbed_nav = function(div_id, element){
@@ -84,7 +84,7 @@ elgg.profile_manager.toggle_tabbed_nav = function(div_id, element){
 
 	$('#profile_manager_register_tabbed li.elgg-state-selected').removeClass('elgg-state-selected');
 	$(element).parent('li').addClass("elgg-state-selected");
-}
+};
 
 elgg.profile_manager.init_register = function(){
 	
@@ -95,7 +95,7 @@ elgg.profile_manager.init_register = function(){
 
 		var $form = $(this);
 		var selProfileType =  $("#custom_profile_fields_custom_profile_type").val();
-		if(selProfileType == ""){
+		if (selProfileType === "") {
 			selProfileType = 0;
 		}
 		
@@ -108,8 +108,8 @@ elgg.profile_manager.init_register = function(){
 
 					// check parents
 					var $parents = $(elem).parents(".profile_manager_register_category");
-					if(($parents.length == 0) || ($parents.hasClass("category_" + selProfileType) || $parents.hasClass("category_0"))){
-						if($form.find("input[name='" + $(elem).attr("name") + "']:checked").length == 0){
+					if (($parents.length === 0) || ($parents.hasClass("category_" + selProfileType) || $parents.hasClass("category_0"))) {
+						if ($form.find("input[name='" + $(elem).attr("name") + "']:checked").length === 0) {
 							
 							$(elem).parent(".mandatory").addClass("profile_manager_register_missing");
 							error_count++;
@@ -123,10 +123,10 @@ elgg.profile_manager.init_register = function(){
 
 					// check parents
 					var $parents = $(elem).parents(".profile_manager_register_category");
-					if(($parents.length == 0) || ($parents.hasClass("profile_type_" + selProfileType) || $parents.hasClass("profile_type_0"))){
+					if (($parents.length === 0) || ($parents.hasClass("profile_type_" + selProfileType) || $parents.hasClass("profile_type_0"))) {
 					
-						if($(elem).is("select")){
-							if(($(elem).val() == null) || ($(elem).val() == "")){
+						if ($(elem).is("select")) {
+							if (($(elem).val() === null) || ($(elem).val() === "")) {
 								$(elem).addClass("profile_manager_register_missing");
 								// also add class to multiselect element
 								$(elem).next(".ui-multiselect").addClass("profile_manager_register_missing");
@@ -135,7 +135,7 @@ elgg.profile_manager.init_register = function(){
 							}
 						} else {
 							
-							if($(elem).val().trim() == ""){
+							if ($(elem).val().trim() === "") {
 								$(elem).addClass("profile_manager_register_missing");
 								error_count++;
 							}
@@ -145,7 +145,7 @@ elgg.profile_manager.init_register = function(){
 			}
 		});
 	
-		if(error_count > 0){
+		if (error_count > 0) {
 			alert(elgg.echo("profile_manager:register:mandatory"));
 		} else {
 			result = true;
@@ -157,10 +157,10 @@ elgg.profile_manager.init_register = function(){
 	// add username generation when a email adress has been entered
 	$(".elgg-form-register input[name='email']").live("blur", function(){
 		var email_value = $(this).val();
-		if(email_value.indexOf("@") !== -1){
+		if (email_value.indexOf("@") !== -1) {
 			var pre = email_value.split("@");
-			if(pre[0]){
-				if($(".elgg-form-register input[name='username']").val() == ""){
+			if (pre[0]) {
+				if ($(".elgg-form-register input[name='username']").val() === "") {
 					// change value and trigger change
 					var new_val = pre[0].replace(/[^a-zA-Z0-9]/g, "");
 					$(".elgg-form-register input[name='username']").val(new_val).keyup();
@@ -198,8 +198,7 @@ elgg.profile_manager.init_register = function(){
 			}
 		}
 	});
-
-}
+};
 
 //register init hook
 elgg.register_hook_handler("init", "system", elgg.profile_manager.init_register);

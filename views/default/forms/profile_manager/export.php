@@ -2,6 +2,8 @@
 
 $fieldtype = $vars["fieldtype"];
 
+$fields = false;
+
 if ($fieldtype == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE) {
 	$fields = elgg_get_config("profile_fields");
 } elseif ($fieldtype == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE) {
@@ -47,7 +49,7 @@ if ($fields) {
 		echo "<td>" . $metadata_name . "</td>";
 		echo "<td class='plm'>";
 		echo elgg_view("input/checkbox", array(
-			"name" => "export[" . $metadata_name. "]",
+			"name" => "export[" . $metadata_name . "]",
 			"value" => $metadata_name,
 			"default" => false
 		));

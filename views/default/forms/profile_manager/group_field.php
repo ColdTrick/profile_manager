@@ -40,6 +40,16 @@ if ($types) {
 	}
 }
 
+$metadata_name = null;
+$metadata_label = null;
+$metadata_hint = null;
+$metadata_placeholder = null;
+$metadata_type = null;
+$metadata_options = null;
+$output_as_tags = null;
+$blank_available = null;
+$admin_only = null;
+
 if ($vars["entity"]) {
 	
 	$form_title = elgg_echo('profile_manager:group_fields:edit');

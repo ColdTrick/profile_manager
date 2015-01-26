@@ -42,7 +42,8 @@ $fields = $categorized_fields['fields'];
 $cats = $categorized_fields['categories'];
 
 if (elgg_is_sticky_form('profile_manager_register')) {
-	extract(elgg_get_sticky_values('profile_manager_register'));
+	$sticky_values = elgg_get_sticky_values('profile_manager_register');
+	extract($sticky_values);
 	elgg_clear_sticky_form('profile_manager_register');
 }
 	

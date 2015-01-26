@@ -82,7 +82,6 @@ $group_limit_options = array(
 		</td>
 		<td>
 			<?php
-				 
 				echo elgg_view("input/dropdown", array(
 					"name" => "params[profile_icon_on_register]", 
 					"options_values" => $profile_icon_options, 

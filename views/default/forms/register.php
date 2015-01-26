@@ -15,7 +15,8 @@ $name = get_input('n');
 $terms = "";
 
 if (elgg_is_sticky_form('register')) {
-	extract(elgg_get_sticky_values('register'));
+	$values = elgg_get_sticky_values('register');
+	extract($values);
 	elgg_clear_sticky_form('register');
 }
 
@@ -133,7 +134,6 @@ if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 <?php
 // view to extend to add more fields to the registration form
 echo elgg_view('register/extend');
-
 
 // Add captcha hook
 echo elgg_view('input/captcha');

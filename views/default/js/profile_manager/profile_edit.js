@@ -7,24 +7,24 @@ elgg.profile_manager.change_profile_type = function(){
 	$('.custom_fields_edit_profile_category').hide();
 	$('.custom_profile_type_description').hide();
 
-	if(selVal != ""){
+	if (selVal !== "") {
 		$('.custom_profile_type_' + selVal).show();
 		$('#custom_profile_type_description_'+ selVal).show();
 	}
 	
-	if($("#profile_manager_profile_edit_tabs li.elgg-state-selected:visible").length == 0){
+	if ($("#profile_manager_profile_edit_tabs li.elgg-state-selected:visible").length === 0) {
 		$('#profile_manager_profile_edit_tab_content_wrapper>div').hide();
 		$("#profile_manager_profile_edit_tabs a:first:visible").click();
 	}
-}
+};
 
 elgg.profile_manager.profile_manager_username = function(event, elem) {
-	if(event.which != 13){
+	if (event.which !== 13) {
 		var username = $(elem).val();
 		$container = $(elem).parent();
 		$container.find(".elgg-icon").hide();
 		
-		if(username !== $(elem).attr("rel")){
+		if (username !== $(elem).attr("rel")) {
 			$container.find(".elgg-icon-profile-manager-loading").show();
 			
 			$.getJSON(elgg.get_site_url() + "profile_manager/validate_username", { "username": username }, function(data){
@@ -40,9 +40,9 @@ elgg.profile_manager.profile_manager_username = function(event, elem) {
 			});
 		}
 	}
-}
+};
 
-elgg.profile_manager.init_edit = function(){
+elgg.profile_manager.init_edit = function() {
 	// tab switcher on edit form
 	$("#profile_manager_profile_edit_tabs a").click(function(event) {
 		var id = $(this).attr("href").replace("#", "");
@@ -72,7 +72,7 @@ elgg.profile_manager.init_edit = function(){
 	$("#profile_manager_username .elgg-input-text").live("keyup", function(event) {
 		elgg.profile_manager.profile_manager_username(event, $(this));
 	});
-}
+};
 
 //register init hook
 elgg.register_hook_handler("init", "system", elgg.profile_manager.init_edit);
