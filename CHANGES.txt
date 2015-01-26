@@ -1,6 +1,12 @@
 Version history
 ===============
 
+8.0.1 (2015-01-26):
+
+- changed: moved part of the javascript to AMD loaded module
+- fixed: do not forward on avatar fail, but correctly return to register
+- fixed: replace deprecated function usage of getEntitiesFromRelationship
+
 8.0 (2014-11-17):
 
 - added: #54 placeholder option on field definition
