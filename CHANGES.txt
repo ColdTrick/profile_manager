@@ -1,6 +1,10 @@
 Version history
 ===============
 
+9.0.1 (2015-01-27):
+
+- fixed: js error on register form in walled garden
+
 9.0 (2015-01-26):
 
 - fixed: compatibility with Elgg 1.10.x
