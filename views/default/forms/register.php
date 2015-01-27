@@ -6,8 +6,6 @@
  * @subpackage Core
  */
 
-elgg_require_js("profile_manager/register");
-
 $password = $password2 = '';
 $username = get_input('u');
 $email = get_input('e');
@@ -154,8 +152,8 @@ echo "<div class='elgg-subtext mtm'>" . elgg_echo("profile_manager:register:mand
 echo "</div>";
 
 ?>
-
-<script type="text/javascript">
-	//init selected profile type, can't be done on ajax load as it could be loaded via ajax
-	elgg.profile_manager.change_profile_type_register();
+<script type='text/javascript'>
+	require(['profile_manager/register'], function() {
+		elgg.profile_manager.change_profile_type_register();
+	});
 </script>
