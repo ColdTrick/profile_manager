@@ -70,7 +70,7 @@ if (!empty($cats)) {
 			
 			?>
 			<script type="text/javascript">
-				$(document).ready(function(){
+				require(['profile_manager/profile_edit'], function() {
 					elgg.profile_manager.change_profile_type();
 				});
 			</script>
