@@ -132,7 +132,7 @@ if (!empty($cats)) {
 			
 			if ($profile_types = elgg_get_entities_from_relationship($profile_type_options)) {
 				
-				$class = "custom_fields_edit_profile_category";
+				$class .= " custom_fields_edit_profile_category";
 				
 				// add extra class so it can be toggle in the display
 				foreach ($profile_types as $type) {
