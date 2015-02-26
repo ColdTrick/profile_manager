@@ -36,6 +36,8 @@ if (!empty($cats)) {
 		$setting = "user";
 	}
 	
+	$profile_type = $vars['entity']->custom_profile_type;
+	
 	// can user edit? or just admins
 	if ($setting == "user" || elgg_is_admin_logged_in()) {
 		// get profile types
@@ -68,14 +70,6 @@ if (!empty($cats)) {
 				}
 			}
 			
-			?>
-			<script type="text/javascript">
-				require(['profile_manager/profile_edit'], function() {
-					elgg.profile_manager.change_profile_type();
-				});
-			</script>
-			<?php
-
 			echo "<div>";
 			echo "<label>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:label") . "</label>";
 			echo elgg_view("input/dropdown", array("name" => "custom_profile_type",
@@ -89,18 +83,9 @@ if (!empty($cats)) {
 			echo $types_description;
 		}
 	} else {
-		$profile_type = $vars['entity']->custom_profile_type;
-		
 		if (!empty($profile_type)) {
 			echo elgg_view("input/hidden", array("name" => "custom_profile_type", "value" => $profile_type));
 			echo elgg_view("input/hidden", array("name" => "accesslevel[custom_profile_type]", "value" => ACCESS_PUBLIC));
-			?>
-			<script type="text/javascript">
-				$(document).ready(function(){
-					$('.custom_profile_type_<?php echo $profile_type; ?>').show();
-				});
-			</script>
-			<?php
 		}
 	}
 	
@@ -135,8 +120,16 @@ if (!empty($cats)) {
 				$class .= " custom_fields_edit_profile_category";
 				
 				// add extra class so it can be toggle in the display
+				$hidden_category = true;
 				foreach ($profile_types as $type) {
 					$class .= " custom_profile_type_" . $type->getGUID();
+					if ($type->getGUID() === (int) $profile_type) {
+						$hidden_category = false;
+					}
+				}
+				
+				if ($hidden_category) {
+					$class .= " hidden";
 				}
 			}
 		}
