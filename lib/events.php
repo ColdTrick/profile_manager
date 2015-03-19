@@ -200,7 +200,12 @@ function profile_manager_create_member_of_site($event, $object_type, $object) {
 		elgg_delete_river(array("view" => 'river/relationship/member_of_site/create', "subject_guid" => $user_guid, "object_guid" => $site_guid));
 		
 		// add new join river event
-		add_to_river('river/relationship/member_of_site/create', 'join', $user_guid, $site_guid);
+		elgg_create_river_item(array(
+	            'view' => 'river/relationship/member_of_site/create',
+	            'action_type' => 'join',
+	            'subject_guid' => $user_guid,
+	            'object_guid' => $site_guid,
+	        ));
 	}
 }
 
