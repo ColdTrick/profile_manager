@@ -37,6 +37,7 @@ $english = array(
 	'profile_manager:settings:view_profile' => 'View Profile',
 	'profile_manager:settings:group' => "Edit Group Profile",
 
+	'profile_manager:settings:generate_username_from_email' => 'Generate username from email',
 	'profile_manager:settings:profile_icon_on_register' => 'Add mandatory profile icon input field on register form',
 	'profile_manager:settings:profile_icon_on_register:option:optional' => 'Optional',
 	'profile_manager:settings:show_account_hints' => 'Show hints for default account registration questions',

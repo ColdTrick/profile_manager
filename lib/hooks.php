@@ -202,7 +202,8 @@ function profile_manager_categorized_profile_fields_hook($hook_name, $entity_typ
 }
 
 /**
- * function to check if custom fields on register have been filled (if required)
+ * Function to check if custom fields on register have been filled (if required)
+ * Also generates a username if needed
  *
  * @param string  $hook_name    name of the hook
  * @param string  $entity_type  type of the hook
@@ -290,6 +291,24 @@ function profile_manager_action_register_hook($hook_name, $entity_type, $return_
 				forward(REFERER);
 			}
 		}
+	}
+	
+	// generate username
+	$username = get_input('username');
+	$email = get_input('email');
+	if (empty($username) && !empty($email) && (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") == "yes")) {
+		
+		$email_parts = explode('@', $email);
+		$base_username = $email_parts[0];
+		$tmp_username = $base_username;
+		
+		$i = 1;
+		while (get_user_by_username($tmp_username)) {
+			$tmp_username = $base_username . $i;
+			$i++;
+		}
+				
+		set_input('username', $tmp_username);
 	}
 }
 

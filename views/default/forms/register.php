@@ -24,6 +24,11 @@ $show_hints = false;
 if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 	$show_hints = true;
 }
+
+$generate_username_from_email = false;
+if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") == "yes") {
+	$generate_username_from_email = true;
+}
 ?>
 
 <fieldset>
@@ -68,6 +73,8 @@ if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 			<span class='elgg-icon profile_manager_validate_icon'></span>
 		</div>
 	</div>
+	
+	<?php if (!$generate_username_from_email) { ?>
 	<div class="mandatory">
 		<label for='register-username'><?php echo elgg_echo('username'); ?></label>
 		
@@ -88,6 +95,8 @@ if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
 			<div class='elgg-icon profile_manager_validate_icon'></div>
 		</div>
 	</div>
+	<?php } ?>
+	
 	<div class="mandatory">
 		<label for='register-password'><?php echo elgg_echo('password'); ?></label>
 		

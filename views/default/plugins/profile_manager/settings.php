@@ -78,6 +78,14 @@ $group_limit_options = array(
 	</tr>
 	<tr>
 		<td>
+			<?php echo elgg_echo('profile_manager:settings:generate_username_from_email'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[generate_username_from_email]", "options_values" => $noyes_options, "value" => $vars['entity']->generate_username_from_email)); ?>
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<?php echo elgg_echo('profile_manager:settings:profile_icon_on_register'); ?>
 		</td>
 		<td>
