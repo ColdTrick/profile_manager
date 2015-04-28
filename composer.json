@@ -1,0 +1,7 @@
+{
+    "name": "coldtrick/profile_manager",
+    "type": "elgg-plugin",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
