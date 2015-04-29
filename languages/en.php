@@ -96,6 +96,9 @@ $english = array(
 	'profile_manager:admin:options:multiselect' => 'MultiSelect',
 	'profile_manager:admin:options:file' => 'File',
 	'profile_manager:admin:options:pm_rating' => 'Rating',
+	'profile_manager:admin:options:pm_twitter' => 'Twitter',
+	'profile_manager:admin:options:pm_facebook' => 'Facebook',
+	'profile_manager:admin:options:pm_linkedin' => 'LinkedIn',
 	
 	'profile_manager:admin:additional_options' => 'Additional options',
 	'profile_manager:admin:show_on_register' => 'Show on register form',
@@ -330,6 +333,12 @@ $english = array(
 		<b>Actions</b><br />
 		Various actions related to these profile fields.
 	",
+	
+	// custom input/output views
+	'profile_manager:pm_twitter:input:placeholder' => "Enter your Twitter username here",
+	'profile_manager:pm_twitter:output:follow' => "Follow @%s",
+	'profile_manager:pm_facebook:input:placeholder' => "Enter your Facebook profile url here",
+	'profile_manager:pm_linkedin:input:placeholder' => "Enter your LinkedIn profile url here",
 
 	// widgets
 	'widgets:profile_completeness:title' => 'Profile Completeness',

@@ -37,6 +37,9 @@ function profile_manager_register_custom_field_types() {
 	$pm_rating_options = $profile_options;
 	unset($pm_rating_options["output_as_tags"]);
 	
+	$social_options = $profile_options;
+	$social_options['output_as_tags'] = false;
+	
 	profile_manager_add_custom_field_type("custom_profile_field_types", 'text', elgg_echo('profile:field:text'), $profile_options);
 	profile_manager_add_custom_field_type("custom_profile_field_types", 'longtext', elgg_echo('profile:field:longtext'), $profile_options);
 	profile_manager_add_custom_field_type("custom_profile_field_types", 'tags', elgg_echo('profile:field:tags'), $profile_options);
@@ -49,6 +52,9 @@ function profile_manager_register_custom_field_types() {
 	profile_manager_add_custom_field_type("custom_profile_field_types", 'radio', elgg_echo('profile_manager:admin:options:radio'), $radio_options);
 	profile_manager_add_custom_field_type("custom_profile_field_types", 'multiselect', elgg_echo('profile_manager:admin:options:multiselect'), $profile_options);
 	profile_manager_add_custom_field_type("custom_profile_field_types", 'pm_rating', elgg_echo('profile_manager:admin:options:pm_rating'), $pm_rating_options);
+	profile_manager_add_custom_field_type("custom_profile_field_types", 'pm_twitter', elgg_echo('profile_manager:admin:options:pm_twitter'), $social_options);
+	profile_manager_add_custom_field_type("custom_profile_field_types", 'pm_facebook', elgg_echo('profile_manager:admin:options:pm_facebook'), $social_options);
+	profile_manager_add_custom_field_type("custom_profile_field_types", 'pm_linkedin', elgg_echo('profile_manager:admin:options:pm_linkedin'), $social_options);
 	//profile_manager_add_custom_field_type("custom_profile_field_types", 'pm_file', elgg_echo('profile_manager:admin:options:file'), $file_options);
 	
 	// registering group field types
