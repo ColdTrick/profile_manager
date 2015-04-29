@@ -116,10 +116,6 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	cursor: pointer;
 }
 
-#restoreForm {
-	display: none;
-}
-
 .custom_fields_add_form_table,
 .custom_fields_add_form_table_left {
 	width: 100%;

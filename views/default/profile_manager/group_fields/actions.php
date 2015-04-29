@@ -26,7 +26,7 @@ $form_body = "<div class='mtm'>" . elgg_echo("profile_manager:actions:configurat
 $form_body .= elgg_view("input/file", array("name" => "restoreFile"));
 $form_body .= elgg_view("input/submit", array("value" => elgg_echo("profile_manager:actions:configuration:restore:upload")));
 
-$body .= elgg_view("input/form", array("action" => "action/profile_manager/configuration/restore?fieldtype=" . CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE, "id" => "restoreForm", "body" => $form_body, "enctype" => "multipart/form-data"));
+$body .= elgg_view("input/form", array("action" => "action/profile_manager/configuration/restore?fieldtype=" . CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE, "id" => "restoreForm", "body" => $form_body, "enctype" => "multipart/form-data", 'class' => 'hidden'));
 $body .= '</div>';
 
 $footer = elgg_format_element('div', ['class' => 'hidden', 'id' => 'text_more_info_actions'], elgg_echo("profile_manager:tooltips:actions"));
