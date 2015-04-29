@@ -87,17 +87,6 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	margin-right: 5px;
 }
 
-.field_config_title{
-}
-
-.field_config_extra{
-	display:none;
-}
-
-.field_config_metadata {
-	float: right;
-}
-
 .field_config_metadata_option {
 	width: 16px;
 	height: 13px;

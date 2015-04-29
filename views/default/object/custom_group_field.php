@@ -12,7 +12,7 @@
 
 $handle = "<div onclick='$(\"#" . $vars['entity']->guid . "\").toggle();' class='custom_field_handle'></div>";
 
-$title = "<div class='field_config_title'>";
+$title = "<div>";
 $title .= "<b>" . $vars['entity']->metadata_name . "</b> [" . $vars['entity']->metadata_type . "]";
 $title .= elgg_view("output/url", array(
 	"href" => "ajax/view/forms/profile_manager/group_field?guid=" . $vars['entity']->guid,
@@ -29,7 +29,7 @@ $title .= elgg_view("output/url", array(
 ));
 $title .= "</div>";
 
-$extra_info = "<div id='" . $vars['entity']->guid . "' class='field_config_extra'>";
+$extra_info = "<div id='" . $vars['entity']->guid . "' class='hidden'>";
 
 // label information
 if (!empty($vars['entity']->metadata_label)) {
@@ -62,7 +62,7 @@ if (empty($vars['entity']->output_as_tags)) {
 	$vars['entity']->output_as_tags = "no";
 }
 
-$metadata = "<div class='field_config_metadata'>";
+$metadata = "<div class='float-alt'>";
 
 // output_as_tags
 $metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "output_as_tags"));
