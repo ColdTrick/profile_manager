@@ -116,14 +116,6 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	cursor: pointer;
 }
 
-.profile-manager-actions {
-	padding: 5px 0px;
-}
-
-.profile-manager-actions a{
-	margin: 0 5px 5px 0;
-}
-
 #restoreForm {
 	display: none;
 }
