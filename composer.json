@@ -1,0 +1,17 @@
+{
+	"name": "coldtrick/profile_manager",
+	"description": "Improved management of user and group profile fields",
+	"type": "elgg-plugin",
+	"keywords": ["elgg", "plugin", "profile", "groups"],
+	"license": "GPL-2.0",
+	"support": {
+		"source": "https://github.com/ColdTrick/profile_manager",
+		"issues": "https://github.com/ColdTrick/profile_manager/issues"
+	},
+	"require": {
+		"composer/installers": "^1.0.8"
+	},
+	"require-dev": {
+		"coldtrick/sniffs": "dev-master"
+	}
+}
