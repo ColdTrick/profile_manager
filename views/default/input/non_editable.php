@@ -17,6 +17,6 @@ if (is_array($vars["value"])) {
 
 echo elgg_view("input/hidden", $vars);
 	
-echo elgg_format_element('div', null, elgg_view("output/text", $vars));
+echo elgg_format_element('div', array(), elgg_view("output/text", $vars));
 
-echo elgg_format_element('div', null, elgg_echo("profile_manager:non_editable:info"));
+echo elgg_format_element('div', array(), elgg_echo("profile_manager:non_editable:info"));
