@@ -10,19 +10,6 @@
 * @link http://www.coldtrick.com/
 */
 
-// new groups default to open membership
-if (isset($vars['entity'])) {
-	$membership = $vars['entity']->membership;
-	$access = $vars['entity']->access_id;
-	if ($access != ACCESS_PUBLIC && $access != ACCESS_LOGGED_IN) {
-		// group only - this is done to handle access not created when group is created
-		$access = ACCESS_PRIVATE;
-	}
-} else {
-	$membership = ACCESS_PUBLIC;
-	$access = ACCESS_PUBLIC;
-}
-
 $group = elgg_extract("entity", $vars);
 
 $name_limit = elgg_get_plugin_setting("group_limit_name", "profile_manager");
@@ -55,7 +42,7 @@ if (!$show_input && !empty($group) && (!empty($name_limit) || ($name_limit == "0
 if ($show_input) {
 	echo elgg_view("input/text", array(
 			'name' => 'name',
-			'value' => $vars['entity']->name,
+			'value' => elgg_extract('name', $vars),
 	));
 	if (!empty($name_edit_num_left)) {
 		echo "<div class='elgg-subtext'>" . elgg_echo("profile_manager:group:edit:limit", array("<strong>" . $name_edit_num_left . "</strong>")) . "</div>";
@@ -63,13 +50,13 @@ if ($show_input) {
 } else {
 	// show value
 	echo elgg_view("output/text", array(
-			'value' => $vars['entity']->name,
+			'value' => elgg_extract('name', $vars),
 	));
 	
 	// add hidden so it gets saved and form checks still are valid
 	echo elgg_view("input/hidden", array(
 			'name' => 'name',
-			'value' => $vars['entity']->name,
+			'value' => elgg_extract('name', $vars),
 	));
 }
 
@@ -95,20 +82,7 @@ if (count($group_fields["fields"]) > 0) {
 		$title = $field->getTitle();
 		
 		// get value
-		$value = '';
-		if ($metadata = $vars['entity']->$metadata_name) {
-			if (is_array($metadata)) {
-				foreach ($metadata as $md) {
-					if (!empty($value)) {
-						$value .= ', ';
-					}
-					
-					$value .= $md;
-				}
-			} else {
-				$value = $metadata;
-			}
-		}
+		$value = elgg_extract($metadata_name, $vars);
 		
 		$line_break = '<br />';
 		if ($valtype == 'longtext') {
