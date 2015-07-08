@@ -1,6 +1,21 @@
 Version history
 ===============
 
+9.1 (2015-07-08):
+
+- added: the option to generate username based on email during registration
+- added: composer support
+- added: added social input fields for Twitter, Facebook and LinkedIn
+- fixed: avoid use of deprecated Elgg add_to_river() function
+- fixed: correctly show categories when admin changed profile type
+- fixed: profile edit js function called before lib is loaded
+- fixed: set correct class for categories when using profile types
+- fixed: group profile edit isn't sticky
+- fixed: php type hint warning
+- changed: improved layout of profile field actions
+- changed: some admin css cleanup
+- removed: removed the restoreForm css
+
 9.0.1 (2015-01-27):
 
 - fixed: js error on register form in walled garden
