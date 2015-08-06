@@ -33,9 +33,8 @@ class ProfileManagerCustomProfileType extends ElggObject {
 		$title = $this->metadata_label;
 
 		if (empty($title)) {
-			$trans_key = "profile:types:" . $this->metadata_name;
-			if ($trans_key != elgg_echo($trans_key)) {
-				$title = elgg_echo($trans_key);
+			if (elgg_language_key_exists("profile:types:{$this->metadata_name}")) {
+				$title = elgg_echo("profile:types:{$this->metadata_name}");
 			} else {
 				$title = $this->metadata_name;
 			}
@@ -52,9 +51,8 @@ class ProfileManagerCustomProfileType extends ElggObject {
 	public function getDescription() {
 		$description = $this->metadata_description;
 		if (empty($description)) {
-			$trans_key = "profile:types:" . $this->metadata_name . ":description";
-			if ($trans_key != elgg_echo($trans_key)) {
-				$description = elgg_echo($trans_key);
+			if (elgg_language_key_exists("profile:types:{$this->metadata_name}:description")) {
+				$description = elgg_echo("profile:types:{$this->metadata_name}:description");
 			}
 		}
 		

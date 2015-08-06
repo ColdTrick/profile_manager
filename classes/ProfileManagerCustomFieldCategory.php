@@ -33,9 +33,8 @@ class ProfileManagerCustomFieldCategory extends ElggObject {
 		$title = $this->metadata_label;
 		
 		if (empty($title)) {
-			$trans_key = "profile:categories:" . $this->metadata_name;
-			if ($trans_key != elgg_echo($trans_key)) {
-				$title = elgg_echo($trans_key);
+			if (elgg_language_key_exists("profile:categories:{$this->metadata_name}")) {
+				$title = elgg_echo("profile:categories:{$this->metadata_name}");
 			} else {
 				$title = $this->metadata_name;
 			}

@@ -61,9 +61,8 @@ abstract class ProfileManagerCustomField extends ElggObject {
 		$result = $this->metadata_hint;
 		
 		if (empty($result)) {
-			$trans_key = "profile:hint:" . $this->metadata_name;
-			if ($trans_key != elgg_echo($trans_key)) {
-				$result = elgg_echo($trans_key);
+			if (elgg_language_key_exists("profile:hint:{$this->metadata_name}")) {
+				$result = elgg_echo("profile:hint:{$this->metadata_name}");
 			}
 		}
 		return $result;
@@ -78,9 +77,8 @@ abstract class ProfileManagerCustomField extends ElggObject {
 		$result = $this->metadata_placeholder;
 		
 		if (empty($result)) {
-			$trans_key = "profile:placeholder:" . $this->metadata_name;
-			if ($trans_key != elgg_echo($trans_key)) {
-				$result = elgg_echo($trans_key);
+			if (elgg_language_key_exists("profile:placeholder:{$this->metadata_name}")) {
+				$result = elgg_echo("profile:placeholder:{$this->metadata_name}");
 			}
 		}
 		return $result;
