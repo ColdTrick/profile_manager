@@ -60,11 +60,6 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	background-position: 0 0;
 }
 
-/* profile type */
-.custom_profile_type_description {
-	display: none;
-}
-
 /* fix for max-height multi-select drop down*/
 .ui-dropdownchecklist-dropcontainer {
 	max-height: 150px;

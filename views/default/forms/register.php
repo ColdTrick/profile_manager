@@ -162,7 +162,5 @@ echo "</div>";
 
 ?>
 <script type='text/javascript'>
-	require(['profile_manager/register'], function() {
-		elgg.profile_manager.change_profile_type_register();
-	});
+	require(['profile_manager/register']);
 </script>

@@ -32,19 +32,23 @@ foreach ($types as $type) {
 	$description = $type->getDescription();
 		
 	if (!empty($description)) {
-		$types_description .= elgg_format_element('div', ['id' => $type->guid, 'class' => 'custom_profile_type_description'], $description);
+		$description_class = ['custom_profile_type_description'];
+		if ($value != $type->guid) {
+			$description_class[] = 'hidden';
+		}
+		$types_description .= elgg_format_element('div', ['id' => $type->guid, 'class' => $description_class], $description);
 	}
 }
 
 $result = elgg_format_element('label', [], elgg_echo('profile_manager:profile:edit:custom_profile_type:label'));
 $result .='<br />';
-$result .= elgg_view('input/dropdown', array(
+$result .= elgg_view('input/dropdown', [
 	'name' => 'custom_profile_fields_custom_profile_type',
 	'id' => 'custom_profile_fields_custom_profile_type',
 	'options_values' => $types_options_values,
 	'onchange' => 'elgg.profile_manager.change_profile_type_register();',
-	'value' => $value)
-);
+	'value' => $value
+]);
 
 $result .= $types_description;
 

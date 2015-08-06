@@ -56,7 +56,7 @@ if (elgg_get_plugin_setting('profile_type_selection', 'profile_manager') !== 'ad
 if (!empty($fields)) {
 	$tabbed_cat_titles = '';
 	$tabbed_cat_content = '';
-	
+	$tab_selected = false;
 	foreach ($cats as $cat_guid => $cat) {
 		
 		$linked_profile_types = array(0);
@@ -84,7 +84,7 @@ if (!empty($fields)) {
 			}
 			$field_class = [];
 			if ($field->mandatory == 'yes') {
-				$field_class = 'mandatory';
+				$field_class[] = 'mandatory';
 			}
 			
 			$field_result = elgg_format_element('label', [], $field->getTitle());
@@ -107,6 +107,11 @@ if (!empty($fields)) {
 		}
 		
 		$category_classes = ["category_{$cat_guid}"];
+		
+		if (($linked_profile_types[0] !== 0) && !in_array($custom_profile_fields_custom_profile_type, $linked_profile_types)) {
+			$category_classes[] = 'hidden';
+		}
+		
 		foreach ($linked_profile_types as $type_guid) {
 			$category_classes[] = "profile_type_{$type_guid}";
 		}
@@ -122,7 +127,13 @@ if (!empty($fields)) {
 			
 			if ($tabbed) {
 				$tab_link = elgg_format_element('a', ['href' => 'javascript:void(0);', 'onclick' => "elgg.profile_manager.toggle_tabbed_nav('{$cat_guid}', this);"], $title);
-				$tabbed_cat_titles .= elgg_format_element('li', ['class' => $category_classes], $tab_link);
+				
+				$li_classes = $category_classes;
+				if (!$tab_selected && !in_array('hidden', $category_classes)) {
+					$li_classes[] = 'elgg-state-selected';
+					$tab_selected = true;
+				}
+				$tabbed_cat_titles .= elgg_format_element('li', ['class' => $li_classes], $tab_link);
 			} else {
 				$cat_header = elgg_format_element('div', ['class' => 'elgg-head'], "<h3>{$title}</h3>");
 			}
