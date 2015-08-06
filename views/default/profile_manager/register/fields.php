@@ -51,6 +51,8 @@ if (empty($custom_profile_fields_custom_profile_type)) {
 
 if (elgg_get_plugin_setting('profile_type_selection', 'profile_manager') !== 'admin') {
 	$result .= elgg_view('profile_manager/register/profile_type_selection', ['value' => $custom_profile_fields_custom_profile_type]);
+} else {
+	$result .= elgg_view('input/hidden', ['name' => 'custom_profile_fields_custom_profile_type', 'value' => $custom_profile_fields_custom_profile_type]);
 }
 
 if (!empty($fields)) {
