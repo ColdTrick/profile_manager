@@ -46,8 +46,15 @@ function profile_manager_profile_override($hook_name, $entity_type, $return_valu
 		$translations = array();
 		$context = elgg_get_context();
 		
-		// Make new result
+		// order fields
+		$ordered_entities = [];
 		foreach ($entities as $entity) {
+			$ordered_entities[$entity->order] = $entity;
+		}
+		ksort($ordered_entities);
+				
+		// Make new result
+		foreach ($ordered_entities as $entity) {
 			if ($entity->admin_only != "yes" || elgg_is_admin_logged_in()) {
 
 				$result[$entity->metadata_name] = $entity->metadata_type;
@@ -67,7 +74,7 @@ function profile_manager_profile_override($hook_name, $entity_type, $return_valu
 			$result["custom_profile_type"] = "non_editable";
 		}
 	}
-
+	
 	return $result;
 }
 
