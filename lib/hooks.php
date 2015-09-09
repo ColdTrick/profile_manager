@@ -258,12 +258,19 @@ function profile_manager_action_register_hook($hook_name, $entity_type, $return_
 		}
 
 		foreach ($required_fields as $entity) {
-
-			$passed_value = trim($custom_profile_fields[$entity->metadata_name]);
-
-			if (strlen($passed_value) < 1) {
-				register_error(elgg_echo("profile_manager:register_pre_check:missing", array($entity->getTitle())));
-				forward(REFERER);
+			$passed_value = $custom_profile_fields[$entity->metadata_name];
+			if (is_array($passed_value)) {
+				if (!count($passed_value)) {
+					register_error(elgg_echo("profile_manager:register_pre_check:missing", array($entity->getTitle())));
+					forward(REFERER);
+				}
+			}
+			else {
+				$passed_value = trim($passed_value);
+				if (strlen($passed_value) < 1) {
+					register_error(elgg_echo("profile_manager:register_pre_check:missing", array($entity->getTitle())));
+					forward(REFERER);
+				}
 			}
 		}
 
