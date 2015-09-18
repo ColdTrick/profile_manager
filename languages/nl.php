@@ -1,10 +1,18 @@
 <?php
 /**
- * This file was created by Translation Editor v2.0
- * On 2014-07-17 09:43
+ * This file was created by Translation Editor v4.0
+ * On 2015-09-18 15:51
  */
 
-$language = array (
+return array (
+  'profile_manager:settings:generate_username_from_email' => 'Genereer gebruikersnaam op basis van email',
+  'profile_manager:admin:options:pm_twitter' => 'Twitter',
+  'profile_manager:admin:options:pm_facebook' => 'Facebook',
+  'profile_manager:admin:options:pm_linkedin' => 'LinkedIn',
+  'profile_manager:pm_twitter:input:placeholder' => 'Voer je Twitter gebruikersnaam in',
+  'profile_manager:pm_twitter:output:follow' => 'Volg @%s',
+  'profile_manager:pm_facebook:input:placeholder' => 'Voer je Facebook profiel url in',
+  'profile_manager:pm_linkedin:input:placeholder' => 'Voer je LinkedIn profiel url in',
   'profile_manager:admin:metadata_placeholder' => 'Placeholder',
   'profile_manager:settings:group' => 'Bewerk Groep Profiel',
   'profile_manager:settings:group:group_limit_name' => 'Maximum aantal keer dat een groepsnaam kan worden bewerkt',
@@ -263,4 +271,3 @@ $language = array (
   'profile_manager:account:login_history:date' => 'Datum',
   'profile_manager:account:login_history:ip' => 'IP Adres',
 );
-add_translation("nl", $language);
