@@ -128,23 +128,25 @@ function profile_manager_page_handler($page) {
 /**
  * Function to add menu items to the pages
  *
- * @return unknown_type
+ * @return void
  */
 function profile_manager_pagesetup() {
-	if (elgg_in_context("admin") && elgg_is_admin_logged_in()) {
-		elgg_load_js('lightbox');
-		elgg_load_css('lightbox');
+	if (!elgg_in_context('admin') || !elgg_is_admin_logged_in()) {
+		return;
+	}
 		
-		elgg_register_admin_menu_item('administer', 'export', 'users');
-		elgg_register_admin_menu_item('administer', 'inactive', 'users');
-		
-		if (elgg_is_active_plugin("groups")) {
-			elgg_register_admin_menu_item('configure', 'group_fields', 'appearance');
-		}
-		
-		if (elgg_get_plugin_setting("user_summary_control", "profile_manager") == "yes") {
-			elgg_register_admin_menu_item('configure', 'user_summary_control', 'appearance');
-		}
+	elgg_load_js('lightbox');
+	elgg_load_css('lightbox');
+	
+	elgg_register_admin_menu_item('administer', 'export', 'users');
+	elgg_register_admin_menu_item('administer', 'inactive', 'users');
+	
+	if (elgg_is_active_plugin('groups')) {
+		elgg_register_admin_menu_item('configure', 'group_fields', 'appearance');
+	}
+	
+	if (elgg_get_plugin_setting('user_summary_control', 'profile_manager') == 'yes') {
+		elgg_register_admin_menu_item('configure', 'user_summary_control', 'appearance');
 	}
 }
 

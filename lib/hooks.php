@@ -89,62 +89,62 @@ function profile_manager_profile_override($hook_name, $entity_type, $return_valu
  * @return array
  */
 function profile_manager_group_override($hook_name, $entity_type, $return_value, $parameters) {
-	$result = $return_value;
 
 	// get from cache
-	$site_guid = elgg_get_config("site_guid");
-	$entities = elgg_load_system_cache("profile_manager_group_fields_" . $site_guid);
+	$site_guid = elgg_get_config('site_guid');
+	$entities = elgg_load_system_cache('profile_manager_group_fields_' . $site_guid);
 	if ($entities === null) {
-		$options = array(
-				"type" => "object",
-				"subtype" => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
-				"limit" => false,
-				"owner_guid" => elgg_get_config("site_guid")
-		);
+		$options = [
+			'type' => 'object',
+			'subtype' => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
+			'limit' => false,
+			'owner_guid' => elgg_get_config('site_guid')
+		];
 		$entities = elgg_get_entities($options);
-		elgg_save_system_cache("profile_manager_group_fields_" . $site_guid, serialize($entities));
+		elgg_save_system_cache('profile_manager_group_fields_' . $site_guid, serialize($entities));
 	} else {
 		$entities = unserialize($entities);
 	}
 
-	if ($entities) {
-
-		$guids = array();
-		$translations = array();
-
-		foreach ($entities as $entity) {
-			$guids[] = $entity->getGUID();
-		}
-
-		_elgg_services()->metadataCache->populateFromEntities($guids);
-
-		$result = array();
-		$ordered = array();
-
-		// Order the group fields and filter some types out
-		foreach ($entities as $group_field) {
-			if ($group_field->admin_only != "yes" || elgg_is_admin_logged_in()) {
-				$ordered[$group_field->order] = $group_field;
-			}
-		}
-		ksort($ordered);
-
-		// build the correct list
-		$result["name"] = "text";
-		foreach ($ordered as $group_field) {
-			$result[$group_field->metadata_name] = $group_field->metadata_type;
-
-			// should it be handled as tags? Q: is this still needed? A: Yes it is, it handles presentation of these fields in listing mode
-			if (elgg_get_context() == "search" && ($group_field->output_as_tags == "yes" || $group_field->metadata_type == "multiselect")) {
-				$result[$group_field->metadata_name] = "tags";
-			}
-			
-			$translations["groups:" . $group_field->metadata_name] = $group_field->getTitle();
-		}
-		
-		add_translation(get_current_language(), $translations);
+	if (empty($entities)) {
+		return;
 	}
 
+	$guids = [];
+	$translations = [];
+
+	foreach ($entities as $entity) {
+		$guids[] = $entity->getGUID();
+	}
+
+	_elgg_services()->metadataCache->populateFromEntities($guids);
+
+	$result = [];
+	$ordered = [];
+
+	// Order the group fields and filter some types out
+	foreach ($entities as $group_field) {
+		if ($group_field->admin_only != 'yes' || elgg_is_admin_logged_in()) {
+			$ordered[$group_field->order] = $group_field;
+		}
+	}
+	ksort($ordered);
+
+	// build the correct list
+	$result['name'] = 'text';
+	foreach ($ordered as $group_field) {
+		$result[$group_field->metadata_name] = $group_field->metadata_type;
+
+		// should it be handled as tags? Q: is this still needed? A: Yes it is, it handles presentation of these fields in listing mode
+		if (elgg_get_context() == 'search' && ($group_field->output_as_tags == 'yes' || $group_field->metadata_type == 'multiselect')) {
+			$result[$group_field->metadata_name] = 'tags';
+		}
+		
+		$translations['groups:' . $group_field->metadata_name] = $group_field->getTitle();
+	}
+	
+	add_translation(get_current_language(), $translations);
+	
 	return $result;
 }
 
