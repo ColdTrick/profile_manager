@@ -68,7 +68,14 @@ function profile_manager_profile_override($hook_name, $entity_type, $return_valu
 			$translations["profile:" . $entity->metadata_name] = $entity->getTitle();
 		}
 
-		add_translation(get_current_language(), $translations);
+		$languages = ['en'];
+		$languages[] = get_current_language();
+		$languages[] = elgg_get_config('language');
+		array_unique($languages);
+		
+		foreach ($languages as $lang) {
+			add_translation($lang, $translations);
+		}
 
 		if (count($result) > 0) {
 			$result["custom_profile_type"] = "non_editable";
@@ -143,7 +150,14 @@ function profile_manager_group_override($hook_name, $entity_type, $return_value,
 		$translations['groups:' . $group_field->metadata_name] = $group_field->getTitle();
 	}
 	
-	add_translation(get_current_language(), $translations);
+	$languages = ['en'];
+	$languages[] = get_current_language();
+	$languages[] = elgg_get_config('language');
+	array_unique($languages);
+	
+	foreach ($languages as $lang) {
+		add_translation($lang, $translations);
+	}
 	
 	return $result;
 }
