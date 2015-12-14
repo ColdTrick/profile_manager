@@ -330,12 +330,16 @@ function profile_manager_action_register_hook($hook_name, $entity_type, $return_
 		$base_username = $email_parts[0];
 		$tmp_username = $base_username;
 		
+		$show_hidden = access_show_hidden_entities(true);
+		
 		$i = 1;
 		while (get_user_by_username($tmp_username)) {
 			$tmp_username = $base_username . $i;
 			$i++;
 		}
-				
+		
+		access_show_hidden_entities($show_hidden);
+		
 		set_input('username', $tmp_username);
 	}
 }
