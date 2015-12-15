@@ -9,7 +9,6 @@
 */
 
 require_once(dirname(__FILE__) . "/lib/functions.php");
-require_once(dirname(__FILE__) . "/lib/hooks.php");
 
 define("CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE", "custom_profile_field_category");
 define("CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE", "custom_profile_type");
@@ -65,18 +64,18 @@ function profile_manager_init() {
 	elgg_extend_view('core/settings/statistics', 'profile_manager/account/login_history');
 	
 	// hook for extending menus
-	elgg_register_plugin_hook_handler('register', 'menu:entity', 'profile_manager_register_entity_menu', 600);
+	elgg_register_plugin_hook_handler('register', 'menu:entity', '\ColdTrick\ProfileManager\Users::registerEntityMenu', 600);
 	
 	// extend public pages
-	elgg_register_plugin_hook_handler('public_pages', 'walled_garden', 'profile_manager_public_pages');
+	elgg_register_plugin_hook_handler('public_pages', 'walled_garden', '\ColdTrick\ProfileManager\Sites::publicPages');
 	
-	elgg_register_plugin_hook_handler('permissions_check:annotate', 'site', 'profile_manager_permissions_check_annotate');
+	elgg_register_plugin_hook_handler('permissions_check:annotate', 'site', '\ColdTrick\ProfileManager\Sites::permissionsCheckAnnotate');
 	
 	// enable username change
 	elgg_extend_view("forms/account/settings", "profile_manager/account/username", 50); // positioned at the beginning of the options
 
 	// register hook for saving the new username
-	elgg_register_plugin_hook_handler('usersettings:save', 'user', 'profile_manager_username_change_hook');
+	elgg_register_plugin_hook_handler('usersettings:save', 'user', '\ColdTrick\ProfileManager\Users::usernameChange');
 	
 	// site join event handler
 	elgg_register_event_handler('create', 'member_of_site', '\ColdTrick\ProfileManager\Sites::createMember');
@@ -171,13 +170,13 @@ elgg_register_event_handler('pagesetup', 'system', 'profile_manager_pagesetup');
 elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::create');
 elgg_register_event_handler('profileupdate','user', '\ColdTrick\ProfileManager\Users::updateProfile');
 
-elgg_register_plugin_hook_handler('profile:fields', 'profile', 'profile_manager_profile_override');
-elgg_register_plugin_hook_handler('profile:fields', 'group', 'profile_manager_group_override');
+elgg_register_plugin_hook_handler('profile:fields', 'profile', '\ColdTrick\ProfileManager\ProfileFields::getUserFields');
+elgg_register_plugin_hook_handler('profile:fields', 'group', '\ColdTrick\ProfileManager\ProfileFields::getGroupFields');
 
-elgg_register_plugin_hook_handler('action', 'register', 'profile_manager_action_register_hook');
-elgg_register_plugin_hook_handler('action', 'groups/edit', 'profile_manager_action_groups_edit_hook');
+elgg_register_plugin_hook_handler('action', 'register', '\ColdTrick\ProfileManager\Users::actionRegister');
+elgg_register_plugin_hook_handler('action', 'groups/edit', '\ColdTrick\ProfileManager\Groups::groupsEdit');
 
-elgg_register_plugin_hook_handler('categorized_profile_fields', 'profile_manager', 'profile_manager_categorized_profile_fields_hook', 1000);
+elgg_register_plugin_hook_handler('categorized_profile_fields', 'profile_manager', '\ColdTrick\ProfileManager\ProfileFields::addAdminFields', 1000);
 
 // actions
 elgg_register_action("profile_manager/new", dirname(__FILE__) . "/actions/new.php", "admin");

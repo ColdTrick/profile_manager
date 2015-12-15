@@ -53,4 +53,40 @@ class Sites {
 		// clear current river events
 		elgg_delete_river(array("view" => 'river/relationship/member_of_site/create', "subject_guid" => $user_guid, "object_guid" => $site_guid));
 	}
+	
+	/**
+	 * Used to prevent likes on site objects
+	 *
+	 * @param string  $hook_name    name of the hook
+	 * @param string  $entity_type  type of the hook
+	 * @param unknown $return_value return value
+	 * @param unknown $params       hook parameters
+	 *
+	 * @return boolean
+	 */
+	public static function permissionsCheckAnnotate($hook_name, $entity_type, $return_value, $params) {
+		$return = $return_value;
+		if (is_array($params) && (elgg_extract("annotation_name", $params) == "likes")) {
+			$return = false;
+		}
+		return $return;
+	}
+	
+	/**
+	 * Extend public pages
+	 *
+	 * @param string  $hook_name    name of the hook
+	 * @param string  $entity_type  type of the hook
+	 * @param unknown $return_value return value
+	 * @param unknown $params       hook parameters
+	 *
+	 * @return array
+	 */
+	public static function publicPages($hook_name, $entity_type, $return_value, $params) {
+		$return = $return_value;
+		if (is_array($return)) {
+			$return[] = "action/profile_manager/register/validate.*";
+		}
+		return $return;
+	}
 }
