@@ -69,7 +69,7 @@ elgg.profile_manager.init_edit = function() {
 	}
 
 	// username change
-	$("#profile_manager_username .elgg-input-text").live("keyup", function(event) {
+	$(document).on('keyup', '#profile_manager_username .elgg-input-text', function(event) {
 		elgg.profile_manager.profile_manager_username(event, $(this));
 	});
 };

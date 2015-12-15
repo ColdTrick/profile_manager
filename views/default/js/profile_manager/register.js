@@ -89,7 +89,7 @@ elgg.profile_manager.toggle_tabbed_nav = function(div_id, element){
 elgg.profile_manager.init_register = function(){
 	
 	// validate on submit
-	$(".elgg-form-register").live("submit", function() {
+	$(document).on('submit', '.elgg-form-register', function() {
 		var error_count = 0;
 		var result = false;
 
@@ -155,7 +155,7 @@ elgg.profile_manager.init_register = function(){
 	});
 	
 	// add username generation when a email adress has been entered
-	$(".elgg-form-register input[name='email']").live("blur", function(){
+	$(document).on('blur', '.elgg-form-register input[name="email"]', function(){
 		var email_value = $(this).val();
 		if (email_value.indexOf("@") !== -1) {
 			var pre = email_value.split("@");
@@ -170,7 +170,7 @@ elgg.profile_manager.init_register = function(){
 	});
 
 	// add live validation of username and emailaddress
-	$(".elgg-form-register input[name='username'], .elgg-form-register input[name='email'], .elgg-form-register input[name='password']").live("keyup", function(event){
+	$(document).on('keyup', '.elgg-form-register input[name="username"], .elgg-form-register input[name="email"], .elgg-form-register input[name="password"]', function(event){
 		var fieldname = $(event.currentTarget).attr("name");
 		var form = $(this).parents(".elgg-form-register");
 		clearTimeout(profile_manager_register_form_timers[fieldname]);
@@ -180,7 +180,7 @@ elgg.profile_manager.init_register = function(){
 	});
 
 	// password compare check
-	$(".elgg-form-register input[name='password'], .elgg-form-register input[name='password2']").live("keyup", function(event){
+	$(document).on('keyup', '.elgg-form-register input[name="password"], .elgg-form-register input[name="password2"]', function(event){
 		var form = $(this).parents(".elgg-form-register");
 		
 		var password1 = form.find("input[name='password']").val();

@@ -46,11 +46,11 @@ elgg.profile_manager.init_admin = function() {
 		}
 	});
 
-	$(".elgg-icon-profile-manager-user-summary-config-add").live("click", function(){
+	$(document).on('click', '.elgg-icon-profile-manager-user-summary-config-add', function(){
 		$("#profile-manager-user-summary-config-options").clone().insertBefore($(this)).removeAttr("id").attr("name", $(this).parent().attr("rel") + "[]");
 	});
 
-	$(".profile-manager-user-summary-config-options-delete").live("click", function(){
+	$(document).on('click', '.profile-manager-user-summary-config-options-delete', function(){
 		$(this).parent().remove();
 	});
 }

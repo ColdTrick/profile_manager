@@ -5,7 +5,7 @@ elgg.provide("elgg.profile_manager");
 
 elgg.profile_manager.init = function(){
 	// more info tooltips
-	$("span.custom_fields_more_info").live('mouseover', function(e) {
+	$(document).on('mouseover', 'span.custom_fields_more_info', function(e) {
 			var tooltip = $("#text_" + $(this).attr('id'));
 			$("body").append("<p id='custom_fields_more_info_tooltip'>"+ $(tooltip).html() + "</p>");
 		
@@ -21,7 +21,7 @@ elgg.profile_manager.init = function(){
 					.css("left",(e.pageX - 260) + "px")
 					.fadeIn("medium");
 			}
-		}).live('mouseout', function() {
+		}).on('mouseout', 'span.custom_fields_more_info', function() {
 			$("#custom_fields_more_info_tooltip").remove();
 		}
 	);
