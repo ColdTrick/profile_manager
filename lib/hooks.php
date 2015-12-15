@@ -573,7 +573,7 @@ function profile_manager_action_groups_edit_hook($hook_name, $entity_type, $retu
 					
 					if ($count < $limit) {
 						// register function to increment count on succesful edit
-						elgg_register_event_handler("update", "group", "profile_manager_name_edit_increment");
+						elgg_register_event_handler("update", "group", "\ColdTrick\ProfileManager\Groups::nameIncrement");
 					} else {
 						// group name needs special treatment
 						$name = htmlspecialchars_decode($group->name, ENT_QUOTES);
@@ -593,7 +593,7 @@ function profile_manager_action_groups_edit_hook($hook_name, $entity_type, $retu
 					
 					if ($count < $limit) {
 						// register function to increment count on succesful edit
-						elgg_register_event_handler("update", "group", "profile_manager_description_edit_increment");
+						elgg_register_event_handler("update", "group", "\ColdTrick\ProfileManager\Groups::descriptionIncrement");
 					} else {
 						// cannot be changed, so reset to current value
 						set_input("description", $group->description);

@@ -10,7 +10,6 @@
 
 require_once(dirname(__FILE__) . "/lib/functions.php");
 require_once(dirname(__FILE__) . "/lib/hooks.php");
-require_once(dirname(__FILE__) . "/lib/events.php");
 
 define("CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE", "custom_profile_field_category");
 define("CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE", "custom_profile_type");
@@ -80,10 +79,8 @@ function profile_manager_init() {
 	elgg_register_plugin_hook_handler('usersettings:save', 'user', 'profile_manager_username_change_hook');
 	
 	// site join event handler
-	elgg_register_event_handler("create", "member_of_site", "profile_manager_create_member_of_site");
-	
-	// always cleanup
-	elgg_register_event_handler("delete", "member_of_site", "profile_manager_delete_member_of_site");
+	elgg_register_event_handler('create', 'member_of_site', '\ColdTrick\ProfileManager\Sites::createMember');
+	elgg_register_event_handler('delete', 'member_of_site', '\ColdTrick\ProfileManager\Sites::deleteMember');
 	
 	// register ajax views
 	elgg_register_ajax_view("forms/profile_manager/type");
@@ -171,8 +168,8 @@ elgg_register_event_handler('plugins_boot', 'system', 'profile_manager_plugins_b
 elgg_register_event_handler('init', 'system', 'profile_manager_init');
 elgg_register_event_handler('pagesetup', 'system', 'profile_manager_pagesetup');
 
-elgg_register_event_handler('create', 'user', 'profile_manager_create_user_event');
-elgg_register_event_handler('profileupdate','user', 'profile_manager_profileupdate_user_event');
+elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::create');
+elgg_register_event_handler('profileupdate','user', '\ColdTrick\ProfileManager\Users::updateProfile');
 
 elgg_register_plugin_hook_handler('profile:fields', 'profile', 'profile_manager_profile_override');
 elgg_register_plugin_hook_handler('profile:fields', 'group', 'profile_manager_group_override');
