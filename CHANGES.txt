@@ -1,6 +1,20 @@
 Version history
 ===============
 
+9.2 (2015-12-15):
+
+- changed: label of a field now gets added to all translations
+- changed: refactored register form fields code for better readability
+- changed: the config 'profile' now contains an ordered list of fields
+- changed: updated dutch language
+- changed: use new Elgg 1.11 function to check if translation key exists
+- fixed: check for arrays passed as values during validation
+- fixed: correctly set profile type on registration form if only admins can change it
+- fixed: prevent flickering of categories shown based on profile type
+- fixed: replaced deprecated jquery live function with on
+- fixed: username generation should check for hidden users
+- fixed: added missing actions tokens in profile field action links
+
 9.1 (2015-07-08):
 
 - added: the option to generate username based on email during registration
