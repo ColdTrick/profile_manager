@@ -27,23 +27,23 @@ abstract class CustomField extends \ElggObject {
 	 * @return string
 	 */
 	public function getOptions($add_blank_option = false) {
-		$options = "";
+		$options = '';
 		
 		// get options
 		if (empty($this->metadata_options)) {
 			return $options;
 		}
 			
-		$options = explode(",", $this->metadata_options);
+		$options = explode(',', $this->metadata_options);
 		
-		if ($this->blank_available == "yes") {
+		if ($this->blank_available == 'yes') {
 			// if field has a blank option available, always add the blank option
 			$add_blank_option = true;
 		}
 		
-		if ($this->metadata_type != "multiselect" && $add_blank_option) {
+		if ($this->metadata_type != 'multiselect' && $add_blank_option) {
 			// optionally add a blank option to the field options
-			array_unshift($options, "");
+			array_unshift($options, '');
 		}
 		
 		$options = array_combine($options, $options); // add values as labels for deprecated notices
@@ -59,10 +59,8 @@ abstract class CustomField extends \ElggObject {
 	public function getHint() {
 		$result = $this->metadata_hint;
 		
-		if (empty($result)) {
-			if (elgg_language_key_exists("profile:hint:{$this->metadata_name}")) {
-				$result = elgg_echo("profile:hint:{$this->metadata_name}");
-			}
+		if (empty($result) && elgg_language_key_exists("profile:hint:{$this->metadata_name}")) {
+			$result = elgg_echo("profile:hint:{$this->metadata_name}");
 		}
 		return $result;
 	}
@@ -75,10 +73,8 @@ abstract class CustomField extends \ElggObject {
 	public function getPlaceholder() {
 		$result = $this->metadata_placeholder;
 		
-		if (empty($result)) {
-			if (elgg_language_key_exists("profile:placeholder:{$this->metadata_name}")) {
-				$result = elgg_echo("profile:placeholder:{$this->metadata_name}");
-			}
+		if (empty($result) && elgg_language_key_exists("profile:placeholder:{$this->metadata_name}")) {
+			$result = elgg_echo("profile:placeholder:{$this->metadata_name}");
 		}
 		return $result;
 	}

@@ -6,7 +6,7 @@ namespace ColdTrick\ProfileManager;
  */
 class CustomProfileField extends CustomField {
 
-	const SUBTYPE = "custom_profile_field";
+	const SUBTYPE = 'custom_profile_field';
 
 	/**
 	 * initializes the default class attributes
@@ -25,16 +25,14 @@ class CustomProfileField extends CustomField {
 	 * @return string
 	 */
 	public function getTitle() {
-		// make title
-		$title = $this->metadata_label;
-		
-		if (empty($title)) {
-			if (elgg_language_key_exists("profile:{$this->metadata_name}")) {
-				$title = elgg_echo("profile:{$this->metadata_name}");
-			} else {
-				$title = $this->metadata_name;
-			}
+		if ($this->metadata_label) {
+			return $this->metadata_label;
 		}
-		return $title;
+		
+		if (elgg_language_key_exists("profile:{$this->metadata_name}")) {
+			return elgg_echo("profile:{$this->metadata_name}");
+		}
+		
+		return $this->metadata_name;
 	}
 }

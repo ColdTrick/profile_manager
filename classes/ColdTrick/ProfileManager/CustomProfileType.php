@@ -6,7 +6,7 @@ namespace ColdTrick\ProfileManager;
  */
 class CustomProfileType extends \ElggObject {
 
-	const SUBTYPE = "custom_profile_type";
+	const SUBTYPE = 'custom_profile_type';
 	
 	/**
 	 * initializes the default class attributes
@@ -28,18 +28,15 @@ class CustomProfileType extends \ElggObject {
 	 * @return string
 	 */
 	public function getTitle() {
-		// make title
-		$title = $this->metadata_label;
-
-		if (empty($title)) {
-			if (elgg_language_key_exists("profile:types:{$this->metadata_name}")) {
-				$title = elgg_echo("profile:types:{$this->metadata_name}");
-			} else {
-				$title = $this->metadata_name;
-			}
+		if ($this->metadata_label) {
+			return $this->metadata_label;
 		}
 		
-		return $title;
+		if (elgg_language_key_exists("profile:types:{$this->metadata_name}")) {
+			return elgg_echo("profile:types:{$this->metadata_name}");
+		}
+		
+		return $this->metadata_name;
 	}
 
 	/**
@@ -49,10 +46,8 @@ class CustomProfileType extends \ElggObject {
 	 */
 	public function getDescription() {
 		$description = $this->metadata_description;
-		if (empty($description)) {
-			if (elgg_language_key_exists("profile:types:{$this->metadata_name}:description")) {
-				$description = elgg_echo("profile:types:{$this->metadata_name}:description");
-			}
+		if (empty($description) && elgg_language_key_exists("profile:types:{$this->metadata_name}:description")) {
+			$description = elgg_echo("profile:types:{$this->metadata_name}:description");
 		}
 		
 		return $description;

@@ -6,7 +6,7 @@ namespace ColdTrick\ProfileManager;
  */
 class CustomFieldCategory extends \ElggObject {
 
-	const SUBTYPE = "custom_profile_field_category";
+	const SUBTYPE = 'custom_profile_field_category';
 	
 	/**
 	 * initializes the default class attributes
@@ -28,18 +28,15 @@ class CustomFieldCategory extends \ElggObject {
 	 * @return string
 	 */
 	public function getTitle() {
-		// make title
-		$title = $this->metadata_label;
-		
-		if (empty($title)) {
-			if (elgg_language_key_exists("profile:categories:{$this->metadata_name}")) {
-				$title = elgg_echo("profile:categories:{$this->metadata_name}");
-			} else {
-				$title = $this->metadata_name;
-			}
+		if ($this->metadata_label) {
+			return $this->metadata_label;
 		}
 		
-		return $title;
+		if (elgg_language_key_exists("profile:categories:{$this->metadata_name}")) {
+			return elgg_echo("profile:categories:{$this->metadata_name}");
+		}
+		
+		return $this->metadata_name;
 	}
 
 	/**
@@ -48,21 +45,21 @@ class CustomFieldCategory extends \ElggObject {
 	 * @return void
 	 */
 	public function getLinkedProfileTypes() {
-		$types = $this->getEntitiesFromRelationship(array(
+		$types = $this->getEntitiesFromRelationship([
 			'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
 			'inverse_relationship' => true,
 			'limit' => false
-		));
+		]);
 		
-		if ($types) {
-			$result = array();
-			
-			foreach ($types as $type) {
-				$result[] = $type->getGUID();
-			}
-		} else {
+		if (empty($types)) {
 			// return 0 as the default
-			$result = array(0);
+			return [0];
+		}
+		
+		$result = [];
+				
+		foreach ($types as $type) {
+			$result[] = $type->getGUID();
 		}
 		
 		return $result;

@@ -6,7 +6,7 @@ namespace ColdTrick\ProfileManager;
  */
 class CustomGroupField extends CustomField {
 
-	const SUBTYPE = "custom_group_field";
+	const SUBTYPE = 'custom_group_field';
 	
 	/**
 	 * initializes the default class attributes
@@ -15,6 +15,8 @@ class CustomGroupField extends CustomField {
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
+		
+		$this->attributes['subtype'] = self::SUBTYPE;
 	}
 
 	/**
@@ -23,17 +25,14 @@ class CustomGroupField extends CustomField {
 	 * @return string
 	 */
 	public function getTitle() {
-		// make title
-		$title = $this->metadata_label;
-		
-		if (empty($title)) {
-			if (elgg_language_key_exists("groups:{$this->metadata_name}")) {
-				$title = elgg_echo("groups:{$this->metadata_name}");
-			} else {
-				$title = $this->metadata_name;
-			}
+		if ($this->metadata_label) {
+			return $this->metadata_label;
 		}
 		
-		return $title;
+		if (elgg_language_key_exists("groups:{$this->metadata_name}")) {
+			return elgg_echo("groups:{$this->metadata_name}");
+		}
+		
+		return $this->metadata_name;
 	}
 }

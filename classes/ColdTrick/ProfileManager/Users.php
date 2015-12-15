@@ -17,91 +17,95 @@ class Users {
 	 * @return void
 	 */
 	public static function updateProfile($event, $object_type, $user) {
-	
-		if (!empty($user) && ($user instanceof ElggUser)) {
-			// upload a file to your profile
-			$accesslevel = get_input('accesslevel');
-			if (!is_array($accesslevel)) {
-				$accesslevel = array();
+		if (!elgg_instanceof($user, 'user')) {
+			return;
+		}
+
+		// upload a file to your profile
+		$accesslevel = get_input('accesslevel');
+		if (!is_array($accesslevel)) {
+			$accesslevel = [];
+		}
+
+		$configured_fields = elgg_get_entities_from_metadata([
+			'type' => 'object',
+			'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
+			'limit' => false,
+			'metadata_name_value_pairs' => [
+				'name' => 'metadata_type',
+				'value' => 'pm_file',
+			],
+		]);
+
+		if (empty($configured_fields)) {
+			return;
+		}
+		
+		foreach ($configured_fields as $field) {
+			// check for uploaded files
+			$metadata_name = $field->metadata_name;
+			$current_file_guid = $user->$metadata_name;
+
+			if (isset($accesslevel[$metadata_name])) {
+				$access_id = (int) $accesslevel[$metadata_name];
+			} else {
+				// this should never be executed since the access level should always be set
+				$access_id = ACCESS_PRIVATE;
 			}
-	
-			$options = array(
-				"type" => "object",
-				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
-				"limit" => false,
-				"metadata_name_value_pairs" => array("name" => "metadata_type", "value" => "pm_file")
-			);
-	
-			$configured_fields = elgg_get_entities_from_metadata($options);
-	
-			if ($configured_fields) {
-				foreach ($configured_fields as $field) {
-					// check for uploaded files
-					$metadata_name = $field->metadata_name;
-					$current_file_guid = $user->$metadata_name;
-	
-					if (isset($accesslevel[$metadata_name])) {
-						$access_id = (int) $accesslevel[$metadata_name];
-					} else {
-						// this should never be executed since the access level should always be set
-						$access_id = ACCESS_PRIVATE;
+
+			if (isset($_FILES[$metadata_name]) && $_FILES[$metadata_name]['error'] == 0) {
+				// uploaded file exists so, save it to an ElggFile object
+				// use current_file_guid to overwrite previously uploaded files
+				$filehandler = new ElggFile($current_file_guid);
+				$filehandler->owner_guid = $user->getGUID();
+				$filehandler->container_guid = $user->getGUID();
+				$filehandler->subtype = "file";
+				$filehandler->access_id = $access_id;
+				$filehandler->title = $field->getTitle();
+					
+				$filehandler->setFilename("profile_manager/" .  $_FILES[$metadata_name]["name"]);
+				$filehandler->setMimeType($_FILES[$metadata_name]["type"]);
+					
+				$filehandler->open("write");
+				$filehandler->write(get_uploaded_file($metadata_name));
+				$filehandler->close();
+					
+				if ($filehandler->save()) {
+					$filehandler->profile_manager_metadata_name = $metadata_name; // used to retrieve user file when deleting
+					$filehandler->originalfilename = $_FILES[$metadata_name]["name"];
+						
+					create_metadata($user->guid, $metadata_name, $filehandler->getGUID(), 'text', $user->guid, $access_id);
+				}
+			} else {
+				// if file not uploaded should it be deleted???
+				if (empty($current_file_guid)) {
+					// find the previously uploaded file and if exists... delete it
+					$files = elgg_get_entities_from_metadata([
+						"type" => "object",
+						"subtype" => "file",
+						"owner_guid" => $user->getGUID(),
+						"limit" => 1,
+						"metadata_name_value_pairs" => [
+							"name" => "profile_manager_metadata_name",
+							"value" => $metadata_name,
+						],
+					]);
+					
+					if ($files) {
+						$file = $files[0];
+						$file->delete();
 					}
-	
-					if (isset($_FILES[$metadata_name]) && $_FILES[$metadata_name]['error'] == 0) {
-						// uploaded file exists so, save it to an ElggFile object
-						// use current_file_guid to overwrite previously uploaded files
-						$filehandler = new ElggFile($current_file_guid);
-						$filehandler->owner_guid = $user->getGUID();
-						$filehandler->container_guid = $user->getGUID();
-						$filehandler->subtype = "file";
-						$filehandler->access_id = $access_id;
-						$filehandler->title = $field->getTitle();
-							
-						$filehandler->setFilename("profile_manager/" .  $_FILES[$metadata_name]["name"]);
-						$filehandler->setMimeType($_FILES[$metadata_name]["type"]);
-							
-						$filehandler->open("write");
-						$filehandler->write(get_uploaded_file($metadata_name));
-						$filehandler->close();
-							
-						if ($filehandler->save()) {
-							$filehandler->profile_manager_metadata_name = $metadata_name; // used to retrieve user file when deleting
-							$filehandler->originalfilename = $_FILES[$metadata_name]["name"];
-								
-							create_metadata($user->guid, $metadata_name, $filehandler->getGUID(), 'text', $user->guid, $access_id);
-						}
-					} else {
-						// if file not uploaded should it be deleted???
-						if (empty($current_file_guid)) {
-							// find the previously uploaded file and if exists... delete it
-	
-							$options = array(
-								"type" => "object",
-								"subtype" => "file",
-								"owner_guid" => $user->getGUID(),
-								"limit" => 1,
-								"metadata_name_value_pairs" => array("name" => "profile_manager_metadata_name", "value" => $metadata_name)
-							);
-	
-							$files = elgg_get_entities_from_metadata($options);
-							if ($files) {
-								$file = $files[0];
-								$file->delete();
-							}
-						} else {
-							if ($file = get_entity($current_file_guid)) {
-								// maybe we need to update the access id
-								$file->access_id = $access_id;
-								$file->save();
-							}
-						}
+				} else {
+					if ($file = get_entity($current_file_guid)) {
+						// maybe we need to update the access id
+						$file->access_id = $access_id;
+						$file->save();
 					}
 				}
 			}
-	
-			// update profile completeness
-			profile_manager_profile_completeness($user);
 		}
+		// update profile completeness
+		profile_manager_profile_completeness($user);
 	}
 	
 	/**
@@ -114,13 +118,13 @@ class Users {
 	 * @return array
 	 */
 	public static function create($event, $object_type, $object) {
-		$custom_profile_fields = array();
+		$custom_profile_fields = [];
 	
 		// retrieve all field that were on the register page
 		foreach ($_POST as $key => $value) {
-			if (strpos($key, "custom_profile_fields_") === 0) {
+			if (strpos($key, 'custom_profile_fields_') === 0) {
 				$key = substr($key, 22);
-				$custom_profile_fields[$key] = get_input("custom_profile_fields_" . $key);
+				$custom_profile_fields[$key] = get_input("custom_profile_fields_{$key}");
 			}
 		}
 	
@@ -139,7 +143,7 @@ class Users {
 					// only do something if it not is already an array
 					foreach ($configured_fields as $configured_field) {
 						if ($configured_field->metadata_name == $shortname) {
-							if ($configured_field->metadata_type == "tags" || $configured_field->output_as_tags == "yes") {
+							if ($configured_field->metadata_type == 'tags' || $configured_field->output_as_tags == 'yes') {
 								$value = string_to_tag_array($value);
 								// no need to continue this foreach
 								break;
@@ -169,16 +173,16 @@ class Users {
 			elgg_set_ignore_access($ia);
 		}
 	
-		if (isset($_FILES["profile_icon"])) {
+		if (isset($_FILES['profile_icon'])) {
 			if (!profile_manager_add_profile_icon($object)) {
 				// return false to delete the user
 				return false;
 			}
 		}
 	
-		$terms = elgg_get_plugin_setting("registration_terms", "profile_manager");
+		$terms = elgg_get_plugin_setting('registration_terms', 'profile_manager');
 		if ($terms) {
-			$object->setPrivateSetting("general_terms_accepted", time());
+			$object->setPrivateSetting('general_terms_accepted', time());
 		}
 	
 		elgg_clear_sticky_form('profile_manager_register');
@@ -197,101 +201,129 @@ class Users {
 	public static function registerEntityMenu($hook_name, $entity_type, $return_value, $params) {
 	
 		if (empty($return_value)) {
-			$return_value = array();
+			$return_value = [];
 		}
 	
 		// if it is not an array, someone is doing something strange with this hook
-		if (is_array($return_value)) {
-	
-			// cleanup existing menu items (location is added in core/lib/users.php)
-			if (!empty($return_value)) {
-				foreach ($return_value as $key => $menu_item) {
-					if ($menu_item instanceof ElggMenuItem) {
-						if ($menu_item->getName() == "location") {
-							// add the new and improved version that supports 'old' location as tags field
-							if ($location = $params["entity"]->location) {
-								if (is_array($location)) {
-									$location = implode(",", $location);
-								}
-								$options = array(
-									'name' => 'location',
-									'text' => "<span>$location</span>",
-									'href' => false,
-									'priority' => 150,
-								);
-								$location_menu = ElggMenuItem::factory($options);
-								$return_value[$key] = $location_menu;
-							}
-						}
-					}
-				}
-			}
-	
-			if (!elgg_in_context("widgets") && elgg_instanceof($params['entity'], 'user')) {
-				if (elgg_get_plugin_setting("user_summary_control", "profile_manager") == "yes") {
-					// add optional custom profile field data
-					$current_config = elgg_get_plugin_setting("user_summary_config", "profile_manager");
-					if (!empty($current_config)) {
-						$current_config = json_decode($current_config, true);
-	
-						$profile_fields = elgg_get_config("profile_fields");
-	
-						if (!empty($current_config) && is_array($current_config) && !empty($profile_fields)) {
-							if (array_key_exists("entity_menu", $current_config)) {
-								$fields = $current_config["entity_menu"];
-								$spacer_allowed = true;
-								$spacer_result = "";
-								$menu_content = "";
-	
-								foreach ($fields as $field) {
-									$field_result = "";
-	
-									switch ($field) {
-										case "spacer_dash":
-											if ($spacer_allowed) {
-												$spacer_result = " - ";
-											}
-											$spacer_allowed = false;
-											break;
-										case "spacer_space":
-											if ($spacer_allowed) {
-												$spacer_result = " ";
-											}
-											$spacer_allowed = false;
-											break;
-										case "spacer_new_line":
-											$spacer_allowed = true;
-											$field_result = "<br />";
-											break;
-										default:
-											if (array_key_exists($field, $profile_fields)) {
-												$spacer_allowed = true;
-												$field_result = elgg_view("output/" . $profile_fields[$field], array("value" => $params["entity"]->$field));
-											}
-											break;
-									}
-	
-									if (!empty($field_result)) {
-										$menu_content .= $spacer_result . $field_result;
-									}
-								}
-									
-								if (!empty($menu_content)) {
-									$options = array(
-										'name' => 'profile_manager_user_summary_control_entity_menu',
-										'text' => "<span>$menu_content</span>",
-										'href' => false,
-										'priority' => 150,
-									);
-									$return_value[] = ElggMenuItem::factory($options);
-								}
-							}
-						}
-					}
-				}
-			}
+		if (!is_array($return_value)) {
+			return $return_value;
 		}
 	
+		// cleanup existing menu items (location is added in core/lib/users.php)
+		// @todo is this fix still needed?
+		if (!empty($return_value)) {
+			foreach ($return_value as $key => $menu_item) {
+				
+				if (!($menu_item instanceof ElggMenuItem)) {
+					continue;
+				}
+				
+				
+				if ($menu_item->getName() !== "location") {
+					continue;
+				}
+				
+				$location = $params['entity']->location;
+				if (empty($location)) {
+					continue;
+				}
+				
+				// add the new and improved version that supports 'old' location as tags field
+				
+				if (is_array($location)) {
+					$location = implode(',', $location);
+				}
+				$options = array(
+					'name' => 'location',
+					'text' => "<span>$location</span>",
+					'href' => false,
+					'priority' => 150,
+				);
+				$location_menu = ElggMenuItem::factory($options);
+				$return_value[$key] = $location_menu;
+			}
+		}
+
+		if (elgg_in_context('widgets')) {
+			return $return_value;
+		}
+		
+		$user = elgg_extract('entity', $params);
+		if (!elgg_instanceof($user, 'user')) {
+			return $return_value;
+		}
+		
+		if (elgg_get_plugin_setting('user_summary_control', 'profile_manager') !== 'yes') {
+			return $return_value;
+		}
+		
+		// add optional custom profile field data
+		$current_config = elgg_get_plugin_setting('user_summary_config', 'profile_manager');
+		if (empty($current_config)) {
+			return $return_value;
+		}
+		
+		$profile_fields = elgg_get_config('profile_fields');
+		if (empty($profile_fields)) {
+			return $return_value;
+		}
+		
+		$current_config = json_decode($current_config, true);
+		if (empty($current_config) || !is_array($current_config)) {
+			return $return_value;
+		}
+
+		$fields = elgg_extract('entity_menu', $current_config);
+		if (empty($fields)) {
+			return $return_value;
+		}
+		
+		$spacer_allowed = true;
+		$spacer_result = '';
+		$menu_content = '';
+
+		foreach ($fields as $field) {
+			$field_result = '';
+
+			switch ($field) {
+				case 'spacer_dash':
+					if ($spacer_allowed) {
+						$spacer_result = ' - ';
+					}
+					$spacer_allowed = false;
+					break;
+				case 'spacer_space':
+					if ($spacer_allowed) {
+						$spacer_result = ' ';
+					}
+					$spacer_allowed = false;
+					break;
+				case 'spacer_new_line':
+					$spacer_allowed = true;
+					$field_result = '<br />';
+					break;
+				default:
+					if (array_key_exists($field, $profile_fields)) {
+						$spacer_allowed = true;
+						$field_result = elgg_view('output/' . $profile_fields[$field], ['value' => $user->$field]);
+					}
+					break;
+			}
+
+			if (!empty($field_result)) {
+				$menu_content .= $spacer_result . $field_result;
+			}
+		}
+			
+		if (!empty($menu_content)) {
+			$return_value[] = ElggMenuItem::factory([
+				'name' => 'profile_manager_user_summary_control_entity_menu',
+				'text' => elgg_format_element('span', [], $menu_content),
+				'href' => false,
+				'priority' => 150,
+			]);
+		}
+		
 		return $return_value;
 	}
 	
@@ -312,33 +344,33 @@ class Users {
 		elgg_make_sticky_form('profile_manager_register');
 	
 		// validate mandatory profile fields
-		$profile_icon = elgg_get_plugin_setting("profile_icon_on_register", "profile_manager");
+		$profile_icon = elgg_get_plugin_setting('profile_icon_on_register', 'profile_manager');
 	
 		// general terms
-		$terms = elgg_get_plugin_setting("registration_terms", "profile_manager");
+		$terms = elgg_get_plugin_setting('registration_terms', 'profile_manager');
 	
 		// new
-		$profile_type_guid = get_input("custom_profile_fields_custom_profile_type", false);
+		$profile_type_guid = get_input('custom_profile_fields_custom_profile_type', false);
 		$fields = profile_manager_get_categorized_fields(null, true, true, true, $profile_type_guid);
-		$required_fields = array();
+		$required_fields = [];
 	
-		if (!empty($fields["categories"])) {
-			foreach ($fields["categories"] as $cat_guid => $cat) {
-				$cat_fields = $fields["fields"][$cat_guid];
+		if (!empty($fields['categories'])) {
+			foreach ($fields['categories'] as $cat_guid => $cat) {
+				$cat_fields = $fields['fields'][$cat_guid];
 				foreach ($cat_fields as $field) {
-					if ($field->show_on_register == "yes" && $field->mandatory == "yes") {
+					if ($field->show_on_register == 'yes' && $field->mandatory == 'yes') {
 						$required_fields[] = $field;
 					}
 				}
 			}
 		}
 	
-		if ($terms || $required_fields || $profile_icon == "yes") {
+		if ($terms || $required_fields || $profile_icon == 'yes') {
 	
-			$custom_profile_fields = array();
+			$custom_profile_fields = [];
 	
 			foreach ($_POST as $key => $value) {
-				if (strpos($key, "custom_profile_fields_") == 0) {
+				if (strpos($key, 'custom_profile_fields_') == 0) {
 					$key = substr($key, 22);
 					$custom_profile_fields[$key] = $value;
 				}
@@ -348,34 +380,33 @@ class Users {
 				$passed_value = $custom_profile_fields[$entity->metadata_name];
 				if (is_array($passed_value)) {
 					if (!count($passed_value)) {
-						register_error(elgg_echo("profile_manager:register_pre_check:missing", array($entity->getTitle())));
+						register_error(elgg_echo('profile_manager:register_pre_check:missing', [$entity->getTitle()]));
 						forward(REFERER);
 					}
-				}
-				else {
+				} else {
 					$passed_value = trim($passed_value);
 					if (strlen($passed_value) < 1) {
-						register_error(elgg_echo("profile_manager:register_pre_check:missing", array($entity->getTitle())));
+						register_error(elgg_echo('profile_manager:register_pre_check:missing', [$entity->getTitle()]));
 						forward(REFERER);
 					}
 				}
 			}
 	
-			if ($profile_icon == "yes") {
-				$profile_icon = $_FILES["profile_icon"];
+			if ($profile_icon == 'yes') {
+				$profile_icon = $_FILES['profile_icon'];
 	
 				$error = false;
-				if (empty($profile_icon["name"])) {
-					register_error(elgg_echo("profile_manager:register_pre_check:missing", array("profile_icon")));
+				if (empty($profile_icon['name'])) {
+					register_error(elgg_echo('profile_manager:register_pre_check:missing', ['profile_icon']));
 					$error = true;
-				} elseif ($profile_icon["error"] != 0) {
-					register_error(elgg_echo("profile_manager:register_pre_check:profile_icon:error"));
+				} elseif ($profile_icon['error'] != 0) {
+					register_error(elgg_echo('profile_manager:register_pre_check:profile_icon:error'));
 					$error = true;
 				} else {
 					// test if we can handle the image
 					$image = get_resized_image_from_uploaded_file('profile_icon', '10', '10', true, false);
 					if (!$image) {
-						register_error(elgg_echo("profile_manager:register_pre_check:profile_icon:nosupportedimage"));
+						register_error(elgg_echo('profile_manager:register_pre_check:profile_icon:nosupportedimage'));
 						$error = true;
 					}
 				}
@@ -386,9 +417,9 @@ class Users {
 			}
 	
 			if ($terms) {
-				$terms_accepted = get_input("accept_terms");
-				if ($terms_accepted !== "yes") {
-					register_error(elgg_echo("profile_manager:register_pre_check:terms"));
+				$terms_accepted = get_input('accept_terms');
+				if ($terms_accepted !== 'yes') {
+					register_error(elgg_echo('profile_manager:register_pre_check:terms'));
 					forward(REFERER);
 				}
 			}
@@ -397,7 +428,7 @@ class Users {
 		// generate username
 		$username = get_input('username');
 		$email = get_input('email');
-		if (empty($username) && !empty($email) && (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") == "yes")) {
+		if (empty($username) && !empty($email) && (elgg_get_plugin_setting('generate_username_from_email', 'profile_manager') == 'yes')) {
 	
 			$email_parts = explode('@', $email);
 			$base_username = $email_parts[0];
@@ -431,25 +462,38 @@ class Users {
 		$user_guid = (int) get_input('guid');
 		$new_username = get_input('username');
 	
-		$enable_username_change = elgg_get_plugin_setting("enable_username_change", "profile_manager");
-		if ($enable_username_change == "yes" || ($enable_username_change == "admin" && elgg_is_admin_logged_in())) {
-	
-			if (!empty($user_guid) && !empty($new_username)) {
-				if (profile_manager_validate_username($new_username)) {
-					if ($user = get_user($user_guid)) {
-						if ($user->canEdit()) {
-							if ($user->username !== $new_username) {
-								$user->username = $new_username;
-								if ($user->save()) {
-									elgg_register_plugin_hook_handler("forward", "system", "\ColdTrick\ProfileManager\Users::usernameChangeForward");
-	
-									system_message(elgg_echo('profile_manager:action:username:change:succes'));
-								}
-							}
-						}
-					}
-				}
-			}
+		if (empty($user_guid) || empty($new_username)) {
+			return;
+		}
+		
+		$enable_username_change = elgg_get_plugin_setting('enable_username_change', 'profile_manager', 'no');
+		if ($enable_username_change == 'no' || ($enable_username_change == 'admin' && !elgg_is_admin_logged_in())) {
+			return;
+		}
+		
+		
+		if (!profile_manager_validate_username($new_username)) {
+			return;
+		}
+		
+		$user = get_user($user_guid);
+		if (empty($user)) {
+			return;
+		}
+
+		if (!$user->canEdit()) {
+			return;
+		}
+		
+		if ($user->username == $new_username) {
+			return;
+		}
+		
+		$user->username = $new_username;
+		if ($user->save()) {
+			elgg_register_plugin_hook_handler('forward', 'system', '\ColdTrick\ProfileManager\Users::usernameChangeForward');
+
+			system_message(elgg_echo('profile_manager:action:username:change:succes'));
 		}
 	}
 	
@@ -465,9 +509,9 @@ class Users {
 	 * @return string
 	 */
 	public static function usernameChangeForward($hook_name, $entity_type, $return_value, $parameters) {
-		$username = get_input("username");
+		$username = get_input('username'');
 		if (!empty($username)) {
-			return elgg_get_site_url() . "settings/user/" . $username;
+			return elgg_normalize_url("settings/user/{$username}");
 		}
 	}
 }
