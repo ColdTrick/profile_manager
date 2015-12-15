@@ -10,7 +10,7 @@
 * @link http://www.coldtrick.com/
 */
 
-$english = array(
+return [
 				
 	// entity names
 	'item:object:custom_profile_field' => 'Custom Profile Field',
@@ -401,9 +401,5 @@ $english = array(
 	'profile_manager:account:login_history' => "Login History",
 	'profile_manager:account:login_history:date' => "Date",
 	'profile_manager:account:login_history:ip' => "IP Address",
-	
 
-);
-
-add_translation("en", $english);
-	
+];

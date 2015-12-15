@@ -95,14 +95,14 @@ if (!empty($cats)) {
 	
 	foreach ($cats as $cat_guid => $cat) {
 		// make nice title for category
-		if (empty($cat_guid) || !($cat instanceof ProfileManagerCustomFieldCategory)) {
+		if (empty($cat_guid) || !($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory)) {
 			$cat_title = elgg_echo("profile_manager:categories:list:default");
 		} else {
 			$cat_title = $cat->getTitle();
 		}
 	
 		$class = "elgg-module elgg-module-info";
-		if (!empty($cat_guid) && ($cat instanceof ProfileManagerCustomFieldCategory)) {
+		if (!empty($cat_guid) && ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory)) {
 			
 			$profile_type_options = array(
 					"type" => "object",

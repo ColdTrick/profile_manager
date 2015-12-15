@@ -17,7 +17,7 @@ if (!elgg_is_admin_logged_in()) {
 
 if ($guid = get_input("guid")) {
 	if ($entity = get_entity($guid)) {
-		if ($entity instanceof ProfileManagerCustomField) {
+		if ($entity instanceof \ColdTrick\ProfileManager\CustomField) {
 			$vars["entity"] = $entity;
 		}
 	}

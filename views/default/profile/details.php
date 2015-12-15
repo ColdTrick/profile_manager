@@ -21,7 +21,7 @@ $details_result = "";
 	
 if ($show_profile_type_on_profile != "no") {
 	if ($profile_type_guid = $user->custom_profile_type) {
-		if (($profile_type = get_entity($profile_type_guid)) && ($profile_type instanceof ProfileManagerCustomProfileType)) {
+		if (($profile_type = get_entity($profile_type_guid)) && ($profile_type instanceof \ColdTrick\ProfileManager\CustomProfileType)) {
 			$details_result .= "<div class='even'><b>" . elgg_echo("profile_manager:user_details:profile_type") . "</b>: " . $profile_type->getTitle() . " </div>";
 		}
 	}
@@ -51,7 +51,7 @@ if (count($cats) > 0) {
 				} else {
 					$title = elgg_echo("profile_manager:categories:list:default");
 				}
-			} elseif ($cat instanceof ProfileManagerCustomFieldCategory) {
+			} elseif ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 				$title = $cat->getTitle();
 			} else {
 				$title = $cat;

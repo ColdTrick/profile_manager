@@ -40,7 +40,7 @@ if ($fieldlist = elgg_get_config('profile_custom_fields')) {
 			$count = elgg_get_entities_from_metadata($options);
 			
 			if ($count == 0) {
-				$field = new ProfileManagerCustomProfileField();
+				$field = new \ColdTrick\ProfileManager\CustomProfileField();
 						
 				$field->save();
 				

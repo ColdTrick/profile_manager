@@ -4,7 +4,7 @@
  * On 2015-09-18 15:51
  */
 
-return array (
+return [
   'profile_manager:settings:generate_username_from_email' => 'Genereer gebruikersnaam op basis van email',
   'profile_manager:admin:options:pm_twitter' => 'Twitter',
   'profile_manager:admin:options:pm_facebook' => 'Facebook',
@@ -270,4 +270,4 @@ return array (
   'profile_manager:account:login_history' => 'Aanmeld geschiedenis',
   'profile_manager:account:login_history:date' => 'Datum',
   'profile_manager:account:login_history:ip' => 'IP Adres',
-);
+];

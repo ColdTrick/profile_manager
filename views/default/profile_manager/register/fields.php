@@ -62,7 +62,7 @@ if (!empty($fields)) {
 	foreach ($cats as $cat_guid => $cat) {
 		
 		$linked_profile_types = array(0);
-		if ($cat instanceof ProfileManagerCustomFieldCategory) {
+		if ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 			$linked_profile_types = $cat->getLinkedProfileTypes();
 		}
 		

@@ -9,7 +9,6 @@
 */
 
 require_once(dirname(__FILE__) . "/lib/functions.php");
-require_once(dirname(__FILE__) . "/lib/run_once.php");
 require_once(dirname(__FILE__) . "/lib/hooks.php");
 require_once(dirname(__FILE__) . "/lib/events.php");
 
@@ -86,10 +85,6 @@ function profile_manager_init() {
 	// always cleanup
 	elgg_register_event_handler("delete", "member_of_site", "profile_manager_delete_member_of_site");
 	
-	// Run once function to configure this plugin
-	run_function_once('profile_manager_run_once', 1287964800); // 2010-10-25
-	run_function_once('profile_manager_fix_access_default');
-	
 	// register ajax views
 	elgg_register_ajax_view("forms/profile_manager/type");
 	elgg_register_ajax_view("forms/profile_manager/category");
@@ -150,7 +145,29 @@ function profile_manager_pagesetup() {
 	}
 }
 
+/**
+ * Performs class upgrade before init as classes are needed during init
+ *
+ * @return void
+ */
+function profile_manager_plugins_boot() {
+	$classes = [
+		'\ColdTrick\ProfileManager\CustomProfileField',
+		'\ColdTrick\ProfileManager\CustomGroupField',
+		'\ColdTrick\ProfileManager\CustomProfileType',
+		'\ColdTrick\ProfileManager\CustomFieldCategory',
+	];
+	
+	foreach ($classes as $class) {
+		$current_class = get_subtype_class('object', $class::SUBTYPE);
+		if ($current_class !== $class) {
+			update_subtype('object', $class::SUBTYPE, $class);
+		}
+	}
+}
+
 // Initialization functions
+elgg_register_event_handler('plugins_boot', 'system', 'profile_manager_plugins_boot');
 elgg_register_event_handler('init', 'system', 'profile_manager_init');
 elgg_register_event_handler('pagesetup', 'system', 'profile_manager_pagesetup');
 

@@ -1,11 +1,10 @@
 <?php
+namespace ColdTrick\ProfileManager;
+
 /**
- * ProfileManagerCustomProfileType
- *
- * @package ProfileManager
- *
+ * CustomProfileType
  */
-class ProfileManagerCustomProfileType extends ElggObject {
+class CustomProfileType extends \ElggObject {
 
 	const SUBTYPE = "custom_profile_type";
 	

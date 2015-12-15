@@ -16,7 +16,7 @@ $guid = get_input("guid");
 if (!empty($guid)) {
 	$entity = get_entity($guid);
 	
-	if ($entity instanceof ProfileManagerCustomFieldCategory) {
+	if ($entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 		$options = array(
 			"type" => "object",
 			"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,

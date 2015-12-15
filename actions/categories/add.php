@@ -19,13 +19,13 @@ $add = false;
 if (!empty($name) && preg_match("/^[a-zA-Z0-9_]{1,}$/", $name)) {
 	if (!empty($guid)) {
 		$entity = get_entity($guid);
-		if (!empty($entity) && !($entity instanceof ProfileManagerCustomFieldCategory)) {
+		if (!empty($entity) && !($entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory)) {
 			$entity = null;
 		}
 	}
 	
 	if (empty($entity)) {
-		$entity = new ProfileManagerCustomFieldCategory();
+		$entity = new \ColdTrick\ProfileManager\CustomFieldCategory();
 		$entity->save();
 		$add = true;
 	}

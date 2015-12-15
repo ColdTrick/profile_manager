@@ -202,7 +202,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 			$profile_type = get_entity($profile_type_guid);
 			
 			// check if profile type is a REAL profile type
-			if (!empty($profile_type) && ($profile_type instanceof ProfileManagerCustomProfileType)) {
+			if (!empty($profile_type) && ($profile_type instanceof \ColdTrick\ProfileManager\CustomProfileType)) {
 				if ($profile_type->getSubtype() != CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE) {
 					$profile_type = null;
 				}

@@ -209,7 +209,7 @@ function profile_manager_categorized_profile_fields_hook($hook_name, $entity_typ
 			);
 
 			foreach ($system_fields as $metadata_name => $metadata_type) {
-				$system_field = new ProfileManagerCustomProfileField();
+				$system_field = new \ColdTrick\ProfileManager\CustomProfileField();
 
 				$system_field->metadata_name = $metadata_name;
 				$system_field->metadata_type = $metadata_type;

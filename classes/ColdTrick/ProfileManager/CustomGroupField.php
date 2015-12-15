@@ -1,14 +1,13 @@
 <?php
+namespace ColdTrick\ProfileManager;
+
 /**
- * ProfileManagerCustomProfileField
- *
- * @package ProfileManager
- *
+ * CustomGroupField
  */
-class ProfileManagerCustomProfileField extends ProfileManagerCustomField {
+class CustomGroupField extends CustomField {
 
-	const SUBTYPE = "custom_profile_field";
-
+	const SUBTYPE = "custom_group_field";
+	
 	/**
 	 * initializes the default class attributes
 	 *
@@ -16,10 +15,8 @@ class ProfileManagerCustomProfileField extends ProfileManagerCustomField {
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
-		
-		$this->attributes['subtype'] = self::SUBTYPE;
 	}
-	
+
 	/**
 	 * Returns the title of the field
 	 *
@@ -30,12 +27,13 @@ class ProfileManagerCustomProfileField extends ProfileManagerCustomField {
 		$title = $this->metadata_label;
 		
 		if (empty($title)) {
-			if (elgg_language_key_exists("profile:{$this->metadata_name}")) {
-				$title = elgg_echo("profile:{$this->metadata_name}");
+			if (elgg_language_key_exists("groups:{$this->metadata_name}")) {
+				$title = elgg_echo("groups:{$this->metadata_name}");
 			} else {
 				$title = $this->metadata_name;
 			}
 		}
+		
 		return $title;
 	}
 }

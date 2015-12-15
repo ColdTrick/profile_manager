@@ -20,13 +20,13 @@ $categories = get_input("categories");
 if (!empty($name) && preg_match("/^[a-zA-Z0-9_]{1,}$/", $name)) {
 	if (!empty($guid)) {
 		$object = get_entity($guid);
-		if (!empty($object) && !($object instanceof ProfileManagerCustomProfileType)) {
+		if (!empty($object) && !($object instanceof \ColdTrick\ProfileManager\CustomProfileType)) {
 			$object = null;
 		}
 	}
 	
 	if (empty($object)) {
-		$object = new ProfileManagerCustomProfileType();
+		$object = new \ColdTrick\ProfileManager\CustomProfileType();
 		$object->save();
 	}
 	

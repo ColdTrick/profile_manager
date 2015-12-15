@@ -1,11 +1,10 @@
 <?php
+namespace ColdTrick\ProfileManager;
+
 /**
- * ProfileManagerCustomField
- *
- * @package ProfileManager
- *
+ * CustomField
  */
-abstract class ProfileManagerCustomField extends ElggObject {
+abstract class CustomField extends \ElggObject {
 	
 	/**
 	 * initializes the default class attributes

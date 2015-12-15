@@ -1,11 +1,10 @@
 <?php
+namespace ColdTrick\ProfileManager;
+
 /**
- * ProfileManagerCustomFieldCategory
- *
- * @package ProfileManager
- *
+ * CustomFieldCategory
  */
-class ProfileManagerCustomFieldCategory extends ElggObject {
+class CustomFieldCategory extends \ElggObject {
 
 	const SUBTYPE = "custom_profile_field_category";
 	

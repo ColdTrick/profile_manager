@@ -17,7 +17,7 @@ $ordering = get_input("elgg-object");
 if (!empty($ordering) && is_array($ordering)) {
 	foreach ($ordering as $order => $guid) {
 		if ($entity = get_entity($guid)) {
-			if ($entity instanceof ProfileManagerCustomFieldCategory) {
+			if ($entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 				$entity->order = $order + 1;
 				
 				// trigger memcache update
