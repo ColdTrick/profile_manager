@@ -45,14 +45,6 @@ elgg.profile_manager.init_admin = function() {
 			elgg.profile_manager.change_field_category(dragged_field, dropped_on);
 		}
 	});
-
-	$(document).on('click', '.elgg-icon-profile-manager-user-summary-config-add', function(){
-		$("#profile-manager-user-summary-config-options").clone().insertBefore($(this)).removeAttr("id").attr("name", $(this).parent().attr("rel") + "[]");
-	});
-
-	$(document).on('click', '.profile-manager-user-summary-config-options-delete', function(){
-		$(this).parent().remove();
-	});
 }
 
 elgg.profile_manager.toggle_option = function(field, guid) {

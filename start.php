@@ -110,9 +110,6 @@ function profile_manager_page_handler($page) {
 				return true;
 			}
 			break;
-		case "user_summary_control":
-			include(dirname(__FILE__) . "/pages/user_summary_control/preview.php");
-			return true;
 	}
 }
 
@@ -134,10 +131,6 @@ function profile_manager_pagesetup() {
 	
 	if (elgg_is_active_plugin('groups')) {
 		elgg_register_admin_menu_item('configure', 'group_fields', 'appearance');
-	}
-	
-	if (elgg_get_plugin_setting('user_summary_control', 'profile_manager') == 'yes') {
-		elgg_register_admin_menu_item('configure', 'user_summary_control', 'appearance');
 	}
 }
 
@@ -197,8 +190,6 @@ elgg_register_action("profile_manager/categories/delete", dirname(__FILE__) . "/
 
 elgg_register_action("profile_manager/profile_types/add", dirname(__FILE__) . "/actions/profile_types/add.php", "admin");
 elgg_register_action("profile_manager/profile_types/delete", dirname(__FILE__) . "/actions/profile_types/delete.php", "admin");
-
-elgg_register_action("profile_manager/user_summary_control/save", dirname(__FILE__) . "/actions/user_summary_control/save.php", "admin");
 
 elgg_register_action("profile_manager/users/export_inactive", dirname(__FILE__) . "/actions/users/export_inactive.php", "admin");
 

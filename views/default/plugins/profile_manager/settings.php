@@ -91,8 +91,8 @@ $group_limit_options = array(
 		<td>
 			<?php
 				echo elgg_view("input/dropdown", array(
-					"name" => "params[profile_icon_on_register]", 
-					"options_values" => $profile_icon_options, 
+					"name" => "params[profile_icon_on_register]",
+					"options_values" => $profile_icon_options,
 					"value" => $vars['entity']->profile_icon_on_register
 				));
 			?>
@@ -233,14 +233,6 @@ $group_limit_options = array(
 		</td>
 		<td>
 			<?php echo elgg_view("input/dropdown", array("name" => "params[display_system_category]", "options_values" => $noyes_options, "value" => $vars['entity']->display_system_category)); ?>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<?php echo elgg_echo('profile_manager:settings:user_summary_control'); ?>
-		</td>
-		<td>
-			<?php echo elgg_view("input/dropdown", array("name" => "params[user_summary_control]", "options_values" => $noyes_options, "value" => $vars['entity']->user_summary_control)); ?>
 		</td>
 	</tr>
 	<tr>

@@ -31,7 +31,6 @@ Improved management of user and group profile fields
 - replace profile fields access control with just one profile access option
 - a customized registration form
 - live check for valid username, email and password fields on registration form
-- control the fields shown on a user summary / listing view
 
 ### Widgets
 
