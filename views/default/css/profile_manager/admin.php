@@ -40,10 +40,12 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 #custom_fields_category_list_custom .custom_fields_category_selected {
 	background: #BBBBBB;
 }
-.custom_field .elgg-icon,
-.custom_profile_type .elgg-icon,
-.custom_fields_category .elgg-icon {
-	cursor: pointer;
+.custom_field .elgg-icon-settings-alt,
+.custom_profile_type .elgg-icon-settings-alt,
+.custom_fields_category .elgg-icon-settings-alt,
+.custom_field .elgg-icon-delete-alt,
+.custom_profile_type .elgg-icon-delete-alt,
+.custom_fields_category .elgg-icon-delete-alt {
 	vertical-align: text-bottom;
 }
 
@@ -78,21 +80,13 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	width: 700px;
 }
 
-.field_config_metadata_option {
-	width: 16px;
-	height: 13px;
-	display: inline-block;
-	cursor: default;
-	background: url(<?php echo $plugin_graphics_folder; ?>field_metadata_status.png);
-}
-
-.field_config_metadata_option_enabled{
-	background-position: 0 -16px;
+.field_config_metadata_option_enabled {
+	color: #090;
 	cursor: pointer;
 }
 
-.field_config_metadata_option_disabled{
-	background-position: 0 -32px;
+.field_config_metadata_option_disabled {
+	color: #f00;
 	cursor: pointer;
 }
 
@@ -105,10 +99,10 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	white-space: nowrap;
 }
 
-.custom_fields_add_form_table_right label{
+.custom_fields_add_form_table_right label {
 	font-size:inherit;
 	font-weight:inherit;
 }
-.custom_fields_add_form_table_right .elgg-input-checkbox{
+.custom_fields_add_form_table_right .elgg-input-checkbox {
 	vertical-align: middle;
 }

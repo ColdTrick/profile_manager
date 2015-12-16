@@ -14,34 +14,34 @@ $entity = $vars['entity'];
 $metadata_type = $entity->metadata_type;
 $metadata_name = $vars['metadata_name'];
 
-$types = array();
-$type_options = array();
+$types = [];
+$type_options = [];
 
 if ($entity->getSubType() == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE) {
-	$types = profile_manager_get_custom_field_types("custom_profile_field_types");
+	$types = profile_manager_get_custom_field_types('custom_profile_field_types');
 } elseif ($entity->getSubType() == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE) {
-	$types = profile_manager_get_custom_field_types("custom_group_field_types");
+	$types = profile_manager_get_custom_field_types('custom_group_field_types');
 }
 	
 if (!empty($metadata_type) && !empty($types) && array_key_exists($metadata_type, $types)) {
 	$type_options = $types[$metadata_type]->options;
 }
 
-$id = $metadata_name . "_" . $entity->guid;
-	
-$class = "";
-$onclick = "";
+$options = [
+	'title' => elgg_echo('profile_manager:admin:option_unavailable'),
+	'class' => ['field_config_metadata_option'],
+];
 
 // if no option is available in the register, this metadata field can't be toggled
 if (!empty($type_options) && array_key_exists($metadata_name, $type_options) && $type_options[$metadata_name]) {
 	if ($entity->$metadata_name != "yes") {
-		$class = " field_config_metadata_option_disabled";
+		$options['class'][] = 'field_config_metadata_option_disabled';
 	} else {
-		$class = " field_config_metadata_option_enabled";
+		$options['class'][] = 'field_config_metadata_option_enabled';
 	}
-	$title = elgg_echo('profile_manager:admin:' . $metadata_name);
-	$onclick = "onclick='elgg.profile_manager.toggle_option(\"" . $metadata_name . "\", " . $entity->guid . "); return false;'";
-} else {
-	$title = elgg_echo('profile_manager:admin:option_unavailable');
+	$options['title'] = elgg_echo("profile_manager:admin:{$metadata_name}");
+	$options['data-guid'] = $entity->guid;
+	$options['data-field'] = $metadata_name;
 }
-echo "<span title='" . $title . "' class='field_config_metadata_option" . $class . "' id='" . $id . "' " . $onclick . "></span>";
+
+echo elgg_view_icon('circle', $options);

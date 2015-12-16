@@ -23,7 +23,7 @@ $body .= elgg_view("output/url", array("text" => elgg_echo("reset"), "title" => 
 $body .= elgg_view("output/url", array("text" => elgg_echo("profile_manager:actions:import:from_default"), "title" => elgg_echo("profile_manager:actions:import:from_default:description"), "href" => "action/profile_manager/importFromDefault?type=group", "confirm" => elgg_echo("profile_manager:actions:import:from_default:confirm"), "class" => "elgg-button elgg-button-action", 'is_action' => true));
 $body .= elgg_view("output/url", array("title" => elgg_echo("profile_manager:actions:export:description"),"text" => elgg_echo("export"), "href" => "admin/groups/export", "class" => "elgg-button elgg-button-action", 'is_action' => true));
 $body .= elgg_view("output/url", array("text" => elgg_echo("profile_manager:actions:configuration:backup"), "href" => "action/profile_manager/configuration/backup?fieldtype=" . CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE, "confirm" => elgg_echo("profile_manager:actions:configuration:backup:description"), "class" => "elgg-button elgg-button-action", 'is_action' => true));
-$body .= elgg_view("output/url", array("text" => elgg_echo("profile_manager:actions:configuration:restore"), "onclick" => "$('#restoreForm').toggle();", "class" => "elgg-button elgg-button-action", 'is_action' => true));
+$body .= elgg_view("output/url", array("text" => elgg_echo("profile_manager:actions:configuration:restore"), "href" => '#restoreForm', 'rel' => 'toggle', "class" => "elgg-button elgg-button-action"));
 		
 $form_body = "<div class='mtm'>" . elgg_echo("profile_manager:actions:configuration:restore:description") . "</div>";
 $form_body .= elgg_view("input/file", array("name" => "restoreFile"));

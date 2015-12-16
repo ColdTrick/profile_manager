@@ -31,22 +31,28 @@ elgg.profile_manager.init_admin = function() {
 			elgg.profile_manager.change_field_category(dragged_field, dropped_on);
 		}
 	});
+	
+	$(document).on('click', '.field_config_metadata_option_disabled, .field_config_metadata_option_enabled', elgg.profile_manager.toggle_option);
 }
 
-elgg.profile_manager.toggle_option = function(field, guid) {
+elgg.profile_manager.toggle_option = function(event) {
+	$button = $(this);
+	
+	var field = $button.data().field;
+	var guid = $button.data().guid;
 	elgg.action('profile_manager/toggleOption', {
 		data: {
 			guid: guid,
 			field: field
 		},
 		success: function(data) {
-			if(data == true){
-				$("#" + field + "_" + guid).toggleClass("field_config_metadata_option_disabled field_config_metadata_option_enabled");
-			} else {
-				alert(elgg.echo("profile_manager:actions:toggle_option:error:unknown"));
+			if (data.status === 0) {
+				$button.toggleClass('field_config_metadata_option_disabled field_config_metadata_option_enabled');
 			}
 		},
 	});
+	
+	event.preventDefault();
 }
 
 elgg.profile_manager.reorder_custom_fields = function() {
