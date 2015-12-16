@@ -12,7 +12,10 @@
 
 $header = '<h3>';
 $header .= elgg_echo('profile_manager:actions:title');
-$header .= elgg_format_element('span', ['class' => 'custom_fields_more_info', 'id' => 'more_info_actions']);
+$header .= elgg_view('output/pm_hint', [
+	'id' => 'more_info_actions',
+	'text' => elgg_echo('profile_manager:tooltips:actions'),
+]);
 $header .= '</h3>';
 
 $body = '<div class="pvm">';
@@ -29,6 +32,4 @@ $form_body .= elgg_view("input/submit", array("value" => elgg_echo("profile_mana
 $body .= elgg_view("input/form", array("action" => "action/profile_manager/configuration/restore?fieldtype=" . CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE, "id" => "restoreForm", "body" => $form_body, "enctype" => "multipart/form-data", 'class' => 'hidden'));
 $body .= '</div>';
 
-$footer = elgg_format_element('div', ['class' => 'hidden', 'id' => 'text_more_info_actions'], elgg_echo("profile_manager:tooltips:actions"));
-
-echo elgg_view_module('inline', null, $body, ['header' => $header, 'footer' => $footer]);
+echo elgg_view_module('inline', null, $body, ['header' => $header]);

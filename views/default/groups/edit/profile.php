@@ -92,11 +92,12 @@ if (count($group_fields["fields"]) > 0) {
 		echo $title;
 		echo "</label>";
 		
-		if ($hint = $field->getHint()) {
-			?>
-			<span class='custom_fields_more_info' id='more_info_<?php echo $metadata_name; ?>'></span>
-			<span class="hidden" id="text_more_info_<?php echo $metadata_name; ?>"><?php echo $hint;?></span>
-			<?php
+		$hint = $field->getHint();
+		if ($hint) {
+			echo elgg_view('output/pm_hint', [
+				'id' => "more_info_{$metadata_name}",
+				'text' => $hint,
+			]);
 		}
 		
 		echo $line_break;

@@ -32,8 +32,13 @@ if (!empty($categories)) {
 	<div class="elgg-head">
 		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "ajax/view/forms/profile_manager/category", "class" => "elgg-button elgg-button-action profile-manager-popup elgg-lightbox")); ?>
 		<h3>
-			<?php echo elgg_echo('profile_manager:categories:list:title'); ?>
-			<span class='custom_fields_more_info' id='more_info_category_list'></span>
+			<?php
+			echo elgg_echo('profile_manager:categories:list:title');
+			echo elgg_view('output/pm_hint', [
+				'id' => 'more_info_category_list',
+				'text' => elgg_echo('profile_manager:tooltips:category_list'),
+			]);
+			?>
 		</h3>
 	</div>
 	<div class="elgg-body" id="custom_fields_category_list_custom">
@@ -42,6 +47,3 @@ if (!empty($categories)) {
 		<?php echo $list; ?>
 	</div>
 </div>
-
-<div class="hidden" id="text_more_info_category"><?php echo elgg_echo("profile_manager:tooltips:category");?></div>
-<div class="hidden" id="text_more_info_category_list"><?php echo elgg_echo("profile_manager:tooltips:category_list");?></div>

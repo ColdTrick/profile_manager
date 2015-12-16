@@ -30,14 +30,16 @@ if (empty($list)) {
 	<div class="elgg-head">
 		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "ajax/view/forms/profile_manager/type", "class" => "elgg-button elgg-button-action profile-manager-popup elgg-lightbox")); ?>
 		<h3>
-			<?php echo elgg_echo('profile_manager:profile_types:list:title'); ?>
-			<span class='custom_fields_more_info' id='more_info_profile_type_list'></span>
+			<?php
+			echo elgg_echo('profile_manager:profile_types:list:title');
+			echo elgg_view('output/pm_hint', [
+				'id' => 'more_info_profile_type_list',
+				'text' => elgg_echo('profile_manager:tooltips:profile_type_list'),
+			]);
+			?>
 		</h3>
 	</div>
 	<div class="elgg-body" id="custom_fields_profile_types_list_custom">
 		<?php echo $list; ?>
 	</div>
 </div>
-
-<div class="hidden" id="text_more_info_profile_type"><?php echo elgg_echo("profile_manager:tooltips:profile_type");?></div>
-<div class="hidden" id="text_more_info_profile_type_list"><?php echo elgg_echo("profile_manager:tooltips:profile_type_list");?></div>

@@ -90,7 +90,11 @@ $formbody .= elgg_echo('profile_manager:admin:metadata_placeholder') . "*:" . el
 $formbody .= elgg_echo('profile_manager:admin:field_type') . ": " . $type_control;
 $formbody .= "<br />" . elgg_echo('profile_manager:admin:metadata_options') . "*:" . elgg_view('input/text', array('name' => 'metadata_options', "value" => $metadata_options));
 
-$formbody .= "<div class='elgg-module elgg-module-inline'><div class='elgg-head'><h3>" . elgg_echo("profile_manager:admin:additional_options") . "<span class='custom_fields_more_info' id='more_info_profile_field_additional'></span></h3></div><div class='elgg-body'>";
+$hint = elgg_view('output/pm_hint', [
+	'id' => 'more_info_profile_field_additional',
+	'text' => elgg_echo('profile_manager:tooltips:profile_field_additional'),
+]);
+$formbody .= "<div class='elgg-module elgg-module-inline'><div class='elgg-head'><h3>" . elgg_echo("profile_manager:admin:additional_options") . $hint . "</h3></div><div class='elgg-body'>";
 $formbody .= "<table>";
 
 if (array_key_exists("show_on_register", $option_classes)) {
@@ -170,8 +174,13 @@ $form = elgg_view('input/form', array('body' => $formbody, 'action' => 'action/p
 <div class="elgg-module elgg-module-inline mvn" id="custom_fields_form">
 	<div class="elgg-head">
 		<h3>
-			<?php echo $form_title; ?>
-			<span class='custom_fields_more_info' id='more_info_profile_field'></span>
+			<?php
+			echo $form_title;
+			echo elgg_view('output/pm_hint', [
+				'id' => 'more_info_profile_field',
+				'text' => elgg_echo('profile_manager:tooltips:profile_field'),
+			]);
+			?>
 		</h3>
 	</div>
 	<div class="elgg-body">

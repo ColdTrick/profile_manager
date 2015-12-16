@@ -104,8 +104,13 @@ $form = elgg_view('input/form', array('body' => $formbody, 'action' => 'action/p
 <div class="elgg-module elgg-module-inline mvn" id="custom_fields_category_form">
 	<div class="elgg-head">
 		<h3>
-			<?php echo $form_title; ?>
-			<span class='custom_fields_more_info' id='more_info_category'></span>
+			<?php
+			echo $form_title;
+			echo elgg_view('output/pm_hint', [
+				'id' => 'more_info_category',
+				'text' => elgg_echo('profile_manager:tooltips:category'),
+			]);
+			?>
 		</h3>
 	</div>
 	<div class="elgg-body">

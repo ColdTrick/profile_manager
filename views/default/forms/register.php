@@ -36,30 +36,35 @@ if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") =
 		
 		<label for='register-name'><?php echo elgg_echo('name'); ?></label>
 		
-		<?php if ($show_hints) { ?>
-		<span class='custom_fields_more_info' id='more_info_name'></span>
-		<span class='hidden' id='text_more_info_name'><?php echo elgg_echo("profile_manager:register:hints:name")?></span>
-		<?php } ?>
-		
-		<br />
-		
 		<?php
-		echo elgg_view('input/text', array(
+		if ($show_hints) {
+			echo elgg_view('output/pm_hint', [
+				'id' => 'more_info_name',
+				'text' => elgg_echo('profile_manager:register:hints:name'),
+			]);
+		}
+		
+		echo '<br />';
+		echo elgg_view('input/text', [
 			'id' => 'register-name',
 			'name' => 'name',
 			'value' => $name,
-			'class' => 'elgg-autofocus'
-		));
+			'class' => 'elgg-autofocus',
+		]);
 		?>
 		
 	</div>
 	<div class="mandatory">
 		<label for='register-email'><?php echo elgg_echo('email'); ?></label>
 		
-		<?php if ($show_hints) { ?>
-		<span class='custom_fields_more_info' id='more_info_email'></span>
-		<span class='hidden' id='text_more_info_email'><?php echo elgg_echo("profile_manager:register:hints:email")?></span>
-		<?php } ?>
+		<?php
+		if ($show_hints) {
+			echo elgg_view('output/pm_hint', [
+				'id' => 'more_info_email',
+				'text' => elgg_echo('profile_manager:register:hints:email'),
+			]);
+		}
+		?>
 		
 		<br />
 		<div class='profile_manager_register_input_container'>
@@ -78,10 +83,14 @@ if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") =
 	<div class="mandatory">
 		<label for='register-username'><?php echo elgg_echo('username'); ?></label>
 		
-		<?php if ($show_hints) { ?>
-		<span class='custom_fields_more_info' id='more_info_username'></span>
-		<span class='hidden' id='text_more_info_username'><?php echo elgg_echo("profile_manager:register:hints:username")?></span>
-		<?php } ?>
+		<?php
+		if ($show_hints) {
+			echo elgg_view('output/pm_hint', [
+				'id' => 'more_info_username',
+				'text' => elgg_echo('profile_manager:register:hints:username'),
+			]);
+		}
+		?>
 		
 		<br />
 		<div class='profile_manager_register_input_container'>
@@ -100,10 +109,14 @@ if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") =
 	<div class="mandatory">
 		<label for='register-password'><?php echo elgg_echo('password'); ?></label>
 		
-		<?php if ($show_hints) { ?>
-		<span class='custom_fields_more_info' id='more_info_password'></span>
-		<span class='hidden' id='text_more_info_password'><?php echo elgg_echo("profile_manager:register:hints:password")?></span>
-		<?php } ?>
+		<?php
+		if ($show_hints) {
+			echo elgg_view('output/pm_hint', [
+				'id' => 'more_info_password',
+				'text' => elgg_echo('profile_manager:register:hints:password'),
+			]);
+		}
+		?>
 		
 		<br />
 		<div class='profile_manager_register_input_container'>
@@ -120,10 +133,14 @@ if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") =
 	<div class="mandatory">
 		<label for='register-password2'><?php echo elgg_echo('passwordagain'); ?></label>
 		
-		<?php if ($show_hints) { ?>
-		<span class='custom_fields_more_info' id='more_info_passwordagain'></span>
-		<span class='hidden' id='text_more_info_passwordagain'><?php echo elgg_echo("profile_manager:register:hints:passwordagain")?></span>
-		<?php } ?>
+		<?php
+		if ($show_hints) {
+			echo elgg_view('output/pm_hint', [
+				'id' => 'more_info_passwordagain',
+				'text' => elgg_echo('profile_manager:register:hints:passwordagain'),
+			]);
+		}
+		?>
 		
 		<br />
 		<div class='profile_manager_register_input_container'>

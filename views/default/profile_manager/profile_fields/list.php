@@ -38,6 +38,3 @@ if (empty($list)) {
 		<?php echo $list; ?>
 	</div>
 </div>
-
-<div class="hidden" id="text_more_info_profile_field"><?php echo elgg_echo("profile_manager:tooltips:profile_field");?></div>
-<div class="hidden" id="text_more_info_profile_field_additional"><?php echo elgg_echo("profile_manager:tooltips:profile_field_additional");?></div>

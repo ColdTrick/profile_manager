@@ -25,5 +25,3 @@ if (!empty($ordering) && is_array($ordering)) {
 		}
 	}
 }
-
-exit();

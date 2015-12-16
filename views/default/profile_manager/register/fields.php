@@ -93,8 +93,10 @@ if (!empty($fields)) {
 			
 			$hint = $field->getHint();
 			if ($hint) {
-				$field_result .= elgg_format_element('span', ['class' => 'custom_fields_more_info', 'id' => "more_info_{$field->metadata_name}"]);
-				$field_result .= elgg_format_element('span', ['class' => 'hidden', 'id' => "text_more_info_{$field->metadata_name}"], $hint);
+				echo elgg_view('output/pm_hint', [
+					'id' => "more_info_{$field->metadata_name}",
+					'text' => $hint,
+				]);
 			}
 			
 			$field_result .= '<br />';

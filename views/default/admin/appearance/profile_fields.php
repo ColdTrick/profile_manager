@@ -10,6 +10,8 @@
 * @link http://www.coldtrick.com/
 */
 
+elgg_require_js('profile_manager/admin');
+
 $types = elgg_view("profile_manager/profile_types/list");
 $categories = elgg_view("profile_manager/categories/list");
 $fields = elgg_view("profile_manager/profile_fields/list");

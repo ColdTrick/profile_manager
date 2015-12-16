@@ -27,15 +27,14 @@ function profile_manager_init() {
 	elgg_register_js("jquery.ui.multiselect", "mod/profile_manager/vendors/jquery_ui_multiselect/jquery.multiselect.js");
 	
 	// Extend CSS
-	elgg_extend_view("css/admin", "css/profile_manager/global");
+	elgg_extend_view("css/admin", "css/profile_manager/global.css");
 	elgg_extend_view("css/admin", "css/profile_manager/admin");
 	elgg_extend_view("css/admin", "css/profile_manager/multiselect");
 	elgg_extend_view("css/elgg", "css/profile_manager/multiselect");
-	elgg_extend_view("css/elgg", "css/profile_manager/global");
+	elgg_extend_view("css/elgg", "css/profile_manager/global.css");
 	elgg_extend_view("css/elgg", "css/profile_manager/site");
 	
 	elgg_extend_view("js/elgg", "js/profile_manager/site.js");
-	elgg_extend_view("js/admin", "js/profile_manager/admin.js");
 	
 	// Register Page handler
 	elgg_register_page_handler("profile_manager", "profile_manager_page_handler");
