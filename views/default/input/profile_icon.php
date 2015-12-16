@@ -10,17 +10,18 @@
 * @link http://www.coldtrick.com/
 */
 
-$profile_icon = elgg_get_plugin_setting("profile_icon_on_register", "profile_manager");
-if ($profile_icon == "yes") {
-	// mandatory	
-	echo "<div class='mandatory'>";	
-} else {
-	echo "<div>";	
+$profile_icon = elgg_get_plugin_setting('profile_icon_on_register', 'profile_manager');
+
+$div_options = [];
+if ($profile_icon == 'yes') {
+	$div_options['class'] = 'mandatory';
 }
 
-echo "<label for='register-profile_icon'>" . elgg_echo("profile_manager:register:profile_icon") . "</label><br />";
-echo elgg_view("input/file", array("name" => "profile_icon", "id" => "register-profile_icon"));
-echo "</div>";
+$content = elgg_format_element('label', ['for' => 'register-profile_icon'], elgg_echo('profile_manager:register:profile_icon'));
+$content .= '<br />';
+$content .= elgg_view('input/file', ['name' => 'profile_icon', 'id' => 'register-profile_icon']);
+
+echo elgg_format_element('div', $div_options, $content);
 ?>
 <script type="text/javascript">
 	$(document).ready(function(){

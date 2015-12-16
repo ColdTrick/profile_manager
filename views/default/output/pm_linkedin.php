@@ -8,7 +8,7 @@ if (empty($href)) {
 	return;
 }
 
-$name = "";
+$name = '';
 $page_owner = elgg_get_page_owner_entity();
 if ($page_owner) {
 	$name = $page_owner->name;

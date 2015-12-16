@@ -12,10 +12,6 @@
 
 elgg_require_js('profile_manager/admin');
 
-$fields = elgg_view("profile_manager/group_fields/list");
-$actions = elgg_view("profile_manager/group_fields/actions");
-
-$page_data = $fields . $actions;
-
-echo elgg_view("profile_manager/admin/tabs", array("group_fields_selected" => true));
-echo $page_data;
+echo elgg_view('profile_manager/admin/tabs', ['group_fields_selected' => true]);
+echo elgg_view('profile_manager/group_fields/list');
+echo elgg_view('profile_manager/group_fields/actions');

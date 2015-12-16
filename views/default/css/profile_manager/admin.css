@@ -1,24 +1,12 @@
-<?php
-	
-$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
-
-?>
 #custom_fields_ordering {
 	width: 518px;
 }
 
-.elgg-button-action.profile-manager-popup {
-	float: right;
-	padding-top: 0;
-	padding-bottom: 0;
-	margin: 0;
-}
-
-#custom_fields_category_list_custom .droppable-hover{
+#custom_fields_category_list_custom .droppable-hover {
 	background: #000000;
 }
 
-#custom_fields_category_list_custom .droppable-hover a{
+#custom_fields_category_list_custom .droppable-hover a {
 	color: #FFFFFF;
 }
 
@@ -47,6 +35,7 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 .custom_profile_type .elgg-icon-delete-alt,
 .custom_fields_category .elgg-icon-delete-alt {
 	vertical-align: text-bottom;
+	cursor: pointer;
 }
 
 .custom_fields_category .elgg-icon-drag-arrow {
@@ -65,7 +54,7 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	background: #FFFFFF;
 }
 
-#custom_fields_ordering .custom_field{
+#custom_fields_ordering .custom_field {
 	border: 1px solid #CCCCCC;
 	cursor: move;
 	padding: 5px;

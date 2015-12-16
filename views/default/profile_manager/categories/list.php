@@ -30,7 +30,7 @@ if (!empty($categories)) {
 ?>
 <div class="elgg-module elgg-module-inline">
 	<div class="elgg-head">
-		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "ajax/view/forms/profile_manager/category", "class" => "elgg-button elgg-button-action profile-manager-popup elgg-lightbox")); ?>
+		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => "ajax/view/forms/profile_manager/category", "class" => "elgg-button elgg-button-action man pvn float-alt elgg-lightbox")); ?>
 		<h3>
 			<?php
 			echo elgg_echo('profile_manager:categories:list:title');

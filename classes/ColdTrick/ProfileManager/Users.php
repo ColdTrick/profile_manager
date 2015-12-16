@@ -332,7 +332,6 @@ class Users {
 			return;
 		}
 		
-		
 		if (!profile_manager_validate_username($new_username)) {
 			return;
 		}

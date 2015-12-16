@@ -10,8 +10,8 @@
 * @link http://www.coldtrick.com/
 */
 
-if (is_string($vars["value"])) {
-	$vars["value"] = string_to_tag_array($vars["value"]);
+if (is_string($vars['value'])) {
+	$vars['value'] = string_to_tag_array($vars['value']);
 }
 
-echo elgg_view("output/tags", $vars);
+echo elgg_view('output/tags', $vars);

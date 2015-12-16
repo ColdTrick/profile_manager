@@ -18,7 +18,7 @@ define('CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE', 'custom_group_field');
 define('CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP', 'custom_profile_type_category_relationship');
 
 /**
- * initialization of plugin
+ * Initialization of plugin
  *
  * @return void
  */
@@ -28,9 +28,9 @@ function profile_manager_init() {
 	
 	// Extend CSS
 	elgg_extend_view('css/admin', 'css/profile_manager/global.css');
-	elgg_extend_view('css/admin', 'css/profile_manager/admin');
-	elgg_extend_view('css/admin', 'css/profile_manager/multiselect');
-	elgg_extend_view('css/elgg', 'css/profile_manager/multiselect');
+	elgg_extend_view('css/admin', 'css/profile_manager/admin.css');
+	elgg_extend_view('css/admin', 'css/profile_manager/multiselect.css');
+	elgg_extend_view('css/elgg', 'css/profile_manager/multiselect.css');
 	elgg_extend_view('css/elgg', 'css/profile_manager/global.css');
 	elgg_extend_view('css/elgg', 'css/profile_manager/site');
 	

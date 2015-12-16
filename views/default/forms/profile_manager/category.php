@@ -58,7 +58,7 @@ $formbody = "<table class='custom_fields_add_form_table'>";
 $formbody .= "<tr>";
 $formbody .= "<td class='custom_fields_add_form_table_left'>";
 $formbody .= elgg_echo('profile_manager:admin:metadata_name') . ":";
-$formbody .= elgg_view('input/text', array('name' => 'metadata_name', "value" => $metadata_name));
+$formbody .= elgg_view('input/text', array('name' => 'metadata_name', "value" => $metadata_name, 'required' => true));
 $formbody .= "</td>";
 $formbody .= "<td rowspan='2' class='custom_fields_add_form_table_right'>";
 
