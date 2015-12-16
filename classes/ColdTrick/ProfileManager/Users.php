@@ -369,7 +369,7 @@ class Users {
 	 * @return string
 	 */
 	public static function usernameChangeForward($hook_name, $entity_type, $return_value, $parameters) {
-		$username = get_input('username'');
+		$username = get_input('username');
 		if (!empty($username)) {
 			return elgg_normalize_url("settings/user/{$username}");
 		}

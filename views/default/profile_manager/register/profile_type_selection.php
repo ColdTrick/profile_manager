@@ -6,13 +6,12 @@
 
 $value = elgg_extract('value', $vars);
 
-$types_options = array(
+$types = elgg_get_entities([
 	'type' => 'object',
 	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 	'limit' => false,
-	'owner_guid' => elgg_get_site_entity()->getGUID()
-);
-$types = elgg_get_entities($types_options);
+	'owner_guid' => elgg_get_site_entity()->getGUID(),
+]);
 
 if (empty($types)) {
 	return;
@@ -47,7 +46,7 @@ $result .= elgg_view('input/dropdown', [
 	'id' => 'custom_profile_fields_custom_profile_type',
 	'options_values' => $types_options_values,
 	'onchange' => 'elgg.profile_manager.change_profile_type_register();',
-	'value' => $value
+	'value' => $value,
 ]);
 
 $result .= $types_description;
