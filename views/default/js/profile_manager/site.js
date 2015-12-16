@@ -1,6 +1,3 @@
-<?php
-?>
-//<script>
 elgg.provide("elgg.profile_manager");
 
 elgg.profile_manager.init = function(){
