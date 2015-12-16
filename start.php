@@ -61,10 +61,7 @@ function profile_manager_init() {
 	
 	// login history
 	elgg_extend_view('core/settings/statistics', 'profile_manager/account/login_history');
-	
-	// hook for extending menus
-	elgg_register_plugin_hook_handler('register', 'menu:entity', '\ColdTrick\ProfileManager\Users::registerEntityMenu', 600);
-	
+		
 	// extend public pages
 	elgg_register_plugin_hook_handler('public_pages', 'walled_garden', '\ColdTrick\ProfileManager\Sites::publicPages');
 	
