@@ -10,7 +10,11 @@
 * @link http://www.coldtrick.com/
 */
 
-$handle = "<div onclick='$(\"#" . $vars['entity']->guid . "\").toggle();' class='custom_field_handle'></div>";
+$handle = elgg_view_icon('book', [
+	'class' => 'float',
+	'rel' => 'toggle',
+	'data-toggle-selector' => '#' . $vars['entity']->guid,
+]);
 
 $title = "<div>";
 $title .= "<b>" . $vars['entity']->metadata_name . "</b> [" . $vars['entity']->metadata_type . "]";

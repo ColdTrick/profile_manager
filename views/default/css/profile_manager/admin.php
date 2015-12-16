@@ -78,15 +78,6 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	width: 700px;
 }
 
-.custom_field_handle {
-	background: url("<?php echo $plugin_graphics_folder; ?>custom_profile_field.png");
-	width: 16px;
-	height: 16px;
-	cursor: pointer;
-	float: left;
-	margin-right: 5px;
-}
-
 .field_config_metadata_option {
 	width: 16px;
 	height: 13px;
