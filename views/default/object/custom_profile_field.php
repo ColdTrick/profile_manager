@@ -9,80 +9,44 @@
 * @copyright Coldtrick IT Solutions 2009
 * @link http://www.coldtrick.com/
 */
-$handle = elgg_view_icon('book', [
-	'class' => 'float',
-	'rel' => 'toggle',
-	'data-toggle-selector' => '#' . $vars['entity']->guid,
+
+$field = elgg_extract('entity', $vars);
+
+$title = '<b>' . $field->metadata_name . '</b> [' . $field->metadata_type . ']';
+$title .= elgg_view('output/url', [
+	'href' => 'ajax/view/forms/profile_manager/profile_field?guid=' . $field->guid,
+	'class' => 'elgg-lightbox',
+	'title' => elgg_echo('edit'),
+	'text' => elgg_view_icon('settings-alt')
+
 ]);
+$title .= elgg_view('output/url', [
+	'href' => false,
+	'class' => 'profile-manager-remove-field',
+	'data-guid' => $field->guid,
+	'title' => elgg_echo('delete'),
+	'text' => elgg_view_icon('delete-alt'),
+]);
+$title = elgg_format_element('div', [], $title);
 
-$title = "<div>";
-$title .= "<b>" . $vars['entity']->metadata_name . "</b> [" . $vars['entity']->metadata_type . "]";
-$title .= elgg_view("output/url", array(
-		"href" => "ajax/view/forms/profile_manager/profile_field?guid=" . $vars['entity']->guid,
-		"class" => "elgg-lightbox",
-		"title" => elgg_echo("edit"),
-		"text" => elgg_view_icon("settings-alt")
+$metadata = '';
 
-));
-$title .= elgg_view("output/url", array(
-		"href" => false,
-		"onclick" => "elgg.profile_manager.remove_field(" . $vars['entity']->guid . ");",
-		"title" => elgg_echo("delete"),
-		"text" => elgg_view_icon("delete-alt")
-));
-$title .= "</div>";
+$toggle_options = ['show_on_register', 'mandatory', 'user_editable', 'output_as_tags', 'admin_only'];
 
-$extra_info = "<div id='" . $vars['entity']->guid . "' class='hidden'>";
-
-// label information
-if (!empty($vars['entity']->metadata_label)) {
-	$extra_info .= elgg_echo("profile_manager:admin:metadata_label") . ": " . $vars['entity']->metadata_label . "<br />";
-} else {
-	if (elgg_echo("profile:" . $vars['entity']->metadata_name) == "profile:" . $vars['entity']->metadata_name) {
-		$extra_info .= elgg_echo("profile_manager:admin:metadata_label_untranslated") . ": <i>" . elgg_echo("profile:" . $vars['entity']->metadata_name) . "</i><br />";
-	} else {
-		$extra_info .= elgg_echo("profile_manager:admin:metadata_label_translated") . ": " . elgg_echo("profile:" . $vars['entity']->metadata_name) . "<br />";
-	}
+if (elgg_get_plugin_setting('enable_profile_completeness_widget', 'profile_manager') == 'yes') {
+	$toggle_options[] = 'count_for_completeness';
 }
 
-// options
-if (!empty($vars['entity']->metadata_options)) {
-	$extra_info .= elgg_echo("profile_manager:admin:metadata_options") . ": " . $vars['entity']->metadata_options . "<br />";
+foreach ($toggle_options as $option) {
+	$metadata .= elgg_view('profile_manager/toggle_metadata', ['entity' => $field, 'metadata_name' => $option]);
 }
 
-// Hint
-if (!empty($vars['entity']->metadata_hint)) {
-	$extra_info .= elgg_echo("profile_manager:admin:metadata_hint") . ": " . $vars['entity']->metadata_hint . "<br />";
-}
-
-$extra_info .= "</div>";
-
-$metadata = "<div class='float-alt'>";
-
-// show_on_register
-$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "show_on_register"));
-
-// mandatory
-$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "mandatory"));
-
-// user_editable
-$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "user_editable"));
-
-// output_as_tags
-$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "output_as_tags"));
-
-// admin_only
-$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "admin_only"));
-
-// profile completeness
-if (elgg_get_plugin_setting("enable_profile_completeness_widget", "profile_manager") == "yes") {
-	$metadata .= "|";
-	$metadata .= elgg_view("profile_manager/toggle_metadata", array("entity" => $vars['entity'], "metadata_name" => "count_for_completeness"));
-}
-
-$metadata .= "</div>";
+$metadata = elgg_format_element('div', ['class' => 'float-alt'], $metadata);
 		
-$info = $handle . $metadata . $title . $extra_info;
-
-echo "<div id='custom_profile_field_" . $vars['entity']->guid . "' class='custom_field' rel='" . $vars['entity']->category_guid . "'>"  . $info . "</div>";
+echo elgg_format_element('div', [
+	'id' => "custom_profile_field_{$field->guid}",
+	'class' => 'custom_field',
+	'rel' => "{$field->category_guid}",
+	'title' => elgg_echo("profile:{$field->metadata_name}"),
+], $metadata . $title);
 	

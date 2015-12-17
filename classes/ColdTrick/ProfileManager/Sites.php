@@ -70,7 +70,7 @@ class Sites {
 	 */
 	public static function permissionsCheckAnnotate($hook_name, $entity_type, $return_value, $params) {
 		$return = $return_value;
-		if (is_array($params) && (elgg_extract("annotation_name", $params) == "likes")) {
+		if (is_array($params) && (elgg_extract('annotation_name', $params) == 'likes')) {
 			$return = false;
 		}
 		return $return;
@@ -89,7 +89,7 @@ class Sites {
 	public static function publicPages($hook_name, $entity_type, $return_value, $params) {
 		$return = $return_value;
 		if (is_array($return)) {
-			$return[] = "action/profile_manager/register/validate.*";
+			$return[] = 'action/profile_manager/register/validate.*';
 		}
 		return $return;
 	}

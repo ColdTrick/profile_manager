@@ -17,6 +17,10 @@ class CustomProfileField extends CustomField {
 		parent::initializeAttributes();
 		
 		$this->attributes['subtype'] = self::SUBTYPE;
+		
+		$this->show_on_register = 'no';
+		$this->mandatory = 'no';
+		$this->user_editable = 'yes';
 	}
 	
 	/**

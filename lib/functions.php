@@ -502,18 +502,3 @@ function profile_manager_validate_username($username) {
 	
 	return $result;
 }
-
-/**
- * Returns group name
- *
- * @param stdClass $row Row returned from an elgg_get_entities* function
- *
- * @return string
- */
-function profile_manager_export_group_name($row) {
-	$name = htmlspecialchars_decode($row->name);
-	$name = str_replace("\"", "", $name);
-	$name = str_replace(",", " ", $name);
-
-	return $name;
-}

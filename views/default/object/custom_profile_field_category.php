@@ -10,34 +10,35 @@
 * @link http://www.coldtrick.com/
 */
 
-$entity = $vars["entity"];
+$entity = elgg_extract('entity', $vars);
 
-// get title
-$title = $entity->getTitle();
-	
-echo "<div class='custom_fields_category' id='custom_profile_field_category_" . $entity->guid . "'>";
-echo elgg_view_icon("drag-arrow");
+$content = elgg_view_icon('drag-arrow');
 
 // filter link
-echo elgg_view("output/url", array(
-	"href" => "javascript:elgg.profile_manager.filter_custom_fields(" . $entity->guid . ")",
-	"text" => $title
-));
+$content .= elgg_view('output/url', [
+	'href' => '#',
+	'text' => $entity->getTitle(),
+	'class' => 'category-filter',
+	'data-guid' => $entity->guid,
+]);
 
 // edit link
-echo elgg_view("output/url", array(
-	"href" => "ajax/view/forms/profile_manager/category?guid=" . $entity->guid,
-	"class" => "elgg-lightbox",
-	"title" => elgg_echo("edit"),
-	"text" => elgg_view_icon("settings-alt")
-));
+$content .= elgg_view('output/url', [
+	'href' => 'ajax/view/forms/profile_manager/category?guid=' . $entity->guid,
+	'class' => 'elgg-lightbox',
+	'title' => elgg_echo('edit'),
+	'text' => elgg_view_icon('settings-alt'),
+]);
 
 // delete link
-echo elgg_view("output/url", array(
-	"href" => "action/profile_manager/categories/delete?guid=" . $entity->guid,
-	"title" => elgg_echo("delete"),
-	"text" => elgg_view_icon("delete"),
-	"confirm" => elgg_echo("profile_manager:categories:delete:confirm")
-));
+$content .= elgg_view('output/url', [
+	'href' => 'action/profile_manager/categories/delete?guid=' . $entity->guid,
+	'title' => elgg_echo('delete'),
+	'text' => elgg_view_icon('delete'),
+	'confirm' => elgg_echo('profile_manager:categories:delete:confirm'),
+]);
 
-echo "</div>";
+echo elgg_format_element('div', [
+	'class' => 'custom_fields_category',
+	'id' => 'custom_profile_field_category_' . $entity->guid
+], $content);

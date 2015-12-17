@@ -48,7 +48,7 @@ fclose($df);
 $output = ob_get_clean();
 
 if (empty($output)) {
-	system_message(elgg_echo("InvalidParameterException:NoDataFound"));
+	register_error(elgg_echo("InvalidParameterException:NoDataFound"));
 	forward(REFERER);
 }
 

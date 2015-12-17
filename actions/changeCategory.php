@@ -10,22 +10,20 @@
 * @link http://www.coldtrick.com/
 */
 
-$guid = get_input("guid");
-$category_guid = get_input("category_guid");
+$guid = (int) get_input('guid');
+$category_guid = (int) get_input('category_guid');
 
-if (!empty($guid)) {
-	$entity = get_entity($guid);
-	if ($entity->getSubtype() == CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE || $entity->getSubtype() == CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE) {
-		if (!empty($category_guid)) {
-			$entity->category_guid = $category_guid;
-		} else {
-			unset($entity->category_guid);
-		}
-		echo "true";
-		
-		// trigger memcache update
-		$entity->save();
-	}
+$entity = get_entity($guid);
+if (!elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE) && !elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE)) {
+	register_error(elgg_echo('profile_manager:actions:change_category:error:unknown'));
+	return;
 }
 
-exit();
+if (!empty($category_guid)) {
+	$entity->category_guid = $category_guid;
+} else {
+	unset($entity->category_guid);
+}
+
+// trigger memcache update
+$entity->save();

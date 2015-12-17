@@ -84,8 +84,6 @@ return [
 	'profile_manager:admin:metadata_label' => 'Label',
 	'profile_manager:admin:metadata_hint' => 'Hint',
 	'profile_manager:admin:metadata_placeholder' => 'Placeholder',
-	'profile_manager:admin:metadata_label_translated' => 'Label (Translated)',
-	'profile_manager:admin:metadata_label_untranslated' => 'Label (Untranslated)',
 	'profile_manager:admin:metadata_options' => 'Options (comma separated)',
 	'profile_manager:admin:field_type' => "Field Type",
 	'profile_manager:admin:options:dropdown' => 'Dropdown',

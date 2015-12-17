@@ -30,13 +30,13 @@ if (is_array($use_default_access)) {
 	$use_default_access = $use_default_access[0];
 }
 
-$custom_profile_fields = get_input("custom_profile_fields");
+$custom_profile_fields = get_input('custom_profile_fields');
 
 // For now, just try and register the user
 try {
 	$guid = register_user($username, $password, $name, $email, TRUE);
 
-	if (((trim($password) != "") && (strcmp($password, $password2) == 0)) && ($guid)) {
+	if (((trim($password) != '') && (strcmp($password, $password2) == 0)) && ($guid)) {
 		$new_user = get_entity($guid);
 		if (($guid) && ($admin)) {
 			$new_user->makeAdmin();
@@ -88,9 +88,9 @@ try {
 			}
 		}
 
-		system_message(elgg_echo("adduser:ok", array(elgg_get_site_entity()->name)));
+		system_message(elgg_echo('adduser:ok', [elgg_get_site_entity()->name]));
 	} else {
-		register_error(elgg_echo("adduser:bad"));
+		register_error(elgg_echo('adduser:bad'));
 	}
 } catch (RegistrationException $r) {
 	register_error($r->getMessage());

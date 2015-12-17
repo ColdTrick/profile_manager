@@ -10,28 +10,28 @@
 * @link http://www.coldtrick.com/
 */
 
-$entity = $vars["entity"];
+$entity = $vars['entity'];
 
 // get title
-$title = $entity->getTitle();
-	
-echo "<div class='custom_profile_type' id='custom_profile_type_" . $entity->guid . "'>";
-echo $title;
+$content = $entity->getTitle();
 
 // edit link
-echo elgg_view("output/url", array(
-	"href" => "ajax/view/forms/profile_manager/type?guid=" .  $entity->guid,
-	"class" => "elgg-lightbox",
-	"title" => elgg_echo("edit"),
-	"text" => elgg_view_icon("settings-alt")
-));
+$content .= elgg_view('output/url', [
+	'href' => 'ajax/view/forms/profile_manager/type?guid=' .  $entity->guid,
+	'class' => 'elgg-lightbox',
+	'title' => elgg_echo('edit'),
+	'text' => elgg_view_icon('settings-alt')
+]);
 
 // delete link
-echo elgg_view("output/url", array(
-	"href" => "action/profile_manager/profile_types/delete?guid=" . $entity->guid,
-	"title" => elgg_echo("delete"),
-	"text" => elgg_view_icon("delete"),
-	"confirm" => elgg_echo("profile_manager:profile_types:delete:confirm")
-));
+$content .= elgg_view('output/url', [
+	'href' => 'action/profile_manager/profile_types/delete?guid=' . $entity->guid,
+	'title' => elgg_echo('delete'),
+	'text' => elgg_view_icon('delete'),
+	'confirm' => elgg_echo('profile_manager:profile_types:delete:confirm'),
+]);
 
-echo "</div>";
+echo elgg_format_element('div', [
+	'class' => 'custom_profile_type',
+	'id' => 'custom_profile_type_' . $entity->guid
+], $content);

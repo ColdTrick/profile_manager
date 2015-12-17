@@ -29,6 +29,8 @@ $generate_username_from_email = false;
 if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") == "yes") {
 	$generate_username_from_email = true;
 }
+
+$spinner = elgg_view_icon('spinner', ['class' => 'profile_manager_validate_icon fa-pulse hidden']);
 ?>
 
 <fieldset>
@@ -74,8 +76,9 @@ if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") =
 				'name' => 'email',
 				'value' => $email,
 			));
+
+			echo $spinner;
 			?>
-			<span class='elgg-icon profile_manager_validate_icon'></span>
 		</div>
 	</div>
 	
@@ -100,8 +103,9 @@ if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") =
 				'name' => 'username',
 				'value' => $username,
 			));
+
+			echo $spinner;
 			?>
-			<div class='elgg-icon profile_manager_validate_icon'></div>
 		</div>
 	</div>
 	<?php } ?>
@@ -126,8 +130,9 @@ if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") =
 				'name' => 'password',
 				'value' => $password,
 			));
+
+			echo $spinner;
 			?>
-			<span class='elgg-icon profile_manager_validate_icon'></span>
 		</div>
 	</div>
 	<div class="mandatory">
@@ -150,8 +155,9 @@ if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") =
 				'name' => 'password2',
 				'value' => $password2,
 			));
+
+			echo $spinner;
 			?>
-			<span class='elgg-icon profile_manager_validate_icon'></span>
 		</div>
 	</div>
 </fieldset>
