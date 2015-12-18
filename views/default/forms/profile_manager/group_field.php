@@ -15,26 +15,25 @@ if (!elgg_is_admin_logged_in()) {
 	return;
 }
 
-if ($guid = get_input("guid")) {
-	if ($entity = get_entity($guid)) {
-		if ($entity instanceof \ColdTrick\ProfileManager\CustomGroupField) {
-			$vars["entity"] = $entity;
-		}
-	}
+$guid = get_input('guid');
+
+$entity = get_entity($guid);
+if (!($entity instanceof \ColdTrick\ProfileManager\CustomGroupField)) {
+	$entity = null;
 }
 
 $form_title = elgg_echo('profile_manager:group_fields:add');
 
-$options_values = array();
-$option_classes = array();
+$options_values = [];
+$option_classes = [];
 
-$types = profile_manager_get_custom_field_types("custom_profile_field_types");
+$types = profile_manager_get_custom_field_types('custom_profile_field_types');
 if ($types) {
 	foreach ($types as $type) {
 		$options_values[$type->type] = $type->name;
 		foreach ($type->options as $option_name => $option_value) {
 			if ($option_value) {
-				$option_classes[$option_name] .= " field_option_enable_" . $type->type;
+				$option_classes[$option_name] .= ' field_option_enable_' . $type->type;
 			}
 		}
 	}
@@ -50,93 +49,73 @@ $output_as_tags = null;
 $blank_available = null;
 $admin_only = null;
 
-if ($vars["entity"]) {
+if ($entity) {
 	
 	$form_title = elgg_echo('profile_manager:group_fields:edit');
 	
-	$guid = $vars["entity"]->guid;
-	$metadata_name = $vars["entity"]->metadata_name;
-	$metadata_label = $vars["entity"]->metadata_label;
-	$metadata_hint = $vars["entity"]->metadata_hint;
-	$metadata_placeholder = $vars["entity"]->metadata_placeholder;
-	$metadata_type = $vars["entity"]->metadata_type;
-	$metadata_options = $vars["entity"]->metadata_options;
+	$guid = $entity->guid;
+	$metadata_name = $entity->metadata_name;
+	$metadata_label = $entity->metadata_label;
+	$metadata_hint = $entity->metadata_hint;
+	$metadata_placeholder = $entity->metadata_placeholder;
+	$metadata_type = $entity->metadata_type;
+	$metadata_options = $entity->metadata_options;
 	
-	$output_as_tags = $vars["entity"]->output_as_tags;
-	$blank_available = $vars["entity"]->blank_available;
-	$admin_only = $vars["entity"]->admin_only;
+	$output_as_tags = $entity->output_as_tags;
+	$blank_available = $entity->blank_available;
+	$admin_only = $entity->admin_only;
 	
 	if (!array_key_exists($metadata_type, $options_values)) {
 		$options_values[$metadata_type] = $metadata_type;
 	}
 }
 
-$no_yes_options = array('no' => elgg_echo('option:no'), 'yes' => elgg_echo('option:yes'));
+$no_yes_options = ['no' => elgg_echo('option:no'), 'yes' => elgg_echo('option:yes')];
 
-$type_control = elgg_view('input/dropdown', array('name' => 'metadata_type', 'options_values' => $options_values, 'onchange' => 'elgg.profile_manager.change_field_type();', "value" => $metadata_type));
+$formbody .= elgg_echo('profile_manager:admin:metadata_name') . '*:' . elgg_view('input/text', ['name' => 'metadata_name', 'value' => $metadata_name, 'required' => true]);
+$formbody .= elgg_echo('profile_manager:admin:metadata_label') . ':' . elgg_view('input/text', ['name' => 'metadata_label', 'value' => $metadata_label]);
+$formbody .= elgg_echo('profile_manager:admin:metadata_hint') . ':' . elgg_view('input/text', ['name' => 'metadata_hint', 'value' => $metadata_hint]);
+$formbody .= elgg_echo('profile_manager:admin:metadata_placeholder') . ':' . elgg_view('input/text', ['name' => 'metadata_placeholder', 'value' => $metadata_placeholder]);
+$formbody .= elgg_echo('profile_manager:admin:field_type') . ': ' . elgg_view('input/dropdown', [
+	'name' => 'metadata_type',
+	'options_values' => $options_values,
+	'onchange' => 'elgg.profile_manager.change_field_type();',
+	'value' => $metadata_type,
+]);
+$formbody .= '<div>' . elgg_echo('profile_manager:admin:metadata_options') . ':' . elgg_view('input/text', ['name' => 'metadata_options', 'value' => $metadata_options]) . '</div>';
 
-$formbody .= elgg_echo('profile_manager:admin:metadata_name') . ":" . elgg_view('input/text', array('name' => 'metadata_name', "value" => $metadata_name));
-$formbody .= elgg_echo('profile_manager:admin:metadata_label') . "*:" . elgg_view('input/text', array('name' => 'metadata_label', "value" => $metadata_label));
-$formbody .= elgg_echo('profile_manager:admin:metadata_hint') . "*:" . elgg_view('input/text', array('name' => 'metadata_hint', "value" => $metadata_hint));
-$formbody .= elgg_echo('profile_manager:admin:metadata_placeholder') . "*:" . elgg_view('input/text', array('name' => 'metadata_placeholder', "value" => $metadata_placeholder));
-$formbody .= elgg_echo('profile_manager:admin:field_type') . ": " . $type_control;
-$formbody .= "<div>" . elgg_echo('profile_manager:admin:metadata_options') . "*:" . elgg_view('input/text', array('name' => 'metadata_options', "value" => $metadata_options)) . "</div>";
+$options_table = '';
 
-$formbody .= "<div class='elgg-module elgg-module-inline'><div class='elgg-head'><h3>" . elgg_echo("profile_manager:admin:additional_options") . "</h3></div><div class='elgg-body'>";
+$options = ['output_as_tags', 'admin_only', 'blank_available'];
+foreach ($options as $option) {
+	$class = elgg_extract($option, $option_classes, '');
 
-$formbody .= "<table>";
-
-if (array_key_exists("output_as_tags", $option_classes)) {
-	$class = $option_classes['output_as_tags'];
-} else {
-	$class = "";
+	$options_table .= '<tr>';
+	$options_table .= '<td>' . elgg_echo("profile_manager:admin:{$option}") . ':</td>';
+	$options_table .= '<td>';
+	$options_table .=  elgg_view('input/dropdown', [
+		'name' => $option,
+		'options_values' => $no_yes_options ,
+		'value' => $$option,
+		'class' => 'mhs custom_fields_form_field_option' . $class,
+	]);
+	$options_table .= '</td>';
+	$options_table .= elgg_format_element('td', [], elgg_echo("profile_manager:admin:{$option}:description"));
+	$options_table .= '</tr>';
 }
-$formbody .= "<tr>";
-$formbody .= "<td>" . elgg_echo('profile_manager:admin:output_as_tags') . ":</td>";
-$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'output_as_tags', 'options_values' => $no_yes_options, 'value' => $output_as_tags, 'class' => 'custom_fields_form_field_option field_option_enable_text' . $class)) . "</td>";
-$formbody .= "<td>" . elgg_echo('profile_manager:admin:output_as_tags:description') . "</td>";
-$formbody .= "</tr>";
 
-if (array_key_exists("admin_only", $option_classes)) {
-	$class = $option_classes['admin_only'];
-} else {
-	$class = "";
-}
-$formbody .= "<tr>";
-$formbody .= "<td>" . elgg_echo('profile_manager:admin:admin_only') . ":</td>";
-$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'admin_only', 'options_values' => $no_yes_options, 'value' => $admin_only, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
-$formbody .= "<td>" . elgg_echo('profile_manager:admin:admin_only:description') . "</td>";
-$formbody .= "</tr>";
+$options_table = elgg_format_element('table', [], $options_table);
 
-if (array_key_exists("blank_available", $option_classes)) {
-	$class = $option_classes['blank_available'];
-} else {
-	$class = "";
-}
-$formbody .= "<tr>";
-$formbody .= "<td>" . elgg_echo('profile_manager:admin:blank_available') . ":</td>";
-$formbody .= "<td>" . elgg_view('input/dropdown', array('name' => 'blank_available', 'options_values' => $no_yes_options, 'value' => $blank_available, 'class' => 'custom_fields_form_field_option' . $class)) . "</td>";
-$formbody .= "<td>" . elgg_echo('profile_manager:admin:blank_available:description') . "</td>";
-$formbody .= "</tr>";
+$options_title = elgg_echo('profile_manager:admin:additional_options');
 
-$formbody .= "</table></div></div>";
+$formbody .= elgg_view_module('inline', $options_title, $options_table);
 
-$formbody .= "<br />";
+$formbody .= '<br />';
 
-$formbody .= elgg_view("input/hidden", array("name" => "type", "value" => "group"));
-$formbody .= elgg_view('input/hidden', array('name' => 'guid', "value" => $guid));
-$formbody .= elgg_view('input/submit', array('value' => elgg_echo('save')));
+$formbody .= elgg_view('input/hidden', ['name' => 'type', 'value' => 'group']);
+$formbody .= elgg_view('input/hidden', ['name' => 'guid', 'value' => $guid]);
+$formbody .= elgg_view('input/submit', ['value' => elgg_echo('save')]);
 
-$form = elgg_view('input/form', array('body' => $formbody, 'action' => 'action/profile_manager/new'));
-		
-?>
-<div class="elgg-module elgg-module-inline mvn" id="custom_fields_form">
-	<div class="elgg-head">
-		<h3>
-			<?php echo $form_title; ?>
-		</h3>
-	</div>
-	<div class="elgg-body">
-		<?php echo $form; ?>
-	</div>
-</div>
+$form = elgg_view('input/form', ['body' => $formbody, 'action' => 'action/profile_manager/new']);
+
+echo elgg_view_module('inline', $form_title, $form, ['class' => 'mvn', 'id' => 'custom_fields_form']);

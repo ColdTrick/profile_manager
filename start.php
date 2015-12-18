@@ -32,10 +32,8 @@ function profile_manager_init() {
 	elgg_extend_view('css/admin', 'css/profile_manager/multiselect.css');
 	elgg_extend_view('css/elgg', 'css/profile_manager/multiselect.css');
 	elgg_extend_view('css/elgg', 'css/profile_manager/global.css');
-	elgg_extend_view('css/elgg', 'css/profile_manager/site');
-	
-	elgg_extend_view('js/elgg', 'js/profile_manager/site.js');
-	
+	elgg_extend_view('css/elgg', 'css/profile_manager/site.css');
+		
 	// Register Page handler
 	elgg_register_page_handler('profile_manager', 'profile_manager_page_handler');
 	
@@ -72,6 +70,8 @@ function profile_manager_init() {
 
 	// register hook for saving the new username
 	elgg_register_plugin_hook_handler('usersettings:save', 'user', '\ColdTrick\ProfileManager\Users::usernameChange');
+	
+	elgg_register_plugin_hook_handler('view_vars', 'input/form', '\ColdTrick\ProfileManager\Users::registerViewVars');
 	
 	// site join event handler
 	elgg_register_event_handler('create', 'member_of_site', '\ColdTrick\ProfileManager\Sites::createMember');

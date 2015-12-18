@@ -22,9 +22,3 @@ $content .= '<br />';
 $content .= elgg_view('input/file', ['name' => 'profile_icon', 'id' => 'register-profile_icon']);
 
 echo elgg_format_element('div', $div_options, $content);
-?>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(".elgg-form-register").attr("enctype", "multipart/form-data").attr("encoding", "multipart/form-data");
-	});
-</script>

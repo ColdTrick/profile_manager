@@ -10,27 +10,69 @@
 * @link http://www.coldtrick.com/
 */
 
-$header = '<h3>';
-$header .= elgg_echo('profile_manager:actions:title');
-$header .= elgg_view('output/pm_hint', [
+$title = elgg_echo('profile_manager:actions:title');
+$title .= elgg_view('output/pm_hint', [
 	'id' => 'more_info_actions',
 	'text' => elgg_echo('profile_manager:tooltips:actions'),
 ]);
-$header .= '</h3>';
+$header = elgg_format_element('h3', [], $title);
 
-$body = '<div class="pvm">';
-$body .= elgg_view("output/url", array("text" => elgg_echo("reset"), "title" => elgg_echo("profile_manager:actions:reset:description"), "href" => "/action/profile_manager/reset?type=profile", "confirm" => elgg_echo("profile_manager:actions:reset:confirm"), "class" => "elgg-button elgg-button-action", 'is_action' => true));
-$body .= elgg_view("output/url", array("text" => elgg_echo("profile_manager:actions:import:from_custom"), "title" => elgg_echo("profile_manager:actions:import:from_custom:description"), "href" => "/action/profile_manager/importFromCustom", "confirm" => elgg_echo("profile_manager:actions:import:from_custom:confirm"), "class" => "elgg-button elgg-button-action", 'is_action' => true));
-$body .= elgg_view("output/url", array("text" => elgg_echo("profile_manager:actions:import:from_default"), "title" => elgg_echo("profile_manager:actions:import:from_default:description"), "href" => "/action/profile_manager/importFromDefault?type=profile", "confirm" => elgg_echo("profile_manager:actions:import:from_default:confirm"), "class" => "elgg-button elgg-button-action", 'is_action' => true));
-$body .= elgg_view("output/url", array("title" => elgg_echo("profile_manager:actions:export:description"),"text" => elgg_echo("export"), "href" => "/admin/users/export", "class" => "elgg-button elgg-button-action"));
-$body .= elgg_view("output/url", array("text" => elgg_echo("profile_manager:actions:configuration:backup"), "href" => "/action/profile_manager/configuration/backup?fieldtype=" . CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE, "confirm" => elgg_echo("profile_manager:actions:configuration:backup:description"), "class" => "elgg-button elgg-button-action", 'is_action' => true));
-$body .= elgg_view("output/url", array("text" => elgg_echo("profile_manager:actions:configuration:restore"), "href" => "#restoreForm", "rel" => "toggle", "class" => "elgg-button elgg-button-action"));
+$buttonbank = elgg_view('output/url', [
+	'text' => elgg_echo('reset'),
+	'title' => elgg_echo('profile_manager:actions:reset:description'),
+	'href' => 'action/profile_manager/reset?type=profile',
+	'confirm' => elgg_echo('profile_manager:actions:reset:confirm'),
+	'class' => 'elgg-button elgg-button-action',
+	'is_action' => true,
+]);
+$buttonbank .= elgg_view('output/url', [
+	'text' => elgg_echo('profile_manager:actions:import:from_custom'),
+	'title' => elgg_echo('profile_manager:actions:import:from_custom:description'),
+	'href' => '/action/profile_manager/importFromCustom',
+	'confirm' => elgg_echo('profile_manager:actions:import:from_custom:confirm'),
+	'class' => 'elgg-button elgg-button-action',
+	'is_action' => true,
+]);
+$buttonbank .= elgg_view('output/url', [
+	'text' => elgg_echo('profile_manager:actions:import:from_default'),
+	'title' => elgg_echo('profile_manager:actions:import:from_default:description'),
+	'href' => 'action/profile_manager/importFromDefault?type=profile',
+	'confirm' => elgg_echo('profile_manager:actions:import:from_default:confirm'),
+	'class' => 'elgg-button elgg-button-action',
+	'is_action' => true,
+]);
+$buttonbank .= elgg_view('output/url', [
+	'title' => elgg_echo('profile_manager:actions:export:description'),
+	'text' => elgg_echo('export'),
+	'href' => 'admin/users/export',
+	'class' => 'elgg-button elgg-button-action',
+]);
+$buttonbank .= elgg_view('output/url', [
+	'text' => elgg_echo('profile_manager:actions:configuration:backup'),
+	'href' => 'action/profile_manager/configuration/backup?fieldtype=' . CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
+	'confirm' => elgg_echo('profile_manager:actions:configuration:backup:description'),
+	'class' => 'elgg-button elgg-button-action',
+	'is_action' => true,
+]);
+$buttonbank .= elgg_view('output/url', [
+	'text' => elgg_echo('profile_manager:actions:configuration:restore'),
+	'href' => '#restoreForm',
+	'rel' => 'toggle',
+	'class' => 'elgg-button elgg-button-action',
+]);
 
-$form_body = "<div class='mtm'>" . elgg_echo("profile_manager:actions:configuration:restore:description") . "</div>";
-$form_body .= elgg_view("input/file", array("name" => "restoreFile"));
-$form_body .= elgg_view("input/submit", array("value" => elgg_echo("profile_manager:actions:configuration:restore:upload")));
+$form_body = elgg_format_element('div', ['class' => 'mtm'], elgg_echo('profile_manager:actions:configuration:restore:description'));
+$form_body .= elgg_view('input/file', ['name' => 'restoreFile']);
+$form_body .= elgg_view('input/submit', ['value' => elgg_echo('profile_manager:actions:configuration:restore:upload')]);
 
-$body .= elgg_view("input/form", array("action" => "action/profile_manager/configuration/restore?fieldtype=" . CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE, "id" => "restoreForm", "body" => $form_body, "enctype" => "multipart/form-data", 'class' => 'hidden'));
-$body .= '</div>';
+$form = elgg_view('input/form', [
+	'action' => 'action/profile_manager/configuration/restore?fieldtype=' . CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
+	'id' => 'restoreForm',
+	'body' => $form_body,
+	'enctype' => 'multipart/form-data',
+	'class' => 'hidden',
+]);
+
+$body = elgg_format_element('div', ['class' => 'pvm'], $buttonbank . $form);
 
 echo elgg_view_module('inline', null, $body, ['header' => $header]);

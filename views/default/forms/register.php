@@ -10,7 +10,7 @@ $password = $password2 = '';
 $username = get_input('u');
 $email = get_input('e');
 $name = get_input('n');
-$terms = "";
+$terms = '';
 
 if (elgg_is_sticky_form('register')) {
 	$values = elgg_get_sticky_values('register');
@@ -21,12 +21,12 @@ if (elgg_is_sticky_form('register')) {
 echo "<div id='profile_manager_register_left'>";
 
 $show_hints = false;
-if (elgg_get_plugin_setting("show_account_hints", "profile_manager") == "yes") {
+if (elgg_get_plugin_setting('show_account_hints', 'profile_manager') == 'yes') {
 	$show_hints = true;
 }
 
 $generate_username_from_email = false;
-if (elgg_get_plugin_setting("generate_username_from_email", "profile_manager") == "yes") {
+if (elgg_get_plugin_setting('generate_username_from_email', 'profile_manager') == 'yes') {
 	$generate_username_from_email = true;
 }
 
@@ -168,11 +168,10 @@ echo elgg_view('register/extend');
 // Add captcha hook
 echo elgg_view('input/captcha');
 
-echo "</div>";
+echo '</div>';
 
-echo "<div id='profile_manager_register_right'>";
-echo elgg_view("register/extend_side", array("field_location" => "beside"));
-echo "</div>";
+echo elgg_format_element('div', ['id' => 'profile_manager_register_right'], elgg_view('register/extend_side', ['field_location' => 'beside']));
+
 
 echo "<div class='clearfloat man'></div>";
 echo "<div class='elgg-foot'>";
@@ -183,7 +182,4 @@ echo elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('r
 echo "<div class='elgg-subtext mtm'>" . elgg_echo("profile_manager:register:mandatory") . "</div>";
 echo "</div>";
 
-?>
-<script type='text/javascript'>
-	require(['profile_manager/register']);
-</script>
+echo elgg_format_element('script', [], 'require(["profile_manager/register"]);');

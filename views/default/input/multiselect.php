@@ -11,64 +11,59 @@
 */
 
 global $multiselect;
+
 if (empty($multiselect)) {
 	$multiselect = 1;
 } else {
 	$multiselect++;
 }
-$selected_items = elgg_extract("value", $vars, "");
+
+$selected_items = elgg_extract('value', $vars, '');
+$options_values = elgg_extract('options_values', $vars);
+$options = elgg_extract('options', $vars);
 
 if (!is_array($selected_items)) {
 	$selected_items = string_to_tag_array($selected_items);
 }
 
-$selected_items = array_map("strtolower", $selected_items);
+$selected_items = array_map('strtolower', $selected_items);
 
-$internal_id = str_replace("]", "_", str_replace("[" , "_" ,$vars['name'])) . $multiselect;
-	
 if (elgg_is_xhr()) {
 	// register form for walled garden could load via ajax, so we need to load library manually
-	$location = elgg_get_site_url() . "mod/profile_manager/vendors/jquery_ui_multiselect/jquery.multiselect.js";
-	echo "<script type='text/javascript' src='" . $location . "'></script>";
+	echo elgg_format_element('script', ['src' => elgg_normalize_url('mod/profile_manager/vendors/jquery_ui_multiselect/jquery.multiselect.js')]);
 } else {
-	elgg_load_js("jquery.ui.multiselect");
+	elgg_load_js('jquery.ui.multiselect');
 }
-?>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#<?php echo $internal_id;?>").multiselect({
-			header: false,
-			selectedList: 4,
-			noneSelectedText: "<?php echo elgg_echo("profile_manager:input:multi_select:empty_text"); ?>"
-		});
-	});
-</script>
-<div>
-	<select id="<?php echo $internal_id;?>" name="<?php echo $vars['name'];?>[]" multiple="multiple">
-<?php
-if (!empty($vars["options_values"])) {
-	foreach ($vars['options_values'] as $value => $option) {
+
+$select_options = '';
+if (!empty($options_values)) {
+	foreach ($options_values as $value => $option) {
 
 		$encoded_value = htmlentities($value, ENT_QUOTES, 'UTF-8');
 		$encoded_option = htmlentities($option, ENT_QUOTES, 'UTF-8');
 
-		if (in_array(strtolower($value), $selected_items)) {
-			echo "<option value=\"$encoded_value\" selected=\"selected\">$encoded_option</option>";
-		} else {
-			echo "<option value=\"$encoded_value\">$encoded_option</option>";
-		}
+		$select_options .= elgg_format_element('option', [
+			'value' => $encoded_value,
+			'selected' => in_array(strtolower($value), $selected_items),
+		], $encoded_option);
 	}
-} elseif (!empty($vars["options"])) {
-	foreach ($vars['options'] as $option) {
-		$selected = "";
-		if (in_array(strtolower($option), $selected_items)) {
-			$selected = " selected='selected'";
-		}
+} elseif (!empty($options)) {
+	foreach ($options as $option) {
 		$encoded_option = htmlentities($option, ENT_QUOTES, 'UTF-8');
-		
-		echo "<option value=\"$encoded_option\"" . $selected . ">" . $encoded_option . "</option>";
+
+		$select_options .= elgg_format_element('option', [
+			'value' => $encoded_option,
+			'selected' => in_array(strtolower($encoded_option), $selected_items),
+		], $encoded_option);
 	}
 }
-?>
-	</select>
-</div>
+
+$hidden = elgg_view('input/hidden', ['name' => elgg_extract('name', $vars) . '[]']);
+$select = elgg_format_element('select', [
+	'class' => 'profile-manager-multiselect',
+	'name' => elgg_extract('name', $vars) . '[]',
+	'multiple' => true,
+], $select_options);
+echo elgg_format_element('div', [], $hidden . $select);
+
+echo elgg_format_element('script', [], 'require(["profile_manager/multiselect"]);');

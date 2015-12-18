@@ -55,7 +55,7 @@ if ($entity) {
 $formbody = "<table class='custom_fields_add_form_table'>";
 $formbody .= "<tr>";
 $formbody .= "<td class='custom_fields_add_form_table_left'>";
-$formbody .= elgg_echo('profile_manager:admin:metadata_name') . ":";
+$formbody .= elgg_echo('profile_manager:admin:metadata_name') . "*:";
 $formbody .= elgg_view('input/text', [
 	'name' => 'metadata_name',
 	'value' => $metadata_name,
@@ -95,7 +95,7 @@ $formbody .= "</td>";
 $formbody .= "</tr>";
 $formbody .= "<tr>";
 $formbody .= "<td>";
-$formbody .= elgg_echo('profile_manager:admin:metadata_label') . "*:";
+$formbody .= elgg_echo('profile_manager:admin:metadata_label') . ":";
 $formbody .= elgg_view('input/text', [
 	'name' => 'metadata_label',
 	'value' => $metadata_label,

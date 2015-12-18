@@ -10,7 +10,7 @@
 * @link http://www.coldtrick.com/
 */
 
-$field_location = $vars['field_location'];
+$field_location = elgg_extract('field_location', $vars);
 $field_location_setting = elgg_get_plugin_setting('registration_extra_fields', 'profile_manager');
 if ($field_location == 'beside') {
 	if ($field_location_setting !== 'beside') {
@@ -93,7 +93,7 @@ if (!empty($fields)) {
 			
 			$hint = $field->getHint();
 			if ($hint) {
-				echo elgg_view('output/pm_hint', [
+				$field_result .= elgg_view('output/pm_hint', [
 					'id' => "more_info_{$field->metadata_name}",
 					'text' => $hint,
 				]);

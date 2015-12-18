@@ -4,18 +4,18 @@ elgg.profile_manager.init_admin = function() {
 	elgg.profile_manager.filter_custom_fields(0);
 	
 	$('#custom_fields_ordering').sortable({
-  		update: function(event, ui) {
-  			elgg.profile_manager.reorder_custom_fields();
-   		},
-   		opacity: 0.6,
-   		tolerance: 'pointer',
-   		items: 'li'
+		update: function(event, ui) {
+			elgg.profile_manager.reorder_custom_fields();
+		},
+		opacity: 0.6,
+		tolerance: 'pointer',
+		items: 'li'
 	});
 
 	$('#custom_fields_category_list_custom .elgg-list').sortable({
 		update: function(event, ui) {
 			elgg.action('profile_manager/categories/reorder?' + $('#custom_fields_category_list_custom .elgg-list').sortable('serialize'));
-   		},
+		},
 		opacity: 0.6,
 		tolerance: 'pointer',
 		items: 'li',
@@ -44,7 +44,7 @@ elgg.profile_manager.init_admin = function() {
 			elgg.profile_manager.remove_field($(this).data().guid);
 		}
 	});
-}
+};
 
 elgg.profile_manager.toggle_option = function(event) {
 	var $button = $(this);
@@ -64,11 +64,11 @@ elgg.profile_manager.toggle_option = function(event) {
 	});
 	
 	event.preventDefault();
-}
+};
 
 elgg.profile_manager.reorder_custom_fields = function() {
 	elgg.action('profile_manager/reorder?' + $('#custom_fields_ordering').sortable('serialize'));
-}
+};
 
 elgg.profile_manager.remove_field = function(guid) {
 	elgg.action('profile_manager/delete', {
@@ -82,7 +82,7 @@ elgg.profile_manager.remove_field = function(guid) {
 			}
 		},
 	});
-}
+};
 
 elgg.profile_manager.filter_custom_fields = function(category_guid) {
 	$('#custom_fields_ordering .elgg-item').hide();
@@ -102,14 +102,14 @@ elgg.profile_manager.filter_custom_fields = function(category_guid) {
 			$('#custom_profile_field_category_' + category_guid).parent().addClass('custom_fields_category_selected');
 		}
 	}
-}
+};
 
 elgg.profile_manager.change_field_type = function() {
 	var selectedType = $('#custom_fields_form select[name="metadata_type"]').val();
 	
 	$('#custom_fields_form .custom_fields_form_field_option').attr('disabled', 'disabled');
 	$('#custom_fields_form .field_option_enable_' + selectedType).removeAttr('disabled');
-}
+};
 
 elgg.profile_manager.change_field_category = function(field, category_guid) {
 	var field_guid = $(field).attr('id').replace('elgg-object-','');
@@ -122,7 +122,7 @@ elgg.profile_manager.change_field_category = function(field, category_guid) {
 		},
 		success: function(data) {
 			if (data.status === 0) {
-				if (category_guid == 0) {
+				if (category_guid === 0) {
 					category_guid = '';
 				}
 				
@@ -142,7 +142,7 @@ elgg.profile_manager.change_field_category = function(field, category_guid) {
 		},
 	});
 
-}
+};
 
 //register init hook
 elgg.register_hook_handler("init", "system", elgg.profile_manager.init_admin);

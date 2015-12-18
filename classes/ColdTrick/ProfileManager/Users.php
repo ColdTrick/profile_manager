@@ -8,6 +8,25 @@ namespace ColdTrick\ProfileManager;
 class Users {
 
 	/**
+	 * Changes the register form view vars so profile icons can be uploaded
+	 *
+ 	 * @param string  $hook_name    name of the hook
+	 * @param string  $entity_type  type of the hook
+	 * @param unknown $return_value return value
+	 * @param unknown $parameters   hook parameters
+	 *
+	 * @return void
+	 */
+	public static function registerViewVars($hook_name, $entity_type, $return_value, $parameters) {
+		if (elgg_extract('action_name', $return_value) !== 'register') {
+			return;
+		}
+		
+		$return_value['enctype'] = 'multipart/form-data';
+		return $return_value;
+	}
+
+	/**
 	 * Adds uploaded files to your profile
 	 *
 	 * @param string   $event       Event name
