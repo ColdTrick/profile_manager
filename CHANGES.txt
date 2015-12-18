@@ -1,6 +1,20 @@
 Version history
 ===============
 
+10.0-beta (2015-12-18):
+
+- added: support for Elgg 2.0
+- changed: moved event functions to classes
+- changed: moved hooks to class functions
+- changed: namespaced the profile manager object classes
+- changed: refactored profile field toggle options
+- changed: renamed js and css views
+- changed: replaced usage of custom icon with fontawesome alternative
+- changed: tooltip hints now use an output view and AMD load its js
+- changed: a lot of code styling and refactoring
+- removed: dropped the user summary feature
+- removed: no longer support calendar input type
+
 9.2 (2015-12-15):
 
 - changed: label of a field now gets added to all translations
