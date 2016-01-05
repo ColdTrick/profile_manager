@@ -470,35 +470,3 @@ function profile_manager_generate_username_from_email($email) {
 	
 	return $username;
 }
-
-/**
- * Validates a username
- *
- * @param string $username Username
- *
- * @return boolean
- */
-function profile_manager_validate_username($username) {
-	$result = false;
-	if (empty($username)) {
-		return $result;
-	}
-	
-	// make sure we can check every user (even unvalidated)
-	$access_status = access_show_hidden_entities(true);
-	
-	// check if username exists
-	try {
-		if (validate_username($username)) {
-			if (!get_user_by_username($username)) {
-				$result = true;
-			}
-		}
-	} catch (Exception $e) {
-	}
-	
-	// restore access settings
-	access_show_hidden_entities($access_status);
-	
-	return $result;
-}

@@ -5,7 +5,7 @@ if ($enable_username_change == 'no' || ($enable_username_change == 'admin' && !e
 	return;
 }
 
-elgg_require_js('profile_manager/profile_edit');
+elgg_require_js('profile_manager/username_change');
 
 $user = elgg_get_page_owner_entity();
 
@@ -17,14 +17,13 @@ $body = elgg_view('input/button', [
 ]);
 
 $body .= '<div id="profile_manager_username" class="hidden">';
-$body .= elgg_view_icon('spinner', ['class' => 'fa-pulse']);
-$body .= elgg_view_icon('check-circle');
-$body .= elgg_view_icon('exclamation-circle');
 $body .= elgg_view('input/text', [
 	'name' => 'username',
 	'value' => $user->username,
 	'rel' => $user->username,
 ]);
+$body .= elgg_view_icon('spinner', ['class' => 'profile_manager_validate_icon fa-pulse hidden']);
+
 $body .= elgg_format_element('div', ['class' => 'elgg-subtext'], elgg_echo('profile_manager:account:username:info'));
 $body .= '</div>';
 

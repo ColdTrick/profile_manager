@@ -351,7 +351,7 @@ class Users {
 			return;
 		}
 		
-		if (!profile_manager_validate_username($new_username)) {
+		if (!self::validateUsername($new_username)) {
 			return;
 		}
 		
@@ -376,7 +376,38 @@ class Users {
 		}
 	}
 	
-
+	/**
+	 * Validates a username
+	 *
+	 * @param string $username Username
+	 *
+	 * @return boolean
+	 */
+	protected static function validateUsername($username) {
+		$result = false;
+		if (empty($username)) {
+			return $result;
+		}
+		
+		// make sure we can check every user (even unvalidated)
+		$access_status = access_show_hidden_entities(true);
+		
+		// check if username exists
+		try {
+			if (validate_username($username)) {
+				if (!get_user_by_username($username)) {
+					$result = true;
+				}
+			}
+		} catch (Exception $e) {
+		}
+		
+		// restore access settings
+		access_show_hidden_entities($access_status);
+		
+		return $result;
+	}
+	
 	/**
 	 * Directs user to correct settings links after changing a username
 	 *

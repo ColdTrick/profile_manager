@@ -18,30 +18,6 @@ elgg.profile_manager.change_profile_type = function(){
 	}
 };
 
-elgg.profile_manager.profile_manager_username = function(event, elem) {
-	if (event.which !== 13) {
-		var username = $(elem).val();
-		$container = $(elem).parent();
-		$container.find('.elgg-icon').hide();
-		
-		if (username !== $(elem).attr('rel')) {
-			$container.find('.elgg-icon-spinner').show();
-			
-			$.getJSON(elgg.get_site_url() + 'profile_manager/validate_username', { 'username': username }, function(data){
-				if ($('#profile_manager_username .elgg-input-text').val() == username) {
-					if (data.valid) {
-						$container.find('.elgg-icon-check-circle').show();
-					} else {
-						$container.find('.elgg-icon-exclamation-circle').show();
-					}
-					
-					$('#profile_manager_username .elgg-icon-spinner').hide();
-				}
-			});
-		}
-	}
-};
-
 elgg.profile_manager.init_edit = function() {
 	// tab switcher on edit form
 	$('#profile_manager_profile_edit_tabs a').click(function(event) {
@@ -67,11 +43,6 @@ elgg.profile_manager.init_edit = function() {
 	} else {
 		$('#profile_manager_profile_edit_tabs a:first:visible').click();
 	}
-
-	// username change
-	$(document).on('keyup', '#profile_manager_username .elgg-input-text', function(event) {
-		elgg.profile_manager.profile_manager_username(event, $(this));
-	});
 	
 	elgg.profile_manager.change_profile_type();
 };

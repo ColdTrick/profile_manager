@@ -33,9 +33,6 @@ function profile_manager_init() {
 	elgg_extend_view('css/elgg', 'css/profile_manager/multiselect.css');
 	elgg_extend_view('css/elgg', 'css/profile_manager/global.css');
 	elgg_extend_view('css/elgg', 'css/profile_manager/site.css');
-		
-	// Register Page handler
-	elgg_register_page_handler('profile_manager', 'profile_manager_page_handler');
 	
 	// admin user add, registered here to overrule default action
 	elgg_register_action('useradd', dirname(__FILE__) . '/actions/useradd.php', 'admin');
@@ -82,27 +79,6 @@ function profile_manager_init() {
 	elgg_register_ajax_view('forms/profile_manager/category');
 	elgg_register_ajax_view('forms/profile_manager/group_field');
 	elgg_register_ajax_view('forms/profile_manager/profile_field');
-}
-
-/**
- * Function to handle the nice urls for Profile Manager pages
- *
- * @param array $page pages
- *
- * @return void|boolean
- */
-function profile_manager_page_handler($page) {
-	switch ($page[0]) {
-		case 'validate_username':
-			if (elgg_is_logged_in()) {
-				$valid = profile_manager_validate_username(get_input('username'));
-
-				echo json_encode(['valid' => $valid]);
-				
-				return true;
-			}
-			break;
-	}
 }
 
 /**

@@ -106,11 +106,5 @@ li.custom_fields_edit_profile_category {
 #profile_manager_username {
 	position: relative;
 }
-#profile_manager_username > .elgg-icon {
-	position: absolute;
-	right: 5px;
-	top: 8px;
-	display: none;
-}
 
 /* End Account Username Change */
