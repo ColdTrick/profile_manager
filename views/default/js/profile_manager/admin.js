@@ -107,8 +107,8 @@ elgg.profile_manager.filter_custom_fields = function(category_guid) {
 elgg.profile_manager.change_field_type = function() {
 	var selectedType = $('#custom_fields_form select[name="metadata_type"]').val();
 	
-	$('#custom_fields_form .custom_fields_form_field_option').attr('disabled', 'disabled');
-	$('#custom_fields_form .field_option_enable_' + selectedType).removeAttr('disabled');
+	$('#custom_fields_form .custom_fields_form_field_option').prop('disabled', true);
+	$('#custom_fields_form .field_option_enable_' + selectedType).prop('disabled', false);
 };
 
 elgg.profile_manager.change_field_category = function(field, category_guid) {
