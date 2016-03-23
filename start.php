@@ -71,8 +71,8 @@ function profile_manager_init() {
 	elgg_register_plugin_hook_handler('view_vars', 'input/form', '\ColdTrick\ProfileManager\Users::registerViewVars');
 	
 	// site join event handler
-	elgg_register_event_handler('create', 'member_of_site', '\ColdTrick\ProfileManager\Sites::createMember');
-	elgg_register_event_handler('delete', 'member_of_site', '\ColdTrick\ProfileManager\Sites::deleteMember');
+	elgg_register_event_handler('create', 'relationship', '\ColdTrick\ProfileManager\Sites::createMember');
+	elgg_register_event_handler('delete', 'relationship', '\ColdTrick\ProfileManager\Sites::deleteMember');
 	
 	// register ajax views
 	elgg_register_ajax_view('forms/profile_manager/type');

@@ -17,6 +17,10 @@ class Sites {
 	 * @return void
 	 */
 	public static function createMember($event, $object_type, $object) {
+		if ($object->relationship !== 'member_of_site') {
+			return;
+		}
+		
 		$enable_river_event = elgg_get_plugin_setting('enable_site_join_river_event', 'profile_manager');
 		if ($enable_river_event == 'no') {
 			return;
@@ -51,6 +55,10 @@ class Sites {
 	 * @return void
 	 */
 	public static function deleteMember($event, $object_type, $object) {
+		if ($object->relationship !== 'member_of_site') {
+			return;
+		}
+		
 		elgg_delete_river([
 			'view' => 'river/relationship/member_of_site/create',
 			'subject_guid' => $object->guid_one,
