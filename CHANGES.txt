@@ -1,6 +1,13 @@
 Version history
 ===============
 
+10.0 (2016-04-13):
+
+- added: spanish translation
+- changed: username_change js check now is the same as on register form
+- fixed: correctly set/unset disabled state when changing field type
+- fixed: listen to correct events to create site join river items
+
 10.0-beta (2015-12-18):
 
 - added: support for Elgg 2.0
