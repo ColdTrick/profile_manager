@@ -4,21 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "81a89c35244bf09fb2374172f76222ad",
+    "hash": "cd7b17124fcaf5836a67fb72c05f7623",
+    "content-hash": "c40f46c30a7ffd8601b6e6d3dc78811b",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.0.21",
+            "version": "v1.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "d64e23fce42a4063d63262b19b8e7c0f3b5e4c45"
+                "reference": "36e5b5843203d7f1cf6ffb0305a97e014387bd8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/d64e23fce42a4063d63262b19b8e7c0f3b5e4c45",
-                "reference": "d64e23fce42a4063d63262b19b8e7c0f3b5e4c45",
+                "url": "https://api.github.com/repos/composer/installers/zipball/36e5b5843203d7f1cf6ffb0305a97e014387bd8e",
+                "reference": "36e5b5843203d7f1cf6ffb0305a97e014387bd8e",
                 "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
             },
             "replace": {
                 "roundcube/plugin-installer": "*",
@@ -28,16 +32,16 @@
                 "composer/composer": "1.0.*@dev",
                 "phpunit/phpunit": "4.1.*"
             },
-            "type": "composer-installer",
+            "type": "composer-plugin",
             "extra": {
-                "class": "Composer\\Installers\\Installer",
+                "class": "Composer\\Installers\\Plugin",
                 "branch-alias": {
                     "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Composer\\Installers\\": "src/"
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -52,12 +56,14 @@
                 }
             ],
             "description": "A multi-framework Composer library installer",
-            "homepage": "http://composer.github.com/installers/",
+            "homepage": "https://composer.github.io/installers/",
             "keywords": [
                 "Craft",
                 "Dolibarr",
                 "Hurad",
+                "ImageCMS",
                 "MODX Evo",
+                "Mautic",
                 "OXID",
                 "SMF",
                 "Thelia",
@@ -99,10 +105,37 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2015-02-18 17:17:01"
+            "time": "2016-04-13 19:46:30"
         }
     ],
     "packages-dev": [
+        {
+            "name": "coldtrick/releases",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ColdTrick/releases.git",
+                "reference": "a4ac414e013dc31e0f19c4f729488b86b285b263"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ColdTrick/releases/zipball/a4ac414e013dc31e0f19c4f729488b86b285b263",
+                "reference": "a4ac414e013dc31e0f19c4f729488b86b285b263",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "description": "A set of scripts needed for building releases",
+            "keywords": [
+                "ci",
+                "release",
+                "travis"
+            ],
+            "time": "2016-03-11 12:51:42"
+        },
         {
             "name": "coldtrick/sniffs",
             "version": "dev-master",
@@ -132,22 +165,26 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.3.2",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "e96d8579fbed0c95ecf2a0501ec4f307a4aa6404"
+                "reference": "1bcdf03b068a530ac1962ce671dead356eeba43b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e96d8579fbed0c95ecf2a0501ec4f307a4aa6404",
-                "reference": "e96d8579fbed0c95ecf2a0501ec4f307a4aa6404",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/1bcdf03b068a530ac1962ce671dead356eeba43b",
+                "reference": "1bcdf03b068a530ac1962ce671dead356eeba43b",
                 "shasum": ""
             },
             "require": {
+                "ext-simplexml": "*",
                 "ext-tokenizer": "*",
                 "ext-xmlwriter": "*",
                 "php": ">=5.1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
             },
             "bin": [
                 "scripts/phpcs",
@@ -156,7 +193,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -202,13 +239,14 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2015-04-28 23:28:20"
+            "time": "2016-04-03 22:58:34"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "coldtrick/sniffs": 20
+        "coldtrick/sniffs": 20,
+        "coldtrick/releases": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
