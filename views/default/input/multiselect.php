@@ -66,4 +66,4 @@ $select = elgg_format_element('select', [
 ], $select_options);
 echo elgg_format_element('div', [], $hidden . $select);
 
-echo elgg_format_element('script', [], 'require(["profile_manager/multiselect"]);');
+echo elgg_format_element('script', [], 'require(["profile_manager/multiselect"], function() { elgg.multiselect.init(); });');
