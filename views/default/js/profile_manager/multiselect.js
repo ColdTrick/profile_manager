@@ -10,5 +10,5 @@ define(function(require) {
 			selectedList: 4,
 			noneSelectedText: elgg.echo('profile_manager:input:multi_select:empty_text')
 		});
-	}	
+	};
 });

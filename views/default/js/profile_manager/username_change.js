@@ -27,7 +27,7 @@ define(function(require) {
 			
 		var data = {};
 		data.name = 'username';
-		data['username'] = fieldvalue;
+		data.username = fieldvalue;
 		
 		$field_icon.removeClass('hidden');
 		
