@@ -7,7 +7,7 @@ Version history
 - added: multiselect supports required attribute
 - changed: multiselect dropdown now has a font awesome icon triangle
 - changed: updated the multiselect library to v1.14
-- Check ignore access when checking for admin only fields
+- fixed: check ignore access when checking for admin only fields
 - fixed: added pointer cursor to multiselect dropdown
 - fixed: allow multiselect to be inited multiple times via AJAX
 
