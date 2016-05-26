@@ -24,8 +24,10 @@ define('CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP', 'custom_profi
  */
 function profile_manager_init() {
 	// register libraries
-	elgg_register_js('jquery.ui.multiselect', 'mod/profile_manager/vendors/jquery_ui_multiselect/jquery.multiselect.js');
-	
+	elgg_define_js('jquery.multiselect', [
+		'src' => 'mod/profile_manager/vendors/jquery_ui_multiselect/jquery.multiselect.js',
+		'deps' => ['elgg','jquery'],
+	]);
 	// Extend CSS
 	elgg_extend_view('css/admin', 'css/profile_manager/global.css');
 	elgg_extend_view('css/admin', 'css/profile_manager/admin.css');

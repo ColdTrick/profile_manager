@@ -28,13 +28,6 @@ if (!is_array($selected_items)) {
 
 $selected_items = array_map('strtolower', $selected_items);
 
-if (elgg_is_xhr()) {
-	// register form for walled garden could load via ajax, so we need to load library manually
-	echo elgg_format_element('script', ['src' => elgg_normalize_url('mod/profile_manager/vendors/jquery_ui_multiselect/jquery.multiselect.js')]);
-} else {
-	elgg_load_js('jquery.ui.multiselect');
-}
-
 $select_options = '';
 if (!empty($options_values)) {
 	foreach ($options_values as $value => $option) {
@@ -66,4 +59,4 @@ $select = elgg_format_element('select', [
 ], $select_options);
 echo elgg_format_element('div', [], $hidden . $select);
 
-echo elgg_format_element('script', [], 'require(["profile_manager/multiselect"], function() { elgg.multiselect.init(); });');
+echo elgg_format_element('script', [], 'require(["jquery.multiselect", "profile_manager/multiselect"], function() { elgg.multiselect.init(); });');
