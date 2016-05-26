@@ -56,6 +56,7 @@ $select = elgg_format_element('select', [
 	'class' => 'profile-manager-multiselect',
 	'name' => elgg_extract('name', $vars) . '[]',
 	'multiple' => true,
+	'required' => elgg_extract('required', $vars, false),
 ], $select_options);
 echo elgg_format_element('div', [], $hidden . $select);
 

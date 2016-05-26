@@ -25,3 +25,12 @@
 
 /* remove label borders in IE6 because IE6 does not support transparency */
 * html .ui-multiselect-checkboxes label { border:none }
+
+.profile-manager-multiselect {
+	visibility: hidden;
+	display: inline-block !important;
+	width: 0;
+	height: 0;
+	padding: 0;
+	margin: 0 -2px 0 0;
+}
