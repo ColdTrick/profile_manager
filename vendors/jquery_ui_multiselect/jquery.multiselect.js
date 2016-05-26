@@ -57,7 +57,7 @@
       // jQuery UI 1.9+, and otherwise fallback to a custom string.
       this._namespaceID = this.eventNamespace || ('multiselect' + multiselectID);
 
-      var button = (this.button = $('<button type="button"><span class="float-alt elgg-icon elgg-icon-caret-down fa fa-caret-down"></span></button>'))
+      var button = (this.button = $('<button type="button"><span class="float-alt link elgg-icon elgg-icon-caret-down fa fa-caret-down"></span></button>'))
         .addClass('ui-multiselect ui-widget ui-state-default ui-corner-all')
         .addClass(o.classes)
         .attr({ 'title':el.attr('title'), 'aria-haspopup':true, 'tabIndex':el.attr('tabIndex') })
