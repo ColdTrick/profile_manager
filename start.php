@@ -90,9 +90,6 @@ function profile_manager_pagesetup() {
 	if (!elgg_in_context('admin') || !elgg_is_admin_logged_in()) {
 		return;
 	}
-		
-	elgg_load_js('lightbox');
-	elgg_load_css('lightbox');
 	
 	elgg_register_admin_menu_item('administer', 'export', 'users');
 	elgg_register_admin_menu_item('administer', 'inactive', 'users');
