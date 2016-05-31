@@ -1,6 +1,16 @@
 Version history
 ===============
 
+10.1 (2016-05-26):
+
+- added: multiselect js is now available as an AMD
+- added: multiselect supports required attribute
+- changed: multiselect dropdown now has a font awesome icon triangle
+- changed: updated the multiselect library to v1.14
+- fixed: check ignore access when checking for admin only fields
+- fixed: added pointer cursor to multiselect dropdown
+- fixed: allow multiselect to be inited multiple times via AJAX
+
 10.0 (2016-04-13):
 
 - added: spanish translation
