@@ -70,6 +70,9 @@ function profile_manager_init() {
 	
 	elgg_register_plugin_hook_handler('view_vars', 'input/form', '\ColdTrick\ProfileManager\Users::registerViewVars');
 	
+	// menu hooks
+	elgg_register_plugin_hook_handler('register', 'menu:page', '\ColdTrick\ProfileManager\Menus::registerAdmin');
+	
 	// site join event handler
 	elgg_register_event_handler('create', 'relationship', '\ColdTrick\ProfileManager\Sites::createMember');
 	elgg_register_event_handler('delete', 'relationship', '\ColdTrick\ProfileManager\Sites::deleteMember');
@@ -79,24 +82,6 @@ function profile_manager_init() {
 	elgg_register_ajax_view('forms/profile_manager/category');
 	elgg_register_ajax_view('forms/profile_manager/group_field');
 	elgg_register_ajax_view('forms/profile_manager/profile_field');
-}
-
-/**
- * Function to add menu items to the pages
- *
- * @return void
- */
-function profile_manager_pagesetup() {
-	if (!elgg_in_context('admin') || !elgg_is_admin_logged_in()) {
-		return;
-	}
-	
-	elgg_register_admin_menu_item('administer', 'export', 'users');
-	elgg_register_admin_menu_item('administer', 'inactive', 'users');
-	
-	if (elgg_is_active_plugin('groups')) {
-		elgg_register_admin_menu_item('configure', 'group_fields', 'appearance');
-	}
 }
 
 /**
@@ -123,7 +108,6 @@ function profile_manager_plugins_boot() {
 // elgg initialization events
 elgg_register_event_handler('plugins_boot', 'system', 'profile_manager_plugins_boot');
 elgg_register_event_handler('init', 'system', 'profile_manager_init');
-elgg_register_event_handler('pagesetup', 'system', 'profile_manager_pagesetup');
 
 // users
 elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::create');
