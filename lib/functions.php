@@ -357,36 +357,6 @@ function profile_manager_get_categorized_group_fields($group = null) {
 }
 
 /**
- * Returns the max order from a specific profile field type
- *
- * @param string $field_type Type of fields to fetch
- *
- * @return boolean|int
- */
-function profile_manager_get_max_order($field_type) {
-	
-	if (!in_array($field_type, [CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE, CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE])) {
-		return false;
-	}
-		
-	$entities = elgg_get_entities_from_metadata([
-		'type' => 'object',
-		'subtype' => $field_type,
-		'limit' => 1,
-		'order_by_metadata' => [['name' => 'order', 'direction' => 'desc', 'as' => 'integer']],
-		'owner_guid' => elgg_get_config('site_guid'),
-		'site_guid' => elgg_get_config('site_guid'),
-	]);
-	
-	if ($entities) {
-		$entity = $entities[0];
-		return (int) $entity->order;
-	}
-	
-	return 0;
-}
-
-/**
  * Returns an array with percentage completeness and required / missing fields
  *
  * @param ElggUser $user User to count completeness for
