@@ -437,36 +437,3 @@ function profile_manager_profile_completeness($user = null) {
 		'percentage_completeness' => $percentage_completeness,
 	];
 }
-
-/**
- * Generates username based on emailaddress
- *
- * @param string $email Email address
- *
- * @return boolean|string
- */
-function profile_manager_generate_username_from_email($email) {
-	
-	if (empty($email) || !is_email_address($email)) {
-		return false;
-	}
-	
-	list($username) = explode('@', $email);
-	
-	// show hidden entities (unvalidated users)
-	$hidden = access_show_hidden_entities(true);
-	
-	// check if username is unique
-	$original_username = $username;
-	
-	$i = 1;
-	while (get_user_by_username($username)) {
-		$username = $original_username . $i;
-		$i++;
-	}
-	
-	// restore hidden entities
-	access_show_hidden_entities($hidden);
-	
-	return $username;
-}

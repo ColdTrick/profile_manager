@@ -308,24 +308,41 @@ class Users {
 		// generate username
 		$username = get_input('username');
 		$email = get_input('email');
-		if (empty($username) && !empty($email) && (elgg_get_plugin_setting('generate_username_from_email', 'profile_manager') == 'yes')) {
-	
-			$email_parts = explode('@', $email);
-			$base_username = $email_parts[0];
-			$tmp_username = $base_username;
-	
-			$show_hidden = access_show_hidden_entities(true);
-	
-			$i = 1;
-			while (get_user_by_username($tmp_username)) {
-				$tmp_username = $base_username . $i;
-				$i++;
-			}
-	
-			access_show_hidden_entities($show_hidden);
-	
-			set_input('username', $tmp_username);
+		if (empty($username) && (elgg_get_plugin_setting('generate_username_from_email', 'profile_manager') == 'yes')) {
+			set_input('username', self::generateUsernameFromEmail($email));
 		}
+	}
+	
+	/**
+	 * Generates username based on emailaddress
+	 *
+	 * @param string $email Email address
+	 *
+	 * @return false|string
+	 */
+	protected static function generateUsernameFromEmail($email) {
+		if (empty($email) || !is_email_address($email)) {
+			return false;
+		}
+		
+		list($username) = explode('@', $email);
+		
+		// show hidden entities (unvalidated users)
+		$hidden = access_show_hidden_entities(true);
+		
+		// check if username is unique
+		$original_username = $username;
+		
+		$i = 1;
+		while (get_user_by_username($username)) {
+			$username = $original_username . $i;
+			$i++;
+		}
+		
+		// restore hidden entities
+		access_show_hidden_entities($hidden);
+		
+		return $username;
 	}
 	
 	/**
