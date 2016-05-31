@@ -146,22 +146,20 @@ if (!empty($cats)) {
 		$list_content .= '<fieldset>';
 		
 		// display each field for currect category
-		$hide_non_editables = elgg_get_plugin_setting('hide_non_editables', 'profile_manager');
-		
 		$visible_fields = 0;
 		
 		foreach ($fields[$cat_guid] as $field) {
+			
+			if ($field->user_editable == 'no') {
+				// non editable fields should not be on the form
+				continue;
+			}
+			
+			$valtype = $field->metadata_type;
 			$metadata_name = $field->metadata_name;
 			
 			// get options
 			$options = $field->getOptions();
-			
-			// get type of field
-			if ($field->user_editable == 'no') {
-				$valtype = 'non_editable';
-			} else {
-				$valtype = $field->metadata_type;
-			}
 						
 			// get value
 			$metadata = elgg_get_metadata([
@@ -180,12 +178,8 @@ if (!empty($cats)) {
 				$access_id = get_default_access($user);
 			}
 
-			if ($hide_non_editables == 'yes' && ($valtype == 'non_editable')) {
-				$field_result = '<div class="hidden">';
-			} else {
-				$visible_fields++;
-				$field_result = '<div>';
-			}
+			$visible_fields++;
+			$field_result = '<div>';
 			
 			$field_result .= elgg_format_element('label', [], $field->getTitle());
 			

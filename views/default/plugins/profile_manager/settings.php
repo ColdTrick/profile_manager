@@ -217,20 +217,6 @@ $group_limit_options = [
 	</tr>
 	<tr>
 		<td>
-			<?php echo elgg_echo('profile_manager:settings:hide_non_editables'); ?>
-		</td>
-		<td>
-			<?php
-				echo elgg_view('input/dropdown', [
-					'name' => 'params[hide_non_editables]',
-					'options_values' => $noyes_options,
-					'value' => $plugin->hide_non_editables,
-				]);
-			?>
-		</td>
-	</tr>
-	<tr>
-		<td>
 			<?php echo elgg_echo('profile_manager:settings:edit_profile_mode'); ?>
 		</td>
 		<td>

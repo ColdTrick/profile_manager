@@ -44,8 +44,6 @@ return [
 	'profile_manager:settings:default_profile_type' => "Default profile type on registration form",
 	'profile_manager:settings:hide_profile_type_default' => "Hide the 'Default' profile type on registration form",
 
-	'profile_manager:settings:hide_non_editables' => 'Hide the non editable fields from the Edit Profile form',
-
 	'profile_manager:settings:edit_profile_mode' => "How to show the 'edit profile' screen",
 	'profile_manager:settings:edit_profile_mode:list' => "List",
 	'profile_manager:settings:edit_profile_mode:tabbed' => "Tabbed",
@@ -338,9 +336,6 @@ return [
 	'profile_manager:profile:edit:custom_profile_type:description' => "Description of selected profile type",
 	'profile_manager:profile:edit:custom_profile_type:default' => "Default",
 
-	// non_editable
-	'profile_manager:non_editable:info' => 'This field can not be edited',
-	
 	// register form mandatory notice
 	'profile_manager:register:mandatory' => "Items marked with a * are mandatory",
 

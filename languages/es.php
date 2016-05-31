@@ -44,8 +44,6 @@ return [
 	'profile_manager:settings:default_profile_type' => "Tipo de perfil seleccionado por defecto en el formulario de registro",
 	'profile_manager:settings:hide_profile_type_default' => "Ocultar el tipo de formulario por defecto ('Default') en el formulario de registro",
 
-	'profile_manager:settings:hide_non_editables' => 'Ocultar los campos no editables en el formulario de edición de perfil',
-
 	'profile_manager:settings:edit_profile_mode' => "Cómo mostrar la pantalla de edición del perfil",
 	'profile_manager:settings:edit_profile_mode:list' => "Lista",
 	'profile_manager:settings:edit_profile_mode:tabbed' => "Pestañas",
@@ -336,9 +334,6 @@ return [
 	'profile_manager:profile:edit:custom_profile_type:label' => "Selecciona tu tipo de perfil",
 	'profile_manager:profile:edit:custom_profile_type:description' => "Descripción de tu tipo de perfil",
 	'profile_manager:profile:edit:custom_profile_type:default' => "Por defecto",
-
-	// non_editable
-	'profile_manager:non_editable:info' => 'Este campo no puede ser editado',
 
 	// register form mandatory notice
 	'profile_manager:register:mandatory' => "Los campos marcados con * son obligatorios",

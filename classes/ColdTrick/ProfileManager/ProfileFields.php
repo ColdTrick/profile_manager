@@ -83,7 +83,7 @@ class ProfileFields {
 		}
 
 		if (count($result) > 0) {
-			$result['custom_profile_type'] = 'non_editable';
+			$result['custom_profile_type'] = 'hidden';
 		}
 		
 		return $result;
