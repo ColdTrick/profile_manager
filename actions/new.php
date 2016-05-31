@@ -42,7 +42,7 @@ if ($guid) {
 }
 if ($current_field && ($current_field->getSubtype() != CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE && $current_field->getSubtype() != CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE)) {
 	// wrong custom field type
-	register_error(elgg_echo('profile_manager:action:new:error:type2'));
+	register_error(elgg_echo('profile_manager:action:new:error:type'));
 	forward(REFERER);
 }
 

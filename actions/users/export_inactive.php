@@ -5,7 +5,7 @@ set_time_limit(0);
 $last_login = sanitise_int(get_input('last_login'), false);
 
 if (empty($last_login)) {
-	register_error(elgg_echo('InvalidParameterException:NoDataFound'));
+	register_error(elgg_echo('error:missing_data'));
 	forward(REFERER);
 }
 
@@ -48,7 +48,7 @@ fclose($df);
 $output = ob_get_clean();
 
 if (empty($output)) {
-	register_error(elgg_echo("InvalidParameterException:NoDataFound"));
+	register_error(elgg_echo("error:missing_data"));
 	forward(REFERER);
 }
 
