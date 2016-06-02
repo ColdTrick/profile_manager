@@ -8,7 +8,8 @@ define(function(require) {
 		$('.profile-manager-multiselect').multiselect({
 			header: false,
 			selectedList: 4,
-			noneSelectedText: elgg.echo('profile_manager:input:multi_select:empty_text')
+			noneSelectedText: elgg.echo('profile_manager:input:multi_select:empty_text'),
+			selectedText: elgg.echo('profile_manager:input:multi_select:selected_text')
 		});
 	};
 });

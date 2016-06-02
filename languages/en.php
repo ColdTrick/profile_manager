@@ -330,6 +330,7 @@ return [
 	'widgets:register:loggedout' => "You need to be logged out to use this widget",
 
 	'profile_manager:input:multi_select:empty_text' => 'Please select ...',
+	'profile_manager:input:multi_select:selected_text' => '# selected',
 
 	// Edit profile => profile type selector
 	'profile_manager:profile:edit:custom_profile_type:label' => "Select your profile type",

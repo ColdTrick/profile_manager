@@ -243,6 +243,7 @@ return [
   'widgets:register:description' => 'Toon een registration formulier',
   'widgets:register:loggedout' => 'U moet afgemeld zijn om deze widget te kunnen gebruiken',
   'profile_manager:input:multi_select:empty_text' => 'Maak uw keuze ...',
+  'profile_manager:input:multi_select:selected_text' => '# geselecteerd',
   'profile_manager:profile:edit:custom_profile_type:label' => 'Selecteer je profiel type',
   'profile_manager:profile:edit:custom_profile_type:description' => 'Omschrijving van het geselecteerde profiel type',
   'profile_manager:profile:edit:custom_profile_type:default' => 'Standaard',
