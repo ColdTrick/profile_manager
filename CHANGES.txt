@@ -1,6 +1,18 @@
 Version history
 ===============
 
+10.2 (2016-06-16):
+
+- changed: input/multiselect now reuses input/select view
+- changed: moved admin menu items registration to menu hook
+- changed: multiselect will show 'x selected' when more than 1 selected
+- changed: only require lightbox js and css in the views that need it
+- fixed: missing translations for some action error messages
+- fixed: multiselect selected text is now translatable
+- removed: non-editable fields will no longer show on profile edit form
+- removed: unused function profile_manager_generate_username_from_email
+- removed: unused function profile_manager_get_max_order
+
 10.1 (2016-05-26):
 
 - added: multiselect js is now available as an AMD
