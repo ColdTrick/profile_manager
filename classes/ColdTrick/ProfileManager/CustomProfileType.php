@@ -25,9 +25,18 @@ class CustomProfileType extends \ElggObject {
 	/**
 	 * Returns the title of the type
 	 *
+	 * @param bool $plural set to true if you want to return the plural form (if available)
+	 *
 	 * @return string
 	 */
-	public function getTitle() {
+	public function getTitle($plural = false) {
+		if ($plural) {
+			$result = $this->getPluralTitle();
+			if ($result) {
+				return $result;
+			}
+		}
+		
 		if ($this->metadata_label) {
 			return $this->metadata_label;
 		}
@@ -37,6 +46,23 @@ class CustomProfileType extends \ElggObject {
 		}
 		
 		return $this->metadata_name;
+	}
+	
+	/**
+	 * Returns the plural form of the profile type label
+	 *
+	 * @return string|false
+	 */
+	protected function getPluralTitle() {
+		if ($this->metadata_label_plural) {
+			return $this->metadata_label_plural;
+		}
+		
+		if (elgg_language_key_exists("profile:types:{$this->metadata_name}:plural")) {
+			return elgg_echo("profile:types:{$this->metadata_name}:plural");
+		}
+		
+		return false;
 	}
 
 	/**

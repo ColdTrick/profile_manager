@@ -140,6 +140,9 @@ return [
 	// Custom Profile Types
 	'profile_manager:profile_types:add' => "Add a new profile type",
 	'profile_manager:profile_types:edit' => "Edit a profile type",
+	'profile_manager:profile_types:edit:related_categories' => "Related categories",
+	'profile_manager:profile_types:edit:metadata_label:singular' => "Label (enkelvoud)",
+	'profile_manager:profile_types:edit:metadata_label:plural' => "Label (meervoud)",
 	'profile_manager:profile_types:list:title' => "Profile Types",
 	'profile_manager:profile_types:list:no_types' => "No profile types defined",
 	'profile_manager:profile_types:delete:confirm' => "Are you sure you wish to delete this profile type?",

@@ -14,6 +14,7 @@
 $guid = (int) get_input('guid');
 $name = get_input('metadata_name');
 $label = get_input('metadata_label');
+$metadata_label_plural = get_input('metadata_label_plural');
 $description = get_input('metadata_description');
 $categories = get_input('categories');
 
@@ -43,6 +44,11 @@ if (!empty($label)) {
 	$object->metadata_label = $label;
 } else {
 	unset($object->metadata_label);
+}
+if (!empty($metadata_label_plural)) {
+	$object->metadata_label_plural = $metadata_label_plural;
+} else {
+	unset($object->metadata_label_plural);
 }
 
 if (!empty($description)) {
