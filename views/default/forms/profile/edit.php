@@ -48,8 +48,8 @@ if (!empty($cats)) {
 		if ($types) {
 			$types_description = '';
 			
-			$dropdown_options = [''  => elgg_echo('profile_manager:profile:edit:custom_profile_type:default')];
-			
+			$dropdown_options = ['' => elgg_echo('profile_manager:profile:edit:custom_profile_type:default')];
+
 			foreach ($types as $type) {
 				
 				$dropdown_options[$type->getGUID()] = $type->getTitle();
@@ -67,6 +67,14 @@ if (!empty($cats)) {
 					], $type_description);
 				}
 			}
+			
+			if (elgg_get_plugin_setting('hide_profile_type_default', 'profile_manager') == 'yes') {
+				// only unset if the current type exists in the options, otherwise keep default intact
+				if (array_key_exists($profile_type, $dropdown_options)) {
+					unset($dropdown_options['']);
+				}
+			}
+			
 			
 			$types_input = elgg_format_element('label', [], elgg_echo('profile_manager:profile:edit:custom_profile_type:label'));
 			$types_input .= elgg_view('input/dropdown', [
