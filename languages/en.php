@@ -130,6 +130,7 @@ return [
 	// Custom fields categories
 	'profile_manager:categories:add' => "Add a new category",
 	'profile_manager:categories:edit' => "Edit a category",
+	'profile_manager:categories:edit:related_types' => "Related profile types",
 	'profile_manager:categories:list:title' => "Categories",
 	'profile_manager:categories:list:default' => "Default",
 	'profile_manager:categories:list:system' => "System (admin only)",

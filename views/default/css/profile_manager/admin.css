@@ -78,20 +78,3 @@
 	color: #f00;
 	cursor: pointer;
 }
-
-.custom_fields_add_form_table,
-.custom_fields_add_form_table_left {
-	width: 100%;
-}
-
-.custom_fields_add_form_table_right {
-	white-space: nowrap;
-}
-
-.custom_fields_add_form_table_right label {
-	font-size:inherit;
-	font-weight:inherit;
-}
-.custom_fields_add_form_table_right .elgg-input-checkbox {
-	vertical-align: middle;
-}
