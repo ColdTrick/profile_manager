@@ -19,6 +19,9 @@ $title = '<b>' . $field->metadata_name . '</b> [' . $field->metadata_type . ']';
 $title .= elgg_view('output/url', [
 	'href' => 'ajax/view/forms/profile_manager/profile_field?guid=' . $field->guid,
 	'class' => 'elgg-lightbox',
+	'data-colorbox-opts' => json_encode([
+		'maxHeight' => '90%'
+	]),
 	'title' => elgg_echo('edit'),
 	'text' => elgg_view_icon('settings-alt')
 

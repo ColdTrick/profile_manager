@@ -14,6 +14,7 @@ $site_guid = elgg_get_site_entity()->getGUID();
 
 $metadata_name = trim(get_input('metadata_name'));
 $metadata_label = trim(get_input('metadata_label'));
+$metadata_input_label = trim(get_input('metadata_input_label'));
 $metadata_hint = trim(get_input('metadata_hint'));
 $metadata_placeholder = trim(get_input('metadata_placeholder'));
 $metadata_type = get_input('metadata_type');
@@ -125,6 +126,12 @@ if (!empty($metadata_label)) {
 	$field->metadata_label = $metadata_label;
 } elseif ($current_field) {
 	unset($field->metadata_label);
+}
+
+if (!empty($metadata_input_label)) {
+	$field->metadata_input_label = $metadata_input_label;
+} elseif ($current_field) {
+	unset($field->metadata_input_label);
 }
 
 if (!empty($metadata_hint)) {

@@ -89,7 +89,7 @@ if (!empty($fields)) {
 				$field_class[] = 'mandatory';
 			}
 			
-			$field_result = elgg_format_element('label', [], $field->getTitle());
+			$field_result = elgg_format_element('label', [], $field->getTitle(true));
 			
 			$hint = $field->getHint();
 			if ($hint) {

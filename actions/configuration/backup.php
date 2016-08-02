@@ -32,6 +32,7 @@ foreach ($entities as $entity) {
 	$fields[] = [
 		'metadata_name' => $entity->metadata_name,
 		'metadata_label' => $entity->metadata_label,
+		'metadata_input_label' => $entity->metadata_input_label,
 		'metadata_hint' => $entity->metadata_hint,
 		'metadata_type' => $entity->metadata_type,
 		'metadata_options' => $entity->metadata_options,

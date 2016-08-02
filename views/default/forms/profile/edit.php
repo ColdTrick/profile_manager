@@ -189,7 +189,7 @@ if (!empty($cats)) {
 			$visible_fields++;
 			$field_result = '<div>';
 			
-			$field_result .= elgg_format_element('label', [], $field->getTitle());
+			$field_result .= elgg_format_element('label', [], $field->getTitle(true));
 			
 			$hint = $field->getHint();
 			if ($hint) {

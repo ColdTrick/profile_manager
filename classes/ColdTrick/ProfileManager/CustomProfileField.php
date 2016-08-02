@@ -26,9 +26,22 @@ class CustomProfileField extends CustomField {
 	/**
 	 * Returns the title of the field
 	 *
+	 * @param bool $input set to true if you need the title for an input field
+	 *
 	 * @return string
 	 */
-	public function getTitle() {
+	public function getTitle($input = false) {
+		
+		if ($input) {
+			if ($this->metadata_input_label) {
+				return $this->metadata_input_label;
+			}
+			
+			if (elgg_language_key_exists("profile:{$this->metadata_name}:input")) {
+				return elgg_echo("profile:{$this->metadata_name}:input");
+			}
+		}
+		
 		if ($this->metadata_label) {
 			return $this->metadata_label;
 		}

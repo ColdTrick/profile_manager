@@ -28,6 +28,9 @@ $header = elgg_view('output/url', [
 	'text' => elgg_echo('add'),
 	'href' => 'ajax/view/forms/profile_manager/profile_field',
 	'class' => 'elgg-button elgg-button-action man pvn float-alt elgg-lightbox',
+	'data-colorbox-opts' => json_encode([
+		'maxHeight' => '90%'
+	]),
 ]);
 $header .= elgg_format_element('h3', [], elgg_echo('profile_manager:profile_fields:list:title'));
 		
