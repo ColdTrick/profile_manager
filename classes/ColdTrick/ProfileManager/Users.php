@@ -327,6 +327,17 @@ class Users {
 		
 		list($username) = explode('@', $email);
 		
+		// strip unsupported chars from the usernam
+		// using same blacklist as in validate_username() function
+		// not using a preg_replace as otherwise the hook can not be used (as the syntax is different)
+		$blacklist = '\'/\\"*& ?#%^(){}[]~?<>;|¬`@+=';
+		$blacklist = elgg_trigger_plugin_hook('username:character_blacklist', 'user', ['blacklist' => $blacklist], $blacklist);
+		for ($n = 0; $n < strlen($blacklist); $n++) {
+			$unwanted_character = $blacklist[$n];
+			$username = str_replace($unwanted_character, '', $username);
+		}
+		
+		
 		// show hidden entities (unvalidated users)
 		$hidden = access_show_hidden_entities(true);
 		
