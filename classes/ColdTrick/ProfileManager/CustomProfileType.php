@@ -32,7 +32,7 @@ class CustomProfileType extends \ElggObject {
 	public function getTitle($plural = false) {
 		if ($plural) {
 			$result = $this->getPluralTitle();
-			if ($result) {
+			if ($result !== false) {
 				return $result;
 			}
 		}

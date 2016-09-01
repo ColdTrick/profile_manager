@@ -86,7 +86,7 @@ elgg.profile_manager.change_profile_type_register = function() {
 
 //tab switcher on register form
 elgg.profile_manager.toggle_tabbed_nav = function(div_id, element) {
-	$content_container = $('#profile_manager_register_tabbed').next();
+	var $content_container = $('#profile_manager_register_tabbed').next();
 	$content_container.find('>div').hide();
 	$content_container.find('>div.category_' + div_id).show();
 
@@ -190,7 +190,7 @@ elgg.profile_manager.init_register = function() {
 	});
 
 	// password compare check
-	$(document).on('keyup', '.elgg-form-register input[name="password"], .elgg-form-register input[name="password2"]', function(event) {
+	$(document).on('keyup', '.elgg-form-register input[name="password"], .elgg-form-register input[name="password2"]', function() {
 		var $form = $(this).parents('.elgg-form-register');
 		
 		var password1 = $form.find('input[name="password"]').val();

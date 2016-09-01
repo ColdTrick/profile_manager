@@ -4,7 +4,7 @@ elgg.profile_manager.init_admin = function() {
 	elgg.profile_manager.filter_custom_fields(0);
 	
 	$('#custom_fields_ordering').sortable({
-		update: function(event, ui) {
+		update: function() {
 			elgg.profile_manager.reorder_custom_fields();
 		},
 		opacity: 0.6,
@@ -13,7 +13,7 @@ elgg.profile_manager.init_admin = function() {
 	});
 
 	$('#custom_fields_category_list_custom .elgg-list').sortable({
-		update: function(event, ui) {
+		update: function() {
 			elgg.action('profile_manager/categories/reorder?' + $('#custom_fields_category_list_custom .elgg-list').sortable('serialize'));
 		},
 		opacity: 0.6,

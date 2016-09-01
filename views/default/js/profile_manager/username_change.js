@@ -4,7 +4,7 @@ define(function(require) {
 	
 	var profile_manager_username_validate_xhr;
 
-	validate = function(event, elem) {
+	var validate = function(event, elem) {
 		if (event.which == 13) {
 			return;
 		}
