@@ -1,9 +1,13 @@
-# Profile Manager [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/badges/quality-score.png?s=f793cb23030a6d48aee98de8ddaf2a34d5a2ef3c)](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/)
+# Profile Manager
+
+[![Build Status](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/coldtrick/profile_manager/v/stable.svg)](https://packagist.org/packages/coldtrick/profile_manager)
+[![License](https://poser.pugx.org/coldtrick/profile_manager/license.svg)](https://packagist.org/packages/coldtrick/profile_manager)
 
 Improved management of user and group profile fields
 
 ## Features
-
 
 ### Configure User and Group profile fields
 
