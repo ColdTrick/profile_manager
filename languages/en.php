@@ -88,6 +88,7 @@ return [
 	'profile_manager:admin:field_type' => "Field Type",
 	'profile_manager:admin:options:dropdown' => 'Dropdown',
 	'profile_manager:admin:options:radio' => 'Radio',
+	'profile_manager:admin:options:tel' => 'Telephone',
 	'profile_manager:admin:options:multiselect' => 'MultiSelect',
 	'profile_manager:admin:options:file' => 'File',
 	'profile_manager:admin:options:pm_rating' => 'Rating',

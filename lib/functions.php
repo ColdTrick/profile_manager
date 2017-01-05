@@ -29,6 +29,9 @@ function profile_manager_register_custom_field_types() {
 	$radio_options = $profile_options;
 	$radio_options['blank_available'] = true;
 	
+	$tel_options = $profile_options;
+	$tel_options['output_as_tags'] = false;
+	
 	//$file_options = array(
 	//	'user_editable' => true,
 	//	'admin_only' => true
@@ -46,6 +49,7 @@ function profile_manager_register_custom_field_types() {
 	profile_manager_add_custom_field_type('custom_profile_field_types', 'location', elgg_echo('profile:field:location'), $location_options);
 	profile_manager_add_custom_field_type('custom_profile_field_types', 'url', elgg_echo('profile:field:url'), $profile_options);
 	profile_manager_add_custom_field_type('custom_profile_field_types', 'email', elgg_echo('profile:field:email'), $profile_options);
+	profile_manager_add_custom_field_type('custom_profile_field_types', 'tel', elgg_echo('profile_manager:admin:options:tel'), $tel_options);
 	profile_manager_add_custom_field_type('custom_profile_field_types', 'date', elgg_echo('profile:field:date'), $profile_options);
 	profile_manager_add_custom_field_type('custom_profile_field_types', 'dropdown', elgg_echo('profile_manager:admin:options:dropdown'), $dropdown_options);
 	profile_manager_add_custom_field_type('custom_profile_field_types', 'radio', elgg_echo('profile_manager:admin:options:radio'), $radio_options);
@@ -71,11 +75,15 @@ function profile_manager_register_custom_field_types() {
 	$location_options = $group_options;
 	unset($location_options['output_as_tags']);
 	
+	$tel_options = $group_options;
+	$tel_options['output_as_tags'] = false;
+	
 	profile_manager_add_custom_field_type('custom_group_field_types', 'text', elgg_echo('profile:field:text'), $group_options);
 	profile_manager_add_custom_field_type('custom_group_field_types', 'longtext', elgg_echo('profile:field:longtext'), $group_options);
 	profile_manager_add_custom_field_type('custom_group_field_types', 'tags', elgg_echo('profile:field:tags'), $group_options);
 	profile_manager_add_custom_field_type('custom_group_field_types', 'url', elgg_echo('profile:field:url'), $group_options);
 	profile_manager_add_custom_field_type('custom_group_field_types', 'email', elgg_echo('profile:field:email'), $group_options);
+	profile_manager_add_custom_field_type('custom_group_field_types', 'tel', elgg_echo('profile_manager:admin:options:tel'), $tel_options);
 	profile_manager_add_custom_field_type('custom_group_field_types', 'date', elgg_echo('profile:field:date'), $group_options);
 	profile_manager_add_custom_field_type('custom_group_field_types', 'location', elgg_echo('profile:field:location'), $location_options);
 	profile_manager_add_custom_field_type('custom_group_field_types', 'dropdown', elgg_echo('profile_manager:admin:options:dropdown'), $dropdown_options);
