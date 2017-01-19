@@ -273,24 +273,27 @@ class Users {
 			}
 	
 			if ($profile_icon == 'yes') {
-				$profile_icon = $_FILES['profile_icon'];
-	
 				$error = false;
-				if (empty($profile_icon['name'])) {
+				
+				$profile_icons = elgg_get_uploaded_files('profile_icon');
+				if (empty($profile_icons)) {
 					register_error(elgg_echo('profile_manager:register_pre_check:missing', ['profile_icon']));
 					$error = true;
-				} elseif ($profile_icon['error'] != 0) {
-					register_error(elgg_echo('profile_manager:register_pre_check:profile_icon:error'));
-					$error = true;
 				} else {
-					// test if we can handle the image
-					$image = get_resized_image_from_uploaded_file('profile_icon', '10', '10', true, false);
-					if (!$image) {
-						register_error(elgg_echo('profile_manager:register_pre_check:profile_icon:nosupportedimage'));
+					
+					$profile_icon = $profile_icons[0];
+					if (!$profile_icon->isValid()) {
+						register_error(elgg_echo('profile_manager:register_pre_check:profile_icon:error'));
 						$error = true;
+					} else {
+						// test if we can handle the image
+						if (strpos($profile_icon->getMimeType(), 'image/') !== 0) {
+							register_error(elgg_echo('profile_manager:register_pre_check:profile_icon:nosupportedimage'));
+							$error = true;
+						}
 					}
 				}
-	
+					
 				if ($error) {
 					forward(REFERER);
 				}

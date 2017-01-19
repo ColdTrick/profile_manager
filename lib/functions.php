@@ -144,37 +144,10 @@ function profile_manager_get_custom_field_types($register_name) {
  * @return boolean
  */
 function profile_manager_add_profile_icon($user) {
-	
-	$icon_sizes = elgg_get_config('icon_sizes');
-	
-	// get the images and save their file handlers into an array
-	// so we can do clean up if one fails.
-	$files = [];
-	
-	foreach ($icon_sizes as $name => $size_info) {
-		$resized = get_resized_image_from_uploaded_file('profile_icon', $size_info['w'], $size_info['h'], $size_info['square'], $size_info['upscale']);
-	
-		if ($resized) {
-			$file = new ElggFile();
-			$file->owner_guid = $user->guid;
-			$file->setFilename("profile/{$user->guid}{$name}.jpg");
-			$file->open('write');
-			$file->write($resized);
-			$file->close();
-			$files[] = $file;
-		} else {
-			// cleanup on fail
-			foreach ($files as $file) {
-				$file->delete();
-			}
-	
-			register_error(elgg_echo('avatar:resize:fail'));
-			
-			return false;
-		}
+	if (!$user->saveIconFromUploadedFile('profile_icon')) {
+		register_error(elgg_echo('avatar:resize:fail'));
+		return false;
 	}
-	
-	$user->icontime = time();
 	
 	return true;
 }
