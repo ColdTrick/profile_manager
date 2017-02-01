@@ -357,6 +357,9 @@ function profile_manager_profile_completeness($user = null) {
 	$required_fields = [];
 	$missing_fields = [];
 	$percentage_completeness = 100;
+	$avatar_missing = false;
+	
+	$ia = elgg_set_ignore_access(true);
 	
 	$fields = profile_manager_get_categorized_fields($user, true, false, true);
 	
@@ -378,13 +381,31 @@ function profile_manager_profile_completeness($user = null) {
 		}
 	}
 	
-	if (count($required_fields) > 0) {
-		$percentage_completeness = 100 - round(((count($missing_fields) / count($required_fields)) * 100));
+	$avatar_percentage = (int) elgg_get_plugin_setting('profile_completeness_avatar', 'profile_manager');
+	if ($avatar_percentage) {
+		if (!$user->icontime) {
+			$avatar_missing = true;
+		}
 	}
+	
+	$percentage_completeness = 100;
+		
+	if (count($required_fields)) {
+		$percentage_completeness -= (count($missing_fields) / count($required_fields)) * (100 - $avatar_percentage);
+	}
+	
+	if ($avatar_missing) {
+		$percentage_completeness -= $avatar_percentage;
+	}
+	
+	$percentage_completeness = round($percentage_completeness);
 
+	elgg_set_ignore_access($ia);
+	
 	return [
 		'required_fields' => $required_fields,
 		'missing_fields' => $missing_fields,
+		'avatar_missing' => $avatar_missing,
 		'percentage_completeness' => $percentage_completeness,
 	];
 }

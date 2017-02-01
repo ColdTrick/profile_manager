@@ -64,6 +64,8 @@ return [
 	'profile_manager:settings:enable_username_change' => "Allow users to change their username in settings",
 	'profile_manager:settings:enable_username_change:option:admin' => "Admin only",
 	'profile_manager:settings:enable_site_join_river_event' => "Add a river event when people join this site",
+	'profile_manager:settings:profile_completeness:avatar' => "Avatar completeness percentage",
+	'profile_manager:settings:profile_completeness:avatar:help' => "If using profile completeness features you can ,optionally, configure here how much a profile avatar counts towards profile completeness. The remainder percentage will be used for the profile field configuration.",
 	
 	'profile_manager:settings:registration:terms' => "To show an 'Accept terms' field on the registration page, please fill in the URL to the terms below",
 	'profile_manager:settings:registration:extra_fields' => "Where to show extra profile fields",

@@ -82,7 +82,6 @@ $registration_settings .= elgg_view_field([
 	'value' => $plugin->profile_icon_on_register,
 ]);
 
-
 $registration_settings .= elgg_view_field([
 	'#type' => 'select',
 	'#label' => elgg_echo('profile_manager:settings:show_account_hints'),
@@ -224,6 +223,16 @@ $other = elgg_view_field([
 	'name' => 'params[enable_profile_completeness_widget]',
 	'options_values' => $noyes_options,
 	'value' => $plugin->enable_profile_completeness_widget,
+]);
+	
+$other .= elgg_view_field([
+	'#type' => 'number',
+	'#label' => elgg_echo('profile_manager:settings:profile_completeness:avatar'),
+	'#help' => elgg_echo('profile_manager:settings:profile_completeness:avatar:help'),
+	'name' => 'params[profile_completeness_avatar]',
+	'value' => $plugin->profile_completeness_avatar,
+	'min' => 0,
+	'max' => 100,
 ]);
 	
 $other .= elgg_view_field([
