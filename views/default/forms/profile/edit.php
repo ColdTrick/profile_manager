@@ -280,7 +280,11 @@ if ($simple_access_control == 'yes') {
 	<?php
 }
 
-$foot = elgg_view('input/hidden', ['name' => 'guid', 'value' => $user->guid]);
-$foot .= elgg_view('input/submit', ['value' => elgg_echo('save')]);
+echo elgg_view_field([
+	'#type' => 'hidden',	
+	'name' => 'guid', 
+	'value' => $user->guid,
+]);
 
-echo elgg_format_element('div', ['class' => 'elgg-foot'], $foot);
+$footer = elgg_view('input/submit', ['value' => elgg_echo('save')]);
+elgg_set_form_footer($footer);

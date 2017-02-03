@@ -86,14 +86,12 @@ if ($admin_option) {
 	echo "<div>" . elgg_view('input/checkboxes', array('name' => "use_default_access", 'value' => elgg_echo('profile_manager:admin:adduser:use_default_access'), 'options' => array(elgg_echo('profile_manager:admin:adduser:use_default_access') => 1))) . "</div>";
 	
 	// get profile types
-	$profile_type_options = array(
-				"type" => "object",
-				"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
-				"limit" => false,
-				"owner_guid" => elgg_get_site_entity()->getGUID()
-			);
-	
-	$types = elgg_get_entities($profile_type_options);
+	$types = elgg_get_entities([
+		'type' => 'object',
+		'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+		'limit' => false,
+		'owner_guid' => elgg_get_site_entity()->getGUID(),
+	]);
 	
 	$categorized_fields = profile_manager_get_categorized_fields(null, true);
 	$cats = $categorized_fields['categories'];
@@ -106,36 +104,33 @@ if ($admin_option) {
 	
 	if ($types) {
 		
-		$options = array();
-		$options[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
+		$options = [
+			'' => elgg_echo('profile_manager:profile:edit:custom_profile_type:default'),
+		];
 		
 		foreach ($types as $type) {
 			$options[$type->guid] = $type->getTitle();
 		}
 		
-		echo "<div>";
-		echo "<label>" . elgg_echo("profile_manager:profile:edit:custom_profile_type:label") . "</label><br />";
-		echo elgg_view("input/dropdown", array("name" => "custom_profile_fields[custom_profile_type]", "options_values" => $options));
-		echo "</div>";
+		echo elgg_view_field([
+			'#type' => 'select',
+			'#label' => elgg_echo('profile_manager:profile:edit:custom_profile_type:label'),
+			'name' => 'custom_profile_fields[custom_profile_type]', 
+			'options_values' => $options,
+		]);
+		
 	}
 	
 	if (!empty($cats)) {
 		foreach ($cats as $cat_guid => $cat) {
 			// display each field for currect category
 			foreach ($fields[$cat_guid] as $field) {
-				$metadata_name = $field->metadata_name;
-				// get options
-				$options = $field->getOptions(true);
-	
-				// make title
-				$title = $field->getTitle();
-				
-				echo "<div><label>" . $title . "</label><br />";
-				echo elgg_view("input/" . $field->metadata_type, array(
-																'name' => "custom_profile_fields[" . $metadata_name . "]",
-																'options' => $options
-																));
-				echo "</div>";
+				echo elgg_view_field([
+					'#type' => $field->metadata_type,
+					'#label' => $field->getTitle(),
+					'name' => "custom_profile_fields[{$field->metadata_name}]",
+					'options' => $field->getOptions(true),
+				]);
 			}
 		}
 	}
@@ -144,7 +139,6 @@ if ($admin_option) {
 		echo "</div>";
 	}
 }
-?>
-<div class="elgg-foot">
-	<?php echo elgg_view('input/submit', array('value' => elgg_echo('register'))); ?>
-</div>
+
+$footer = elgg_view('input/submit', ['value' => elgg_echo('register')]);
+elgg_set_form_footer($footer);

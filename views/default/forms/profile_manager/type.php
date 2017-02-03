@@ -60,32 +60,36 @@ if ($entity) {
 
 $formbody = '';
 
-$formbody .= elgg_view_input('text', [
+$formbody .= elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('profile_manager:admin:metadata_name'),
 	'name' => 'metadata_name',
 	'value' => $metadata_name,
-	'label' => elgg_echo('profile_manager:admin:metadata_name'),
 	'required' => true,
 ]);
 
 $formbody .= '<div class="elgg-col elgg-col-1of2 man">';
-$formbody .= elgg_view_input('text', [
+$formbody .= elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('profile_manager:profile_types:edit:metadata_label:singular'),
 	'name' => 'metadata_label',
 	'value' => $metadata_label,
-	'label' => elgg_echo('profile_manager:profile_types:edit:metadata_label:singular'),
 ]);
 $formbody .= '</div>';
 $formbody .= '<div class="elgg-col elgg-col-1of2 man">';
-$formbody .= elgg_view_input('text', [
+$formbody .= elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('profile_manager:profile_types:edit:metadata_label:plural'),
 	'name' => 'metadata_label_plural',
 	'value' => $metadata_label_plural,
-	'label' => elgg_echo('profile_manager:profile_types:edit:metadata_label:plural'),
 ]);
 $formbody .= '</div>';
 
-$formbody .= elgg_view_input('longtext', [
+$formbody .= elgg_view_field([
+	'#type' => 'longtext',
+	'#label' => elgg_echo('description'),
 	'name' => 'metadata_description',
 	'value' => $metadata_description,
-	'label' => elgg_echo('description'),
 ]);
 	
 $categories = elgg_get_entities([
@@ -103,11 +107,12 @@ if (!empty($categories)) {
 		$checkbox_options[$title] = $cat->guid;
 	}
 	
-	$formbody .= elgg_view_input('checkboxes', [
+	$formbody .= elgg_view_field([
+		'#type' => 'checkboxes', 
+		'#label' => elgg_echo('profile_manager:profile_types:edit:related_categories'),
 		'name' => 'categories',
 		'options' => $checkbox_options,
 		'value' => $related_categories,
-		'label' => elgg_echo('profile_manager:profile_types:edit:related_categories'),
 	]);
 }
 

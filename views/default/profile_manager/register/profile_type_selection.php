@@ -39,13 +39,14 @@ foreach ($types as $type) {
 	}
 }
 
-$dropdown = elgg_view_input('dropdown', [
+$dropdown = elgg_view_field([
+	'#type' => 'select',
+	'#label' => elgg_echo('profile_manager:profile:edit:custom_profile_type:label'),
 	'name' => 'custom_profile_fields_custom_profile_type',
 	'id' => 'custom_profile_fields_custom_profile_type',
 	'options_values' => $types_options_values,
 	'onchange' => 'elgg.profile_manager.change_profile_type_register();',
 	'value' => $value,
-	'label' => elgg_echo('profile_manager:profile:edit:custom_profile_type:label'),
 ]);
 
 echo elgg_format_element('div', [], $dropdown . $types_description);

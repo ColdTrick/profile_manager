@@ -82,50 +82,57 @@ if ($entity) {
 $yes_no_options = ['yes' => elgg_echo('option:yes'),'no' => elgg_echo('option:no')];
 $no_yes_options = array_reverse($yes_no_options);
 
-$formbody .= elgg_view_input('text', [
+$formbody .= elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('profile_manager:admin:metadata_name'),
 	'name' => 'metadata_name',
 	'value' => $metadata_name,
 	'required' => true,
-	'label' => elgg_echo('profile_manager:admin:metadata_name'),
 ]);
 
-$formbody .= elgg_view_input('text', [
+$formbody .= elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('profile_manager:admin:metadata_label'),
 	'name' => 'metadata_label',
 	'value' => $metadata_label,
-	'label' => elgg_echo('profile_manager:admin:metadata_label'),
 ]);
 
-$formbody .= elgg_view_input('text', [
+$formbody .= elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('profile_manager:admin:metadata_input_label'),
+	'#help' => elgg_echo('profile_manager:admin:metadata_input_label:help'),
 	'name' => 'metadata_input_label',
 	'value' => $metadata_input_label,
-	'label' => elgg_echo('profile_manager:admin:metadata_input_label'),
-	'help' => elgg_echo('profile_manager:admin:metadata_input_label:help'),
 ]);
 
-$formbody .= elgg_view_input('text', [
+$formbody .= elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('profile_manager:admin:metadata_hint'),
 	'name' => 'metadata_hint',
 	'value' => $metadata_hint,
-	'label' => elgg_echo('profile_manager:admin:metadata_hint'),
 ]);
 
-$formbody .= elgg_view_input('text', [
+$formbody .= elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('profile_manager:admin:metadata_placeholder'),
 	'name' => 'metadata_placeholder',
 	'value' => $metadata_placeholder,
-	'label' => elgg_echo('profile_manager:admin:metadata_placeholder'),
 ]);
 
-$formbody .= elgg_view_input('select', [
+$formbody .= elgg_view_field([
+	'#type' => 'select',
+	'#label' => elgg_echo('profile_manager:admin:field_type'),
 	'name' => 'metadata_type',
 	'options_values' => $options_values,
 	'value' => $metadata_type,
-	'label' => elgg_echo('profile_manager:admin:field_type'),
 	'onchange' => 'elgg.profile_manager.change_field_type();',
 ]);
 
-$formbody .= elgg_view_input('text', [
+$formbody .= elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('profile_manager:admin:metadata_options'),
 	'name' => 'metadata_options',
 	'value' => $metadata_options,
-	'label' => elgg_echo('profile_manager:admin:metadata_options'),
 ]);
 
 $options_table = '';
