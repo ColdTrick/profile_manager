@@ -1,10 +1,19 @@
 <?php
 /**
- * This file was created by Translation Editor v4.0
- * On 2015-09-18 15:51
+ * This file was created by Translation Editor v5.2
+ * On 2017-02-13 11:30
  */
 
-return [
+return array (
+  'profile_manager:settings:profile_completeness:avatar' => 'Avatar compleetheidspercentage',
+  'profile_manager:admin:options:tel' => 'Telefoon',
+  'profile_manager:categories:edit:related_types' => 'Gerelateerde profieltypes',
+  'profile_manager:profile_types:edit:related_categories' => 'Gerelateerde categorieën',
+  'profile_manager:profile_types:edit:metadata_label:singular' => 'Label (enkelvoud)',
+  'profile_manager:profile_types:edit:metadata_label:plural' => 'Label (meervoud)',
+  'profile_manager:admin:metadata_input_label' => 'Invoer label',
+  'profile_manager:admin:metadata_input_label:help' => 'Wordt gebruikt op het registratie en profiel bewerken formulier in plaats van het reguliere label',
+  'profile_manager:settings:profile_completeness:avatar:help' => 'Indien profielcompleetheid gebruikt wordt kun je een percentage configureren hoeveel een avatar meetelt voor deze compleetheid. Het resterende percentage wordt voor de overige profielvelden gebruikt.',
   'profile_manager:settings:generate_username_from_email' => 'Genereer gebruikersnaam op basis van email',
   'profile_manager:admin:options:pm_twitter' => 'Twitter',
   'profile_manager:admin:options:pm_facebook' => 'Facebook',
@@ -27,7 +36,6 @@ return [
   'profile:custom_profile_type' => 'Custom Profiel Type',
   'admin:appearance:group_fields' => 'Bewerk groep velden',
   'admin:appearance:export_fields' => 'Exporteer profiel informatie',
-  'admin:appearance:user_summary_control' => 'Gebruikers Lijstweergave Controle',
   'admin:groups' => 'Groepen',
   'admin:groups:export' => 'Exporteer groepsinformatie',
   'admin:users:export' => 'Exporteer gebruikers',
@@ -52,7 +60,6 @@ return [
   'profile_manager:settings:profile_type_selection' => 'Wie kan het profiel type wijzigen?',
   'profile_manager:settings:profile_type_selection:option:user' => 'Gebruiker',
   'profile_manager:settings:profile_type_selection:option:admin' => 'Alleen de beheerder',
-  'profile_manager:settings:user_summary_control' => 'Laat de Profile Manager de lijstweergave van gebruikers beheren',
   'profile_manager:settings:enable_profile_completeness_widget' => 'Activeer de profiel compleetheid widget',
   'profile_manager:settings:enable_username_change' => 'Sta gebruikers toe om hun gebruikersnaam te wijzigen',
   'profile_manager:settings:enable_username_change:option:admin' => 'Alleen beheerders',
@@ -65,8 +72,6 @@ return [
   'profile_manager:admin:metadata_name' => 'Naam',
   'profile_manager:admin:metadata_label' => 'Label',
   'profile_manager:admin:metadata_hint' => 'Hint',
-  'profile_manager:admin:metadata_label_translated' => 'Label (Vertaald)',
-  'profile_manager:admin:metadata_label_untranslated' => 'Label (Onvertaald)',
   'profile_manager:admin:metadata_options' => 'Opties (komma gescheiden)',
   'profile_manager:admin:field_type' => 'Veld Type',
   'profile_manager:admin:options:dropdown' => 'Dropdown',
@@ -112,16 +117,6 @@ return [
   'profile_manager:profile_types:list:no_types' => 'Geen profiel types gedefinieerd',
   'profile_manager:profile_types:delete:confirm' => 'Weet u zeker dat u dit profiel type wilt verwijderen?',
   'profile_manager:user_details:profile_type' => 'Profiel Type',
-  'profile_manager:user_summary_control:config' => 'Configuratie',
-  'profile_manager:user_summary_control:info' => 'Voeg velden toe aan de verschillende container en bekijk in de preview het resultaat van de configuratie. Als je tevreden bent kies \'Opslaan\'',
-  'profile_manager:user_summary_control:container:title' => 'Titel',
-  'profile_manager:user_summary_control:container:entity_menu' => 'Entiteit Menu',
-  'profile_manager:user_summary_control:container:subtitle' => 'Ondertitel',
-  'profile_manager:user_summary_control:container:content' => 'Content',
-  'profile_manager:user_summary_control:options:spacers' => 'Scheidingstekens',
-  'profile_manager:user_summary_control:options:spacers:new_line' => 'Nieuwe regel',
-  'profile_manager:user_summary_control:options:spacers:space' => 'Spatie',
-  'profile_manager:user_summary_control:options:spacers:dash' => '-',
   'profile_manager:admin:users:inactive:last_login' => 'Laatst aangemeld voor',
   'profile_manager:admin:users:inactive:list' => 'Inactive gebruikers',
   'profile_manager:actions:title' => 'Acties',
@@ -269,4 +264,4 @@ return [
   'profile_manager:account:login_history' => 'Aanmeld geschiedenis',
   'profile_manager:account:login_history:date' => 'Datum',
   'profile_manager:account:login_history:ip' => 'IP Adres',
-];
+);
