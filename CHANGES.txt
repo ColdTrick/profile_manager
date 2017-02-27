@@ -1,6 +1,14 @@
 Version history
 ===============
 
+12.0 (2017-02-27):
+
+- added: avatar can be counted towards profile completeness
+- added: input/tel is now an available input type
+- changed: updated minimal Elgg requirements to 2.3
+- fixed: load correct field config adding group profile fields
+- fixed: use newer api functions to check for uploaded profile icons
+
 11.0 (2016-09-01):
 
 - added: profile types now have a plural label available to configure
