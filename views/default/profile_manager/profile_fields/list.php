@@ -26,7 +26,7 @@ $list = elgg_list_entities_from_metadata([
 
 $header = elgg_view('output/url', [
 	'text' => elgg_echo('add'),
-	'href' => 'ajax/view/forms/profile_manager/profile_field',
+	'href' => 'ajax/view/profile_manager/forms/profile_field',
 	'class' => 'elgg-button elgg-button-action man pvn float-alt elgg-lightbox',
 	'data-colorbox-opts' => json_encode([
 		'maxHeight' => '90%'
