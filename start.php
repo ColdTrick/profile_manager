@@ -83,6 +83,7 @@ function profile_manager_init() {
 	elgg_register_ajax_view('profile_manager/forms/group_field');
 	elgg_register_ajax_view('profile_manager/forms/profile_field');
 	elgg_register_ajax_view('forms/profile_manager/field_options');
+	elgg_register_ajax_view('profile/edit/fields');
 }
 
 /**

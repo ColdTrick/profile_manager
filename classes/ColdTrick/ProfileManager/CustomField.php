@@ -3,6 +3,20 @@ namespace ColdTrick\ProfileManager;
 
 /**
  * CustomField
+ *
+ * @property int $category_guid GUID of the category the field belongs to (null for Default)
+ * @property string $metadata_name
+ * @property string $metadata_label
+ * @property string $metadata_type
+ * @property string $metadata_hint
+ * @property string $metadata_placeholder
+ * @property string|array  $metadata_options
+ * @property string $mandatory 'no'|'yes'
+ * @property string $user_editable 'no'|'yes'
+ * @property string $output_as_tags 'no'|'yes'
+ * @property string $show_on_register 'no'|'yes'
+ * @property string $admin_only 'no'|'yes'
+ * @property string $blank_available 'no'|'yes'
  */
 abstract class CustomField extends \ElggObject {
 	
