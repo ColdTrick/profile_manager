@@ -1,15 +1,15 @@
 <?php
-/**
-* Profile Manager
-*
-* Action to create/edit profile field
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
 
+/**
+ * Profile Manager
+ *
+ * Action to create/edit profile field
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
 $site_guid = elgg_get_site_entity()->getGUID();
 
 $metadata_name = trim(get_input('metadata_name'));
@@ -20,14 +20,7 @@ $metadata_placeholder = trim(get_input('metadata_placeholder'));
 $metadata_type = get_input('metadata_type');
 $metadata_options = get_input('metadata_options');
 
-$show_on_register = get_input('show_on_register');
-$mandatory = get_input('mandatory');
-$user_editable = get_input('user_editable');
-$output_as_tags = get_input('output_as_tags');
-$admin_only = get_input('admin_only');
-$blank_available = get_input('blank_available');
-
-$type = get_input('type', 'profile');
+$field_type = get_input('field_type', get_input('type', 'profile'));
 
 $guid = (int) get_input('guid');
 $current_field = false;
@@ -47,7 +40,8 @@ if ($current_field && ($current_field->getSubtype() != CUSTOM_PROFILE_FIELDS_PRO
 	forward(REFERER);
 }
 
-if (!in_array($type, ['profile', 'group'])) {
+$config = profile_manager_get_field_types();
+if (!in_array($field_type, array_keys($config))) {
 	// wrong custom field type
 	register_error(elgg_echo('profile_manager:action:new:error:type'));
 	forward(REFERER);
@@ -85,7 +79,7 @@ if (in_array($metadata_type, ['dropdown', 'radio', 'multiselect'])) {
 			$new_options[$key] = $trimmed_option;
 		}
 	}
-	
+
 	if (count($new_options) > 0) {
 		$new_options = implode(',', $new_options);
 	} else {
@@ -98,7 +92,7 @@ if ($options_error) {
 	forward(REFERER);
 }
 
-$subtype = "custom_{$type}_field";
+$subtype = $config[$field_type]['subtype'];
 $options = [
 	'type' => 'object',
 	'subtype' => $subtype,
@@ -111,12 +105,17 @@ $max_fields = elgg_get_entities($options) + 1;
 if ($current_field) {
 	$field = $current_field;
 } else {
-	$field = new ElggObject();
-		
+	$class = get_subtype_class('object', $subtype);
+	if ($class) {
+		$field = new $class();
+	} else {
+		$field = new ElggObject();
+		$field->subtype = $subtype;
+	}
+
 	$field->owner_guid = $site_guid;
 	$field->container_guid = $site_guid;
 	$field->access_id = ACCESS_PUBLIC;
-	$field->subtype = $subtype;
 	$field->save();
 }
 
@@ -153,15 +152,27 @@ if (in_array($metadata_type, ['dropdown', 'radio', 'multiselect'])) {
 	$field->deleteMetadata('metadata_options');
 }
 
-if ($type == 'profile') {
-	$field->show_on_register = $show_on_register;
-	$field->mandatory = $mandatory;
-	$field->user_editable = $user_editable;
+$profile_only_options = ['show_on_register', 'mandatory', 'user_editable'];
+if ($field_type == 'profile') {
+	foreach ($profile_only_options as $option) {
+		$value = get_input($option);
+		if (isset($value)) {
+			$field->$option = $value;
+		} else {
+			unset($field->$option);
+		}
+	}
 }
 
-$field->admin_only = $admin_only;
-$field->output_as_tags = $output_as_tags;
-$field->blank_available = $blank_available;
+$other_field_options = array_diff((array) $config[$field_type]['options'], $profile_only_options);
+foreach ($other_field_options as $option) {
+	$value = get_input($option);
+	if (isset($value)) {
+		$field->$option = $value;
+	} else {
+		unset($field->$option);
+	}
+}
 
 if (empty($current_field)) {
 	$field->order = $max_fields;
@@ -174,6 +185,6 @@ if ($field->save()) {
 }
 
 // update system cache
-elgg_get_system_cache()->delete("profile_manager_{$type}_fields_{$site_guid}");
+elgg_get_system_cache()->delete("profile_manager_{$field_type}_fields_{$site_guid}");
 
 forward(REFERER);

@@ -17,7 +17,7 @@ $field = elgg_extract('entity', $vars);
 
 $title = '<b>' . $field->metadata_name . '</b> [' . $field->metadata_type . ']';
 $title .= elgg_view('output/url', [
-	'href' => 'ajax/view/forms/profile_manager/profile_field?guid=' . $field->guid,
+	'href' => 'ajax/view/profile_manager/forms/profile_field?guid=' . $field->guid,
 	'class' => 'elgg-lightbox',
 	'data-colorbox-opts' => json_encode([
 		'maxHeight' => '90%'

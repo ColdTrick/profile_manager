@@ -61,7 +61,7 @@ if ($show_input) {
 echo '</div>';
 
 // retrieve group fields
-$group_fields = profile_manager_get_categorized_group_fields();
+$group_fields = profile_manager_get_categorized_group_fields($group, true, !$group);
 $group_fields = elgg_extract('fields', $group_fields);
 if (empty($group_fields)) {
 	return;

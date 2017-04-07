@@ -80,8 +80,10 @@ function profile_manager_init() {
 	// register ajax views
 	elgg_register_ajax_view('forms/profile_manager/type');
 	elgg_register_ajax_view('forms/profile_manager/category');
-	elgg_register_ajax_view('forms/profile_manager/group_field');
-	elgg_register_ajax_view('forms/profile_manager/profile_field');
+	elgg_register_ajax_view('profile_manager/forms/group_field');
+	elgg_register_ajax_view('profile_manager/forms/profile_field');
+	elgg_register_ajax_view('forms/profile_manager/field_options');
+	elgg_register_ajax_view('profile/edit/fields');
 }
 
 /**
