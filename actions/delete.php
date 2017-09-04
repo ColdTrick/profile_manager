@@ -16,15 +16,13 @@ $guid = (int) get_input('guid');
 
 $entity = get_entity($guid);
 if (!elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE) && !elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE)) {
-	register_error(elgg_echo('profile_manager:actions:delete:error:unknown'));
-	return;
+	return elgg_error_response(elgg_echo('profile_manager:actions:delete:error:unknown'));
 }
 
 $site_guid = $entity->site_guid;
 
 if (!$entity->delete()) {
-	register_error(elgg_echo('profile_manager:actions:delete:error:unknown'));
-	return;
+	return elgg_error_response(elgg_echo('profile_manager:actions:delete:error:unknown'));
 }
 
 // clear cache

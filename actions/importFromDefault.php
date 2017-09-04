@@ -10,13 +10,12 @@
 * @link http://www.coldtrick.com/
 */
 
-$site_guid = elgg_get_site_entity()->getGUID();
+$site_guid = elgg_get_site_entity()->guid;
 
 $type = get_input('type', 'profile');
 
 if (!in_array($type, ['profile', 'group'])) {
-	register_error(elgg_echo('profile_manager:actions:import:from_default:error:wrong_type'));
-	forward(REFEER);
+	return elgg_error_response(elgg_echo('profile_manager:actions:import:from_default:error:wrong_type'));
 }
 
 $added = 0;
@@ -86,10 +85,9 @@ foreach ($defaults as $metadata_name => $metadata_type) {
 }
 
 if ($added == 0) {
-	register_error(elgg_echo('profile_manager:actions:import:from_default:no_fields'));
-} else {
-	elgg_get_system_cache()->delete("profile_manager_{$type}_fields_{$site_guid}");
-	system_message(elgg_echo('profile_manager:actions:import:from_default:new_fields', [$added]));
+	return elgg_error_response(elgg_echo('profile_manager:actions:import:from_default:no_fields'));
 }
 
-forward(REFERER);
+elgg_get_system_cache()->delete("profile_manager_{$type}_fields_{$site_guid}");
+
+return elgg_ok_response('', elgg_echo('profile_manager:actions:import:from_default:new_fields', [$added]));

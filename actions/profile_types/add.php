@@ -19,8 +19,7 @@ $description = get_input('metadata_description');
 $categories = get_input('categories');
 
 if (empty($name) || !preg_match('/^[a-zA-Z0-9_]{1,}$/', $name)) {
-	register_error(elgg_echo('profile_manager:action:profile_types:add:error:name'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:action:profile_types:add:error:name'));
 }
 
 $object = get_entity($guid);
@@ -34,8 +33,7 @@ if (empty($object)) {
 }
 
 if (empty($object)) {
-	register_error(elgg_echo('profile_manager:action:profile_types:add:error:object'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:action:profile_types:add:error:object'));
 }
 
 $object->metadata_name = $name;
@@ -65,10 +63,8 @@ if (!empty($categories) && is_array($categories)) {
 	}
 }
 
-if ($object->save()) {
-	system_message(elgg_echo('profile_manager:action:profile_types:add:succes'));
-} else {
-	register_error(elgg_echo('profile_manager:action:profile_types:add:error:save'));
+if (!$object->save()) {
+	return elgg_error_response(elgg_echo('profile_manager:action:profile_types:add:error:save'));
 }
 
-forward(REFERER);
+return elgg_ok_response('', elgg_echo('profile_manager:action:profile_types:add:succes'));

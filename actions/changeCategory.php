@@ -15,8 +15,7 @@ $category_guid = (int) get_input('category_guid');
 
 $entity = get_entity($guid);
 if (!elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE) && !elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE)) {
-	register_error(elgg_echo('profile_manager:actions:change_category:error:unknown'));
-	return;
+	return elgg_error_response(elgg_echo('profile_manager:actions:change_category:error:unknown'));
 }
 
 if (!empty($category_guid)) {

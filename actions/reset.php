@@ -14,8 +14,7 @@ $type = get_input('type', 'profile');
 $error = false;
 
 if (!in_array($type, ['profile', 'group'])) {
-	register_error(elgg_echo('profile_manager:actions:reset:error:wrong_type'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:actions:reset:error:wrong_type'));
 }
 
 $site_guid = elgg_get_site_entity()->getGUID();
@@ -24,7 +23,7 @@ $entities = elgg_get_entities([
 	'type' => 'object',
 	'subtype' => "custom_{$type}_field",
 	'limit' => false,
-	'owner_guid' => $site_guid
+	'owner_guid' => $site_guid,
 ]);
 
 if ($entities) {
@@ -37,10 +36,8 @@ if ($entities) {
 
 elgg_get_system_cache()->delete("profile_manager_{$type}_fields_{$site_guid}");
 
-if (!$error) {
-	system_message(elgg_echo('profile_manager:actions:reset:success'));
-} else {
-	register_error(elgg_echo('profile_manager:actions:reset:error:unknown'));
+if ($error) {
+	return elgg_error_response(elgg_echo('profile_manager:actions:reset:error:unknown'));
 }
 
-forward(REFERER);
+return elgg_ok_response('', elgg_echo('profile_manager:actions:reset:success'));

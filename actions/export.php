@@ -21,13 +21,11 @@ $fieldtype = get_input('fieldtype');
 $fields = get_input('export');
 	
 if (empty($fieldtype) || empty($fields)) {
-	register_error(elgg_echo("error:missing_data"));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
 if (!in_array($fieldtype, [CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE, CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE])) {
-	register_error(elgg_echo("error:missing_data"));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
 header('Pragma: public');

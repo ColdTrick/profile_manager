@@ -25,8 +25,7 @@ $new_order = elgg_get_entities($options) + 1;
 $fieldlist = elgg_get_config('profile_custom_fields');
 
 if (empty($fieldlist)) {
-	register_error(elgg_echo('profile_manager:actions:import:from_custom:no_fields'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:actions:import:from_custom:no_fields'));
 }
 
 $fieldlistarray = explode(',', $fieldlist);
@@ -65,14 +64,12 @@ foreach ($fieldlistarray as $listitem) {
 }
 
 // clear cache
-$site_guid = elgg_get_site_entity()->getGUID();
+$site_guid = elgg_get_site_entity()->guid;
 elgg_get_system_cache()->delete("profile_manager_profile_fields_{$site_guid}");
 
 $num_new_fields = $n - $skipped;
-if ($num_new_fields) {
-	system_message(elgg_echo('profile_manager:actions:import:from_custom:new_fields', [$num_new_fields]));
-} else {
-	register_error(elgg_echo('profile_manager:actions:import:from_custom:no_fields'));
+if (!$num_new_fields) {
+	return elgg_error_response(elgg_echo('profile_manager:actions:import:from_custom:no_fields'));
 }
 
-forward(REFERER);
+return elgg_ok_response('', elgg_echo('profile_manager:actions:import:from_custom:new_fields', [$num_new_fields]));

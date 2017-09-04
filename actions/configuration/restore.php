@@ -14,14 +14,12 @@ $site_guid = elgg_get_site_entity()->getGUID();
 
 $json = get_uploaded_file('restoreFile');
 if (empty($json)) {
-	register_error(elgg_echo('profile_manager:actions:restore:error:nofile'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:actions:restore:error:nofile'));
 }
 
 $data = json_decode($json, true);
 if (empty($data)) {
-	register_error(elgg_echo('profile_manager:actions:restore:error:json'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:actions:restore:error:json'));
 }
 
 $requestedfieldtype = get_input('fieldtype');
@@ -32,14 +30,12 @@ $fields = $data['fields'];
 // check if field data is corrupted
 
 if (empty($fieldtype) || empty($md5) || empty($fields) || (md5(print_r($fields, true)) !== $md5)) {
-	register_error(elgg_echo('profile_manager:actions:restore:error:corrupt'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:actions:restore:error:corrupt'));
 }
 
 // check if selected file is same type as requested
 if ($requestedfieldtype !== $fieldtype) {
-	register_error(elgg_echo('profile_manager:actions:restore:error:fieldtype'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:actions:restore:error:fieldtype'));
 }
 
 // clear cache
@@ -65,8 +61,7 @@ if (!empty($entities)) {
 }
 
 if ($error) {
-	register_error(elgg_echo('profile_manager:actions:restore:error:deleting'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:actions:restore:error:deleting'));
 }
 
 // add new fields with configured metadata
@@ -88,7 +83,4 @@ foreach ($fields as $index => $field) {
 	$object->save();
 }
 
-// report backup to user
-system_message(elgg_echo('profile_manager:actions:restore:success'));
-
-forward(REFERER);
+return elgg_ok_response('', elgg_echo('profile_manager:actions:restore:success'));

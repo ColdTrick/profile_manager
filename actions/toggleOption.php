@@ -23,14 +23,12 @@ $guid = get_input('guid');
 $field = get_input('field');
 
 if (empty($guid) || !in_array($field, $allowed)) {
-	register_error(elgg_echo('profile_manager:actions:toggle_option:error:unknown'));
-	return;
+	return elgg_error_response(elgg_echo('profile_manager:actions:toggle_option:error:unknown'));
 }
 
 $entity = get_entity($guid);
 if (!elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE) && !elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE)) {
-	register_error(elgg_echo('profile_manager:actions:toggle_option:error:unknown'));
-	return;
+	return elgg_error_response(elgg_echo('profile_manager:actions:toggle_option:error:unknown'));
 }
 
 if ($entity->$field == 'yes') {

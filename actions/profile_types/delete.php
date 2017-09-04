@@ -13,20 +13,17 @@
 $guid = (int) get_input('guid');
 
 if (empty($guid)) {
-	register_error(elgg_echo('profile_manager:action:profile_types:delete:error:guid'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:action:profile_types:delete:error:guid'));
 }
 
 $entity = get_entity($guid);
 
 if (!elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE)) {
-	register_error(elgg_echo('profile_manager:action:profile_types:delete:error:type'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:action:profile_types:delete:error:type'));
 }
 
 if (!$entity->delete()) {
-	register_error(elgg_echo('profile_manager:action:profile_types:delete:error:delete'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:action:profile_types:delete:error:delete'));
 }
 
 $meta_name = 'custom_profile_type';
@@ -43,6 +40,4 @@ foreach ($entities as $entity) {
 	unset($entity->$meta_name);
 }
 
-system_message(elgg_echo('profile_manager:action:profile_types:delete:succes'));
-
-forward(REFERER);
+return elgg_ok_response('', elgg_echo('profile_manager:action:profile_types:delete:succes'));

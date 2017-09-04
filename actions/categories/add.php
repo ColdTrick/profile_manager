@@ -17,8 +17,7 @@ $profile_types = get_input('profile_types');
 $add = false;
 
 if (empty($name) || !preg_match('/^[a-zA-Z0-9_]{1,}$/', $name)) {
-	register_error(elgg_echo('profile_manager:action:category:add:error:name'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:action:category:add:error:name'));
 }
 	
 $entity = get_entity($guid);
@@ -33,8 +32,7 @@ if (empty($entity)) {
 }
 
 if (empty($entity)) {
-	register_error(elgg_echo('profile_manager:action:category:add:error:object'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('profile_manager:action:category:add:error:object'));
 }
 
 $entity->metadata_name = $name;
@@ -65,10 +63,8 @@ if ($add) {
 	$entity->order = $count;
 }
 
-if ($entity->save()) {
-	system_message(elgg_echo('profile_manager:action:category:add:succes'));
-} else {
-	register_error(elgg_echo('profile_manager:action:category:add:error:save'));
+if (!$entity->save()) {
+	return elgg_error_response(elgg_echo('profile_manager:action:category:add:error:save'));
 }
 
-forward(REFERER);
+return elgg_ok_response('', elgg_echo('profile_manager:action:category:add:succes'));
