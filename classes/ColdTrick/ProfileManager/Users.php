@@ -152,21 +152,26 @@ class Users {
 			$configured_fields = $categorized_fields['fields'];
 	
 			// set ignore access
-			$ia = elgg_get_ignore_access();
-			elgg_set_ignore_access(true);
-	
+			$ia = elgg_set_ignore_access(true);
+			
 			foreach ($custom_profile_fields as $shortname => $value) {
 					
 				// determine if $value should be an array
 				if (!is_array($value) && !empty($configured_fields)) {
-					// only do something if it not is already an array
-					foreach ($configured_fields as $configured_field) {
-						if ($configured_field->metadata_name == $shortname) {
-							if ($configured_field->metadata_type == 'tags' || $configured_field->output_as_tags == 'yes') {
-								$value = string_to_tag_array($value);
-								// no need to continue this foreach
-								break;
+					foreach ($configured_fields as $configured_field_category) {
+						foreach ($configured_field_category as $configured_field) {
+							if ($configured_field->metadata_name !== $shortname) {
+								continue;
 							}
+							
+							if ($configured_field->metadata_type !== 'tags' && $configured_field->output_as_tags !== 'yes') {
+								continue;
+							}
+							
+							$value = string_to_tag_array($value);
+							
+							// no need to continue this foreach
+							break(2);
 						}
 					}
 				}
