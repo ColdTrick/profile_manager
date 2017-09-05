@@ -10,6 +10,8 @@
 * @link http://www.coldtrick.com/
 */
 
+elgg_load_css('jquery/multiselect');
+
 $vars['class'] = (array) elgg_extract('class', $vars, []);
 $vars['class'][] = 'profile-manager-multiselect';
 
@@ -23,4 +25,4 @@ if (!is_array($value)) {
 $vars['value'] = $value;
 
 echo elgg_format_element('div', [], elgg_view('input/select', $vars));
-echo elgg_format_element('script', [], 'require(["jquery.multiselect", "profile_manager/multiselect"], function() { elgg.multiselect.init(); });');
+echo elgg_format_element('script', [], 'require(["jquery/multiselect", "profile_manager/multiselect"], function() { elgg.multiselect.init(); });');

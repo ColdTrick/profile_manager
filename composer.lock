@@ -4,9 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee857d85c26cea66e28e9573726af5c1",
-    "content-hash": "7123b3726cafe9bc7b3ae3c54eacadc0",
+    "content-hash": "e38521906117c22db5d3bace5b5033db",
     "packages": [
+        {
+            "name": "bower-asset/jquery-ui-multiselect-widget",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ehynds/jquery-ui-multiselect-widget.git",
+                "reference": "a5f3e0cffa6cc1d9fcd75c5977e3185b4bd5d635"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ehynds/jquery-ui-multiselect-widget/zipball/a5f3e0cffa6cc1d9fcd75c5977e3185b4bd5d635",
+                "reference": "a5f3e0cffa6cc1d9fcd75c5977e3185b4bd5d635",
+                "shasum": ""
+            },
+            "type": "bower-asset-library"
+        },
         {
             "name": "composer/installers",
             "version": "v1.2.0",
@@ -112,7 +127,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2016-08-13 20:53:52"
+            "time": "2016-08-13T20:53:52+00:00"
         }
     ],
     "packages-dev": [
@@ -122,12 +137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ColdTrick/releases.git",
-                "reference": "5965ce8cf0bf3b6c2cd0e61153be0b2977eeb9a5"
+                "reference": "bbf82576bc42d8b14c0d8f3d9aee24025fcbcba2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ColdTrick/releases/zipball/5965ce8cf0bf3b6c2cd0e61153be0b2977eeb9a5",
-                "reference": "5965ce8cf0bf3b6c2cd0e61153be0b2977eeb9a5",
+                "url": "https://api.github.com/repos/ColdTrick/releases/zipball/bbf82576bc42d8b14c0d8f3d9aee24025fcbcba2",
+                "reference": "bbf82576bc42d8b14c0d8f3d9aee24025fcbcba2",
                 "shasum": ""
             },
             "type": "library",
@@ -141,7 +156,7 @@
                 "release",
                 "travis"
             ],
-            "time": "2016-10-06 13:03:44"
+            "time": "2017-02-27T09:56:56+00:00"
         },
         {
             "name": "coldtrick/sniffs",
@@ -168,7 +183,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "Elgg coding standards",
-            "time": "2015-02-17 14:47:25"
+            "time": "2015-02-17T14:47:25+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -246,7 +261,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-09-01 23:53:02"
+            "time": "2016-09-01T23:53:02+00:00"
         }
     ],
     "aliases": [],

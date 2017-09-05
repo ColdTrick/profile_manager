@@ -9,7 +9,8 @@
 		"issues": "https://github.com/ColdTrick/profile_manager/issues"
 	},
 	"require": {
-		"composer/installers": "^1.0.8"
+		"composer/installers": "^1.0.8",
+		"bower-asset/jquery-ui-multiselect-widget": "~2.0.1"
 	},
 	"require-dev": {
 		"coldtrick/sniffs": "dev-master",

@@ -10,3 +10,22 @@
 	font-size: 90%;
 	z-index: 20000;
 }
+
+.ui-multiselect-menu {
+	z-index:10000;
+	background: white;
+	border: 1px solid #CCCCCC;
+}
+
+.ui-multiselect-checkboxes .ui-state-hover {
+	background: #CCCCCC;
+}
+
+.profile-manager-multiselect {
+	visibility: hidden;
+	display: inline-block !important;
+	width: 0;
+	height: 0;
+	padding: 0;
+	margin: 0 -2px 0 0;
+}
