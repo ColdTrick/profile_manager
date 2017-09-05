@@ -137,22 +137,6 @@ function profile_manager_get_custom_field_types($register_name) {
 }
 
 /**
- * Function to upload a profile icon on register of a user
- *
- * @param ElggUser $user The user to add the profile icons to
- *
- * @return boolean
- */
-function profile_manager_add_profile_icon($user) {
-	if (!$user->saveIconFromUploadedFile('profile_icon')) {
-		register_error(elgg_echo('avatar:resize:fail'));
-		return false;
-	}
-	
-	return true;
-}
-
-/**
  * Returns an array containing the categories and the fields ordered by category and field order
  *
  * @param ElggUser $user               User to check

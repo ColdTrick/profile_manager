@@ -198,7 +198,8 @@ class Users {
 		}
 	
 		if (isset($_FILES['profile_icon'])) {
-			if (!profile_manager_add_profile_icon($object)) {
+			if (!$object->saveIconFromUploadedFile('profile_icon')) {
+				register_error(elgg_echo('avatar:resize:fail'));
 				// return false to delete the user
 				return false;
 			}
