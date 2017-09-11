@@ -334,13 +334,12 @@ function profile_manager_profile_completeness($user = null) {
 		$user = elgg_get_logged_in_user_entity();
 	}
 	
-	if (!elgg_instanceof($user, 'user')) {
+	if (!$user instanceof \ElggUser) {
 		return false;
 	}
 		
 	$required_fields = [];
 	$missing_fields = [];
-	$percentage_completeness = 100;
 	$avatar_missing = false;
 	
 	$ia = elgg_set_ignore_access(true);
