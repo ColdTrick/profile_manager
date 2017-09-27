@@ -70,17 +70,10 @@ class ProfileFields {
 				}
 			}
 
-			$translations["profile:{$entity->metadata_name}"] = $entity->getTitle();
+			$translations["profile:{$entity->metadata_name}"] = $entity;
 		}
 
-		$languages = ['en'];
-		$languages[] = get_current_language();
-		$languages[] = elgg_get_config('language');
-		array_unique($languages);
-
-		foreach ($languages as $lang) {
-			add_translation($lang, $translations);
-		}
+		self::registerFieldTranslations($translations);
 
 		if (count($result) > 0) {
 			$result['custom_profile_type'] = 'hidden';
@@ -152,17 +145,10 @@ class ProfileFields {
 				$result[$group_field->metadata_name] = 'tags';
 			}
 	
-			$translations["groups:{$group_field->metadata_name}"] = $group_field->getTitle();
+			$translations["groups:{$group_field->metadata_name}"] = $group_field;
 		}
 	
-		$languages = ['en'];
-		$languages[] = get_current_language();
-		$languages[] = elgg_get_config('language');
-		array_unique($languages);
-	
-		foreach ($languages as $lang) {
-			add_translation($lang, $translations);
-		}
+		self::registerFieldTranslations($translations);
 	
 		return $result;
 	}
@@ -233,5 +219,42 @@ class ProfileFields {
 		}
 	
 		return $result;
+	}
+	
+	/**
+	 * Register translations for profile fields
+	 *
+	 * @param array $fields Array of translations keys and fields to register
+	 *
+	 * @return void
+	 */
+	protected static function registerFieldTranslations($fields = []) {
+		$languages = ['en'];
+		$languages[] = get_current_language();
+		$languages[] = elgg_get_config('language');
+		$languages = array_unique($languages);
+		
+		foreach ($languages as $lang) {
+			
+			$translations = [];
+			foreach ($fields as $key => $field) {
+				$title = $field->getTitle(false, $lang);
+				if (elgg_language_key_exists($key, $lang)) {
+					// check if translation registration is needed
+					if ($title === elgg_echo($key, [], $lang)) {
+						// skip adding if already exists
+						continue;
+					}
+				}
+				
+				$translations[$key] = $title;
+			}
+			
+			if (empty($translations)) {
+				continue;
+			}
+			
+			add_translation($lang, $translations);
+		}
 	}
 }

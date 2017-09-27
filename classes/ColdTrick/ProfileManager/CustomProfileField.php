@@ -30,15 +30,17 @@ class CustomProfileField extends CustomField {
 	 *
 	 * @return string
 	 */
-	public function getTitle($input = false) {
-		
+	public function getTitle($input = false, $lang = null) {
+		if (!isset($lang)) {
+			$lang = get_current_language();
+		}
 		if ($input) {
 			if ($this->metadata_input_label) {
 				return $this->metadata_input_label;
 			}
 			
-			if (elgg_language_key_exists("profile:{$this->metadata_name}:input")) {
-				return elgg_echo("profile:{$this->metadata_name}:input");
+			if (elgg_language_key_exists("profile:{$this->metadata_name}:input", $lang)) {
+				return elgg_echo("profile:{$this->metadata_name}:input", [], $lang);
 			}
 		}
 		
@@ -46,8 +48,8 @@ class CustomProfileField extends CustomField {
 			return $this->metadata_label;
 		}
 		
-		if (elgg_language_key_exists("profile:{$this->metadata_name}")) {
-			return elgg_echo("profile:{$this->metadata_name}");
+		if (elgg_language_key_exists("profile:{$this->metadata_name}", $lang)) {
+			return elgg_echo("profile:{$this->metadata_name}", [], $lang);
 		}
 		
 		return $this->metadata_name;
