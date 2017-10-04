@@ -1,6 +1,13 @@
 Version history
 ===============
 
+13.0 (2017-10-04):
+
+- changed: updated to use composer version of jquery multiselect v2.0.1
+- fixed: incorrect registration of translations in multilingual sites
+- fixed: tag input on register form needs to be converted to array
+- removed: profile_manager_add_profile_icon is no longer available
+
 12.0 (2017-02-27):
 
 - added: avatar can be counted towards profile completeness
