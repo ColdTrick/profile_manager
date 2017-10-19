@@ -163,12 +163,8 @@ if (!empty($cats)) {
 				continue;
 			}
 			
-			$valtype = $field->metadata_type;
 			$metadata_name = $field->metadata_name;
 			
-			// get options
-			$options = $field->getOptions();
-						
 			// get value
 			$metadata = elgg_get_metadata([
 				'guid' => $user->guid,
@@ -187,45 +183,28 @@ if (!empty($cats)) {
 			}
 
 			$visible_fields++;
-			$field_result = '<div>';
 			
-			$field_result .= elgg_format_element('label', [], $field->getTitle(true));
+			$field_title = $field->getTitle(true);
 			
 			$hint = $field->getHint();
 			if ($hint) {
-				$field_result .= elgg_view('output/pm_hint', [
+				$field_title .= elgg_view('output/pm_hint', [
 					'id' => "more_info_{$metadata_name}",
 					'text' => $hint,
 				]);
 			}
 			
-			if ($valtype == 'dropdown') {
-				// add div around dropdown to let it act as a block level element
-				$field_result .= '<div>';
-			}
-			
-			$field_options = [
+			$field_result = elgg_view_field([
+				'#type' => 'profile_edit',
+				'#label' => $field_title,
+				'pm_type' => $field->metadata_type,
+				'pm_access_id' => $access_id,
+				'id' => $metadata_name,
 				'name' => $metadata_name,
 				'value' => $value,
-				'options' => $options
-			];
-
-			$field_placeholder = $field->getPlaceholder();
-			if (!empty($field_placeholder)) {
-				$field_options['placeholder'] = $field_placeholder;
-			}
-
-			$field_result .= elgg_view('input/' . $valtype, $field_options);
-			
-			if ($valtype == 'dropdown') {
-				$field_result .= '</div>';
-			}
-			
-			$field_result .= elgg_view('input/access', [
-				'name' => 'accesslevel[' . $metadata_name . ']',
-				'value' => $access_id,
+				'options' => $field->getOptions() ?: null,
+				'placeholder' => $field->getPlaceholder() ?: null,
 			]);
-			$field_result .= '</div>';
 			
 			$tab_content .= $field_result;
 			$list_content .= $field_result;
@@ -281,8 +260,8 @@ if ($simple_access_control == 'yes') {
 }
 
 echo elgg_view_field([
-	'#type' => 'hidden',	
-	'name' => 'guid', 
+	'#type' => 'hidden',
+	'name' => 'guid',
 	'value' => $user->guid,
 ]);
 
