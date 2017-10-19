@@ -27,10 +27,10 @@ function profile_manager_init() {
 	// Extend CSS
 	elgg_extend_view('css/admin', 'css/profile_manager/global.css');
 	elgg_extend_view('css/admin', 'css/profile_manager/admin.css');
+	elgg_extend_view('css/admin', 'jquery/multiselect.css');
 	elgg_extend_view('css/elgg', 'css/profile_manager/global.css');
 	elgg_extend_view('css/elgg', 'css/profile_manager/site.css');
-	
-	elgg_register_css('jquery/multiselect', elgg_get_simplecache_url('jquery/multiselect.css'));
+	elgg_extend_view('css/elgg', 'jquery/multiselect.css');
 	
 	// admin user add, registered here to overrule default action
 	elgg_register_action('useradd', dirname(__FILE__) . '/actions/useradd.php', 'admin');

@@ -10,8 +10,6 @@
 * @link http://www.coldtrick.com/
 */
 
-elgg_load_css('jquery/multiselect');
-
 $vars['class'] = (array) elgg_extract('class', $vars, []);
 $vars['class'][] = 'profile-manager-multiselect';
 
