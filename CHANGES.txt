@@ -1,6 +1,10 @@
 Version history
 ===============
 
+13.0.1 (2017-11-01):
+
+- fixed: multiselect not looking good if ajax loaded
+
 13.0 (2017-10-04):
 
 - changed: updated to use composer version of jquery multiselect v2.0.1
