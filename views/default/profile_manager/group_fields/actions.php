@@ -28,7 +28,7 @@ $buttonbank = elgg_view('output/url', [
 $buttonbank .= elgg_view('output/url', [
 	'text' => elgg_echo('profile_manager:actions:import:from_default'),
 	'title' => elgg_echo('profile_manager:actions:import:from_default:description'),
-	'href' => 'action/profile_manager/importFromDefault?type=group',
+	'href' => 'action/profile_manager/import_from_default?type=group',
 	'confirm' => elgg_echo('profile_manager:actions:import:from_default:confirm'),
 	'class' => 'elgg-button elgg-button-action',
 	'is_action' => true,

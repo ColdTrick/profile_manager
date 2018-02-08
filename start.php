@@ -32,9 +32,6 @@ function profile_manager_init() {
 	elgg_extend_view('css/elgg', 'css/profile_manager/site.css');
 	elgg_extend_view('css/elgg', 'jquery/multiselect.css');
 	
-	// admin user add, registered here to overrule default action
-	elgg_register_action('useradd', dirname(__FILE__) . '/actions/useradd.php', 'admin');
-	
 	// Register all custom field types
 	profile_manager_register_custom_field_types();
 	
@@ -69,6 +66,19 @@ function profile_manager_init() {
 	// menu hooks
 	elgg_register_plugin_hook_handler('register', 'menu:page', '\ColdTrick\ProfileManager\Menus::registerAdmin');
 	
+	// users
+	elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::create');
+	elgg_register_event_handler('profileupdate','user', '\ColdTrick\ProfileManager\Users::updateProfile');
+	elgg_register_plugin_hook_handler('action', 'register', '\ColdTrick\ProfileManager\Users::actionRegister');
+	
+	// groups
+	elgg_register_plugin_hook_handler('action', 'groups/edit', '\ColdTrick\ProfileManager\Groups::groupsEdit');
+	
+	// profile fields
+	elgg_register_plugin_hook_handler('profile:fields', 'profile', '\ColdTrick\ProfileManager\ProfileFields::getUserFields');
+	elgg_register_plugin_hook_handler('profile:fields', 'group', '\ColdTrick\ProfileManager\ProfileFields::getGroupFields');
+	elgg_register_plugin_hook_handler('categorized_profile_fields', 'profile_manager', '\ColdTrick\ProfileManager\ProfileFields::addAdminFields', 1000);
+	
 	// site join event handler
 	elgg_register_event_handler('create', 'relationship', '\ColdTrick\ProfileManager\Sites::createMember');
 	elgg_register_event_handler('delete', 'relationship', '\ColdTrick\ProfileManager\Sites::deleteMember');
@@ -82,41 +92,4 @@ function profile_manager_init() {
 
 // elgg initialization events
 elgg_register_event_handler('init', 'system', 'profile_manager_init');
-
-// users
-elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::create');
-elgg_register_event_handler('profileupdate','user', '\ColdTrick\ProfileManager\Users::updateProfile');
-elgg_register_plugin_hook_handler('action', 'register', '\ColdTrick\ProfileManager\Users::actionRegister');
-
-// groups
-elgg_register_plugin_hook_handler('action', 'groups/edit', '\ColdTrick\ProfileManager\Groups::groupsEdit');
-
-// profile fields
-elgg_register_plugin_hook_handler('profile:fields', 'profile', '\ColdTrick\ProfileManager\ProfileFields::getUserFields');
-elgg_register_plugin_hook_handler('profile:fields', 'group', '\ColdTrick\ProfileManager\ProfileFields::getGroupFields');
-elgg_register_plugin_hook_handler('categorized_profile_fields', 'profile_manager', '\ColdTrick\ProfileManager\ProfileFields::addAdminFields', 1000);
-
-// actions
-elgg_register_action("profile_manager/new", dirname(__FILE__) . "/actions/new.php", "admin");
-elgg_register_action("profile_manager/reset", dirname(__FILE__) . "/actions/reset.php", "admin");
-elgg_register_action("profile_manager/reorder", dirname(__FILE__) . "/actions/reorder.php", "admin");
-elgg_register_action("profile_manager/delete", dirname(__FILE__) . "/actions/delete.php", "admin");
-elgg_register_action("profile_manager/toggleOption", dirname(__FILE__) . "/actions/toggleOption.php", "admin");
-elgg_register_action("profile_manager/changeCategory", dirname(__FILE__) . "/actions/changeCategory.php", "admin");
-elgg_register_action("profile_manager/importFromCustom", dirname(__FILE__) . "/actions/importFromCustom.php", "admin");
-elgg_register_action("profile_manager/importFromDefault", dirname(__FILE__) . "/actions/importFromDefault.php", "admin");
-elgg_register_action("profile_manager/export", dirname(__FILE__) . "/actions/export.php", "admin");
-elgg_register_action("profile_manager/configuration/backup", dirname(__FILE__) . "/actions/configuration/backup.php", "admin");
-elgg_register_action("profile_manager/configuration/restore", dirname(__FILE__) . "/actions/configuration/restore.php", "admin");
-
-elgg_register_action("profile_manager/categories/add", dirname(__FILE__) . "/actions/categories/add.php", "admin");
-elgg_register_action("profile_manager/categories/reorder", dirname(__FILE__) . "/actions/categories/reorder.php", "admin");
-elgg_register_action("profile_manager/categories/delete", dirname(__FILE__) . "/actions/categories/delete.php", "admin");
-
-elgg_register_action("profile_manager/profile_types/add", dirname(__FILE__) . "/actions/profile_types/add.php", "admin");
-elgg_register_action("profile_manager/profile_types/delete", dirname(__FILE__) . "/actions/profile_types/delete.php", "admin");
-
-elgg_register_action("profile_manager/users/export_inactive", dirname(__FILE__) . "/actions/users/export_inactive.php", "admin");
-
-elgg_register_action("profile_manager/register/validate", dirname(__FILE__) . "/actions/register/validate.php", "public");
 	

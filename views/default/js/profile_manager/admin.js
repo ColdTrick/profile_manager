@@ -51,7 +51,7 @@ elgg.profile_manager.toggle_option = function(event) {
 	
 	var field = $button.data().field;
 	var guid = $button.data().guid;
-	elgg.action('profile_manager/toggleOption', {
+	elgg.action('profile_manager/toggle_option', {
 		data: {
 			guid: guid,
 			field: field
@@ -115,7 +115,7 @@ elgg.profile_manager.change_field_category = function(field, category_guid) {
 	var field_guid = $(field).attr('id').replace('elgg-object-','');
 	category_guid = category_guid.replace('elgg-object-','').replace('custom_profile_field_category_', '');
 	
-	elgg.action('profile_manager/changeCategory', {
+	elgg.action('profile_manager/change_category', {
 		data: {
 			guid: field_guid,
 			category_guid: category_guid
