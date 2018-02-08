@@ -6,6 +6,21 @@ if (is_dir(__DIR__ . '/vendor')) {
 }
 
 return [
+	'settings' => [
+		'generate_username_from_email' => 'no',
+		'show_account_hints' => 'no',
+		'profile_icon_on_register' => 'no',
+		'registration_extra_fields' => 'extend',
+		'hide_profile_type_default' => 'no',
+		'simple_access_control' => 'no',
+		'edit_profile_mode' => 'list',
+		'profile_type_selection' => 'user',
+		'show_profile_type_on_profile' => 'no',
+		'display_categories' => 'plain',
+		'display_system_category' => 'no',
+		'enable_profile_completeness_widget' => 'no',
+		'enable_site_join_river_event' => 'yes',
+	],
 	'entities' => [
 		[
 			'type' => 'object',
