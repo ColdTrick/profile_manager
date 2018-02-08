@@ -23,15 +23,6 @@ class Menus {
 		}
 		
 		$returnvalue[] = \ElggMenuItem::factory([
-			'name' => 'users:export',
-			'text' => elgg_echo('admin:users:export'),
-			'href' => 'admin/users/export',
-			'context' => 'admin',
-			'parent_name' => 'users',
-			'section' => 'administer',
-		]);
-		
-		$returnvalue[] = \ElggMenuItem::factory([
 			'name' => 'users:inactive',
 			'text' => elgg_echo('admin:users:inactive'),
 			'href' => 'admin/users/inactive',

@@ -24,7 +24,6 @@ Improved management of user and group profile fields
 
 ### Informational
 
-- export user profile (meta)data to csv
 - a river event when user joins the site
 - admin listing + download of inactive users
 

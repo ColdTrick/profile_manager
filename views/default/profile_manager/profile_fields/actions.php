@@ -42,12 +42,6 @@ $buttonbank .= elgg_view('output/url', [
 	'is_action' => true,
 ]);
 $buttonbank .= elgg_view('output/url', [
-	'title' => elgg_echo('profile_manager:actions:export:description'),
-	'text' => elgg_echo('export'),
-	'href' => 'admin/users/export',
-	'class' => 'elgg-button elgg-button-action',
-]);
-$buttonbank .= elgg_view('output/url', [
 	'text' => elgg_echo('profile_manager:actions:configuration:backup'),
 	'href' => 'action/profile_manager/configuration/backup?fieldtype=' . CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 	'confirm' => elgg_echo('profile_manager:actions:configuration:backup:description'),

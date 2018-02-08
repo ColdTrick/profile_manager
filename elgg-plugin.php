@@ -37,7 +37,6 @@ return [
 	'actions' => [
 		'profile_manager/change_category' => ['access' => 'admin'],
 		'profile_manager/delete' => ['access' => 'admin'],
-		'profile_manager/export' => ['access' => 'admin'],
 		'profile_manager/import_from_custom' => ['access' => 'admin'],
 		'profile_manager/import_from_default' => ['access' => 'admin'],
 		'profile_manager/new' => ['access' => 'admin'],
