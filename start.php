@@ -60,9 +60,6 @@ function profile_manager_init() {
 	elgg_register_event_handler('profileupdate','user', '\ColdTrick\ProfileManager\Users::updateProfile');
 	elgg_register_plugin_hook_handler('action', 'register', '\ColdTrick\ProfileManager\Users::actionRegister');
 	
-	// groups
-	elgg_register_plugin_hook_handler('action', 'groups/edit', '\ColdTrick\ProfileManager\Groups::groupsEdit');
-	
 	// profile fields
 	elgg_register_plugin_hook_handler('profile:fields', 'profile', '\ColdTrick\ProfileManager\ProfileFields::getUserFields');
 	elgg_register_plugin_hook_handler('profile:fields', 'group', '\ColdTrick\ProfileManager\ProfileFields::getGroupFields');

@@ -51,21 +51,6 @@ if (!empty($profile_type_entities)) {
 
 echo elgg_view('profile_manager/admin/tabs', ['settings_selected' => true]);
 
-$group_limit_options = [
-	'' => elgg_echo('profile_manager:settings:group:limit:unlimited'),
-	0 => elgg_echo('never'),
-	1 => 1,
-	2 => 2,
-	3 => 3,
-	4 => 4,
-	5 => 5,
-	6 => 6,
-	7 => 7,
-	8 => 8,
-	9 => 9,
-	10 => 10,
-];
-
 $registration_settings = elgg_view_field([
 	'#type' => 'select',
 	'#label' => elgg_echo('profile_manager:settings:generate_username_from_email'),
@@ -195,26 +180,6 @@ $view_profile .= elgg_view_field([
 ]);
 	
 echo elgg_view_module('inline', elgg_echo('profile_manager:settings:view_profile'), $view_profile);
-
-
-$group_profile = elgg_view_field([
-	'#type' => 'select',
-	'#label' => elgg_echo('profile_manager:settings:group:group_limit_name'),
-	'name' => 'params[group_limit_name]',
-	'options_values' => $group_limit_options,
-	'value' => $plugin->group_limit_name,
-]);
-
-$group_profile .= elgg_view_field([
-	'#type' => 'select',
-	'#label' => elgg_echo('profile_manager:settings:group:group_limit_description'),
-	'#help' => elgg_echo('profile_manager:settings:group:limit:info'),
-	'name' => 'params[group_limit_description]',
-	'options_values' => $group_limit_options,
-	'value' => $plugin->group_limit_description,
-]);
-
-echo elgg_view_module('inline', elgg_echo('profile_manager:settings:group'), $group_profile);
 
 
 $other = elgg_view_field([
