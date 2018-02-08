@@ -8,12 +8,12 @@
 	<website>http://www.coldtrick.com/</website>
 	<repository>https://github.com/ColdTrick/profile_manager</repository>
 	<bugtracker>https://github.com/ColdTrick/profile_manager/issues</bugtracker>
-	<copyright>(C) ColdTrick IT Solutions 2009 - 2014</copyright>
+	<copyright>(C) ColdTrick IT Solutions 2009 - 2018</copyright>
 	<license>GNU General Public License version 2</license>
  	
  	<requires>
 		<type>elgg_release</type>
-		<version>2.3</version>
+		<version>3.0</version>
 	</requires>
 	
 	<requires>
@@ -42,21 +42,6 @@
 		<plugin>groups</plugin>
 		<priority>after</priority>
 	</suggests>
- 
-	<screenshot>
-		<description>Edit Profile Fields</description>
-		<path>screenshots/edit_profile_fields.png</path>
-	</screenshot>
-
-	<screenshot>
-		<description>New Profile Field</description>
-		<path>screenshots/new_profile_field.png</path>
-	</screenshot>
-
-	<screenshot>
-		<description>Accordion Profile View</description>
-		<path>screenshots/accordion_profile_view.png</path>
-	</screenshot>
  	
  	<category>ColdTrick</category>
 </plugin_manifest>

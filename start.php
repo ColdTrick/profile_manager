@@ -80,29 +80,7 @@ function profile_manager_init() {
 	elgg_register_ajax_view('forms/profile_manager/profile_field');
 }
 
-/**
- * Performs class upgrade before init as classes are needed during init
- *
- * @return void
- */
-function profile_manager_plugins_boot() {
-	$classes = [
-		'\ColdTrick\ProfileManager\CustomProfileField',
-		'\ColdTrick\ProfileManager\CustomGroupField',
-		'\ColdTrick\ProfileManager\CustomProfileType',
-		'\ColdTrick\ProfileManager\CustomFieldCategory',
-	];
-	
-	foreach ($classes as $class) {
-		$current_class = get_subtype_class('object', $class::SUBTYPE);
-		if ($current_class !== $class) {
-			update_subtype('object', $class::SUBTYPE, $class);
-		}
-	}
-}
-
 // elgg initialization events
-elgg_register_event_handler('plugins_boot', 'system', 'profile_manager_plugins_boot');
 elgg_register_event_handler('init', 'system', 'profile_manager_init');
 
 // users
