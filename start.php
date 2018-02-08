@@ -49,9 +49,6 @@ function profile_manager_init() {
 	elgg_extend_view('register/extend_side', 'profile_manager/register/fields');
 	elgg_extend_view('register/extend', 'profile_manager/register/fields');
 	
-	// login history
-	elgg_extend_view('core/settings/statistics', 'profile_manager/account/login_history');
-		
 	// extend public pages
 	elgg_register_plugin_hook_handler('public_pages', 'walled_garden', '\ColdTrick\ProfileManager\Sites::publicPages');
 	

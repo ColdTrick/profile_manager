@@ -26,7 +26,6 @@ Improved management of user and group profile fields
 
 - export user profile (meta)data to csv
 - a river event when user joins the site
-- login history view on users statistics page
 - admin listing + download of inactive users
 
 ### Other features
