@@ -52,12 +52,6 @@ function profile_manager_init() {
 	// extend public pages
 	elgg_register_plugin_hook_handler('public_pages', 'walled_garden', '\ColdTrick\ProfileManager\Sites::publicPages');
 	
-	// enable username change
-	elgg_extend_view('forms/account/settings', 'profile_manager/account/username', 50); // positioned at the beginning of the options
-
-	// register hook for saving the new username
-	elgg_register_plugin_hook_handler('usersettings:save', 'user', '\ColdTrick\ProfileManager\Users::usernameChange');
-	
 	elgg_register_plugin_hook_handler('view_vars', 'input/form', '\ColdTrick\ProfileManager\Users::registerViewVars');
 	
 	// menu hooks

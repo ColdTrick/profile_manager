@@ -366,54 +366,6 @@ class Users {
 	}
 	
 	/**
-	 * If possible change the username of a user
-	 *
-	 * @param string  $hook_name    name of the hook
-	 * @param string  $entity_type  type of the hook
-	 * @param unknown $return_value return value
-	 * @param unknown $parameters   hook parameters
-	 *
-	 * @return void
-	 */
-	public static function usernameChange($hook_name, $entity_type, $return_value, $parameters) {
-		$user_guid = (int) get_input('guid');
-		$new_username = get_input('username');
-	
-		if (empty($user_guid) || empty($new_username)) {
-			return;
-		}
-		
-		$enable_username_change = elgg_get_plugin_setting('enable_username_change', 'profile_manager', 'no');
-		if ($enable_username_change == 'no' || ($enable_username_change == 'admin' && !elgg_is_admin_logged_in())) {
-			return;
-		}
-		
-		if (!self::validateUsername($new_username)) {
-			return;
-		}
-		
-		$user = get_user($user_guid);
-		if (empty($user)) {
-			return;
-		}
-
-		if (!$user->canEdit()) {
-			return;
-		}
-		
-		if ($user->username == $new_username) {
-			return;
-		}
-		
-		$user->username = $new_username;
-		if ($user->save()) {
-			elgg_register_plugin_hook_handler('forward', 'system', '\ColdTrick\ProfileManager\Users::usernameChangeForward');
-
-			system_message(elgg_echo('profile_manager:action:username:change:succes'));
-		}
-	}
-	
-	/**
 	 * Validates a username
 	 *
 	 * @param string $username Username
@@ -443,22 +395,5 @@ class Users {
 		access_show_hidden_entities($access_status);
 		
 		return $result;
-	}
-	
-	/**
-	 * Directs user to correct settings links after changing a username
-	 *
-	 * @param string  $hook_name    name of the hook
-	 * @param string  $entity_type  type of the hook
-	 * @param unknown $return_value return value
-	 * @param unknown $parameters   hook parameters
-	 *
-	 * @return string
-	 */
-	public static function usernameChangeForward($hook_name, $entity_type, $return_value, $parameters) {
-		$username = get_input('username');
-		if (!empty($username)) {
-			return elgg_normalize_url("settings/user/{$username}");
-		}
 	}
 }

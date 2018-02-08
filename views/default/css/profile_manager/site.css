@@ -97,14 +97,3 @@ li.custom_fields_edit_profile_category {
 .profile_manager_register_missing {
 	border: 1px solid red !important;
 }
-
-/* Account Username Change */
-.profile-manager-account-change-username.elgg-state-active {
-	display: none;
-}
-
-#profile_manager_username {
-	position: relative;
-}
-
-/* End Account Username Change */
