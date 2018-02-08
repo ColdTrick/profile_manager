@@ -334,10 +334,6 @@ return [
 	'widgets:profile_completeness:view:tips' => 'Tip! Update your %s to improve the Profile Completeness.',
 	'widgets:profile_completeness:view:complete' => 'Congratulations! Your profile is 100% complete!',
 	
-	'widgets:register:title' => "Register",
-	'widgets:register:description' => "Show a register box",
-	'widgets:register:loggedout' => "You need to be logged out to use this widget",
-
 	'profile_manager:input:multi_select:empty_text' => 'Please select ...',
 	'profile_manager:input:multi_select:selected_text' => '# selected',
 
