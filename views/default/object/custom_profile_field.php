@@ -10,9 +10,6 @@
 * @link http://www.coldtrick.com/
 */
 
-elgg_load_js('lightbox');
-elgg_load_css('lightbox');
-
 $field = elgg_extract('entity', $vars);
 
 $title = '<b>' . $field->metadata_name . '</b> [' . $field->metadata_type . ']';

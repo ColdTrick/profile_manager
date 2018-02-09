@@ -10,9 +10,6 @@
 * @link http://www.coldtrick.com/
 */
 
-elgg_load_js('lightbox');
-elgg_load_css('lightbox');
-
 $entity = $vars['entity'];
 
 // get title

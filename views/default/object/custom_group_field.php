@@ -9,9 +9,6 @@
 * @copyright Coldtrick IT Solutions 2009
 * @link http://www.coldtrick.com/
 */
-
-elgg_load_js('lightbox');
-elgg_load_css('lightbox');
 	
 $field = elgg_extract('entity', $vars);
 

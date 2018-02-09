@@ -10,9 +10,6 @@
 * @link http://www.coldtrick.com/
 */
 
-elgg_load_js('lightbox');
-elgg_load_css('lightbox');
-
 $options = [
 	'type' => 'object',
 	'subtype' => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
