@@ -108,7 +108,7 @@ $options_table = elgg_format_element('table', [], $options_table);
 
 $options_title = elgg_echo('profile_manager:admin:additional_options');
 
-$formbody .= elgg_view_module('inline', $options_title, $options_table);
+$formbody .= elgg_view_module('info', $options_title, $options_table);
 
 $formbody .= '<br />';
 
@@ -118,4 +118,4 @@ $formbody .= elgg_view('input/submit', ['value' => elgg_echo('save')]);
 
 $form = elgg_view('input/form', ['body' => $formbody, 'action' => 'action/profile_manager/new']);
 
-echo elgg_view_module('inline', $form_title, $form, ['class' => 'mvn', 'id' => 'custom_fields_form']);
+echo elgg_view_module('info', $form_title, $form, ['class' => 'mvn', 'id' => 'custom_fields_form']);

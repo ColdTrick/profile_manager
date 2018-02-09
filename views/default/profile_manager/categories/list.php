@@ -38,10 +38,11 @@ $default = elgg_format_element('div', ['id' => 'custom_profile_field_category_0'
 
 $body = elgg_format_element('div', ['id' => 'custom_fields_category_list_custom'], $all . $default . $list);
 
-$head = elgg_view('output/url', [
+$menu = elgg_view('output/url', [
 	'text' => elgg_echo('add'),
+	'icon' => 'plus',
 	'href' => 'ajax/view/forms/profile_manager/category',
-	'class' => 'elgg-button elgg-button-action man pvn float-alt elgg-lightbox',
+	'class' => 'elgg-button elgg-button-action elgg-lightbox',
 ]);
 
 $title = elgg_echo('profile_manager:categories:list:title');
@@ -50,6 +51,4 @@ $title .= elgg_view('output/pm_hint', [
 	'text' => elgg_echo('profile_manager:tooltips:category_list'),
 ]);
 
-$head .= elgg_format_element('h3', [], $title);
-
-echo elgg_view_module('inline', '', $body, ['header' => $head]);
+echo elgg_view_module('info', $title, $body, ['menu' => $menu]);

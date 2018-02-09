@@ -20,10 +20,11 @@ $list = elgg_list_entities([
 	'no_results' => elgg_echo('profile_manager:profile_types:list:no_types'),
 ]);
 
-$header = elgg_view('output/url', [
+$menu = elgg_view('output/url', [
 	'text' => elgg_echo('add'),
+	'icon' => 'plus',
 	'href' => 'ajax/view/forms/profile_manager/type',
-	'class' => 'elgg-button elgg-button-action man pvn float-alt elgg-lightbox',
+	'class' => 'elgg-button elgg-button-action elgg-lightbox',
 ]);
 
 $title = elgg_echo('profile_manager:profile_types:list:title');
@@ -31,9 +32,7 @@ $title .= elgg_view('output/pm_hint', [
 	'id' => 'more_info_profile_type_list',
 	'text' => elgg_echo('profile_manager:tooltips:profile_type_list'),
 ]);
-
-$header .= elgg_format_element('h3', [], $title);
 		
 $list = elgg_format_element('div', ['id' => 'custom_fields_profile_types_list_custom'], $list);
 
-echo elgg_view_module('inline', '', $list, ['header' => $header]);
+echo elgg_view_module('info', $title, $list, ['menu' => $menu]);

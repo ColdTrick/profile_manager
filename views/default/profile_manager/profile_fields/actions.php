@@ -15,7 +15,6 @@ $title .= elgg_view('output/pm_hint', [
 	'id' => 'more_info_actions',
 	'text' => elgg_echo('profile_manager:tooltips:actions'),
 ]);
-$header = elgg_format_element('h3', [], $title);
 
 $buttonbank = elgg_view('output/url', [
 	'text' => elgg_echo('reset'),
@@ -67,6 +66,6 @@ $form = elgg_view('input/form', [
 	'class' => 'hidden',
 ]);
 
-$body = elgg_format_element('div', ['class' => 'pvm'], $buttonbank . $form);
+$body = $buttonbank . $form;
 
-echo elgg_view_module('inline', null, $body, ['header' => $header]);
+echo elgg_view_module('info', $title, $body);

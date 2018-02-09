@@ -21,16 +21,16 @@ $list = elgg_list_entities([
 	'no_results' => elgg_echo('profile_manager:profile_fields:no_fields'),
 ]);
 
-$header = elgg_view('output/url', [
+$menu = elgg_view('output/url', [
 	'text' => elgg_echo('add'),
+	'icon' => 'plus',
 	'href' => 'ajax/view/forms/profile_manager/profile_field',
-	'class' => 'elgg-button elgg-button-action man pvn float-alt elgg-lightbox',
+	'class' => 'elgg-button elgg-button-action elgg-lightbox',
 	'data-colorbox-opts' => json_encode([
 		'maxHeight' => '90%'
 	]),
 ]);
-$header .= elgg_format_element('h3', [], elgg_echo('profile_manager:profile_fields:list:title'));
 		
 $list = elgg_format_element('div', ['id' => 'custom_fields_ordering'], $list);
 
-echo elgg_view_module('inline', '', $list, ['header' => $header]);
+echo elgg_view_module('info', elgg_echo('profile_manager:profile_fields:list:title'), $list, ['menu' => $menu]);

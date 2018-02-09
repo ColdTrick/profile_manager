@@ -126,4 +126,4 @@ $form_title .= elgg_view('output/pm_hint', [
 	'text' => elgg_echo('profile_manager:tooltips:profile_type'),
 ]);
 
-echo elgg_view_module('inline', $form_title, $form, ['class' => 'mvn', 'id' => 'custom_fields_profile_type_form']);
+echo elgg_view_module('info', $form_title, $form, ['class' => 'mvn', 'id' => 'custom_fields_profile_type_form']);
