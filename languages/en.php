@@ -21,8 +21,7 @@ return [
 	'profile:custom_profile_type' => 'Custom Profile Type',
 	
 	// admin menu
-	'admin:appearance:group_fields' => "Edit Group Fields",
-	'admin:appearance:export_fields' => "Export Profile Data",
+	'admin:configure_utilities:group_fields' => "Edit Group Fields",
 	
 	'admin:groups' => "Groups",
 	'admin:groups:export' => "Export groups",

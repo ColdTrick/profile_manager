@@ -33,11 +33,11 @@ class Menus {
 		
 		if (elgg_is_active_plugin('groups')) {
 			$returnvalue[] = \ElggMenuItem::factory([
-				'name' => 'appearance:group_fields',
-				'text' => elgg_echo('admin:appearance:group_fields'),
-				'href' => 'admin/appearance/group_fields',
+				'name' => 'configure_utilities:group_fields',
+				'text' => elgg_echo('admin:configure_utilities:group_fields'),
+				'href' => 'admin/configure_utilities/group_fields',
 				'context' => 'admin',
-				'parent_name' => 'appearance',
+				'parent_name' => 'configure_utilities',
 				'section' => 'configure',
 			]);
 		}
