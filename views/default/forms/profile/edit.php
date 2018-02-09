@@ -114,15 +114,11 @@ if (!empty($cats)) {
 		}
 		if (!empty($cat_guid) && ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory)) {
 
-			$profile_types = elgg_get_entities_from_relationship([
+			$profile_types = elgg_get_entities([
 				'type' => 'object',
 				'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 				'limit' => false,
 				'owner_guid' => $cat->getOwnerGUID(),
-				'site_guid' => $cat->site_guid,
-				'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
-				'relationship_guid' => $cat_guid,
-				'inverse_relationship' => true,
 			]);
 			if ($profile_types) {
 				

@@ -46,7 +46,7 @@ class Users {
 			$accesslevel = [];
 		}
 
-		$configured_fields = elgg_get_entities_from_metadata([
+		$configured_fields = elgg_get_entities([
 			'type' => 'object',
 			'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 			'limit' => false,
@@ -99,7 +99,7 @@ class Users {
 				// if file not uploaded should it be deleted???
 				if (empty($current_file_guid)) {
 					// find the previously uploaded file and if exists... delete it
-					$files = elgg_get_entities_from_metadata([
+					$files = elgg_get_entities([
 						"type" => "object",
 						"subtype" => "file",
 						"owner_guid" => $user->getGUID(),

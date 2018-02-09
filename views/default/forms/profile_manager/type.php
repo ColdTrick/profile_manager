@@ -41,14 +41,11 @@ if ($entity) {
 	$metadata_label_plural = $entity->metadata_label_plural;
 	$metadata_description = $entity->metadata_description;
 	
-	$cats = elgg_get_entities_from_relationship([
+	$cats = elgg_get_entities([
 		'type' => 'object',
 		'subtype' => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 		'limit' => false,
 		'owner_guid' => elgg_get_site_entity()->getGUID(),
-		'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
-		'relationship_guid' => $guid,
-		'inverse_relationship' => false,
 	]);
 	
 	if ($cats) {
@@ -108,7 +105,7 @@ if (!empty($categories)) {
 	}
 	
 	$formbody .= elgg_view_field([
-		'#type' => 'checkboxes', 
+		'#type' => 'checkboxes',
 		'#label' => elgg_echo('profile_manager:profile_types:edit:related_categories'),
 		'name' => 'categories',
 		'options' => $checkbox_options,

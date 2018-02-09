@@ -10,7 +10,7 @@
 * @link http://www.coldtrick.com/
 */
 
-$list = elgg_list_entities_from_metadata([
+$list = elgg_list_entities([
 	'type' => 'object',
 	'subtype' => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
 	'limit' => false,

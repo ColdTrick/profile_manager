@@ -53,9 +53,12 @@ if ($type == 'profile') {
 }
 
 foreach ($defaults as $metadata_name => $metadata_type) {
-	$options['metadata_name_value_pairs'] = ['name' => 'metadata_name', 'value' => $metadata_name];
+	$options['metadata_name_value_pairs'] = [
+		'name' => 'metadata_name',
+		'value' => $metadata_name,
+	];
 	
-	$count = elgg_get_entities_from_metadata($options);
+	$count = elgg_get_entities($options);
 	if ($count) {
 		continue;
 	}

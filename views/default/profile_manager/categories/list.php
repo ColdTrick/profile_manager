@@ -10,16 +10,14 @@
 * @link http://www.coldtrick.com/
 */
 
-$options = [
+$categories = elgg_list_entities([
 	'type' => 'object',
 	'subtype' => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 	'limit' => false,
 	'pagination' => false,
 	'owner_guid' => elgg_get_site_entity()->getGUID(),
 	'order_by_metadata' => ['name' => 'order', 'as' => 'integer'],
-];
-
-$categories = elgg_list_entities_from_metadata($options);
+]);
 
 $list = $categories ?: elgg_echo('profile_manager:categories:list:no_categories');
 

@@ -24,12 +24,15 @@ if (!($entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory)) {
 }
 
 // remove reference to this category on related profile fields
-$fields = elgg_get_entities_from_metadata([
+$fields = elgg_get_entities([
 	'type' => 'object',
 	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 	'limit' => false,
 	'owner_guid' => elgg_get_site_entity()->guid,
-	'metadata_name_value_pairs' => ['name' => 'category_guid', 'value' => $guid],
+	'metadata_name_value_pairs' => [
+		'name' => 'category_guid',
+		'value' => $guid,
+	],
 ]);
 
 if ($fields) {

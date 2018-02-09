@@ -35,14 +35,11 @@ if ($entity) {
 	$metadata_name = $entity->metadata_name;
 	$metadata_label = $entity->metadata_label;
 	
-	$types = elgg_get_entities_from_relationship([
+	$types = elgg_get_entities([
 		"type" => "object",
 		"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 		"limit" => false,
 		"owner_guid" => elgg_get_site_entity()->getGUID(),
-		"relationship" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
-		"relationship_guid" => $guid,
-		"inverse_relationship" => true,
 	]);
 	
 	if ($types) {

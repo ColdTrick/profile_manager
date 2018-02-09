@@ -22,7 +22,7 @@ foreach ($fields as $field) {
 }
 fputcsv($df, $headers, ';');
 
-$users = new ElggBatch('elgg_get_entities_from_relationship', [
+$users = new ElggBatch('elgg_get_entities', [
 	'type' => 'user',
 	'limit' => false,
 	'relationship' => 'member_of_site',

@@ -41,7 +41,7 @@ foreach ($fieldlistarray as $listitem) {
 	
 	$options['metadata_name_value_pairs'] = ['name' => 'metadata_name', 'value' => $metadata_name];
 		
-	$count = elgg_get_entities_from_metadata($options);
+	$count = elgg_get_entities($options);
 	
 	if ($count == 0) {
 		$field = new \ColdTrick\ProfileManager\CustomProfileField();

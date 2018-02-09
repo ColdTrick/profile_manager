@@ -26,18 +26,21 @@ if (!$entity->delete()) {
 	return elgg_error_response(elgg_echo('profile_manager:action:profile_types:delete:error:delete'));
 }
 
-$meta_name = 'custom_profile_type';
-
 // remove corresponding profile type metadata from userobjects
-$entities = new ElggBatch('elgg_get_entities_from_metadata', [
+$entities = elgg_get_entities([
 	'type' => 'user',
 	'limit' => false,
-	'metadata_name_value_pairs' => ['name' => $meta_name, 'value' => $guid],
+	'batch' => true,
+	'batch_inc_offset' => false,
+	'metadata_name_value_pairs' => [
+		'name' => 'custom_profile_type',
+		'value' => $guid,
+	],
 ]);
 
 foreach ($entities as $entity) {
 	// unset currently deleted profile type for user
-	unset($entity->$meta_name);
+	unset($entity->custom_profile_type);
 }
 
 return elgg_ok_response('', elgg_echo('profile_manager:action:profile_types:delete:succes'));
