@@ -14,10 +14,11 @@ $list = elgg_list_entities([
 	'type' => 'object',
 	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 	'limit' => false,
-	'owner_guid' => elgg_get_site_entity()->getGUID(),
+	'owner_guid' => elgg_get_site_entity()->guid,
 	'pagination' => false,
 	'full_view' => false,
 	'no_results' => elgg_echo('profile_manager:profile_types:list:no_types'),
+	'list_class' => 'clearfix',
 ]);
 
 $menu = elgg_view('output/url', [

@@ -1,16 +1,12 @@
 <?php
 /**
-* Profile Manager
-*
-* Object view of a custom profile field type
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
+* Object view of a custom profile type
 */
 
-$entity = $vars['entity'];
+$entity = elgg_extract('entity', $vars);
+if (!$entity instanceof \ColdTrick\ProfileManager\CustomProfileType) {
+	return;
+}
 
 // get title
 $content = $entity->getTitle();
@@ -21,9 +17,6 @@ $content .= elgg_view('output/url', [
 	'class' => 'elgg-lightbox',
 	'title' => elgg_echo('edit'),
 	'text' => elgg_view_icon('settings-alt'),
-	'data-colorbox-opts' => json_encode([
-		'trapFocus' => false,
-	]),
 ]);
 
 // delete link
@@ -31,7 +24,7 @@ $content .= elgg_view('output/url', [
 	'href' => 'action/profile_manager/profile_types/delete?guid=' . $entity->guid,
 	'title' => elgg_echo('delete'),
 	'text' => elgg_view_icon('delete'),
-	'confirm' => elgg_echo('profile_manager:profile_types:delete:confirm'),
+	'confirm' => true,
 ]);
 
 echo elgg_format_element('div', [
