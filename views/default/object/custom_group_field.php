@@ -1,58 +1,56 @@
 <?php
 /**
-* Profile Manager
-*
 * Object view of a custom group field
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
 */
 	
 $field = elgg_extract('entity', $vars);
+if (!$field instanceof \ColdTrick\ProfileManager\CustomGroupField) {
+	return;
+}
 
-$title = '<b>' . $field->metadata_name . '</b> [' . $field->metadata_type . ']';
+$title = '<strong>' . $field->metadata_name . '</strong> [' . $field->metadata_type . ']';
+
 $title .= elgg_view('output/url', [
-	'href' => 'ajax/view/forms/profile_manager/group_field?guid=' . $field->guid,
-	'class' => 'elgg-lightbox',
+	'href' => elgg_http_add_url_query_elements('ajax/view/forms/profile_manager/group_field', [
+		'guid' => $field->guid,
+	]),
+	'class' => ['elgg-lightbox', 'mls'],
 	'title' => elgg_echo('edit'),
-	'text' => elgg_view_icon('settings-alt')
-		
+	'text' => false,
+	'icon' => 'settings-alt',
+
 ]);
 $title .= elgg_view('output/url', [
 	'href' => false,
 	'class' => 'profile-manager-remove-field',
 	'data-guid' => $field->guid,
+	'class' => 'mls',
 	'title' => elgg_echo('delete'),
-	'text' => elgg_view_icon('delete-alt'),
+	'text' => false,
+	'icon' => 'delete-alt',
 ]);
 
 $title = elgg_format_element('div', [], $title);
 
-// set default display values
-if (empty($field->user_editable)) {
-	$field->user_editable = 'yes';
-}
-if (empty($field->output_as_tags)) {
-	$field->output_as_tags = 'no';
-}
-
 $metadata = '';
 
-$toggle_options = ['output_as_tags', 'admin_only'];
+$toggle_options = [
+	'output_as_tags',
+	'admin_only',
+];
 
 foreach ($toggle_options as $option) {
-	$metadata .= elgg_view('profile_manager/toggle_metadata', ['entity' => $field, 'metadata_name' => $option]);
+	$metadata .= elgg_view('profile_manager/toggle_metadata', [
+		'entity' => $field,
+		'metadata_name' => $option,
+	]);
 }
 
-$metadata = elgg_format_element('div', ['class' => 'float-alt'], $metadata);
-
-echo elgg_format_element('div', [
+echo elgg_view_image_block('', $title, [
 	'id' => "custom_profile_field_{$field->guid}",
 	'class' => 'custom_field',
 	'rel' => "{$field->category_guid}",
-	'title' => "groups:{$field->metadata_name}",
-], $metadata . $title);
-
+	'title' => elgg_echo("groups:{$field->metadata_name}"),
+	'image_alt' => $metadata,
+]);
 	

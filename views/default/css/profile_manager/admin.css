@@ -1,5 +1,10 @@
 #custom_fields_ordering {
-	width: 518px;
+	max-width: 600px;
+}
+
+#custom_fields_ordering .elgg-item {
+	padding: 0 0 0.5rem;
+	border: none;
 }
 
 #custom_fields_category_list_custom .droppable-hover {
@@ -19,62 +24,47 @@
 	margin: 0 2px 0 0;
 	padding: 5px;
 	word-wrap: break-word;
-	float: left;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+	display: inline-block;
 	border-radius: 5px;
 }
 
 #custom_fields_category_list_custom .custom_fields_category_selected {
 	background: #BBBBBB;
 }
-.custom_field .elgg-icon-settings-alt,
-.custom_profile_type .elgg-icon-settings-alt,
-.custom_fields_category .elgg-icon-settings-alt,
-.custom_field .elgg-icon-delete-alt,
-.custom_profile_type .elgg-icon-delete-alt,
-.custom_fields_category .elgg-icon-delete-alt {
-	vertical-align: text-bottom;
-	cursor: pointer;
+
+#custom_fields_category_list_custom > .elgg-list {
+	display: inline-block;
 }
 
 .custom_fields_category .elgg-icon-drag-arrow {
 	cursor: move;
-	float: left;
 }
 
 .custom_profile_type_description {
 	display: none;
 	margin-bottom: 5px;
 	padding-bottom: 5px;
-	border-bottom: 1px dotted #CCCCCC;
-}
-
-#custom_fields_ordering .elgg-item {
-	background: #FFFFFF;
+	border-bottom: 1px dotted $(border-color-soft);
 }
 
 #custom_fields_ordering .custom_field {
-	border: 1px solid #CCCCCC;
+	border: 1px solid $(border-color-soft);
 	cursor: move;
 	padding: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
 
 #custom_fields_form,
 #custom_fields_category_form,
 #custom_fields_profile_type_form {
-	width: 700px;
+	min-width: 700px;
+}
+
+.field_config_metadata_option {
+	color: $(border-color-soft);
+	margin-left: 0.2rem;
 }
 
 .field_config_metadata_option_enabled {
-	color: #090;
-	cursor: pointer;
-}
-
-.field_config_metadata_option_disabled {
-	color: #f00;
-	cursor: pointer;
+	color: $(border-color-highlight);
 }

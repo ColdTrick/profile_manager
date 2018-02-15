@@ -1,22 +1,18 @@
 <?php
 /**
-* Profile Manager
-*
 * Object view of a custom profile field category
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
 */
 
 $entity = elgg_extract('entity', $vars);
+if (!$entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
+	return;
+}
 
-$content = elgg_view_icon('drag-arrow');
+$content = elgg_view_icon('drag-arrow', ['class' => 'mrs']);
 
 // filter link
 $content .= elgg_view('output/url', [
-	'href' => '#',
+	'href' => false,
 	'text' => $entity->getDisplayName(),
 	'class' => 'category-filter',
 	'data-guid' => $entity->guid,
@@ -24,18 +20,25 @@ $content .= elgg_view('output/url', [
 
 // edit link
 $content .= elgg_view('output/url', [
-	'href' => 'ajax/view/forms/profile_manager/category?guid=' . $entity->guid,
-	'class' => 'elgg-lightbox',
+	'href' => elgg_http_add_url_query_elements('ajax/view/forms/profile_manager/category', [
+		'guid' => $entity->guid,
+	]),
+	'class' => ['elgg-lightbox', 'mls'],
 	'title' => elgg_echo('edit'),
-	'text' => elgg_view_icon('settings-alt'),
+	'text' => false,
+	'icon' => 'settings-alt',
 ]);
 
 // delete link
 $content .= elgg_view('output/url', [
-	'href' => 'action/profile_manager/categories/delete?guid=' . $entity->guid,
+	'href' => elgg_generate_action_url('profile_manager/categories/delete', [
+		'guid' => $entity->guid,
+	]),
 	'title' => elgg_echo('delete'),
-	'text' => elgg_view_icon('delete'),
-	'confirm' => elgg_echo('profile_manager:categories:delete:confirm'),
+	'text' => false,
+	'class' => ['mls'],
+	'icon' => 'delete-alt',
+	'confirm' => true,
 ]);
 
 echo elgg_format_element('div', [

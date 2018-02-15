@@ -13,17 +13,24 @@ $content = $entity->getDisplayName();
 
 // edit link
 $content .= elgg_view('output/url', [
-	'href' => 'ajax/view/forms/profile_manager/type?guid=' .  $entity->guid,
-	'class' => 'elgg-lightbox',
+	'href' => elgg_http_add_url_query_elements('ajax/view/forms/profile_manager/type', [
+		'guid' => $entity->guid,
+	]),
+	'class' => ['elgg-lightbox', 'mls'],
 	'title' => elgg_echo('edit'),
-	'text' => elgg_view_icon('settings-alt'),
+	'text' => false,
+	'icon' => 'settings-alt',
 ]);
 
 // delete link
 $content .= elgg_view('output/url', [
-	'href' => 'action/profile_manager/profile_types/delete?guid=' . $entity->guid,
+	'href' => elgg_generate_action_url('profile_manager/profile_types/delete', [
+		'guid' => $entity->guid,
+	]),
 	'title' => elgg_echo('delete'),
-	'text' => elgg_view_icon('delete'),
+	'text' => false,
+	'class' => ['mls'],
+	'icon' => 'delete-alt',
 	'confirm' => true,
 ]);
 

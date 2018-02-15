@@ -1,18 +1,12 @@
 <?php
 /**
-* Profile Manager
-*
 * Toggle metadata view
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
 */
 
-$entity = $vars['entity'];
+$entity = elgg_extract('entity', $vars);
+$metadata_name = elgg_extract('metadata_name', $vars);
+
 $metadata_type = $entity->metadata_type;
-$metadata_name = $vars['metadata_name'];
 
 $types = [];
 $type_options = [];
@@ -32,9 +26,11 @@ $options = [
 	'class' => ['field_config_metadata_option'],
 ];
 
+$icon_name = 'circle-o';
+
 // if no option is available in the register, this metadata field can't be toggled
 if (!empty($type_options) && array_key_exists($metadata_name, $type_options) && $type_options[$metadata_name]) {
-	if ($entity->$metadata_name != "yes") {
+	if ($entity->$metadata_name !== "yes") {
 		$options['class'][] = 'field_config_metadata_option_disabled';
 	} else {
 		$options['class'][] = 'field_config_metadata_option_enabled';
@@ -42,6 +38,8 @@ if (!empty($type_options) && array_key_exists($metadata_name, $type_options) && 
 	$options['title'] = elgg_echo("profile_manager:admin:{$metadata_name}");
 	$options['data-guid'] = $entity->guid;
 	$options['data-field'] = $metadata_name;
+	
+	$icon_name = 'circle';
 }
 
-echo elgg_view_icon('circle', $options);
+echo elgg_view_icon($icon_name, $options);

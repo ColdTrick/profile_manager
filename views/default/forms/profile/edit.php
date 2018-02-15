@@ -119,6 +119,9 @@ if (!empty($cats)) {
 				'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 				'limit' => false,
 				'owner_guid' => $cat->getOwnerGUID(),
+				'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
+				'relationship_guid' => $cat_guid,
+				'inverse_relationship' => true,
 			]);
 			if ($profile_types) {
 				

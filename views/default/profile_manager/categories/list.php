@@ -15,34 +15,46 @@ $categories = elgg_list_entities([
 	'subtype' => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 	'limit' => false,
 	'pagination' => false,
-	'owner_guid' => elgg_get_site_entity()->getGUID(),
-	'order_by_metadata' => ['name' => 'order', 'as' => 'integer'],
+	'owner_guid' => elgg_get_site_entity()->guid,
+	'order_by_metadata' => [
+		'name' => 'order',
+		'as' => 'integer',
+	],
 ]);
 
-$list = $categories ?: elgg_echo('profile_manager:categories:list:no_categories');
+if (empty($categories)) {
+	$list = elgg_view('page/components/no_results', ['no_results' => elgg_echo('profile_manager:categories:list:no_categories')]);
+} else {
 
-$all_link = elgg_view('output/url', [
-	'href' => '#',
-	'text' => elgg_echo('all'),
-	'class' => 'category-filter',
-]);
-$all = elgg_format_element('div', ['id' => 'custom_profile_field_category_all', 'class' => 'custom_fields_category'], $all_link);
+	$list = elgg_format_element('div', [
+		'id' => 'custom_profile_field_category_all',
+		'class' => 'custom_fields_category',
+	], elgg_view('output/url', [
+		'href' => false,
+		'text' => elgg_echo('all'),
+		'class' => 'category-filter',
+	]));
+	
+	$list .= elgg_format_element('div', [
+		'id' => 'custom_profile_field_category_0',
+		'class' => 'custom_fields_category',
+	], elgg_view('output/url', [
+		'href' => false,
+		'text' => elgg_echo('profile_manager:categories:list:default'),
+		'class' => 'category-filter',
+		'data-guid' => 0,
+	]));
+	
+	$list .= $categories;
+}
 
-$default_link = elgg_view('output/url', [
-	'href' => '#',
-	'text' => elgg_echo('profile_manager:categories:list:default'),
-	'class' => 'category-filter',
-	'data-guid' => 0,
-]);
-$default = elgg_format_element('div', ['id' => 'custom_profile_field_category_0', 'class' => 'custom_fields_category'], $default_link);
-
-$body = elgg_format_element('div', ['id' => 'custom_fields_category_list_custom'], $all . $default . $list);
+$body = elgg_format_element('div', ['id' => 'custom_fields_category_list_custom'], $list);
 
 $menu = elgg_view('output/url', [
 	'text' => elgg_echo('add'),
 	'icon' => 'plus',
 	'href' => 'ajax/view/forms/profile_manager/category',
-	'class' => 'elgg-button elgg-button-action elgg-lightbox',
+	'class' => 'elgg-lightbox',
 ]);
 
 $title = elgg_echo('profile_manager:categories:list:title');

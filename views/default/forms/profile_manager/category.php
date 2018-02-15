@@ -36,10 +36,13 @@ if ($entity) {
 	$metadata_label = $entity->metadata_label;
 	
 	$types = elgg_get_entities([
-		"type" => "object",
-		"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
-		"limit" => false,
-		"owner_guid" => elgg_get_site_entity()->getGUID(),
+		'type' => 'object',
+		'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+		'limit' => false,
+		'owner_guid' => elgg_get_site_entity()->guid,
+		'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
+		'relationship_guid' => $guid,
+		'inverse_relationship' => true,
 	]);
 	
 	if ($types) {

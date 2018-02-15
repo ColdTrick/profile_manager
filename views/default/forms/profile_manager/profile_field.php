@@ -18,11 +18,12 @@ if (!elgg_is_admin_logged_in()) {
 $guid = (int) get_input('guid');
 
 $entity = get_entity($guid);
-if (!($entity instanceof \ColdTrick\ProfileManager\CustomField)) {
+if (!($entity instanceof \ColdTrick\ProfileManager\CustomProfileField)) {
 	$entity = null;
 }
 
 $form_title = elgg_echo('profile_manager:profile_fields:add');
+$formbody = '';
 
 $options_values = [];
 $option_classes = [];
@@ -134,9 +135,21 @@ $formbody .= elgg_view_field([
 
 $options_content = '';
 
-$options = ['show_on_register', 'mandatory', 'user_editable', 'output_as_tags', 'blank_available', 'admin_only'];
+$options = [
+	'show_on_register',
+	'mandatory',
+	'user_editable',
+	'output_as_tags',
+	'blank_available',
+	'admin_only',
+];
 foreach ($options as $option) {
 	$class = 'custom_fields_form_field_option'. elgg_extract($option, $option_classes, '');
+	
+	$checked = ($$option === 'yes');
+	if ($option === 'user_editable') {
+		$checked = ($$option !== 'no');
+	}
 	
 	$options_content .= elgg_view_field([
 		'#type' => 'checkbox',
@@ -144,7 +157,7 @@ foreach ($options as $option) {
 		'#help' => elgg_echo("profile_manager:admin:{$option}:description"),
 		'name' => $option,
 		'class' => $class,
-		'checked' => $$option === 'yes',
+		'checked' => $checked,
 		'switch' => true,
 		'default' => 'no',
 		'value' => 'yes',

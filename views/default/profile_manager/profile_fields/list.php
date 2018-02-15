@@ -25,10 +25,7 @@ $menu = elgg_view('output/url', [
 	'text' => elgg_echo('add'),
 	'icon' => 'plus',
 	'href' => 'ajax/view/forms/profile_manager/profile_field',
-	'class' => 'elgg-button elgg-button-action elgg-lightbox',
-	'data-colorbox-opts' => json_encode([
-		'maxHeight' => '90%'
-	]),
+	'class' => 'elgg-lightbox',
 ]);
 		
 $list = elgg_format_element('div', ['id' => 'custom_fields_ordering'], $list);

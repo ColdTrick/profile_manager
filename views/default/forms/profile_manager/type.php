@@ -45,7 +45,10 @@ if ($entity) {
 		'type' => 'object',
 		'subtype' => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 		'limit' => false,
-		'owner_guid' => elgg_get_site_entity()->getGUID(),
+		'owner_guid' => elgg_get_site_entity()->guid,
+		'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
+		'relationship_guid' => $guid,
+		'inverse_relationship' => false,
 	]);
 	
 	if ($cats) {

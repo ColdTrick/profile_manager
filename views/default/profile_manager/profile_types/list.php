@@ -18,14 +18,13 @@ $list = elgg_list_entities([
 	'pagination' => false,
 	'full_view' => false,
 	'no_results' => elgg_echo('profile_manager:profile_types:list:no_types'),
-	'list_class' => 'clearfix',
 ]);
 
 $menu = elgg_view('output/url', [
 	'text' => elgg_echo('add'),
 	'icon' => 'plus',
 	'href' => 'ajax/view/forms/profile_manager/type',
-	'class' => 'elgg-button elgg-button-action elgg-lightbox',
+	'class' => 'elgg-lightbox',
 ]);
 
 $title = elgg_echo('profile_manager:profile_types:list:title');
