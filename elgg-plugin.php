@@ -69,8 +69,6 @@ return [
 		'profile_manager/profile_types/add' => ['access' => 'admin'],
 		'profile_manager/profile_types/delete' => ['access' => 'admin'],
 
-		'profile_manager/users/export_inactive' => ['access' => 'admin'],
-
 		'profile_manager/register/validate' => ['access' => 'public'],
 		
 		// admin user add, registered here to overrule default action

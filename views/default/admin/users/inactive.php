@@ -84,16 +84,6 @@ if (!empty($users)) {
 		'limit' => $limit,
 		'count' => $count,
 	]);
-	
-	$content .= '<br /><div class="mbm">';
-	$content .= elgg_view('output/url', [
-		'text' => elgg_echo('download'),
-		'href' => "action/profile_manager/users/export_inactive?last_login={$last_login}",
-		'is_action' => true,
-		'class' => 'elgg-button elgg-button-action',
-	]);
-	$content .= '</div>';
-	
 } else {
 	$content = elgg_echo('notfound');
 }
