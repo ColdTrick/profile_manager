@@ -54,6 +54,7 @@ function profile_manager_init() {
 	
 	// menu hooks
 	elgg_register_plugin_hook_handler('register', 'menu:page', '\ColdTrick\ProfileManager\Menus::registerAdmin');
+	elgg_register_plugin_hook_handler('register', 'menu:profile_fields', '\ColdTrick\ProfileManager\Menus::registerProfileFieldsActions');
 	
 	// users
 	elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::create');
@@ -74,6 +75,7 @@ function profile_manager_init() {
 	elgg_register_ajax_view('forms/profile_manager/category');
 	elgg_register_ajax_view('forms/profile_manager/group_field');
 	elgg_register_ajax_view('forms/profile_manager/profile_field');
+	elgg_register_ajax_view('forms/profile_manager/restore_fields');
 }
 
 // elgg initialization events

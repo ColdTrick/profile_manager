@@ -1,20 +1,10 @@
 <?php
 /**
-* Profile Manager
-*
 * Backup of profile fields config
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
 */
 
-// We'll be outputting a txt
-header('Content-Type: text/plain');
-	
-// It will be called custom_profile_fields.backup.json.txt
-header('Content-Disposition: attachment; filename="custom_profile_fields.backup.json.txt"');
+elgg_set_http_header('Content-Type: application/json');
+elgg_set_http_header('Content-Disposition: attachment; filename="custom_profile_fields.backup.json"');
 
 $fieldtype = get_input('fieldtype' , CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE);
 
@@ -25,7 +15,7 @@ $entities = elgg_get_entities([
 	'owner_guid' => elgg_get_site_entity()->getGUID(),
 ]);
 
-$info = ['fieldtype' => $fieldtype];
+$info = [];
 
 $fields = [];
 foreach ($entities as $entity) {
@@ -47,11 +37,12 @@ foreach ($entities as $entity) {
 	];
 }
 
-$info['md5'] = md5(print_r($fields, true));
-
 echo json_encode(
 	[
-		'info' => $info,
+		'info' => [
+			'fieldtype' => $fieldtype,
+			'md5' => md5(print_r($fields, true)),
+		],
 		'fields' => $fields,
 	],
 	JSON_PRETTY_PRINT
