@@ -92,13 +92,11 @@ if (!empty($profile_type_entities)) {
 	];
 }
 
-echo elgg_view('input/fieldset', [
-	'legend' => elgg_echo('profile_manager:settings:registration'),
+echo elgg_view_module('info', elgg_echo('profile_manager:settings:registration'), elgg_view('input/fieldset', [
 	'fields' => $registration_fields,
-]);
+]));
 
-echo elgg_view('input/fieldset', [
-	'legend' => elgg_echo('profile_manager:settings:edit_profile'),
+echo elgg_view_module('info', elgg_echo('profile_manager:settings:edit_profile'), elgg_view('input/fieldset', [
 	'fields' => [
 		[
 			'#type' => 'checkbox',
@@ -130,10 +128,9 @@ echo elgg_view('input/fieldset', [
 			'value' => $plugin->profile_type_selection,
 		],
 	],
-]);
+]));
 
-echo elgg_view('input/fieldset', [
-	'legend' => elgg_echo('profile_manager:settings:view_profile'),
+echo elgg_view_module('info', elgg_echo('profile_manager:settings:view_profile'), elgg_view('input/fieldset', [
 	'fields' => [
 		[
 			'#type' => 'checkbox',
@@ -164,11 +161,9 @@ echo elgg_view('input/fieldset', [
 			'value' => 'yes',
 		],
 	],
-]);
+]));
 
-
-echo elgg_view('input/fieldset', [
-	'legend' => elgg_echo('other'),
+echo elgg_view_module('info', elgg_echo('other'), elgg_view('input/fieldset', [
 	'fields' => [
 		[
 			'#type' => 'checkbox',
@@ -198,4 +193,4 @@ echo elgg_view('input/fieldset', [
 			'value' => 'yes',
 		],
 	],
-]);
+]));
