@@ -28,4 +28,5 @@ echo elgg_view_module('info', $title, elgg_view_menu('profile_fields', [
 	'type' => 'profile',
 	'fieldtype' => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 	'class' => 'elgg-menu-hz',
+	'item_class' => 'mrm',
 ]));

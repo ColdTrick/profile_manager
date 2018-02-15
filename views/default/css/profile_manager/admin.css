@@ -68,7 +68,3 @@
 .field_config_metadata_option_enabled {
 	color: $(border-color-highlight);
 }
-
-.elgg-menu-profile-fields > li {
-	margin-right: 0.5rem;
-}
