@@ -21,7 +21,7 @@ $details_result = '';
 if ($show_profile_type_on_profile !== 'no') {
 	if ($profile_type_guid = $user->custom_profile_type) {
 		if (($profile_type = get_entity($profile_type_guid)) && ($profile_type instanceof \ColdTrick\ProfileManager\CustomProfileType)) {
-			$details_result .= elgg_format_element('div', ['class' => 'even'], '<b>' . elgg_echo('profile_manager:user_details:profile_type') . '</b>: ' . $profile_type->getTitle());
+			$details_result .= elgg_format_element('div', ['class' => 'even'], '<b>' . elgg_echo('profile_manager:user_details:profile_type') . '</b>: ' . $profile_type->getDisplayName());
 		}
 	}
 }
@@ -50,7 +50,7 @@ if (count($cats) > 0) {
 					$title = elgg_echo('profile_manager:categories:list:default');
 				}
 			} elseif ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
-				$title = $cat->getTitle();
+				$title = $cat->getDisplayName();
 			}
 
 			$collapse_link = elgg_view('output/url', [
@@ -99,7 +99,7 @@ if (count($cats) > 0) {
 			
 			// build result
 			$field_result .= '<div class="' . $even_odd . '">';
-			$field_result .= '<b>' . $field->getTitle() . '</b>:&nbsp;';
+			$field_result .= '<b>' . $field->getDisplayName() . '</b>:&nbsp;';
 			$field_result .= elgg_view('output/' . $output_type, ['value' => $value, 'target' => $target]);
 			$field_result .= '</div>';
 		}

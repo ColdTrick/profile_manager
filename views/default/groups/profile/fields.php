@@ -24,7 +24,7 @@ foreach ($group_fields as $field) {
 	}
 	
 	// make title
-	$title = $field->getTitle();
+	$title = $field->getDisplayName();
 	
 	// adjust output type
 	if ($field->output_as_tags == 'yes') {

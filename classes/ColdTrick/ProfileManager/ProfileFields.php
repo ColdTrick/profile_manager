@@ -238,7 +238,7 @@ class ProfileFields {
 			
 			$translations = [];
 			foreach ($fields as $key => $field) {
-				$title = $field->getTitle(false, $lang);
+				$title = $field->getDisplayName(false, $lang);
 				if (elgg_language_key_exists($key, $lang)) {
 					// check if translation registration is needed
 					if ($title === elgg_echo($key, [], $lang)) {

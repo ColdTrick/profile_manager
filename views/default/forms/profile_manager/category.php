@@ -78,7 +78,7 @@ if (count($types) > 0) {
 	$checkbox_options = [];
 	
 	foreach ($types as $type) {
-		$title = $type->getTitle();
+		$title = $type->getDisplayName();
 		$checkbox_options[$title] = $type->guid;
 	}
 	

@@ -24,7 +24,7 @@ class CustomGroupField extends CustomField {
 	 *
 	 * @return string
 	 */
-	public function getTitle() {
+	public function getDisplayName() {
 		if ($this->metadata_label) {
 			return $this->metadata_label;
 		}

@@ -52,7 +52,7 @@ if (!empty($cats)) {
 
 			foreach ($types as $type) {
 				
-				$dropdown_options[$type->getGUID()] = $type->getTitle();
+				$dropdown_options[$type->guid] = $type->getDisplayName();
 				
 				// preparing descriptions of profile types
 				$description = $type->getDescription();
@@ -105,7 +105,7 @@ if (!empty($cats)) {
 		// make nice title for category
 		$cat_title = elgg_echo('profile_manager:categories:list:default');
 		if ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
-			$cat_title = $cat->getTitle();
+			$cat_title = $cat->getDisplayName();
 		}
 	
 		$class = '';
@@ -180,7 +180,7 @@ if (!empty($cats)) {
 
 			$visible_fields++;
 			
-			$field_title = $field->getTitle(true);
+			$field_title = $field->getDisplayName(true);
 			
 			$hint = $field->getHint();
 			if ($hint) {

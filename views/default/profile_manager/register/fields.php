@@ -89,7 +89,7 @@ if (!empty($fields)) {
 				$field_class[] = 'mandatory';
 			}
 			
-			$field_result = elgg_format_element('label', [], $field->getTitle(true));
+			$field_result = elgg_format_element('label', [], $field->getDisplayName(true));
 			
 			$hint = $field->getHint();
 			if ($hint) {
@@ -126,7 +126,7 @@ if (!empty($fields)) {
 			if ($cat_guid == 0) {
 				$title = elgg_echo("profile_manager:categories:list:default");
 			} else {
-				$title = $cat->getTitle();
+				$title = $cat->getDisplayName();
 			}
 			
 			if ($tabbed) {

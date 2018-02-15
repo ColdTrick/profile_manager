@@ -9,7 +9,7 @@ if (!$entity instanceof \ColdTrick\ProfileManager\CustomProfileType) {
 }
 
 // get title
-$content = $entity->getTitle();
+$content = $entity->getDisplayName();
 
 // edit link
 $content .= elgg_view('output/url', [

@@ -100,7 +100,7 @@ if (!empty($categories)) {
 	$checkbox_options = [];
 	
 	foreach ($categories as $cat) {
-		$title = $cat->getTitle();
+		$title = $cat->getDisplayName();
 		$checkbox_options[$title] = $cat->guid;
 	}
 	

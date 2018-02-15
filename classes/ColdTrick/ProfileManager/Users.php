@@ -80,7 +80,7 @@ class Users {
 				$filehandler->container_guid = $user->getGUID();
 				$filehandler->subtype = "file";
 				$filehandler->access_id = $access_id;
-				$filehandler->title = $field->getTitle();
+				$filehandler->title = $field->getDisplayName();
 					
 				$filehandler->setFilename("profile_manager/" .  $_FILES[$metadata_name]["name"]);
 				$filehandler->setMimeType($_FILES[$metadata_name]["type"]);
@@ -266,13 +266,13 @@ class Users {
 				$passed_value = $custom_profile_fields[$entity->metadata_name];
 				if (is_array($passed_value)) {
 					if (!count($passed_value)) {
-						register_error(elgg_echo('profile_manager:register_pre_check:missing', [$entity->getTitle()]));
+						register_error(elgg_echo('profile_manager:register_pre_check:missing', [$entity->getDisplayName()]));
 						forward(REFERER);
 					}
 				} else {
 					$passed_value = trim($passed_value);
 					if (strlen($passed_value) < 1) {
-						register_error(elgg_echo('profile_manager:register_pre_check:missing', [$entity->getTitle()]));
+						register_error(elgg_echo('profile_manager:register_pre_check:missing', [$entity->getDisplayName()]));
 						forward(REFERER);
 					}
 				}

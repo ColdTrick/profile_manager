@@ -26,11 +26,12 @@ class CustomProfileField extends CustomField {
 	/**
 	 * Returns the title of the field
 	 *
-	 * @param bool $input set to true if you need the title for an input field
+	 * @param bool   $input set to true if you need the title for an input field
+	 * @param string $lang  (optional) specific language for the title
 	 *
 	 * @return string
 	 */
-	public function getTitle($input = false, $lang = null) {
+	public function getDisplayName($input = false, $lang = null) {
 		if (!isset($lang)) {
 			$lang = get_current_language();
 		}

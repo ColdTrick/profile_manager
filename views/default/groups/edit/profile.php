@@ -48,7 +48,7 @@ foreach ($group_fields as $field) {
 	$value = elgg_extract($metadata_name, $vars);
 	
 	echo '<div>';
-	echo elgg_format_element('label', [], $field->getTitle());
+	echo elgg_format_element('label', [], $field->getDisplayName());
 	
 	$hint = $field->getHint();
 	if ($hint) {

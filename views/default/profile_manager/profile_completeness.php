@@ -21,7 +21,7 @@ if ($user->getGUID() === elgg_get_logged_in_user_guid()) {
 		$field = $missing_fields[$rand_key];
 		$url = elgg_view('output/url', [
 			'href' => "profile/{$user->username}/edit",
-			'text' => $field->getTitle(),
+			'text' => $field->getDisplayName(),
 		]);
 		$tips = elgg_echo('widgets:profile_completeness:view:tips', [$url]);
 	} elseif (elgg_extract('avatar_missing', $completeness, false)) {

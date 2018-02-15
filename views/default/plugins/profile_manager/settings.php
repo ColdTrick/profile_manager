@@ -70,7 +70,7 @@ if (!empty($profile_type_entities)) {
 		'' => elgg_echo('profile_manager:profile:edit:custom_profile_type:default'),
 	];
 	foreach ($profile_type_entities as $type) {
-		$profile_types[$type->guid] = $type->getTitle();
+		$profile_types[$type->guid] = $type->getDisplayName();
 	}
 
 	$registration_fields[] = [

@@ -29,7 +29,7 @@ class CustomProfileType extends \ElggObject {
 	 *
 	 * @return string
 	 */
-	public function getTitle($plural = false) {
+	public function getDisplayName($plural = false) {
 		if ($plural) {
 			$result = $this->getPluralTitle();
 			if ($result !== false) {

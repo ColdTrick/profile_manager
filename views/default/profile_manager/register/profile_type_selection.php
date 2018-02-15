@@ -25,7 +25,7 @@ if (elgg_get_plugin_setting('hide_profile_type_default', 'profile_manager') !== 
 // Generate type descriptions for all profile types
 $types_description = '';
 foreach ($types as $type) {
-	$types_options_values[$type->guid] = $type->getTitle();
+	$types_options_values[$type->guid] = $type->getDisplayName();
 		
 	// preparing descriptions of profile types
 	$description = $type->getDescription();

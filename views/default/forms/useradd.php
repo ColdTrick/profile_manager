@@ -109,13 +109,13 @@ if ($admin_option) {
 		];
 		
 		foreach ($types as $type) {
-			$options[$type->guid] = $type->getTitle();
+			$options[$type->guid] = $type->getDisplayName();
 		}
 		
 		echo elgg_view_field([
 			'#type' => 'select',
 			'#label' => elgg_echo('profile_manager:profile:edit:custom_profile_type:label'),
-			'name' => 'custom_profile_fields[custom_profile_type]', 
+			'name' => 'custom_profile_fields[custom_profile_type]',
 			'options_values' => $options,
 		]);
 		
@@ -127,7 +127,7 @@ if ($admin_option) {
 			foreach ($fields[$cat_guid] as $field) {
 				echo elgg_view_field([
 					'#type' => $field->metadata_type,
-					'#label' => $field->getTitle(),
+					'#label' => $field->getDisplayName(),
 					'name' => "custom_profile_fields[{$field->metadata_name}]",
 					'options' => $field->getOptions(true),
 				]);

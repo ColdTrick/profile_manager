@@ -17,7 +17,7 @@ $content = elgg_view_icon('drag-arrow');
 // filter link
 $content .= elgg_view('output/url', [
 	'href' => '#',
-	'text' => $entity->getTitle(),
+	'text' => $entity->getDisplayName(),
 	'class' => 'category-filter',
 	'data-guid' => $entity->guid,
 ]);
