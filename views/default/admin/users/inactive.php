@@ -52,11 +52,11 @@ $users = elgg_get_entities($options);
 
 if (!empty($users)) {
 	$content = '<table class="elgg-table">';
-	$content .= '<tr>';
+	$content .= '<thead><tr>';
 	$content .= '<th>' . elgg_echo('user') . '</th>';
 	$content .= '<th>' . elgg_echo('usersettings:statistics:label:lastlogin') . '</th>';
 	$content .= '<th>' . elgg_echo('banned') . '</th>';
-	$content .= '</tr>';
+	$content .= '</tr></thead>';
 	
 	foreach ($users as $user) {
 		$content .= '<tr>';
