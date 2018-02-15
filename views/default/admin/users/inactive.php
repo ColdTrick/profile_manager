@@ -8,16 +8,22 @@ if ($date > 0) {
 }
 
 $form_body = elgg_view_field([
-	'#type' => 'date',
-	'#label' => elgg_echo('profile_manager:admin:users:inactive:last_login'),
-	'name' => 'last_login',
-	'value' => $last_login,
-	'timestamp' => true,
-	'readonly' => true,
-]);
-$form_body .= elgg_view_field([
-	'#type' => 'submit',
-	'value' => elgg_echo('search'),
+	'#type' => 'fieldset',
+	'align' => 'horizontal',
+	'fields' => [
+		[
+			'#type' => 'date',
+			'#label' => elgg_echo('profile_manager:admin:users:inactive:last_login'),
+			'name' => 'last_login',
+			'value' => $last_login,
+			'timestamp' => true,
+			'readonly' => true,
+		],
+		[
+			'#type' => 'submit',
+			'value' => elgg_echo('search'),
+		],
+	],
 ]);
 
 $form = elgg_view('input/form', [
