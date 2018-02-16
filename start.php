@@ -73,7 +73,6 @@ function profile_manager_init() {
 	
 	// site join event handler
 	elgg_register_event_handler('create', 'relationship', '\ColdTrick\ProfileManager\Sites::createMember');
-	elgg_register_event_handler('delete', 'relationship', '\ColdTrick\ProfileManager\Sites::deleteMember');
 	
 	// register ajax views
 	elgg_register_ajax_view('forms/profile_manager/type');

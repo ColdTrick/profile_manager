@@ -44,28 +44,7 @@ class Sites {
 			'object_guid' => $site_guid,
 		]);
 	}
-	
-	/**
-	 * Remove river join event on site leave
-	 *
-	 * @param string           $event       Event name
-	 * @param string           $object_type Event type
-	 * @param ElggRelationship $object      Relationship object being removed
-	 *
-	 * @return void
-	 */
-	public static function deleteMember($event, $object_type, $object) {
-		if ($object->relationship !== 'member_of_site') {
-			return;
-		}
 		
-		elgg_delete_river([
-			'view' => 'river/relationship/member_of_site/create',
-			'subject_guid' => $object->guid_one,
-			'object_guid' => $object->guid_two,
-		]);
-	}
-	
 	/**
 	 * Extend public pages
 	 *

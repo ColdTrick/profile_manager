@@ -67,12 +67,5 @@ return [
 		'profile_manager/profile_types/add' => ['access' => 'admin'],
 
 		'profile_manager/register/validate' => ['access' => 'public'],
-		
-		// admin user add, registered here to overrule default action
-		'useradd' => [
-			'access' => 'admin',
-			'filename' => __DIR__ . 'actions/useradd.php',
-		],
-		
 	],
 ];
