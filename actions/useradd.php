@@ -25,11 +25,6 @@ if (is_array($notify)) {
 	$notify = $notify[0];
 }
 
-$use_default_access = get_input('use_default_access', false);
-if (is_array($use_default_access)) {
-	$use_default_access = $use_default_access[0];
-}
-
 $custom_profile_fields = get_input('custom_profile_fields');
 
 // For now, just try and register the user
@@ -65,25 +60,7 @@ try {
 		if (is_array($custom_profile_fields)) {
 			foreach ($custom_profile_fields as $metadata_name => $metadata_value) {
 				if (!empty($metadata_value) || $metadata_value === 0) {
-					if (!empty($use_default_access)) {
-						// use create_metadata to listen to ACCESS_DEFAULT
-						if (is_array($metadata_value)) {
-							$i = 0;
-							foreach ($metadata_value as $interval) {
-								$i++;
-								if ($i == 1) {
-									$multiple = false;
-								} else {
-									$multiple = true;
-								}
-								create_metadata($new_user->guid, $metadata_name, $interval, 'text', $new_user->guid, get_default_access($new_user), $multiple);
-							}
-						} else {
-							create_metadata($new_user->guid, $metadata_name, $metadata_value, 'text', $new_user->guid, get_default_access($new_user));
-						}
-					} else {
-						$new_user->$metadata_name = $metadata_value;
-					}
+					$new_user->$metadata_name = $metadata_value;
 				}
 			}
 		}

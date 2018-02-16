@@ -46,6 +46,8 @@ function profile_manager_init() {
 	// where to put extra profile fields
 	elgg_extend_view('register/extend_side', 'profile_manager/register/fields');
 	elgg_extend_view('register/extend', 'profile_manager/register/fields');
+
+	elgg_extend_view('forms/useradd', 'profile_manager/admin/useradd');
 	
 	// extend public pages
 	elgg_register_plugin_hook_handler('public_pages', 'walled_garden', '\ColdTrick\ProfileManager\Sites::publicPages');
