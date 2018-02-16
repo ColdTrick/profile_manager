@@ -11,84 +11,40 @@
 */
 
 $group = elgg_extract('entity', $vars);
-	
-echo '<div>';
-echo elgg_format_element('label', [], elgg_echo('groups:icon')) . '<br />';
-echo elgg_view('input/file', ['name' => 'icon']);
-echo '</div>';
 
-echo '<div>';
-echo elgg_format_element('label', [], elgg_echo('groups:name')) . '<br />';
+$name = elgg_extract('name', $vars);
+$group_profile_fields = (array) elgg_extract('fields', profile_manager_get_categorized_group_fields());
 
-echo elgg_view('input/text', [
-	'name' => 'name',
-	'value' => elgg_extract('name', $vars),
+echo elgg_view_field([
+	'#type' => 'file',
+	'#label' => elgg_echo('groups:icon'),
+	'name' => 'icon',
 ]);
 
-echo '</div>';
+echo elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('groups:name'),
+	'required' => true,
+	'name' => 'name',
+	'value' => $name,
+]);
 
-// retrieve group fields
-$group_fields = profile_manager_get_categorized_group_fields();
-$group_fields = elgg_extract('fields', $group_fields);
-if (empty($group_fields)) {
-	return;
-}
-
-foreach ($group_fields as $field) {
-	$metadata_name = $field->metadata_name;
+// show the configured group profile fields
+foreach ($group_profile_fields as $field) {
+	$shortname = $field->metadata_name;
 	
-	// get options
-	$options = $field->getOptions();
-	$placeholder = $field->getPlaceholder();
-	
-	// get type of field
-	$valtype = $field->metadata_type;
-	
-	// get value
-	$value = elgg_extract($metadata_name, $vars);
-	
-	echo '<div>';
-	echo elgg_format_element('label', [], $field->getDisplayName());
-	
-	$hint = $field->getHint();
-	if ($hint) {
-		echo elgg_view('output/pm_hint', [
-			'id' => "more_info_{$metadata_name}",
-			'text' => $hint,
-		]);
-	}
-	
-	if ($valtype !== 'longtext') {
-		echo '<br />';
-	}
-	
-	$field_output_options = [
-		'name' => $metadata_name,
-		'value' => $value,
+	$options = [
+		'#type' => $field->metadata_type,
+		'#help' => $field->getHint(),
+		'name' => $shortname,
+		'value' => elgg_extract($shortname, $vars),
+		'options' => $field->getOptions(),
+		'placeholder' => $field->getPlaceholder(),
 	];
-
-	if ($options) {
-		$field_output_options['options'] = $options;
-	}
-
-	if ($placeholder) {
-		$field_output_options['placeholder'] = $placeholder;
-	}
-
-	if ($metadata_name == 'description') {
-		echo elgg_view("input/{$valtype}", $field_output_options);
-	} else {
-		if ($valtype == 'dropdown') {
-			// add div around dropdown to let it act as a block level element
-			echo '<div>';
-		}
-		
-		echo elgg_view("input/{$valtype}", $field_output_options);
-		
-		if ($valtype == 'dropdown') {
-			echo '</div>';
-		}
+	
+	if ($valtype !== 'hidden') {
+		$options['#label'] = $field->getDisplayName();
 	}
 	
-	echo '</div>';
+	echo elgg_view_field($options);
 }

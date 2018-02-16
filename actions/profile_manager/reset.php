@@ -17,27 +17,19 @@ if (!in_array($type, ['profile', 'group'])) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:reset:error:wrong_type'));
 }
 
-$site_guid = elgg_get_site_entity()->getGUID();
-
 $entities = elgg_get_entities([
 	'type' => 'object',
 	'subtype' => "custom_{$type}_field",
 	'limit' => false,
-	'owner_guid' => $site_guid,
+	'owner_guid' => elgg_get_site_entity()->guid,
+	'batch' => true,
+	'batch_inc_offset' => false,
 ]);
 
-if ($entities) {
-	foreach ($entities as $entity) {
-		if (!$entity->delete()) {
-			$error = true;
-		}
+foreach ($entities as $entity) {
+	if (!$entity->delete()) {
+		return elgg_error_response(elgg_echo('profile_manager:actions:reset:error:unknown'));
 	}
-}
-
-elgg_get_system_cache()->delete("profile_manager_{$type}_fields_{$site_guid}");
-
-if ($error) {
-	return elgg_error_response(elgg_echo('profile_manager:actions:reset:error:unknown'));
 }
 
 return elgg_ok_response('', elgg_echo('profile_manager:actions:reset:success'));

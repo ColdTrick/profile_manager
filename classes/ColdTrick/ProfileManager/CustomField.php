@@ -15,8 +15,8 @@ abstract class CustomField extends \ElggObject {
 		parent::initializeAttributes();
 		
 		$this->attributes['access_id'] = ACCESS_PUBLIC;
-		$this->attributes['owner_guid'] = elgg_get_site_entity()->getGUID();
-		$this->attributes['container_guid'] = elgg_get_site_entity()->getGUID();
+		$this->attributes['owner_guid'] = elgg_get_site_entity()->guid;
+		$this->attributes['container_guid'] = elgg_get_site_entity()->guid;
 	}
 	
 	/**
