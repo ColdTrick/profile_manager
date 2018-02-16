@@ -64,4 +64,35 @@ class CustomFieldCategory extends \ElggObject {
 		
 		return $result;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public function delete($recursive = true) {
+		$guid = $this->guid;
+		
+		$deleted = parent::delete($recursive);
+		
+		if ($deleted) {
+			// remove reference to this category on related profile fields
+			$fields = elgg_get_entities([
+				'type' => 'object',
+				'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
+				'limit' => false,
+				'owner_guid' => elgg_get_site_entity()->guid,
+				'metadata_name_value_pairs' => [
+					'name' => 'category_guid',
+					'value' => $guid,
+				],
+				'batch' => true,
+				'batch_inc_offset' => false,
+			]);
+			
+			foreach ($fields as $field) {
+				unset($field->category_guid);
+			}
+		}
+		
+		return $deleted;
+	}
 }

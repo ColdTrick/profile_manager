@@ -31,7 +31,7 @@ $content .= elgg_view('output/url', [
 
 // delete link
 $content .= elgg_view('output/url', [
-	'href' => elgg_generate_action_url('profile_manager/categories/delete', [
+	'href' => elgg_generate_action_url('entity/delete', [
 		'guid' => $entity->guid,
 	]),
 	'title' => elgg_echo('delete'),

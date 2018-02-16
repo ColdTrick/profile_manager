@@ -51,7 +51,6 @@ return [
 	],
 	'actions' => [
 		'profile_manager/change_category' => ['access' => 'admin'],
-		'profile_manager/delete' => ['access' => 'admin'],
 		'profile_manager/import_from_custom' => ['access' => 'admin'],
 		'profile_manager/import_from_default' => ['access' => 'admin'],
 		'profile_manager/new' => ['access' => 'admin'],
@@ -64,10 +63,8 @@ return [
 		
 		'profile_manager/categories/add' => ['access' => 'admin'],
 		'profile_manager/categories/reorder' => ['access' => 'admin'],
-		'profile_manager/categories/delete' => ['access' => 'admin'],
 
 		'profile_manager/profile_types/add' => ['access' => 'admin'],
-		'profile_manager/profile_types/delete' => ['access' => 'admin'],
 
 		'profile_manager/register/validate' => ['access' => 'public'],
 		

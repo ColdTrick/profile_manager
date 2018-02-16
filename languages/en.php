@@ -20,6 +20,12 @@ return [
 
 	'profile:custom_profile_type' => 'Custom Profile Type',
 	
+	// generic delete actions
+	'entity:delete:object:custom_profile_field:success' => "The profile field was deleted.",
+	'entity:delete:object:custom_group_field:success' => "The group profile field was deleted.",
+	'entity:delete:object:custom_profile_field_category:success' => "The profile category was deleted.",
+	'entity:delete:object:custom_profile_type:success' => "The profile type was deleted.",
+	
 	// admin menu
 	'admin:configure_utilities:group_fields' => "Edit Group Fields",
 	

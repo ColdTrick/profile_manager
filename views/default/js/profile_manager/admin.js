@@ -71,7 +71,7 @@ elgg.profile_manager.reorder_custom_fields = function() {
 };
 
 elgg.profile_manager.remove_field = function(guid) {
-	elgg.action('profile_manager/delete', {
+	elgg.action('entity/delete', {
 		data: {
 			guid: guid
 		},

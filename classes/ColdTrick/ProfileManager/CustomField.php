@@ -78,4 +78,21 @@ abstract class CustomField extends \ElggObject {
 		}
 		return $result;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public function delete($recursive = true) {
+		$site_guid = $this->site_guid;
+		
+		$deleted = parent::delete($recursive);
+		if ($deleted) {
+			
+			// clear cache
+			elgg_get_system_cache()->delete("profile_manager_profile_fields_{$site_guid}");
+			elgg_get_system_cache()->delete("profile_manager_group_fields_{$site_guid}");
+		}
+		
+		return $deleted;
+	}
 }

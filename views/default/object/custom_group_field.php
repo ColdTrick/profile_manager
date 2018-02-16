@@ -22,9 +22,8 @@ $title .= elgg_view('output/url', [
 ]);
 $title .= elgg_view('output/url', [
 	'href' => false,
-	'class' => 'profile-manager-remove-field',
+	'class' => ['profile-manager-remove-field', 'mls'],
 	'data-guid' => $field->guid,
-	'class' => 'mls',
 	'title' => elgg_echo('delete'),
 	'text' => false,
 	'icon' => 'delete-alt',
