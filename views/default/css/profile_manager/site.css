@@ -1,6 +1,6 @@
 /* widgets */
 #widget_profile_completeness_container {
-	border: 1px solid #AAAAAA;
+	border: 1px solid $(state-success-border-color);
 	position: relative;
 }
 
@@ -8,12 +8,13 @@
 	position: absolute;
 	line-height: 20px;
 	font-weight: bold;
+	color: $(state-success-font-color);
 	width: 100%;
 	text-align: center;
 }
 
 #widget_profile_completeness_progress_bar {
-	background: #00FF00;
+	background: $(state-success-background-color);
 	height: 20px;
 }
 

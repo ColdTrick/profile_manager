@@ -37,7 +37,10 @@ function profile_manager_init() {
 	
 	// add profile_completeness widget
 	if (elgg_get_plugin_setting('enable_profile_completeness_widget', 'profile_manager') == 'yes') {
-		elgg_register_widget_type('profile_completeness', elgg_echo('widgets:profile_completeness:title'), elgg_echo('widgets:profile_completeness:description'), ['profile', 'dashboard']);
+		elgg_register_widget_type([
+			'id' => 'profile_completeness',
+			'context' => ['profile', 'dashboard'],
+		]);
 	}
 	
 	// free_text on register form

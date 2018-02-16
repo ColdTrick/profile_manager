@@ -329,7 +329,7 @@ return array(
 	'profile_manager:pm_linkedin:input:placeholder' => "Entrez votre url LinkedIn ici",
 
 	// widgets
-	'widgets:profile_completeness:title' => 'Profil complet',
+	'widgets:profile_completeness:name' => 'Profil complet',
 	'widgets:profile_completeness:description' => 'Affiche les profils complets',
 	'widgets:profile_completeness:view:tips' => "Tip ! Mettez à jour votre %s pour améliorer l'Exhaustivité de votre profil.",
 	'widgets:profile_completeness:view:complete' => 'Félicitations ! Votre profil est 100% complet!',

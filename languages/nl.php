@@ -230,7 +230,7 @@ return array (
 			Klik op het bewerk icoon om het profiel type te bewerken.',
   'profile_manager:tooltips:actions' => '<b>Acties</b><br>
 			Verschillende acties die van toepassing zijn op de profiel velden.',
-  'widgets:profile_completeness:title' => 'Profiel Compleetheid',
+  'widgets:profile_completeness:name' => 'Profiel Compleetheid',
   'widgets:profile_completeness:description' => 'Toon de profiel compleetheid',
   'widgets:profile_completeness:view:tips' => 'Tip! Update je %s om je profiel compleetheid te verbeteren.',
   'widgets:profile_completeness:view:complete' => 'Gefeliciteerd! Je profiel is 100% compleet!',

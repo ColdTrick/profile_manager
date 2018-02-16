@@ -319,7 +319,7 @@ return [
 	'profile_manager:pm_linkedin:input:placeholder' => "Ingresa la URL de tu perfil de Linkedin",
 
 	// widgets
-	'widgets:profile_completeness:title' => 'Completitud del perfil',
+	'widgets:profile_completeness:name' => 'Completitud del perfil',
 	'widgets:profile_completeness:description' => 'Muestra cuan completa esta el perfil',
 	'widgets:profile_completeness:view:tips' => 'Tip! Actualiza tu %s para mejorar la completitud de u perfil.',
 	'widgets:profile_completeness:view:complete' => '¡Felicitaciones! Tu perfil esta totalmente completo',

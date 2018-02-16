@@ -345,30 +345,28 @@ function profile_manager_profile_completeness($user = null) {
 	$ia = elgg_set_ignore_access(true);
 	
 	$fields = profile_manager_get_categorized_fields($user, true, false, true);
+	$categories = (array) elgg_extract('categories', $fields, []);
 	
-	if (!empty($fields['categories'])) {
+	foreach ($categories as $cat_guid => $cat) {
+		$cat_fields = $fields['fields'][$cat_guid];
 		
-		foreach ($fields['categories'] as $cat_guid => $cat) {
-			$cat_fields = $fields['fields'][$cat_guid];
+		foreach ($cat_fields as $field) {
 			
-			foreach ($cat_fields as $field) {
-				
-				if ($field->count_for_completeness == 'yes') {
-					$required_fields[] = $field;
-					$metaname = $field->metadata_name;
-					if (empty($user->$metaname) && ($user->$metaname !== 0)) {
-						$missing_fields[] = $field;
-					}
-				}
+			if ($field->count_for_completeness !== 'yes') {
+				continue;
+			}
+			
+			$required_fields[] = $field;
+			$metaname = $field->metadata_name;
+			if (empty($user->$metaname) && ($user->$metaname !== 0)) {
+				$missing_fields[] = $field;
 			}
 		}
 	}
 	
 	$avatar_percentage = (int) elgg_get_plugin_setting('profile_completeness_avatar', 'profile_manager');
-	if ($avatar_percentage) {
-		if (!$user->icontime) {
-			$avatar_missing = true;
-		}
+	if ($avatar_percentage && empty($user->icontime)) {
+		$avatar_missing = true;
 	}
 	
 	$percentage_completeness = 100;
