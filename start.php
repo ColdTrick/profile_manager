@@ -74,7 +74,7 @@ function profile_manager_init() {
 	elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUserRiverItem');
 	elgg_register_plugin_hook_handler('action', 'useradd', function() {
 		// only register createByAdmin during useradd action
-		elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createByAdmin');
+		elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUserByAdmin');
 	});
 	
 	// register ajax views

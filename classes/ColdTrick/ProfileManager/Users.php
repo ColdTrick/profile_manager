@@ -360,9 +360,19 @@ class Users {
 			return;
 		}
 		
-		foreach ($custom_profile_fields as $metadata_name => $metadata_value) {
-			if (!empty($metadata_value) || $metadata_value === 0) {
-				$user->$metadata_name = $metadata_value;
+		$user_default_access = get_default_access($user);
+		
+		foreach ($custom_profile_fields as $shortname => $value) {
+			if (!empty($value) || $value === 0) {
+				if (!is_array($value)) {
+					$value = [$value];
+				}
+				foreach ($value as $interval) {
+					$user->annotate("profile:$shortname", $interval, $user_default_access);
+				}
+		
+				// for BC, keep storing fields in MD, but we'll read annotations only
+				$user->$shortname = $value;
 			}
 		}
 	}
