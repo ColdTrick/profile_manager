@@ -370,7 +370,7 @@ return [
 	'profile_manager:account:username:info' => "Puedes cambiar tu nombre de usuario, el icono te indicará si el mismo es válido y está disponible.",
 
 	// river events
-	'river:join:site:default' => '%s se sumo al sitio',
+	'river:site:site:join' => '%s se sumo al sitio',
 
 	// login history
 	'profile_manager:account:login_history' => "Registro de ingreso",

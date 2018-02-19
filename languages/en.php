@@ -382,6 +382,6 @@ return [
 	'profile_manager:account:username:info' => "Change your username. An icon will tell you if the username entered is valid and available.",
 	
 	// river events
-	'river:join:site:default' => '%s joined the site',
+	'river:site:site:join' => '%s joined the site',
 
 ];

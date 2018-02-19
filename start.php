@@ -71,8 +71,7 @@ function profile_manager_init() {
 	elgg_register_plugin_hook_handler('profile:fields', 'group', '\ColdTrick\ProfileManager\ProfileFields::getGroupFields');
 	elgg_register_plugin_hook_handler('categorized_profile_fields', 'profile_manager', '\ColdTrick\ProfileManager\ProfileFields::addAdminFields', 1000);
 	
-	// site join event handler
-	elgg_register_event_handler('create', 'relationship', '\ColdTrick\ProfileManager\Sites::createMember');
+	elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUser');
 	
 	// register ajax views
 	elgg_register_ajax_view('forms/profile_manager/type');

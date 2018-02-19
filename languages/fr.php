@@ -381,7 +381,7 @@ return array(
 	'profile_manager:account:username:info' => "Changer votre nom d'utilisateur. Une icône vous indiquera si le nom d'utilisateur saisi est valide et disponible.",
 	
 	// river events
-	'river:join:site:default' => '%s a rejoint le site',
+	'river:site:site:join' => '%s a rejoint le site',
 
 	// login history
 	'profile_manager:account:login_history' => "Historique de connexion",

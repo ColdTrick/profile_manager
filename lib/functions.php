@@ -185,7 +185,6 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 		'subtype' => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
 		'limit' => false,
 		'owner_guid' => elgg_get_config('site_guid'),
-		'site_guid' => elgg_get_config('site_guid')
 	]);
 	if ($cats) {
 		foreach ($cats as $cat) {
@@ -209,7 +208,6 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 					'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 					'count' => true,
 					'owner_guid' => $cat->getOwnerGUID(),
-					'site_guid' => $cat->site_guid,
 					'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
 					'relationship_guid' => $cat->getGUID(),
 					'inverse_relationship' => true
@@ -235,7 +233,6 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 		'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 		'limit' => false,
 		'owner_guid' => elgg_get_config('site_guid'),
-		'site_guid' => elgg_get_config('site_guid')
 	]);
 	
 	if ($fields) {
@@ -304,7 +301,6 @@ function profile_manager_get_categorized_group_fields($group = null) {
 		'subtype' => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
 		'limit' => false,
 		'owner_guid' => elgg_get_config('site_guid'),
-		'site_guid' => elgg_get_config('site_guid')
 	]);
 
 	if ($fields) {

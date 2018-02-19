@@ -323,6 +323,27 @@ class Users {
 	}
 	
 	/**
+	 * Adds a river event when a user is created
+	 *
+	 * @param \Elgg\Event $event event
+	 *
+	 * @return void
+	 */
+	public static function createUser(\Elgg\Event $event) {
+		
+		$enable_river_event = elgg_get_plugin_setting('enable_site_join_river_event', 'profile_manager');
+		if ($enable_river_event == 'no') {
+			return;
+		}
+
+		elgg_create_river_item([
+			'action_type' => 'join',
+			'subject_guid' => $event->getObject()->guid,
+			'object_guid' => elgg_get_site_entity()->guid,
+		]);
+	}
+	
+	/**
 	 * Generates username based on emailaddress
 	 *
 	 * @param string $email Email address

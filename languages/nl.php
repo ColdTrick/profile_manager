@@ -260,7 +260,7 @@ return array (
   'profile_manager:admin:adduser:extra_metadata' => 'Extra profiel informatie toevoegen',
   'profile_manager:account:username:button' => 'Klik om je gebruikersnaam te wijzigen',
   'profile_manager:account:username:info' => 'Wijzig je gebruikersnaam. Een icoon zal aangeven of de ingevoerde gebruikersnaam beschikbaar en geldig is.',
-  'river:join:site:default' => '%s is lid geworden van de site',
+  'river:site:site:join' => '%s is lid geworden van de site',
   'profile_manager:account:login_history' => 'Aanmeld geschiedenis',
   'profile_manager:account:login_history:date' => 'Datum',
   'profile_manager:account:login_history:ip' => 'IP Adres',
