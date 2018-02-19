@@ -71,7 +71,11 @@ function profile_manager_init() {
 	elgg_register_plugin_hook_handler('profile:fields', 'group', '\ColdTrick\ProfileManager\ProfileFields::getGroupFields');
 	elgg_register_plugin_hook_handler('categorized_profile_fields', 'profile_manager', '\ColdTrick\ProfileManager\ProfileFields::addAdminFields', 1000);
 	
-	elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUser');
+	elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUserRiverItem');
+	elgg_register_plugin_hook_handler('action', 'useradd', function() {
+		// only register createByAdmin during useradd action
+		elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createByAdmin');
+	});
 	
 	// register ajax views
 	elgg_register_ajax_view('forms/profile_manager/type');

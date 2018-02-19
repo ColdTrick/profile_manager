@@ -329,7 +329,7 @@ class Users {
 	 *
 	 * @return void
 	 */
-	public static function createUser(\Elgg\Event $event) {
+	public static function createUserRiverItem(\Elgg\Event $event) {
 		
 		$enable_river_event = elgg_get_plugin_setting('enable_site_join_river_event', 'profile_manager');
 		if ($enable_river_event == 'no') {
@@ -341,6 +341,30 @@ class Users {
 			'subject_guid' => $event->getObject()->guid,
 			'object_guid' => elgg_get_site_entity()->guid,
 		]);
+	}
+
+	/**
+	 * Saves extra user information when user is created with admin useradd form
+	 *
+	 * @param \Elgg\Event $event event
+	 *
+	 * @return void
+	 */
+	public static function createUserByAdmin(\Elgg\Event $event) {
+		
+		$user = $event->getObject();
+		
+		$custom_profile_fields = get_input('custom_profile_fields');
+		
+		if (!is_array($custom_profile_fields)) {
+			return;
+		}
+		
+		foreach ($custom_profile_fields as $metadata_name => $metadata_value) {
+			if (!empty($metadata_value) || $metadata_value === 0) {
+				$user->$metadata_name = $metadata_value;
+			}
+		}
 	}
 	
 	/**
