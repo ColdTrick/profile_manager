@@ -10,7 +10,7 @@ $types = elgg_get_entities([
 	'type' => 'object',
 	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 	'limit' => false,
-	'owner_guid' => elgg_get_site_entity()->getGUID(),
+	'owner_guid' => elgg_get_site_entity()->guid,
 ]);
 
 if (empty($types)) {
@@ -31,8 +31,8 @@ foreach ($types as $type) {
 	$description = $type->getDescription();
 		
 	if (!empty($description)) {
-		$description_class = ['custom_profile_type_description'];
-		if ($value != $type->guid) {
+		$description_class = ['custom_profile_type_description', 'mbl'];
+		if ($value !== $type->guid) {
 			$description_class[] = 'hidden';
 		}
 		$types_description .= elgg_format_element('div', ['id' => $type->guid, 'class' => $description_class], $description);

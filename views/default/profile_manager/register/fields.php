@@ -10,70 +10,63 @@
 * @link http://www.coldtrick.com/
 */
 
-$field_location = elgg_extract('field_location', $vars);
-$field_location_setting = elgg_get_plugin_setting('registration_extra_fields', 'profile_manager');
-if ($field_location == 'beside') {
-	if ($field_location_setting !== 'beside') {
-		// beside should be beside
-		return true;
-	}
-} elseif ($field_location_setting == 'beside') {
-	// below or default
-	return true;
-}
+$fields = [];
 
-$tabbed = false;
-if (elgg_get_plugin_setting('edit_profile_mode', 'profile_manager') == 'tabbed') {
-	$tabbed = true;
-}
-
-$result = '';
-
-// profile icon
 $profile_icon = elgg_get_plugin_setting('profile_icon_on_register', 'profile_manager');
 if ($profile_icon == 'yes' || $profile_icon == 'optional') {
-	$result .= elgg_view('input/profile_icon');
+	$fields[] = [
+		'#type' => 'file',
+		'#label' => elgg_echo('profile_manager:register:profile_icon'),
+		'name' => 'profile_icon',
+		'required' => ($profile_icon == 'yes'),
+	];
 }
 
 $categorized_fields = profile_manager_get_categorized_fields(null, true, true);
-$fields = $categorized_fields['fields'];
-$cats = $categorized_fields['categories'];
+
+$profile_fields = elgg_extract('fields', $categorized_fields);
+$cats = elgg_extract('categories', $categorized_fields);
+
+$tabbed = (bool) (elgg_get_plugin_setting('edit_profile_mode', 'profile_manager') == 'tabbed');
+if (count($cats) < 2) {
+	$tabbed = false;
+}
 
 if (elgg_is_sticky_form('profile_manager_register')) {
 	$sticky_values = elgg_get_sticky_values('profile_manager_register');
 	extract($sticky_values);
 	elgg_clear_sticky_form('profile_manager_register');
 }
-	
-if (empty($custom_profile_fields_custom_profile_type)) {
-	$custom_profile_fields_custom_profile_type = elgg_get_plugin_setting('default_profile_type', 'profile_manager');
-}
+
+$custom_profile_fields_custom_profile_type = elgg_get_plugin_setting('default_profile_type', 'profile_manager');
 
 if (elgg_get_plugin_setting('profile_type_selection', 'profile_manager') !== 'admin') {
-	$result .= elgg_view('profile_manager/register/profile_type_selection', ['value' => $custom_profile_fields_custom_profile_type]);
+	$profile_types = elgg_view('profile_manager/register/profile_type_selection', [
+		'value' => $custom_profile_fields_custom_profile_type,
+	]);
+	if (!empty($profile_types)) {
+		$fields[] = ['#html' => $profile_types];
+	}
 } else {
-	$result .= elgg_view('input/hidden', ['name' => 'custom_profile_fields_custom_profile_type', 'value' => $custom_profile_fields_custom_profile_type]);
+	$fields[] = [
+		'#type' => 'hidden',
+		'name' => 'custom_profile_fields_custom_profile_type',
+		'value' => $custom_profile_fields_custom_profile_type,
+	];
 }
 
-if (!empty($fields)) {
-	$tabbed_cat_titles = '';
-	$tabbed_cat_content = '';
-	$tab_selected = false;
+if (!empty($profile_fields)) {
 	foreach ($cats as $cat_guid => $cat) {
 		
-		$linked_profile_types = array(0);
+		$linked_profile_types = [0];
 		if ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 			$linked_profile_types = $cat->getLinkedProfileTypes();
 		}
 		
-		$fields_result = '';
-		foreach ($fields[$cat_guid] as $field) {
+		$category_fields = [];
+		foreach ($profile_fields[$cat_guid] as $field) {
 			$metadata_type = $field->metadata_type;
-			if ($metadata_type == 'longtext') {
-				// bug when showing tinymce on register page (when moving) newer versions of tinymce are working correctly
-				$metadata_type = 'plaintext';
-			}
-			
+						
 			$field_name = "custom_profile_fields_{$field->metadata_name}";
 			
 			$value = '';
@@ -84,30 +77,17 @@ if (!empty($fields)) {
 			if (is_array($value)) {
 				$value = implode(', ', $value);
 			}
-			$field_class = [];
-			if ($field->mandatory == 'yes') {
-				$field_class[] = 'mandatory';
-			}
 			
-			$field_result = elgg_format_element('label', [], $field->getDisplayName(true));
-			
-			$hint = $field->getHint();
-			if ($hint) {
-				$field_result .= elgg_view('output/pm_hint', [
-					'id' => "more_info_{$field->metadata_name}",
-					'text' => $hint,
-				]);
-			}
-			
-			$field_result .= '<br />';
-			
-			$field_result .= elgg_view("input/{$metadata_type}", [
+			$category_fields[] = [
+				'#type' => $metadata_type,
+				'#label' => $field->getDisplayName(true),
+				'#help' => $field->getHint(),
 				'name' => $field_name,
 				'value' => $value,
+				'required' => ($field->mandatory == 'yes'),
 				'options' => $field->getOptions(),
-				'placeholder' => $field->getPlaceholder()
-			]);
-			$fields_result .= elgg_format_element('div', ['class' => $field_class], $field_result);
+				'placeholder' => $field->getPlaceholder(),
+			];
 		}
 		
 		$category_classes = ["category_{$cat_guid}"];
@@ -120,55 +100,66 @@ if (!empty($fields)) {
 			$category_classes[] = "profile_type_{$type_guid}";
 		}
 		
-		$cat_header = '';
-		if (count($cats) > 1) {
-			// make nice title
-			if ($cat_guid == 0) {
-				$title = elgg_echo("profile_manager:categories:list:default");
-			} else {
-				$title = $cat->getDisplayName();
-			}
+// 		$cat_header = '';
+// 		if (count($cats) > 1) {
 			
-			if ($tabbed) {
-				$tab_link = elgg_format_element('a', ['href' => 'javascript:void(0);', 'onclick' => "elgg.profile_manager.toggle_tabbed_nav('{$cat_guid}', this);"], $title);
+// 			if ($tabbed) {
 				
-				$li_classes = $category_classes;
-				if (!$tab_selected && !in_array('hidden', $category_classes)) {
-					$li_classes[] = 'elgg-state-selected';
-					$tab_selected = true;
-				}
-				$tabbed_cat_titles .= elgg_format_element('li', ['class' => $li_classes], $tab_link);
-			} else {
-				$cat_header = elgg_format_element('div', ['class' => 'elgg-head'], "<h3>{$title}</h3>");
-			}
-		}
-		
-		$cat_body = elgg_format_element('div', ['class' => 'elgg-body'], "<fieldset>{$fields_result}</fieldset>");
-		
+// 				$li_classes = $category_classes;
+// 				if (!$tab_selected && !in_array('hidden', $category_classes)) {
+// 					$li_classes[] = 'elgg-state-selected';
+// 					$tab_selected = true;
+// 				}
+// 				$tabbed_cat_titles .= elgg_format_element('li', ['class' => $li_classes], $tab_link);
+// 			}
+// 		}
+				
 		$category_classes[] = 'profile_manager_register_category';
-		$category_classes[] = 'elgg-module';
-		$category_classes[] = 'elgg-module-info';
 		
-		$cat_result = elgg_format_element('div', ['class' => $category_classes], $cat_header . $cat_body);
+		$cat_title = empty($cat_guid) ? elgg_echo('profile_manager:categories:list:default') : $cat->getDisplayName();
+		
+		$cat_body = elgg_view_field([
+			'#type' => 'fieldset',
+			'#class' => $category_classes,
+			'fields' => $category_fields,
+		]);
 		
 		if ($tabbed) {
-			$tabbed_cat_content .= $cat_result;
+			$tabs[] = [
+				'text' => $cat_title,
+				'content' => $cat_body,
+				'class' => $category_classes,
+			];
 		} else {
-			$result .= $cat_result;
+			$fields[] = [
+				'#html' => elgg_view_module('inline', $cat_title, $cat_body, ['class' => $category_classes]),
+			];
 		}
 	}
 	
-	if ($tabbed) {
-		if ($tabbed_cat_titles) {
+// 	if ($tabbed) {
+// 		if ($tabbed_cat_titles) {
 			
-			$result .= elgg_format_element('ul', ['class' => 'elgg-tabs elgg-htabs', 'id' => 'profile_manager_register_tabbed'], $tabbed_cat_titles);
-			$result .= elgg_format_element('div', [], $tabbed_cat_content);
-		} else {
-			$result .= $tabbed_cat_content;
-		}
-	}
+// 			$result .= elgg_format_element('ul', ['class' => 'elgg-tabs elgg-htabs', 'id' => 'profile_manager_register_tabbed'], $tabbed_cat_titles);
+// 			$result .= elgg_format_element('div', [], $tabbed_cat_content);
+// 		} else {
+// 			$result .= $tabbed_cat_content;
+// 		}
+// 	}
 }
 
-if (!empty($result)) {
-	echo elgg_format_element('fieldset', [], $result);
+if (!empty($tabs)) {
+	$fields[] = [
+		'#html' => elgg_view('page/components/tabs', ['tabs' => $tabs]),
+	];
 }
+
+if (empty($fields)) {
+	return;
+}
+
+echo elgg_view_field([
+	'#type' => 'fieldset',
+	'#class' => 'register-form-fields',
+	'fields' => $fields,
+]);

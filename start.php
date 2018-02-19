@@ -44,10 +44,7 @@ function profile_manager_init() {
 	}
 	
 	// free_text on register form
-	elgg_extend_view('register/extend_side', 'profile_manager/register/free_text');
-	
-	// where to put extra profile fields
-	elgg_extend_view('register/extend_side', 'profile_manager/register/fields');
+	elgg_extend_view('forms/register', 'profile_manager/register/free_text', 400);
 	elgg_extend_view('register/extend', 'profile_manager/register/fields');
 
 	elgg_extend_view('forms/useradd', 'profile_manager/admin/useradd');

@@ -67,15 +67,14 @@ elgg.profile_manager.change_profile_type_register = function() {
 	$('div.custom_profile_type_description').hide();
 	$('#'+ selVal).show();
 
-	// tabs
-	var $tabs = $('#profile_manager_register_tabbed');
+	var $tabs = $('.register-form-fields .elgg-tabs');
 	if ($tabs.length > 0) {
 		$tabs.find('li').hide();
 		$tabs.find(".profile_type_0, .profile_type_" + selVal).show();
-		if ($tabs.find('li.selected:visible').length === 0) {
+		if ($tabs.find('li.elgg-state-selected:visible').length === 0) {
 			$tabs.find('li:visible:first>a').click();
 		} else {
-			$tabs.find('li.selected:visible').click();
+			$tabs.find('li.elgg-state-selected:visible').click();
 		}
 	} else {
 		// list
@@ -210,6 +209,8 @@ elgg.profile_manager.init_register = function() {
 			}
 		}
 	});
+	
+	elgg.profile_manager.change_profile_type_register();
 };
 
 //register init hook

@@ -59,23 +59,10 @@ li.custom_fields_edit_profile_category {
 	max-width: 100%;
 }
 
-.profile_manager_register_input_container {
-	white-space:nowrap; /* required for outlining in IE7 */
-}
-
-.profile_manager_register_input_container > input {
-	padding-right: 25px;
-}
-
 .elgg-icon.profile_manager_validate_icon {
 	margin-left: -22px;
     margin-top: 8px;
     position: absolute;
-}
-
-/* register form */
-.elgg-form-register .mandatory > label:after {
-	content: "*";
 }
 
 /* registration field */

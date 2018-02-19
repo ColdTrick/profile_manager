@@ -41,16 +41,6 @@ $registration_fields = [
 		'value' => $plugin->registration_terms,
 	],
 	[
-		'#type' => 'select',
-		'#label' => elgg_echo('profile_manager:settings:registration:extra_fields'),
-		'name' => 'params[registration_extra_fields]',
-		'options_values' => [
-			'extend' => elgg_echo('profile_manager:settings:registration:extra_fields:extend'),
-			'beside' => elgg_echo('profile_manager:settings:registration:extra_fields:beside'),
-		],
-		'value' => $plugin->registration_extra_fields,
-	],
-	[
 		'#type' => 'longtext',
 		'#label' => elgg_echo('profile_manager:settings:registration:free_text'),
 		'name' => 'params[registration_free_text]',
