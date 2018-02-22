@@ -54,30 +54,10 @@ li.custom_fields_edit_profile_category {
 	display: none;
 }
 
-/* registration form */
-.elgg-form-register {
-	max-width: 100%;
-}
-
 .elgg-icon.profile_manager_validate_icon {
 	margin-left: -22px;
     margin-top: 8px;
     position: absolute;
-}
-
-/* registration field */
-#profile_manager_register_left {
-	float: left;
-	width: 450px;
-}
-
-#profile_manager_register_right {
-	float: right;
-	width: 450px;
-}
-
-#profile_manager_register_right > fieldset {
-	margin-top: 10px;
 }
 
 /* registration form mandatory fields */
