@@ -11,14 +11,34 @@
 	z-index: 20000;
 }
 
+
+
+
+
+button.ui-multiselect {
+	max-width: 100%;
+	border: 1px solid $(border-color-mild);
+	color: $(text-color-strong);
+	background: white;
+	padding: 0.25rem 0.5rem;
+	line-height: 1.75rem;
+	vertical-align: middle;
+	border-radius: 3px;
+	
+	> .ui-icon {
+		font-size: 0.8rem;
+		padding-top: 5px;
+	} 
+}
+
 .ui-multiselect-menu {
 	z-index:10000;
 	background: white;
-	border: 1px solid #CCCCCC;
+	border: 1px solid $(border-color-mild);
 }
 
 .ui-multiselect-checkboxes .ui-state-hover {
-	background: #CCCCCC;
+	background: $(background-color-mild);
 }
 
 .profile-manager-multiselect {
