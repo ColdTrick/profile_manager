@@ -187,9 +187,6 @@ class ProfileFields {
 
 		$system_fields = [
 			'guid' => 'text',
-			'owner_guid' => 'text',
-			'container_guid' => 'text',
-			'site_guid' => 'text',
 
 			'time_created' => 'date',
 			'time_updated' => 'date',

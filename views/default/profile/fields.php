@@ -76,21 +76,24 @@ foreach ($cats as $cat_guid => $cat) {
 	foreach ($fields[$cat_guid] as $field) {
 		$shortname = $field->metadata_name;
 		$valtype = $field->metadata_type;
+		if ($cat_guid !== -1) {
+			$annotations = $user->getAnnotations([
+				'annotation_names' => "profile:$shortname",
+				'limit' => false,
+			]);
+			$values = array_map(function (ElggAnnotation $a) {
+				return $a->value;
+			}, $annotations);
 		
-		$annotations = $user->getAnnotations([
-			'annotation_names' => "profile:$shortname",
-			'limit' => false,
-		]);
-		$values = array_map(function (ElggAnnotation $a) {
-			return $a->value;
-		}, $annotations);
-	
-		if (!$values) {
-			continue;
+			if (!$values) {
+				continue;
+			}
+			// emulate metadata API
+			$value = (count($values) === 1) ? $values[0] : $values;
+		} else {
+			// system data is not annotations
+			$value = $user->$shortname;
 		}
-		// emulate metadata API
-		$value = (count($values) === 1) ? $values[0] : $values;
-	
 		// validate urls
 		if ($valtype == 'url' && !preg_match('~^https?\://~i', $value)) {
 			$value = "http://$value";
