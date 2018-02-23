@@ -42,37 +42,8 @@ if ($show_profile_type_on_profile !== 'no') {
 $show_header = (bool) (count($cats) > 1);
 
 foreach ($cats as $cat_guid => $cat) {
-	
-	$cat_title = '';
-	$field_result = '';
-	
-	if ($show_header) {
-		// make nice title
-// 		$title = $cat;
-// 		if ($cat_guid == -1) {
-// 			$title = elgg_echo('profile_manager:categories:list:system');
-// 		} elseif ($cat_guid == 0) {
-// 			if (empty($cat)) {
-// 				$title = elgg_echo('profile_manager:categories:list:default');
-// 			}
-// 		} elseif ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
-// 			$title = $cat->getDisplayName();
-// 		}
 
-// 		$collapse_link = elgg_view('output/url', [
-// 			'text' => ' ',
-// 			'href' => '#',
-// 			'class' => 'elgg-widget-collapse-button',
-// 			'rel' => 'toggle',
-// 		]);
-		
-// 		$cat_title = elgg_format_element('h3', ['class' => 'elgg-head mtm'], $title);
-	}
-	
-	
-	
-	
-	
+	$cat_data = '';
 	foreach ($fields[$cat_guid] as $field) {
 		$shortname = $field->metadata_name;
 		$valtype = $field->metadata_type;
@@ -109,7 +80,7 @@ foreach ($cats as $cat_guid => $cat) {
 		
 		$class = elgg_extract($shortname, $microformats, '');
 	
-		$output .= elgg_view('object/elements/field', [
+		$cat_data .= elgg_view('object/elements/field', [
 			'label' => $field->getDisplayName(),
 			'value' => elgg_format_element('span', [
 				'class' => $class,
@@ -120,11 +91,24 @@ foreach ($cats as $cat_guid => $cat) {
 		]);
 	}
 	
-	
-// 	if (!empty($field_result)) {
-// 		$details_result .= $cat_title;
-// 		$details_result .= elgg_format_element('div', [], $field_result);
-// 	}
+	if (!empty($cat_data)) {
+		if (!$show_header) {
+			$output .= $cat_data;
+		} else {
+			$cat_title = $cat;
+			if ($cat_guid == -1) {
+				$cat_title = elgg_echo('profile_manager:categories:list:system');
+			} elseif ($cat_guid == 0) {
+				if (empty($cat)) {
+					$cat_title = elgg_echo('profile_manager:categories:list:default');
+				}
+			} elseif ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
+				$cat_title = $cat->getDisplayName();
+			}
+			
+			$output .= elgg_view_module('info', $cat_title, $cat_data);
+		}
+	}
 }
 
 if ($output) {
