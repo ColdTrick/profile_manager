@@ -58,7 +58,6 @@ function profile_manager_register_custom_field_types() {
 	profile_manager_add_custom_field_type('custom_profile_field_types', 'pm_twitter', elgg_echo('profile_manager:admin:options:pm_twitter'), $social_options);
 	profile_manager_add_custom_field_type('custom_profile_field_types', 'pm_facebook', elgg_echo('profile_manager:admin:options:pm_facebook'), $social_options);
 	profile_manager_add_custom_field_type('custom_profile_field_types', 'pm_linkedin', elgg_echo('profile_manager:admin:options:pm_linkedin'), $social_options);
-	//profile_manager_add_custom_field_type('custom_profile_field_types', 'pm_file', elgg_echo('profile_manager:admin:options:file'), $file_options);
 	
 	// registering group field types
 	$group_options = [
