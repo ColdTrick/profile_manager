@@ -15,6 +15,10 @@ for ($i = 1; $i <= 5; $i++) {
 	}
 }
 
-$body .= ' ' . elgg_view('output/url', ['text' => elgg_echo('reset'), 'href' => '#']);
+$body .= elgg_view('output/url', [
+	'text' => elgg_echo('reset'),
+	'class' => 'mlm',
+	'href' => false,
+]);
 
 echo elgg_format_element('div', ['class' => 'profile-manager-input-pm-rating', 'id' => $rating_id], $body);
