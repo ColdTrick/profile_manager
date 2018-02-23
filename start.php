@@ -61,7 +61,6 @@ function profile_manager_init() {
 	// users
 	elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::create');
 	elgg_register_event_handler('profileupdate','user', '\ColdTrick\ProfileManager\Users::updateProfile');
-	elgg_register_plugin_hook_handler('action', 'register', '\ColdTrick\ProfileManager\Users::actionRegister');
 	
 	// profile fields
 	elgg_register_plugin_hook_handler('profile:fields', 'profile', '\ColdTrick\ProfileManager\ProfileFields::getUserFields');

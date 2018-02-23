@@ -2,6 +2,8 @@
 
 namespace ColdTrick\ProfileManager;
 
+use Elgg\Http\OkResponse;
+
 /**
  * Users
  */
@@ -197,7 +199,7 @@ class Users {
 			elgg_set_ignore_access($ia);
 		}
 	
-		if (isset($_FILES['profile_icon'])) {
+		if (elgg_get_uploaded_file('profile_icon')) {
 			if (!$object->saveIconFromUploadedFile('profile_icon')) {
 				register_error(elgg_echo('avatar:resize:fail'));
 				// return false to delete the user
@@ -213,115 +215,93 @@ class Users {
 		elgg_clear_sticky_form('profile_manager_register');
 	}
 	
-	/**
-	 * Function to check if custom fields on register have been filled (if required)
-	 * Also generates a username if needed
-	 *
-	 * @param string  $hook_name    name of the hook
-	 * @param string  $entity_type  type of the hook
-	 * @param unknown $return_value return value
-	 * @param unknown $parameters   hook parameters
-	 *
-	 * @return void
-	 */
-	public static function actionRegister($hook_name, $entity_type, $return_value, $parameters) {
-	
+	public static function validateRegisterAction(\Elgg\Request $request) {
 		elgg_make_sticky_form('register');
 		elgg_make_sticky_form('profile_manager_register');
-	
-		// validate mandatory profile fields
-		$profile_icon = elgg_get_plugin_setting('profile_icon_on_register', 'profile_manager');
-	
-		// general terms
-		$terms = elgg_get_plugin_setting('registration_terms', 'profile_manager');
-	
-		// new
-		$profile_type_guid = get_input('custom_profile_fields_custom_profile_type', false);
-		$fields = profile_manager_get_categorized_fields(null, true, true, true, $profile_type_guid);
-		$required_fields = [];
-	
-		if (!empty($fields['categories'])) {
-			foreach ($fields['categories'] as $cat_guid => $cat) {
-				$cat_fields = $fields['fields'][$cat_guid];
-				foreach ($cat_fields as $field) {
-					if ($field->show_on_register == 'yes' && $field->mandatory == 'yes') {
-						$required_fields[] = $field;
-					}
-				}
-			}
+		
+		$valid_icon = self::validateRegisterProfileIcon($request);
+		if ($valid_icon instanceof OkResponse) {
+			return $valid_icon;
 		}
-	
-		if ($terms || $required_fields || $profile_icon == 'yes') {
-	
-			$custom_profile_fields = [];
-	
-			foreach ($_POST as $key => $value) {
-				if (strpos($key, 'custom_profile_fields_') == 0) {
-					$key = substr($key, 22);
-					$custom_profile_fields[$key] = $value;
-				}
-			}
-	
-			foreach ($required_fields as $entity) {
-				$passed_value = $custom_profile_fields[$entity->metadata_name];
-				if (is_array($passed_value)) {
-					if (!count($passed_value)) {
-						register_error(elgg_echo('profile_manager:register_pre_check:missing', [$entity->getDisplayName()]));
-						forward(REFERER);
-					}
-				} else {
-					$passed_value = trim($passed_value);
-					if (strlen($passed_value) < 1) {
-						register_error(elgg_echo('profile_manager:register_pre_check:missing', [$entity->getDisplayName()]));
-						forward(REFERER);
-					}
-				}
-			}
-	
-			if ($profile_icon == 'yes') {
-				$error = false;
-				
-				$profile_icons = elgg_get_uploaded_files('profile_icon');
-				if (empty($profile_icons)) {
-					register_error(elgg_echo('profile_manager:register_pre_check:missing', ['profile_icon']));
-					$error = true;
-				} else {
-					
-					$profile_icon = $profile_icons[0];
-					if (!$profile_icon->isValid()) {
-						register_error(elgg_echo('profile_manager:register_pre_check:profile_icon:error'));
-						$error = true;
-					} else {
-						// test if we can handle the image
-						if (strpos($profile_icon->getMimeType(), 'image/') !== 0) {
-							register_error(elgg_echo('profile_manager:register_pre_check:profile_icon:nosupportedimage'));
-							$error = true;
-						}
-					}
-				}
-					
-				if ($error) {
-					forward(REFERER);
-				}
-			}
-	
-			if ($terms) {
-				$terms_accepted = get_input('accept_terms');
-				if ($terms_accepted !== 'yes') {
-					register_error(elgg_echo('profile_manager:register_pre_check:terms'));
-					forward(REFERER);
-				}
-			}
+		
+		$valid_terms = self::validateRegisterTerms($request);
+		if ($valid_terms instanceof OkResponse) {
+			return $valid_terms;
 		}
 	
 		// generate username
-		$username = get_input('username');
-		$email = get_input('email');
-		if (empty($username) && (elgg_get_plugin_setting('generate_username_from_email', 'profile_manager') == 'yes')) {
-			set_input('username', self::generateUsernameFromEmail($email));
+		if (empty(get_input('username')) && (elgg_get_plugin_setting('generate_username_from_email', 'profile_manager') == 'yes')) {
+			set_input('username', self::generateUsernameFromEmail(get_input('email')));
 		}
 	}
 	
+	protected static function validateRegisterProfileIcon(\Elgg\Request $request) {
+		
+		$profile_icon = elgg_get_plugin_setting('profile_icon_on_register', 'profile_manager');
+		
+		if ($profile_icon !== 'yes') {
+			return;
+		}
+		
+		$file = elgg_get_uploaded_file('profile_icon', false);
+		
+		if (empty($file)) {
+			return elgg_error_response(elgg_echo('profile_manager:register_pre_check:missing', ['profile_icon']));
+		}
+		
+		if (!$file->isValid()) {
+			return elgg_error_response(elgg_echo('profile_manager:register_pre_check:profile_icon:error'));
+		}
+	
+		// test if we can handle the image
+		if (strpos($file->getMimeType(), 'image/') !== 0) {
+			return elgg_error_response(elgg_echo('profile_manager:register_pre_check:profile_icon:nosupportedimage'));
+		}
+	}
+	
+	protected static function validateRegisterTerms(\Elgg\Request $request) {
+		
+		$terms = elgg_get_plugin_setting('registration_terms', 'profile_manager');
+		
+		if (empty($terms)) {
+			return;
+		}
+		
+		if (get_input('accept_terms') === 'yes') {
+			return;
+		}
+		
+		return elgg_error_response(elgg_echo('profile_manager:register_pre_check:terms'));
+	}
+	
+	protected static function validateRegisterRequiredFields(\Elgg\Request $request) {
+
+		$profile_type_guid = get_input('custom_profile_fields_custom_profile_type', false);
+		$categorized_fields = profile_manager_get_categorized_fields(null, true, true, true, $profile_type_guid);
+		
+		$fields = elgg_extract('fields', $categorized_fields);
+		$categories = elgg_extract('categories', $categorized_fields);
+		if (empty($categories)) {
+			return;
+		}
+		
+		foreach ($categories as $cat_guid => $cat) {
+			$cat_fields = elgg_extract($cat_guid, $fields, []);
+			foreach ($cat_fields as $field) {
+				if ($field->show_on_register !== 'yes' || $field->mandatory !== 'yes') {
+					continue;
+				}
+				
+				$value = get_input("custom_profile_fields_{$field->metadata_name}");
+				if (!empty($value)) {
+					continue;
+				}
+				
+				return elgg_error_response(elgg_echo('profile_manager:register_pre_check:missing', [$field->getDisplayName()]));
+			}
+		}
+	}
+		
 	/**
 	 * Adds a river event when a user is created
 	 *
@@ -368,7 +348,7 @@ class Users {
 					$value = [$value];
 				}
 				foreach ($value as $interval) {
-					$user->annotate("profile:$shortname", $interval, $user_default_access);
+					$user->annotate("profile:$shortname", $interval, $user_default_access, $user->guid, 'text');
 				}
 		
 				// for BC, keep storing fields in MD, but we'll read annotations only
@@ -402,6 +382,12 @@ class Users {
 			$username = str_replace($unwanted_character, '', $username);
 		}
 		
+		// check if minimal length is matched
+		$min_length = elgg_get_config('minusername');
+		if ($min_length) {
+			$username = str_pad($username, $min_length, 0);
+		}
+	
 		// show hidden entities (unvalidated users)
 		$hidden = access_show_hidden_entities(true);
 		

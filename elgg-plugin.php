@@ -1,5 +1,7 @@
 <?php
 
+use Elgg\Project\Paths;
+
 $composer_path = '';
 if (is_dir(__DIR__ . '/vendor')) {
 	$composer_path = __DIR__ . '/';
@@ -46,6 +48,16 @@ return [
 		'default' => [
 			'jquery/multiselect.js' => $composer_path . 'vendor/bower-asset/jquery-ui-multiselect-widget/src/jquery.multiselect.js',
 			'jquery/multiselect.css' => $composer_path . 'vendor/bower-asset/jquery-ui-multiselect-widget/jquery.multiselect.css',
+		],
+	],
+	'routes' => [
+		'action:register' => [
+			'path' => '/action/register',
+			'file' => Paths::elgg() . 'actions/register.php',
+			'walled' => false,
+			'middleware' => [
+				'\ColdTrick\ProfileManager\Users::validateRegisterAction',
+			]
 		],
 	],
 	'actions' => [
