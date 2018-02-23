@@ -27,18 +27,18 @@ class Users {
 		$return_value['enctype'] = 'multipart/form-data';
 		return $return_value;
 	}
-	
+
 	/**
-	 * Function to add custom profile fields to user on register
+	 * Saves extra user information when user registers on the site
 	 *
-	 * @param string   $event       Event name
-	 * @param string   $object_type Event type
-	 * @param ElggUser $object      User being created
+	 * @param \Elgg\Event $event event
 	 *
-	 * @return array
+	 * @return void
 	 */
-	public static function create($event, $object_type, $object) {
+	public static function createUserByRegister(\Elgg\Event $event) {
 		$custom_profile_fields = [];
+		
+		$user = $event->getObject();
 	
 		// retrieve all field that were on the register page
 		foreach ($_POST as $key => $value) {
@@ -55,8 +55,9 @@ class Users {
 			// set ignore access
 			$ia = elgg_set_ignore_access(true);
 			
+			$user_default_access = get_default_access($user);
+			
 			foreach ($custom_profile_fields as $shortname => $value) {
-					
 				// determine if $value should be an array
 				if (!is_array($value) && !empty($configured_fields)) {
 					foreach ($configured_fields as $configured_field_category) {
@@ -76,22 +77,20 @@ class Users {
 						}
 					}
 				}
-					
-				// use create_metadata to listen to default access
-				if (is_array($value)) {
-					$i = 0;
-					foreach ($value as $interval) {
-						$i++;
-						if ($i == 1) {
-							$multiple = false;
-						} else {
-							$multiple = true;
-						}
-						create_metadata($object->guid, $shortname, $interval, 'text', $object->guid, get_default_access($object), $multiple);
-					}
-				} else {
-					create_metadata($object->guid, $shortname, $value, 'text', $object->guid, get_default_access($object));
+				
+				if (empty($value) && $value !== 0) {
+					continue;
 				}
+				
+				if (!is_array($value)) {
+					$value = [$value];
+				}
+				foreach ($value as $interval) {
+					$user->annotate("profile:$shortname", $interval, $user_default_access, $user->guid, 'text');
+				}
+		
+				// for BC, keep storing fields in MD, but we'll read annotations only
+				$user->$shortname = $value;
 			}
 	
 			// restore ignore access
@@ -99,8 +98,8 @@ class Users {
 		}
 	
 		if (elgg_get_uploaded_file('profile_icon')) {
-			if (!$object->saveIconFromUploadedFile('profile_icon')) {
-				register_error(elgg_echo('avatar:resize:fail'));
+			if (!$user->saveIconFromUploadedFile('profile_icon')) {
+				register_error(elgg_echo('avatar:upload:fail'));
 				// return false to delete the user
 				return false;
 			}
@@ -108,12 +107,53 @@ class Users {
 	
 		$terms = elgg_get_plugin_setting('registration_terms', 'profile_manager');
 		if ($terms) {
-			$object->setPrivateSetting('general_terms_accepted', time());
+			// already checked for acceptance in middleware
+			$user->setPrivateSetting('general_terms_accepted', time());
 		}
 	
 		elgg_clear_sticky_form('profile_manager_register');
 	}
+
+	/**
+	 * Saves extra user information when user is created with admin useradd form
+	 *
+	 * @param \Elgg\Event $event event
+	 *
+	 * @return void
+	 */
+	public static function createUserByAdmin(\Elgg\Event $event) {
+		
+		$user = $event->getObject();
+		
+		$custom_profile_fields = get_input('custom_profile_fields');
+		
+		if (!is_array($custom_profile_fields)) {
+			return;
+		}
+		
+		$user_default_access = get_default_access($user);
+		
+		foreach ($custom_profile_fields as $shortname => $value) {
+			if (!empty($value) || $value === 0) {
+				if (!is_array($value)) {
+					$value = [$value];
+				}
+				foreach ($value as $interval) {
+					$user->annotate("profile:$shortname", $interval, $user_default_access, $user->guid, 'text');
+				}
+		
+				// for BC, keep storing fields in MD, but we'll read annotations only
+				$user->$shortname = $value;
+			}
+		}
+	}
 	
+	/**
+	 * Validates the register action
+	 *
+	 * @param \Elgg\Request $request request
+	 * @return void|\Elgg\Http\OkResponse
+	 */
 	public static function validateRegisterAction(\Elgg\Request $request) {
 		elgg_make_sticky_form('register');
 		elgg_make_sticky_form('profile_manager_register');
@@ -134,6 +174,12 @@ class Users {
 		}
 	}
 	
+	/**
+	 * Validates the existence of a required profile icon when a user registers
+	 *
+	 * @param \Elgg\Request $request request
+	 * @return \Elgg\Http\OkResponse
+	 */
 	protected static function validateRegisterProfileIcon(\Elgg\Request $request) {
 		
 		$profile_icon = elgg_get_plugin_setting('profile_icon_on_register', 'profile_manager');
@@ -158,6 +204,12 @@ class Users {
 		}
 	}
 	
+	/**
+	 * Validates if terms are required to be accepted when a user registers
+	 *
+	 * @param \Elgg\Request $request request
+	 * @return \Elgg\Http\OkResponse
+	 */
 	protected static function validateRegisterTerms(\Elgg\Request $request) {
 		
 		$terms = elgg_get_plugin_setting('registration_terms', 'profile_manager');
@@ -173,6 +225,12 @@ class Users {
 		return elgg_error_response(elgg_echo('profile_manager:register_pre_check:terms'));
 	}
 	
+	/**
+	 * Validates if required fields are submitted on the user registration form
+	 *
+	 * @param \Elgg\Request $request request
+	 * @return \Elgg\Http\OkResponse
+	 */
 	protected static function validateRegisterRequiredFields(\Elgg\Request $request) {
 
 		$profile_type_guid = get_input('custom_profile_fields_custom_profile_type', false);
@@ -221,40 +279,6 @@ class Users {
 			'object_guid' => elgg_get_site_entity()->guid,
 		]);
 	}
-
-	/**
-	 * Saves extra user information when user is created with admin useradd form
-	 *
-	 * @param \Elgg\Event $event event
-	 *
-	 * @return void
-	 */
-	public static function createUserByAdmin(\Elgg\Event $event) {
-		
-		$user = $event->getObject();
-		
-		$custom_profile_fields = get_input('custom_profile_fields');
-		
-		if (!is_array($custom_profile_fields)) {
-			return;
-		}
-		
-		$user_default_access = get_default_access($user);
-		
-		foreach ($custom_profile_fields as $shortname => $value) {
-			if (!empty($value) || $value === 0) {
-				if (!is_array($value)) {
-					$value = [$value];
-				}
-				foreach ($value as $interval) {
-					$user->annotate("profile:$shortname", $interval, $user_default_access, $user->guid, 'text');
-				}
-		
-				// for BC, keep storing fields in MD, but we'll read annotations only
-				$user->$shortname = $value;
-			}
-		}
-	}
 	
 	/**
 	 * Generates username based on emailaddress
@@ -282,7 +306,7 @@ class Users {
 		}
 		
 		// check if minimal length is matched
-		$min_length = elgg_get_config('minusername');
+		$min_length = elgg_get_config('minusername') ?: 4;
 		if ($min_length) {
 			$username = str_pad($username, $min_length, 0);
 		}
@@ -303,37 +327,5 @@ class Users {
 		access_show_hidden_entities($hidden);
 		
 		return $username;
-	}
-	
-	/**
-	 * Validates a username
-	 *
-	 * @param string $username Username
-	 *
-	 * @return boolean
-	 */
-	protected static function validateUsername($username) {
-		$result = false;
-		if (empty($username)) {
-			return $result;
-		}
-		
-		// make sure we can check every user (even unvalidated)
-		$access_status = access_show_hidden_entities(true);
-		
-		// check if username exists
-		try {
-			if (validate_username($username)) {
-				if (!get_user_by_username($username)) {
-					$result = true;
-				}
-			}
-		} catch (Exception $e) {
-		}
-		
-		// restore access settings
-		access_show_hidden_entities($access_status);
-		
-		return $result;
 	}
 }

@@ -32,6 +32,10 @@ function profile_manager_init() {
 	elgg_extend_view('css/elgg', 'css/profile_manager/site.css');
 	elgg_extend_view('css/elgg', 'jquery/multiselect.css');
 	
+	elgg_extend_view('forms/register', 'profile_manager/register/free_text', 400);
+	elgg_extend_view('register/extend', 'profile_manager/register/fields');
+	elgg_extend_view('forms/useradd', 'profile_manager/admin/useradd');
+	
 	// Register all custom field types
 	profile_manager_register_custom_field_types();
 	
@@ -43,30 +47,17 @@ function profile_manager_init() {
 		]);
 	}
 	
-	// free_text on register form
-	elgg_extend_view('forms/register', 'profile_manager/register/free_text', 400);
-	elgg_extend_view('register/extend', 'profile_manager/register/fields');
-
-	elgg_extend_view('forms/useradd', 'profile_manager/admin/useradd');
-	
-	// extend public pages
-	elgg_register_plugin_hook_handler('public_pages', 'walled_garden', '\ColdTrick\ProfileManager\Sites::publicPages');
-	
-	elgg_register_plugin_hook_handler('view_vars', 'input/form', '\ColdTrick\ProfileManager\Users::registerViewVars');
-	
-	// menu hooks
-	elgg_register_plugin_hook_handler('register', 'menu:page', '\ColdTrick\ProfileManager\Menus::registerAdmin');
-	elgg_register_plugin_hook_handler('register', 'menu:profile_fields', '\ColdTrick\ProfileManager\Menus::registerProfileFieldsActions');
-	
-	// users
-	elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::create');
-	
-	// profile fields
+	elgg_register_plugin_hook_handler('categorized_profile_fields', 'profile_manager', '\ColdTrick\ProfileManager\ProfileFields::addAdminFields', 1000);
 	elgg_register_plugin_hook_handler('profile:fields', 'profile', '\ColdTrick\ProfileManager\ProfileFields::getUserFields');
 	elgg_register_plugin_hook_handler('profile:fields', 'group', '\ColdTrick\ProfileManager\ProfileFields::getGroupFields');
-	elgg_register_plugin_hook_handler('categorized_profile_fields', 'profile_manager', '\ColdTrick\ProfileManager\ProfileFields::addAdminFields', 1000);
+	elgg_register_plugin_hook_handler('public_pages', 'walled_garden', '\ColdTrick\ProfileManager\Sites::publicPages');
+	elgg_register_plugin_hook_handler('register', 'menu:page', '\ColdTrick\ProfileManager\Menus::registerAdmin');
+	elgg_register_plugin_hook_handler('register', 'menu:profile_fields', '\ColdTrick\ProfileManager\Menus::registerProfileFieldsActions');
+	elgg_register_plugin_hook_handler('view_vars', 'input/form', '\ColdTrick\ProfileManager\Users::registerViewVars');
 	
+	elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUserByRegister');
 	elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUserRiverItem');
+	
 	elgg_register_plugin_hook_handler('action', 'useradd', function() {
 		// only register createByAdmin during useradd action
 		elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUserByAdmin');
