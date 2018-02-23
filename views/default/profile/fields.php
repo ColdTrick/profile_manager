@@ -29,6 +29,7 @@ if (count($cats) < 1) {
 $output = '';
 
 $show_profile_type_on_profile = elgg_get_plugin_setting('show_profile_type_on_profile', 'profile_manager');
+$show_as_tabs = (bool) (elgg_get_plugin_setting('display_categories', 'profile_manager') == 'tabs');
 
 if ($show_profile_type_on_profile !== 'no') {
 	if ($profile_type_guid = $user->custom_profile_type) {
@@ -41,6 +42,7 @@ if ($show_profile_type_on_profile !== 'no') {
 // only show category headers if more than 1 category available
 $show_header = (bool) (count($cats) > 1);
 
+$tabs = [];
 foreach ($cats as $cat_guid => $cat) {
 
 	$cat_data = '';
@@ -106,24 +108,28 @@ foreach ($cats as $cat_guid => $cat) {
 				$cat_title = $cat->getDisplayName();
 			}
 			
-			$output .= elgg_view_module('info', $cat_title, $cat_data);
+			if ($show_as_tabs) {
+				$tabs[] = [
+					'text' => $cat_title,
+					'content' => $cat_data,
+				];
+			} else {
+				$output .= elgg_view_module('info', $cat_title, $cat_data);
+			}
 		}
 	}
 }
 
-if ($output) {
-	echo elgg_format_element('div', ['class' => 'elgg-profile-fields'], $output);
+if (!empty($tabs)) {
+	// make the first tab selected
+	$tabs[0]['selected'] = true;
+	$output .= elgg_view('page/components/tabs', [
+		'tabs' => $tabs,
+	]);
 }
 
+if (empty($output)) {
+	return;
+}
 
-// if (!empty($details_result)) {
-// 	$details_options = [
-// 		'id' => 'custom_fields_userdetails',
-// 		'class' => ['elgg-module', 'elgg-module-info'],
-// 	];
-// 	if (elgg_get_plugin_setting('display_categories', 'profile_manager') == 'accordion') {
-// 		elgg_require_js('profile_manager/accordion');
-// 		$details_options['class'][] = 'profile-manager-accordion';
-// 	}
-// 	$content .= elgg_format_element('div', $details_options, $details_result);
-// }
+echo elgg_format_element('div', ['class' => 'elgg-profile-fields'], $output);
