@@ -137,7 +137,7 @@ echo elgg_view_module('info', elgg_echo('profile_manager:settings:view_profile')
 			'name' => 'params[display_categories]',
 			'options_values' => [
 				'plain' => elgg_echo('profile_manager:settings:display_categories:option:plain'),
-				'accordion' => elgg_echo('profile_manager:settings:display_categories:option:accordion'),
+				'tabs' => elgg_echo('profile_manager:settings:display_categories:option:tabs'),
 			],
 			'value' => $plugin->display_categories,
 		],

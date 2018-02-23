@@ -18,31 +18,6 @@
 	height: 20px;
 }
 
-#custom_fields_userdetails.ui-accordion {
-	margin-bottom: 10px;
-}
-
-#custom_fields_userdetails .ui-accordion-header {
-	color: #666666;
-	background: #EEEEEE;
-	border: 2px solid #DEDEDE;
-	cursor: pointer;
-	margin-top: 5px;
-	margin-bottom: 0px;
-	padding: 5px;
-}
-
-#custom_fields_userdetails .ui-accordion-content {
-	border-style: solid;
-	border-color: #DEDEDE;
-	border-width: 0 2px 2px 2px;
-	padding: 5px;
-}
-
-#custom_fields_userdetails .ui-accordion-header:hover {
-	border-color: #CCCCCC;
-}
-
 /* fix for max-height multi-select drop down*/
 .ui-dropdownchecklist-dropcontainer {
 	max-height: 150px;

@@ -52,7 +52,6 @@ return [
 
 	'profile_manager:settings:display_categories' => 'Selecciona como se muestran las categorías en el perfil',
 	'profile_manager:settings:display_categories:option:plain' => 'Plano',
-	'profile_manager:settings:display_categories:option:accordion' => 'Acordeón',
 
 	'profile_manager:settings:display_system_category' => 'Mostrar una categoría extra en el perfil con systemdata (solo para admins)',
 

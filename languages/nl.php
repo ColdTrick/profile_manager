@@ -55,7 +55,7 @@ return array (
   'profile_manager:settings:show_profile_type_on_profile' => 'Toon het profiel type op het profiel van een gebruiker',
   'profile_manager:settings:display_categories' => 'Hoe moeten de velden op het profiel worden getoond',
   'profile_manager:settings:display_categories:option:plain' => 'Gewoon',
-  'profile_manager:settings:display_categories:option:accordion' => 'Accordeon',
+  'profile_manager:settings:display_categories:option:tabs' => 'Tabs',
   'profile_manager:settings:display_system_category' => 'Toon een extra categorie op het profiel met systeem informatie (alleen voor beheerders)',
   'profile_manager:settings:profile_type_selection' => 'Wie kan het profiel type wijzigen?',
   'profile_manager:settings:profile_type_selection:option:user' => 'Gebruiker',

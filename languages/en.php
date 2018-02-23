@@ -57,7 +57,7 @@ return [
 
 	'profile_manager:settings:display_categories' => 'Select how the different categories are displayed on the profile',
 	'profile_manager:settings:display_categories:option:plain' => 'Plain',
-	'profile_manager:settings:display_categories:option:accordion' => 'Accordion',
+	'profile_manager:settings:display_categories:option:tabs' => 'Tabs',
 
 	'profile_manager:settings:display_system_category' => 'Show an extra category on the profile with systemdata (only for admins)',
 

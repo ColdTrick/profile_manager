@@ -52,7 +52,6 @@ return array(
 
 	'profile_manager:settings:display_categories' => 'Sélectionnez la façon dont les différentes catégories sont affichées sur le profil',
 	'profile_manager:settings:display_categories:option:plain' => 'Simple',
-	'profile_manager:settings:display_categories:option:accordion' => 'Accordéon',
 
 	'profile_manager:settings:display_system_category' => 'Afficher une catégorie supplémentaire sur le profil avec les données du système (uniquement pour les admins )',
 
@@ -85,7 +84,7 @@ return array(
 	'profile_manager:admin:metadata_input_label' => 'Label du champ',
 	'profile_manager:admin:metadata_input_label:help' => "Utilisé à l'inscription et à la modification du profile à la place du libellé",
 	'profile_manager:admin:metadata_hint' => 'Conseil',
-	'profile_manager:admin:metadata_placeholder' => 'Paramètre substituable',	
+	'profile_manager:admin:metadata_placeholder' => 'Paramètre substituable',
 	'profile_manager:admin:metadata_options' => 'Options (séparées par des virgules)',
 	'profile_manager:admin:field_type' => "Type de champs",
 	'profile_manager:admin:options:dropdown' => 'Menu déroulant',
