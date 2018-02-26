@@ -90,17 +90,17 @@ if (!empty($profile_fields)) {
 			];
 		}
 		
-		$category_classes = ["category_{$cat_guid}"];
+		$category_classes = ["custom_profile_type_{$cat_guid}"];
 		
 		if (($linked_profile_types[0] !== 0) && !in_array($custom_profile_fields_custom_profile_type, $linked_profile_types)) {
 			$category_classes[] = 'hidden';
 		}
 		
 		foreach ($linked_profile_types as $type_guid) {
-			$category_classes[] = "profile_type_{$type_guid}";
+			$category_classes[] = "custom_profile_type_{$type_guid}";
 		}
 				
-		$category_classes[] = 'profile_manager_register_category';
+		$category_classes[] = 'custom_fields_edit_profile_category';
 		
 		$cat_title = empty($cat_guid) ? elgg_echo('profile_manager:categories:list:default') : $cat->getDisplayName();
 		

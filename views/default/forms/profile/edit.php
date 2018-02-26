@@ -13,7 +13,6 @@
 
 $user = elgg_extract('entity', $vars);
 
-elgg_require_js('profile_manager/profile_edit');
 
 $sticky_values = elgg_get_sticky_values('profile:edit');
 
@@ -41,15 +40,16 @@ if (!empty($cats)) {
 	
 	// can user edit? or just admins
 	if ($setting == 'user' || elgg_is_admin_logged_in()) {
-		// get profile types
-		
 		$types = elgg_get_entities([
 			'type' => 'object',
 			'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
 			'limit' => false,
 			'owner_guid' => elgg_get_site_entity()->getGUID(),
 		]);
+		
 		if ($types) {
+			elgg_require_js('profile_manager/profile_type');
+
 			$types_description = '';
 			
 			$dropdown_options = ['' => elgg_echo('profile_manager:profile:edit:custom_profile_type:default')];
@@ -62,7 +62,7 @@ if (!empty($cats)) {
 				$description = $type->getDescription();
 				
 				if (!empty($description)) {
-					$type_description = elgg_format_element('h3', [], elgg_echo("profile_manager:profile:edit:custom_profile_type:description"));
+					$type_description = elgg_format_element('strong', [], elgg_echo("profile_manager:profile:edit:custom_profile_type:description"));
 					$type_description .= $description;
 					
 					$types_description .= elgg_format_element('div', [
@@ -109,7 +109,9 @@ if (!empty($cats)) {
 	
 	foreach ($cats as $cat_guid => $cat) {
 		
-		$category_class = [];
+		$category_class = [
+			'custom_fields_edit_profile_category',
+		];
 		if ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 
 			$profile_types = elgg_get_entities([
@@ -123,9 +125,6 @@ if (!empty($cats)) {
 			]);
 			
 			if ($profile_types) {
-				
-				$category_class[] = 'custom_fields_edit_profile_category';
-				
 				// add extra class so it can be toggle in the display
 				$hidden_category = true;
 				foreach ($profile_types as $type) {
@@ -138,7 +137,11 @@ if (!empty($cats)) {
 				if ($hidden_category) {
 					$category_class[] = 'hidden';
 				}
+			} else {
+				$category_class[] = 'custom_profile_type_0';
 			}
+		} else {
+			$category_class[] = 'custom_profile_type_0';
 		}
 				
 		$cat_data = '';
