@@ -18,16 +18,29 @@
 	height: 20px;
 }
 
+/* edit profile */
+.profile-manager-edit-profile-field > .elgg-field-input {
+	display: flex;
+	
+	> .elgg-input-access {
+		margin-left: 1rem;
+	}
+}
+
+.profile-manager-simple-access-controlled .elgg-input-access {
+	display: none;
+}
+
+.ui-multiselect,
+.profile-manager-input-pm-rating {
+	margin-right: auto;
+}
+
 /* fix for max-height multi-select drop down*/
 .ui-dropdownchecklist-dropcontainer {
 	max-height: 150px;
 }
 /* end fix */
-
-.profile_manager_profile_edit_tab_content,
-li.custom_fields_edit_profile_category {
-	display: none;
-}
 
 .elgg-icon.profile_manager_validate_icon {
 	margin-left: -22px;

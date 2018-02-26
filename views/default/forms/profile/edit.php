@@ -15,23 +15,27 @@ $user = elgg_extract('entity', $vars);
 
 elgg_require_js('profile_manager/profile_edit');
 
+$sticky_values = elgg_get_sticky_values('profile:edit');
+
 echo elgg_view('profile/edit/name', $vars);
 
 // Build fields
 
 $categorized_fields = profile_manager_get_categorized_fields($user, true);
-$cats = $categorized_fields['categories'];
-$fields = $categorized_fields['fields'];
+$cats = elgg_extract('categories', $categorized_fields);
+$fields = elgg_extract('fields', $categorized_fields);
 
 $edit_profile_mode = elgg_get_plugin_setting('edit_profile_mode', 'profile_manager');
-$simple_access_control = elgg_get_plugin_setting('simple_access_control','profile_manager');
+$show_tabbed = (bool) ($edit_profile_mode === 'tabbed');
+
+$simple_access_control = (bool) (elgg_get_plugin_setting('simple_access_control','profile_manager') === 'yes');
 
 $access_id = get_default_access($user);
 
 if (!empty($cats)) {
 	
 	// Profile type selector
-	$setting = elgg_get_plugin_setting('profile_type_selection', 'profile_manager', 'user');
+	$setting = elgg_get_plugin_setting('profile_type_selection', 'profile_manager');
 	
 	$profile_type = $user->custom_profile_type;
 	
@@ -98,21 +102,15 @@ if (!empty($cats)) {
 	}
 	
 	$tabs = [];
-	$tab_content = '';
-	$list_content = '';
+	$output = '';
+	
+	// only show category headers if more than 1 category available
+	$show_header = (bool) (count($cats) > 1);
 	
 	foreach ($cats as $cat_guid => $cat) {
-		// make nice title for category
-		$cat_title = elgg_echo('profile_manager:categories:list:default');
+		
+		$category_class = [];
 		if ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
-			$cat_title = $cat->getDisplayName();
-		}
-	
-		$class = '';
-		if ($edit_profile_mode !== 'tabbed') {
-			$class .= 'elgg-module elgg-module-info';
-		}
-		if (!empty($cat_guid) && ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory)) {
 
 			$profile_types = elgg_get_entities([
 				'type' => 'object',
@@ -123,140 +121,144 @@ if (!empty($cats)) {
 				'relationship_guid' => $cat_guid,
 				'inverse_relationship' => true,
 			]);
+			
 			if ($profile_types) {
 				
-				$class .= ' custom_fields_edit_profile_category';
+				$category_class[] = 'custom_fields_edit_profile_category';
 				
 				// add extra class so it can be toggle in the display
 				$hidden_category = true;
 				foreach ($profile_types as $type) {
-					$class .= ' custom_profile_type_' . $type->getGUID();
-					if ($type->getGUID() === (int) $profile_type) {
+					$category_class[] = 'custom_profile_type_' . $type->guid;
+					if ($type->guid === (int) $profile_type) {
 						$hidden_category = false;
 					}
 				}
 				
 				if ($hidden_category) {
-					$class .= ' hidden';
+					$category_class[] = 'hidden';
 				}
 			}
 		}
 				
-		$tab_content .= "<div id='profile_manager_profile_edit_tab_content_{$cat_guid}' class='profile_manager_profile_edit_tab_content'>";
-			
-		$list_content .= "<div id='{$cat_guid}' class='{$class}'>";
-		if (count($cats) > 1) {
-			$cat_header = elgg_format_element('h3', [], $cat_title);
-			$list_content .= elgg_format_element('div', ['class' => 'elgg-head'], $cat_header);
-		}
-		$list_content .= '<div class="elgg-body">';
-		$list_content .= '<fieldset>';
-		
-		// display each field for currect category
-		$visible_fields = 0;
+		$cat_data = '';
 		
 		foreach ($fields[$cat_guid] as $field) {
-			
 			if ($field->user_editable == 'no') {
 				// non editable fields should not be on the form
 				continue;
 			}
 			
-			$metadata_name = $field->metadata_name;
+			$shortname = $field->metadata_name;
+			$valtype = $field->metadata_type;
 			
-			// get value
-			$metadata = elgg_get_metadata([
-				'guid' => $user->guid,
-				'metadata_name' => $metadata_name,
+			$annotations = $user->getAnnotations([
+				'annotation_names' => "profile:$shortname",
 				'limit' => false,
 			]);
-			
-			if ($metadata) {
-				$metadata = $metadata[0];
-				
-				$value = $user->$metadata_name;
-				$access_id = $metadata->access_id;
+			$access_id = ACCESS_DEFAULT;
+			if ($annotations) {
+				$value = '';
+				foreach ($annotations as $annotation) {
+					if (!empty($value)) {
+						$value .= ', ';
+					}
+					$value .= $annotation->value;
+					$access_id = $annotation->access_id;
+				}
 			} else {
 				$value = '';
-				$access_id = get_default_access($user);
 			}
-
-			$visible_fields++;
-			
-			$field_title = $field->getDisplayName(true);
-			
-			$hint = $field->getHint();
-			if ($hint) {
-				$field_title .= elgg_view('output/pm_hint', [
-					'id' => "more_info_{$metadata_name}",
-					'text' => $hint,
-				]);
+	
+			// sticky form values take precedence over saved ones
+			if (isset($sticky_values[$shortname])) {
+				$value = $sticky_values[$shortname];
 			}
-			
-			$field_result = elgg_view_field([
-				'#type' => 'profile_edit',
-				'#label' => $field_title,
-				'pm_type' => $field->metadata_type,
-				'pm_access_id' => $access_id,
-				'id' => $metadata_name,
-				'name' => $metadata_name,
+			if (isset($sticky_values['accesslevel'][$shortname])) {
+				$access_id = $sticky_values['accesslevel'][$shortname];
+			}
+	
+			$id = "profile-$shortname";
+			$input = elgg_view("input/$valtype", [
+				'name' => $shortname,
 				'value' => $value,
+				'id' => $id,
 				'options' => $field->getOptions() ?: null,
 				'placeholder' => $field->getPlaceholder() ?: null,
 			]);
+			$access_input = elgg_view('input/access', [
+				'name' => "accesslevel[$shortname]",
+				'value' => $access_id,
+			]);
 			
-			$tab_content .= $field_result;
-			$list_content .= $field_result;
+			$cat_data .= elgg_view('elements/forms/field', [
+				'class' => 'profile-manager-edit-profile-field',
+				'input' => elgg_format_element('div', [
+						'class' => 'elgg-field-input',
+					], $input . $access_input),
+				'label' => elgg_view('elements/forms/label', [
+					'label' => $field->getDisplayName(true),
+					'id' => $id,
+				]),
+				'help' => elgg_view('elements/forms/help', [
+					'help' => $field->getHint(),
+				]),
+			]);
 		}
 		
-		if ($visible_fields) {
-			// only add tab if there are visible fields
-			$tabs[] = [
-				'title' => $cat_title,
-				'url' => "#" . $cat_guid,
-				'id' => $cat_guid,
-				'class' => $class,
-			];
+		if (!empty($cat_data)) {
+			if (!$show_header) {
+				$output .= $cat_data;
+			} else {
+				// make nice title for category
+				$cat_title = elgg_echo('profile_manager:categories:list:default');
+				if ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
+					$cat_title = $cat->getDisplayName();
+				}
+				
+				if ($show_tabbed) {
+					$tabs[] = [
+						'text' => $cat_title,
+						'content' => $cat_data,
+						'class' => $category_class,
+					];
+				} else {
+					$output .= elgg_view_module('info', $cat_title, $cat_data, [
+						'class' => $category_class,
+					]);
+				}
+			}
 		}
-		
-		$tab_content .= '</div>';
-		
-		$list_content .= '</fieldset>';
-		$list_content .= '</div>';
-		$list_content .= '</div>';
 	}
 	
-	if (($edit_profile_mode == 'tabbed') && (count($cats) > 1)) {
-		echo elgg_format_element('div', ['id' => 'profile_manager_profile_edit_tabs'], elgg_view('navigation/tabs', ['tabs' => $tabs]));
-		echo elgg_format_element('div', ['id' => 'profile_manager_profile_edit_tab_content_wrapper'], $tab_content);
+	if (!empty($tabs)) {
+		// make the first tab selected
+		$tabs[0]['selected'] = true;
+		$output .= elgg_view('page/components/tabs', [
+			'tabs' => $tabs,
+			'id' => 'profile_manager_profile_edit_tabs',
+		]);
+	}
+	
+	if (!empty($output) && $simple_access_control) {
+		elgg_require_js('profile_manager/simple_access_control');
+		
+		echo elgg_format_element('div', [
+			'class' => 'profile-manager-simple-access-controlled',
+		], $output);
+		
+		echo elgg_view_field([
+			'#type' => 'access',
+			'#label' => elgg_echo('profile_manager:simple_access_control'),
+			'name' => 'simple_access_control',
+			'value' => $access_id,
+		]);
 	} else {
-		echo $list_content;
+		echo $output;
 	}
 }
 
-if ($simple_access_control == 'yes') {
-	elgg_require_js('profile_manager/simple_access_control');
-	
-	$simple_access_control_input = elgg_format_element('label', [], elgg_echo('profile_manager:simple_access_control'));
-	$simple_access_control_input .= elgg_view('input/access', [
-		'name' => 'simple_access_control',
-		'value' => $access_id,
-		'class' => 'simple_access_control mlm hidden',
-	]);
-	
-	echo elgg_format_element('div', ['class' => 'profile-manager-simple-access-control'], $simple_access_control_input);
-	
-	?>
-	<style type="text/css">
-		.elgg-input-access {
-			display: none;
-		}
-		.simple_access_control {
-			display: inline-block;
-		}
-	</style>
-	<?php
-}
+elgg_clear_sticky_form('profile:edit');
 
 echo elgg_view_field([
 	'#type' => 'hidden',
@@ -264,5 +266,8 @@ echo elgg_view_field([
 	'value' => $user->guid,
 ]);
 
-$footer = elgg_view('input/submit', ['value' => elgg_echo('save')]);
+$footer = elgg_view_field([
+	'#type' => 'submit',
+	'value' => elgg_echo('save'),
+]);
 elgg_set_form_footer($footer);
