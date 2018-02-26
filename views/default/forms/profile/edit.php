@@ -251,7 +251,7 @@ if (!empty($cats)) {
 			'#type' => 'access',
 			'#label' => elgg_echo('profile_manager:simple_access_control'),
 			'name' => 'simple_access_control',
-			'value' => $access_id,
+			'value' => get_default_access($user),
 		]);
 	} else {
 		echo $output;

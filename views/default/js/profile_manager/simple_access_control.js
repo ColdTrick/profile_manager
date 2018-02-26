@@ -3,19 +3,16 @@ define(function(require) {
 
 	function init () {
 		$(document).ready(function(){
-			var val = $('.elgg-input-access:first').val();
-			$('.simple_access_control').val(val);
+			set_access_control($('.elgg-input-access[name="simple_access_control"]').val());
 			
-			set_access_control(val);
-			
-			$('.simple_access_control').on('change', function() {
+			$('.elgg-input-access[name="simple_access_control"]').on('change', function() {
 				set_access_control($(this).val());
-			}).removeClass('hidden');
+			});
 		});
 	}
 	
 	function set_access_control(val){
-		$('.elgg-input-access').not('.simple_access_control').val(val);
+		$('.profile-manager-edit-profile-field .elgg-input-access').val(val);
 	}
 	
 	init();
