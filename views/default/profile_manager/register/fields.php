@@ -99,20 +99,6 @@ if (!empty($profile_fields)) {
 		foreach ($linked_profile_types as $type_guid) {
 			$category_classes[] = "profile_type_{$type_guid}";
 		}
-		
-// 		$cat_header = '';
-// 		if (count($cats) > 1) {
-			
-// 			if ($tabbed) {
-				
-// 				$li_classes = $category_classes;
-// 				if (!$tab_selected && !in_array('hidden', $category_classes)) {
-// 					$li_classes[] = 'elgg-state-selected';
-// 					$tab_selected = true;
-// 				}
-// 				$tabbed_cat_titles .= elgg_format_element('li', ['class' => $li_classes], $tab_link);
-// 			}
-// 		}
 				
 		$category_classes[] = 'profile_manager_register_category';
 		
@@ -136,16 +122,6 @@ if (!empty($profile_fields)) {
 			];
 		}
 	}
-	
-// 	if ($tabbed) {
-// 		if ($tabbed_cat_titles) {
-			
-// 			$result .= elgg_format_element('ul', ['class' => 'elgg-tabs elgg-htabs', 'id' => 'profile_manager_register_tabbed'], $tabbed_cat_titles);
-// 			$result .= elgg_format_element('div', [], $tabbed_cat_content);
-// 		} else {
-// 			$result .= $tabbed_cat_content;
-// 		}
-// 	}
 }
 
 if (!empty($tabs)) {

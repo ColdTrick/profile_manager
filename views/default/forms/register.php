@@ -122,18 +122,4 @@ $footer .= elgg_view_field([
 
 elgg_set_form_footer($footer);
 
-
 echo elgg_format_element('script', [], 'require(["profile_manager/register"]);');
-
-
-
-
-
-
-$spinner = elgg_view_icon('spinner', ['class' => 'profile_manager_validate_icon fa-pulse hidden']);
-// email
-// username
-// passwprd 1 en 2
-
-
-

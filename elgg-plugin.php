@@ -76,7 +76,5 @@ return [
 		'profile_manager/categories/reorder' => ['access' => 'admin'],
 
 		'profile_manager/profile_types/add' => ['access' => 'admin'],
-
-		'profile_manager/register/validate' => ['access' => 'public'],
 	],
 ];

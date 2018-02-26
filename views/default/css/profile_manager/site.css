@@ -41,15 +41,3 @@
 	max-height: 150px;
 }
 /* end fix */
-
-.elgg-icon.profile_manager_validate_icon {
-	margin-left: -22px;
-    margin-top: 8px;
-    position: absolute;
-}
-
-/* registration form mandatory fields */
-
-.profile_manager_register_missing {
-	border: 1px solid red !important;
-}
