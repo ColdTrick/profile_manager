@@ -11,10 +11,6 @@
 	z-index: 20000;
 }
 
-
-
-
-
 button.ui-multiselect {
 	max-width: 100%;
 	border: 1px solid $(border-color-mild);

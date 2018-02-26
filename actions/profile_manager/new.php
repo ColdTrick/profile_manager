@@ -160,14 +160,10 @@ if (empty($current_field)) {
 	$field->order = $max_fields;
 }
 
-if (!$field->save()) {
-	// update system cache
-	elgg_get_system_cache()->delete("profile_manager_{$type}_fields_{$site_guid}");
+elgg_delete_system_cache("profile_manager_{$type}_fields");
 
+if (!$field->save()) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:new:error:unknown'));
 }
-
-// update system cache
-elgg_get_system_cache()->delete("profile_manager_{$type}_fields_{$site_guid}");
 
 return elgg_ok_response('', elgg_echo('profile_manager:actions:new:success'));

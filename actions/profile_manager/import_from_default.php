@@ -91,6 +91,6 @@ if ($added == 0) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:import:from_default:no_fields'));
 }
 
-elgg_get_system_cache()->delete("profile_manager_{$type}_fields_{$site_guid}");
+elgg_delete_system_cache("profile_manager_{$type}_fields");
 
 return elgg_ok_response('', elgg_echo('profile_manager:actions:import:from_default:new_fields', [$added]));

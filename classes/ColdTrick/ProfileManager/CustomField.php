@@ -87,10 +87,8 @@ abstract class CustomField extends \ElggObject {
 		
 		$deleted = parent::delete($recursive);
 		if ($deleted) {
-			
-			// clear cache
-			elgg_get_system_cache()->delete("profile_manager_profile_fields_{$site_guid}");
-			elgg_get_system_cache()->delete("profile_manager_group_fields_{$site_guid}");
+			elgg_delete_system_cache('profile_manager_profile_fields');
+			elgg_delete_system_cache('profile_manager_group_fields');
 		}
 		
 		return $deleted;

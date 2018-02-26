@@ -32,11 +32,6 @@ function profile_manager_register_custom_field_types() {
 	$tel_options = $profile_options;
 	$tel_options['output_as_tags'] = false;
 	
-	//$file_options = array(
-	//	'user_editable' => true,
-	//	'admin_only' => true
-	//);
-	
 	$pm_rating_options = $profile_options;
 	unset($pm_rating_options['output_as_tags']);
 	

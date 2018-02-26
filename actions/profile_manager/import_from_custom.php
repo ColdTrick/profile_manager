@@ -63,9 +63,7 @@ foreach ($fieldlistarray as $listitem) {
 	$n++;
 }
 
-// clear cache
-$site_guid = elgg_get_site_entity()->guid;
-elgg_get_system_cache()->delete("profile_manager_profile_fields_{$site_guid}");
+elgg_delete_system_cache('profile_manager_profile_fields');
 
 $num_new_fields = $n - $skipped;
 if (!$num_new_fields) {

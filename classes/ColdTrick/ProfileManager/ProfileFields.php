@@ -21,9 +21,7 @@ class ProfileFields {
 		$result = [];
 	
 		// get from cache
-		$site_guid = elgg_get_config('site_guid');
-	
-		$entities = elgg_load_system_cache("profile_manager_profile_fields_{$site_guid}");
+		$entities = elgg_load_system_cache('profile_manager_profile_fields');
 		if ($entities === null) {
 			$entities = elgg_get_entities([
 				'type' => 'object',
@@ -31,7 +29,7 @@ class ProfileFields {
 				'limit' => false,
 				'owner_guid' => elgg_get_config('site_guid'),
 			]);
-			elgg_save_system_cache("profile_manager_profile_fields_{$site_guid}", serialize($entities));
+			elgg_save_system_cache('profile_manager_profile_fields', serialize($entities));
 		} else {
 			$entities = unserialize($entities);
 		}
@@ -95,9 +93,7 @@ class ProfileFields {
 	public static function getGroupFields($hook_name, $entity_type, $return_value, $parameters) {
 	
 		// get from cache
-		$site_guid = elgg_get_config('site_guid');
-		
-		$entities = elgg_load_system_cache("profile_manager_group_fields_{$site_guid}");
+		$entities = elgg_load_system_cache('profile_manager_group_fields');
 		if ($entities === null) {
 			$options = [
 				'type' => 'object',
@@ -106,7 +102,7 @@ class ProfileFields {
 				'owner_guid' => elgg_get_config('site_guid')
 			];
 			$entities = elgg_get_entities($options);
-			elgg_save_system_cache("profile_manager_group_fields_{$site_guid}", serialize($entities));
+			elgg_save_system_cache('profile_manager_group_fields', serialize($entities));
 		} else {
 			$entities = unserialize($entities);
 		}
