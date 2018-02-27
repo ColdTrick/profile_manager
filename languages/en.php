@@ -39,8 +39,7 @@ return [
 	'profile_manager:settings:registration' => 'Registration',
 	'profile_manager:settings:edit_profile' => 'Edit Profile',
 	'profile_manager:settings:view_profile' => 'View Profile',
-	'profile_manager:settings:group' => "Edit Group Profile",
-
+	
 	'profile_manager:settings:generate_username_from_email' => 'Generate username from email',
 	'profile_manager:settings:profile_icon_on_register' => 'Add mandatory profile icon input field on register form',
 	'profile_manager:settings:profile_icon_on_register:option:optional' => 'Optional',
@@ -66,23 +65,12 @@ return [
 	'profile_manager:settings:profile_type_selection:option:admin' => 'Admin only',
 
 	'profile_manager:settings:enable_profile_completeness_widget' => "Enable the profile completeness widget",
-	'profile_manager:settings:enable_username_change' => "Allow users to change their username in settings",
-	'profile_manager:settings:enable_username_change:option:admin' => "Admin only",
 	'profile_manager:settings:enable_site_join_river_event' => "Add a river event when people join this site",
 	'profile_manager:settings:profile_completeness:avatar' => "Avatar completeness percentage",
 	'profile_manager:settings:profile_completeness:avatar:help' => "If using profile completeness features you can, optionally, configure here how much a profile avatar counts towards profile completeness. The remainder percentage will be used for the profile field configuration.",
 	
 	'profile_manager:settings:registration:terms' => "To show an 'Accept terms' field on the registration page, please fill in the URL to the terms below",
-	'profile_manager:settings:registration:extra_fields' => "Where to show extra profile fields",
-	'profile_manager:settings:registration:extra_fields:extend' => "Below default registration form",
-	'profile_manager:settings:registration:extra_fields:beside' => "Beside registration form",
 	'profile_manager:settings:registration:free_text' => "Enter extra text to show on the registration page",
-	
-	
-	'profile_manager:settings:group:group_limit_name' => "Maximum number of times a group name can be edited",
-	'profile_manager:settings:group:group_limit_description' => "Maximum number of times a group description can be edited",
-	'profile_manager:settings:group:limit:unlimited' => "Unlimited",
-	'profile_manager:settings:group:limit:info' => "These limits do not apply to site administrators",
 	
 	// Field Configuration
 	'profile_manager:admin:metadata_name' => 'Name',
@@ -97,7 +85,6 @@ return [
 	'profile_manager:admin:options:radio' => 'Radio',
 	'profile_manager:admin:options:tel' => 'Telephone',
 	'profile_manager:admin:options:multiselect' => 'MultiSelect',
-	'profile_manager:admin:options:file' => 'File',
 	'profile_manager:admin:options:pm_rating' => 'Rating',
 	'profile_manager:admin:options:pm_twitter' => 'Twitter',
 	'profile_manager:admin:options:pm_facebook' => 'Facebook',
@@ -146,7 +133,6 @@ return [
 	'profile_manager:categories:list:system' => "System (admin only)",
 	'profile_manager:categories:list:view_all' => "View all fields",
 	'profile_manager:categories:list:no_categories' => "No categories defined",
-	'profile_manager:categories:delete:confirm' => "Are you sure you wish to delete this category?",
 	
 	// Custom Profile Types
 	'profile_manager:profile_types:add' => "Add a new profile type",
@@ -156,7 +142,6 @@ return [
 	'profile_manager:profile_types:edit:metadata_label:plural' => "Label (plural)",
 	'profile_manager:profile_types:list:title' => "Profile Types",
 	'profile_manager:profile_types:list:no_types' => "No profile types defined",
-	'profile_manager:profile_types:delete:confirm' => "Are you sure you wish to delete this profile type?",
 	'profile_manager:user_details:profile_type' => "Profile Type",
 		
 	// profile manager inactive users
@@ -187,18 +172,6 @@ return [
 	'profile_manager:actions:import:from_default:no_fields' => 'No default fields available for import',
 	'profile_manager:actions:import:from_default:new_fields' => 'Succesfully imported <b>%s</b> new fields',
 	'profile_manager:actions:import:from_default:error:wrong_type' => 'Wrong profile field type (group or profile)',
-
-	// Export
-	'profile_manager:actions:export:description' => "Export profile data to a csv file",
-	'profile_manager:export:title' => "Export Profile Data",
-	'profile_manager:export:description:custom_profile_field' => "This function will export all <b>user</b> metadata based on selected fields.",
-	'profile_manager:export:description:custom_group_field' => "This function will export all <b>group</b> metadata based on selected fields.",
-	'profile_manager:export:list:title' => "Select the fields which you want to be exported",
-	'profile_manager:export:list:include_group_membership' => "Include group membership",
-	'profile_manager:export:nofields' => "No custom profile fields available for export",
-
-	// Group Edit
-	'profile_manager:group:edit:limit' => "You can edit this field %s more time(s)",
 	
 	// Configuration Backup and Restore
 	'profile_manager:actions:configuration:backup' => "Backup",
@@ -223,12 +196,8 @@ return [
 	'profile_manager:actions:new:error:unknown' => 'Unknown error occurred when saving a new custom profile field',
 	'profile_manager:action:new:error:type' => 'Wrong profile field type (group or profile)',
 	
-	// edit
-	'profile_manager:actions:edit:error:unknown' => 'Error fetching profile field data',
-
 	//delete
 	'profile_manager:actions:delete:confirm' => 'Are you sure you wish to delete this field?',
-	'profile_manager:actions:delete:error:unknown' => 'Unknown error occurred while deleting',
 
 	// toggle option
 	'profile_manager:actions:toggle_option:error:unknown' => 'Unknown error occurred while changing the option',
@@ -242,26 +211,11 @@ return [
 	'profile_manager:action:category:add:error:save' => "Error while saving the category object",
 	'profile_manager:action:category:add:succes' => "The category was created succesfully",
 
-	// delete category
-	'profile_manager:action:category:delete:error:guid' => "No GUID provided",
-	'profile_manager:action:category:delete:error:type' => "The provided GUID is not a custom profile field category",
-	'profile_manager:action:category:delete:error:delete' => "An error occured while deleting the category",
-	'profile_manager:action:category:delete:succes' => "The category was deleted succesfully",
-
 	// add profile type
 	'profile_manager:action:profile_types:add:error:name' => "No name or an invalid name provided for the Custom Profile Type",
 	'profile_manager:action:profile_types:add:error:object' => "Error while creating the Custom Profile Type",
 	'profile_manager:action:profile_types:add:error:save' => "Error while saving the Custom Profile Type",
 	'profile_manager:action:profile_types:add:succes' => "The Custom profile Type was created succesfully",
-	
-	// delete profile type
-	'profile_manager:action:profile_types:delete:error:guid' => "No GUID provided",
-	'profile_manager:action:profile_types:delete:error:type' => "The provided GUID is not an Custom Profile Type",
-	'profile_manager:action:profile_types:delete:error:delete' => "An unknown error occured while deleting the Custom Profile Type",
-	'profile_manager:action:profile_types:delete:succes' => "The Custom Profile Type was deleted succesfully",
-	
-	// change username action
-	'profile_manager:action:username:change:succes' => "Successfully changed your username",
 
 	// Tooltips
 	'profile_manager:tooltips:profile_field' => "
@@ -347,9 +301,6 @@ return [
 	'profile_manager:profile:edit:custom_profile_type:description' => "Description of selected profile type",
 	'profile_manager:profile:edit:custom_profile_type:default' => "Default",
 
-	// register form mandatory notice
-	'profile_manager:register:mandatory' => "Items marked with a * are mandatory",
-
 	// register account field hints
 	'profile_manager:register:hints:name' => "Enter the name which will be shown on your profile",
 	'profile_manager:register:hints:username' => "You can use your username to login",
@@ -373,13 +324,7 @@ return [
 	'profile_manager:register_pre_check:profile_icon:nosupportedimage' => "Can't handle the profile icon. Maybe the uploaded profile icon is not the right type (jpg, gif, png)?",
 
 	// Admin add user form
-	'profile_manager:admin:adduser:notify' => "Notify user",
-	'profile_manager:admin:adduser:use_default_access' => "Extra metadata created based on site default access level",
 	'profile_manager:admin:adduser:extra_metadata' => "Add extra profile data",
-	
-	// change username form
-	'profile_manager:account:username:button' => "Click to change your username",
-	'profile_manager:account:username:info' => "Change your username. An icon will tell you if the username entered is valid and available.",
 	
 	// river events
 	'river:site:site:join' => '%s joined the site',
