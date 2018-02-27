@@ -14,7 +14,11 @@ $list = elgg_list_entities([
 	'type' => 'object',
 	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
 	'limit' => false,
-	'order_by_metadata' => [['name' => 'order', 'direction' => 'asc', 'as' => 'integer']],
+	'order_by_metadata' => [
+		'name' => 'order',
+		'as' => 'integer',
+		'direction' => 'asc',
+	],
 	'owner_guid' => elgg_get_site_entity()->getGUID(),
 	'pagination' => false,
 	'full_view' => false,
