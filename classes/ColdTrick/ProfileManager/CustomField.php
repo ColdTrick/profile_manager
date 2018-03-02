@@ -83,8 +83,6 @@ abstract class CustomField extends \ElggObject {
 	 * {@inheritDoc}
 	 */
 	public function delete($recursive = true) {
-		$site_guid = $this->site_guid;
-		
 		$deleted = parent::delete($recursive);
 		if ($deleted) {
 			elgg_delete_system_cache('profile_manager_profile_fields');
