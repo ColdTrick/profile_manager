@@ -38,4 +38,3 @@ Improved management of user and group profile fields
 ### Widgets
 
 - profile completeness widget
-- register form widget
