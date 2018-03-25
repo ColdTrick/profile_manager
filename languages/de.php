@@ -70,6 +70,9 @@ return [
 	'profile_manager:settings:profile_completeness:avatar:help' => "Bei Benutzung des Vollständigkeitsgrads-Features kannst Du hier angeben, wieviel Prozent für einen gesetzten Avatar gerechnet werden.",
 
 	'profile_manager:settings:registration:terms' => "Um ein 'Bedingungen akzeptieren'-Feld auf dem Registrierungsformular anzuzeigen, gib bitte die URL zu den Bedingungen unten an",
+    'profile_manager:settings:registration:extra_fields' => 'Wo sollen die zusätzlichen Felder bei der Registrierung angzeigt werden?',
+    'profile_manager:settings:registration:extra_fields:extend' => 'Unter dem Registrierungsformular',
+    'profile_manager:settings:registration:extra_fields:beside' => 'Neben dem Registrierungsformular',
 	'profile_manager:settings:registration:free_text' => "Einen zusätzlichen Text auf dem Registrierungsformular anzeigen",
 
 	// Field Configuration
@@ -79,6 +82,11 @@ return [
 	'profile_manager:admin:metadata_input_label:help' => 'Wird im Registrierungsformular und während der Profilbearbeitung anstatt der Feldbezeichnung verwendet',
 	'profile_manager:admin:metadata_hint' => 'Hinweis',
 	'profile_manager:admin:metadata_placeholder' => 'Platzhalter',
+    'profile_manager:settings:group' => 'Gruppenprofil bearbeiten',
+    'profile_manager:settings:group:group_limit_name' => 'Maximale Anzahl von Änderungen des Gruppennamens',
+    'profile_manager:settings:group:group_limit_description' => 'Maximale Anzahl von Änderungen der Gruppenbeschreibung',
+    'profile_manager:settings:group:limit:unlimited' => 'Unbegrenzt',
+    'profile_manager:settings:group:limit:info' => 'Diese Beschränkung gilt nicht für Site-Administratoren',
 	'profile_manager:admin:metadata_options' => 'Optionen (kommasepariert)',
 	'profile_manager:admin:field_type' => "Feldtyp",
 	'profile_manager:admin:options:dropdown' => 'Auswahl',
@@ -97,6 +105,8 @@ return [
 	'profile_manager:admin:output_as_tags' => 'Auf dem Profil als Tags anzeigen',
 	'profile_manager:admin:admin_only' => 'Nur für den Admin',
 	'profile_manager:admin:count_for_completeness' => 'Dieses Feld für den Vollständigkeitsgrad einbeziehen',
+    'profile_manager:settings:enable_username_change' => 'Den Benutzern erlauben, den Benutzernamen zu ändern',
+    'profile_manager:settings:enable_username_change:option:admin' => 'Nur Administratoren',
 	'profile_manager:admin:blank_available' => 'Feld hat eine leere Option',
 	'profile_manager:admin:option_unavailable' => 'Option nicht verfügbar',
 
