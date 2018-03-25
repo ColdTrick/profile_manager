@@ -26,6 +26,7 @@ foreach ($entities as $entity) {
 		'metadata_hint' => $entity->metadata_hint,
 		'metadata_type' => $entity->metadata_type,
 		'metadata_options' => $entity->metadata_options,
+		'metadata_placeholder' => $entity->metadata_placeholder,
 		'show_on_register' => $entity->show_on_register,
 		'mandatory' => $entity->mandatory,
 		'user_editable' => $entity->user_editable,
