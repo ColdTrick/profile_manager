@@ -12,6 +12,8 @@
 
 $vars['class'] = (array) elgg_extract('class', $vars, []);
 $vars['class'][] = 'profile-manager-multiselect';
+$hidden_vars = array();
+$hidden_vars['name'] = $vars['name'];
 
 $vars['name'] .= '[]';
 $vars['multiple'] = true;
@@ -22,5 +24,6 @@ if (!is_array($value)) {
 }
 $vars['value'] = $value;
 
+echo elgg_format_element('div', [], elgg_view('input/hidden', $hidden_vars));
 echo elgg_view('input/select', $vars);
 echo elgg_format_element('script', [], 'require(["jquery/multiselect", "profile_manager/multiselect"], function() { elgg.multiselect.init(); });');
