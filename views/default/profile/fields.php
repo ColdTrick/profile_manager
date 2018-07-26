@@ -5,14 +5,6 @@
  * @uses $vars['fields']       Array of profile fields to show
  */
 
-$microformats = [
-	'mobile' => 'tel p-tel',
-	'phone' => 'tel p-tel',
-	'website' => 'url u-url',
-	'contactemail' => 'email u-email',
-];
-$microformats = array_merge($microformats, (array) elgg_extract('microformats', $vars, []));
-
 $user = elgg_extract('entity', $vars);
 if (!($user instanceof ElggUser)) {
 	return;
@@ -45,78 +37,41 @@ $show_header = (bool) (count($cats) > 1);
 $tabs = [];
 foreach ($cats as $cat_guid => $cat) {
 
-	$cat_data = '';
-	foreach ($fields[$cat_guid] as $field) {
-		$shortname = $field->metadata_name;
-		$valtype = $field->metadata_type;
-		if ($cat_guid !== -1) {
-			$annotations = $user->getAnnotations([
-				'annotation_names' => "profile:$shortname",
-				'limit' => false,
-			]);
-			$values = array_map(function (ElggAnnotation $a) {
-				return $a->value;
-			}, $annotations);
-		
-			if (!$values) {
-				continue;
-			}
-			// emulate metadata API
-			$value = (count($values) === 1) ? $values[0] : $values;
-		} else {
-			// system data is not annotations
-			$value = $user->$shortname;
-		}
-		// validate urls
-		if ($valtype == 'url' && !preg_match('~^https?\://~i', $value)) {
-			$value = "http://$value";
-		}
-		
-		// adjust output type
-		if ($field->output_as_tags == 'yes') {
-			$valtype = 'tags';
-			if (!is_array($value)) {
-				$value = string_to_tag_array($value);
-			}
-		}
-		
-		$class = elgg_extract($shortname, $microformats, '');
+	$cat_data = elgg_view('profile/fields/category', [
+		'entity' => $user,
+		'category' => $cat,
+		'category_guid' => $cat_guid,
+		'fields' => $fields[$cat_guid],
+		'microformats' => elgg_extract('microformats', $vars, []),
+	]);
 	
-		$cat_data .= elgg_view('object/elements/field', [
-			'label' => $field->getDisplayName(),
-			'value' => elgg_format_element('span', [
-				'class' => $class,
-			], elgg_view("output/{$valtype}", [
-				'value' => $value,
-			])),
-			'name' => $shortname,
-		]);
+	if (empty($cat_data)) {
+		continue;
 	}
 	
-	if (!empty($cat_data)) {
-		if (!$show_header) {
-			$output .= $cat_data;
-		} else {
-			$cat_title = $cat;
-			if ($cat_guid == -1) {
-				$cat_title = elgg_echo('profile_manager:categories:list:system');
-			} elseif ($cat_guid == 0) {
-				if (empty($cat)) {
-					$cat_title = elgg_echo('profile_manager:categories:list:default');
-				}
-			} elseif ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
-				$cat_title = $cat->getDisplayName();
-			}
-			
-			if ($show_as_tabs) {
-				$tabs[] = [
-					'text' => $cat_title,
-					'content' => $cat_data,
-				];
-			} else {
-				$output .= elgg_view_module('info', $cat_title, $cat_data);
-			}
+	if (!$show_header) {
+		$output .= $cat_data;
+		continue;
+	}
+	
+	$cat_title = $cat;
+	if ($cat_guid == -1) {
+		$cat_title = elgg_echo('profile_manager:categories:list:system');
+	} elseif ($cat_guid == 0) {
+		if (empty($cat)) {
+			$cat_title = elgg_echo('profile_manager:categories:list:default');
 		}
+	} elseif ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
+		$cat_title = $cat->getDisplayName();
+	}
+	
+	if ($show_as_tabs) {
+		$tabs[] = [
+			'text' => $cat_title,
+			'content' => $cat_data,
+		];
+	} else {
+		$output .= elgg_view_module('info', $cat_title, $cat_data);
 	}
 }
 
