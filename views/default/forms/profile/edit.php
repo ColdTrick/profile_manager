@@ -253,6 +253,7 @@ if (!empty($cats)) {
 		echo elgg_view_field([
 			'#type' => 'access',
 			'#label' => elgg_echo('profile_manager:simple_access_control'),
+			'#class' => 'profile-manager-simple-access-control',
 			'name' => 'simple_access_control',
 			'value' => get_default_access($user),
 		]);
