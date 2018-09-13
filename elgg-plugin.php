@@ -1,6 +1,13 @@
 <?php
 
 use Elgg\Project\Paths;
+use ColdTrick\ProfileManager\Bootstrap;
+
+define('CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE', 'custom_profile_field_category');
+define('CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE', 'custom_profile_type');
+define('CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE', 'custom_profile_field');
+define('CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE', 'custom_group_field');
+define('CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP', 'custom_profile_type_category_relationship');
 
 $composer_path = '';
 if (is_dir(__DIR__ . '/vendor')) {
@@ -8,6 +15,7 @@ if (is_dir(__DIR__ . '/vendor')) {
 }
 
 return [
+	'bootstrap' => Bootstrap::class,
 	'settings' => [
 		'generate_username_from_email' => 'no',
 		'show_account_hints' => 'no',
