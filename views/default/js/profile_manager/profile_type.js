@@ -8,7 +8,7 @@ define(function(require) {
 	 */
 	function change_profile_type() {
 		var selVal = $('#custom_profile_type').val();
-		console.log(selVal);
+
 		$('.custom_fields_edit_profile_category, .custom_profile_type_description').hide();
 
 		$('.custom_profile_type_0').show();
