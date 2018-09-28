@@ -8,7 +8,7 @@ if (!$group instanceof ElggGroup) {
 	return;
 }
 
-$profile_fields = elgg_extract('fields', profile_manager_get_categorized_group_fields());
+$profile_fields = elgg_extract('fields', profile_manager_get_categorized_group_fields($group));
 if (empty($profile_fields) || !is_array($profile_fields)) {
 	return;
 }

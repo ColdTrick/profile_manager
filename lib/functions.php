@@ -223,7 +223,7 @@ function profile_manager_get_categorized_group_fields($group = null) {
 	}
 	
 	//  fire hook to see if other plugins have extra fields
-	return elgg_trigger_plugin_hook('categorized_group_fields', 'profile_manager', ['group' => $group], $result);
+	return elgg_trigger_plugin_hook('categorized_group_fields', 'profile_manager', ['entity' => $group], $result);
 }
 
 /**

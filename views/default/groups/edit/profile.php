@@ -13,7 +13,7 @@
 $group = elgg_extract('entity', $vars);
 
 $name = elgg_extract('name', $vars);
-$group_profile_fields = (array) elgg_extract('fields', profile_manager_get_categorized_group_fields());
+$group_profile_fields = (array) elgg_extract('fields', profile_manager_get_categorized_group_fields($group));
 
 echo elgg_view_field([
 	'#type' => 'file',
