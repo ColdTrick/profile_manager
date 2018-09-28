@@ -42,7 +42,7 @@ foreach ($group_profile_fields as $field) {
 		'placeholder' => $field->getPlaceholder(),
 	];
 	
-	if ($valtype !== 'hidden') {
+	if ($field->metadata_type !== 'hidden') {
 		$options['#label'] = $field->getDisplayName();
 	}
 	
