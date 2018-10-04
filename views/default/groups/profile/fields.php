@@ -28,7 +28,7 @@ foreach ($profile_fields as $field) {
 	}
 
 	$value = $group->$key;
-	if (is_null($value)) {
+	if (elgg_is_empty($value)) {
 		continue;
 	}
 	

@@ -45,6 +45,10 @@ if ((bool) elgg_extract('is_attribute', $vars, false)) {
 	$value = (count($values) === 1) ? $values[0] : $values;
 }
 
+if (elgg_is_empty($value)) {
+	return;
+}
+
 // validate urls
 if ($valtype == 'url' && !preg_match('~^https?\://~i', $value)) {
 	$value = "http://$value";
