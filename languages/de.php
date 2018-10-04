@@ -114,7 +114,7 @@ return [
 	'profile_manager:admin:show_on_register:description' => "Ob dieses Feld auf dem Registrierungsformular sein soll.",
 	'profile_manager:admin:mandatory:description' => "Ob dieses Feld ein Pflichtfeld sein soll (nur für das Registrierungsformular).",
 	'profile_manager:admin:user_editable:description' => "Wenn das auf 'Nein' gesetzt ist, kann das Feld nicht bearbeitet werden (nützlich für Daten aus externen Systemen).",
-	'profile_manager:admin:output_as_tags:description' => "Datenausgabe wird als Tags behandelt (nur für die Profilanzeige).",
+	'profile_manager:admin:output_as_tags:description' => "Datenausgabe wird als Tags behandelt.",
 	'profile_manager:admin:admin_only:description' => "Wenn das auf 'Ja' gesetzt ist, kann das Feld nur von Administratoren gesehen und bearbeitet werden.",
 	'profile_manager:admin:blank_available:description' => "Wenn das auf 'Ja' gesetzt ist, wird eine leere Option zu der Auswahl hinzugefügt",
 

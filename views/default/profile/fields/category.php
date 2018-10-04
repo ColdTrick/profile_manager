@@ -18,6 +18,10 @@ if (!$entity instanceof ElggUser || empty($fields) || !is_array($fields)) {
 $category_guid = (int) elgg_extract('category_guid', $vars);
 
 foreach ($fields as $field) {
+	if (!$field->showOnProfile()) {
+		continue;
+	}
+	
 	echo elgg_view('profile/fields/field', [
 		'entity' => $entity,
 		'field' => $field,

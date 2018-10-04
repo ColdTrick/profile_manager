@@ -78,6 +78,15 @@ abstract class CustomField extends \ElggObject {
 		}
 		return $result;
 	}
+
+	/**
+	 * Checks if can show on profile
+	 *
+	 * @return bool
+	 */
+	public function showOnProfile() {
+		return $this->show_on_profile !== 'no';
+	}
 	
 	/**
 	 * {@inheritDoc}

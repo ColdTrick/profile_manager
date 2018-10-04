@@ -94,6 +94,7 @@ return [
 	'profile_manager:admin:show_on_register' => 'Show on register form',
 	'profile_manager:admin:mandatory' => 'Mandatory',
 	'profile_manager:admin:user_editable' => 'User can edit this field',
+	'profile_manager:admin:show_on_profile' => 'Show on profile',
 	'profile_manager:admin:output_as_tags' => 'Show on profile as tags',
 	'profile_manager:admin:admin_only' => 'Admin only field',
 	'profile_manager:admin:count_for_completeness' => 'Count this field in profile completeness widget',
@@ -104,7 +105,8 @@ return [
 	'profile_manager:admin:show_on_register:description' => "If you want this field to be on the register form.",
 	'profile_manager:admin:mandatory:description' => "If you want this field to be mandatory (only applies to the register form).",
 	'profile_manager:admin:user_editable:description' => "If set to 'No' users can't edit this field (handy when data is managed in an external system).",
-	'profile_manager:admin:output_as_tags:description' => "Data output will be handle as tags (only applies on user profile).",
+	'profile_manager:admin:show_on_profile:description' => "Is this field visible on the profile",
+	'profile_manager:admin:output_as_tags:description' => "Data output will be handle as tags.",
 	'profile_manager:admin:admin_only:description' => "Select 'Yes' if field is only available for admins.",
 	'profile_manager:admin:blank_available:description' => "Select 'Yes' if a blank option should be added to the field options",
 

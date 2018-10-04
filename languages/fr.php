@@ -111,7 +111,7 @@ return array(
 	'profile_manager:admin:show_on_register:description' => "Si vous souhaitez que ce champ soit sur le formulaire d'inscription.",
 	'profile_manager:admin:mandatory:description' => "Si vous souhaitez que ce champ soit obligatoire (valable uniquement pour le formulaire d'inscription ).",
 	'profile_manager:admin:user_editable:description' => "Si la valeur aux utilisateurs «Non» ne peut pas modifier ce champ ( pratique lorsque les données sont gérées dans un système externe ).",
-	'profile_manager:admin:output_as_tags:description' => "La sortie de données sera traitée en tant que balises (uniquement sur ​​le profil de l'utilisateur).",
+	'profile_manager:admin:output_as_tags:description' => "La sortie de données sera traitée en tant que balises.",
 	'profile_manager:admin:admin_only:description' => "Sélectionnez «Oui» si le champ est uniquement disponible pour les administrateurs .",
 	'profile_manager:admin:blank_available:description' => "Sélectionnez «Oui» si une option vide doit être ajoutée aux options de champ",
 

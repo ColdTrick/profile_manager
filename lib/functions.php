@@ -10,7 +10,7 @@
  *
  * @return void
  */
-function profile_manager_add_custom_field_type($register_name, $field_type, $field_display_name, $options) {
+function profile_manager_add_custom_field_type($register_name, $field_type, $field_display_name, $options = []) {
 	global $PROFILE_MANAGER_FIELD_TYPES;
 	
 	if (!isset($PROFILE_MANAGER_FIELD_TYPES)) {
@@ -20,10 +20,14 @@ function profile_manager_add_custom_field_type($register_name, $field_type, $fie
 		$PROFILE_MANAGER_FIELD_TYPES[$register_name] = array();
 	}
 	
+	$defaults = [
+		'show_on_profile' => true,
+	];
+	
 	$field_config = new stdClass();
 	$field_config->name = $field_display_name;
 	$field_config->type = $field_type;
-	$field_config->options = $options;
+	$field_config->options = array_merge($defaults, $options);
 	
 	$PROFILE_MANAGER_FIELD_TYPES[$register_name][$field_type] = $field_config;
 }

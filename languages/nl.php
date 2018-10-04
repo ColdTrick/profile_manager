@@ -91,7 +91,7 @@ return array (
   'profile_manager:admin:show_on_register:description' => 'Indien het veld ook op het registratie formulier ingevuld kan worden.',
   'profile_manager:admin:mandatory:description' => 'Indien het veld verplicht moet worden ingevuld (dit geldt alleen op het registratie formulier).',
   'profile_manager:admin:user_editable:description' => 'Bij \'Nee\' kunnen gebruikers dit veld niet bewerken (handig als de data uit een extern systeem komt).',
-  'profile_manager:admin:output_as_tags:description' => 'Weergave zal worden behandeld als tags (alleen van toepassing op profiel weergave).',
+  'profile_manager:admin:output_as_tags:description' => 'Weergave zal worden behandeld als tags.',
   'profile_manager:admin:admin_only:description' => 'Kies \'Ja\' indien het veld alleen zichtbaar is voor beheerders.',
   'profile_manager:admin:blank_available:description' => 'Kies \'Ja\' indien een lege optie aan de opties moet worden toegevoegd.',
   'profile_manager:profile_fields:list:title' => 'Profiel Velden',

@@ -51,6 +51,7 @@ $metadata_options = null;
 $show_on_register = null;
 $mandatory = null;
 $user_editable = null;
+$show_on_profile = null;
 $output_as_tags = null;
 $blank_available = null;
 $admin_only = null;
@@ -71,6 +72,7 @@ if ($entity) {
 	$show_on_register = $entity->show_on_register;
 	$mandatory = $entity->mandatory;
 	$user_editable = $entity->user_editable;
+	$show_on_profile = $entity->show_on_profile;
 	$output_as_tags = $entity->output_as_tags;
 	$blank_available = $entity->blank_available;
 	$admin_only = $entity->admin_only;
@@ -139,6 +141,7 @@ $options = [
 	'show_on_register',
 	'mandatory',
 	'user_editable',
+	'show_on_profile',
 	'output_as_tags',
 	'blank_available',
 	'admin_only',
@@ -147,7 +150,7 @@ foreach ($options as $option) {
 	$class = 'custom_fields_form_field_option'. elgg_extract($option, $option_classes, '');
 	
 	$checked = ($$option === 'yes');
-	if ($option === 'user_editable') {
+	if (in_array($option, ['user_editable', 'show_on_profile'])) {
 		$checked = ($$option !== 'no');
 	}
 	

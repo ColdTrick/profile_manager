@@ -23,6 +23,7 @@ $metadata_options = get_input('metadata_options');
 $show_on_register = get_input('show_on_register');
 $mandatory = get_input('mandatory');
 $user_editable = get_input('user_editable');
+$show_on_profile = get_input('show_on_profile');
 $output_as_tags = get_input('output_as_tags');
 $admin_only = get_input('admin_only');
 $blank_available = get_input('blank_available');
@@ -153,6 +154,7 @@ if ($type == 'profile') {
 }
 
 $field->admin_only = $admin_only;
+$field->show_on_profile = $show_on_profile;
 $field->output_as_tags = $output_as_tags;
 $field->blank_available = $blank_available;
 

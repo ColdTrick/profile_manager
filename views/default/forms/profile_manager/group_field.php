@@ -46,6 +46,7 @@ $metadata_hint = null;
 $metadata_placeholder = null;
 $metadata_type = null;
 $metadata_options = null;
+$show_on_profile = null;
 $output_as_tags = null;
 $blank_available = null;
 $admin_only = null;
@@ -62,6 +63,7 @@ if ($entity) {
 	$metadata_type = $entity->metadata_type;
 	$metadata_options = $entity->metadata_options;
 	
+	$show_on_profile = $entity->show_on_profile;
 	$output_as_tags = $entity->output_as_tags;
 	$blank_available = $entity->blank_available;
 	$admin_only = $entity->admin_only;
@@ -118,9 +120,19 @@ $formbody .= elgg_view_field([
 
 $options_content = '';
 
-$options = ['output_as_tags', 'admin_only', 'blank_available'];
+$options = [
+	'show_on_profile',
+	'output_as_tags',
+	'admin_only',
+	'blank_available',
+];
 foreach ($options as $option) {
 	$class = 'custom_fields_form_field_option'. elgg_extract($option, $option_classes, '');
+	
+	$checked = ($$option === 'yes');
+	if (in_array($option, ['show_on_profile'])) {
+		$checked = ($$option !== 'no');
+	}
 	
 	$options_content .= elgg_view_field([
 		'#type' => 'checkbox',
@@ -128,7 +140,7 @@ foreach ($options as $option) {
 		'#help' => elgg_echo("profile_manager:admin:{$option}:description"),
 		'name' => $option,
 		'class' => $class,
-		'checked' => $$option === 'yes',
+		'checked' => $checked,
 		'switch' => true,
 		'default' => 'no',
 		'value' => 'yes',
