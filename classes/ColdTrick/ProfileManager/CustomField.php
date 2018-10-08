@@ -24,14 +24,11 @@ abstract class CustomField extends \ElggObject {
 	 *
 	 * @param boolean $add_blank_option optional boolean if there should be an extra empty option added
 	 *
-	 * @return string
+	 * @return array|null
 	 */
 	public function getOptions($add_blank_option = false) {
-		$options = '';
-		
-		// get options
 		if (empty($this->metadata_options)) {
-			return $options;
+			return null;
 		}
 			
 		$options = explode(',', $this->metadata_options);
