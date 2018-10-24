@@ -17,6 +17,11 @@ return [
 	'item:object:custom_profile_field_category' => 'Custom Profile Field Category',
 	'item:object:custom_profile_type' => 'Custom Profile Type',
 	'item:object:custom_group_field' => 'Custom Group Field',
+	
+	'collection:object:custom_profile_field' => "Custom Profile Fields",
+	'collection:object:custom_group_field' => "Custom Group Fields",
+	'collection:object:custom_profile_field_category' => "Custom Profile Field Categories",
+	'collection:object:custom_profile_type' => "Custom Profile Types",
 
 	'profile:custom_profile_type' => 'Custom Profile Type',
 	
