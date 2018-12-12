@@ -16,17 +16,15 @@ $name = elgg_extract('name', $vars);
 $group_profile_fields = (array) elgg_extract('fields', profile_manager_get_categorized_group_fields($group));
 
 echo elgg_view_field([
-	'#type' => 'file',
-	'#label' => elgg_echo('groups:icon'),
-	'name' => 'icon',
-]);
-
-echo elgg_view_field([
 	'#type' => 'text',
 	'#label' => elgg_echo('groups:name'),
 	'required' => true,
 	'name' => 'name',
 	'value' => $name,
+]);
+
+echo elgg_view('entity/edit/icon', [
+	'entity' => elgg_extract('entity', $vars),
 ]);
 
 // show the configured group profile fields
