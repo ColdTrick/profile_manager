@@ -138,7 +138,6 @@ return [
 	'profile_manager:categories:list:title' => "Categories",
 	'profile_manager:categories:list:default' => "Default",
 	'profile_manager:categories:list:system' => "System (admin only)",
-	'profile_manager:categories:list:view_all' => "View all fields",
 	'profile_manager:categories:list:no_categories' => "No categories defined",
 	
 	// Custom Profile Types
