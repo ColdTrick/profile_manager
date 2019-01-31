@@ -19,15 +19,21 @@
 }
 
 /* edit profile */
-.profile-manager-edit-profile-field > .elgg-field-input {
-	display: flex;
-	
-	> .elgg-input-access {
-		margin-left: 1rem;
+@media $(media-tablet-up) {
+	.profile-manager-edit-profile-field > .elgg-field-input {
+		display: flex;
+		
+		> .edit-profile-input {
+			flex-grow: 1;
+		}
+		
+		> .edit-profile-access > .elgg-input-access {
+			margin-left: 1rem;
+		}
 	}
 }
 
-.profile-manager-simple-access-controlled .elgg-input-access {
+.profile-manager-simple-access-controlled .edit-profile-access {
 	display: none;
 }
 

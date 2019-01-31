@@ -198,7 +198,7 @@ if (!empty($cats)) {
 				'class' => 'profile-manager-edit-profile-field',
 				'input' => elgg_format_element('div', [
 						'class' => 'elgg-field-input',
-					], $input . $access_input),
+					], '<div class="edit-profile-input">' . $input . '</div><div class="edit-profile-access">' . $access_input . '</div>'),
 				'label' => elgg_view('elements/forms/label', [
 					'label' => $field->getDisplayName(true),
 					'id' => $id,
