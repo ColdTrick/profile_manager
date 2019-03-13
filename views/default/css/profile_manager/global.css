@@ -38,6 +38,7 @@ button.ui-multiselect {
 }
 
 .profile-manager-multiselect {
+	visibility: hidden;
 	display: inline-block !important;
 	width: 0;
 	height: 0;
