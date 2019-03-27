@@ -1,6 +1,39 @@
 Version history
 ===============
 
+14.0 (2019-03-27):
+
+- added: class on simple access control field
+- added: feature to hide a profile field from user/group profile
+- added: german translation
+- added: profile fields can now show as tabs
+- changed: group is passed through categorized profile fields function
+- changed: moved actions registration to elgg-plugin
+- changed: moved plugin initialisation to bootstrap class
+- changed: register action validation now uses middleware
+- changed: replaced custom delete actions with generic entity/delete
+- changed: replaced object functions getTitle with getDisplayName
+- changed: site join river item now is created on user create event
+- changed: split profile rendering into subviews
+- changed: updated useradd form with core defaults
+- changed: updates for Elgg 3.0
+- fixed: allow multiselect fields to be empty/removed
+- fixed: allow unsetting a multiselect value
+- fixed: also export field placeholder data
+- fixed: do not hide select so required checks show indicator with field
+- fixed: multiselect can be correctly used multiple times on the same page
+- fixed: provide group type/subtype for icon input
+- removed: changing account is now a core feature
+- removed: download action of inactive users
+- removed: export of user/group profile data
+- removed: live validation of register form
+- removed: login history statistics is provided by system_log
+- removed: no longer show profile fields in an accordeon
+- removed: register widget moved to widget_pack plugin
+- removed: support setting a limit on group name/description
+- removed: unused event for pm_file profile field uploads
+- Revert "fixed: do not hide select so required checks show indicator with field"
+
 13.0.1 (2017-11-01):
 
 - fixed: multiselect not looking good if ajax loaded
