@@ -1,6 +1,10 @@
 Version history
 ===============
 
+14.0.1 (2019-03-27):
+
+- several small chores/fixes
+
 14.0 (2019-03-27):
 
 - added: class on simple access control field
