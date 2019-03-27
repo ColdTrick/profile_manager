@@ -26,3 +26,4 @@ echo elgg_view('input/hidden', ['name' => $vars['name'], 'value' => '']);
 echo elgg_view('input/select', $vars);
 
 echo elgg_format_element('script', [], 'require(["profile_manager/multiselect"], function(MultiSelect) { MultiSelect.init("#' . $vars['id'] . '"); });');
+
