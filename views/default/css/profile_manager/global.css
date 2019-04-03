@@ -20,6 +20,8 @@ button.ui-multiselect {
 	line-height: 1.75rem;
 	vertical-align: middle;
 	border-radius: 3px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	
 	> .ui-icon {
 		font-size: 0.8rem;
