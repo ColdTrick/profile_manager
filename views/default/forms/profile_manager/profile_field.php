@@ -34,7 +34,7 @@ if ($types) {
 		$options_values[$type->type] = $type->name;
 		foreach ($type->options as $option_name => $option_value) {
 			if ($option_value) {
-				$option_classes[$option_name] .= ' field_option_enable_' . $type->type;
+				$option_classes[$option_name][] = "field_option_enable_{$type->type}";
 			}
 		}
 	}
@@ -147,8 +147,6 @@ $options = [
 	'admin_only',
 ];
 foreach ($options as $option) {
-	$class = 'custom_fields_form_field_option'. elgg_extract($option, $option_classes, '');
-	
 	$checked = ($$option === 'yes');
 	if (in_array($option, ['user_editable', 'show_on_profile'])) {
 		$checked = ($$option !== 'no');
@@ -159,7 +157,7 @@ foreach ($options as $option) {
 		'#label' => elgg_echo("profile_manager:admin:{$option}"),
 		'#help' => elgg_echo("profile_manager:admin:{$option}:description"),
 		'name' => $option,
-		'class' => $class,
+		'class' => elgg_extract_class($option_classes, ['custom_fields_form_field_option'], $option),
 		'checked' => $checked,
 		'switch' => true,
 		'default' => 'no',
