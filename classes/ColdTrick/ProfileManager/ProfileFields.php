@@ -10,14 +10,11 @@ class ProfileFields {
 	/**
 	 * Hook to replace the profile fields
 	 *
-	 * @param string  $hook_name    name of the hook
-	 * @param string  $entity_type  type of the hook
-	 * @param unknown $return_value return value
-	 * @param unknown $parameters   hook parameters
+	 * @param \Elgg\Hook $hook 'profile:fields', 'profile'
 	 *
 	 * @return array
 	 */
-	public static function getUserFields($hook_name, $entity_type, $return_value, $parameters) {
+	public static function getUserFields(\Elgg\Hook $hook) {
 		$result = [];
 	
 		// get from cache
@@ -83,14 +80,11 @@ class ProfileFields {
 	/**
 	 * Function to replace group profile fields
 	 *
-	 * @param string  $hook_name    name of the hook
-	 * @param string  $entity_type  type of the hook
-	 * @param unknown $return_value return value
-	 * @param unknown $parameters   hook parameters
+	 * @param \Elgg\Hook $hook 'profile:fields', 'group'
 	 *
 	 * @return array
 	 */
-	public static function getGroupFields($hook_name, $entity_type, $return_value, $parameters) {
+	public static function getGroupFields(\Elgg\Hook $hook) {
 	
 		// get from cache
 		$entities = elgg_load_system_cache('profile_manager_group_fields');
@@ -152,14 +146,11 @@ class ProfileFields {
 	/**
 	 * Hook to add a system category to the profile fields
 	 *
-	 * @param string  $hook_name    name of the hook
-	 * @param string  $entity_type  type of the hook
-	 * @param unknown $return_value return value
-	 * @param unknown $params       hook parameters
+	 * @param \Elgg\Hook $hook 'categorized_profile_fields', 'profile_manager'
 	 *
 	 * @return array
 	 */
-	public static function addAdminFields($hook_name, $entity_type, $return_value, $params) {
+	public static function addAdminFields(\Elgg\Hook $hook) {
 		if (!elgg_is_admin_logged_in()) {
 			return;
 		}
@@ -167,16 +158,13 @@ class ProfileFields {
 		if (elgg_get_plugin_setting('display_system_category', 'profile_manager') !== 'yes') {
 			return;
 		}
-		
-		$edit = elgg_extract('edit', $params);
-		$register = elgg_extract('register', $params);
 
-		if ($edit || $register) {
+		if ($hook->getParam('edit') || $hook->getParam('register')) {
 			return;
 		}
 
 		// optionally add the system fields for admins
-		$result = $return_value;
+		$result = $hook->getValue();
 		
 		$result['categories'][-1] = '';
 		$result['fields'][-1] = [];

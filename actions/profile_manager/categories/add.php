@@ -53,14 +53,11 @@ if (!empty($profile_types) && is_array($profile_types)) {
 
 // add correct order
 if ($add) {
-	$count = elgg_get_entities([
+	$entity->order = elgg_count_entities([
 		'type' => 'object',
 		'subtype' => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
-		'count' => true,
-		'owner_guid' => elgg_get_site_entity()->getGUID()
+		'owner_guid' => elgg_get_site_entity()->guid,
 	]);
-	
-	$entity->order = $count;
 }
 
 if (!$entity->save()) {

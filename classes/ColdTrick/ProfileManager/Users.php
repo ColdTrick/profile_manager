@@ -12,14 +12,12 @@ class Users {
 	/**
 	 * Changes the register form view vars so profile icons can be uploaded
 	 *
- 	 * @param string  $hook_name    name of the hook
-	 * @param string  $entity_type  type of the hook
-	 * @param unknown $return_value return value
-	 * @param unknown $parameters   hook parameters
+ 	 * @param \Elgg\Hook $hook 'view_vars', 'input/form'
 	 *
-	 * @return void
+	 * @return void|array
 	 */
-	public static function registerViewVars($hook_name, $entity_type, $return_value, $parameters) {
+	public static function registerViewVars(\Elgg\Hook $hook) {
+		$return_value = $hook->getValue();
 		if (elgg_extract('action_name', $return_value) !== 'register') {
 			return;
 		}

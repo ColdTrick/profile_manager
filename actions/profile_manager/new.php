@@ -93,14 +93,12 @@ if ($options_error) {
 }
 
 $subtype = "custom_{$type}_field";
-$options = [
+
+$max_fields = elgg_count_entities([
 	'type' => 'object',
 	'subtype' => $subtype,
-	'count' => true,
 	'owner_guid' => $site_guid,
-];
-
-$max_fields = elgg_get_entities($options) + 1;
+]) + 1;
 
 if ($current_field) {
 	$field = $current_field;

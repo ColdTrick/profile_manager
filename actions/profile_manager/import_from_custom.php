@@ -16,11 +16,10 @@ $skipped = 0;
 $options = [
 	'type' => 'object',
 	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
-	'count' => true,
 	'owner_guid' => elgg_get_site_entity()->getGUID(),
 ];
 
-$new_order = elgg_get_entities($options) + 1;
+$new_order = elgg_count_entities($options) + 1;
 
 $fieldlist = elgg_get_config('profile_custom_fields');
 
@@ -41,7 +40,7 @@ foreach ($fieldlistarray as $listitem) {
 	
 	$options['metadata_name_value_pairs'] = ['name' => 'metadata_name', 'value' => $metadata_name];
 		
-	$count = elgg_get_entities($options);
+	$count = elgg_count_entities($options);
 	
 	if ($count == 0) {
 		$field = new \ColdTrick\ProfileManager\CustomProfileField();

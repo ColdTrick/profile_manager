@@ -25,11 +25,10 @@ $subtype = "custom_{$type}_field";
 $options = [
 	'type' => 'object',
 	'subtype' => $subtype,
-	'count' => true,
 	'owner_guid' => $site_guid,
 ];
 
-$max_fields = elgg_get_entities($options) + 1;
+$max_fields = elgg_count_entities($options) + 1;
 
 if ($type == 'profile') {
 	$defaults = [
@@ -58,8 +57,7 @@ foreach ($defaults as $metadata_name => $metadata_type) {
 		'value' => $metadata_name,
 	];
 	
-	$count = elgg_get_entities($options);
-	if ($count) {
+	if (elgg_count_entities($options)) {
 		continue;
 	}
 	

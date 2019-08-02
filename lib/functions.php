@@ -116,10 +116,9 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 			
 			if (!$edit || $profile_type_limit) {
 				
-				$rel_count = elgg_get_entities([
+				$rel_count = elgg_count_entities([
 					'type' => 'object',
 					'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
-					'count' => true,
 					'owner_guid' => $cat->getOwnerGUID(),
 					'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
 					'relationship_guid' => $cat->getGUID(),

@@ -10,18 +10,16 @@ class Menus {
 	/**
 	 * Add admin menu items
 	 *
-	 * @param string $hook        hook name
-	 * @param string $entity_type hook type
-	 * @param array  $returnvalue current return value
-	 * @param array  $params      parameters
+	 * @param \Elgg\Hook $hook 'register', 'menu:page'
 	 *
 	 * @return array
 	 */
-	public static function registerAdmin($hook, $entity_type, $returnvalue, $params) {
+	public static function registerAdmin(\Elgg\Hook $hook) {
 		if (!elgg_in_context('admin') || !elgg_is_admin_logged_in()) {
 			return;
 		}
 		
+		$returnvalue = $hook->getValue();
 		$returnvalue[] = \ElggMenuItem::factory([
 			'name' => 'users:inactive',
 			'text' => elgg_echo('admin:users:inactive'),
