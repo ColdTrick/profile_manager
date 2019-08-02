@@ -85,4 +85,40 @@ return [
 
 		'profile_manager/profile_types/add' => ['access' => 'admin'],
 	],
+	'hooks' => [
+		'categorized_profile_fields' => [
+			'profile_manager' => [
+				'\ColdTrick\ProfileManager\ProfileFields::addAdminFields' => ['priority' => 999],
+			],
+		],
+		'profile:fields' => [
+			'profile' => [
+				'\ColdTrick\ProfileManager\ProfileFields::getUserFields' => [],
+			],
+			'group' => [
+				'\ColdTrick\ProfileManager\ProfileFields::getGroupFields' => [],
+			],
+		],
+		'register' => [
+			'menu:page' => [
+				'\ColdTrick\ProfileManager\Menus::registerAdmin' => [],
+			],
+			'menu:profile_fields' => [
+				'\ColdTrick\ProfileManager\Menus::registerProfileFieldsActions' => [],
+			],
+		],
+		'view_vars' => [
+			'input/form' => [
+				'\ColdTrick\ProfileManager\Users::registerViewVars' => [],
+			],
+		],
+	],
+	'events' => [
+		'create' => [
+			'user' => [
+				'\ColdTrick\ProfileManager\Users::createUserByRegister' => [],
+				'\ColdTrick\ProfileManager\Users::createUserRiverItem' => [],
+			],
+		],
+	],
 ];

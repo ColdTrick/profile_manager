@@ -45,20 +45,10 @@ class Bootstrap extends DefaultPluginBootstrap {
 		
 		$hooks = $this->elgg()->hooks;
 		
-		$hooks->registerHandler('categorized_profile_fields', 'profile_manager', '\ColdTrick\ProfileManager\ProfileFields::addAdminFields', 1000);
-		$hooks->registerHandler('profile:fields', 'profile', '\ColdTrick\ProfileManager\ProfileFields::getUserFields');
-		$hooks->registerHandler('profile:fields', 'group', '\ColdTrick\ProfileManager\ProfileFields::getGroupFields');
-		$hooks->registerHandler('register', 'menu:page', '\ColdTrick\ProfileManager\Menus::registerAdmin');
-		$hooks->registerHandler('register', 'menu:profile_fields', '\ColdTrick\ProfileManager\Menus::registerProfileFieldsActions');
-		$hooks->registerHandler('view_vars', 'input/form', '\ColdTrick\ProfileManager\Users::registerViewVars');
-		
 		$hooks->registerHandler('action', 'useradd', function() {
 			// only register createByAdmin during useradd action
 			elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUserByAdmin');
 		});
-		
-		elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUserByRegister');
-		elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUserRiverItem');
 	}
 	
 	/**
