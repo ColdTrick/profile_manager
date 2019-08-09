@@ -1,4 +1,6 @@
 <?php
+use ColdTrick\ProfileManager\CustomField;
+
 /**
 * Profile Manager
 *
@@ -14,7 +16,7 @@ $guid = (int) get_input('guid');
 $category_guid = (int) get_input('category_guid');
 
 $entity = get_entity($guid);
-if (!elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE) && !elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE)) {
+if (!$entity instanceof CustomField) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:change_category:error:unknown'));
 }
 

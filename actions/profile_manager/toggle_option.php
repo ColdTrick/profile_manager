@@ -1,4 +1,6 @@
 <?php
+use ColdTrick\ProfileManager\CustomField;
+
 /**
 * Profile Manager
 *
@@ -27,7 +29,7 @@ if (empty($guid) || !in_array($field, $allowed)) {
 }
 
 $entity = get_entity($guid);
-if (!elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE) && !elgg_instanceof($entity, 'object', CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE)) {
+if (!$entity instanceof CustomField) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:toggle_option:error:unknown'));
 }
 

@@ -50,49 +50,45 @@ class Users {
 			$categorized_fields = profile_manager_get_categorized_fields(null, true, true);
 			$configured_fields = $categorized_fields['fields'];
 	
-			// set ignore access
-			$ia = elgg_set_ignore_access(true);
-			
-			$user_default_access = get_default_access($user);
-			
-			foreach ($custom_profile_fields as $shortname => $value) {
-				// determine if $value should be an array
-				if (!is_array($value) && !empty($configured_fields)) {
-					foreach ($configured_fields as $configured_field_category) {
-						foreach ($configured_field_category as $configured_field) {
-							if ($configured_field->metadata_name !== $shortname) {
-								continue;
+			elgg_call(ELGG_IGNORE_ACCESS, function() use ($user, $configured_fields) {
+				$user_default_access = get_default_access($user);
+				
+				foreach ($custom_profile_fields as $shortname => $value) {
+					// determine if $value should be an array
+					if (!is_array($value) && !empty($configured_fields)) {
+						foreach ($configured_fields as $configured_field_category) {
+							foreach ($configured_field_category as $configured_field) {
+								if ($configured_field->metadata_name !== $shortname) {
+									continue;
+								}
+								
+								if ($configured_field->metadata_type !== 'tags' && $configured_field->output_as_tags !== 'yes') {
+									continue;
+								}
+								
+								$value = string_to_tag_array($value);
+								
+								// no need to continue this foreach
+								break(2);
 							}
-							
-							if ($configured_field->metadata_type !== 'tags' && $configured_field->output_as_tags !== 'yes') {
-								continue;
-							}
-							
-							$value = string_to_tag_array($value);
-							
-							// no need to continue this foreach
-							break(2);
 						}
 					}
+					
+					if (empty($value) && $value !== 0) {
+						continue;
+					}
+					
+					if (!is_array($value)) {
+						$value = [$value];
+					}
+					foreach ($value as $interval) {
+						$user->annotate("profile:$shortname", $interval, $user_default_access, $user->guid, 'text');
+					}
+			
+					// for BC, keep storing fields in MD, but we'll read annotations only
+					$user->$shortname = $value;
 				}
-				
-				if (empty($value) && $value !== 0) {
-					continue;
-				}
-				
-				if (!is_array($value)) {
-					$value = [$value];
-				}
-				foreach ($value as $interval) {
-					$user->annotate("profile:$shortname", $interval, $user_default_access, $user->guid, 'text');
-				}
-		
-				// for BC, keep storing fields in MD, but we'll read annotations only
-				$user->$shortname = $value;
-			}
-	
-			// restore ignore access
-			elgg_set_ignore_access($ia);
+			});
 		}
 	
 		if (elgg_get_uploaded_file('profile_icon')) {
