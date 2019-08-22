@@ -1,6 +1,13 @@
 Version history
 ===============
 
+15.0 (2019-08-22):
+
+- changed: minimal Elgg requirement increased to Elgg 3.1
+- changed: moved hook and event registrations to elgg-plugin
+- fixed: no longer use the linkedin widget in field output
+- removed: no longer provide the input/output tel views
+
 14.0.2 (2019-04-17):
 
 - several small chores/fixes
