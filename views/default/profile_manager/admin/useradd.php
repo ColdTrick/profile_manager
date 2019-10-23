@@ -15,7 +15,7 @@ $categorized_fields = profile_manager_get_categorized_fields(null, true);
 $cats = elgg_extract('categories', $categorized_fields);
 $fields = elgg_extract('fields', $categorized_fields);
 
-if (empty($types) && empty(elgg_extract(0, $fields))) {
+if (empty($types) && empty($fields)) {
 	return;
 }
 
