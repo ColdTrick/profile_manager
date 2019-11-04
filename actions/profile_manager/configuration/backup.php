@@ -3,8 +3,8 @@
 * Backup of profile fields config
 */
 
-elgg_set_http_header('Content-Type: application/json');
-elgg_set_http_header('Content-Disposition: attachment; filename="custom_profile_fields.backup.json"');
+header('Content-Type: application/json');
+header('Content-Disposition: attachment; filename="custom_profile_fields.backup.json"');
 
 $fieldtype = get_input('fieldtype' , CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE);
 
