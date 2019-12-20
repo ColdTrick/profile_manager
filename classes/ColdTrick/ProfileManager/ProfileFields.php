@@ -58,11 +58,6 @@ class ProfileFields {
 			if ($entity->admin_only != 'yes' || (elgg_is_admin_logged_in() || elgg_get_ignore_access())) {
 
 				$result[$entity->metadata_name] = $entity->metadata_type;
-
-				// should it be handled as tags? TODO: is this still needed? Yes it is, it handles presentation of these fields in listing mode
-				if ($context == 'search' && ($entity->output_as_tags == 'yes' || $entity->metadata_type == 'multiselect')) {
-					$result[$entity->metadata_name] = 'tags';
-				}
 			}
 
 			$translations["profile:{$entity->metadata_name}"] = $entity;
@@ -129,12 +124,7 @@ class ProfileFields {
 		$result['name'] = 'text';
 		foreach ($ordered as $group_field) {
 			$result[$group_field->metadata_name] = $group_field->metadata_type;
-	
-			// should it be handled as tags? Q: is this still needed? A: Yes it is, it handles presentation of these fields in listing mode
-			if (elgg_get_context() == 'search' && ($group_field->output_as_tags == 'yes' || $group_field->metadata_type == 'multiselect')) {
-				$result[$group_field->metadata_name] = 'tags';
-			}
-	
+		
 			$translations["groups:{$group_field->metadata_name}"] = $group_field;
 		}
 	
