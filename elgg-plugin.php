@@ -64,6 +64,7 @@ return [
 			'file' => Paths::elgg() . 'actions/register.php',
 			'walled' => false,
 			'middleware' => [
+				'\Elgg\Router\Middleware\ActionMiddleware',
 				'\ColdTrick\ProfileManager\Users::validateRegisterAction',
 			]
 		],
