@@ -108,11 +108,6 @@ return [
 				'\ColdTrick\ProfileManager\Menus::registerProfileFieldsActions' => [],
 			],
 		],
-		'view_vars' => [
-			'input/form' => [
-				'\ColdTrick\ProfileManager\Users::registerViewVars' => [],
-			],
-		],
 	],
 	'events' => [
 		'create' => [

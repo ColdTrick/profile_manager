@@ -10,23 +10,6 @@ use Elgg\Http\OkResponse;
 class Users {
 
 	/**
-	 * Changes the register form view vars so profile icons can be uploaded
-	 *
- 	 * @param \Elgg\Hook $hook 'view_vars', 'input/form'
-	 *
-	 * @return void|array
-	 */
-	public static function registerViewVars(\Elgg\Hook $hook) {
-		$return_value = $hook->getValue();
-		if (elgg_extract('action_name', $return_value) !== 'register') {
-			return;
-		}
-		
-		$return_value['enctype'] = 'multipart/form-data';
-		return $return_value;
-	}
-
-	/**
 	 * Saves extra user information when user registers on the site
 	 *
 	 * @param \Elgg\Event $event event
