@@ -8,7 +8,7 @@ if (!$entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 	return;
 }
 
-$content = elgg_view_icon('drag-arrow', ['class' => 'mrs']);
+$content = elgg_view_icon('arrows-alt', ['class' => 'mrs']);
 
 // filter link
 $content .= elgg_view('output/url', [

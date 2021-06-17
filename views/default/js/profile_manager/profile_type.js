@@ -1,7 +1,4 @@
-define(function(require) {
-	var $ = require('jquery');
-	var elgg = require('elgg');
-	var tabs = require('page/components/tabs');
+define(['jquery', 'page/components/tabs'], function($) {
 
 	/**
 	 * show description and fields based on selected profile type (profile edit)

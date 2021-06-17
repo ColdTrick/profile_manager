@@ -11,4 +11,4 @@ echo elgg_format_element('div', [
 	'id' => "text_{$id}",
 ], elgg_extract('text', $vars));
 
-echo elgg_format_element('script', [], 'require(["profile_manager/tooltips"])');
+elgg_require_js('profile_manager/tooltips');

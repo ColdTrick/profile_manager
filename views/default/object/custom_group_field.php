@@ -49,7 +49,7 @@ echo elgg_view_image_block('', $title, [
 	'id' => "custom_profile_field_{$field->guid}",
 	'class' => 'custom_field',
 	'rel' => "{$field->category_guid}",
-	'title' => elgg_echo("groups:{$field->metadata_name}"),
+	'title' => $field->getDisplayName(),
 	'image_alt' => $metadata,
 ]);
 	

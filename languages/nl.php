@@ -7,7 +7,7 @@
 return array (
   'collection:object:custom_profile_field' => 'Custom Profiel Velden',
   'collection:object:custom_group_field' => 'Custom Groep Velden',
-  'collection:object:custom_profile_field_category' => 'Custom Profiel Velg Categorieën',
+  'collection:object:custom_profile_field_category' => 'Custom Profiel Veld Categorieën',
   'collection:object:custom_profile_type' => 'Custom Profiel Types',
   'entity:delete:object:custom_profile_field:success' => 'Het profielveld is verwijderd',
   'entity:delete:object:custom_group_field:success' => 'Het groepsprofielveld is verwijderd.',

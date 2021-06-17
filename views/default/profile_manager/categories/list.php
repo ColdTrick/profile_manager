@@ -10,9 +10,11 @@
 * @link http://www.coldtrick.com/
 */
 
+use ColdTrick\ProfileManager\CustomFieldCategory;
+
 $categories = elgg_list_entities([
 	'type' => 'object',
-	'subtype' => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
+	'subtype' => CustomFieldCategory::SUBTYPE,
 	'limit' => false,
 	'pagination' => false,
 	'owner_guid' => elgg_get_site_entity()->guid,

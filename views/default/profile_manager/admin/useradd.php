@@ -3,10 +3,12 @@
  * Extra fields for admin user add form
  */
 
+use ColdTrick\ProfileManager\CustomProfileType;
+
 // get profile types
 $types = elgg_get_entities([
 	'type' => 'object',
-	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+	'subtype' => CustomProfileType::SUBTYPE,
 	'limit' => false,
 	'owner_guid' => elgg_get_site_entity()->guid,
 ]);

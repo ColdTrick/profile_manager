@@ -1,6 +1,7 @@
 {
 	"name": "coldtrick/profile_manager",
 	"description": "Improved management of user and group profile fields",
+	"homepage": "https://www.coldtrick.com",
 	"type": "elgg-plugin",
 	"keywords": ["elgg", "plugin", "profile", "groups"],
 	"license": "GPL-2.0-only",
@@ -10,13 +11,24 @@
 	},
 	"require": {
 		"composer/installers": "^1.0.8",
-		"bower-asset/jquery-ui-multiselect-widget": "~2.0.1"
+		"bower-asset/jquery-ui-multiselect-widget": "~3.0.0"
 	},
+	"repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+	"config": {
+        "fxp-asset": {
+            "enabled": false
+        }
+    },
 	"require-dev": {
 		"coldtrick/sniffs": "dev-master",
 		"coldtrick/releases": "dev-master"
 	},
 	"conflict": {
-		"elgg/elgg": "<3.1"
+		"elgg/elgg": "<4.0"
 	}
 }

@@ -7,6 +7,7 @@ namespace ColdTrick\ProfileManager;
 class CustomProfileType extends \ElggObject {
 
 	const SUBTYPE = 'custom_profile_type';
+	const CATEGORY_RELATIONSHIP = 'custom_profile_type_category_relationship';
 	
 	/**
 	 * initializes the default class attributes

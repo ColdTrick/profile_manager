@@ -10,9 +10,11 @@
 * @link http://www.coldtrick.com/
 */
 
+use ColdTrick\ProfileManager\CustomProfileType;
+
 $list = elgg_list_entities([
 	'type' => 'object',
-	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+	'subtype' => CustomProfileType::SUBTYPE,
 	'limit' => false,
 	'owner_guid' => elgg_get_site_entity()->guid,
 	'pagination' => false,

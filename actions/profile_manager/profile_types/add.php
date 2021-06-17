@@ -23,7 +23,7 @@ if (empty($name) || !preg_match('/^[a-zA-Z0-9_]{1,}$/', $name)) {
 }
 
 $object = get_entity($guid);
-if (!($object instanceof \ColdTrick\ProfileManager\CustomProfileType)) {
+if (!$object instanceof \ColdTrick\ProfileManager\CustomProfileType) {
 	$object = null;
 }
 
@@ -56,10 +56,10 @@ if (!empty($description)) {
 }
 
 // add category relations
-remove_entity_relationships($object->guid, CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP);
+remove_entity_relationships($object->guid, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP);
 if (!empty($categories) && is_array($categories)) {
 	foreach ($categories as $cat_guid) {
-		$object->addRelationship($cat_guid, CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP);
+		$object->addRelationship($cat_guid, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP);
 	}
 }
 

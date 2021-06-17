@@ -10,7 +10,7 @@
 * @link http://www.coldtrick.com/
 */
 
-$site_guid = elgg_get_site_entity()->getGUID();
+$site_guid = elgg_get_site_entity()->guid;
 
 $metadata_name = trim(get_input('metadata_name'));
 $metadata_label = trim(get_input('metadata_label'));
@@ -42,7 +42,7 @@ $reserved_metadata_names = [
 if ($guid) {
 	$current_field = get_entity($guid);
 }
-if ($current_field && ($current_field->getSubtype() != CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE && $current_field->getSubtype() != CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE)) {
+if ($current_field && ($current_field->getSubtype() != \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE && $current_field->getSubtype() != \ColdTrick\ProfileManager\CustomGroupField::SUBTYPE)) {
 	// wrong custom field type
 	return elgg_error_response(elgg_echo('profile_manager:action:new:error:type'));
 }
@@ -66,8 +66,12 @@ if (in_array($metadata_type, ['dropdown', 'radio', 'multiselect']) && empty($met
 	return elgg_error_response(elgg_echo('profile_manager:actions:new:error:metadata_options'));
 }
 
-if (empty($current_field) && array_key_exists($metadata_name, elgg_get_config('profile_fields'))) {
-	return elgg_error_response(elgg_echo('profile_manager:actions:new:error:metadata_name_invalid'));
+if (empty($current_field)) {
+	foreach (elgg()->fields->get('user', 'user') as $existing_field) {
+		if ($metadata_name === $existing_field['name']) {
+			return elgg_error_response(elgg_echo('profile_manager:actions:new:error:metadata_name_invalid'));
+		}
+	}
 }
 
 $new_options = [];
@@ -103,12 +107,12 @@ $max_fields = elgg_count_entities([
 if ($current_field) {
 	$field = $current_field;
 } else {
-	$field = new ElggObject();
+	$field = new \ElggObject();
 		
 	$field->owner_guid = $site_guid;
 	$field->container_guid = $site_guid;
 	$field->access_id = ACCESS_PUBLIC;
-	$field->subtype = $subtype;
+	$field->setSubtype($subtype);
 	$field->save();
 }
 

@@ -1,5 +1,4 @@
-define(function(require) {
-	var $ = require('jquery');
+define(['jquery'], function($) {
 
 	// add username generation when a email adress has been entered
 	$(document).on('blur', '.elgg-form-register input[name="email"]', function(){

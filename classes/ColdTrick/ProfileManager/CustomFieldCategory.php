@@ -42,11 +42,11 @@ class CustomFieldCategory extends \ElggObject {
 	/**
 	 * Returns an array of linked profile type guids
 	 *
-	 * @return void
+	 * @return array
 	 */
-	public function getLinkedProfileTypes() {
+	public function getLinkedProfileTypes(): array {
 		$types = $this->getEntitiesFromRelationship([
-			'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
+			'relationship' => \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP,
 			'inverse_relationship' => true,
 			'limit' => false
 		]);
@@ -59,7 +59,7 @@ class CustomFieldCategory extends \ElggObject {
 		$result = [];
 				
 		foreach ($types as $type) {
-			$result[] = $type->getGUID();
+			$result[] = $type->guid;
 		}
 		
 		return $result;
@@ -77,7 +77,7 @@ class CustomFieldCategory extends \ElggObject {
 			// remove reference to this category on related profile fields
 			$fields = elgg_get_entities([
 				'type' => 'object',
-				'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
+				'subtype' => \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE,
 				'limit' => false,
 				'owner_guid' => elgg_get_site_entity()->guid,
 				'metadata_name_value_pairs' => [

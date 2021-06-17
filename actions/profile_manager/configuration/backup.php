@@ -6,13 +6,13 @@
 header('Content-Type: application/json');
 header('Content-Disposition: attachment; filename="custom_profile_fields.backup.json"');
 
-$fieldtype = get_input('fieldtype' , CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE);
+$fieldtype = get_input('fieldtype' , \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE);
 
 $entities = elgg_get_entities([
 	'type' => 'object',
 	'subtype' => $fieldtype,
 	'limit' => false,
-	'owner_guid' => elgg_get_site_entity()->getGUID(),
+	'owner_guid' => elgg_get_site_entity()->guid,
 ]);
 
 $info = [];

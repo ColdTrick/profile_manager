@@ -26,7 +26,7 @@ abstract class CustomField extends \ElggObject {
 	 *
 	 * @return array|null
 	 */
-	public function getOptions($add_blank_option = false) {
+	public function getOptions($add_blank_option = false): ?array {
 		if (empty($this->metadata_options)) {
 			return null;
 		}
@@ -53,7 +53,7 @@ abstract class CustomField extends \ElggObject {
 	 *
 	 * @return string
 	 */
-	public function getHint() {
+	public function getHint(): string {
 		$result = $this->metadata_hint;
 		
 		if (empty($result) && elgg_language_key_exists("profile:hint:{$this->metadata_name}")) {
@@ -67,7 +67,7 @@ abstract class CustomField extends \ElggObject {
 	 *
 	 * @return string
 	 */
-	public function getPlaceholder() {
+	public function getPlaceholder(): string {
 		$result = $this->metadata_placeholder;
 		
 		if (empty($result) && elgg_language_key_exists("profile:placeholder:{$this->metadata_name}")) {
@@ -81,7 +81,7 @@ abstract class CustomField extends \ElggObject {
 	 *
 	 * @return bool
 	 */
-	public function showOnProfile() {
+	public function showOnProfile(): bool {
 		return $this->show_on_profile !== 'no';
 	}
 	
@@ -91,8 +91,8 @@ abstract class CustomField extends \ElggObject {
 	public function delete($recursive = true) {
 		$deleted = parent::delete($recursive);
 		if ($deleted) {
-			elgg_delete_system_cache('profile_manager_profile_fields');
-			elgg_delete_system_cache('profile_manager_group_fields');
+			elgg_delete_system_cache('profile_manager_user:user_fields');
+			elgg_delete_system_cache('profile_manager_group:group_fields');
 		}
 		
 		return $deleted;

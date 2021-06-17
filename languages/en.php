@@ -63,8 +63,6 @@ return [
 	'profile_manager:settings:display_categories:option:plain' => 'Plain',
 	'profile_manager:settings:display_categories:option:tabs' => 'Tabs',
 
-	'profile_manager:settings:display_system_category' => 'Show an extra category on the profile with systemdata (only for admins)',
-
 	'profile_manager:settings:profile_type_selection' => 'Who can change the profile type?',
 	'profile_manager:settings:profile_type_selection:option:user' => 'User',
 	'profile_manager:settings:profile_type_selection:option:admin' => 'Admin only',
@@ -164,20 +162,12 @@ return [
 	'profile_manager:actions:reset:error:wrong_type' => 'Wrong profile field type (group or profile)',
 	'profile_manager:actions:reset:success' => 'Reset succesful',
 
-	// import from custom
-	'profile_manager:actions:import:from_custom' => 'Import custom fields',
-	'profile_manager:actions:import:from_custom:description' => 'Imports previous defined (with default Elgg functionality) profile fields',
-	'profile_manager:actions:import:from_custom:confirm' => 'Are you sure you wish to import custom fields?',
-	'profile_manager:actions:import:from_custom:no_fields' => 'No custom fields available for import',
-	'profile_manager:actions:import:from_custom:new_fields' => 'Succesfully imported <b>%s</b> new fields',
-
 	// import from default
-	'profile_manager:actions:import:from_default' => 'Import default fields',
-	'profile_manager:actions:import:from_default:description' => "Imports Elgg's default fields",
-	'profile_manager:actions:import:from_default:confirm' => 'Are you sure you wish to import default fields?',
-	'profile_manager:actions:import:from_default:no_fields' => 'No default fields available for import',
-	'profile_manager:actions:import:from_default:new_fields' => 'Succesfully imported <b>%s</b> new fields',
-	'profile_manager:actions:import:from_default:error:wrong_type' => 'Wrong profile field type (group or profile)',
+	'profile_manager:actions:import:from_existing' => 'Import existing fields',
+	'profile_manager:actions:import:from_existing:description' => "Import already existing fields",
+	'profile_manager:actions:import:from_existing:no_fields' => 'No existing fields available for import',
+	'profile_manager:actions:import:from_existing:new_fields' => 'Succesfully imported <b>%s</b> new fields',
+	'profile_manager:actions:import:from_existing:error:wrong_type' => 'Wrong profile field type (group or profile)',
 	
 	// Configuration Backup and Restore
 	'profile_manager:actions:configuration:backup' => "Backup",

@@ -1,5 +1,8 @@
 <?php
 
+use ColdTrick\ProfileManager\CustomFieldCategory;
+use ColdTrick\ProfileManager\CustomProfileType;
+
 /**
  * Function to add a custom field type to a register
  *
@@ -70,7 +73,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 		$edit = true;
 	}
 	
-	if (!empty($user) && ($user instanceof ElggUser)) {
+	if ($user instanceof ElggUser) {
 		$profile_type_guid = $user->custom_profile_type;
 		
 		if (!empty($profile_type_guid)) {
@@ -78,7 +81,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 			
 			// check if profile type is a REAL profile type
 			if (!empty($profile_type) && ($profile_type instanceof \ColdTrick\ProfileManager\CustomProfileType)) {
-				if ($profile_type->getSubtype() != CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE) {
+				if ($profile_type->getSubtype() !== CustomProfileType::SUBTYPE) {
 					$profile_type = null;
 				}
 			}
@@ -95,7 +98,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 	// get ordered categories
 	$cats = elgg_get_entities([
 		'type' => 'object',
-		'subtype' => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
+		'subtype' => CustomFieldCategory::SUBTYPE,
 		'limit' => false,
 		'owner_guid' => elgg_get_config('site_guid'),
 	]);
@@ -118,17 +121,17 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 				
 				$rel_count = elgg_count_entities([
 					'type' => 'object',
-					'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+					'subtype' => CustomProfileType::SUBTYPE,
 					'owner_guid' => $cat->getOwnerGUID(),
-					'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
-					'relationship_guid' => $cat->getGUID(),
+					'relationship' => \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP,
+					'relationship_guid' => $cat->guid,
 					'inverse_relationship' => true
 				]);
 				
 				if ($rel_count == 0) {
 					$filtered_ordered_cats[$cat->guid] = [];
 					$result['categories'][$cat->guid] = $cat;
-				} elseif (!empty($profile_type) && check_entity_relationship($profile_type->guid, CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP, $cat->guid)) {
+				} elseif (!empty($profile_type) && check_entity_relationship($profile_type->guid, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP, $cat->guid)) {
 					$filtered_ordered_cats[$cat->guid] = [];
 					$result['categories'][$cat->guid] = $cat;
 				}
@@ -142,7 +145,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 	// adding fields to categories
 	$fields = elgg_get_entities([
 		'type' => 'object',
-		'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE,
+		'subtype' => \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE,
 		'limit' => false,
 		'owner_guid' => elgg_get_config('site_guid'),
 	]);
@@ -151,7 +154,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 		
 		foreach ($fields as $field) {
 			
-			if (!($cat_guid = $field->category_guid)) {
+			if ($cat_guid !== $field->category_guid) {
 				$cat_guid = 0; // 0 is default
 			}
 			
@@ -210,7 +213,7 @@ function profile_manager_get_categorized_group_fields($group = null) {
 	// Get all custom group fields
 	$fields = elgg_get_entities([
 		'type' => 'object',
-		'subtype' => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
+		'subtype' => \ColdTrick\ProfileManager\CustomGroupField::SUBTYPE,
 		'limit' => false,
 		'owner_guid' => elgg_get_config('site_guid'),
 	]);

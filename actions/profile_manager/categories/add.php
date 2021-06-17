@@ -10,6 +10,8 @@
 * @link http://www.coldtrick.com/
 */
 
+use ColdTrick\ProfileManager\CustomFieldCategory;
+
 $name = get_input('metadata_name');
 $label = get_input('metadata_label');
 $guid = (int) get_input('guid');
@@ -21,7 +23,7 @@ if (empty($name) || !preg_match('/^[a-zA-Z0-9_]{1,}$/', $name)) {
 }
 	
 $entity = get_entity($guid);
-if (!($entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory)) {
+if (!$entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 	$entity = null;
 }
 
@@ -44,10 +46,10 @@ if (!empty($label)) {
 }
 
 // add relationship
-remove_entity_relationships($entity->guid, CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP, true);
+remove_entity_relationships($entity->guid, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP, true);
 if (!empty($profile_types) && is_array($profile_types)) {
 	foreach ($profile_types as $type) {
-		add_entity_relationship($type, CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP, $entity->guid);
+		add_entity_relationship($type, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP, $entity->guid);
 	}
 }
 
@@ -55,7 +57,7 @@ if (!empty($profile_types) && is_array($profile_types)) {
 if ($add) {
 	$entity->order = elgg_count_entities([
 		'type' => 'object',
-		'subtype' => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
+		'subtype' => CustomFieldCategory::SUBTYPE,
 		'owner_guid' => elgg_get_site_entity()->guid,
 	]);
 }

@@ -62,6 +62,7 @@ class Menus {
 		
 		$items[] = \ElggMenuItem::factory([
 			'name' => 'reset',
+			'icon' => 'refresh',
 			'text' => elgg_echo('reset'),
 			'title' => elgg_echo('profile_manager:actions:reset:description'),
 			'href' => elgg_generate_action_url('profile_manager/reset', [
@@ -72,29 +73,20 @@ class Menus {
 		]);
 		
 		$items[] = \ElggMenuItem::factory([
-			'name' => 'import_default',
-			'text' => elgg_echo('profile_manager:actions:import:from_default'),
-			'title' => elgg_echo('profile_manager:actions:import:from_default:description'),
-			'href' => elgg_generate_action_url('profile_manager/import_from_default', [
+			'name' => 'import_existing',
+			'icon' => 'plus-circle',
+			'text' => elgg_echo('profile_manager:actions:import:from_existing'),
+			'title' => elgg_echo('profile_manager:actions:import:from_existing:description'),
+			'href' => elgg_generate_action_url('profile_manager/import_existing', [
 				'type' => $type,
 			]),
-			'confirm' => elgg_echo('profile_manager:actions:import:from_default:confirm'),
+			'confirm' => true,
 			'class' => 'elgg-button elgg-button-action',
 		]);
 		
-		if ($type === 'profile') {
-			$items[] = \ElggMenuItem::factory([
-				'name' => 'import_custom',
-				'text' => elgg_echo('profile_manager:actions:import:from_custom'),
-				'title' => elgg_echo('profile_manager:actions:import:from_custom:description'),
-				'href' => elgg_generate_action_url('profile_manager/import_from_custom'),
-				'confirm' => elgg_echo('profile_manager:actions:import:from_custom:confirm'),
-				'class' => 'elgg-button elgg-button-action',
-			]);
-		}
-		
 		$items[] = \ElggMenuItem::factory([
 			'name' => 'backup',
+			'icon' => 'download',
 			'text' => elgg_echo('profile_manager:actions:configuration:backup'),
 			'href' => elgg_generate_action_url('profile_manager/configuration/backup', [
 				'fieldtype' => $fieldtype,
@@ -105,6 +97,7 @@ class Menus {
 		
 		$items[] = \ElggMenuItem::factory([
 			'name' => 'restore',
+			'icon' => 'upload',
 			'text' => elgg_echo('profile_manager:actions:configuration:restore'),
 			'href' => elgg_http_add_url_query_elements('ajax/view/forms/profile_manager/restore_fields', [
 				'fieldtype' => $fieldtype,

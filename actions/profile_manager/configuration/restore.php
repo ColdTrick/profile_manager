@@ -10,14 +10,14 @@
 * @link http://www.coldtrick.com/
 */
 
-$site_guid = elgg_get_site_entity()->getGUID();
+$site_guid = elgg_get_site_entity()->guid;
 
-$json = get_uploaded_file('restoreFile');
+$json = elgg_get_uploaded_file('restoreFile');
 if (empty($json)) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:restore:error:nofile'));
 }
 
-$data = json_decode($json, true);
+$data = json_decode(file_get_contents($json), true);
 if (empty($data)) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:restore:error:json'));
 }
@@ -39,15 +39,15 @@ if ($requestedfieldtype !== $fieldtype) {
 }
 
 // clear cache
-elgg_delete_system_cache('profile_manager_profile_fields');
-elgg_delete_system_cache('profile_manager_group_fields');
+elgg_delete_system_cache('profile_manager_user:user_fields');
+elgg_delete_system_cache('profile_manager_group:group_fields');
 
 // remove existing fields
 $entities = elgg_get_entities([
 	'type' => 'object',
 	'subtype' => $fieldtype,
 	'limit' => false,
-	'owner_guid' => $site_guid
+	'owner_guid' => $site_guid,
 ]);
 
 $error = false;
@@ -71,7 +71,7 @@ foreach ($fields as $index => $field) {
 	$object->owner_guid = $site_guid;
 	$object->container_guid = $site_guid;
 	$object->access_id = ACCESS_PUBLIC;
-	$object->subtype = $fieldtype;
+	$object->setSubtype($fieldtype);
 	$object->save();
 						
 	foreach ($field as $metadata_key => $metadata_value) {

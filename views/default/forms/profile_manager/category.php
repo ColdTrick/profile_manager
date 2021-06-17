@@ -10,14 +10,17 @@
 * @link http://www.coldtrick.com/
 */
 
+use ColdTrick\ProfileManager\CustomProfileType;
+
 if (!elgg_is_admin_logged_in()) {
 	echo elgg_echo('adminrequired');
 	return;
 }
+
 $guid = (int) get_input('guid');
 
 $entity = get_entity($guid);
-if (!($entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory)) {
+if (!$entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 	$entity = null;
 }
 
@@ -37,10 +40,10 @@ if ($entity) {
 	
 	$types = elgg_get_entities([
 		'type' => 'object',
-		'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+		'subtype' => CustomProfileType::SUBTYPE,
 		'limit' => false,
 		'owner_guid' => elgg_get_site_entity()->guid,
-		'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
+		'relationship' => \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP,
 		'relationship_guid' => $guid,
 		'inverse_relationship' => true,
 	]);
@@ -71,9 +74,9 @@ $formbody .= elgg_view_field([
 
 $types = elgg_get_entities([
 	'type' => 'object',
-	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+	'subtype' => CustomProfileType::SUBTYPE,
 	'limit' => false,
-	'owner_guid' => elgg_get_site_entity()->getGUID()
+	'owner_guid' => elgg_get_site_entity()->guid,
 ]);
 
 if (count($types) > 0) {
@@ -81,8 +84,7 @@ if (count($types) > 0) {
 	$checkbox_options = [];
 	
 	foreach ($types as $type) {
-		$title = $type->getDisplayName();
-		$checkbox_options[$title] = $type->guid;
+		$checkbox_options[$type->getDisplayName()] = $type->guid;
 	}
 	
 	$formbody .= elgg_view_field([

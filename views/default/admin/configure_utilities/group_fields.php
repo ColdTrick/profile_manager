@@ -24,7 +24,7 @@ $title .= elgg_view('output/pm_hint', [
 
 echo elgg_view_module('info', $title, elgg_view_menu('profile_fields', [
 	'type' => 'group',
-	'fieldtype' => CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE,
+	'fieldtype' => \ColdTrick\ProfileManager\CustomGroupField::SUBTYPE,
 	'class' => 'elgg-menu-hz',
 	'item_class' => 'mrm',
 ]));

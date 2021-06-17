@@ -18,7 +18,7 @@ if (!elgg_is_admin_logged_in()) {
 $guid = (int) get_input('guid');
 
 $entity = get_entity($guid);
-if (!($entity instanceof \ColdTrick\ProfileManager\CustomGroupField)) {
+if (!$entity instanceof \ColdTrick\ProfileManager\CustomGroupField) {
 	$entity = null;
 }
 
@@ -34,6 +34,9 @@ if ($types) {
 		$options_values[$type->type] = $type->name;
 		foreach ($type->options as $option_name => $option_value) {
 			if ($option_value) {
+				if (!isset($option_classes[$option_name])) {
+					$option_classes[$option_name] = '';
+				}
 				$option_classes[$option_name] .= ' field_option_enable_' . $type->type;
 			}
 		}
@@ -108,7 +111,6 @@ $formbody .= elgg_view_field([
 	'name' => 'metadata_type',
 	'options_values' => $options_values,
 	'value' => $metadata_type,
-	'onchange' => 'elgg.profile_manager.change_field_type();',
 ]);
 
 $formbody .= elgg_view_field([

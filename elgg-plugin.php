@@ -3,18 +3,18 @@
 use Elgg\Project\Paths;
 use ColdTrick\ProfileManager\Bootstrap;
 
-define('CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE', 'custom_profile_field_category');
-define('CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE', 'custom_profile_type');
-define('CUSTOM_PROFILE_FIELDS_PROFILE_SUBTYPE', 'custom_profile_field');
-define('CUSTOM_PROFILE_FIELDS_GROUP_SUBTYPE', 'custom_group_field');
-define('CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP', 'custom_profile_type_category_relationship');
-
 $composer_path = '';
 if (is_dir(__DIR__ . '/vendor')) {
 	$composer_path = __DIR__ . '/';
 }
 
 return [
+	'plugin' => [
+		'version' => '15.0.2',
+		'dependencies' => [
+			'profile' => ['position' => 'after'],
+		],
+	],
 	'bootstrap' => Bootstrap::class,
 	'settings' => [
 		'generate_username_from_email' => 'no',
@@ -26,7 +26,6 @@ return [
 		'profile_type_selection' => 'user',
 		'show_profile_type_on_profile' => 'no',
 		'display_categories' => 'plain',
-		'display_system_category' => 'no',
 		'enable_profile_completeness_widget' => 'no',
 		'enable_site_join_river_event' => 'yes',
 	],
@@ -71,8 +70,7 @@ return [
 	],
 	'actions' => [
 		'profile_manager/change_category' => ['access' => 'admin'],
-		'profile_manager/import_from_custom' => ['access' => 'admin'],
-		'profile_manager/import_from_default' => ['access' => 'admin'],
+		'profile_manager/import_existing' => ['access' => 'admin'],
 		'profile_manager/new' => ['access' => 'admin'],
 		'profile_manager/reorder' => ['access' => 'admin'],
 		'profile_manager/reset' => ['access' => 'admin'],
@@ -87,17 +85,12 @@ return [
 		'profile_manager/profile_types/add' => ['access' => 'admin'],
 	],
 	'hooks' => [
-		'categorized_profile_fields' => [
-			'profile_manager' => [
-				'\ColdTrick\ProfileManager\ProfileFields::addAdminFields' => ['priority' => 999],
+		'fields' => [
+			'user:user' => [
+				'\ColdTrick\ProfileManager\ProfileFields::getFields' => [],
 			],
-		],
-		'profile:fields' => [
-			'profile' => [
-				'\ColdTrick\ProfileManager\ProfileFields::getUserFields' => [],
-			],
-			'group' => [
-				'\ColdTrick\ProfileManager\ProfileFields::getGroupFields' => [],
+			'group:group' => [
+				'\ColdTrick\ProfileManager\ProfileFields::getFields' => [],
 			],
 		],
 		'register' => [

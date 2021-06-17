@@ -11,8 +11,9 @@
 * @uses $user The user entity
 */
 
-$user = elgg_extract('entity', $vars);
+use ColdTrick\ProfileManager\CustomProfileType;
 
+$user = elgg_extract('entity', $vars);
 
 $sticky_values = elgg_get_sticky_values('profile:edit');
 
@@ -42,9 +43,9 @@ if (!empty($cats)) {
 	if ($setting == 'user' || elgg_is_admin_logged_in()) {
 		$types = elgg_get_entities([
 			'type' => 'object',
-			'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+			'subtype' => CustomProfileType::SUBTYPE,
 			'limit' => false,
-			'owner_guid' => elgg_get_site_entity()->getGUID(),
+			'owner_guid' => elgg_get_site_entity()->guid,
 		]);
 		
 		if ($types) {
@@ -66,7 +67,7 @@ if (!empty($cats)) {
 					$type_description .= $description;
 					
 					$types_description .= elgg_format_element('div', [
-						'id' => 'custom_profile_type_description_' . $type->getGUID(),
+						'id' => 'custom_profile_type_description_' . $type->guid,
 						'class' => 'custom_profile_type_description hidden',
 					], $type_description);
 				}
@@ -79,13 +80,11 @@ if (!empty($cats)) {
 				}
 			}
 			
-			
 			$types_input = elgg_format_element('label', [], elgg_echo('profile_manager:profile:edit:custom_profile_type:label'));
 			$types_input .= elgg_view('input/dropdown', [
 				'name' => 'custom_profile_type',
 				'id' => 'custom_profile_type',
 				'options_values' => $dropdown_options,
-				'onchange' => 'elgg.profile_manager.change_profile_type();',
 				'value' => $user->custom_profile_type,
 				'class' => 'mlm',
 			]);
@@ -116,10 +115,10 @@ if (!empty($cats)) {
 
 			$profile_types = elgg_get_entities([
 				'type' => 'object',
-				'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+				'subtype' => CustomProfileType::SUBTYPE,
 				'limit' => false,
 				'owner_guid' => $cat->getOwnerGUID(),
-				'relationship' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_CATEGORY_RELATIONSHIP,
+				'relationship' => \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP,
 				'relationship_guid' => $cat_guid,
 				'inverse_relationship' => true,
 			]);
@@ -128,7 +127,7 @@ if (!empty($cats)) {
 				// add extra class so it can be toggle in the display
 				$hidden_category = true;
 				foreach ($profile_types as $type) {
-					$category_class[] = 'custom_profile_type_' . $type->guid;
+					$category_class[] = "custom_profile_type_{$type->guid}";
 					if ($type->guid === (int) $profile_type) {
 						$hidden_category = false;
 					}
@@ -156,7 +155,7 @@ if (!empty($cats)) {
 			$valtype = $field->metadata_type;
 			
 			$annotations = $user->getAnnotations([
-				'annotation_names' => "profile:$shortname",
+				'annotation_names' => "profile:{$shortname}",
 				'limit' => false,
 			]);
 			$access_id = ACCESS_DEFAULT;

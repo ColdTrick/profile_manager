@@ -1,5 +1,7 @@
 <?php
 
+use ColdTrick\ProfileManager\CustomProfileType;
+
 $plugin = elgg_extract('entity', $vars);
 
 echo elgg_view('profile_manager/admin/tabs', ['settings_selected' => true]);
@@ -50,7 +52,7 @@ $registration_fields = [
 
 $profile_type_entities = elgg_get_entities([
 	'type' => 'object',
-	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+	'subtype' => CustomProfileType::SUBTYPE,
 	'owner_guid' => elgg_get_site_entity()->guid,
 	'limit' => false,
 ]);
@@ -140,15 +142,6 @@ echo elgg_view_module('info', elgg_echo('profile_manager:settings:view_profile')
 				'tabs' => elgg_echo('profile_manager:settings:display_categories:option:tabs'),
 			],
 			'value' => $plugin->display_categories,
-		],
-		[
-			'#type' => 'checkbox',
-			'#label' => elgg_echo('profile_manager:settings:display_system_category'),
-			'name' => 'params[display_system_category]',
-			'checked' => $plugin->display_system_category === 'yes',
-			'switch' => true,
-			'default' => 'no',
-			'value' => 'yes',
 		],
 	],
 ]));

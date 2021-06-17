@@ -18,7 +18,7 @@ if (!elgg_is_admin_logged_in()) {
 $guid = (int) get_input('guid');
 
 $entity = get_entity($guid);
-if (!($entity instanceof \ColdTrick\ProfileManager\CustomProfileField)) {
+if (!$entity instanceof \ColdTrick\ProfileManager\CustomProfileField) {
 	$entity = null;
 }
 
@@ -125,7 +125,6 @@ $formbody .= elgg_view_field([
 	'name' => 'metadata_type',
 	'options_values' => $options_values,
 	'value' => $metadata_type,
-	'onchange' => 'elgg.profile_manager.change_field_type();',
 ]);
 
 $formbody .= elgg_view_field([
@@ -185,4 +184,4 @@ $form_title .= elgg_view('output/pm_hint', [
 
 echo elgg_view_module('info', $form_title, $form, ['class' => 'mvn', 'id' => 'custom_fields_form']);
 
-echo elgg_format_element('script', [], 'elgg.profile_manager.change_field_type();');
+echo elgg_format_element('script', [], '$(\'#custom_fields_form select[name="metadata_type"]\').trigger("change");');

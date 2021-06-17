@@ -1,14 +1,15 @@
 <?php
-
-/*
+/**
  * Shows a selection dropdown for the profile types on the registration form
  */
+
+use ColdTrick\ProfileManager\CustomProfileType;
 
 $value = elgg_extract('value', $vars);
 
 $types = elgg_get_entities([
 	'type' => 'object',
-	'subtype' => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+	'subtype' => CustomProfileType::SUBTYPE,
 	'limit' => false,
 	'owner_guid' => elgg_get_site_entity()->guid,
 ]);
