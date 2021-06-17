@@ -2,7 +2,7 @@
 
 $last_login = strtotime('-3 months');
 
-$date = sanitise_int(get_input('last_login'));
+$date = (int) get_input('last_login');
 if ($date > 0) {
 	$last_login = $date;
 }
@@ -36,7 +36,7 @@ $form = elgg_view('input/form', [
 echo elgg_view_module('inline', null, $form);
 
 $limit = max((int) get_input('limit', 50), 0);
-$offset = sanitise_int(get_input('offset', 0), false);
+$offset = (int) get_input('offset', 0);
 
 $options = [
 	'type' => 'user',
@@ -81,9 +81,8 @@ if (!empty($users)) {
 	}
 	
 	$content .= '</table>';
-	
-	$options['count'] = true;
-	$count = elgg_get_entities($options);
+
+	$count = elgg_count_entities($options);
 	
 	$content .= elgg_view('navigation/pagination', [
 		'offset' => $offset,

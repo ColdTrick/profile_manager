@@ -1,6 +1,6 @@
 <?php
 
-$selected_value = sanitise_int($vars['value'], false);
+$selected_value = (int) $vars['value'];
 
 $stars = '';
 for ($i = 1; $i <= 5; $i++) {

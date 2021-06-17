@@ -36,5 +36,5 @@ $content .= elgg_view('output/url', [
 
 echo elgg_format_element('div', [
 	'class' => 'custom_profile_type',
-	'id' => 'custom_profile_type_' . $entity->guid
+	'id' => 'custom_profile_type_' . $entity->guid,
 ], $content);

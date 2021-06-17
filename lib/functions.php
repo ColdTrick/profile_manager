@@ -153,11 +153,8 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 	if ($fields) {
 		
 		foreach ($fields as $field) {
-			
-			if ($cat_guid !== $field->category_guid) {
-				$cat_guid = 0; // 0 is default
-			}
-			
+			$cat_guid = $field->category_guid ?: 0; // 0 is default
+					
 			$admin_only = $field->admin_only;
 			if ($register || $admin_only != 'yes' || elgg_is_admin_logged_in()) {
 				if ($edit) {
