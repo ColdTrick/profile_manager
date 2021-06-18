@@ -15,10 +15,14 @@ $fields = [];
 $profile_icon = elgg_get_plugin_setting('profile_icon_on_register', 'profile_manager');
 if ($profile_icon == 'yes' || $profile_icon == 'optional') {
 	$fields[] = [
-		'#type' => 'file',
-		'#label' => elgg_echo('profile_manager:register:profile_icon'),
-		'name' => 'profile_icon',
-		'required' => ($profile_icon == 'yes'),
+		'#html' => elgg_view('entity/edit/icon', [
+			'entity_type' => 'user',
+			'entity_subtype' => 'user',
+			'name' => 'profile_icon',
+			'cropper_enabled' => true,
+			'show_remove' => false,
+			'required' => ($profile_icon == 'yes'),
+		]),
 	];
 }
 
