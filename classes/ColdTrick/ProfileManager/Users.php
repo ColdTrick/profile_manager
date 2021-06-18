@@ -12,13 +12,14 @@ class Users {
 	/**
 	 * Saves extra user information when user registers on the site
 	 *
-	 * @param \Elgg\Event $event event
+	 * @param \Elgg\Event $event 'create', 'user'
 	 *
 	 * @return void
 	 */
 	public static function createUserByRegister(\Elgg\Event $event) {
 		$custom_profile_fields = [];
 		
+		/* @var \ElggUser $user */
 		$user = $event->getObject();
 	
 		// retrieve all field that were on the register page
@@ -33,7 +34,7 @@ class Users {
 			$categorized_fields = profile_manager_get_categorized_fields(null, true, true);
 			$configured_fields = $categorized_fields['fields'];
 	
-			elgg_call(ELGG_IGNORE_ACCESS, function() use ($user, $configured_fields) {
+			elgg_call(ELGG_IGNORE_ACCESS, function() use ($user, $configured_fields, $custom_profile_fields) {
 				$user_default_access = get_default_access($user);
 				
 				foreach ($custom_profile_fields as $shortname => $value) {
@@ -61,15 +62,7 @@ class Users {
 						continue;
 					}
 					
-					if (!is_array($value)) {
-						$value = [$value];
-					}
-					foreach ($value as $interval) {
-						$user->annotate("profile:$shortname", $interval, $user_default_access, $user->guid, 'text');
-					}
-			
-					// for BC, keep storing fields in MD, but we'll read annotations only
-					$user->$shortname = $value;
+					$user->setProfileData($shortname, $value, $user_default_access);
 				}
 			});
 		}
@@ -94,12 +87,13 @@ class Users {
 	/**
 	 * Saves extra user information when user is created with admin useradd form
 	 *
-	 * @param \Elgg\Event $event event
+	 * @param \Elgg\Event $event 'create', 'user'
 	 *
 	 * @return void
 	 */
 	public static function createUserByAdmin(\Elgg\Event $event) {
 		
+		/* @var \ElggUser $user */
 		$user = $event->getObject();
 		
 		$custom_profile_fields = get_input('custom_profile_fields');
@@ -112,15 +106,7 @@ class Users {
 		
 		foreach ($custom_profile_fields as $shortname => $value) {
 			if (!empty($value) || $value === 0) {
-				if (!is_array($value)) {
-					$value = [$value];
-				}
-				foreach ($value as $interval) {
-					$user->annotate("profile:$shortname", $interval, $user_default_access, $user->guid, 'text');
-				}
-		
-				// for BC, keep storing fields in MD, but we'll read annotations only
-				$user->$shortname = $value;
+				$user->setProfileData($shortname, $value, $user_default_access);
 			}
 		}
 	}
@@ -239,7 +225,7 @@ class Users {
 	/**
 	 * Adds a river event when a user is created
 	 *
-	 * @param \Elgg\Event $event event
+	 * @param \Elgg\Event $event 'validate:after', 'user'
 	 *
 	 * @return void
 	 */
@@ -288,21 +274,17 @@ class Users {
 			$username = str_pad($username, $min_length, 0);
 		}
 	
-		// show hidden entities (unvalidated users)
-		$hidden = access_show_hidden_entities(true);
-		
-		// check if username is unique
-		$original_username = $username;
-		
-		$i = 1;
-		while (get_user_by_username($username)) {
-			$username = $original_username . $i;
-			$i++;
-		}
-		
-		// restore hidden entities
-		access_show_hidden_entities($hidden);
-		
-		return $username;
+		return elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function() use ($username) {
+			// check if username is unique
+			$original_username = $username;
+			
+			$i = 1;
+			while (get_user_by_username($username)) {
+				$username = $original_username . $i;
+				$i++;
+			}
+			
+			return $username;
+		});
 	}
 }

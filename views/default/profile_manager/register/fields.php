@@ -118,7 +118,7 @@ if (!empty($profile_fields)) {
 			];
 		} else {
 			$fields[] = [
-				'#html' => elgg_view_module('inline', $cat_title, $cat_body, ['class' => $category_classes]),
+				'#html' => elgg_view_module('info', $cat_title, $cat_body, ['class' => $category_classes]),
 			];
 		}
 	}

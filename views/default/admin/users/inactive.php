@@ -66,10 +66,7 @@ if (!empty($users)) {
 	
 	foreach ($users as $user) {
 		$content .= '<tr>';
-		$content .= '<td>' . elgg_view('output/url', [
-			'text' => $user->name,
-			'href' => $user->getURL(),
-		]) . '</td>';
+		$content .= '<td>' . elgg_view_entity_url($user) . '</td>';
 		$user_last_login = $user->last_login;
 		if (empty($user_last_login)) {
 			$content .= '<td>' . elgg_echo('never') . '</td>';

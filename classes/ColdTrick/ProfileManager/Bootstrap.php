@@ -45,7 +45,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 		
 		$hooks = $this->elgg()->hooks;
 		
-		$hooks->registerHandler('action', 'useradd', function() {
+		$hooks->registerHandler('action:validate', 'useradd', function() {
 			// only register createByAdmin during useradd action
 			elgg_register_event_handler('create', 'user', '\ColdTrick\ProfileManager\Users::createUserByAdmin');
 		});

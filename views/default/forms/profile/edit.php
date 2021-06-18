@@ -222,7 +222,7 @@ if (!empty($cats)) {
 					$tabs[] = [
 						'text' => $cat_title,
 						'content' => $cat_data,
-						'class' => $category_class,
+						'item_class' => $category_class,
 					];
 				} else {
 					$output .= elgg_view_module('info', $cat_title, $cat_data, [

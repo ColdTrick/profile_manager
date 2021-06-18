@@ -37,7 +37,7 @@ $registration_fields = [
 		'value' => $plugin->profile_icon_on_register,
 	],
 	[
-		'#type' => 'text',
+		'#type' => 'url',
 		'#label' => elgg_echo('profile_manager:settings:registration:terms'),
 		'name' => 'params[registration_terms]',
 		'value' => $plugin->registration_terms,

@@ -59,7 +59,7 @@ abstract class CustomField extends \ElggObject {
 		if (empty($result) && elgg_language_key_exists("profile:hint:{$this->metadata_name}")) {
 			$result = elgg_echo("profile:hint:{$this->metadata_name}");
 		}
-		return $result;
+		return (string) $result;
 	}
 
 	/**
@@ -73,7 +73,7 @@ abstract class CustomField extends \ElggObject {
 		if (empty($result) && elgg_language_key_exists("profile:placeholder:{$this->metadata_name}")) {
 			$result = elgg_echo("profile:placeholder:{$this->metadata_name}");
 		}
-		return $result;
+		return (string) $result;
 	}
 
 	/**

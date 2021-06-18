@@ -106,6 +106,10 @@ return [
 		'create' => [
 			'user' => [
 				'\ColdTrick\ProfileManager\Users::createUserByRegister' => [],
+			],
+		],
+		'validate:after' => [
+			'user' => [
 				'\ColdTrick\ProfileManager\Users::createUserRiverItem' => [],
 			],
 		],
