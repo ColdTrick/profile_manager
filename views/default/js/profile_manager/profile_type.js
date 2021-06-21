@@ -14,8 +14,8 @@ define(['jquery', 'page/components/tabs'], function($) {
 			$('#custom_profile_type_description_'+ selVal).show();
 		}
 
-		if ($('.custom_fields_edit_profile_category.elgg-state-selected:visible').length === 0) {
-			$('.custom_fields_edit_profile_category:visible:first a').click();
+		if ($('#profile_manager_profile_edit_tabs .custom_fields_edit_profile_category.elgg-state-selected:visible').length === 0) {
+			$('#profile_manager_profile_edit_tabs .custom_fields_edit_profile_category:visible:first a').click();
 		}
 	};
 	

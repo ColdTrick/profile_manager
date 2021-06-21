@@ -1,6 +1,6 @@
 <?php
 
-elgg_require_js('profile_manager/rating');
+elgg_require_js('input/pm_rating');
 
 $selected_value = (int) $vars['value'];
 
@@ -9,9 +9,9 @@ $rating_id = $vars['name'] . '_container';
 $body = elgg_view('input/hidden', $vars);
 for ($i = 1; $i <= 5; $i++) {
 	if ($i <= $selected_value) {
-		$body .= elgg_view_icon('star-alt', 'link');
+		$body .= elgg_view_icon('star', ['class' => ['link', 'pm-rating-selected']]);
 	} else {
-		$body .= elgg_view_icon('star-empty','link');
+		$body .= elgg_view_icon('star-regular', ['class' => 'link']);
 	}
 }
 

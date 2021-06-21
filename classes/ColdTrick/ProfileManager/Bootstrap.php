@@ -32,6 +32,14 @@ class Bootstrap extends DefaultPluginBootstrap {
 		elgg_register_ajax_view('forms/profile_manager/profile_field');
 		elgg_register_ajax_view('forms/profile_manager/restore_fields');
 		
+		elgg_define_js('jquery/multiselect', [
+			'deps' => [
+				'jquery-ui/widget',
+				'jquery-ui/data',
+			],
+			'src' => elgg_get_simplecache_url('jquery/multiselect'),
+		]);
+		
 		// Register all custom field types
 		$this->registerCustomFieldTypes();
 		
