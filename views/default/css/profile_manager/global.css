@@ -47,15 +47,3 @@ button.ui-multiselect {
 	padding: 0;
 	margin: 0 -2px 0 0;
 }
-
-input[type=tel] {
-	height: 2.5rem;
-}
-
-input[type=tel]:focus {
-	border: solid 1px $(border-color-strong);
-	background-color: $(background-color-soft);
-	/* We remove outlines from specific input types so we can leave the browser
-	   defaults (like glows) for everything else */
-	outline: 0 none;
-}
