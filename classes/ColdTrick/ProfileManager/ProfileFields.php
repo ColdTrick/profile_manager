@@ -44,6 +44,7 @@ class ProfileFields {
 			$result[] = [
 				'name' => 'name',
 				'#type' => 'text',
+				'#label' => elgg_echo('groups:name'),
 			];
 		}
 
