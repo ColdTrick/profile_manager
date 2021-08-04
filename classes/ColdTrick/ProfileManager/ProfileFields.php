@@ -64,6 +64,7 @@ class ProfileFields {
 				'#type' => $entity->metadata_type,
 				'#label' => $entity->getDisplayName(),
 				'name' => $entity->metadata_name,
+				'placeholder' => $entity->getPlaceholder(),
 			];
 		}
 		
