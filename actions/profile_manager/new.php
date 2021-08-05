@@ -164,7 +164,8 @@ if (empty($current_field)) {
 	$field->order = $max_fields;
 }
 
-elgg_delete_system_cache("profile_manager_{$type}_fields");
+elgg_delete_system_cache('profile_manager_user:user_fields');
+elgg_delete_system_cache('profile_manager_group:group_fields');
 
 if (!$field->save()) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:new:error:unknown'));
