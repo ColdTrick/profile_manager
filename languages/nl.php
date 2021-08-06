@@ -1,10 +1,15 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0-beta
- * On 2018-12-13 17:02
+ * This file was created by Translation Editor v8.0
+ * On 2021-08-06 10:08
  */
 
 return array (
+  'profile_manager:actions:import:from_existing' => 'Importeer bestaande velden',
+  'profile_manager:actions:import:from_existing:description' => 'Importeer alreeds bestaande velden',
+  'profile_manager:actions:import:from_existing:no_fields' => 'Er zijn geen bestaande velden beschikbaar om te importeren',
+  'profile_manager:actions:import:from_existing:new_fields' => 'Succesvol <b>%s</b> nieuwe velden geïmporteerd',
+  'profile_manager:actions:import:from_existing:error:wrong_type' => 'Verkeerde profiel type (group of profile)',
   'collection:object:custom_profile_field' => 'Custom Profiel Velden',
   'collection:object:custom_group_field' => 'Custom Groep Velden',
   'collection:object:custom_profile_field_category' => 'Custom Profiel Veld Categorieën',
@@ -59,7 +64,6 @@ return array (
   'profile_manager:settings:display_categories' => 'Hoe moeten de velden op het profiel worden getoond',
   'profile_manager:settings:display_categories:option:plain' => 'Gewoon',
   'profile_manager:settings:display_categories:option:tabs' => 'Tabs',
-  'profile_manager:settings:display_system_category' => 'Toon een extra categorie op het profiel met systeem informatie (alleen voor beheerders)',
   'profile_manager:settings:profile_type_selection' => 'Wie kan het profiel type wijzigen?',
   'profile_manager:settings:profile_type_selection:option:user' => 'Gebruiker',
   'profile_manager:settings:profile_type_selection:option:admin' => 'Alleen de beheerder',
@@ -119,17 +123,6 @@ return array (
   'profile_manager:actions:reset:error:unknown' => 'Onbekend probleem opgetreden tijdens het resetten van de velden',
   'profile_manager:actions:reset:error:wrong_type' => 'Verkeerd profiel type (groep of profiel)',
   'profile_manager:actions:reset:success' => 'Reset gelukt',
-  'profile_manager:actions:import:from_custom' => 'Importeer custom fields',
-  'profile_manager:actions:import:from_custom:description' => 'Importeert eerder gedefinieerde (met de standaard Elgg functionaliteit) profiel velden.',
-  'profile_manager:actions:import:from_custom:confirm' => 'Weet je zeker dat je de custom fields wilt importeren?',
-  'profile_manager:actions:import:from_custom:no_fields' => 'Geen custom fields beschikbaar voor import',
-  'profile_manager:actions:import:from_custom:new_fields' => 'Succesvol <b>%s</b> nieuwe velden ge�mporteerd',
-  'profile_manager:actions:import:from_default' => 'Importeer standaard velden',
-  'profile_manager:actions:import:from_default:description' => 'Importeert Elgg\'s standaard velden.',
-  'profile_manager:actions:import:from_default:confirm' => 'Weet je zeker dat je de standaard velden wilt importeren?',
-  'profile_manager:actions:import:from_default:no_fields' => 'Geen standaard velden beschikbaar voor import',
-  'profile_manager:actions:import:from_default:new_fields' => 'Succesvol <b>%s</b> nieuwe velden ge�mporteerd',
-  'profile_manager:actions:import:from_default:error:wrong_type' => 'Verkeerd profiel type (groep of profiel)',
   'profile_manager:actions:configuration:backup' => 'Backup',
   'profile_manager:actions:configuration:backup:description' => 'Backup de configuratie van deze velden (categorieën en types worden niet gebackupped)',
   'profile_manager:actions:configuration:restore' => 'Herstel',
