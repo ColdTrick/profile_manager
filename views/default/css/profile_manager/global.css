@@ -35,8 +35,13 @@ button.ui-multiselect {
 	border: 1px solid $(border-color-mild);
 }
 
-.ui-multiselect-checkboxes .ui-state-hover {
-	background: $(background-color-mild);
+.ui-multiselect-checkboxes {
+	overflow: auto !important;
+	max-height: 200px;
+	
+	.ui-state-hover {
+		background: $(background-color-mild);
+	}
 }
 
 .profile-manager-multiselect {
