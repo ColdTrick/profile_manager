@@ -1,6 +1,12 @@
 Version history
 ===============
 
+16.0 (2021-09-27):
+
+- added: avatar upload on register now uses icon cropper
+- changed: register action middleware added using a hook
+- changed: updated for Elgg 4
+
 15.0.2 (2020-02-18):
 
 - fixed: register action validation middleware
