@@ -7,6 +7,15 @@ use Elgg\DefaultPluginBootstrap;
 class Bootstrap extends DefaultPluginBootstrap {
 	
 	/**
+	 * {@inheritDoc}
+	 */
+	public function boot() {
+		$hooks = $this->elgg()->hooks;
+		
+		$hooks->registerHandler('route:config', 'action:register', __NAMESPACE__ . '\Routes::addRegisterActionMiddleware');
+	}
+	
+	/**
 	 * {@inheritdoc}
 	 */
 	public function init() {

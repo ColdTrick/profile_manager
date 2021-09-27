@@ -1,6 +1,5 @@
 <?php
 
-use Elgg\Project\Paths;
 use ColdTrick\ProfileManager\Bootstrap;
 
 $composer_path = '';
@@ -55,17 +54,6 @@ return [
 		'default' => [
 			'jquery/multiselect.js' => $composer_path . 'vendor/bower-asset/jquery-ui-multiselect-widget/src/jquery.multiselect.js',
 			'jquery/multiselect.css' => $composer_path . 'vendor/bower-asset/jquery-ui-multiselect-widget/css/jquery.multiselect.css',
-		],
-	],
-	'routes' => [
-		'action:register' => [
-			'path' => '/action/register',
-			'file' => Paths::elgg() . 'actions/register.php',
-			'walled' => false,
-			'middleware' => [
-				'\Elgg\Router\Middleware\ActionMiddleware',
-				'\ColdTrick\ProfileManager\Users::validateRegisterAction',
-			]
 		],
 	],
 	'actions' => [
