@@ -4,7 +4,6 @@
  *
  * @uses $vars['entity']       the user
  * @uses $vars['field']        profile field
- * @uses $vars['is_attribute'] fetch data from atribute (default: false)
  * @uses $vars['microformats'] Mapping of fieldnames to microformats
  */
 
@@ -26,24 +25,20 @@ $microformats = array_merge($microformats, (array) elgg_extract('microformats', 
 
 $shortname = $field->metadata_name;
 $valtype = $field->metadata_type;
-if ((bool) elgg_extract('is_attribute', $vars, false)) {
-	// system data is not annotations
-	$value = $user->$shortname;
-} else {
-	$annotations = $entity->getAnnotations([
-		'annotation_names' => "profile:{$shortname}",
-		'limit' => false,
-	]);
-	$values = array_map(function (ElggAnnotation $a) {
-		return $a->value;
-	}, $annotations);
 
-	if (!$values) {
-		return;
-	}
-	// emulate metadata API
-	$value = (count($values) === 1) ? $values[0] : $values;
+$annotations = $entity->getAnnotations([
+	'annotation_names' => "profile:{$shortname}",
+	'limit' => false,
+]);
+$values = array_map(function (ElggAnnotation $a) {
+	return $a->value;
+}, $annotations);
+
+if (!$values) {
+	return;
 }
+// emulate metadata API
+$value = (count($values) === 1) ? $values[0] : $values;
 
 if (elgg_is_empty($value)) {
 	return;
@@ -62,12 +57,10 @@ if ($field->output_as_tags == 'yes') {
 	}
 }
 
-$class = elgg_extract($shortname, $microformats, '');
-
 echo elgg_view('object/elements/field', [
 	'label' => $field->getDisplayName(),
 	'value' => elgg_format_element('span', [
-		'class' => $class,
+		'class' => elgg_extract($shortname, $microformats),
 	], elgg_view("output/{$valtype}", [
 		'value' => $value,
 	])),

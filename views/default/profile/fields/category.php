@@ -25,7 +25,6 @@ foreach ($fields as $field) {
 	echo elgg_view('profile/fields/field', [
 		'entity' => $entity,
 		'field' => $field,
-		'is_attribute' => $category_guid === -1,
 		'microformats' => elgg_extract('microformats', $vars, []),
 	]);
 }
