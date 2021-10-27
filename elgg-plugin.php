@@ -9,7 +9,7 @@ if (is_dir(__DIR__ . '/vendor')) {
 
 return [
 	'plugin' => [
-		'version' => '16.0',
+		'version' => '16.0.1',
 		'dependencies' => [
 			'profile' => ['position' => 'after'],
 		],

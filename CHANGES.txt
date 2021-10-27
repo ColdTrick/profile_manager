@@ -1,6 +1,10 @@
 Version history
 ===============
 
+16.0.1 (2021-10-27):
+
+- several small chores/fixes
+
 16.0 (2021-09-27):
 
 - added: avatar upload on register now uses icon cropper
