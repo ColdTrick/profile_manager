@@ -4,52 +4,23 @@ use ColdTrick\ProfileManager\CustomFieldCategory;
 use ColdTrick\ProfileManager\CustomProfileType;
 
 /**
- * Function to add a custom field type to a register
- *
- * @param string $register_name      Name of the register where the fields are configured
- * @param string $field_type         Type op the field
- * @param string $field_display_name Display name of the field type
- * @param array  $options            Array of options
- *
- * @return void
- */
-function profile_manager_add_custom_field_type($register_name, $field_type, $field_display_name, $options = []) {
-	global $PROFILE_MANAGER_FIELD_TYPES;
-	
-	if (!isset($PROFILE_MANAGER_FIELD_TYPES)) {
-		$PROFILE_MANAGER_FIELD_TYPES = array();
-	}
-	if (!isset($PROFILE_MANAGER_FIELD_TYPES[$register_name])) {
-		$PROFILE_MANAGER_FIELD_TYPES[$register_name] = array();
-	}
-	
-	$defaults = [
-		'show_on_profile' => true,
-	];
-	
-	$field_config = new stdClass();
-	$field_config->name = $field_display_name;
-	$field_config->type = $field_type;
-	$field_config->options = array_merge($defaults, $options);
-	
-	$PROFILE_MANAGER_FIELD_TYPES[$register_name][$field_type] = $field_config;
-}
-
-/**
  * Returns the profile manager field types
  *
- * @param string $register_name Name of the register to retrieve
+ * @param string $type subtype of the profile types to get the allowed fields for
  *
- * @return false|array
+ * @return array
  */
-function profile_manager_get_custom_field_types($register_name) {
-	global $PROFILE_MANAGER_FIELD_TYPES;
+function profile_manager_get_custom_field_types(string $type): array {
+	static $types;
 	
-	if (isset($PROFILE_MANAGER_FIELD_TYPES) && isset($PROFILE_MANAGER_FIELD_TYPES[$register_name])) {
-		return $PROFILE_MANAGER_FIELD_TYPES[$register_name];
+	if (!isset($types[$type])) {
+		$items = (array) elgg_trigger_plugin_hook("types:{$type}", 'profile_manager', []);
+		foreach ($items as $item) {
+			$types[$type][$item->type] = $item;
+		}
 	}
 	
-	return false;
+	return $types[$type];
 }
 
 /**

@@ -28,7 +28,7 @@ $formbody = '';
 $options_values = [];
 $option_classes = [];
 
-$types = profile_manager_get_custom_field_types('custom_profile_field_types');
+$types = profile_manager_get_custom_field_types(\ColdTrick\ProfileManager\CustomProfileField::SUBTYPE);
 if ($types) {
 	foreach ($types as $type) {
 		$options_values[$type->type] = $type->name;

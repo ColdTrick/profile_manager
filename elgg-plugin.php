@@ -124,6 +124,16 @@ return [
 				'\ColdTrick\ProfileManager\Menus::registerProfileFieldsActions' => [],
 			],
 		],
+		'types:custom_group_field' => [
+			'profile_manager' => [
+				'\ColdTrick\ProfileManager\ProfileFields::registerGroupProfileFieldTypes' => [],
+			],
+		],
+		'types:custom_profile_field' => [
+			'profile_manager' => [
+				'\ColdTrick\ProfileManager\ProfileFields::registerUserProfileFieldTypes' => [],
+			],
+		],
 	],
 	'events' => [
 		'create' => [

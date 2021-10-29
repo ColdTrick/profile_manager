@@ -9,14 +9,11 @@ $metadata_name = elgg_extract('metadata_name', $vars);
 $metadata_type = $entity->metadata_type;
 
 $types = [];
-$type_options = [];
-
-if ($entity->getSubType() == \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE) {
-	$types = profile_manager_get_custom_field_types('custom_profile_field_types');
-} elseif ($entity->getSubType() == \ColdTrick\ProfileManager\CustomGroupField::SUBTYPE) {
-	$types = profile_manager_get_custom_field_types('custom_group_field_types');
+if ($entity instanceof \ColdTrick\ProfileManager\CustomField) {
+	$types = profile_manager_get_custom_field_types($entity->getSubType());
 }
-	
+
+$type_options = [];
 if (!empty($metadata_type) && !empty($types) && array_key_exists($metadata_type, $types)) {
 	$type_options = $types[$metadata_type]->options;
 }
@@ -30,7 +27,7 @@ $icon_name = 'circle-regular';
 
 // if no option is available in the register, this metadata field can't be toggled
 if (!empty($type_options) && array_key_exists($metadata_name, $type_options) && $type_options[$metadata_name]) {
-	if ($entity->$metadata_name !== "yes") {
+	if ($entity->$metadata_name !== 'yes') {
 		$options['class'][] = 'field_config_metadata_option_disabled';
 	} else {
 		$options['class'][] = 'field_config_metadata_option_enabled';

@@ -117,4 +117,182 @@ class ProfileFields {
 			add_translation($lang, $translations);
 		}
 	}
+	
+	/**
+	 * Registers the field types available for the configuration of user profile fields
+	 *
+	 * @param \Elgg\Hook $hook 'types:custom_profile_field', 'profile_manager'
+	 *
+	 * @return array
+	 */
+	public static function registerUserProfileFieldTypes(\Elgg\Hook $hook) {
+		$result = $hook->getValue();
+		
+		$standard_options = [
+			'show_on_register' => true,
+			'mandatory' => true,
+			'user_editable' => true,
+			'output_as_tags' => true,
+			'admin_only' => true,
+			'count_for_completeness' => true,
+		];
+		
+		$result[] = FieldType::factory([
+			'type' => 'text',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'longtext',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'tags',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'location',
+			'options' => array_merge($standard_options, [
+				'output_as_tags' => false,
+			]),
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'url',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'email',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'tel',
+			'name' => elgg_echo('profile_manager:admin:options:tel'),
+			'options' => array_merge($standard_options, [
+				'output_as_tags' => false,
+			]),
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'date',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'dropdown',
+			'name' => elgg_echo('profile_manager:admin:options:dropdown'),
+			'options' => array_merge($standard_options, [
+				'blank_available' => true,
+			]),
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'radio',
+			'name' => elgg_echo('profile_manager:admin:options:radio'),
+			'options' => array_merge($standard_options, [
+				'blank_available' => true,
+			]),
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'multiselect',
+			'name' => elgg_echo('profile_manager:admin:options:multiselect'),
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'pm_rating',
+			'name' => elgg_echo('profile_manager:admin:options:pm_rating'),
+			'options' => array_merge($standard_options, [
+				'output_as_tags' => false,
+			]),
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'pm_twitter',
+			'name' => elgg_echo('profile_manager:admin:options:pm_twitter'),
+			'options' => array_merge($standard_options, [
+				'output_as_tags' => false,
+			]),
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'pm_facebook',
+			'name' => elgg_echo('profile_manager:admin:options:pm_facebook'),
+			'options' => array_merge($standard_options, [
+				'output_as_tags' => false,
+			]),
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'pm_linkedin',
+			'name' => elgg_echo('profile_manager:admin:options:pm_linkedin'),
+			'options' => array_merge($standard_options, [
+				'output_as_tags' => false,
+			]),
+		]);
+				
+		return $result;
+	}
+	
+	/**
+	 * Registers the field types available for the configuration of group profile fields
+	 *
+	 * @param \Elgg\Hook $hook 'types:custom_group_field', 'profile_manager'
+	 *
+	 * @return array
+	 */
+	public static function registerGroupProfileFieldTypes(\Elgg\Hook $hook) {
+		$result = $hook->getValue();
+		
+		$standard_options = [
+			'output_as_tags' => true,
+			'admin_only' => true,
+		];
+		
+		$result[] = FieldType::factory([
+			'type' => 'text',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'longtext',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'tags',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'url',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'email',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'tel',
+			'name' => elgg_echo('profile_manager:admin:options:tel'),
+			'options' => ['admin_only' => true],
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'date',
+			'options' => $standard_options,
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'location',
+			'options' => ['admin_only' => true],
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'dropdown',
+			'name' => elgg_echo('profile_manager:admin:options:dropdown'),
+			'options' => array_merge($standard_options, [
+				'blank_available' => true,
+			]),
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'radio',
+			'name' => elgg_echo('profile_manager:admin:options:radio'),
+			'options' => array_merge($standard_options, [
+				'blank_available' => true,
+			]),
+		]);
+		$result[] = FieldType::factory([
+			'type' => 'multiselect',
+			'name' => elgg_echo('profile_manager:admin:options:multiselect'),
+			'options' => $standard_options,
+		]);
+		
+		return $result;
+	}
 }
