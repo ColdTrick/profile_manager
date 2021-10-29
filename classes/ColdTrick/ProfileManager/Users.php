@@ -92,15 +92,18 @@ class Users {
 	 * @return void
 	 */
 	public static function createUserByAdmin(\Elgg\Event $event) {
-		
-		/* @var \ElggUser $user */
-		$user = $event->getObject();
+		if (elgg_get_current_route()->getName() !== 'action:useradd') {
+			// only add fields during useradd action
+			return;
+		}
 		
 		$custom_profile_fields = get_input('custom_profile_fields');
-		
 		if (!is_array($custom_profile_fields)) {
 			return;
 		}
+			
+		/* @var \ElggUser $user */
+		$user = $event->getObject();
 		
 		$user_default_access = get_default_access($user);
 		

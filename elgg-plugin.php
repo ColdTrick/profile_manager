@@ -123,6 +123,7 @@ return [
 	'events' => [
 		'create' => [
 			'user' => [
+				'\ColdTrick\ProfileManager\Users::createUserByAdmin' => [],
 				'\ColdTrick\ProfileManager\Users::createUserByRegister' => [],
 			],
 		],
