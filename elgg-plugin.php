@@ -7,6 +7,8 @@ if (is_dir(__DIR__ . '/vendor')) {
 	$composer_path = __DIR__ . '/';
 }
 
+require_once(dirname(__FILE__) . '/lib/functions.php');
+
 return [
 	'plugin' => [
 		'version' => '16.0.1',
@@ -55,6 +57,34 @@ return [
 			'jquery/multiselect.js' => $composer_path . 'vendor/bower-asset/jquery-ui-multiselect-widget/src/jquery.multiselect.js',
 			'jquery/multiselect.css' => $composer_path . 'vendor/bower-asset/jquery-ui-multiselect-widget/css/jquery.multiselect.css',
 		],
+	],
+	'view_extensions' => [
+		'css/admin' => [
+			'css/profile_manager/global.css' => [],
+			'css/profile_manager/admin.css' => [],
+			'jquery/multiselect.css' => [],
+		],
+		'css/elgg' => [
+			'css/profile_manager/global.css' => [],
+			'css/profile_manager/site.css' => [],
+			'jquery/multiselect.css' => [],
+		],
+		'forms/register' => [
+			'profile_manager/register/free_text' => ['priority' => 400],
+		],
+		'forms/useradd' => [
+			'profile_manager/admin/useradd' => [],
+		],
+		'register/extend' => [
+			'profile_manager/register/fields' => [],
+		],
+	],
+	'view_options' => [
+		'forms/profile_manager/type' => ['ajax' => true],
+		'forms/profile_manager/category' => ['ajax' => true],
+		'forms/profile_manager/group_field' => ['ajax' => true],
+		'forms/profile_manager/profile_field' => ['ajax' => true],
+		'forms/profile_manager/restore_fields' => ['ajax' => true],
 	],
 	'actions' => [
 		'profile_manager/change_category' => ['access' => 'admin'],

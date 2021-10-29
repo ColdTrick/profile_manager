@@ -38,11 +38,11 @@ if (empty($object)) {
 
 $object->metadata_name = $name;
 
-if (!empty($label)) {
+// if (!empty($label)) {
 	$object->metadata_label = $label;
-} else {
-	unset($object->metadata_label);
-}
+// } else {
+// 	unset($object->metadata_label);
+// }
 if (!empty($metadata_label_plural)) {
 	$object->metadata_label_plural = $metadata_label_plural;
 } else {

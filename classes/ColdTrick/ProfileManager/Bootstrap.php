@@ -19,28 +19,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 	 * {@inheritdoc}
 	 */
 	public function init() {
-		
-		require_once(self::plugin()->getPath() . '/lib/functions.php');
-		
-		// Extend CSS
-		elgg_extend_view('css/admin', 'css/profile_manager/global.css');
-		elgg_extend_view('css/admin', 'css/profile_manager/admin.css');
-		elgg_extend_view('css/admin', 'jquery/multiselect.css');
-		elgg_extend_view('css/elgg', 'css/profile_manager/global.css');
-		elgg_extend_view('css/elgg', 'css/profile_manager/site.css');
-		elgg_extend_view('css/elgg', 'jquery/multiselect.css');
-		
-		elgg_extend_view('forms/register', 'profile_manager/register/free_text', 400);
-		elgg_extend_view('register/extend', 'profile_manager/register/fields');
-		elgg_extend_view('forms/useradd', 'profile_manager/admin/useradd');
-		
-		// register ajax views
-		elgg_register_ajax_view('forms/profile_manager/type');
-		elgg_register_ajax_view('forms/profile_manager/category');
-		elgg_register_ajax_view('forms/profile_manager/group_field');
-		elgg_register_ajax_view('forms/profile_manager/profile_field');
-		elgg_register_ajax_view('forms/profile_manager/restore_fields');
-		
+
 		elgg_define_js('jquery/multiselect', [
 			'deps' => [
 				'jquery-ui/widget',

@@ -11,8 +11,6 @@
 */
 
 $type = get_input('type', 'profile');
-$error = false;
-
 if (!in_array($type, ['profile', 'group'])) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:reset:error:wrong_type'));
 }
