@@ -30,14 +30,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 		
 		// Register all custom field types
 		$this->registerCustomFieldTypes();
-		
-		// add profile_completeness widget
-		if (elgg_get_plugin_setting('enable_profile_completeness_widget', 'profile_manager') == 'yes') {
-			elgg_register_widget_type([
-				'id' => 'profile_completeness',
-				'context' => ['profile', 'dashboard'],
-			]);
-		}
 	}
 	
 	/**

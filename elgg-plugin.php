@@ -111,6 +111,11 @@ return [
 				'\ColdTrick\ProfileManager\ProfileFields::getFields' => [],
 			],
 		],
+		'handlers' => [
+			'widgets' => [
+				'\ColdTrick\ProfileManager\Widgets::registerProfileCompleteness' => [],
+			],
+		],
 		'register' => [
 			'menu:page' => [
 				'\ColdTrick\ProfileManager\Menus::registerAdmin' => [],
