@@ -5,6 +5,8 @@ if (!$user instanceof \ElggUser) {
 	return;
 }
 
+elgg_require_css('profile_manager/profile_completeness.css');
+
 $completeness = profile_manager_profile_completeness($user);
 $percentage_complete = elgg_extract('percentage_completeness', $completeness);
 
