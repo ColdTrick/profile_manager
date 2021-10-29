@@ -32,17 +32,14 @@ $missing_fields = elgg_extract('missing_fields', $completeness);
 if (count($missing_fields) > 0) {
 	$rand_key = array_rand($missing_fields);
 	$field = $missing_fields[$rand_key];
-	$url = elgg_view('output/url', [
-		'href' => elgg_generate_url('edit:user', ['username' => $user->username]),
-		'text' => $field->getDisplayName(),
+
+	$tips = elgg_echo('widgets:profile_completeness:view:tips', [
+		elgg_view_url(elgg_generate_url('edit:user', ['username' => $user->username]), $field->getDisplayName())
 	]);
-	$tips = elgg_echo('widgets:profile_completeness:view:tips', [$url]);
 } elseif (elgg_extract('avatar_missing', $completeness, false)) {
-	$url = elgg_view('output/url', [
-		'href' => elgg_generate_url('edit:user:avatar', ['username' => $user->username]),
-		'text' => elgg_echo('avatar'),
+	$tips = elgg_echo('widgets:profile_completeness:view:tips', [
+		elgg_view_url(elgg_generate_url('edit:user:avatar', ['username' => $user->username]), elgg_echo('avatar'))
 	]);
-	$tips = elgg_echo('widgets:profile_completeness:view:tips', [$url]);
 } else {
 	$tips = elgg_echo('widgets:profile_completeness:view:complete');
 }
