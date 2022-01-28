@@ -50,7 +50,7 @@ class Users {
 			$categorized_fields = profile_manager_get_categorized_fields(null, true, true);
 			$configured_fields = $categorized_fields['fields'];
 	
-			elgg_call(ELGG_IGNORE_ACCESS, function() use ($user, $configured_fields) {
+			elgg_call(ELGG_IGNORE_ACCESS, function() use ($user, $configured_fields, $custom_profile_fields) {
 				$user_default_access = get_default_access($user);
 				
 				foreach ($custom_profile_fields as $shortname => $value) {
