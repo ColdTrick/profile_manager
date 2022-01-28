@@ -1,6 +1,10 @@
 Version history
 ===============
 
+15.0.3 (2022-01-28):
+
+- fixed: custom_profile_fields should be saved on register
+
 15.0.2 (2020-02-18):
 
 - fixed: register action validation middleware
