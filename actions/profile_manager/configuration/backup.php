@@ -3,21 +3,23 @@
 * Backup of profile fields config
 */
 
-header('Content-Type: application/json');
-header('Content-Disposition: attachment; filename="custom_profile_fields.backup.json"');
+if (\Elgg\Application::isCli()) {
+	// this is in case of the PHPUnit action intergation tests
+	return elgg_error_response();
+}
 
 $fieldtype = get_input('fieldtype' , \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE);
 
 $entities = elgg_get_entities([
 	'type' => 'object',
 	'subtype' => $fieldtype,
-	'limit' => false,
 	'owner_guid' => elgg_get_site_entity()->guid,
+	'limit' => false,
+	'batch' => true,
 ]);
 
-$info = [];
-
 $fields = [];
+/* @var $entity \ColdTrick\ProfileManager\CustomField */
 foreach ($entities as $entity) {
 	$fields[] = [
 		'metadata_name' => $entity->metadata_name,
@@ -37,6 +39,9 @@ foreach ($entities as $entity) {
 		'count_for_completeness' => $entity->count_for_completeness,
 	];
 }
+
+header('Content-Type: application/json');
+header('Content-Disposition: attachment; filename="custom_profile_fields.backup.json"');
 
 echo json_encode(
 	[
