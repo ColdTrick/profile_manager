@@ -92,7 +92,7 @@ class Users {
 	 * @return void
 	 */
 	public static function createUserByAdmin(\Elgg\Event $event) {
-		if (elgg_get_current_route()->getName() !== 'action:useradd') {
+		if (elgg_get_current_route_name() !== 'action:useradd') {
 			// only add fields during useradd action
 			return;
 		}
