@@ -22,12 +22,15 @@
 	"config": {
         "fxp-asset": {
             "enabled": false
-        }
+        },
+		"allow-plugins": {
+			"composer/installers": true
+		}
     },
 	"require-dev": {
 		"coldtrick/sniffs": "dev-master"
 	},
 	"conflict": {
-		"elgg/elgg": "<4.0"
+		"elgg/elgg": "<4.1"
 	}
 }
