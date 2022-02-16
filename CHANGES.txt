@@ -1,6 +1,12 @@
 Version history
 ===============
 
+17.0 (2022-02-16):
+
+- changed: increased minimal Elgg version to 4.1
+- changed: profile field types are now registered via a hook
+- fixed: correctly check for route name
+
 16.0.1 (2021-10-27):
 
 - several small chores/fixes
