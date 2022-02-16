@@ -38,12 +38,7 @@ if (empty($entity)) {
 }
 
 $entity->metadata_name = $name;
-
-if (!empty($label)) {
-	$entity->metadata_label = $label;
-} else {
-	unset($entity->metadata_label);
-}
+$entity->metadata_label = $label;
 
 // add relationship
 remove_entity_relationships($entity->guid, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP, true);

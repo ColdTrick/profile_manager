@@ -1,5 +1,4 @@
 <?php
-
 /**
 * Profile Manager
 *
@@ -37,23 +36,9 @@ if (empty($object)) {
 }
 
 $object->metadata_name = $name;
-
-// if (!empty($label)) {
-	$object->metadata_label = $label;
-// } else {
-// 	unset($object->metadata_label);
-// }
-if (!empty($metadata_label_plural)) {
-	$object->metadata_label_plural = $metadata_label_plural;
-} else {
-	unset($object->metadata_label_plural);
-}
-
-if (!empty($description)) {
-	$object->metadata_description = $description;
-} else {
-	unset($object->metadata_description);
-}
+$object->metadata_label = $label;
+$object->metadata_label_plural = $metadata_label_plural;
+$object->metadata_description = $description;
 
 // add category relations
 remove_entity_relationships($object->guid, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP);

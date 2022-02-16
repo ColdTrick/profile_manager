@@ -117,30 +117,10 @@ if ($current_field) {
 }
 
 $field->metadata_name = $metadata_name;
-
-if (!empty($metadata_label)) {
-	$field->metadata_label = $metadata_label;
-} elseif ($current_field) {
-	unset($field->metadata_label);
-}
-
-if (!empty($metadata_input_label)) {
-	$field->metadata_input_label = $metadata_input_label;
-} elseif ($current_field) {
-	unset($field->metadata_input_label);
-}
-
-if (!empty($metadata_hint)) {
-	$field->metadata_hint = $metadata_hint;
-} elseif ($current_field) {
-	unset($field->metadata_hint);
-}
-
-if (!empty($metadata_placeholder)) {
-	$field->metadata_placeholder = $metadata_placeholder;
-} elseif ($current_field) {
-	unset($field->metadata_placeholder);
-}
+$field->metadata_label = $metadata_label;
+$field->metadata_input_label = $metadata_input_label;
+$field->metadata_hint = $metadata_hint;
+$field->metadata_placeholder = $metadata_placeholder;
 
 $field->metadata_type = $metadata_type;
 if (in_array($metadata_type, ['dropdown', 'radio', 'multiselect'])) {
