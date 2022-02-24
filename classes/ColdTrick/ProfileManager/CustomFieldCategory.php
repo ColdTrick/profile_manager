@@ -29,14 +29,14 @@ class CustomFieldCategory extends \ElggObject {
 	 */
 	public function getDisplayName() {
 		if ($this->metadata_label) {
-			return $this->metadata_label;
+			return (string) $this->metadata_label;
 		}
 		
 		if (elgg_language_key_exists("profile:categories:{$this->metadata_name}")) {
 			return elgg_echo("profile:categories:{$this->metadata_name}");
 		}
 		
-		return $this->metadata_name;
+		return (string) $this->metadata_name;
 	}
 
 	/**
