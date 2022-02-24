@@ -12,11 +12,11 @@
 
 $site_guid = elgg_get_site_entity()->guid;
 
-$metadata_name = trim(get_input('metadata_name'));
-$metadata_label = trim(get_input('metadata_label'));
-$metadata_input_label = trim(get_input('metadata_input_label'));
-$metadata_hint = trim(get_input('metadata_hint'));
-$metadata_placeholder = trim(get_input('metadata_placeholder'));
+$metadata_name = trim(get_input('metadata_name', ''));
+$metadata_label = trim(get_input('metadata_label', ''));
+$metadata_input_label = trim(get_input('metadata_input_label', ''));
+$metadata_hint = trim(get_input('metadata_hint', ''));
+$metadata_placeholder = trim(get_input('metadata_placeholder', ''));
 $metadata_type = get_input('metadata_type');
 $metadata_options = get_input('metadata_options');
 
