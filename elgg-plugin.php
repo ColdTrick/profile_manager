@@ -35,21 +35,33 @@ return [
 			'type' => 'object',
 			'subtype' => 'custom_profile_field',
 			'class' => '\ColdTrick\ProfileManager\CustomProfileField',
+			'capabilities' => [
+				'commentable' => false,
+			],
 		],
 		[
 			'type' => 'object',
 			'subtype' => 'custom_group_field',
 			'class' => '\ColdTrick\ProfileManager\CustomGroupField',
+			'capabilities' => [
+				'commentable' => false,
+			],
 		],
 		[
 			'type' => 'object',
 			'subtype' => 'custom_profile_type',
 			'class' => '\ColdTrick\ProfileManager\CustomProfileType',
+			'capabilities' => [
+				'commentable' => false,
+			],
 		],
 		[
 			'type' => 'object',
 			'subtype' => 'custom_profile_field_category',
 			'class' => '\ColdTrick\ProfileManager\CustomFieldCategory',
+			'capabilities' => [
+				'commentable' => false,
+			],
 		],
 	],
 	'views' => [
