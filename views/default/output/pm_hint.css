@@ -1,0 +1,12 @@
+#custom_fields_more_info_tooltip {
+	position: absolute;
+	border: 1px solid #333333;
+	background: #e4ecf5;
+	color: #333333;
+	padding: 5px;
+	display: none;
+	width: 250px;
+	line-height: 1.2em;
+	font-size: 90%;
+	z-index: 20000;
+}

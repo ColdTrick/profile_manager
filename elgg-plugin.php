@@ -72,17 +72,16 @@ return [
 	],
 	'view_extensions' => [
 		'css/admin' => [
-			'css/profile_manager/global.css' => [],
 			'css/profile_manager/admin.css' => [],
-			'jquery/multiselect.css' => [],
 		],
 		'css/elgg' => [
-			'css/profile_manager/global.css' => [],
 			'css/profile_manager/site.css' => [],
-			'jquery/multiselect.css' => [],
 		],
 		'forms/register' => [
 			'profile_manager/register/free_text' => ['priority' => 400],
+		],
+		'input/multiselect.css' => [
+			'jquery/multiselect.css' => ['priority' => 100],
 		],
 		'forms/useradd' => [
 			'profile_manager/admin/useradd' => [],

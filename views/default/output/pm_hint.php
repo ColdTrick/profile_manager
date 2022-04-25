@@ -12,3 +12,4 @@ echo elgg_format_element('div', [
 ], elgg_extract('text', $vars));
 
 elgg_require_js('profile_manager/tooltips');
+elgg_require_css('output/pm_hint');

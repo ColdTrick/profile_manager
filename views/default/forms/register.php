@@ -1,9 +1,6 @@
 <?php
 /**
  * Elgg register form
- *
- * @package Elgg
- * @subpackage Core
  */
 
 if (elgg_is_sticky_form('register')) {
@@ -22,8 +19,6 @@ $password = $password2 = '';
 $username = elgg_extract('username', $values, get_input('u'));
 $email = elgg_extract('email', $values, get_input('e'));
 $name = elgg_extract('name', $values, get_input('n'));
-
-$terms = elgg_extract('terms', $values);
 
 $show_hints = (bool) (elgg_get_plugin_setting('show_account_hints', 'profile_manager') == 'yes');
 $generate_username_from_email = (bool) (elgg_get_plugin_setting('generate_username_from_email', 'profile_manager') == 'yes');
