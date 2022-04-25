@@ -1,4 +1,4 @@
-define(['jquery', 'page/components/tabs'], function($) {
+define(['jquery'], function($) {
 
 	/**
 	 * show description and fields based on selected profile type (profile edit)

@@ -1,4 +1,4 @@
-define(['jquery', 'elgg', 'elgg/Ajax', 'jquery-ui/widgets/sortable', 'jquery-ui/widgets/droppable'], function($, elgg, Ajax) {
+define(['jquery', 'elgg/i18n', 'elgg/Ajax', 'jquery-ui/widgets/sortable', 'jquery-ui/widgets/droppable'], function($, i18n, Ajax) {
 
 	var ajax = new Ajax();
 
@@ -113,7 +113,7 @@ define(['jquery', 'elgg', 'elgg/Ajax', 'jquery-ui/widgets/sortable', 'jquery-ui/
 	});
 	
 	$(document).on('click', '.profile-manager-remove-field', function() {
-		if (confirm(elgg.echo('profile_manager:actions:delete:confirm'))) {
+		if (confirm(i18n.echo('profile_manager:actions:delete:confirm'))) {
 			var guid = $(this).data().guid;
 			
 			ajax.action('entity/delete', {
