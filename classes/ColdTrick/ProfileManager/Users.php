@@ -69,7 +69,7 @@ class Users {
 	
 		if (elgg_get_uploaded_file('profile_icon')) {
 			if (!$user->saveIconFromUploadedFile('profile_icon')) {
-				register_error(elgg_echo('avatar:upload:fail'));
+				elgg_register_error_message(elgg_echo('avatar:upload:fail'));
 				// return false to delete the user
 				return false;
 			}
