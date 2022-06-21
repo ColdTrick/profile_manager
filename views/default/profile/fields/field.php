@@ -26,20 +26,7 @@ $microformats = array_merge($microformats, (array) elgg_extract('microformats', 
 $shortname = $field->metadata_name;
 $valtype = $field->metadata_type;
 
-$annotations = $entity->getAnnotations([
-	'annotation_names' => "profile:{$shortname}",
-	'limit' => false,
-]);
-$values = array_map(function (ElggAnnotation $a) {
-	return $a->value;
-}, $annotations);
-
-if (!$values) {
-	return;
-}
-// emulate metadata API
-$value = (count($values) === 1) ? $values[0] : $values;
-
+$value = $entity->getProfileData($shortname);
 if (elgg_is_empty($value)) {
 	return;
 }
