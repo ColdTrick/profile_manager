@@ -40,7 +40,7 @@ if ($valtype == 'url' && !preg_match('~^https?\://~i', $value)) {
 if ($field->output_as_tags == 'yes') {
 	$valtype = 'tags';
 	if (!is_array($value)) {
-		$value = string_to_tag_array($value);
+		$value = elgg_string_to_array((string) $value);
 	}
 }
 

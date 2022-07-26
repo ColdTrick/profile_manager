@@ -35,7 +35,7 @@ foreach ($profile_fields as $field) {
 	$field_type = $field->metadata_type;
 	if ($field->output_as_tags == 'yes') {
 		$field_type = 'tags';
-		$value = string_to_tag_array($value);
+		$value = is_string($value) ? string_to_tag_array($value) : $value;
 	}
 	
 	$options = ['value' => $value];

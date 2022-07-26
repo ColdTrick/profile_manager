@@ -15,30 +15,20 @@ class Menus {
 	 * @return array
 	 */
 	public static function registerAdmin(\Elgg\Hook $hook) {
-		if (!elgg_in_context('admin') || !elgg_is_admin_logged_in()) {
+		if (!elgg_in_context('admin') || !elgg_is_admin_logged_in() || !elgg_is_active_plugin('groups')) {
 			return;
 		}
 		
 		$returnvalue = $hook->getValue();
-		$returnvalue[] = \ElggMenuItem::factory([
-			'name' => 'users:inactive',
-			'text' => elgg_echo('admin:users:inactive'),
-			'href' => 'admin/users/inactive',
-			'context' => 'admin',
-			'parent_name' => 'users',
-			'section' => 'administer',
-		]);
 		
-		if (elgg_is_active_plugin('groups')) {
-			$returnvalue[] = \ElggMenuItem::factory([
-				'name' => 'configure_utilities:group_fields',
-				'text' => elgg_echo('admin:configure_utilities:group_fields'),
-				'href' => 'admin/configure_utilities/group_fields',
-				'context' => 'admin',
-				'parent_name' => 'configure_utilities',
-				'section' => 'configure',
-			]);
-		}
+		$returnvalue[] = \ElggMenuItem::factory([
+			'name' => 'configure_utilities:group_fields',
+			'text' => elgg_echo('admin:configure_utilities:group_fields'),
+			'href' => 'admin/configure_utilities/group_fields',
+			'context' => 'admin',
+			'parent_name' => 'configure_utilities',
+			'section' => 'configure',
+		]);
 		
 		return $returnvalue;
 	}

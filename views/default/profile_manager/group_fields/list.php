@@ -14,10 +14,10 @@ $list = elgg_list_entities([
 	'type' => 'object',
 	'subtype' => \ColdTrick\ProfileManager\CustomGroupField::SUBTYPE,
 	'limit' => false,
-	'order_by_metadata' => [
-		'name' => 'order',
+	'sort_by' => [
+		'property' => 'order',
 		'direction' => 'asc',
-		'as' => 'integer',
+		'signed' => true,
 	],
 	'owner_guid' => elgg_get_site_entity()->guid,
 	'pagination' => false,

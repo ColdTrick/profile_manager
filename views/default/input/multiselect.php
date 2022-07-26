@@ -20,7 +20,7 @@ $vars['multiple'] = true;
 
 $value = elgg_extract('value', $vars, []);
 if (!is_array($value)) {
-	$value = string_to_tag_array($value);
+	$value = elgg_string_to_array((string) $value);
 }
 $vars['value'] = $value;
 

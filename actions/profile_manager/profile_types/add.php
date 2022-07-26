@@ -41,7 +41,7 @@ $object->metadata_label_plural = $metadata_label_plural;
 $object->metadata_description = $description;
 
 // add category relations
-remove_entity_relationships($object->guid, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP);
+$object->removeAllRelationships(\ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP);
 if (!empty($categories) && is_array($categories)) {
 	foreach ($categories as $cat_guid) {
 		$object->addRelationship($cat_guid, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP);

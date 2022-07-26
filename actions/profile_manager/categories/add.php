@@ -41,10 +41,13 @@ $entity->metadata_name = $name;
 $entity->metadata_label = $label;
 
 // add relationship
-remove_entity_relationships($entity->guid, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP, true);
+$entity->removeAllRelationships(\ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP, true);
 if (!empty($profile_types) && is_array($profile_types)) {
 	foreach ($profile_types as $type) {
-		add_entity_relationship($type, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP, $entity->guid);
+		$profile_type_entity = get_entity($type);
+		if ($profile_type_entity instanceof \ColdTrick\ProfileManager\CustomProfileType) {
+			$profile_type_entity->addRelationship($entity->guid, $profile_type_entity::CATEGORY_RELATIONSHIP);
+		}
 	}
 }
 

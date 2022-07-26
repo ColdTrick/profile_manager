@@ -23,7 +23,7 @@ if (empty($types) && empty($fields)) {
 
 echo elgg_view('output/url', [
 	'href' => '#extra_metadata',
-	'rel' => 'toggle',
+	'class' => 'elgg-toggle',
 	'text' => elgg_echo('profile_manager:admin:adduser:extra_metadata'),
 ]);
 

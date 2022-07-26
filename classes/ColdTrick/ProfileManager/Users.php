@@ -35,7 +35,7 @@ class Users {
 			$configured_fields = $categorized_fields['fields'];
 	
 			elgg_call(ELGG_IGNORE_ACCESS, function() use ($user, $configured_fields, $custom_profile_fields) {
-				$user_default_access = get_default_access($user);
+				$user_default_access = elgg_get_default_access($user);
 				
 				foreach ($custom_profile_fields as $shortname => $value) {
 					// determine if $value should be an array
@@ -50,7 +50,7 @@ class Users {
 									continue;
 								}
 								
-								$value = string_to_tag_array($value);
+								$value = elgg_string_to_array((string) $value);
 								
 								// no need to continue this foreach
 								break(2);
@@ -105,7 +105,7 @@ class Users {
 		/* @var \ElggUser $user */
 		$user = $event->getObject();
 		
-		$user_default_access = get_default_access($user);
+		$user_default_access = elgg_get_default_access($user);
 		
 		foreach ($custom_profile_fields as $shortname => $value) {
 			if (!empty($value) || $value === 0) {
@@ -254,7 +254,7 @@ class Users {
 	 * @return false|string
 	 */
 	protected static function generateUsernameFromEmail($email) {
-		if (empty($email) || !is_email_address($email)) {
+		if (empty($email) || !elgg_is_valid_email((string) $email)) {
 			return false;
 		}
 		

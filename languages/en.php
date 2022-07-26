@@ -35,10 +35,6 @@ return [
 	'admin:configure_utilities:group_fields' => "Edit Group Fields",
 	
 	'admin:groups' => "Groups",
-	'admin:groups:export' => "Export groups",
-	
-	'admin:users:export' => "Export users",
-	'admin:users:inactive' => "List inactive users",
 
 	// plugin settings
 	'profile_manager:settings:registration' => 'Registration',
@@ -147,10 +143,6 @@ return [
 	'profile_manager:profile_types:list:title' => "Profile Types",
 	'profile_manager:profile_types:list:no_types' => "No profile types defined",
 	'profile_manager:user_details:profile_type' => "Profile Type",
-		
-	// profile manager inactive users
-	'profile_manager:admin:users:inactive:last_login' => "Last login before",
-	'profile_manager:admin:users:inactive:list' => "Inactive users",
 
 	// admin actions
 	'profile_manager:actions:title' => 'Actions',

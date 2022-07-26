@@ -33,7 +33,7 @@ class CustomProfileField extends CustomField {
 	 */
 	public function getDisplayName($input = false, $lang = null) {
 		if (!isset($lang)) {
-			$lang = get_current_language();
+			$lang = elgg_get_current_language();
 		}
 		if ($input) {
 			if ($this->metadata_input_label) {

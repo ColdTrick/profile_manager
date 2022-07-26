@@ -28,7 +28,7 @@ class ProfileFields {
 				'type' => 'object',
 				'subtype' => $subtype,
 				'limit' => false,
-				'owner_guid' => elgg_get_config('site_guid'),
+				'owner_guid' => elgg_get_site_entity()->guid,
 			]);
 			elgg_save_system_cache("profile_manager_{$hook->getType()}_fields", $entities);
 		}
@@ -87,7 +87,7 @@ class ProfileFields {
 	 */
 	protected static function registerFieldTranslations($fields = []) {
 		$languages = ['en'];
-		$languages[] = get_current_language();
+		$languages[] = elgg_get_current_language();
 		$languages[] = elgg_get_config('language');
 		$languages = array_unique($languages);
 		
@@ -114,7 +114,7 @@ class ProfileFields {
 				continue;
 			}
 			
-			add_translation($lang, $translations);
+			elgg()->translator->addTranslation($lang, $translations);
 		}
 	}
 	

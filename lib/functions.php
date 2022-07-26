@@ -32,11 +32,13 @@ function profile_manager_get_custom_field_types(string $type): array {
  * @param boolean  $profile_type_limit Should it be limited by the profile type
  * @param int      $profile_type_guid  The guid of the profile type to limit the results to
  *
- * @return unknown
+ * @return mixed
  */
 function profile_manager_get_categorized_fields($user = null, $edit = false, $register = false, $profile_type_limit = false, $profile_type_guid = false) {
 	
 	$result = [];
+	
+	/** @var \ColdTrick\ProfileManager\CustomProfileType $profile_type */
 	$profile_type = null;
 	
 	if ($register == true) {
@@ -71,7 +73,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 		'type' => 'object',
 		'subtype' => CustomFieldCategory::SUBTYPE,
 		'limit' => false,
-		'owner_guid' => elgg_get_config('site_guid'),
+		'owner_guid' => elgg_get_site_entity()->guid,
 	]);
 	if ($cats) {
 		foreach ($cats as $cat) {
@@ -102,7 +104,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 				if ($rel_count == 0) {
 					$filtered_ordered_cats[$cat->guid] = [];
 					$result['categories'][$cat->guid] = $cat;
-				} elseif (!empty($profile_type) && check_entity_relationship($profile_type->guid, \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP, $cat->guid)) {
+				} elseif (!empty($profile_type) && $profile_type->hasRelationship($cat->guid, $profile_type::CATEGORY_RELATIONSHIP)) {
 					$filtered_ordered_cats[$cat->guid] = [];
 					$result['categories'][$cat->guid] = $cat;
 				}
@@ -118,7 +120,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 		'type' => 'object',
 		'subtype' => \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE,
 		'limit' => false,
-		'owner_guid' => elgg_get_config('site_guid'),
+		'owner_guid' => elgg_get_site_entity()->guid,
 	]);
 	
 	if ($fields) {
@@ -183,7 +185,7 @@ function profile_manager_get_categorized_group_fields($group = null) {
 		'type' => 'object',
 		'subtype' => \ColdTrick\ProfileManager\CustomGroupField::SUBTYPE,
 		'limit' => false,
-		'owner_guid' => elgg_get_config('site_guid'),
+		'owner_guid' => elgg_get_site_entity()->guid,
 	]);
 
 	if ($fields) {

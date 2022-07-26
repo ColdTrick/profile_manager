@@ -18,10 +18,11 @@ $categories = elgg_list_entities([
 	'limit' => false,
 	'pagination' => false,
 	'owner_guid' => elgg_get_site_entity()->guid,
-	'order_by_metadata' => [
-		'name' => 'order',
-		'as' => 'integer',
+	'sort_by' => [
+		'property' => 'order',
+		'signed' => true,
 	],
+	
 ]);
 
 if (empty($categories)) {

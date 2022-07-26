@@ -30,7 +30,7 @@ $show_tabbed = (bool) ($edit_profile_mode === 'tabbed');
 
 $simple_access_control = (bool) (elgg_get_plugin_setting('simple_access_control','profile_manager') === 'yes');
 
-$access_id = get_default_access($user);
+$access_id = elgg_get_default_access($user);
 
 if (!empty($cats)) {
 	
@@ -254,7 +254,7 @@ if (!empty($cats)) {
 			'#label' => elgg_echo('profile_manager:simple_access_control'),
 			'#class' => 'profile-manager-simple-access-control',
 			'name' => 'simple_access_control',
-			'value' => get_default_access($user),
+			'value' => elgg_get_default_access($user),
 		]);
 	} else {
 		echo $output;
