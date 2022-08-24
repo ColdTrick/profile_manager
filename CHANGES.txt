@@ -1,6 +1,10 @@
 Version history
 ===============
 
+19.0 (2022-08-24):
+
+- changed: updated for Elgg 4.3
+
 18.0.1 (2022-07-12):
 
 - several small chores/fixes
