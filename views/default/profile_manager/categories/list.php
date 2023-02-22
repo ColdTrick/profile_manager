@@ -1,14 +1,14 @@
 <?php
 /**
-* Profile Manager
-*
-* Category list view
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+ * Profile Manager
+ *
+ * Category list view
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
 
 use ColdTrick\ProfileManager\CustomFieldCategory;
 
@@ -22,13 +22,11 @@ $categories = elgg_list_entities([
 		'property' => 'order',
 		'signed' => true,
 	],
-	
 ]);
 
 if (empty($categories)) {
 	$list = elgg_view('page/components/no_results', ['no_results' => elgg_echo('profile_manager:categories:list:no_categories')]);
 } else {
-
 	$list = elgg_format_element('div', [
 		'id' => 'custom_profile_field_category_all',
 		'class' => 'custom_fields_category',

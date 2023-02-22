@@ -1,15 +1,15 @@
 <?php
 /**
-* Profile Manager
-*
-* Replaces default Elgg profile edit form
-*
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*
-* @uses $user The user entity
-*/
+ * Profile Manager
+ *
+ * Replaces default Elgg profile edit form
+ *
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ *
+ * @uses $user The user entity
+ */
 
 use ColdTrick\ProfileManager\CustomProfileType;
 
@@ -28,12 +28,11 @@ $fields = elgg_extract('fields', $categorized_fields);
 $edit_profile_mode = elgg_get_plugin_setting('edit_profile_mode', 'profile_manager');
 $show_tabbed = (bool) ($edit_profile_mode === 'tabbed');
 
-$simple_access_control = (bool) (elgg_get_plugin_setting('simple_access_control','profile_manager') === 'yes');
+$simple_access_control = (bool) (elgg_get_plugin_setting('simple_access_control', 'profile_manager') === 'yes');
 
 $access_id = elgg_get_default_access($user);
 
 if (!empty($cats)) {
-	
 	// Profile type selector
 	$setting = elgg_get_plugin_setting('profile_type_selection', 'profile_manager');
 	
@@ -56,15 +55,13 @@ if (!empty($cats)) {
 			$dropdown_options = ['' => elgg_echo('profile_manager:profile:edit:custom_profile_type:default')];
 
 			foreach ($types as $type) {
-				
 				$dropdown_options[$type->guid] = $type->getDisplayName();
 				
 				// preparing descriptions of profile types
 				$description = $type->getDescription();
 				
 				if (!empty($description)) {
-					$type_description = elgg_format_element('strong', [], elgg_echo("profile_manager:profile:edit:custom_profile_type:description"));
-					$type_description .= $description;
+					$type_description = elgg_view_message('info', $description, ['title' => elgg_echo('profile_manager:profile:edit:custom_profile_type:description')]);
 					
 					$types_description .= elgg_format_element('div', [
 						'id' => 'custom_profile_type_description_' . $type->guid,
@@ -107,12 +104,10 @@ if (!empty($cats)) {
 	$show_header = (bool) (count($cats) > 1);
 	
 	foreach ($cats as $cat_guid => $cat) {
-		
 		$category_class = [
 			'custom_fields_edit_profile_category',
 		];
 		if ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
-
 			$profile_types = elgg_get_entities([
 				'type' => 'object',
 				'subtype' => CustomProfileType::SUBTYPE,
@@ -165,6 +160,7 @@ if (!empty($cats)) {
 					if (!empty($value)) {
 						$value .= ', ';
 					}
+					
 					$value .= $annotation->value;
 					$access_id = $annotation->access_id;
 				}
@@ -176,6 +172,7 @@ if (!empty($cats)) {
 			if (isset($sticky_values[$shortname])) {
 				$value = $sticky_values[$shortname];
 			}
+			
 			if (isset($sticky_values['accesslevel'][$shortname])) {
 				$access_id = $sticky_values['accesslevel'][$shortname];
 			}
@@ -195,9 +192,7 @@ if (!empty($cats)) {
 			
 			$cat_data .= elgg_view('elements/forms/field', [
 				'class' => 'profile-manager-edit-profile-field',
-				'input' => elgg_format_element('div', [
-						'class' => 'elgg-field-input',
-					], '<div class="edit-profile-input">' . $input . '</div><div class="edit-profile-access">' . $access_input . '</div>'),
+				'input' => elgg_format_element('div', ['class' => 'elgg-field-input'], '<div class="edit-profile-input">' . $input . '</div><div class="edit-profile-access">' . $access_input . '</div>'),
 				'label' => elgg_view('elements/forms/label', [
 					'label' => $field->getDisplayName(true),
 					'id' => $id,

@@ -6,7 +6,7 @@
  */
 
 $user = elgg_extract('entity', $vars);
-if (!($user instanceof ElggUser)) {
+if (!$user instanceof ElggUser) {
 	return;
 }
 
@@ -24,8 +24,9 @@ $show_profile_type_on_profile = elgg_get_plugin_setting('show_profile_type_on_pr
 $show_as_tabs = (bool) (elgg_get_plugin_setting('display_categories', 'profile_manager') == 'tabs');
 
 if ($show_profile_type_on_profile !== 'no') {
-	if ($profile_type_guid = $user->custom_profile_type) {
-		if (($profile_type = get_entity($profile_type_guid)) && ($profile_type instanceof \ColdTrick\ProfileManager\CustomProfileType)) {
+	if ($user->custom_profile_type) {
+		$profile_type = get_entity($user->custom_profile_type);
+		if ($profile_type instanceof \ColdTrick\ProfileManager\CustomProfileType) {
 			$output .= elgg_format_element('div', ['class' => 'even'], '<b>' . elgg_echo('profile_manager:user_details:profile_type') . '</b>: ' . $profile_type->getDisplayName());
 		}
 	}
@@ -36,7 +37,6 @@ $show_header = (bool) (count($cats) > 1);
 
 $tabs = [];
 foreach ($cats as $cat_guid => $cat) {
-
 	$cat_data = elgg_view('profile/fields/category', [
 		'entity' => $user,
 		'category' => $cat,

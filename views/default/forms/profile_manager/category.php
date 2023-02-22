@@ -1,14 +1,14 @@
 <?php
 /**
-* Profile Manager
-*
-* Category add form
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+ * Profile Manager
+ *
+ * Category add form
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
 
 use ColdTrick\ProfileManager\CustomProfileType;
 
@@ -31,7 +31,6 @@ $metadata_label = null;
 $related_types = [];
 
 if ($entity) {
-	
 	$form_title = elgg_echo('profile_manager:categories:edit');
 	
 	$guid = $entity->guid;
@@ -80,7 +79,6 @@ $types = elgg_get_entities([
 ]);
 
 if (count($types) > 0) {
-	
 	$checkbox_options = [];
 	
 	foreach ($types as $type) {

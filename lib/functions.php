@@ -14,7 +14,7 @@ function profile_manager_get_custom_field_types(string $type): array {
 	static $types;
 	
 	if (!isset($types[$type])) {
-		$items = (array) elgg_trigger_plugin_hook("types:{$type}", 'profile_manager', []);
+		$items = (array) elgg_trigger_event_results("types:{$type}", 'profile_manager', []);
 		foreach ($items as $item) {
 			$types[$type][$item->type] = $item;
 		}
@@ -26,15 +26,15 @@ function profile_manager_get_custom_field_types(string $type): array {
 /**
  * Returns an array containing the categories and the fields ordered by category and field order
  *
- * @param ElggUser $user               User to check
- * @param boolean  $edit               Are you editing profile fields
- * @param boolean  $register           Are you on the register page
- * @param boolean  $profile_type_limit Should it be limited by the profile type
- * @param int      $profile_type_guid  The guid of the profile type to limit the results to
+ * @param \ElggUser $user               User to check
+ * @param boolean   $edit               Are you editing profile fields
+ * @param boolean   $register           Are you on the register page
+ * @param boolean   $profile_type_limit Should it be limited by the profile type
+ * @param int       $profile_type_guid  The guid of the profile type to limit the results to
  *
- * @return mixed
+ * @return array
  */
-function profile_manager_get_categorized_fields($user = null, $edit = false, $register = false, $profile_type_limit = false, $profile_type_guid = false) {
+function profile_manager_get_categorized_fields(\ElggUser $user = null, bool $edit = false, bool $register = false, bool $profile_type_limit = false, int $profile_type_guid = null): array {
 	
 	$result = [];
 	
@@ -79,6 +79,7 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 		foreach ($cats as $cat) {
 			$ordered_cats[$cat->order] = $cat;
 		}
+		
 		ksort($ordered_cats);
 	}
 	
@@ -88,10 +89,8 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 	$filtered_ordered_cats[0] = [];
 	
 	if (!empty($ordered_cats)) {
-		foreach ($ordered_cats as $key => $cat) {
-			
+		foreach ($ordered_cats as $cat) {
 			if (!$edit || $profile_type_limit) {
-				
 				$rel_count = elgg_count_entities([
 					'type' => 'object',
 					'subtype' => CustomProfileType::SUBTYPE,
@@ -124,7 +123,6 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 	]);
 	
 	if ($fields) {
-		
 		foreach ($fields as $field) {
 			$cat_guid = $field->category_guid ?: 0; // 0 is default
 					
@@ -157,26 +155,26 @@ function profile_manager_get_categorized_fields($user = null, $edit = false, $re
 		}
 	}
 	
-	//  fire hook to see if other plugins have extra fields
-	$hook_params = [
+	//  trigger event to see if other plugins have extra fields
+	$params = [
 		'user' => $user,
 		'edit' => $edit,
 		'register' => $register,
 		'profile_type_limit' => $profile_type_limit,
-		'profile_type_guid' => $profile_type_guid
+		'profile_type_guid' => $profile_type_guid,
 	];
 	
-	return elgg_trigger_plugin_hook('categorized_profile_fields', 'profile_manager', $hook_params, $result);
+	return (array) elgg_trigger_event_results('categorized_profile_fields', 'profile_manager', $params, $result);
 }
 
 /**
  * Function just now returns only ordered (name is prepped for future release which should support categories)
  *
- * @param ElggGroup $group Group to check the values of the fields against
+ * @param \ElggGroup $group Group to check the values of the fields against
  *
  * @return array
  */
-function profile_manager_get_categorized_group_fields($group = null) {
+function profile_manager_get_categorized_group_fields(\ElggGroup $group = null): array {
 	
 	$result = ['fields' => []];
 	
@@ -195,11 +193,12 @@ function profile_manager_get_categorized_group_fields($group = null) {
 				$result['fields'][$field->order] = $field;
 			}
 		}
+		
 		ksort($result['fields']);
 	}
 	
-	//  fire hook to see if other plugins have extra fields
-	return elgg_trigger_plugin_hook('categorized_group_fields', 'profile_manager', ['entity' => $group], $result);
+	//  trigger event to see if other plugins have extra fields
+	return (array) elgg_trigger_event_results('categorized_group_fields', 'profile_manager', ['entity' => $group], $result);
 }
 
 /**
@@ -207,16 +206,16 @@ function profile_manager_get_categorized_group_fields($group = null) {
  *
  * @param ElggUser $user User to count completeness for
  *
- * @return boolean|array
+ * @return array
  */
-function profile_manager_profile_completeness($user = null) {
+function profile_manager_profile_completeness(\ElggUser $user = null): array {
 	
 	if (empty($user)) {
 		$user = elgg_get_logged_in_user_entity();
 	}
 	
 	if (!$user instanceof \ElggUser) {
-		return false;
+		return [];
 	}
 	
 	return elgg_call(ELGG_IGNORE_ACCESS, function() use ($user) {
@@ -231,7 +230,6 @@ function profile_manager_profile_completeness($user = null) {
 			$cat_fields = $fields['fields'][$cat_guid];
 			
 			foreach ($cat_fields as $field) {
-				
 				if ($field->count_for_completeness !== 'yes') {
 					continue;
 				}

@@ -32,7 +32,6 @@ return array (
   'profile_manager:settings:profile_type_selection:option:user' => 'Utilisateur',
   'profile_manager:settings:profile_type_selection:option:admin' => 'Administrateur uniquement',
   'profile_manager:settings:enable_profile_completeness_widget' => 'Activer le widget profil complet',
-  'profile_manager:settings:enable_site_join_river_event' => 'Ajouter un événement sur le fil d\'activités quand les gens rejoignent ce site',
   'profile_manager:settings:profile_completeness:avatar' => 'Pourcentage de completude avec l\'avatar',
   'profile_manager:settings:profile_completeness:avatar:help' => 'Si vous utilisez les fonctionnalités de completude du profil, vous pouvez eventuellement parametrer combien vaut l\'avatar. Ce pourcentage restant sera utilisé pour la configuration des champs du profile.',
   'profile_manager:settings:registration:terms' => 'Pour afficher un champ «Accepter les termes» sur la page d\'inscription, merci de remplir les termes dans l\'URL ci-dessous',

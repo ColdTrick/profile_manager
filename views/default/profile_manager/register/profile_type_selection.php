@@ -34,11 +34,16 @@ foreach ($types as $type) {
 	$description = $type->getDescription();
 		
 	if (!empty($description)) {
-		$description_class = ['custom_profile_type_description', 'mbl'];
+		$description_class = ['custom_profile_type_description'];
 		if ($value !== $type->guid) {
 			$description_class[] = 'hidden';
 		}
-		$types_description .= elgg_format_element('div', ['id' => "custom_profile_type_description_{$type->guid}", 'class' => $description_class], $description);
+		
+		$types_description .= elgg_view_message('info', $description, [
+			'id' => "custom_profile_type_description_{$type->guid}",
+			'class' => $description_class,
+			'title' => false,
+		]);
 	}
 }
 

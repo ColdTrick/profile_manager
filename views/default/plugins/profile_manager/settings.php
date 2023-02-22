@@ -166,14 +166,5 @@ echo elgg_view_module('info', elgg_echo('other'), elgg_view('input/fieldset', [
 			'min' => 0,
 			'max' => 100,
 		],
-		[
-			'#type' => 'checkbox',
-			'#label' => elgg_echo('profile_manager:settings:enable_site_join_river_event'),
-			'name' => 'params[enable_site_join_river_event]',
-			'checked' => $plugin->enable_site_join_river_event === 'yes',
-			'switch' => true,
-			'default' => 'no',
-			'value' => 'yes',
-		],
 	],
 ]));

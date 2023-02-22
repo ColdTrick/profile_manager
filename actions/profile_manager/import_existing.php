@@ -1,14 +1,14 @@
 <?php
 /**
-* Profile Manager
-*
-* Action to import from 'existing' profile fields
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+ * Profile Manager
+ *
+ * Action to import from 'existing' profile fields
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
 
 $type = get_input('type', 'user');
 
@@ -27,9 +27,9 @@ if ($type === 'group') {
 
 $new_order = elgg_count_entities($options) + 1;
 
-// deregister hooks
-elgg_unregister_plugin_hook_handler('fields', 'user:user', '\ColdTrick\ProfileManager\ProfileFields::getFields');
-elgg_unregister_plugin_hook_handler('fields', 'group:group', '\ColdTrick\ProfileManager\ProfileFields::getFields');
+// deregister events
+elgg_unregister_event_handler('fields', 'user:user', '\ColdTrick\ProfileManager\ProfileFields::getFields');
+elgg_unregister_event_handler('fields', 'group:group', '\ColdTrick\ProfileManager\ProfileFields::getFields');
 
 if ($type === 'group') {
 	$existing_fields = elgg()->fields->get('group', 'group');
@@ -42,7 +42,6 @@ if (empty($existing_fields)) {
 }
 
 foreach ($existing_fields as $existing_field) {
-	
 	$metadata_name = $existing_field['name'];
 	$metadata_label = $existing_field['#label'];
 	$metadata_type = $existing_field['#type'];
@@ -57,6 +56,7 @@ foreach ($existing_fields as $existing_field) {
 		} else {
 			$field = new \ColdTrick\ProfileManager\CustomProfileField();
 		}
+		
 		$field->save();
 		
 		$field->metadata_name = $metadata_name;
@@ -71,6 +71,7 @@ foreach ($existing_fields as $existing_field) {
 	} else {
 		$skipped++;
 	}
+	
 	$n++;
 }
 

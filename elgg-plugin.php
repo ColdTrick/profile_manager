@@ -28,7 +28,6 @@ return [
 		'show_profile_type_on_profile' => 'no',
 		'display_categories' => 'plain',
 		'enable_profile_completeness_widget' => 'no',
-		'enable_site_join_river_event' => 'yes',
 	],
 	'entities' => [
 		[
@@ -113,7 +112,13 @@ return [
 
 		'profile_manager/profile_types/add' => ['access' => 'admin'],
 	],
-	'hooks' => [
+	'events' => [
+		'create' => [
+			'user' => [
+				'\ColdTrick\ProfileManager\Users::createUserByAdmin' => [],
+				'\ColdTrick\ProfileManager\Users::createUserByRegister' => [],
+			],
+		],
 		'fields' => [
 			'user:user' => [
 				'\ColdTrick\ProfileManager\ProfileFields::getFields' => [],
@@ -128,7 +133,7 @@ return [
 			],
 		],
 		'register' => [
-			'menu:page' => [
+			'menu:admin_header' => [
 				'\ColdTrick\ProfileManager\Menus::registerAdmin' => [],
 			],
 			'menu:profile_fields' => [
@@ -143,19 +148,6 @@ return [
 		'types:custom_profile_field' => [
 			'profile_manager' => [
 				'\ColdTrick\ProfileManager\ProfileFields::registerUserProfileFieldTypes' => [],
-			],
-		],
-	],
-	'events' => [
-		'create' => [
-			'user' => [
-				'\ColdTrick\ProfileManager\Users::createUserByAdmin' => [],
-				'\ColdTrick\ProfileManager\Users::createUserByRegister' => [],
-			],
-		],
-		'validate:after' => [
-			'user' => [
-				'\ColdTrick\ProfileManager\Users::createUserRiverItem' => [],
 			],
 		],
 	],

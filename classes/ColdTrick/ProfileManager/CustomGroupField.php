@@ -9,9 +9,7 @@ class CustomGroupField extends CustomField {
 	const SUBTYPE = 'custom_group_field';
 	
 	/**
-	 * initializes the default class attributes
-	 *
-	 * @return void
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -20,11 +18,9 @@ class CustomGroupField extends CustomField {
 	}
 
 	/**
-	 * Returns the title of the field
-	 *
-	 * @return string
+	 * {@inheritdoc}
 	 */
-	public function getDisplayName() {
+	public function getDisplayName(): string {
 		if ($this->metadata_label) {
 			return (string) $this->metadata_label;
 		}

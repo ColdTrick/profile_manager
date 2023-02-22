@@ -5,9 +5,17 @@ if (!$user instanceof \ElggUser) {
 	return;
 }
 
-elgg_require_css('profile_manager/profile_completeness.css');
-
 $completeness = profile_manager_profile_completeness($user);
+if (empty($completeness)) {
+	return;
+}
+
+if (elgg_is_xhr()) {
+	echo elgg_format_element('link', ['rel' => 'stylesheet', 'href' => elgg_get_simplecache_url('profile_manager/profile_completeness.css')]);
+} else {
+	elgg_require_css('profile_manager/profile_completeness.css');
+}
+
 $percentage_complete = elgg_extract('percentage_completeness', $completeness);
 
 $progress = elgg_format_element('div', [

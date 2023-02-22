@@ -29,7 +29,6 @@ echo elgg_view('output/url', [
 
 $result = '';
 if (!empty($types)) {
-	
 	$options = [
 		'' => elgg_echo('profile_manager:profile:edit:custom_profile_type:default'),
 	];

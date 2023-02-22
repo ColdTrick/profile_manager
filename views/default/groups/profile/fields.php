@@ -15,7 +15,6 @@ if (empty($profile_fields) || !is_array($profile_fields)) {
 
 $output = '';
 foreach ($profile_fields as $field) {
-	
 	if (!$field->showOnProfile()) {
 		continue;
 	}

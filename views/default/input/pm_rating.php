@@ -2,9 +2,9 @@
 
 elgg_require_js('input/pm_rating');
 
-$selected_value = (int) $vars['value'];
+$selected_value = (int) elgg_extract('value', $vars);
 
-$rating_id = $vars['name'] . '_container';
+$rating_id = elgg_extract('name', $vars) . '_container';
 
 $body = elgg_view('input/hidden', $vars);
 for ($i = 1; $i <= 5; $i++) {

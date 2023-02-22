@@ -1,14 +1,14 @@
 <?php
 /**
-* Profile Manager
-*
-* Action to reset profile fields
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+ * Profile Manager
+ *
+ * Action to reset profile fields
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
 
 $type = get_input('type', 'profile');
 if (!in_array($type, ['profile', 'group'])) {

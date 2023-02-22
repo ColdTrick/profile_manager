@@ -1,14 +1,14 @@
 <?php
 /**
-* Profile Manager
-*
-* Profile Types add form
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+ * Profile Manager
+ *
+ * Profile Types add form
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
 
 use ColdTrick\ProfileManager\CustomFieldCategory;
 
@@ -17,7 +17,7 @@ if (!elgg_is_admin_logged_in()) {
 	return;
 }
 
-$guid = get_input('guid');
+$guid = (int) get_input('guid');
 
 $entity = get_entity($guid);
 if (!$entity instanceof \ColdTrick\ProfileManager\CustomProfileType) {
@@ -34,7 +34,6 @@ $metadata_description = null;
 $related_categories = [];
 
 if ($entity) {
-	
 	$form_title = elgg_echo('profile_manager:profile_types:edit');
 	
 	$guid = $entity->guid;

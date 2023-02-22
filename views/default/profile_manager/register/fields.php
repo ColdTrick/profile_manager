@@ -1,14 +1,14 @@
 <?php
 /**
-* Profile Manager
-*
-* Extended registerpage view
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+ * Profile Manager
+ *
+ * Extended registerpage view
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
 
 $fields = [];
 
@@ -61,7 +61,6 @@ if (elgg_get_plugin_setting('profile_type_selection', 'profile_manager') !== 'ad
 
 if (!empty($profile_fields)) {
 	foreach ($cats as $cat_guid => $cat) {
-		
 		$linked_profile_types = [0];
 		if ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 			$linked_profile_types = $cat->getLinkedProfileTypes();
@@ -118,7 +117,7 @@ if (!empty($profile_fields)) {
 			$tabs[] = [
 				'text' => $cat_title,
 				'content' => $cat_body,
-				'class' => $category_classes,
+				'item_class' => $category_classes,
 			];
 		} else {
 			$fields[] = [

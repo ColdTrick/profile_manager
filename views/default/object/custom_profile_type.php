@@ -1,7 +1,7 @@
 <?php
 /**
-* Object view of a custom profile type
-*/
+ * Object view of a custom profile type
+ */
 
 $entity = elgg_extract('entity', $vars);
 if (!$entity instanceof \ColdTrick\ProfileManager\CustomProfileType) {

@@ -1,7 +1,7 @@
 <?php
 /**
-* Object view of a custom group field
-*/
+ * Object view of a custom group field
+ */
 	
 $field = elgg_extract('entity', $vars);
 if (!$field instanceof \ColdTrick\ProfileManager\CustomGroupField) {
@@ -52,4 +52,3 @@ echo elgg_view_image_block('', $title, [
 	'title' => $field->getDisplayName(),
 	'image_alt' => $metadata,
 ]);
-	

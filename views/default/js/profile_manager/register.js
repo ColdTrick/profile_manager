@@ -1,7 +1,7 @@
 define(['jquery'], function($) {
 
 	// add username generation when a email adress has been entered
-	$(document).on('blur', '.elgg-form-register input[name="email"]', function(){
+	$(document).on('blur', '.elgg-form-register input[name="email"]', function() {
 		var email_value = $(this).val();
 		
 		if (email_value.indexOf('@') !== -1) {

@@ -11,7 +11,7 @@ define(['jquery'], function($) {
 		$('.custom_profile_type_0').show();
 		if (selVal !== '') {
 			$('.custom_profile_type_' + selVal).show();
-			$('#custom_profile_type_description_'+ selVal).show();
+			$('#custom_profile_type_description_' + selVal).show();
 		}
 
 		if ($('#profile_manager_profile_edit_tabs .custom_fields_edit_profile_category.elgg-state-selected:visible').length === 0) {

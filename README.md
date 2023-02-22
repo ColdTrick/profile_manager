@@ -1,8 +1,7 @@
 # Profile Manager
 
 ![Elgg 4.3](https://img.shields.io/badge/Elgg-4.3-green.svg)
-[![Build Status](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/profile_manager/?branch=master)
+![Lint Checks](https://github.com/ColdTrick/profile_manager/actions/workflows/lint.yml/badge.svg?event=push)
 [![Latest Stable Version](https://poser.pugx.org/coldtrick/profile_manager/v/stable.svg)](https://packagist.org/packages/coldtrick/profile_manager)
 [![License](https://poser.pugx.org/coldtrick/profile_manager/license.svg)](https://packagist.org/packages/coldtrick/profile_manager)
 
@@ -16,16 +15,12 @@ Improved management of user and group profile fields
 - add categories (draggable reordering, drop fields on categories to add) (user only)
 - importing existing fields
 - ordering of custom fields (drag and drop)
-- adds new field types: dropdown, radio, multiselect and date
+- adds new field types: date, dropdown, radio, multiselect and rating
 - show on register form (user only)
 - show output as tags
 - mandatory fields (for register form, user only)
 - disallow editing of a specific field (applies to edit profile only)
 - backup / restore profile fields configuration
-
-### Informational
-
-- a river event when user joins the site
 
 ### Other features
 

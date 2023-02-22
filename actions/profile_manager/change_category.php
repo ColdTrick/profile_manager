@@ -1,16 +1,16 @@
 <?php
-use ColdTrick\ProfileManager\CustomField;
-
 /**
-* Profile Manager
-*
-* jQuery Profile Field change category
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+ * Profile Manager
+ *
+ * jQuery Profile Field change category
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
+
+use ColdTrick\ProfileManager\CustomField;
 
 $guid = (int) get_input('guid');
 $category_guid = (int) get_input('category_guid');

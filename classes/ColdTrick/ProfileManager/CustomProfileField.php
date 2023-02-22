@@ -9,9 +9,7 @@ class CustomProfileField extends CustomField {
 	const SUBTYPE = 'custom_profile_field';
 
 	/**
-	 * initializes the default class attributes
-	 *
-	 * @return void
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -31,10 +29,11 @@ class CustomProfileField extends CustomField {
 	 *
 	 * @return string
 	 */
-	public function getDisplayName($input = false, $lang = null) {
+	public function getDisplayName(bool $input = false, string $lang = null): string {
 		if (!isset($lang)) {
 			$lang = elgg_get_current_language();
 		}
+		
 		if ($input) {
 			if ($this->metadata_input_label) {
 				return $this->metadata_input_label;

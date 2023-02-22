@@ -1,14 +1,14 @@
 <?php
-	/**
-* Profile Manager
-*
-* Group Fields add form
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+/**
+ * Profile Manager
+ *
+ * Group Fields add form
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
 
 if (!elgg_is_admin_logged_in()) {
 	echo elgg_echo('adminrequired');
@@ -37,6 +37,7 @@ if ($types) {
 				if (!isset($option_classes[$option_name])) {
 					$option_classes[$option_name] = '';
 				}
+				
 				$option_classes[$option_name] .= ' field_option_enable_' . $type->type;
 			}
 		}
@@ -55,7 +56,6 @@ $blank_available = null;
 $admin_only = null;
 
 if ($entity) {
-	
 	$form_title = elgg_echo('profile_manager:group_fields:edit');
 	
 	$guid = $entity->guid;

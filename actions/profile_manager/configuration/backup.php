@@ -1,14 +1,14 @@
 <?php
 /**
-* Backup of profile fields config
-*/
+ * Backup of profile fields config
+ */
 
 if (\Elgg\Application::isCli()) {
 	// this is in case of the PHPUnit action intergation tests
 	return elgg_error_response();
 }
 
-$fieldtype = get_input('fieldtype' , \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE);
+$fieldtype = get_input('fieldtype', \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE);
 
 $entities = elgg_get_entities([
 	'type' => 'object',

@@ -32,7 +32,7 @@ return [
 	'entity:delete:object:custom_profile_type:success' => "The profile type was deleted.",
 	
 	// admin menu
-	'admin:configure_utilities:group_fields' => "Edit Group Fields",
+	'admin:configure_utilities:group_fields' => "Edit group fields",
 	
 	'admin:groups' => "Groups",
 
@@ -64,7 +64,6 @@ return [
 	'profile_manager:settings:profile_type_selection:option:admin' => 'Admin only',
 
 	'profile_manager:settings:enable_profile_completeness_widget' => "Enable the profile completeness widget",
-	'profile_manager:settings:enable_site_join_river_event' => "Add a river event when people join this site",
 	'profile_manager:settings:profile_completeness:avatar' => "Avatar completeness percentage",
 	'profile_manager:settings:profile_completeness:avatar:help' => "If using profile completeness features you can, optionally, configure here how much a profile avatar counts towards profile completeness. The remainder percentage will be used for the profile field configuration.",
 	

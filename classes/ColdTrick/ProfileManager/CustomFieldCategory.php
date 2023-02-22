@@ -9,9 +9,7 @@ class CustomFieldCategory extends \ElggObject {
 	const SUBTYPE = 'custom_profile_field_category';
 	
 	/**
-	 * initializes the default class attributes
-	 *
-	 * @return void
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -23,11 +21,9 @@ class CustomFieldCategory extends \ElggObject {
 	}
 
 	/**
-	 * Returns the title of the category
-	 *
-	 * @return string
+	 * {@inheritdoc}
 	 */
-	public function getDisplayName() {
+	public function getDisplayName(): string {
 		if ($this->metadata_label) {
 			return (string) $this->metadata_label;
 		}
@@ -68,7 +64,7 @@ class CustomFieldCategory extends \ElggObject {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function delete($recursive = true) {
+	public function delete(bool $recursive = true): bool {
 		$guid = $this->guid;
 		
 		$deleted = parent::delete($recursive);

@@ -1,7 +1,7 @@
 <?php
 /**
-* Toggle metadata view
-*/
+ * Toggle metadata view
+ */
 
 $entity = elgg_extract('entity', $vars);
 $metadata_name = elgg_extract('metadata_name', $vars);
@@ -32,6 +32,7 @@ if (!empty($type_options) && array_key_exists($metadata_name, $type_options) && 
 	} else {
 		$options['class'][] = 'field_config_metadata_option_enabled';
 	}
+	
 	$options['title'] = elgg_echo("profile_manager:admin:{$metadata_name}");
 	$options['data-guid'] = $entity->guid;
 	$options['data-field'] = $metadata_name;

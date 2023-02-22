@@ -7,9 +7,7 @@ namespace ColdTrick\ProfileManager;
 abstract class CustomField extends \ElggObject {
 	
 	/**
-	 * initializes the default class attributes
-	 *
-	 * @return void
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -26,7 +24,7 @@ abstract class CustomField extends \ElggObject {
 	 *
 	 * @return array|null
 	 */
-	public function getOptions($add_blank_option = false): ?array {
+	public function getOptions(bool $add_blank_option = false): ?array {
 		if (empty($this->metadata_options)) {
 			return null;
 		}
@@ -59,6 +57,7 @@ abstract class CustomField extends \ElggObject {
 		if (empty($result) && elgg_language_key_exists("profile:hint:{$this->metadata_name}")) {
 			$result = elgg_echo("profile:hint:{$this->metadata_name}");
 		}
+		
 		return (string) $result;
 	}
 
@@ -73,6 +72,7 @@ abstract class CustomField extends \ElggObject {
 		if (empty($result) && elgg_language_key_exists("profile:placeholder:{$this->metadata_name}")) {
 			$result = elgg_echo("profile:placeholder:{$this->metadata_name}");
 		}
+		
 		return (string) $result;
 	}
 
@@ -88,7 +88,7 @@ abstract class CustomField extends \ElggObject {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function delete($recursive = true) {
+	public function delete(bool $recursive = true): bool {
 		$deleted = parent::delete($recursive);
 		if ($deleted) {
 			elgg_delete_system_cache('profile_manager_user:user_fields');

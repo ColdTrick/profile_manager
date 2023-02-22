@@ -10,9 +10,7 @@ class CustomProfileType extends \ElggObject {
 	const CATEGORY_RELATIONSHIP = 'custom_profile_type_category_relationship';
 	
 	/**
-	 * initializes the default class attributes
-	 *
-	 * @return void
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -30,10 +28,10 @@ class CustomProfileType extends \ElggObject {
 	 *
 	 * @return string
 	 */
-	public function getDisplayName($plural = false) {
+	public function getDisplayName(bool $plural = false): string {
 		if ($plural) {
 			$result = $this->getPluralTitle();
-			if ($result !== false) {
+			if (!empty($result)) {
 				return $result;
 			}
 		}
@@ -52,9 +50,9 @@ class CustomProfileType extends \ElggObject {
 	/**
 	 * Returns the plural form of the profile type label
 	 *
-	 * @return string|false
+	 * @return string
 	 */
-	protected function getPluralTitle() {
+	protected function getPluralTitle(): string {
 		if ($this->metadata_label_plural) {
 			return $this->metadata_label_plural;
 		}
@@ -63,7 +61,7 @@ class CustomProfileType extends \ElggObject {
 			return elgg_echo("profile:types:{$this->metadata_name}:plural");
 		}
 		
-		return false;
+		return '';
 	}
 
 	/**
@@ -71,16 +69,19 @@ class CustomProfileType extends \ElggObject {
 	 *
 	 * @return string
 	 */
-	public function getDescription() {
+	public function getDescription(): string {
 		$description = $this->metadata_description;
 		if (empty($description) && elgg_language_key_exists("profile:types:{$this->metadata_name}:description")) {
 			$description = elgg_echo("profile:types:{$this->metadata_name}:description");
 		}
 		
-		return $description;
+		return (string) $description;
 	}
 	
-	public function delete($recursive = true) {
+	/**
+	 * {@inheritdoc}
+	 */
+	public function delete(bool $recursive = true): bool {
 		$guid = $this->guid;
 		
 		$deleted = parent::delete($recursive);

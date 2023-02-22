@@ -1,14 +1,14 @@
 <?php
 /**
-* Profile Manager
-*
-* Restore of profile fields backup
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+ * Profile Manager
+ *
+ * Restore of profile fields backup
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
 
 $site_guid = elgg_get_site_entity()->guid;
 
@@ -80,6 +80,7 @@ foreach ($fields as $index => $field) {
 			$object->$metadata_key = $metadata_value;
 		}
 	}
+	
 	$object->save();
 }
 

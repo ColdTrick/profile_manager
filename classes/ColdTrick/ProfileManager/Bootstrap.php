@@ -4,15 +4,16 @@ namespace ColdTrick\ProfileManager;
 
 use Elgg\DefaultPluginBootstrap;
 
+/**
+ * Plugin bootstrap
+ */
 class Bootstrap extends DefaultPluginBootstrap {
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	public function boot() {
-		$hooks = $this->elgg()->hooks;
-		
-		$hooks->registerHandler('route:config', 'action:register', __NAMESPACE__ . '\Routes::addRegisterActionMiddleware');
+		$this->elgg()->events->registerHandler('route:config', 'action:register', __NAMESPACE__ . '\Routes::addRegisterActionMiddleware');
 	}
 	
 	/**

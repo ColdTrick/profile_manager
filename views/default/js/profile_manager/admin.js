@@ -36,10 +36,10 @@ define(['jquery', 'elgg/i18n', 'elgg/Ajax', 'jquery-ui/widgets/sortable', 'jquer
 				category_guid: category_guid
 			},
 			success: function(data) {
-				if (category_guid === 0) {
+				if (category_guid === '0') {
 					category_guid = '';
 				}
-				
+
 				$(field).find('.custom_field').attr('rel', category_guid);
 
 				var current_cat_guid;
@@ -49,7 +49,7 @@ define(['jquery', 'elgg/i18n', 'elgg/Ajax', 'jquery-ui/widgets/sortable', 'jquer
 					if ($selected_id !== 'custom_profile_field_category_0') {
 						current_cat_guid = $selected_id.replace('elgg-object-','');
 					}
-				}	
+				}
 				
 				filter_custom_fields(current_cat_guid);
 			},
@@ -127,5 +127,5 @@ define(['jquery', 'elgg/i18n', 'elgg/Ajax', 'jquery-ui/widgets/sortable', 'jquer
 				},
 			});
 		}
-	});	
+	});
 });

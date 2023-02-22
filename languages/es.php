@@ -32,7 +32,6 @@ return array (
   'profile_manager:settings:profile_type_selection:option:user' => 'Usuario',
   'profile_manager:settings:profile_type_selection:option:admin' => 'Solo los administradores',
   'profile_manager:settings:enable_profile_completeness_widget' => 'Habilitar el widget que muestra el grado de completado del pefil',
-  'profile_manager:settings:enable_site_join_river_event' => 'Agregar un evento al river cuando alguien se registre en el sitio',
   'profile_manager:settings:registration:terms' => 'Para mostrar una casilla de \'Aceptar términos de uso\' en el formulario de registro, ingresa la URL a la página con los detellas de los Términos de Uso',
   'profile_manager:settings:registration:free_text' => 'Texto adicional para mostrar en el formulario de registro',
   'profile_manager:admin:metadata_name' => 'Nombre',

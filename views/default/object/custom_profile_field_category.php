@@ -1,7 +1,7 @@
 <?php
 /**
-* Object view of a custom profile field category
-*/
+ * Object view of a custom profile field category
+ */
 
 $entity = elgg_extract('entity', $vars);
 if (!$entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {

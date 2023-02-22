@@ -27,9 +27,6 @@
 			"composer/installers": true
 		}
     },
-	"require-dev": {
-		"coldtrick/sniffs": "dev-master"
-	},
 	"conflict": {
 		"elgg/elgg": "<4.3"
 	}

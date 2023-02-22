@@ -1,16 +1,16 @@
 <?php
-use ColdTrick\ProfileManager\CustomField;
-
 /**
-* Profile Manager
-*
-* Action to toggle profile field metadata
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+ * Profile Manager
+ *
+ * Action to toggle profile field metadata
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
+
+use ColdTrick\ProfileManager\CustomField;
 
 $allowed = [
 	'mandatory',
@@ -38,5 +38,6 @@ if ($entity->$field == 'yes') {
 } else {
 	$entity->$field = 'yes';
 }
+
 // need to save to trigger a memcache update
 $entity->save();

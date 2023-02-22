@@ -1,14 +1,14 @@
 <?php
 /**
-* Profile Manager
-*
-* Action to create/edit profile field
-*
-* @package profile_manager
-* @author ColdTrick IT Solutions
-* @copyright Coldtrick IT Solutions 2009
-* @link http://www.coldtrick.com/
-*/
+ * Profile Manager
+ *
+ * Action to create/edit profile field
+ *
+ * @package profile_manager
+ * @author ColdTrick IT Solutions
+ * @copyright Coldtrick IT Solutions 2009
+ * @link http://www.coldtrick.com/
+ */
 
 $site_guid = elgg_get_site_entity()->guid;
 
@@ -42,6 +42,7 @@ $reserved_metadata_names = [
 if ($guid) {
 	$current_field = get_entity($guid);
 }
+
 if ($current_field && ($current_field->getSubtype() != \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE && $current_field->getSubtype() != \ColdTrick\ProfileManager\CustomGroupField::SUBTYPE)) {
 	// wrong custom field type
 	return elgg_error_response(elgg_echo('profile_manager:action:new:error:type'));

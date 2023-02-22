@@ -10,17 +10,17 @@ class ProfileFields {
 	/**
 	 * Returns fields config for users
 	 *
-	 * @param \Elgg\Hook $hook 'fields' 'user:user|group:group'
+	 * @param \Elgg\Event $event 'fields' 'user:user|group:group'
 	 *
 	 * @return array
 	 */
-	public static function getFields(\Elgg\Hook $hook) {
+	public static function getFields(\Elgg\Event $event) {
 		
 		// get from cache
-		$entities = elgg_load_system_cache("profile_manager_{$hook->getType()}_fields");
+		$entities = elgg_load_system_cache("profile_manager_{$event->getType()}_fields");
 		if ($entities === null) {
 			$subtype = \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE;
-			if ($hook->getType() === 'group:group') {
+			if ($event->getType() === 'group:group') {
 				$subtype = \ColdTrick\ProfileManager\CustomGroupField::SUBTYPE;
 			}
 			
@@ -30,7 +30,7 @@ class ProfileFields {
 				'limit' => false,
 				'owner_guid' => elgg_get_site_entity()->guid,
 			]);
-			elgg_save_system_cache("profile_manager_{$hook->getType()}_fields", $entities);
+			elgg_save_system_cache("profile_manager_{$event->getType()}_fields", $entities);
 		}
 		
 		if (empty($entities)) {
@@ -40,7 +40,7 @@ class ProfileFields {
 		_elgg_services()->metadataCache->populateFromEntities($entities);
 		
 		$result = [];
-		if ($hook->getType() === 'group:group') {
+		if ($event->getType() === 'group:group') {
 			$result[] = [
 				'name' => 'name',
 				'#type' => 'text',
@@ -55,6 +55,7 @@ class ProfileFields {
 				$ordered_entities[$entity->order] = $entity;
 			}
 		}
+		
 		ksort($ordered_entities);
 		self::registerFieldTranslations($ordered_entities);
 
@@ -68,7 +69,7 @@ class ProfileFields {
 			];
 		}
 		
-		if (!empty($result) && $hook->getType() === 'user:user') {
+		if (!empty($result) && $event->getType() === 'user:user') {
 			$result[] = [
 				'#type' => 'hidden',
 				'name' => 'custom_profile_type',
@@ -85,17 +86,15 @@ class ProfileFields {
 	 *
 	 * @return void
 	 */
-	protected static function registerFieldTranslations($fields = []) {
+	protected static function registerFieldTranslations(array $fields = []): void {
 		$languages = ['en'];
 		$languages[] = elgg_get_current_language();
 		$languages[] = elgg_get_config('language');
 		$languages = array_unique($languages);
 		
 		foreach ($languages as $lang) {
-			
 			$translations = [];
 			foreach ($fields as $field) {
-				
 				$key = ($field instanceof CustomGroupField) ? "groups:{$field->metadata_name}" : "profile:{$field->metadata_name}";
 				$title = $field->getDisplayName(false, $lang);
 				
@@ -121,12 +120,12 @@ class ProfileFields {
 	/**
 	 * Registers the field types available for the configuration of user profile fields
 	 *
-	 * @param \Elgg\Hook $hook 'types:custom_profile_field', 'profile_manager'
+	 * @param \Elgg\Event $event 'types:custom_profile_field', 'profile_manager'
 	 *
 	 * @return array
 	 */
-	public static function registerUserProfileFieldTypes(\Elgg\Hook $hook) {
-		$result = $hook->getValue();
+	public static function registerUserProfileFieldTypes(\Elgg\Event $event) {
+		$result = $event->getValue();
 		
 		$standard_options = [
 			'show_on_register' => true,
@@ -228,12 +227,12 @@ class ProfileFields {
 	/**
 	 * Registers the field types available for the configuration of group profile fields
 	 *
-	 * @param \Elgg\Hook $hook 'types:custom_group_field', 'profile_manager'
+	 * @param \Elgg\Event $event 'types:custom_group_field', 'profile_manager'
 	 *
 	 * @return array
 	 */
-	public static function registerGroupProfileFieldTypes(\Elgg\Hook $hook) {
-		$result = $hook->getValue();
+	public static function registerGroupProfileFieldTypes(\Elgg\Event $event) {
+		$result = $event->getValue();
 		
 		$standard_options = [
 			'output_as_tags' => true,

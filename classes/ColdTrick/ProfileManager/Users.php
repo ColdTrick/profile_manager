@@ -78,7 +78,7 @@ class Users {
 		$terms = elgg_get_plugin_setting('registration_terms', 'profile_manager');
 		if ($terms) {
 			// already checked for acceptance in middleware
-			$user->setPrivateSetting('general_terms_accepted', time());
+			$user->general_terms_accepted = time();
 		}
 	
 		elgg_clear_sticky_form('profile_manager_register');
@@ -224,27 +224,6 @@ class Users {
 			}
 		}
 	}
-		
-	/**
-	 * Adds a river event when a user is created
-	 *
-	 * @param \Elgg\Event $event 'validate:after', 'user'
-	 *
-	 * @return void
-	 */
-	public static function createUserRiverItem(\Elgg\Event $event) {
-		
-		$enable_river_event = elgg_get_plugin_setting('enable_site_join_river_event', 'profile_manager');
-		if ($enable_river_event == 'no') {
-			return;
-		}
-
-		elgg_create_river_item([
-			'action_type' => 'join',
-			'subject_guid' => $event->getObject()->guid,
-			'object_guid' => elgg_get_site_entity()->guid,
-		]);
-	}
 	
 	/**
 	 * Generates username based on emailaddress
@@ -262,9 +241,9 @@ class Users {
 		
 		// strip unsupported chars from the usernam
 		// using same blacklist as in validate_username() function
-		// not using a preg_replace as otherwise the hook can not be used (as the syntax is different)
+		// not using a preg_replace as otherwise the event can not be used (as the syntax is different)
 		$blacklist = '\'/\\"*& ?#%^(){}[]~?<>;|¬`@+=';
-		$blacklist = elgg_trigger_plugin_hook('username:character_blacklist', 'user', ['blacklist' => $blacklist], $blacklist);
+		$blacklist = elgg_trigger_event_results('username:character_blacklist', 'user', ['blacklist' => $blacklist], $blacklist);
 		$blacklist = str_split($blacklist);
 		
 		foreach ($blacklist as $unwanted_character) {

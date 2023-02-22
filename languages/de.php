@@ -38,7 +38,6 @@ return array (
   'profile_manager:settings:profile_type_selection:option:user' => 'Benutzer',
   'profile_manager:settings:profile_type_selection:option:admin' => 'nur Administratoren',
   'profile_manager:settings:enable_profile_completeness_widget' => 'Das Vollständigkeitsgrads-Widget aktivieren',
-  'profile_manager:settings:enable_site_join_river_event' => 'Einen River-Event hinzufügen, wenn Benutzer zur Site hinzugefügt werden',
   'profile_manager:settings:profile_completeness:avatar' => 'Avatar-Anteil an Profil-Vollständigkeit',
   'profile_manager:settings:profile_completeness:avatar:help' => 'Bei Benutzung des Vollständigkeitsgrads-Features kannst Du hier angeben, wieviel Prozent für einen gesetzten Avatar gerechnet werden.',
   'profile_manager:settings:registration:terms' => 'Um ein \'Bedingungen akzeptieren\'-Feld auf dem Registrierungsformular anzuzeigen, gib bitte die URL zu den Bedingungen unten an',

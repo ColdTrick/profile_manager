@@ -10,16 +10,16 @@ class Menus {
 	/**
 	 * Add admin menu items
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:page'
+	 * @param \Elgg\Event $event 'register', 'menu:admin_header'
 	 *
 	 * @return array
 	 */
-	public static function registerAdmin(\Elgg\Hook $hook) {
+	public static function registerAdmin(\Elgg\Event $event) {
 		if (!elgg_in_context('admin') || !elgg_is_admin_logged_in() || !elgg_is_active_plugin('groups')) {
 			return;
 		}
 		
-		$returnvalue = $hook->getValue();
+		$returnvalue = $event->getValue();
 		
 		$returnvalue[] = \ElggMenuItem::factory([
 			'name' => 'configure_utilities:group_fields',
@@ -27,7 +27,6 @@ class Menus {
 			'href' => 'admin/configure_utilities/group_fields',
 			'context' => 'admin',
 			'parent_name' => 'configure_utilities',
-			'section' => 'configure',
 		]);
 		
 		return $returnvalue;
@@ -36,19 +35,19 @@ class Menus {
 	/**
 	 * Returns the profile fields actions
 	 *
-	 * @param \Elgg\Hook $hook hook
+	 * @param \Elgg\Event $event 'register', 'menu:profile_fields'
 	 *
 	 * @return \ElggMenuItem[]
 	 */
-	public static function registerProfileFieldsActions(\Elgg\Hook $hook) {
+	public static function registerProfileFieldsActions(\Elgg\Event $event) {
 		
-		$type = $hook->getParam('type');
-		$fieldtype = $hook->getParam('fieldtype');
+		$type = $event->getParam('type');
+		$fieldtype = $event->getParam('fieldtype');
 		if (empty($fieldtype) || empty($type)) {
 			return;
 		}
 		
-		$items = $hook->getValue();
+		$items = $event->getValue();
 		
 		$items[] = \ElggMenuItem::factory([
 			'name' => 'reset',
