@@ -261,7 +261,7 @@ class Users {
 			$original_username = $username;
 			
 			$i = 1;
-			while (get_user_by_username($username)) {
+			while (elgg_get_user_by_username($username)) {
 				$username = $original_username . $i;
 				$i++;
 			}
