@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a594d795eb93cd8c9c5f1e61bfb8de49",
+    "content-hash": "d92bdeef5c66fc80ba08770fba58ab87",
     "packages": [
         {
             "name": "bower-asset/jquery-ui-multiselect-widget",
             "version": "v3.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ehynds/jquery-ui-multiselect-widget.git",
+                "url": "git@github.com:ehynds/jquery-ui-multiselect-widget.git",
                 "reference": "7efce3706f2a9ebb7bafebc0320b3644d3f62bd2"
             },
             "dist": {
