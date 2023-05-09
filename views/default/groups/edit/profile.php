@@ -3,11 +3,6 @@
  * Profile Manager
  *
  * Overrules group edit form to support options (radio, dropdown, multiselect)
- *
- * @package profile_manager
- * @author ColdTrick IT Solutions
- * @copyright Coldtrick IT Solutions 2009
- * @link http://www.coldtrick.com/
  */
 
 $group = elgg_extract('entity', $vars);
@@ -20,13 +15,6 @@ echo elgg_view_field([
 	'required' => true,
 	'name' => 'name',
 	'value' => elgg_extract('name', $vars),
-]);
-
-echo elgg_view('entity/edit/icon', [
-	'entity' => elgg_extract('entity', $vars),
-	'entity_type' => 'group',
-	'entity_subtype' => 'group',
-	'cropper_enabled' => true,
 ]);
 
 // show the configured group profile fields
