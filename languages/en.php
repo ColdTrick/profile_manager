@@ -158,7 +158,6 @@ return [
 	'profile_manager:actions:import:from_existing:description' => "Import already existing fields",
 	'profile_manager:actions:import:from_existing:no_fields' => 'No existing fields available for import',
 	'profile_manager:actions:import:from_existing:new_fields' => 'Succesfully imported <b>%s</b> new fields',
-	'profile_manager:actions:import:from_existing:error:wrong_type' => 'Wrong profile field type (group or profile)',
 	
 	// Configuration Backup and Restore
 	'profile_manager:actions:configuration:backup' => "Backup",

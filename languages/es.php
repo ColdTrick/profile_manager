@@ -1,7 +1,7 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0-beta
- * On 2018-12-13 17:05
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:05
  */
 
 return array (
@@ -27,7 +27,6 @@ return array (
   'profile_manager:settings:show_profile_type_on_profile' => 'Mostrar el tipo perfil de usuaio en el perfil',
   'profile_manager:settings:display_categories' => 'Selecciona como se muestran las categorías en el perfil',
   'profile_manager:settings:display_categories:option:plain' => 'Plano',
-  'profile_manager:settings:display_system_category' => 'Mostrar una categoría extra en el perfil con systemdata (solo para admins)',
   'profile_manager:settings:profile_type_selection' => '¿Quién puede cambiar el tipo de perfil?',
   'profile_manager:settings:profile_type_selection:option:user' => 'Usuario',
   'profile_manager:settings:profile_type_selection:option:admin' => 'Solo los administradores',
@@ -88,17 +87,6 @@ return array (
   'profile_manager:actions:reset:error:unknown' => 'Un error desconocido ocurrió al resetar',
   'profile_manager:actions:reset:error:wrong_type' => 'Tipo de perfil erróneo',
   'profile_manager:actions:reset:success' => 'Reseteo exitoso',
-  'profile_manager:actions:import:from_custom' => 'Importar campos personalizados',
-  'profile_manager:actions:import:from_custom:description' => 'Importar campos previamente definidos',
-  'profile_manager:actions:import:from_custom:confirm' => '¿Estas seguro de querer importar campos personalizados?',
-  'profile_manager:actions:import:from_custom:no_fields' => 'No hay campos personalizados para importar',
-  'profile_manager:actions:import:from_custom:new_fields' => 'Se han importado exitosamente <b>%s</b> campos nuevos',
-  'profile_manager:actions:import:from_default' => 'Importar campos por fefecto',
-  'profile_manager:actions:import:from_default:description' => 'Importa los campos de Elgg por defecto',
-  'profile_manager:actions:import:from_default:confirm' => '¿Estas seguro de querer importar campos por defecto>',
-  'profile_manager:actions:import:from_default:no_fields' => 'No hay campos disponibles para ser importados',
-  'profile_manager:actions:import:from_default:new_fields' => 'Se importan exitosamente  <b>%s</b> nuevos campos',
-  'profile_manager:actions:import:from_default:error:wrong_type' => 'Tipo de perfil erróneo',
   'profile_manager:actions:configuration:backup' => 'Backup',
   'profile_manager:actions:configuration:backup:description' => 'Backup de la configuración de estos campos (las categorías y los tipos no son incluídos en el backup)',
   'profile_manager:actions:configuration:restore' => 'Restaurar',

@@ -1,10 +1,11 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0-beta
- * On 2018-12-13 17:07
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:06
  */
 
 return array (
+  'river:site:site:join' => '%s a rejoint le site',
   'item:object:custom_profile_field' => 'Champ de profil personnalisé',
   'item:object:custom_profile_field_category' => 'Catégorie de champ personnalisé du profil',
   'item:object:custom_profile_type' => 'Type du profil personnalisé',
@@ -27,7 +28,6 @@ return array (
   'profile_manager:settings:show_profile_type_on_profile' => 'Afficher le type de profil de l\'utilisateur sur le profil',
   'profile_manager:settings:display_categories' => 'Sélectionnez la façon dont les différentes catégories sont affichées sur le profil',
   'profile_manager:settings:display_categories:option:plain' => 'Simple',
-  'profile_manager:settings:display_system_category' => 'Afficher une catégorie supplémentaire sur le profil avec les données du système (uniquement pour les admins )',
   'profile_manager:settings:profile_type_selection' => 'Qui peut changer le type de profil ?',
   'profile_manager:settings:profile_type_selection:option:user' => 'Utilisateur',
   'profile_manager:settings:profile_type_selection:option:admin' => 'Administrateur uniquement',
@@ -97,17 +97,6 @@ return array (
   'profile_manager:actions:reset:error:unknown' => 'Une erreur inconnue est survenue lors de la réinitialisation de tous les champs de profil',
   'profile_manager:actions:reset:error:wrong_type' => 'Type de champ de profil incorrect (groupe ou profil )',
   'profile_manager:actions:reset:success' => 'Réinitialisation réussi',
-  'profile_manager:actions:import:from_custom' => 'Champs d\'importation personnalisés',
-  'profile_manager:actions:import:from_custom:description' => 'Importations précédemment définis (Fonctionnalité Elgg par défaut) pour les champs de profil',
-  'profile_manager:actions:import:from_custom:confirm' => 'Etes-vous sûr de vouloir importer les champs personnalisés ?',
-  'profile_manager:actions:import:from_custom:no_fields' => 'Pas de champs personnalisés disponibles pour l\'importation',
-  'profile_manager:actions:import:from_custom:new_fields' => 'Nouveaux champs importés avec succès <b>%s</b>',
-  'profile_manager:actions:import:from_default' => 'Champ d\'importation par défaut',
-  'profile_manager:actions:import:from_default:description' => 'Champs d\'importations par défaut Elgg',
-  'profile_manager:actions:import:from_default:confirm' => 'Etes-vous sûr de vouloir importer les champs par défaut ?',
-  'profile_manager:actions:import:from_default:no_fields' => 'Aucun champs par défaut n\'est disponible pour l\'importation',
-  'profile_manager:actions:import:from_default:new_fields' => 'Nouveaux champs importés avec succès <b>%s</b>',
-  'profile_manager:actions:import:from_default:error:wrong_type' => 'Type de champ de profil incorrect (groupe ou profil )',
   'profile_manager:actions:configuration:backup' => 'Sauvegarde',
   'profile_manager:actions:configuration:backup:description' => 'Sauvegarde de la configuration de ces champs (catégories et types ne sont pas sauvegardés)',
   'profile_manager:actions:configuration:restore' => 'Restaurer',
@@ -179,5 +168,4 @@ return array (
   'profile_manager:register_pre_check:profile_icon:error' => 'Erreur lors du téléchargement de votre icône de profil (probablement liée à la taille du fichier)',
   'profile_manager:register_pre_check:profile_icon:nosupportedimage' => 'Vous ne pouvez pas importer l\'icône de profil. Peut-être n\'a-t-elle pas le bon type d\'extension (jpg, gif , png) ?',
   'profile_manager:admin:adduser:extra_metadata' => 'Ajouter des données de profil supplémentaire',
-  'river:site:site:join' => '%s a rejoint le site',
 );

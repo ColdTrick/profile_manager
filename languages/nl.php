@@ -1,7 +1,7 @@
 <?php
 /**
- * This file was created by Translation Editor v8.0
- * On 2021-08-06 10:08
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:05
  */
 
 return array (
@@ -9,7 +9,6 @@ return array (
   'profile_manager:actions:import:from_existing:description' => 'Importeer alreeds bestaande velden',
   'profile_manager:actions:import:from_existing:no_fields' => 'Er zijn geen bestaande velden beschikbaar om te importeren',
   'profile_manager:actions:import:from_existing:new_fields' => 'Succesvol <b>%s</b> nieuwe velden geïmporteerd',
-  'profile_manager:actions:import:from_existing:error:wrong_type' => 'Verkeerde profiel type (group of profile)',
   'collection:object:custom_profile_field' => 'Custom Profiel Velden',
   'collection:object:custom_group_field' => 'Custom Groep Velden',
   'collection:object:custom_profile_field_category' => 'Custom Profiel Veld Categorieën',

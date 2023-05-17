@@ -1,7 +1,7 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0-beta
- * On 2018-12-13 17:06
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:05
  */
 
 return array (
@@ -33,7 +33,6 @@ return array (
   'profile_manager:settings:display_categories' => 'Anzeige der Kategorien auf dem Profil',
   'profile_manager:settings:display_categories:option:plain' => 'Flach',
   'profile_manager:settings:display_categories:option:tabs' => 'Reiter',
-  'profile_manager:settings:display_system_category' => 'Eine zusätzliche Kategorie mit System-Daten auf dem Profil anzeigen (für Administratoren)',
   'profile_manager:settings:profile_type_selection' => 'Wer kann den Profiltyp ändern?',
   'profile_manager:settings:profile_type_selection:option:user' => 'Benutzer',
   'profile_manager:settings:profile_type_selection:option:admin' => 'nur Administratoren',
@@ -103,17 +102,6 @@ return array (
   'profile_manager:actions:reset:error:unknown' => 'Unbekannter Fehler beim Zurücksetzen aller Profilfelder aufgetreten',
   'profile_manager:actions:reset:error:wrong_type' => 'Falscher Profilfeldtyp (Gruppenfeld oder Profilfeld)',
   'profile_manager:actions:reset:success' => 'Zurücksetzen erfolgreich',
-  'profile_manager:actions:import:from_custom' => 'Benutzerdefinierte Profilfelder importieren',
-  'profile_manager:actions:import:from_custom:description' => 'Importiet die zuvor mit der Elgg-Standardfunktion erzeugten Profilfelder',
-  'profile_manager:actions:import:from_custom:confirm' => 'Willst Du wirklich die benutzerdefinierten Profilfelder importieren?',
-  'profile_manager:actions:import:from_custom:no_fields' => 'Keine benutzerdefinierten Profilfelder für den Import verfügbar',
-  'profile_manager:actions:import:from_custom:new_fields' => 'Erfolreich <b>%s</b> neue Felder importiert',
-  'profile_manager:actions:import:from_default' => 'Standardfelder importieren',
-  'profile_manager:actions:import:from_default:description' => 'Importiert Elggs Standardfelder',
-  'profile_manager:actions:import:from_default:confirm' => 'Willst Du wirklich die Standardfelder importieren?',
-  'profile_manager:actions:import:from_default:no_fields' => 'Keine Standardfelder für den Import verfügbar',
-  'profile_manager:actions:import:from_default:new_fields' => 'Erfolreich <b>%s</b> neue Felder importiert',
-  'profile_manager:actions:import:from_default:error:wrong_type' => 'Falscher Profilfeldtyp (Gruppenfeld oder Profilfeld)',
   'profile_manager:actions:configuration:backup' => 'Backup',
   'profile_manager:actions:configuration:backup:description' => 'Ein Backup der Konfiguration dieser Felder erzeugen (Kategorien und Profiltypen sind nicht enthalten)',
   'profile_manager:actions:configuration:restore' => 'Wiederherstellung',
