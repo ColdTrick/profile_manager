@@ -63,6 +63,61 @@ return [
 			],
 		],
 	],
+	'actions' => [
+		'profile_manager/change_category' => ['access' => 'admin'],
+		'profile_manager/import_existing' => ['access' => 'admin'],
+		'profile_manager/new' => ['access' => 'admin'],
+		'profile_manager/reorder' => ['access' => 'admin'],
+		'profile_manager/reset' => ['access' => 'admin'],
+		'profile_manager/toggle_option' => ['access' => 'admin'],
+		
+		'profile_manager/configuration/backup' => ['access' => 'admin'],
+		'profile_manager/configuration/restore' => ['access' => 'admin'],
+		
+		'profile_manager/categories/add' => ['access' => 'admin'],
+		'profile_manager/categories/reorder' => ['access' => 'admin'],
+		
+		'profile_manager/profile_types/add' => ['access' => 'admin'],
+	],
+	'events' => [
+		'create' => [
+			'user' => [
+				'\ColdTrick\ProfileManager\Users::createUserByAdmin' => [],
+				'\ColdTrick\ProfileManager\Users::createUserByRegister' => [],
+			],
+		],
+		'fields' => [
+			'user:user' => [
+				'\ColdTrick\ProfileManager\ProfileFields::getFields' => [],
+			],
+			'group:group' => [
+				'\ColdTrick\ProfileManager\ProfileFields::getFields' => [],
+			],
+		],
+		'handlers' => [
+			'widgets' => [
+				'\ColdTrick\ProfileManager\Widgets::registerProfileCompleteness' => [],
+			],
+		],
+		'register' => [
+			'menu:admin_header' => [
+				'\ColdTrick\ProfileManager\Menus\AdminHeader::registerGroupFields' => [],
+			],
+			'menu:profile_fields' => [
+				'\ColdTrick\ProfileManager\Menus\ProfileFields::registerActions' => [],
+			],
+		],
+		'types:custom_group_field' => [
+			'profile_manager' => [
+				'\ColdTrick\ProfileManager\ProfileFields::registerGroupProfileFieldTypes' => [],
+			],
+		],
+		'types:custom_profile_field' => [
+			'profile_manager' => [
+				'\ColdTrick\ProfileManager\ProfileFields::registerUserProfileFieldTypes' => [],
+			],
+		],
+	],
 	'views' => [
 		'default' => [
 			'jquery/multiselect.js' => $composer_path . 'vendor/bower-asset/jquery-ui-multiselect-widget/src/jquery.multiselect.js',
@@ -95,60 +150,5 @@ return [
 		'forms/profile_manager/group_field' => ['ajax' => true],
 		'forms/profile_manager/profile_field' => ['ajax' => true],
 		'forms/profile_manager/restore_fields' => ['ajax' => true],
-	],
-	'actions' => [
-		'profile_manager/change_category' => ['access' => 'admin'],
-		'profile_manager/import_existing' => ['access' => 'admin'],
-		'profile_manager/new' => ['access' => 'admin'],
-		'profile_manager/reorder' => ['access' => 'admin'],
-		'profile_manager/reset' => ['access' => 'admin'],
-		'profile_manager/toggle_option' => ['access' => 'admin'],
-		
-		'profile_manager/configuration/backup' => ['access' => 'admin'],
-		'profile_manager/configuration/restore' => ['access' => 'admin'],
-		
-		'profile_manager/categories/add' => ['access' => 'admin'],
-		'profile_manager/categories/reorder' => ['access' => 'admin'],
-
-		'profile_manager/profile_types/add' => ['access' => 'admin'],
-	],
-	'events' => [
-		'create' => [
-			'user' => [
-				'\ColdTrick\ProfileManager\Users::createUserByAdmin' => [],
-				'\ColdTrick\ProfileManager\Users::createUserByRegister' => [],
-			],
-		],
-		'fields' => [
-			'user:user' => [
-				'\ColdTrick\ProfileManager\ProfileFields::getFields' => [],
-			],
-			'group:group' => [
-				'\ColdTrick\ProfileManager\ProfileFields::getFields' => [],
-			],
-		],
-		'handlers' => [
-			'widgets' => [
-				'\ColdTrick\ProfileManager\Widgets::registerProfileCompleteness' => [],
-			],
-		],
-		'register' => [
-			'menu:admin_header' => [
-				'\ColdTrick\ProfileManager\Menus::registerAdmin' => [],
-			],
-			'menu:profile_fields' => [
-				'\ColdTrick\ProfileManager\Menus::registerProfileFieldsActions' => [],
-			],
-		],
-		'types:custom_group_field' => [
-			'profile_manager' => [
-				'\ColdTrick\ProfileManager\ProfileFields::registerGroupProfileFieldTypes' => [],
-			],
-		],
-		'types:custom_profile_field' => [
-			'profile_manager' => [
-				'\ColdTrick\ProfileManager\ProfileFields::registerUserProfileFieldTypes' => [],
-			],
-		],
 	],
 ];

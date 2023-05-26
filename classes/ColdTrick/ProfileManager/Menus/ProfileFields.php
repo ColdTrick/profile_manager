@@ -1,52 +1,29 @@
 <?php
 
-namespace ColdTrick\ProfileManager;
+namespace ColdTrick\ProfileManager\Menus;
+
+use Elgg\Menu\MenuItems;
 
 /**
- * Menus
+ * Add menu items to the profile_fields menu
  */
-class Menus {
-
-	/**
-	 * Add admin menu items
-	 *
-	 * @param \Elgg\Event $event 'register', 'menu:admin_header'
-	 *
-	 * @return array
-	 */
-	public static function registerAdmin(\Elgg\Event $event) {
-		if (!elgg_in_context('admin') || !elgg_is_admin_logged_in() || !elgg_is_active_plugin('groups')) {
-			return;
-		}
-		
-		$returnvalue = $event->getValue();
-		
-		$returnvalue[] = \ElggMenuItem::factory([
-			'name' => 'configure_utilities:group_fields',
-			'text' => elgg_echo('admin:configure_utilities:group_fields'),
-			'href' => 'admin/configure_utilities/group_fields',
-			'context' => 'admin',
-			'parent_name' => 'configure_utilities',
-		]);
-		
-		return $returnvalue;
-	}
+class ProfileFields {
 	
 	/**
 	 * Returns the profile fields actions
 	 *
 	 * @param \Elgg\Event $event 'register', 'menu:profile_fields'
 	 *
-	 * @return \ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerProfileFieldsActions(\Elgg\Event $event) {
-		
+	public static function registerActions(\Elgg\Event $event): ?MenuItems {
 		$type = $event->getParam('type');
 		$fieldtype = $event->getParam('fieldtype');
 		if (empty($fieldtype) || empty($type)) {
-			return;
+			return null;
 		}
 		
+		/* @var $items MenuItems */
 		$items = $event->getValue();
 		
 		$items[] = \ElggMenuItem::factory([
