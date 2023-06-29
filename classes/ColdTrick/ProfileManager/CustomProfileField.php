@@ -1,8 +1,13 @@
 <?php
+
 namespace ColdTrick\ProfileManager;
 
 /**
  * CustomProfileField
+ *
+ * @property string $mandatory            mandatory on the registration form (yes|no)
+ * @property string $show_on_register     show on the registration form (yes|no)
+ * @property string $user_editable        the user can edit this field (yes|no)
  */
 class CustomProfileField extends CustomField {
 

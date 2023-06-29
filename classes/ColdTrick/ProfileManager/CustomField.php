@@ -1,8 +1,22 @@
 <?php
+
 namespace ColdTrick\ProfileManager;
 
 /**
  * CustomField
+ *
+ * @property string $admin_only           field is only for admins (yes|no)
+ * @property string $blank_available      add a blank option (yes|no)
+ * @property string $metadata_name        metadata name of the profile field
+ * @property string $metadata_label       label of the profile field
+ * @property string $metadata_input_label label of the profile field during editing
+ * @property string $metadata_hint        hint/help text
+ * @property string $metadata_placeholder input placeholder
+ * @property string $metadata_type        input type
+ * @property string $metadata_options     input options
+ * @property int    $order                order of the profile field
+ * @property string $output_as_tags       show the output as tags (yes|no)
+ * @property string $show_on_profile      show on the profile (yes|no)
  */
 abstract class CustomField extends \ElggObject {
 	
@@ -20,7 +34,7 @@ abstract class CustomField extends \ElggObject {
 	/**
 	 * Returns an array of options to be used in input views
 	 *
-	 * @param boolean $add_blank_option optional boolean if there should be an extra empty option added
+	 * @param bool $add_blank_option optional boolean if there should be an extra empty option added
 	 *
 	 * @return array|null
 	 */

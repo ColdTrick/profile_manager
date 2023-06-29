@@ -10,6 +10,10 @@
  * @link http://www.coldtrick.com/
  */
 
+use ColdTrick\ProfileManager\CustomField;
+use ColdTrick\ProfileManager\CustomGroupField;
+use ColdTrick\ProfileManager\CustomProfileField;
+
 $site_guid = elgg_get_site_entity()->guid;
 
 $metadata_name = trim(get_input('metadata_name', ''));
@@ -39,13 +43,12 @@ $reserved_metadata_names = [
 	'icontime', 'x1', 'x2', 'y1', 'y2'
 ];
 
-if ($guid) {
+if (!empty($guid)) {
 	$current_field = get_entity($guid);
-}
-
-if ($current_field && ($current_field->getSubtype() != \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE && $current_field->getSubtype() != \ColdTrick\ProfileManager\CustomGroupField::SUBTYPE)) {
-	// wrong custom field type
-	return elgg_error_response(elgg_echo('profile_manager:action:new:error:type'));
+	if (!$current_field instanceof CustomField) {
+		// wrong custom field type
+		return elgg_error_response(elgg_echo('profile_manager:action:new:error:type'));
+	}
 }
 
 if (!in_array($type, ['profile', 'group'])) {
@@ -58,7 +61,7 @@ if (empty($metadata_name)) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:new:error:metadata_name_missing'));
 }
 
-if (in_array(strtolower($metadata_name), $reserved_metadata_names) || !preg_match('/^[a-zA-Z0-9_]{1,}$/', $metadata_name)) {
+if (in_array(strtolower($metadata_name), $reserved_metadata_names) || !preg_match('/^[a-zA-Z0-9_]+$/', $metadata_name)) {
 	// invalid name
 	return elgg_error_response(elgg_echo('profile_manager:actions:new:error:metadata_name_invalid'));
 }
@@ -97,23 +100,15 @@ if ($options_error) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:new:error:metadata_options'));
 }
 
-$subtype = "custom_{$type}_field";
-
-$max_fields = elgg_count_entities([
-	'type' => 'object',
-	'subtype' => $subtype,
-	'owner_guid' => $site_guid,
-]) + 1;
-
 if ($current_field) {
 	$field = $current_field;
 } else {
-	$field = new \ElggObject();
+	if ($type === 'group') {
+		$field = new CustomGroupField();
+	} else {
+		$field = new CustomProfileField();
+	}
 		
-	$field->owner_guid = $site_guid;
-	$field->container_guid = $site_guid;
-	$field->access_id = ACCESS_PUBLIC;
-	$field->setSubtype($subtype);
 	$field->save();
 }
 
@@ -126,11 +121,11 @@ $field->metadata_placeholder = $metadata_placeholder;
 $field->metadata_type = $metadata_type;
 if (in_array($metadata_type, ['dropdown', 'radio', 'multiselect'])) {
 	$field->metadata_options = $new_options;
-} elseif ($current_field) {
-	$field->deleteMetadata('metadata_options');
+} else {
+	unset($field->metadata_options);
 }
 
-if ($type == 'profile') {
+if ($type === 'profile') {
 	$field->show_on_register = $show_on_register;
 	$field->mandatory = $mandatory;
 	$field->user_editable = $user_editable;
@@ -142,6 +137,11 @@ $field->output_as_tags = $output_as_tags;
 $field->blank_available = $blank_available;
 
 if (empty($current_field)) {
+	$max_fields = elgg_count_entities([
+		'type' => 'object',
+		'subtype' => $field->getSubtype(),
+		'owner_guid' => $site_guid,
+	]) + 1;
 	$field->order = $max_fields;
 }
 

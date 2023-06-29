@@ -1,8 +1,13 @@
 <?php
+
 namespace ColdTrick\ProfileManager;
 
 /**
  * CustomFieldCategory
+ *
+ * @property string $metadata_label readable label of the category
+ * @property string $metadata_name  name of the category
+ * @property int    $order          order of the category
  */
 class CustomFieldCategory extends \ElggObject {
 

@@ -1,8 +1,14 @@
 <?php
+
 namespace ColdTrick\ProfileManager;
 
 /**
  * CustomProfileType
+ *
+ * @property string $metadata_description  description of the profile type
+ * @property string $metadata_label        readable label of the profile type (singular)
+ * @property string $metadata_label_plural readable label of the profile type (plural)
+ * @property string $metadata_name         name of the profile type
  */
 class CustomProfileType extends \ElggObject {
 
