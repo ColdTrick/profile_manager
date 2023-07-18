@@ -9,7 +9,7 @@ $form_body .= elgg_view_field([
 ]);
 $form_body .= elgg_view_field([
 	'#type' => 'submit',
-	'value' => elgg_echo('profile_manager:actions:configuration:restore:upload'),
+	'text' => elgg_echo('profile_manager:actions:configuration:restore:upload'),
 ]);
 
 echo elgg_view('input/form', [

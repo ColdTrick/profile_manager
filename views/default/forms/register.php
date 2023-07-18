@@ -100,7 +100,7 @@ if ($accept_terms) {
 
 $footer .= elgg_view_field([
 	'#type' => 'submit',
-	'value' => elgg_echo('register'),
+	'text' => elgg_echo('register'),
 ]);
 
 elgg_set_form_footer($footer);
