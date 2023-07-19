@@ -171,8 +171,15 @@ $options_title .= elgg_view('output/pm_hint', [
 
 $formbody .= elgg_view_module('info', $options_title, $options_content);
 
-$formbody .= elgg_view('input/hidden', ['name' => 'guid', 'value' => $guid]);
-$formbody .= elgg_view('input/submit', ['value' => elgg_echo('save')]);
+$formbody .= elgg_view_field([
+	'#type' => 'hidden',
+	'name' => 'guid',
+	'value' => $guid,
+]);
+$formbody .= elgg_view_field([
+	'#type' => 'submit',
+	'text' => elgg_echo('save'),
+]);
 
 $form = elgg_view('input/form', ['body' => $formbody, 'action' => 'action/profile_manager/new']);
 
