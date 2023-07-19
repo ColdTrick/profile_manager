@@ -117,7 +117,7 @@ if (!empty($categories)) {
 }
 
 $formbody .= elgg_view('input/hidden', ['name' => 'guid', 'value' => $guid]);
-$formbody .= elgg_view('input/submit', ['value' => elgg_echo('save')]);
+$formbody .= elgg_view('input/submit', ['text' => elgg_echo('save')]);
 
 $form = elgg_view('input/form', [
 	'body' => $formbody,
