@@ -94,13 +94,14 @@ if (count($types) > 0) {
 	]);
 }
 
-$formbody .= elgg_view('input/hidden', [
+$formbody .= elgg_view_field([
+	'#type' => 'hidden',
 	'name' => 'guid',
 	'value' => $guid,
 ]);
-$formbody .= elgg_view('input/submit', [
-	'name' => elgg_echo('save'),
-	'value' => elgg_echo('save'),
+$formbody .= elgg_view_field([
+	'#type' => 'submit',
+	'text' => elgg_echo('save'),
 ]);
 
 $form = elgg_view('input/form', [
