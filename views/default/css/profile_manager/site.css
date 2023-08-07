@@ -5,6 +5,7 @@
 		
 		> .edit-profile-input {
 			flex-grow: 1;
+			min-width: 0;
 		}
 		
 		> .edit-profile-access > .elgg-input-access {
