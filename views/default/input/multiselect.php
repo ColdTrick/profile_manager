@@ -10,7 +10,11 @@
  * @link http://www.coldtrick.com/
  */
 
-elgg_require_css('input/multiselect');
+if (elgg_is_xhr()) {
+	echo elgg_format_element('link', ['rel' => 'stylesheet', 'href' => elgg_get_simplecache_url('input/multiselect.css')]);
+} else {
+	elgg_require_css('input/multiselect');
+}
 
 $vars['class'] = (array) elgg_extract('class', $vars, []);
 $vars['class'][] = 'profile-manager-multiselect';
