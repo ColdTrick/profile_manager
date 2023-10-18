@@ -1,6 +1,10 @@
 Version history
 ===============
 
+20.0.3 (2023-10-18):
+
+- fixed: make sure multiselect is also loaded if requested via ajax
+
 20.0.2 (2023-08-17):
 
 - fixed: ckeditor issue with detecting correct width in flex layout
