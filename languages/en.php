@@ -32,7 +32,7 @@ return [
 	'entity:delete:object:custom_profile_type:success' => "The profile type was deleted.",
 	
 	// admin menu
-	'admin:configure_utilities:group_fields' => "Edit group fields",
+	'admin:configure_utilities:group_fields' => "Edit Group Fields",
 	
 	'admin:groups' => "Groups",
 

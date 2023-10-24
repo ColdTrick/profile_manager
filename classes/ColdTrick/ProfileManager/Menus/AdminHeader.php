@@ -28,7 +28,7 @@ class AdminHeader {
 			'name' => 'configure_utilities:group_fields',
 			'text' => elgg_echo('admin:configure_utilities:group_fields'),
 			'href' => 'admin/configure_utilities/group_fields',
-			'parent_name' => 'configure_utilities',
+			'parent_name' => 'utilities',
 		]);
 		
 		return $returnvalue;
