@@ -10,7 +10,6 @@
 		"issues": "https://github.com/ColdTrick/profile_manager/issues"
 	},
 	"require": {
-		"composer/installers": "^1.0.8",
 		"bower-asset/jquery-ui-multiselect-widget": "~3.0.0"
 	},
 	"repositories": [
@@ -22,10 +21,7 @@
 	"config": {
         "fxp-asset": {
             "enabled": false
-        },
-		"allow-plugins": {
-			"composer/installers": true
-		}
+        }
     },
 	"conflict": {
 		"elgg/elgg": "<5.1"
