@@ -12,9 +12,6 @@
 
 $type = get_input('type', 'user');
 
-$n = 0;
-$skipped = 0;
-
 $options = [
 	'type' => 'object',
 	'subtype' => \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE,
@@ -41,38 +38,48 @@ if (empty($existing_fields)) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:import:from_existing:no_fields'));
 }
 
+$n = 0;
+$skipped = 0;
 foreach ($existing_fields as $existing_field) {
-	$metadata_name = $existing_field['name'];
-	$metadata_label = $existing_field['#label'];
-	$metadata_type = $existing_field['#type'];
-	
-	$options['metadata_name_value_pairs'] = ['name' => 'metadata_name', 'value' => $metadata_name];
-		
-	$count = elgg_count_entities($options);
-	
-	if ($count == 0) {
-		if ($type === 'group') {
-			$field = new \ColdTrick\ProfileManager\CustomGroupField();
-		} else {
-			$field = new \ColdTrick\ProfileManager\CustomProfileField();
-		}
-		
-		$field->save();
-		
-		$field->metadata_name = $metadata_name;
-		$field->metadata_label = $metadata_label;
-		$field->metadata_type = $metadata_type;
-		
-		$field->order = $new_order;
-		
-		$field->save();
-		
-		$new_order++;
-	} else {
-		$skipped++;
+	$metadata_name = elgg_extract('name', $existing_field);
+	if (empty($metadata_name)) {
+		// invalid field config
+		continue;
 	}
 	
 	$n++;
+	
+	$metadata_label = elgg_extract('#label', $existing_field);
+	$metadata_type = elgg_extract('#type', $existing_field);
+	
+	$options['metadata_name_value_pairs'] = [
+		'name' => 'metadata_name',
+		'value' => $metadata_name,
+	];
+		
+	$count = elgg_count_entities($options);
+	if ($count > 0) {
+		$skipped++;
+		continue;
+	}
+	
+	if ($type === 'group') {
+		$field = new \ColdTrick\ProfileManager\CustomGroupField();
+	} else {
+		$field = new \ColdTrick\ProfileManager\CustomProfileField();
+	}
+	
+	$field->save();
+	
+	$field->metadata_name = $metadata_name;
+	$field->metadata_label = $metadata_label;
+	$field->metadata_type = $metadata_type;
+	
+	$field->order = $new_order;
+	
+	$field->save();
+	
+	$new_order++;
 }
 
 elgg_delete_system_cache("profile_manager_{$type}:{$type}_fields");
