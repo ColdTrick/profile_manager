@@ -128,7 +128,7 @@ return [
 		'css/admin' => [
 			'css/profile_manager/admin.css' => [],
 		],
-		'css/elgg' => [
+		'elgg.css' => [
 			'css/profile_manager/site.css' => [],
 		],
 		'forms/register' => [
