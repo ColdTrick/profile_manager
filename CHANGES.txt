@@ -1,6 +1,10 @@
 Version history
 ===============
 
+21.0.2 (2024-03-14):
+
+- several small chores/fixes
+
 21.0.1 (2024-02-16):
 
 - fixed: correctly extract profile field information
