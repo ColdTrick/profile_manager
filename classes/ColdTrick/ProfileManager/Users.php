@@ -24,7 +24,7 @@ class Users {
 	
 		// retrieve all field that were on the register page
 		foreach ($_POST as $key => $value) {
-			if (strpos($key, 'custom_profile_fields_') === 0) {
+			if (str_starts_with($key, 'custom_profile_fields_')) {
 				$key = substr($key, 22);
 				$custom_profile_fields[$key] = get_input("custom_profile_fields_{$key}");
 			}

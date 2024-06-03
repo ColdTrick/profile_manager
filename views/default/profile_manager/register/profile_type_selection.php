@@ -18,7 +18,7 @@ if (empty($types)) {
 	return;
 }
 
-elgg_require_js('profile_manager/profile_type');
+elgg_import_esm('profile_manager/profile_type');
 
 $types_options_values = [];
 if (elgg_get_plugin_setting('hide_profile_type_default', 'profile_manager') !== 'yes') {

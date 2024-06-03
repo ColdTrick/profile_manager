@@ -16,15 +16,22 @@ if (!$entity instanceof ElggUser || empty($fields) || !is_array($fields)) {
 }
 
 $category_guid = (int) elgg_extract('category_guid', $vars);
+$output = '';
 
 foreach ($fields as $field) {
 	if (!$field->showOnProfile()) {
 		continue;
 	}
 	
-	echo elgg_view('profile/fields/field', [
+	$output .= elgg_view('profile/fields/field', [
 		'entity' => $entity,
 		'field' => $field,
 		'microformats' => elgg_extract('microformats', $vars, []),
 	]);
 }
+
+if (empty($output)) {
+	return;
+}
+
+echo elgg_format_element('div', ['class' => 'elgg-profile-fields'], $output);

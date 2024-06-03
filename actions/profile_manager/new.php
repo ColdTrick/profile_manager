@@ -37,11 +37,11 @@ $type = get_input('type', 'profile');
 $guid = (int) get_input('guid');
 $current_field = false;
 
-$reserved_metadata_names = [
-	'guid', 'title', 'access_id', 'owner_guid', 'container_guid', 'type', 'subtype', 'name', 'username', 'email', 'membership', 'group_acl', 'icon', 'site_guid',
-	'time_created', 'time_updated', 'enabled', 'tables_split', 'tables_loaded', 'password', 'salt', 'language', 'code', 'banned', 'admin', 'custom_profile_type',
-	'icontime', 'x1', 'x2', 'y1', 'y2'
-];
+$reserved_metadata_names = array_merge(\ElggEntity::PRIMARY_ATTR_NAMES, [
+	'title', 'name', 'username', 'email', 'membership', 'group_acl',
+	'password', 'salt', 'language', 'code', 'banned', 'admin', 'custom_profile_type',
+	'icon_coords', 'header_coords'
+]);
 
 if (!empty($guid)) {
 	$current_field = get_entity($guid);

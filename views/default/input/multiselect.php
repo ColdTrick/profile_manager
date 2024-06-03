@@ -16,8 +16,7 @@ if (elgg_is_xhr()) {
 	elgg_require_css('input/multiselect');
 }
 
-$vars['class'] = (array) elgg_extract('class', $vars, []);
-$vars['class'][] = 'profile-manager-multiselect';
+$vars['class'] = elgg_extract_class($vars, 'profile-manager-multiselect');
 
 $vars['name'] .= '[]';
 $vars['multiple'] = true;
@@ -32,4 +31,8 @@ $vars['value'] = $value;
 echo elgg_view('input/hidden', ['name' => $vars['name'], 'value' => '']);
 echo elgg_view('input/select', $vars);
 
-echo elgg_format_element('script', [], 'require(["profile_manager/multiselect"], function(MultiSelect) { MultiSelect.init("#' . $vars['id'] . '"); });');
+?>
+<script type='module'>
+	import MultiSelect from 'input/multiselect';
+	MultiSelect.init("#<?php echo $vars['id']; ?>");
+</script>

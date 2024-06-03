@@ -41,12 +41,12 @@ function profile_manager_get_categorized_fields(\ElggUser $user = null, bool $ed
 	/** @var \ColdTrick\ProfileManager\CustomProfileType $profile_type */
 	$profile_type = null;
 	
-	if ($register == true) {
+	if ($register) {
 		// failsafe for edit
 		$edit = true;
 	}
 	
-	if ($user instanceof ElggUser) {
+	if ($user instanceof \ElggUser) {
 		$profile_type_guid = $user->custom_profile_type;
 		
 		if (!empty($profile_type_guid)) {
@@ -88,29 +88,27 @@ function profile_manager_get_categorized_fields(\ElggUser $user = null, bool $ed
 	// default category at index 0
 	$filtered_ordered_cats[0] = [];
 	
-	if (!empty($ordered_cats)) {
-		foreach ($ordered_cats as $cat) {
-			if (!$edit || $profile_type_limit) {
-				$rel_count = elgg_count_entities([
-					'type' => 'object',
-					'subtype' => CustomProfileType::SUBTYPE,
-					'owner_guid' => $cat->getOwnerGUID(),
-					'relationship' => \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP,
-					'relationship_guid' => $cat->guid,
-					'inverse_relationship' => true
-				]);
-				
-				if ($rel_count == 0) {
-					$filtered_ordered_cats[$cat->guid] = [];
-					$result['categories'][$cat->guid] = $cat;
-				} elseif (!empty($profile_type) && $profile_type->hasRelationship($cat->guid, $profile_type::CATEGORY_RELATIONSHIP)) {
-					$filtered_ordered_cats[$cat->guid] = [];
-					$result['categories'][$cat->guid] = $cat;
-				}
-			} else {
+	foreach ($ordered_cats as $cat) {
+		if (!$edit || $profile_type_limit) {
+			$rel_count = elgg_count_entities([
+				'type' => 'object',
+				'subtype' => CustomProfileType::SUBTYPE,
+				'owner_guid' => $cat->getOwnerGUID(),
+				'relationship' => \ColdTrick\ProfileManager\CustomProfileType::CATEGORY_RELATIONSHIP,
+				'relationship_guid' => $cat->guid,
+				'inverse_relationship' => true
+			]);
+			
+			if ($rel_count == 0) {
+				$filtered_ordered_cats[$cat->guid] = [];
+				$result['categories'][$cat->guid] = $cat;
+			} elseif (!empty($profile_type) && $profile_type->hasRelationship($cat->guid, $profile_type::CATEGORY_RELATIONSHIP)) {
 				$filtered_ordered_cats[$cat->guid] = [];
 				$result['categories'][$cat->guid] = $cat;
 			}
+		} else {
+			$filtered_ordered_cats[$cat->guid] = [];
+			$result['categories'][$cat->guid] = $cat;
 		}
 	}
 			
@@ -243,7 +241,7 @@ function profile_manager_profile_completeness(\ElggUser $user = null): array {
 		}
 		
 		$avatar_percentage = (int) elgg_get_plugin_setting('profile_completeness_avatar', 'profile_manager');
-		if ($avatar_percentage && empty($user->icontime)) {
+		if ($avatar_percentage && !$user->hasIcon('master')) {
 			$avatar_missing = true;
 		}
 		

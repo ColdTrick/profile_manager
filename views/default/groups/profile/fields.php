@@ -41,13 +41,12 @@ foreach ($profile_fields as $field) {
 	if ($field_type == 'tags') {
 		$options['tag_names'] = $field_name;
 	}
-
-	$field_title = $field->getDisplayName();
+	
 	$field_value = elgg_view("output/{$field_type}", $options);
 	$field_value = elgg_format_element('span', [], $field_value);
 
 	$output .= elgg_view('object/elements/field', [
-		'label' => $field_title,
+		'label' => $field->getDisplayName(),
 		'value' => $field_value,
 		'class' => 'group-profile-field',
 		'name' => $field_name,

@@ -4,42 +4,34 @@
  *
  * Replaces default Elgg profile edit form
  *
- * @author ColdTrick IT Solutions
- * @copyright Coldtrick IT Solutions 2009
- * @link http://www.coldtrick.com/
- *
  * @uses $user The user entity
  */
 
 use ColdTrick\ProfileManager\CustomProfileType;
 
+/* @var \ElggUser $user */
 $user = elgg_extract('entity', $vars);
+
+echo elgg_view('forms/profile/edit/name', $vars);
 
 $sticky_values = elgg_get_sticky_values('profile:edit');
 
-echo elgg_view('profile/edit/name', $vars);
-
 // Build fields
-
 $categorized_fields = profile_manager_get_categorized_fields($user, true);
 $cats = elgg_extract('categories', $categorized_fields);
 $fields = elgg_extract('fields', $categorized_fields);
 
-$edit_profile_mode = elgg_get_plugin_setting('edit_profile_mode', 'profile_manager');
-$show_tabbed = (bool) ($edit_profile_mode === 'tabbed');
-
+$show_tabbed = (bool) (elgg_get_plugin_setting('edit_profile_mode', 'profile_manager') === 'tabbed');
 $simple_access_control = (bool) (elgg_get_plugin_setting('simple_access_control', 'profile_manager') === 'yes');
 
 $access_id = elgg_get_default_access($user);
 
 if (!empty($cats)) {
 	// Profile type selector
-	$setting = elgg_get_plugin_setting('profile_type_selection', 'profile_manager');
-	
 	$profile_type = $user->custom_profile_type;
 	
 	// can user edit? or just admins
-	if ($setting == 'user' || elgg_is_admin_logged_in()) {
+	if (elgg_get_plugin_setting('profile_type_selection', 'profile_manager') === 'user' || elgg_is_admin_logged_in()) {
 		$types = elgg_get_entities([
 			'type' => 'object',
 			'subtype' => CustomProfileType::SUBTYPE,
@@ -48,7 +40,7 @@ if (!empty($cats)) {
 		]);
 		
 		if ($types) {
-			elgg_require_js('profile_manager/profile_type');
+			elgg_import_esm('profile_manager/profile_type');
 
 			$types_description = '';
 			
@@ -104,9 +96,8 @@ if (!empty($cats)) {
 	$show_header = (bool) (count($cats) > 1);
 	
 	foreach ($cats as $cat_guid => $cat) {
-		$category_class = [
-			'custom_fields_edit_profile_category',
-		];
+		$category_class = ['custom_fields_edit_profile_category'];
+		
 		if ($cat instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 			$profile_types = elgg_get_entities([
 				'type' => 'object',
@@ -177,8 +168,8 @@ if (!empty($cats)) {
 				$access_id = $sticky_values['accesslevel'][$shortname];
 			}
 	
-			$id = "profile-$shortname";
-			$input = elgg_view("input/$valtype", [
+			$id = "profile-{$shortname}";
+			$input = elgg_view("input/{$valtype}", [
 				'name' => $shortname,
 				'value' => $value,
 				'id' => $id,
@@ -238,11 +229,9 @@ if (!empty($cats)) {
 	}
 	
 	if (!empty($output) && $simple_access_control) {
-		elgg_require_js('profile_manager/simple_access_control');
+		elgg_import_esm('forms/profile/simple_access_control');
 		
-		echo elgg_format_element('div', [
-			'class' => 'profile-manager-simple-access-controlled',
-		], $output);
+		echo elgg_format_element('div', ['class' => 'profile-manager-simple-access-controlled'], $output);
 		
 		echo elgg_view_field([
 			'#type' => 'access',

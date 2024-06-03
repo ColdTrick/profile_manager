@@ -27,9 +27,7 @@ $progress .= elgg_format_element('div', [
 	'style' => "width: {$percentage_complete}%;",
 ]);
 
-echo elgg_format_element('div', [
-	'id' => 'widget_profile_completeness_container',
-], $progress);
+echo elgg_format_element('div', ['id' => 'widget_profile_completeness_container'], $progress);
 
 if ($user->guid !== elgg_get_logged_in_user_guid()) {
 	return;

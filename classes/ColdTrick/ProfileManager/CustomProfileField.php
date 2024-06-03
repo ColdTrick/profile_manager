@@ -29,8 +29,8 @@ class CustomProfileField extends CustomField {
 	/**
 	 * Returns the title of the field
 	 *
-	 * @param bool   $input set to true if you need the title for an input field
-	 * @param string $lang  (optional) specific language for the title
+	 * @param bool        $input set to true if you need the title for an input field
+	 * @param string|null $lang  (optional) specific language for the title
 	 *
 	 * @return string
 	 */

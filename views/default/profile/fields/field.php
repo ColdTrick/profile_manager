@@ -11,7 +11,7 @@ use ColdTrick\ProfileManager\CustomProfileField;
 
 $field = elgg_extract('field', $vars);
 $entity = elgg_extract('entity', $vars);
-if (!$field instanceof CustomProfileField || !$entity instanceof ElggUser) {
+if (!$field instanceof CustomProfileField || !$entity instanceof \ElggUser) {
 	return;
 }
 

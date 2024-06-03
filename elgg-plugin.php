@@ -29,6 +29,9 @@ return [
 		'display_categories' => 'plain',
 		'enable_profile_completeness_widget' => 'no',
 	],
+	'upgrades' => [
+		\ColdTrick\ProfileManager\Upgrades\MigrateOldFieldTypes::class,
+	],
 	'entities' => [
 		[
 			'type' => 'object',
@@ -120,16 +123,16 @@ return [
 	],
 	'views' => [
 		'default' => [
-			'jquery/multiselect.js' => $composer_path . 'vendor/bower-asset/jquery-ui-multiselect-widget/src/jquery.multiselect.js',
+			'jquery/multiselect.mjs' => $composer_path . 'vendor/bower-asset/jquery-ui-multiselect-widget/src/jquery.multiselect.js',
 			'jquery/multiselect.css' => $composer_path . 'vendor/bower-asset/jquery-ui-multiselect-widget/css/jquery.multiselect.css',
 		],
 	],
 	'view_extensions' => [
-		'css/admin' => [
-			'css/profile_manager/admin.css' => [],
+		'admin.css' => [
+			'profile_manager/admin.css' => [],
 		],
 		'elgg.css' => [
-			'css/profile_manager/site.css' => [],
+			'profile_manager/site.css' => [],
 		],
 		'forms/register' => [
 			'profile_manager/register/free_text' => ['priority' => 400],

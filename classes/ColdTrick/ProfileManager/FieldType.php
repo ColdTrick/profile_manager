@@ -12,9 +12,9 @@ class FieldType {
 	 *
 	 * @param array $options The array of options for the field type
 	 *
-	 * @return void
+	 * @return self
 	 */
-	public static function factory(array $options) {
+	public static function factory(array $options): self {
 		$type = elgg_extract('type', $options);
 		$name = elgg_extract('name', $options);
 		if (empty($name) && elgg_language_key_exists("profile:field:{$type}")) {

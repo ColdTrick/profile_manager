@@ -85,8 +85,6 @@ return [
 	'profile_manager:admin:options:multiselect' => 'MultiSelect',
 	'profile_manager:admin:options:pm_rating' => 'Rating',
 	'profile_manager:admin:options:pm_twitter' => 'Twitter',
-	'profile_manager:admin:options:pm_facebook' => 'Facebook',
-	'profile_manager:admin:options:pm_linkedin' => 'LinkedIn',
 	
 	'profile_manager:admin:additional_options' => 'Additional options',
 	'profile_manager:admin:show_on_register' => 'Show on register form',
@@ -270,8 +268,6 @@ return [
 	// custom input/output views
 	'profile_manager:pm_twitter:input:placeholder' => "Enter your Twitter username here",
 	'profile_manager:pm_twitter:output:follow' => "Follow @%s",
-	'profile_manager:pm_facebook:input:placeholder' => "Enter your Facebook profile url here",
-	'profile_manager:pm_linkedin:input:placeholder' => "Enter your LinkedIn profile url here",
 
 	// widgets
 	'widgets:profile_completeness:name' => 'Profile Completeness',
@@ -314,5 +310,8 @@ return [
 	
 	// river events
 	'river:site:site:join' => '%s joined the site',
-
+	
+	// upgrades
+	'profile_manager:upgrade:2024060301:title' => "Migrate old profile field types",
+	'profile_manager:upgrade:2024060301:description' => "User profile fields with the type for LinkedIn or Facebook are migrated to regular URL field types",
 ];

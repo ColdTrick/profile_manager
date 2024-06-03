@@ -55,9 +55,7 @@ abstract class CustomField extends \ElggObject {
 			array_unshift($options, '');
 		}
 		
-		$options = array_combine($options, $options); // add values as labels for deprecated notices
-		
-		return $options;
+		return array_combine($options, $options); // add values as labels for deprecated notices
 	}
 	
 	/**
@@ -100,10 +98,10 @@ abstract class CustomField extends \ElggObject {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
-	public function delete(bool $recursive = true): bool {
-		$deleted = parent::delete($recursive);
+	public function delete(bool $recursive = true, bool $persistent = null): bool {
+		$deleted = parent::delete($recursive, $persistent);
 		if ($deleted) {
 			elgg_delete_system_cache('profile_manager_user:user_fields');
 			elgg_delete_system_cache('profile_manager_group:group_fields');

@@ -69,22 +69,24 @@ $formbody .= elgg_view_field([
 	'required' => true,
 ]);
 
-$formbody .= '<div class="elgg-col elgg-col-1of2 man">';
 $formbody .= elgg_view_field([
-	'#type' => 'text',
-	'#label' => elgg_echo('profile_manager:profile_types:edit:metadata_label:singular'),
-	'name' => 'metadata_label',
-	'value' => $metadata_label,
+	'#type' => 'fieldset',
+	'align' => 'horizontal',
+	'fields' => [
+		[
+			'#type' => 'text',
+			'#label' => elgg_echo('profile_manager:profile_types:edit:metadata_label:singular'),
+			'name' => 'metadata_label',
+			'value' => $metadata_label,
+		],
+		[
+			'#type' => 'text',
+			'#label' => elgg_echo('profile_manager:profile_types:edit:metadata_label:plural'),
+			'name' => 'metadata_label_plural',
+			'value' => $metadata_label_plural,
+		],
+	]
 ]);
-$formbody .= '</div>';
-$formbody .= '<div class="elgg-col elgg-col-1of2 man">';
-$formbody .= elgg_view_field([
-	'#type' => 'text',
-	'#label' => elgg_echo('profile_manager:profile_types:edit:metadata_label:plural'),
-	'name' => 'metadata_label_plural',
-	'value' => $metadata_label_plural,
-]);
-$formbody .= '</div>';
 
 $formbody .= elgg_view_field([
 	'#type' => 'longtext',

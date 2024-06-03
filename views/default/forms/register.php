@@ -38,7 +38,7 @@ $fields = [
 ];
 
 if (!$generate_username_from_email) {
-	elgg_require_js('profile_manager/register');
+	elgg_import_esm('forms/register');
 	
 	$fields[] = [
 		'#type' => 'text',

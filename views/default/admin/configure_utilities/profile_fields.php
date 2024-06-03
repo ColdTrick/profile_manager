@@ -10,7 +10,7 @@
  * @link http://www.coldtrick.com/
  */
 
-elgg_require_js('profile_manager/admin');
+elgg_import_esm('profile_manager/admin');
 
 echo elgg_view('profile_manager/admin/tabs', ['profile_fields_selected' => true]);
 echo elgg_view('profile_manager/profile_types/list');
@@ -28,5 +28,4 @@ echo elgg_view_module('info', $title, elgg_view_menu('profile_fields', [
 	'type' => 'profile',
 	'fieldtype' => \ColdTrick\ProfileManager\CustomProfileField::SUBTYPE,
 	'class' => 'elgg-menu-hz',
-	'item_class' => 'mrm',
 ]));

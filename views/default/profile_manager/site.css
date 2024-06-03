@@ -21,3 +21,11 @@
 .profile-manager-input-pm-rating {
 	margin-right: auto;
 }
+
+#profile-details {
+	padding: 1rem;
+	
+	> .elgg-module-tabs {
+		margin-bottom: 0;
+	}
+}

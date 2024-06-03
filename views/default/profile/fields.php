@@ -83,8 +83,4 @@ if (!empty($tabs)) {
 	]);
 }
 
-if (empty($output)) {
-	return;
-}
-
-echo elgg_format_element('div', ['class' => 'elgg-profile-fields'], $output);
+echo $output;

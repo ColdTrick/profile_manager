@@ -87,10 +87,10 @@ class CustomProfileType extends \ElggObject {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function delete(bool $recursive = true): bool {
+	public function delete(bool $recursive = true, bool $persistent = null): bool {
 		$guid = $this->guid;
 		
-		$deleted = parent::delete($recursive);
+		$deleted = parent::delete($recursive, $persistent);
 		
 		if ($deleted) {
 			// remove corresponding profile type metadata from userobjects

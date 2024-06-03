@@ -67,7 +67,7 @@ if ($error) {
 // add new fields with configured metadata
 foreach ($fields as $index => $field) {
 	// create new field
-	$object = new ElggObject();
+	$object = new \ElggObject();
 	$object->owner_guid = $site_guid;
 	$object->container_guid = $site_guid;
 	$object->access_id = ACCESS_PUBLIC;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aef299be95503b5a270c6376203f97c5",
+    "content-hash": "9c217da56781cfcb03c3cb3232d9152f",
     "packages": [
         {
             "name": "bower-asset/jquery-ui-multiselect-widget",

@@ -1,6 +1,6 @@
 <?php
 
-elgg_require_js('input/pm_rating');
+elgg_import_esm('input/pm_rating');
 
 $selected_value = (int) elgg_extract('value', $vars);
 

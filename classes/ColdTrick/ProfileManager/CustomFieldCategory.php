@@ -67,12 +67,12 @@ class CustomFieldCategory extends \ElggObject {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
-	public function delete(bool $recursive = true): bool {
+	public function delete(bool $recursive = true, bool $persistent = null): bool {
 		$guid = $this->guid;
 		
-		$deleted = parent::delete($recursive);
+		$deleted = parent::delete($recursive, $persistent);
 		
 		if ($deleted) {
 			// remove reference to this category on related profile fields

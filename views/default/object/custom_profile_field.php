@@ -18,8 +18,8 @@ $title .= elgg_view('output/url', [
 	'title' => elgg_echo('edit'),
 	'text' => false,
 	'icon' => 'settings-alt',
-
 ]);
+
 $title .= elgg_view('output/url', [
 	'href' => false,
 	'class' => ['profile-manager-remove-field', 'mls'],

@@ -206,20 +206,6 @@ class ProfileFields {
 				'output_as_tags' => false,
 			]),
 		]);
-		$result[] = FieldType::factory([
-			'type' => 'pm_facebook',
-			'name' => elgg_echo('profile_manager:admin:options:pm_facebook'),
-			'options' => array_merge($standard_options, [
-				'output_as_tags' => false,
-			]),
-		]);
-		$result[] = FieldType::factory([
-			'type' => 'pm_linkedin',
-			'name' => elgg_echo('profile_manager:admin:options:pm_linkedin'),
-			'options' => array_merge($standard_options, [
-				'output_as_tags' => false,
-			]),
-		]);
 				
 		return $result;
 	}
