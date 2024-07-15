@@ -15,5 +15,6 @@ $form_body .= elgg_view_field([
 echo elgg_view('input/form', [
 	'action' => 'action/profile_manager/configuration/restore?fieldtype=' . $fieldtype,
 	'id' => 'restoreForm',
+	'enctype' => 'multipart/form-data',
 	'body' => $form_body,
 ]);
