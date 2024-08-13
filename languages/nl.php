@@ -1,10 +1,12 @@
 <?php
 /**
- * This file was created by Translation Editor v11.1
- * On 2023-05-17 15:05
+ * This file was created by Translation Editor v14.0
+ * On 2024-08-13 12:12
  */
 
 return array (
+  'profile_manager:upgrade:2024060301:title' => 'Migreer oude profielveld types',
+  'profile_manager:upgrade:2024060301:description' => 'Profielvelden voor gebruikers van het type LinkedIn of Facebook worden gemigreerd naar reguliere URL velden',
   'profile_manager:actions:import:from_existing' => 'Importeer bestaande velden',
   'profile_manager:actions:import:from_existing:description' => 'Importeer alreeds bestaande velden',
   'profile_manager:actions:import:from_existing:no_fields' => 'Er zijn geen bestaande velden beschikbaar om te importeren',
@@ -31,12 +33,8 @@ return array (
   'profile_manager:settings:profile_completeness:avatar:help' => 'Indien profielcompleetheid gebruikt wordt kun je een percentage configureren hoeveel een profielfoto meetelt voor deze compleetheid. Het resterende percentage wordt voor de overige profielvelden gebruikt.',
   'profile_manager:settings:generate_username_from_email' => 'Genereer gebruikersnaam op basis van e-mail',
   'profile_manager:admin:options:pm_twitter' => 'Twitter',
-  'profile_manager:admin:options:pm_facebook' => 'Facebook',
-  'profile_manager:admin:options:pm_linkedin' => 'LinkedIn',
   'profile_manager:pm_twitter:input:placeholder' => 'Voer je Twitter gebruikersnaam in',
   'profile_manager:pm_twitter:output:follow' => 'Volg @%s',
-  'profile_manager:pm_facebook:input:placeholder' => 'Voer je Facebook profiel url in',
-  'profile_manager:pm_linkedin:input:placeholder' => 'Voer je LinkedIn profiel url in',
   'profile_manager:admin:metadata_placeholder' => 'Placeholder',
   'item:object:custom_profile_field' => 'Custom Profile Field',
   'item:object:custom_profile_field_category' => 'Custom Profile Field Category',
