@@ -1,6 +1,10 @@
 Version history
 ===============
 
+22.0.1 (2024-10-10):
+
+- fixed: allow restore of profile fields from backup file
+
 22.0 (2024-06-28):
 
 - changed: updated for Elgg 6
