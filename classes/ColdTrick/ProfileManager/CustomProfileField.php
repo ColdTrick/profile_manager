@@ -57,6 +57,6 @@ class CustomProfileField extends CustomField {
 			return elgg_echo("profile:{$this->metadata_name}", [], $lang);
 		}
 		
-		return $this->metadata_name;
+		return (string) $this->metadata_name;
 	}
 }
