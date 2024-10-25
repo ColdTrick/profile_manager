@@ -1,6 +1,10 @@
 Version history
 ===============
 
+22.0.2 (2024-10-25):
+
+- fixed: return correct value type
+
 22.0.1 (2024-10-10):
 
 - fixed: allow restore of profile fields from backup file
