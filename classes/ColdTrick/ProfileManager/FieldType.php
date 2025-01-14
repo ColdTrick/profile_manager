@@ -5,6 +5,7 @@ namespace ColdTrick\ProfileManager;
 /**
  * FieldType
  */
+#[\AllowDynamicProperties]
 class FieldType {
 		
 	/**
