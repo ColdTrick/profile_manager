@@ -1,6 +1,10 @@
 Version history
 ===============
 
+22.0.3 (2025-01-23):
+
+- fixed: PHP notice about dynamic properties
+
 22.0.2 (2024-10-25):
 
 - fixed: return correct value type
