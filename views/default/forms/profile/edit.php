@@ -94,7 +94,7 @@ if (!empty($cats)) {
 	
 	// only show category headers if more than 1 category available
 	$show_header = (bool) (count($cats) > 1);
-	
+	$first_access_value = null;
 	foreach ($cats as $cat_guid => $cat) {
 		$category_class = ['custom_fields_edit_profile_category'];
 		
@@ -167,6 +167,10 @@ if (!empty($cats)) {
 			if (isset($sticky_values['accesslevel'][$shortname])) {
 				$access_id = $sticky_values['accesslevel'][$shortname];
 			}
+			
+			if (!isset($first_access_value) && $access_id !== ACCESS_DEFAULT) {
+				$first_access_value = $access_id;
+			}
 	
 			$id = "profile-{$shortname}";
 			$input = elgg_view("input/{$valtype}", [
@@ -238,7 +242,7 @@ if (!empty($cats)) {
 			'#label' => elgg_echo('profile_manager:simple_access_control'),
 			'#class' => 'profile-manager-simple-access-control',
 			'name' => 'simple_access_control',
-			'value' => elgg_get_default_access($user),
+			'value' => $first_access_value ?? elgg_get_default_access($user),
 		]);
 	} else {
 		echo $output;
