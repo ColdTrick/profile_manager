@@ -34,7 +34,7 @@ class CustomProfileField extends CustomField {
 	 *
 	 * @return string
 	 */
-	public function getDisplayName(bool $input = false, string $lang = null): string {
+	public function getDisplayName(bool $input = false, ?string $lang = null): string {
 		if (!isset($lang)) {
 			$lang = elgg_get_current_language();
 		}

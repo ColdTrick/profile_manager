@@ -100,7 +100,7 @@ abstract class CustomField extends \ElggObject {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function delete(bool $recursive = true, bool $persistent = null): bool {
+	public function delete(bool $recursive = true, ?bool $persistent = null): bool {
 		$deleted = parent::delete($recursive, $persistent);
 		if ($deleted) {
 			elgg_delete_system_cache('profile_manager_user:user_fields');

@@ -26,15 +26,15 @@ function profile_manager_get_custom_field_types(string $type): array {
 /**
  * Returns an array containing the categories and the fields ordered by category and field order
  *
- * @param \ElggUser $user               User to check
- * @param boolean   $edit               Are you editing profile fields
- * @param boolean   $register           Are you on the register page
- * @param boolean   $profile_type_limit Should it be limited by the profile type
- * @param int       $profile_type_guid  The guid of the profile type to limit the results to
+ * @param \ElggUser|null $user               User to check
+ * @param boolean        $edit               Are you editing profile fields
+ * @param boolean        $register           Are you on the register page
+ * @param boolean        $profile_type_limit Should it be limited by the profile type
+ * @param int|null       $profile_type_guid  The guid of the profile type to limit the results to
  *
  * @return array
  */
-function profile_manager_get_categorized_fields(\ElggUser $user = null, bool $edit = false, bool $register = false, bool $profile_type_limit = false, int $profile_type_guid = null): array {
+function profile_manager_get_categorized_fields(?\ElggUser $user = null, bool $edit = false, bool $register = false, bool $profile_type_limit = false, ?int $profile_type_guid = null): array {
 	
 	$result = [];
 	
@@ -168,11 +168,11 @@ function profile_manager_get_categorized_fields(\ElggUser $user = null, bool $ed
 /**
  * Function just now returns only ordered (name is prepped for future release which should support categories)
  *
- * @param \ElggGroup $group Group to check the values of the fields against
+ * @param \ElggGroup|null $group Group to check the values of the fields against
  *
  * @return array
  */
-function profile_manager_get_categorized_group_fields(\ElggGroup $group = null): array {
+function profile_manager_get_categorized_group_fields(?\ElggGroup $group = null): array {
 	
 	$result = ['fields' => []];
 	
@@ -202,11 +202,11 @@ function profile_manager_get_categorized_group_fields(\ElggGroup $group = null):
 /**
  * Returns an array with percentage completeness and required / missing fields
  *
- * @param ElggUser $user User to count completeness for
+ * @param \ElggUser|null $user User to count completeness for
  *
  * @return array
  */
-function profile_manager_profile_completeness(\ElggUser $user = null): array {
+function profile_manager_profile_completeness(?\ElggUser $user = null): array {
 	
 	if (empty($user)) {
 		$user = elgg_get_logged_in_user_entity();
