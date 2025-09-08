@@ -12,11 +12,11 @@ class Widgets {
 	 *
 	 * @param \Elgg\Event $event 'handlers', 'widgets'
 	 *
-	 * @return array
+	 * @return array|null
 	 */
-	public static function registerProfileCompleteness(\Elgg\Event $event) {
+	public static function registerProfileCompleteness(\Elgg\Event $event): ?array {
 		if (elgg_get_plugin_setting('enable_profile_completeness_widget', 'profile_manager') !== 'yes') {
-			return;
+			return null;
 		}
 		
 		$result = $event->getValue();

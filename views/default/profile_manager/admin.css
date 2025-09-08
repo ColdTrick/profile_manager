@@ -28,24 +28,20 @@
 
 #custom_fields_category_list_custom {
 	> .elgg-list-container {
-		display: inline-block;
+		display: inline-flex;
 	}
 	
 	.custom_fields_category_selected {
 		background: #BBBBBB;
 	}
 	
-	.droppable-hover {
+	.ui-droppable-hover {
 		background: #000000;
 		
 		a {
 			color: #FFFFFF;
 		}
 	}
-}
-
-.custom_fields_category .elgg-icon-drag-arrow {
-	cursor: move;
 }
 
 .custom_profile_type_description {

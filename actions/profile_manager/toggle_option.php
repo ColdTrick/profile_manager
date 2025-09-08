@@ -33,7 +33,7 @@ if (!$entity instanceof CustomField) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:toggle_option:error:unknown'));
 }
 
-if ($entity->$field == 'yes') {
+if ($entity->$field === 'yes') {
 	$entity->$field = 'no';
 } else {
 	$entity->$field = 'yes';

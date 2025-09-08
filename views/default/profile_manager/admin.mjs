@@ -88,7 +88,6 @@ $('#custom_fields_category_list_custom .elgg-list').sortable({
 
 $('#custom_profile_field_category_0, #custom_fields_category_list_custom .elgg-item').droppable({
 	accept: '#custom_fields_ordering .elgg-item',
-	hoverClass: 'droppable-hover',
 	tolerance: 'pointer',
 	drop: function(event, ui) {
 		change_field_category($(ui.draggable), $(this).attr('id'));

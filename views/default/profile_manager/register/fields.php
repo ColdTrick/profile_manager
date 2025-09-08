@@ -31,7 +31,7 @@ $categorized_fields = profile_manager_get_categorized_fields(null, true, true);
 $profile_fields = elgg_extract('fields', $categorized_fields);
 $cats = elgg_extract('categories', $categorized_fields);
 
-$tabbed = (bool) (elgg_get_plugin_setting('edit_profile_mode', 'profile_manager') == 'tabbed');
+$tabbed = elgg_get_plugin_setting('edit_profile_mode', 'profile_manager') === 'tabbed';
 if (count($cats) < 2) {
 	$tabbed = false;
 }

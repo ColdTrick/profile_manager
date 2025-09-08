@@ -12,9 +12,9 @@ class ProfileFields {
 	 *
 	 * @param \Elgg\Event $event 'fields' 'user:user|group:group'
 	 *
-	 * @return array
+	 * @return array|null
 	 */
-	public static function getFields(\Elgg\Event $event) {
+	public static function getFields(\Elgg\Event $event): ?array {
 		
 		// get from cache
 		$entities = elgg_load_system_cache("profile_manager_{$event->getType()}_fields");
@@ -34,7 +34,7 @@ class ProfileFields {
 		}
 		
 		if (empty($entities)) {
-			return;
+			return null;
 		}
 		
 		_elgg_services()->metadataCache->populateFromEntities($entities);
