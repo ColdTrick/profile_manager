@@ -1,6 +1,10 @@
 Version history
 ===============
 
+22.0.5 (2025-11-13):
+
+- fixed: PHP implicit null declaration
+
 22.0.4 (2025-06-18):
 
 - fixed: simple access control should use access level from first field
