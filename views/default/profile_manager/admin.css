@@ -7,7 +7,7 @@
 	}
 	
 	.custom_field {
-		border: 1px solid $(border-color-soft);
+		border: 1px solid var(--elgg-border-color-soft);
 		cursor: move;
 		padding: 5px;
 		border-radius: 5px;
@@ -48,7 +48,7 @@
 	display: none;
 	margin-bottom: 5px;
 	padding-bottom: 5px;
-	border-bottom: 1px dotted $(border-color-soft);
+	border-bottom: 1px dotted var(--elgg-border-color-soft);
 }
 
 #custom_fields_form,
@@ -58,11 +58,11 @@
 }
 
 .field_config_metadata_option {
-	color: $(border-color-soft);
+	color: var(--elgg-border-color-soft);
 	margin-left: 0.2rem;
 	cursor: pointer;
 }
 
 .field_config_metadata_option_enabled {
-	color: $(border-color-highlight);
+	color: var(--elgg-border-color-highlight);
 }

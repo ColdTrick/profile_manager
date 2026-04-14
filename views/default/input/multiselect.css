@@ -1,7 +1,7 @@
 button.ui-multiselect {
 	max-width: 100%;
-	border: 1px solid $(border-color-mild);
-	color: $(text-color-strong);
+	border: 1px solid var(--elgg-border-color-mild);
+	color: var(--elgg-text-color-strong);
 	background: white;
 	padding: 0.25rem 0.5rem;
 	line-height: 1.75rem;
@@ -20,7 +20,7 @@ button.ui-multiselect {
 .ui-multiselect-menu {
 	z-index:10000;
 	background: white;
-	border: 1px solid $(border-color-mild);
+	border: 1px solid var(--elgg-border-color-mild);
 }
 
 .ui-multiselect-checkboxes {
@@ -28,7 +28,7 @@ button.ui-multiselect {
 	max-height: 200px;
 	
 	.ui-state-hover {
-		background: $(background-color-mild);
+		background: var(--elgg-background-color-mild);
 	}
 }
 

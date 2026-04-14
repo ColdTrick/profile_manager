@@ -1,5 +1,5 @@
 /* edit profile */
-@media $(media-tablet-up) {
+@media screen and (min-width: 50rem) {
 	.profile-manager-edit-profile-field > .elgg-field-input {
 		display: flex;
 		
