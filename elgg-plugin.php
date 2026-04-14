@@ -37,50 +37,35 @@ return [
 			'type' => 'object',
 			'subtype' => 'custom_profile_field',
 			'class' => '\ColdTrick\ProfileManager\CustomProfileField',
-			'capabilities' => [
-				'commentable' => false,
-			],
 		],
 		[
 			'type' => 'object',
 			'subtype' => 'custom_group_field',
 			'class' => '\ColdTrick\ProfileManager\CustomGroupField',
-			'capabilities' => [
-				'commentable' => false,
-			],
 		],
 		[
 			'type' => 'object',
 			'subtype' => 'custom_profile_type',
 			'class' => '\ColdTrick\ProfileManager\CustomProfileType',
-			'capabilities' => [
-				'commentable' => false,
-			],
 		],
 		[
 			'type' => 'object',
 			'subtype' => 'custom_profile_field_category',
 			'class' => '\ColdTrick\ProfileManager\CustomFieldCategory',
-			'capabilities' => [
-				'commentable' => false,
-			],
 		],
 	],
 	'actions' => [
 		'profile_manager/change_category' => ['access' => 'admin'],
+		'profile_manager/categories/add' => ['access' => 'admin'],
+		'profile_manager/categories/reorder' => ['access' => 'admin'],
+		'profile_manager/configuration/backup' => ['access' => 'admin'],
+		'profile_manager/configuration/restore' => ['access' => 'admin'],
 		'profile_manager/import_existing' => ['access' => 'admin'],
 		'profile_manager/new' => ['access' => 'admin'],
+		'profile_manager/profile_types/add' => ['access' => 'admin'],
 		'profile_manager/reorder' => ['access' => 'admin'],
 		'profile_manager/reset' => ['access' => 'admin'],
 		'profile_manager/toggle_option' => ['access' => 'admin'],
-		
-		'profile_manager/configuration/backup' => ['access' => 'admin'],
-		'profile_manager/configuration/restore' => ['access' => 'admin'],
-		
-		'profile_manager/categories/add' => ['access' => 'admin'],
-		'profile_manager/categories/reorder' => ['access' => 'admin'],
-		
-		'profile_manager/profile_types/add' => ['access' => 'admin'],
 	],
 	'events' => [
 		'create' => [
