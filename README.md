@@ -27,7 +27,3 @@ Improved management of user and group profile fields
 - mandatory profile icon on register form
 - replace profile fields access control with just one profile access option
 - a customized registration form
-
-### Widgets
-
-- profile completeness widget

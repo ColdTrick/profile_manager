@@ -63,10 +63,6 @@ return [
 	'profile_manager:settings:profile_type_selection:option:user' => 'User',
 	'profile_manager:settings:profile_type_selection:option:admin' => 'Admin only',
 
-	'profile_manager:settings:enable_profile_completeness_widget' => "Enable the profile completeness widget",
-	'profile_manager:settings:profile_completeness:avatar' => "Avatar completeness percentage",
-	'profile_manager:settings:profile_completeness:avatar:help' => "If using profile completeness features you can, optionally, configure here how much a profile avatar counts towards profile completeness. The remainder percentage will be used for the profile field configuration.",
-	
 	'profile_manager:settings:registration:terms' => "To show an 'Accept terms' field on the registration page, please fill in the URL to the terms below",
 	'profile_manager:settings:registration:free_text' => "Enter extra text to show on the registration page",
 	
@@ -93,7 +89,6 @@ return [
 	'profile_manager:admin:show_on_profile' => 'Show on profile',
 	'profile_manager:admin:output_as_tags' => 'Show on profile as tags',
 	'profile_manager:admin:admin_only' => 'Admin only field',
-	'profile_manager:admin:count_for_completeness' => 'Count this field in profile completeness widget',
 	'profile_manager:admin:blank_available' => 'Field has a blank option',
 	'profile_manager:admin:option_unavailable' => 'Option unavailable',
 
@@ -268,12 +263,6 @@ return [
 	// custom input/output views
 	'profile_manager:pm_twitter:input:placeholder' => "Enter your Twitter username here",
 	'profile_manager:pm_twitter:output:follow' => "Follow @%s",
-
-	// widgets
-	'widgets:profile_completeness:name' => 'Profile Completeness',
-	'widgets:profile_completeness:description' => 'Show the profile completeness',
-	'widgets:profile_completeness:view:tips' => 'Tip! Update your %s to improve the Profile Completeness.',
-	'widgets:profile_completeness:view:complete' => 'Congratulations! Your profile is 100% complete!',
 	
 	'profile_manager:input:multi_select:empty_text' => 'Please select ...',
 	'profile_manager:input:multi_select:selected_text' => '# selected',

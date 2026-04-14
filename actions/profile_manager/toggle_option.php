@@ -18,7 +18,6 @@ $allowed = [
 	'user_editable',
 	'output_as_tags',
 	'admin_only',
-	'count_for_completeness',
 ];
 
 $guid = get_input('guid');

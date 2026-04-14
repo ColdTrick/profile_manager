@@ -133,7 +133,6 @@ class ProfileFields {
 			'user_editable' => true,
 			'output_as_tags' => true,
 			'admin_only' => true,
-			'count_for_completeness' => true,
 		];
 		
 		$result[] = FieldType::factory([

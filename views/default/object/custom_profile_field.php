@@ -41,10 +41,6 @@ $toggle_options = [
 	'admin_only',
 ];
 
-if (elgg_get_plugin_setting('enable_profile_completeness_widget', 'profile_manager') == 'yes') {
-	$toggle_options[] = 'count_for_completeness';
-}
-
 foreach ($toggle_options as $option) {
 	$metadata .= elgg_view('profile_manager/toggle_metadata', [
 		'entity' => $field,

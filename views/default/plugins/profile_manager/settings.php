@@ -145,26 +145,3 @@ echo elgg_view_module('info', elgg_echo('profile_manager:settings:view_profile')
 		],
 	],
 ]));
-
-echo elgg_view_module('info', elgg_echo('other'), elgg_view('input/fieldset', [
-	'fields' => [
-		[
-			'#type' => 'checkbox',
-			'#label' => elgg_echo('profile_manager:settings:enable_profile_completeness_widget'),
-			'name' => 'params[enable_profile_completeness_widget]',
-			'checked' => $plugin->enable_profile_completeness_widget === 'yes',
-			'switch' => true,
-			'default' => 'no',
-			'value' => 'yes',
-		],
-		[
-			'#type' => 'number',
-			'#label' => elgg_echo('profile_manager:settings:profile_completeness:avatar'),
-			'#help' => elgg_echo('profile_manager:settings:profile_completeness:avatar:help'),
-			'name' => 'params[profile_completeness_avatar]',
-			'value' => $plugin->profile_completeness_avatar,
-			'min' => 0,
-			'max' => 100,
-		],
-	],
-]));

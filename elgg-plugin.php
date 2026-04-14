@@ -27,7 +27,6 @@ return [
 		'profile_type_selection' => 'user',
 		'show_profile_type_on_profile' => 'no',
 		'display_categories' => 'plain',
-		'enable_profile_completeness_widget' => 'no',
 	],
 	'upgrades' => [
 		\ColdTrick\ProfileManager\Upgrades\MigrateOldFieldTypes::class,
@@ -80,11 +79,6 @@ return [
 			],
 			'group:group' => [
 				'\ColdTrick\ProfileManager\ProfileFields::getFields' => [],
-			],
-		],
-		'handlers' => [
-			'widgets' => [
-				'\ColdTrick\ProfileManager\Widgets::registerProfileCompleteness' => [],
 			],
 		],
 		'register' => [
