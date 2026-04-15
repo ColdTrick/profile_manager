@@ -6,7 +6,7 @@
  */
 
 $user = elgg_extract('entity', $vars);
-if (!$user instanceof ElggUser) {
+if (!$user instanceof \ElggUser) {
 	return;
 }
 
@@ -20,10 +20,9 @@ if (count($cats) < 1) {
 
 $output = '';
 
-$show_profile_type_on_profile = elgg_get_plugin_setting('show_profile_type_on_profile', 'profile_manager');
-$show_as_tabs = (bool) (elgg_get_plugin_setting('display_categories', 'profile_manager') == 'tabs');
+$show_as_tabs = (bool) (elgg_get_plugin_setting('display_categories', 'profile_manager') === 'tabs');
 
-if ($show_profile_type_on_profile !== 'no') {
+if (elgg_get_plugin_setting('show_profile_type_on_profile', 'profile_manager')) {
 	if ($user->custom_profile_type) {
 		$profile_type = get_entity($user->custom_profile_type);
 		if ($profile_type instanceof \ColdTrick\ProfileManager\CustomProfileType) {

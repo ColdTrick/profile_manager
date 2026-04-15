@@ -22,7 +22,7 @@ $cats = elgg_extract('categories', $categorized_fields);
 $fields = elgg_extract('fields', $categorized_fields);
 
 $show_tabbed = (bool) (elgg_get_plugin_setting('edit_profile_mode', 'profile_manager') === 'tabbed');
-$simple_access_control = (bool) (elgg_get_plugin_setting('simple_access_control', 'profile_manager') === 'yes');
+$simple_access_control = (bool) elgg_get_plugin_setting('simple_access_control', 'profile_manager');
 
 $access_id = elgg_get_default_access($user);
 
@@ -62,7 +62,7 @@ if (!empty($cats)) {
 				}
 			}
 			
-			if (elgg_get_plugin_setting('hide_profile_type_default', 'profile_manager') == 'yes') {
+			if (elgg_get_plugin_setting('hide_profile_type_default', 'profile_manager')) {
 				// only unset if the current type exists in the options, otherwise keep default intact
 				if (array_key_exists($profile_type, $dropdown_options)) {
 					unset($dropdown_options['']);

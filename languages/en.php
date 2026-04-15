@@ -301,6 +301,6 @@ return [
 	'river:site:site:join' => '%s joined the site',
 	
 	// upgrades
-	'profile_manager:upgrade:2024060301:title' => "Migrate old profile field types",
-	'profile_manager:upgrade:2024060301:description' => "User profile fields with the type for LinkedIn or Facebook are migrated to regular URL field types",
+	'profile_manager:upgrade:2026041501:title' => "Migrate plugin switch settings",
+	'profile_manager:upgrade:2026041501:description' => "The plugin settings stored as yes/no will be changed to 1/0 for easier boolean comparison",
 ];

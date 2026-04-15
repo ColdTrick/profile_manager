@@ -18,18 +18,18 @@ return [
 	],
 	'bootstrap' => Bootstrap::class,
 	'settings' => [
-		'generate_username_from_email' => 'no',
-		'show_account_hints' => 'no',
+		'generate_username_from_email' => false,
+		'show_account_hints' => false,
 		'profile_icon_on_register' => 'no',
-		'hide_profile_type_default' => 'no',
-		'simple_access_control' => 'no',
+		'hide_profile_type_default' => false,
+		'simple_access_control' => false,
 		'edit_profile_mode' => 'list',
 		'profile_type_selection' => 'user',
-		'show_profile_type_on_profile' => 'no',
+		'show_profile_type_on_profile' => false,
 		'display_categories' => 'plain',
 	],
 	'upgrades' => [
-		\ColdTrick\ProfileManager\Upgrades\MigrateOldFieldTypes::class,
+		\ColdTrick\ProfileManager\Upgrades\MigratePluginSwitchSettings::class,
 	],
 	'entities' => [
 		[

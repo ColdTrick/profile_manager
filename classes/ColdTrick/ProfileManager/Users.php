@@ -135,7 +135,7 @@ class Users {
 		}
 	
 		// generate username
-		if (empty(get_input('username')) && (elgg_get_plugin_setting('generate_username_from_email', 'profile_manager') == 'yes')) {
+		if (empty(get_input('username')) && elgg_get_plugin_setting('generate_username_from_email', 'profile_manager')) {
 			set_input('username', self::generateUsernameFromEmail(get_input('email')));
 		}
 	}

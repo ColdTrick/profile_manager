@@ -3,8 +3,8 @@
  * Elgg register form
  */
 
-$show_hints = (bool) (elgg_get_plugin_setting('show_account_hints', 'profile_manager') === 'yes');
-$generate_username_from_email = (bool) (elgg_get_plugin_setting('generate_username_from_email', 'profile_manager') === 'yes');
+$show_hints = (bool) elgg_get_plugin_setting('show_account_hints', 'profile_manager');
+$generate_username_from_email = (bool) elgg_get_plugin_setting('generate_username_from_email', 'profile_manager');
 
 $fields = [
 	[

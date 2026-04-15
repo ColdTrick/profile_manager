@@ -8,22 +8,16 @@ echo elgg_view('profile_manager/admin/tabs', ['settings_selected' => true]);
 
 $registration_fields = [
 	[
-		'#type' => 'checkbox',
+		'#type' => 'switch',
 		'#label' => elgg_echo('profile_manager:settings:generate_username_from_email'),
 		'name' => 'params[generate_username_from_email]',
-		'checked' => $plugin->generate_username_from_email === 'yes',
-		'switch' => true,
-		'default' => 'no',
-		'value' => 'yes',
+		'value' => $plugin->generate_username_from_email,
 	],
 	[
-		'#type' => 'checkbox',
+		'#type' => 'switch',
 		'#label' => elgg_echo('profile_manager:settings:show_account_hints'),
 		'name' => 'params[show_account_hints]',
-		'checked' => $plugin->show_account_hints === 'yes',
-		'switch' => true,
-		'default' => 'no',
-		'value' => 'yes',
+		'value' => $plugin->show_account_hints,
 	],
 	[
 		'#type' => 'select',
@@ -74,13 +68,10 @@ if (!empty($profile_type_entities)) {
 	];
 	
 	$registration_fields[] = [
-		'#type' => 'checkbox',
+		'#type' => 'switch',
 		'#label' => elgg_echo('profile_manager:settings:hide_profile_type_default'),
 		'name' => 'params[hide_profile_type_default]',
-		'checked' => $plugin->hide_profile_type_default === 'yes',
-		'switch' => true,
-		'default' => 'no',
-		'value' => 'yes',
+		'value' => $plugin->hide_profile_type_default,
 	];
 }
 
@@ -91,13 +82,10 @@ echo elgg_view_module('info', elgg_echo('profile_manager:settings:registration')
 echo elgg_view_module('info', elgg_echo('profile_manager:settings:edit_profile'), elgg_view('input/fieldset', [
 	'fields' => [
 		[
-			'#type' => 'checkbox',
+			'#type' => 'switch',
 			'#label' => elgg_echo('profile_manager:settings:simple_access_control'),
 			'name' => 'params[simple_access_control]',
-			'checked' => $plugin->simple_access_control === 'yes',
-			'switch' => true,
-			'default' => 'no',
-			'value' => 'yes',
+			'value' => $plugin->simple_access_control,
 		],
 		[
 			'#type' => 'select',
@@ -125,13 +113,10 @@ echo elgg_view_module('info', elgg_echo('profile_manager:settings:edit_profile')
 echo elgg_view_module('info', elgg_echo('profile_manager:settings:view_profile'), elgg_view('input/fieldset', [
 	'fields' => [
 		[
-			'#type' => 'checkbox',
+			'#type' => 'switch',
 			'#label' => elgg_echo('profile_manager:settings:show_profile_type_on_profile'),
 			'name' => 'params[show_profile_type_on_profile]',
-			'checked' => $plugin->show_profile_type_on_profile === 'yes',
-			'switch' => true,
-			'default' => 'no',
-			'value' => 'yes',
+			'value' => $plugin->show_profile_type_on_profile,
 		],
 		[
 			'#type' => 'select',

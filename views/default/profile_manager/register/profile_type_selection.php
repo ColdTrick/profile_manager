@@ -21,7 +21,7 @@ if (empty($types)) {
 elgg_import_esm('profile_manager/profile_type');
 
 $types_options_values = [];
-if (elgg_get_plugin_setting('hide_profile_type_default', 'profile_manager') !== 'yes') {
+if (!elgg_get_plugin_setting('hide_profile_type_default', 'profile_manager')) {
 	$types_options_values[''] = elgg_echo('profile_manager:profile:edit:custom_profile_type:default');
 }
 
