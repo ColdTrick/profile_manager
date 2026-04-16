@@ -124,7 +124,7 @@ class ProfileFields {
 	 *
 	 * @return array
 	 */
-	public static function registerUserProfileFieldTypes(\Elgg\Event $event) {
+	public static function registerUserProfileFieldTypes(\Elgg\Event $event): array {
 		$result = $event->getValue();
 		
 		$standard_options = [
@@ -198,13 +198,6 @@ class ProfileFields {
 				'output_as_tags' => false,
 			]),
 		]);
-		$result[] = FieldType::factory([
-			'type' => 'pm_twitter',
-			'name' => elgg_echo('profile_manager:admin:options:pm_twitter'),
-			'options' => array_merge($standard_options, [
-				'output_as_tags' => false,
-			]),
-		]);
 				
 		return $result;
 	}
@@ -216,7 +209,7 @@ class ProfileFields {
 	 *
 	 * @return array
 	 */
-	public static function registerGroupProfileFieldTypes(\Elgg\Event $event) {
+	public static function registerGroupProfileFieldTypes(\Elgg\Event $event): array {
 		$result = $event->getValue();
 		
 		$standard_options = [

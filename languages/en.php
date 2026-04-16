@@ -80,7 +80,6 @@ return [
 	'profile_manager:admin:options:tel' => 'Telephone',
 	'profile_manager:admin:options:multiselect' => 'MultiSelect',
 	'profile_manager:admin:options:pm_rating' => 'Rating',
-	'profile_manager:admin:options:pm_twitter' => 'Twitter',
 	
 	'profile_manager:admin:additional_options' => 'Additional options',
 	'profile_manager:admin:show_on_register' => 'Show on register form',
@@ -261,8 +260,6 @@ return [
 	",
 	
 	// custom input/output views
-	'profile_manager:pm_twitter:input:placeholder' => "Enter your Twitter username here",
-	'profile_manager:pm_twitter:output:follow' => "Follow @%s",
 	
 	'profile_manager:input:multi_select:empty_text' => 'Please select ...',
 	'profile_manager:input:multi_select:selected_text' => '# selected',
