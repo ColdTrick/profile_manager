@@ -10,7 +10,6 @@ if (!$entity instanceof \ColdTrick\ProfileManager\CustomFieldCategory) {
 
 $content = elgg_view_icon('arrows-alt', ['class' => 'mrs']);
 
-// filter link
 $content .= elgg_view('output/url', [
 	'href' => false,
 	'text' => $entity->getDisplayName(),
@@ -18,7 +17,6 @@ $content .= elgg_view('output/url', [
 	'data-guid' => $entity->guid,
 ]);
 
-// edit link
 $content .= elgg_view('output/url', [
 	'href' => elgg_http_add_url_query_elements('ajax/form/profile_manager/categories/add', [
 		'guid' => $entity->guid,
@@ -29,7 +27,6 @@ $content .= elgg_view('output/url', [
 	'icon' => 'settings-alt',
 ]);
 
-// delete link
 $content .= elgg_view('output/url', [
 	'href' => elgg_generate_action_url('entity/delete', [
 		'guid' => $entity->guid,

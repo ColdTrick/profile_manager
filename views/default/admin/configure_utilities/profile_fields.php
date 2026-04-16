@@ -1,13 +1,6 @@
 <?php
 /**
- * Profile Manager
- *
  * User Profile Fields Config page
- *
- * @package profile_manager
- * @author ColdTrick IT Solutions
- * @copyright Coldtrick IT Solutions 2009
- * @link http://www.coldtrick.com/
  */
 
 elgg_import_esm('profile_manager/admin');

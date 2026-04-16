@@ -11,7 +11,7 @@
 
 $entity = elgg_extract('entity', $vars);
 $fields = elgg_extract('fields', $vars);
-if (!$entity instanceof ElggUser || empty($fields) || !is_array($fields)) {
+if (!$entity instanceof \ElggUser || empty($fields) || !is_array($fields)) {
 	return;
 }
 

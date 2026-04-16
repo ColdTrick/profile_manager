@@ -8,10 +8,8 @@ if (!$entity instanceof \ColdTrick\ProfileManager\CustomProfileType) {
 	return;
 }
 
-// get title
 $content = $entity->getDisplayName();
 
-// edit link
 $content .= elgg_view('output/url', [
 	'href' => elgg_http_add_url_query_elements('ajax/form/profile_manager/profile_types/add', [
 		'guid' => $entity->guid,
@@ -22,7 +20,6 @@ $content .= elgg_view('output/url', [
 	'icon' => 'settings-alt',
 ]);
 
-// delete link
 $content .= elgg_view('output/url', [
 	'href' => elgg_generate_action_url('entity/delete', [
 		'guid' => $entity->guid,

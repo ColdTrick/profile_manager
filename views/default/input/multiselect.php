@@ -1,13 +1,6 @@
 <?php
 /**
- * Profile Manager
- *
  * Multiselect
- *
- * @package profile_manager
- * @author ColdTrick IT Solutions
- * @copyright Coldtrick IT Solutions 2009
- * @link http://www.coldtrick.com/
  */
 
 if (elgg_is_xhr()) {
