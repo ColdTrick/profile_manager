@@ -293,10 +293,7 @@ return [
 
 	// Admin add user form
 	'profile_manager:admin:adduser:extra_metadata' => "Add extra profile data",
-	
-	// river events
-	'river:site:site:join' => '%s joined the site',
-	
+		
 	// upgrades
 	'profile_manager:upgrade:2026041501:title' => "Migrate plugin switch settings",
 	'profile_manager:upgrade:2026041501:description' => "The plugin settings stored as yes/no will be changed to 1/0 for easier boolean comparison",
