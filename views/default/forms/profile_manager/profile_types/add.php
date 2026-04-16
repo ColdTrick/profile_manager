@@ -123,14 +123,10 @@ $formbody .= elgg_view_field([
 	'name' => 'guid',
 	'value' => $guid,
 ]);
+
 $formbody .= elgg_view_field([
 	'#type' => 'submit',
 	'text' => elgg_echo('save'),
-]);
-
-$form = elgg_view('input/form', [
-	'body' => $formbody,
-	'action' => 'action/profile_manager/profile_types/add',
 ]);
 
 $form_title .= elgg_view('output/pm_hint', [
@@ -138,4 +134,4 @@ $form_title .= elgg_view('output/pm_hint', [
 	'text' => elgg_echo('profile_manager:tooltips:profile_type'),
 ]);
 
-echo elgg_view_module('info', $form_title, $form, ['class' => 'mvn', 'id' => 'custom_fields_profile_type_form']);
+echo elgg_view_module('info', $form_title, $formbody);

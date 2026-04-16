@@ -17,7 +17,6 @@ echo elgg_view('profile_manager/profile_types/list');
 echo elgg_view('profile_manager/categories/list');
 echo elgg_view('profile_manager/profile_fields/list');
 
-// actions
 $title = elgg_echo('profile_manager:actions:title');
 $title .= elgg_view('output/pm_hint', [
 	'id' => 'more_info_actions',

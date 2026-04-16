@@ -176,18 +176,17 @@ $formbody .= elgg_view_field([
 	'name' => 'guid',
 	'value' => $guid,
 ]);
+
 $formbody .= elgg_view_field([
 	'#type' => 'submit',
 	'text' => elgg_echo('save'),
 ]);
-
-$form = elgg_view('input/form', ['body' => $formbody, 'action' => 'action/profile_manager/new']);
 
 $form_title .= elgg_view('output/pm_hint', [
 	'id' => 'more_info_profile_field',
 	'text' => elgg_echo('profile_manager:tooltips:profile_field'),
 ]);
 
-echo elgg_view_module('info', $form_title, $form, ['class' => 'mvn', 'id' => 'custom_fields_form']);
+echo elgg_view_module('info', $form_title, $formbody, ['id' => 'custom_fields_form']);
 
 echo elgg_format_element('script', [], '$(\'#custom_fields_form select[name="metadata_type"]\').trigger("change");');

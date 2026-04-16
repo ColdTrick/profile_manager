@@ -20,10 +20,10 @@ $content .= elgg_view('output/url', [
 
 // edit link
 $content .= elgg_view('output/url', [
-	'href' => elgg_http_add_url_query_elements('ajax/view/forms/profile_manager/category', [
+	'href' => elgg_http_add_url_query_elements('ajax/form/profile_manager/categories/add', [
 		'guid' => $entity->guid,
 	]),
-	'class' => ['elgg-lightbox', 'mls'],
+	'class' => ['elgg-lightbox', 'mlm'],
 	'title' => elgg_echo('edit'),
 	'text' => false,
 	'icon' => 'settings-alt',

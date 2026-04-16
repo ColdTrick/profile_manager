@@ -28,7 +28,7 @@ $list = elgg_list_entities([
 $menu = elgg_view('output/url', [
 	'text' => elgg_echo('add'),
 	'icon' => 'plus',
-	'href' => 'ajax/view/forms/profile_manager/group_field',
+	'href' => 'ajax/form/profile_manager/fields/group',
 	'class' => 'elgg-lightbox',
 ]);
 		

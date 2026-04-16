@@ -3,11 +3,6 @@
  * Profile Manager
  *
  * Restore of profile fields backup
- *
- * @package profile_manager
- * @author ColdTrick IT Solutions
- * @copyright Coldtrick IT Solutions 2009
- * @link http://www.coldtrick.com/
  */
 
 $site_guid = elgg_get_site_entity()->guid;
@@ -34,7 +29,7 @@ if (empty($fieldtype) || empty($md5) || empty($fields) || (md5(print_r($fields, 
 }
 
 // check if selected file is same type as requested
-if ($requestedfieldtype !== $fieldtype) {
+if (($requestedfieldtype !== $fieldtype) || !in_array($fieldtype, ['custom_profile_field', 'custom_group_field'])) {
 	return elgg_error_response(elgg_echo('profile_manager:actions:restore:error:fieldtype'));
 }
 
@@ -67,11 +62,15 @@ if ($error) {
 // add new fields with configured metadata
 foreach ($fields as $index => $field) {
 	// create new field
-	$object = new \ElggObject();
+	if ($fieldtype === 'custom_group_field') {
+		$object = new \ColdTrick\ProfileManager\CustomGroupField();
+	} else {
+		$object = new \ColdTrick\ProfileManager\CustomProfileField();
+	}
+	
 	$object->owner_guid = $site_guid;
 	$object->container_guid = $site_guid;
 	$object->access_id = ACCESS_PUBLIC;
-	$object->setSubtype($fieldtype);
 	$object->save();
 						
 	foreach ($field as $metadata_key => $metadata_value) {

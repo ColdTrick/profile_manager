@@ -1,13 +1,6 @@
 <?php
 /**
- * Profile Manager
- *
  * Profile Type Add action
- *
- * @package profile_manager
- * @author ColdTrick IT Solutions
- * @copyright Coldtrick IT Solutions 2009
- * @link http://www.coldtrick.com/
  */
 
 $guid = (int) get_input('guid');

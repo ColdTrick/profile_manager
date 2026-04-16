@@ -11,10 +11,10 @@ if (!$field instanceof \ColdTrick\ProfileManager\CustomProfileField) {
 $title = '<strong>' . $field->metadata_name . '</strong> [' . $field->metadata_type . ']';
 
 $title .= elgg_view('output/url', [
-	'href' => elgg_http_add_url_query_elements('ajax/view/forms/profile_manager/profile_field', [
+	'href' => elgg_http_add_url_query_elements('ajax/form/profile_manager/fields/profile', [
 		'guid' => $field->guid,
 	]),
-	'class' => ['elgg-lightbox', 'mls'],
+	'class' => ['elgg-lightbox', 'mlm'],
 	'title' => elgg_echo('edit'),
 	'text' => false,
 	'icon' => 'settings-alt',

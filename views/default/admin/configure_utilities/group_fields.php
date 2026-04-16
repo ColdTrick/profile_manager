@@ -15,7 +15,6 @@ elgg_import_esm('profile_manager/admin');
 echo elgg_view('profile_manager/admin/tabs', ['group_fields_selected' => true]);
 echo elgg_view('profile_manager/group_fields/list');
 
-// actions
 $title = elgg_echo('profile_manager:actions:title');
 $title .= elgg_view('output/pm_hint', [
 	'id' => 'more_info_actions',

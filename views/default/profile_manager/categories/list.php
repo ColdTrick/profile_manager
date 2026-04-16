@@ -54,7 +54,7 @@ $body = elgg_format_element('div', ['id' => 'custom_fields_category_list_custom'
 $menu = elgg_view('output/url', [
 	'text' => elgg_echo('add'),
 	'icon' => 'plus',
-	'href' => 'ajax/view/forms/profile_manager/category',
+	'href' => 'ajax/form/profile_manager/categories/add',
 	'class' => 'elgg-lightbox',
 ]);
 

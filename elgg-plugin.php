@@ -57,10 +57,20 @@ return [
 		'profile_manager/change_category' => ['access' => 'admin'],
 		'profile_manager/categories/add' => ['access' => 'admin'],
 		'profile_manager/categories/reorder' => ['access' => 'admin'],
-		'profile_manager/configuration/backup' => ['access' => 'admin'],
+		'profile_manager/configuration/backup' => [
+			'access' => 'admin',
+			'controller' => \ColdTrick\ProfileManager\BackupController::class,
+		],
 		'profile_manager/configuration/restore' => ['access' => 'admin'],
 		'profile_manager/import_existing' => ['access' => 'admin'],
-		'profile_manager/new' => ['access' => 'admin'],
+		'profile_manager/fields/group' => [
+			'access' => 'admin',
+			'filename' => __DIR__ . '/actions/profile_manager/new.php',
+		],
+		'profile_manager/fields/profile' => [
+			'access' => 'admin',
+			'filename' => __DIR__ . '/actions/profile_manager/new.php',
+		],
 		'profile_manager/profile_types/add' => ['access' => 'admin'],
 		'profile_manager/reorder' => ['access' => 'admin'],
 		'profile_manager/reset' => ['access' => 'admin'],
@@ -127,10 +137,10 @@ return [
 		],
 	],
 	'view_options' => [
-		'forms/profile_manager/type' => ['ajax' => true],
-		'forms/profile_manager/category' => ['ajax' => true],
-		'forms/profile_manager/group_field' => ['ajax' => true],
-		'forms/profile_manager/profile_field' => ['ajax' => true],
-		'forms/profile_manager/restore_fields' => ['ajax' => true],
+		'forms/profile_manager/profile_types/add' => ['ajax' => true],
+		'forms/profile_manager/categories/add' => ['ajax' => true],
+		'forms/profile_manager/fields/group' => ['ajax' => true],
+		'forms/profile_manager/fields/profile' => ['ajax' => true],
+		'forms/profile_manager/configuration/restore' => ['ajax' => true],
 	],
 ];

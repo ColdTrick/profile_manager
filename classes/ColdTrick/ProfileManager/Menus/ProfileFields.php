@@ -65,7 +65,7 @@ class ProfileFields {
 			'name' => 'restore',
 			'icon' => 'upload',
 			'text' => elgg_echo('profile_manager:actions:configuration:restore'),
-			'href' => elgg_http_add_url_query_elements('ajax/view/forms/profile_manager/restore_fields', [
+			'href' => elgg_http_add_url_query_elements('ajax/form/profile_manager/configuration/restore', [
 				'fieldtype' => $fieldtype,
 			]),
 			'class' => 'elgg-lightbox elgg-button elgg-button-action',
