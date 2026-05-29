@@ -1,6 +1,14 @@
 Version history
 ===============
 
+23.0 (2026-05-29):
+
+- changed: minimal requirement updated to Elgg 7
+- changed: plugin settings storing yes/no changed to 1/0
+- changed: updated forms and actions and related styling css
+- removed: custom twitter input/output field type
+- removed: profile completeness features removed
+
 22.0.5 (2025-11-13):
 
 - fixed: PHP implicit null declaration
