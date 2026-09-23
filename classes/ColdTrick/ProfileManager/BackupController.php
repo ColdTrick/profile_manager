@@ -31,7 +31,7 @@ class BackupController extends \Elgg\Controllers\JsonDownloadAction {
 		]);
 
 		$fields = [];
-		/* @var $entity \ColdTrick\ProfileManager\CustomField */
+		/** @var \ColdTrick\ProfileManager\CustomField $entity */
 		foreach ($entities as $entity) {
 			$fields[] = [
 				'metadata_name' => $entity->metadata_name,
