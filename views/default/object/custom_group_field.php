@@ -11,7 +11,9 @@ if (!$field instanceof \ColdTrick\ProfileManager\CustomGroupField) {
 $title = '<strong>' . $field->metadata_name . '</strong> [' . $field->metadata_type . ']';
 
 $title .= elgg_view('output/url', [
-	'href' => elgg_http_add_url_query_elements('ajax/form/profile_manager/fields/group', [
+	'href' => elgg_generate_url('ajax', [
+		'type' => 'form',
+		'segments' => 'profile_manager/fields/group',
 		'guid' => $field->guid,
 	]),
 	'class' => ['elgg-lightbox', 'mlm'],

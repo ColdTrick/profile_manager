@@ -11,7 +11,9 @@ if (!$entity instanceof \ColdTrick\ProfileManager\CustomProfileType) {
 $content = $entity->getDisplayName();
 
 $content .= elgg_view('output/url', [
-	'href' => elgg_http_add_url_query_elements('ajax/form/profile_manager/profile_types/add', [
+	'href' => elgg_generate_url('ajax', [
+		'type' => 'form',
+		'segments' => 'profile_manager/profile_types/add',
 		'guid' => $entity->guid,
 	]),
 	'class' => ['elgg-lightbox', 'mlm'],

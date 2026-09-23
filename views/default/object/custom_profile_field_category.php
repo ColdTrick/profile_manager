@@ -18,7 +18,9 @@ $content .= elgg_view('output/url', [
 ]);
 
 $content .= elgg_view('output/url', [
-	'href' => elgg_http_add_url_query_elements('ajax/form/profile_manager/categories/add', [
+	'href' => elgg_generate_url('ajax', [
+		'type' => 'form',
+		'segments' => 'profile_manager/categories/add',
 		'guid' => $entity->guid,
 	]),
 	'class' => ['elgg-lightbox', 'mlm'],
