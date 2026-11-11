@@ -19,7 +19,9 @@ export default {
 					.multiselect('getButton')
 						.find('.ui-icon')
 						.addClass('elgg-icon elgg-icon-caret-down fa fa-caret-down');
+						
 				$(this).data('multiSelectInitialized', 1);
+				$(this).attr('tabindex', '-1');
 			}
 		});
 	}
