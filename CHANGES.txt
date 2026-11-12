@@ -1,6 +1,10 @@
 Version history
 ===============
 
+23.0.1 (2026-11-12):
+
+- fixed: multiselect required message is shown on browser validation
+
 23.0 (2026-05-29):
 
 - changed: minimal requirement updated to Elgg 7
